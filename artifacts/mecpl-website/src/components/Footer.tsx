@@ -41,8 +41,7 @@ export default function Footer() {
             {[
               { label: "Home", path: "/" },
               { label: "About Us", path: "/about" },
-              { label: "Completed Projects", path: "/completed-projects" },
-              { label: "Ongoing Projects", path: "/ongoing-projects" },
+              { label: "Projects", path: "/completed-projects" },
               { label: "Awards", path: "/awards" },
               { label: "Careers", path: "/careers" },
               { label: "Contact", path: "/contact" },

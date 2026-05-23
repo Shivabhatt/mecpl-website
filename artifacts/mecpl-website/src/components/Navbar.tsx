@@ -14,8 +14,14 @@ const navLinks = [
       { label: "Investors", path: "/investors" },
     ],
   },
-  { label: "Projects", path: "/completed-projects" },
-  { label: "Ongoing Projects", path: "/ongoing-projects" },
+  {
+    label: "Projects",
+    path: "/completed-projects",
+    children: [
+      { label: "Completed Projects", path: "/completed-projects" },
+      { label: "Ongoing Projects", path: "/ongoing-projects" },
+    ],
+  },
   { label: "Awards", path: "/awards" },
   { label: "Careers", path: "/careers" },
 ];
@@ -75,7 +81,7 @@ export default function Navbar() {
               >
                 <button
                   className={`flex items-center gap-1.5 transition-colors ${
-                    location.startsWith(link.path) ? "text-[#C41E3A]" : "text-white/80 hover:text-white"
+                    location.startsWith(link.path) || (link.children?.some(c => location.startsWith(c.path))) ? "text-[#C41E3A]" : "text-white/80 hover:text-white"
                   }`}
                   data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                 >
@@ -149,7 +155,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link key={link.path} href={link.path} data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                <div className={`block py-2 text-sm hover:text-[#C41E3A] transition-colors cursor-pointer ${location === link.path ? "text-[#C41E3A]" : "text-white/70"}`}>
+                <div className={`block py-2 text-sm hover:text-[#C41E3A] transition-colors cursor-pointer ${(location === link.path || (link.children?.some(c => location === c.path))) ? "text-[#C41E3A]" : "text-white/70"}`}>
                   {link.label}
                 </div>
               </Link>
