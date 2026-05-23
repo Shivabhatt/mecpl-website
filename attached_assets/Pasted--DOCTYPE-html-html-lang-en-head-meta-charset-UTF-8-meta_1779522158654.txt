@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECPL | Millennium Engineers & Contractors Pvt. Ltd.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mecplRed: '#C41E3A',
+                        mecplDark: '#1A1A1A',
+                        mecplStone: '#2C2C2C',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .backdrop-blur-md { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-[#1A1A1A] text-white font-sans antialiased overflow-x-hidden">
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-mecplRed flex items-center justify-between p-2 rounded-sm transform group-hover:rotate-90 transition-transform duration-500">
+                    <div class="w-1.5 h-full bg-white"></div>
+                    <div class="w-1.5 h-full bg-white"></div>
+                </div>
+                <span class="text-xl font-black tracking-tighter text-white">MECPL</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wider uppercase">
+                <a href="#home" class="hover:text-mecplRed transition-colors">Home</a>
+                <div class="relative group py-2">
+                    <button class="hover:text-mecplRed transition-colors flex items-center space-x-1 uppercase">
+                        <span>About Us</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="absolute top-full left-0 w-56 bg-mecplStone border border-white/10 rounded-sm shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col p-2 space-y-1">
+                        <a href="#profile" class="px-4 py-2 hover:bg-mecplRed rounded-sm text-xs transition-colors">Our Profile</a>
+                        <a href="#partners" class="px-4 py-2 hover:bg-mecplRed rounded-sm text-xs transition-colors">Clients & Architects</a>
+                        <a href="#equipments" class="px-4 py-2 hover:bg-mecplRed rounded-sm text-xs transition-colors">Equipments</a>
+                        <a href="#investors" class="px-4 py-2 hover:bg-mecplRed rounded-sm text-xs transition-colors">Investors</a>
+                    </div>
+                </div>
+                <a href="#projects" class="hover:text-mecplRed transition-colors">Projects</a>
+                <a href="#careers" class="hover:text-mecplRed transition-colors">Careers</a>
+                <a href="#blog" class="hover:text-mecplRed transition-colors">Blog</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="#enquiry" class="bg-mecplRed hover:bg-red-700 text-white text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-sm transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-mecplRed/20">
+                    Enquire Now
+                </a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden text-white text-xl focus:outline-none">
+                <i id="menu-icon" class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-mecplDark border-b border-white/10 px-6 py-6 space-y-4 text-sm font-semibold uppercase tracking-wider">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-mecplRed">Home</a>
+            <div class="border-t border-white/5 pt-2 space-y-2">
+                <span class="text-xs text-mecplRed font-bold block">About Submenu</span>
+                <a href="#profile" onclick="toggleMobileMenu()" class="block pl-4 text-xs text-gray-400 hover:text-white">Our Profile</a>
+                <a href="#partners" onclick="toggleMobileMenu()" class="block pl-4 text-xs text-gray-400 hover:text-white">Clients & Architects</a>
+                <a href="#equipments" onclick="toggleMobileMenu()" class="block pl-4 text-xs text-gray-400 hover:text-white">Equipments</a>
+                <a href="#investors" onclick="toggleMobileMenu()" class="block pl-4 text-xs text-gray-400 hover:text-white">Investors</a>
+            </div>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-mecplRed border-t border-white/5 pt-2">Projects</a>
+            <a href="#careers" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-mecplRed">Careers</a>
+            <a href="#blog" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-mecplRed">Blog</a>
+            <a href="#enquiry" onclick="toggleMobileMenu()" class="block text-center bg-mecplRed text-white py-3 rounded-sm text-xs font-bold tracking-widest">Enquiry Terminal</a>
+        </div>
+    </header>
+
+    <main id="home" class="pt-20">
+        <section class="relative h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover opacity-35 filter grayscale" alt="Structural Construction Backdrop">
+                <div class="absolute inset-0 bg-gradient-to-t from-mecplDark via-transparent to-mecplDark/50"></div>
+            </div>
+            <div class="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8">
+                <h1 class="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-none text-white">
+                    Shaping Skylines.<br><span class="text-mecplRed">Building Trust.</span>
+                </h1>
+                <p class="max-w-2xl mx-auto text-gray-400 text-base md:text-lg tracking-wide leading-relaxed">
+                    Delivering precision infrastructure, high-scale residential marvels, and advanced industrial complexes across India since 1999.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <a href="#enquiry" class="w-full sm:w-auto bg-mecplRed hover:bg-red-700 px-8 py-4 text-xs font-bold tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-mecplRed/30">Start Your Project</a>
+                    <a href="#projects" class="w-full sm:w-auto border border-white/30 hover:border-white px-8 py-4 text-xs font-bold tracking-widest uppercase rounded-sm transition-all bg-white/5 backdrop-blur-sm">Explore Case Studies</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-mecplStone border-y border-white/5 py-4 overflow-hidden select-none">
+            <div class="flex whitespace-nowrap space-x-12 animate-marquee text-xs font-bold uppercase tracking-widest text-white/60">
+                <span>ISO 9001:2015 Certified Company</span> <span class="text-mecplRed">•</span>
+                <span>ISO 14001:2015 Environmental Integrity</span> <span class="text-mecplRed">•</span>
+                <span>ISO 45001:2018 Occupational Safety</span> <span class="text-mecplRed">•</span>
+                <span>CRISIL SME 1 Rating (Highest Financial Reliability)</span> <span class="text-mecplRed">•</span>
+                <span>ISO 9001:2015 Certified Company</span> <span class="text-mecplRed">•</span>
+                <span>ISO 14001:2015 Environmental Integrity</span> <span class="text-mecplRed">•</span>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div class="p-6 border-l-2 border-mecplRed bg-mecplStone/30 rounded-sm">
+                <div class="text-4xl md:text-5xl font-black text-mecplRed tracking-tight">25+</div>
+                <div class="text-xs font-bold uppercase text-gray-400 tracking-wider mt-2">Years Legacy</div>
+            </div>
+            <div class="p-6 border-l-2 border-mecplRed bg-mecplStone/30 rounded-sm">
+                <div class="text-4xl md:text-5xl font-black text-mecplRed tracking-tight">150+</div>
+                <div class="text-xs font-bold uppercase text-gray-400 tracking-wider mt-2">Projects Handed Over</div>
+            </div>
+            <div class="p-6 border-l-2 border-mecplRed bg-mecplStone/30 rounded-sm">
+                <div class="text-4xl md:text-5xl font-black text-mecplRed tracking-tight">20M+</div>
+                <div class="text-xs font-bold uppercase text-gray-400 tracking-wider mt-2">Sq. Ft. Executed</div>
+            </div>
+            <div class="p-6 border-l-2 border-mecplRed bg-mecplStone/30 rounded-sm">
+                <div class="text-4xl md:text-5xl font-black text-mecplRed tracking-tight">50+</div>
+                <div class="text-xs font-bold uppercase text-gray-400 tracking-wider mt-2">Tier-1 Clients</div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Expertise</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Core Capabilities Matrix</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group bg-mecplStone border border-white/5 rounded-sm overflow-hidden shadow-2xl hover:border-mecplRed/30 transition-all duration-300">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0" alt="Civil Construction Capability">
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <h3 class="text-xl font-bold uppercase tracking-tight">Civil Structural Works</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">High-performance foundational engineering for complex architectural blueprints and structural demands.</p>
+                    </div>
+                </div>
+                <div class="group bg-mecplStone border border-white/5 rounded-sm overflow-hidden shadow-2xl hover:border-mecplRed/30 transition-all duration-300">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0" alt="Turnkey Projects Capability">
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <h3 class="text-xl font-bold uppercase tracking-tight">Heavy Turnkey Infra</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Comprehensive, end-to-end site layout design and massive building logistics handled transparently.</p>
+                    </div>
+                </div>
+                <div class="group bg-mecplStone border border-white/5 rounded-sm overflow-hidden shadow-2xl hover:border-mecplRed/30 transition-all duration-300">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0" alt="Project Management Capability">
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <h3 class="text-xl font-bold uppercase tracking-tight">Management & Planning</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Strict safety frameworks and scheduling protocols guaranteeing systematic risk mitigation and timeline handovers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="profile" class="scroll-mt-24 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Corporate Profile</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase text-white">A Legacy Of Quality & Commitment</h2>
+                <p class="text-gray-300 text-base leading-relaxed">
+                    Millennium Engineers & Contractors Pvt. Ltd. (MECPL) is a Pune-based engineering powerhouse recognized globally for delivering heavy complex structural projects with absolute safety, premium workmanship capabilities, and financial integrity.
+                </p>
+                <div class="pt-4 grid grid-cols-3 gap-4 text-center">
+                    <div class="p-4 bg-mecplStone rounded-sm border border-white/5"><i class="fa-solid fa-shield-halved text-mecplRed text-lg mb-2"></i><div class="text-[10px] font-bold uppercase text-gray-400 tracking-wider">ISO 9001</div></div>
+                    <div class="p-4 bg-mecplStone rounded-sm border border-white/5"><i class="fa-solid fa-leaf text-mecplRed text-lg mb-2"></i><div class="text-[10px] font-bold uppercase text-gray-400 tracking-wider">ISO 14001</div></div>
+                    <div class="p-4 bg-mecplStone rounded-sm border border-white/5"><i class="fa-solid fa-user-shield text-mecplRed text-lg mb-2"></i><div class="text-[10px] font-bold uppercase text-gray-400 tracking-wider">ISO 45001</div></div>
+                </div>
+            </div>
+            <div class="h-96 rounded-sm overflow-hidden relative shadow-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500" alt="MECPL Structural Integrity">
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="scroll-mt-24 bg-mecplStone/50 py-24 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Ecosystem</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Clients & Premium Architects</h2>
+                <p class="text-gray-400 text-sm">We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises and global master planners.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center text-center text-xl font-black tracking-widest uppercase text-white/30">
+                <div class="p-8 border border-white/5 rounded-sm hover:text-white hover:border-mecplRed transition-all">TRUMP TOWERS</div>
+                <div class="p-8 border border-white/5 rounded-sm hover:text-white hover:border-mecplRed transition-all">GODREJ PROPS</div>
+                <div class="p-8 border border-white/5 rounded-sm hover:text-white hover:border-mecplRed transition-all">VTP REALTY</div>
+                <div class="p-8 border border-white/5 rounded-sm hover:text-white hover:border-mecplRed transition-all">PANCHSHIL</div>
+            </div>
+
+            <div class="w-full h-64 rounded-sm overflow-hidden relative shadow-inner border border-white/5">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover opacity-40 filter grayscale" alt="Marquee Urban Corporate Assets Architecture">
+            </div>
+        </div>
+    </section>
+
+    <section id="equipments" class="scroll-mt-24 max-w-7xl mx-auto px-6 py-24">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="h-96 rounded-sm overflow-hidden relative order-2 lg:order-1 shadow-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale" alt="Heavy Machinery Infrastructure Fleet Asset">
+            </div>
+            <div class="space-y-6 order-1 lg:order-2">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Infrastructure Assets</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Advanced Machinery Inventory</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">Our execution velocity stems directly from total strategic physical ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
+                <ul class="space-y-3 text-sm font-medium tracking-wide text-gray-300">
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-mecplRed"></i> <span>Automated High-Capacity Tower Cranes & Heavy Material Lifts</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-mecplRed"></i> <span>Computerized Central Concrete Batching Plants</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-mecplRed"></i> <span>Heavy Earth Excavation Machinery & Transit Mixer Fleets</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-mecplRed"></i> <span>Certified Modular Formwork & Heavy Infrastructure Shuttering System Ecosystems</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="investors" class="scroll-mt-24 bg-mecplStone/40 py-24 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 items-center">
+            <div class="md:col-span-2 space-y-6">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Governance</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Investor Transparency & Legal Compliance</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">Access authenticated credit audits, balance confirmations, compliance verifications, and corporate statutory records overseen strictly under internal legal auditing rules.</p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a href="#" class="flex items-center justify-between p-4 bg-mecplDark hover:bg-mecplStone border border-white/10 rounded-sm text-xs font-bold tracking-wider uppercase transition-all w-full">
+                        <span>CRISIL Credit Valuation Analysis</span><i class="fa-solid fa-file-pdf text-mecplRed text-lg"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between p-4 bg-mecplDark hover:bg-mecplStone border border-white/10 rounded-sm text-xs font-bold tracking-wider uppercase transition-all w-full">
+                        <span>Annual Account Audits FY 24-25</span><i class="fa-solid fa-file-pdf text-mecplRed text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="h-64 rounded-sm overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=500&auto=format&fit=crop" class="w-full h-full object-cover opacity-50 filter grayscale" alt="Compliance Auditing Data Graphics">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="scroll-mt-24 max-w-7xl mx-auto px-6 py-24">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div class="space-y-3">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Showcase</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Engineering Landmarks at Scale</h2>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-widest">
+                <button class="bg-mecplRed text-white px-5 py-3 rounded-sm">All Structural Works</button>
+                <button class="bg-mecplStone hover:bg-white/10 text-gray-300 px-5 py-3 rounded-sm transition-colors">Industrial Hubs</button>
+                <button class="bg-mecplStone hover:bg-white/10 text-gray-300 px-5 py-3 rounded-sm transition-colors">Residential Towers</button>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="group bg-mecplStone border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale" alt="Panchshil Highrise Landmark Execution">
+                    <div class="absolute top-4 right-4 bg-mecplRed text-white font-black uppercase text-[9px] tracking-widest px-3 py-1.5 rounded-sm">Featured Landmark</div>
+                </div>
+                <div class="p-8 space-y-6 flex-grow flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-black uppercase tracking-tight">Panchshil Highrise Towers, Kharadi</h3>
+                        <p class="text-xs font-bold text-mecplRed uppercase tracking-widest">Scope: Comprehensive Concrete Civil Construction Frame</p>
+                        <p class="text-gray-400 text-sm leading-relaxed">Managing intricate deep structural reinforcement frameworks under aggressive real-time milestone constraints cleanly.</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+                        <span><i class="fa-solid fa-clock text-mecplRed mr-1.5"></i> 100% On-Time Handover</span>
+                        <a href="#" class="text-white hover:text-mecplRed transition-colors flex items-center space-x-1"><span>View Metrics</span><i class="fa-solid fa-arrow-right-long text-[10px]"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div class="bg-mecplStone border border-white/5 p-6 rounded-sm flex flex-col justify-between space-y-6 shadow-xl">
+                    <h4 class="text-lg font-bold uppercase text-white tracking-tight border-b border-white/5 pb-2">Trump Towers, Pune</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">Iconic luxury double-tower architecture built using cutting edge performance mix metrics.</p>
+                    <span class="text-[10px] font-black uppercase text-mecplRed tracking-widest">Civil Structural Handover</span>
+                </div>
+                <div class="bg-mecplStone border border-white/5 p-6 rounded-sm flex flex-col justify-between space-y-6 shadow-xl">
+                    <h4 class="text-lg font-bold uppercase text-white tracking-tight border-b border-white/5 pb-2">Godrej Boulevard, Pune</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">Sprawling residential infrastructure community with synchronized foundational deployment.</p>
+                    <span class="text-[10px] font-black uppercase text-mecplRed tracking-widest">Residential Framework</span>
+                </div>
+                <div class="bg-mecplStone border border-white/5 p-6 rounded-sm flex flex-col justify-between space-y-6 shadow-xl">
+                    <h4 class="text-lg font-bold uppercase text-white tracking-tight border-b border-white/5 pb-2">VTP Bel Air, Pune</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">High-density multi-tower structural contract completed with uncompromised asset alignment.</p>
+                    <span class="text-[10px] font-black uppercase text-mecplRed tracking-widest">Complex Core Works</span>
+                </div>
+                <div class="bg-mecplStone border border-white/5 p-6 rounded-sm flex flex-col justify-between space-y-6 shadow-xl">
+                    <h4 class="text-lg font-bold uppercase text-white tracking-tight border-b border-white/5 pb-2">BON IT Park, Pune</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">Advanced glass-and-steel engineering infrastructure mapped precisely to technical layouts.</p>
+                    <span class="text-[10px] font-black uppercase text-mecplRed tracking-widest">Commercial Core Infra</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="careers" class="scroll-mt-24 bg-mecplStone/30 border-y border-white/5 py-24">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Join Team MECPL</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Construct Your Engineering Career</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">At Millennium Engineers & Contractors, we prioritize the safety metrics and professional engineering skill-mapping of our core talent team. Shape tomorrow alongside industry-leading veterans.</p>
+                <div class="w-full h-48 rounded-sm overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover opacity-50 filter grayscale" alt="Active Civil Site Engineering Infrastructure Teams">
+                </div>
+            </div>
+            
+            <div class="lg:col-span-7 bg-mecplStone p-8 border border-white/5 rounded-sm shadow-2xl">
+                <form class="grid grid-cols-1 sm:grid-cols-2 gap-6" onsubmit="event.preventDefault(); alert('Application Parameters Transmitted Successfully.');">
+                    <div class="sm:col-span-2 flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Full Legal Profile Name</label>
+                        <input type="text" required placeholder="E.g., Rahul Sharma" class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm focus:outline-none focus:border-mecplRed transition-colors">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Secure Email Address Link</label>
+                        <input type="email" required placeholder="E.g., r.sharma@domain.com" class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm focus:outline-none focus:border-mecplRed transition-colors">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Experience Tracking Metrics</label>
+                        <select class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm focus:outline-none focus:border-mecplRed transition-colors text-gray-400">
+                            <option>0 - 2 Years Baseline</option>
+                            <option>2 - 5 Years Mid-Scale</option>
+                            <option>5 - 10 Years Advanced</option>
+                            <option>10+ Years Senior Executive</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2 flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Upload Engineering Portfolio / CV Documentation</label>
+                        <div class="border-2 border-dashed border-white/10 hover:border-mecplRed/40 bg-mecplDark p-6 rounded-sm text-center transition-colors cursor-pointer relative">
+                            <i class="fa-solid fa-cloud-arrow-up text-gray-500 text-2xl mb-2"></i>
+                            <p class="text-xs text-gray-400">Drag and drop structural profile here, or browse local systems.</p>
+                            <input type="file" class="absolute inset-0 opacity-0 cursor-pointer">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2 pt-2">
+                        <button type="submit" class="w-full bg-mecplRed hover:bg-red-700 text-white font-black text-xs tracking-widest uppercase p-4 rounded-sm transition-colors">Submit Corporate Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="scroll-mt-24 max-w-7xl mx-auto px-6 py-24">
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+            <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Insights</span>
+            <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">The Industrial Blueprint</h2>
+            <p class="text-gray-400 text-sm">Review data updates regarding heavy performance-mix engineering protocols, site safety trends, and infrastructure milestones.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <article class="bg-mecplStone rounded-sm border border-white/5 overflow-hidden flex flex-col justify-between shadow-xl">
+                <div class="h-44 bg-mecplDark relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover opacity-50 filter grayscale hover:opacity-100 transition-opacity duration-300" alt="Technical Analysis Article Layout">
+                </div>
+                <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <span class="text-[9px] font-black tracking-widest uppercase text-mecplRed bg-mecplRed/10 px-2 py-1 rounded-sm">Structural Frameworks</span>
+                        <h3 class="text-lg font-bold uppercase text-white tracking-tight leading-snug hover:text-mecplRed transition-colors cursor-pointer">Mitigating Logistical Friction In Deep Concrete Pile Foundations</h3>
+                    </div>
+                    <a href="#" class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white flex items-center space-x-1 pt-2 border-t border-white/5"><span>Read Analysis</span><i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="bg-mecplStone rounded-sm border border-white/5 overflow-hidden flex flex-col justify-between shadow-xl">
+                <div class="h-44 bg-mecplDark relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover opacity-50 filter grayscale hover:opacity-100 transition-opacity duration-300" alt="Financial Verification Post Layout">
+                </div>
+                <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <span class="text-[9px] font-black tracking-widest uppercase text-mecplRed bg-mecplRed/10 px-2 py-1 rounded-sm">Compliance Metrics</span>
+                        <h3 class="text-lg font-bold uppercase text-white tracking-tight leading-snug hover:text-mecplRed transition-colors cursor-pointer">Analyzing MECPL's Top Tier CRISIL SME 1 Financial Verification Standards</h3>
+                    </div>
+                    <a href="#" class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white flex items-center space-x-1 pt-2 border-t border-white/5"><span>Read Analysis</span><i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <article class="bg-mecplStone rounded-sm border border-white/5 overflow-hidden flex flex-col justify-between shadow-xl">
+                <div class="h-44 bg-mecplDark relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover opacity-50 filter grayscale hover:opacity-100 transition-opacity duration-300" alt="Safety Performance Log">
+                </div>
+                <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <span class="text-[9px] font-black tracking-widest uppercase text-mecplRed bg-mecplRed/10 px-2 py-1 rounded-sm">Site Protocols</span>
+                        <h3 class="text-lg font-bold uppercase text-white tracking-tight leading-snug hover:text-mecplRed transition-colors cursor-pointer">Achieving 1 Million Operational Man-Hours Zero Incident Safety Records</h3>
+                    </div>
+                    <a href="#" class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white flex items-center space-x-1 pt-2 border-t border-white/5"><span>Read Analysis</span><i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="enquiry" class="scroll-mt-24 border-t border-white/5 bg-gradient-to-b from-mecplDark to-black py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
+            <div class="space-y-3">
+                <span class="text-mecplRed text-xs font-black tracking-widest uppercase">Project Intake Channel</span>
+                <h2 class="text-3xl md:text-6xl font-black tracking-tighter uppercase">Let's Build Something<br>Extraordinary Together</h2>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm leading-relaxed">Transmit your structural blueprints or enterprise construction specifications directly. Our central operations control bureau will analyze your technical data immediately.</p>
+            </div>
+
+            <div class="bg-mecplStone border border-white/5 p-8 rounded-sm text-left max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
+                <div class="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-10 translate-y-10">
+                    <i class="fa-solid fa-compass-drafting text-[250px] text-white"></i>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Enquiry Parameters Logged.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex flex-col space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">First / Last Corporate Identity</label>
+                            <input type="text" required placeholder="E.g., Amit Patel" class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-mecplRed transition-colors">
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Verified Contact Domain Link</label>
+                            <input type="email" required placeholder="E.g., patel@enterprise.co.in" class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-mecplRed transition-colors">
+                        </div>
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Direct Telecom Node / Phone Number</label>
+                        <input type="tel" required placeholder="E.g., +91 98765 43210" class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-mecplRed transition-colors">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400">Describe Construction Scale or Parameters</label>
+                        <textarea rows="4" required placeholder="Outline square footage parameters, regional zoning coordinates, or physical structural demands..." class="bg-mecplDark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-mecplRed transition-colors resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-mecplRed hover:bg-red-700 text-white font-black text-xs tracking-widest uppercase p-4 rounded-sm transition-colors shadow-lg shadow-mecplRed/20">Transmit Operational Parameters</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-white/10 text-gray-400 text-xs py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12">
+            <div class="md:col-span-4 space-y-4">
+                <div class="flex items-center space-x-2 text-white font-black tracking-tighter text-lg">
+                    <div class="w-6 h-6 bg-mecplRed flex items-center justify-between p-1 rounded-xs">
+                        <div class="w-1 h-full bg-white"></div><div class="w-1 h-full bg-white"></div>
+                    </div>
+                    <span>MECPL</span>
+                </div>
+                <p class="text-gray-500 leading-relaxed max-w-sm text-xs">Millennium Engineers & Contractors Pvt. Ltd. represents elite infrastructure development, combining heavy machinery management with uncompromised asset delivery across Indian landscapes.</p>
+                <div class="flex space-x-4 text-white/50 text-sm">
+                    <a href="#" class="hover:text-mecplRed transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-mecplRed transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-mecplRed transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 grid grid-cols-2 gap-4 uppercase font-bold tracking-widest text-[10px] text-white">
+                <div class="space-y-3 flex flex-col">
+                    <span class="text-mecplRed font-black block text-xs border-b border-white/5 pb-2">Core Hubs</span>
+                    <a href="#home" class="hover:text-mecplRed text-gray-400 transition-colors">Home Panel</a>
+                    <a href="#profile" class="hover:text-mecplRed text-gray-400 transition-colors">Corporate Info</a>
+                    <a href="#projects" class="hover:text-mecplRed text-gray-400 transition-colors">Portfolio</a>
+                    <a href="#careers" class="hover:text-mecplRed text-gray-400 transition-colors">Careers Portal</a>
+                </div>
+                <div class="space-y-3 flex flex-col">
+                    <span class="text-mecplRed font-black block text-xs border-b border-white/5 pb-2">Compliance Nodes</span>
+                    <a href="#partners" class="hover:text-mecplRed text-gray-400 transition-colors">Clients</a>
+                    <a href="#equipments" class="hover:text-mecplRed text-gray-400 transition-colors">Equipment Assets</a>
+                    <a href="#investors" class="hover:text-mecplRed text-gray-400 transition-colors">Governance</a>
+                    <a href="#blog" class="hover:text-mecplRed text-gray-400 transition-colors">Technical Blog</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 space-y-4 text-xs leading-relaxed">
+                <span class="text-mecplRed font-black uppercase tracking-widest block text-[10px] border-b border-white/5 pb-2 text-white">MECPL HQ Operations</span>
+                <p class="text-gray-400"><i class="fa-solid fa-location-dot text-mecplRed mr-2"></i> Office No. 501-504, 5th Floor, Elite Transbay, Sr. No. 3, Opposite S.K.P Campus, Balewadi, Pune - 411045, Maharashtra, India.</p>
+                <div class="space-y-1 text-gray-400 font-medium">
+                    <div><i class="fa-solid fa-envelope text-mecplRed mr-2"></i> contact@mecpl.in</div>
+                    <div><i class="fa-solid fa-phone text-mecplRed mr-2"></i> Central Exch: 020 6686 5858</div>
+                    <div><i class="fa-solid fa-mobile-screen text-mecplRed mr-2"></i> Mobile Exchange: +91 7066865858</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-gray-600 text-[10px] uppercase font-bold tracking-widest gap-4">
+            <div>&copy; 2026 Millennium Engineers & Contractors Pvt. Ltd. All Governance Protocols Maintained.</div>
+            <div>Working Framework: Mon - Sat | 09:30 AM - 06:30 PM IST</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars-staggered');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars-staggered');
+            }
+        }
+        
+        // Horizontal Continuous Scrolling Engine Animation Speed Framework Configuration Setup
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes marquee {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+                display: flex;
+                width: max-content;
+                animation: marquee 25s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
