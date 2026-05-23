@@ -19,7 +19,7 @@ export default function OngoingProjectsPage() {
     <div className="bg-[#1A1A1A] pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15 grayscale" alt="Construction" />
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">
@@ -60,7 +60,7 @@ export default function OngoingProjectsPage() {
               <div className="h-48 overflow-hidden relative">
                 <img
                   src={project.image}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                   alt={project.name}
                   loading="lazy"
                 />

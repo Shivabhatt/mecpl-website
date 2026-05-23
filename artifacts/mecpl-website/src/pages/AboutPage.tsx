@@ -27,7 +27,7 @@ export default function AboutPage() {
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop"
-          className="absolute inset-0 w-full h-full object-cover opacity-15 grayscale"
+          className="absolute inset-0 w-full h-full object-cover opacity-15"
           alt="Construction"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           <div className="h-96 rounded-sm overflow-hidden shadow-2xl border border-white/10">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover transition-all duration-500"
               alt="MECPL structural integrity"
             />
           </div>

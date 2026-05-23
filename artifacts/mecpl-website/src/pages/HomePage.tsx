@@ -127,7 +127,7 @@ export default function HomePage() {
           <img
             key={slide}
             src={s.image}
-            className="w-full h-full object-cover opacity-30 grayscale transition-opacity duration-1000"
+            className="w-full h-full object-cover opacity-30 transition-opacity duration-1000"
             alt="Construction backdrop"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/60 to-[#1A1A1A]/40"></div>
@@ -207,7 +207,7 @@ export default function HomePage() {
               <div className="h-52 overflow-hidden relative">
                 <img
                   src={cap.image}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                   alt={cap.title}
                 />
               </div>
@@ -248,7 +248,7 @@ export default function HomePage() {
           <div className="h-96 rounded-sm overflow-hidden relative shadow-2xl border border-white/10">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover transition-all duration-500"
               alt="MECPL structural integrity"
             />
           </div>
@@ -272,7 +272,7 @@ export default function HomePage() {
             <div className="h-72 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=700&auto=format&fit=crop"
-                className="w-full h-full object-cover grayscale group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 alt="Panchshil Highrise"
               />
               <div className="absolute top-4 right-4 bg-[#C41E3A] text-white font-black uppercase text-[9px] tracking-widest px-3 py-1.5 rounded-sm">
@@ -323,7 +323,7 @@ export default function HomePage() {
           <div className="w-full h-56 rounded-sm overflow-hidden relative shadow-inner border border-white/5">
             <img
               src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
-              className="w-full h-full object-cover opacity-40 grayscale"
+              className="w-full h-full object-cover opacity-40"
               alt="Corporate architecture partners"
             />
             <div className="absolute inset-0 flex items-center justify-center">

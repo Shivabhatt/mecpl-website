@@ -24,7 +24,7 @@ export default function InvestorsPage() {
     <div className="bg-[#1A1A1A] pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15 grayscale" alt="Compliance" />
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Compliance" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Governance</span>
@@ -58,7 +58,7 @@ export default function InvestorsPage() {
             </div>
           </div>
           <div className="h-56 rounded-sm overflow-hidden border border-white/5">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=500&auto=format&fit=crop" className="w-full h-full object-cover opacity-50 grayscale" alt="Compliance" />
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=500&auto=format&fit=crop" className="w-full h-full object-cover opacity-50" alt="Compliance" />
           </div>
         </div>
 

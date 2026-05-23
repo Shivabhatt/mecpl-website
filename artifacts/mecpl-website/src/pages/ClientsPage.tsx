@@ -28,7 +28,7 @@ export default function ClientsPage() {
     <div className="bg-[#1A1A1A] pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15 grayscale" alt="Corporate" />
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Corporate" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Our Network</span>
@@ -68,7 +68,7 @@ export default function ClientsPage() {
         </div>
 
         <div className="w-full h-52 rounded-sm overflow-hidden relative shadow-inner border border-white/5 mb-14">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover opacity-40 grayscale" alt="Corporate architecture" />
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover opacity-40" alt="Corporate architecture" />
         </div>
       </section>
 

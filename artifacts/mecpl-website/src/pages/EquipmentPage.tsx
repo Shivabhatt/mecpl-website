@@ -38,7 +38,7 @@ export default function EquipmentPage() {
     <div className="bg-[#1A1A1A] pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15 grayscale" alt="Heavy machinery" />
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Heavy machinery" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Infrastructure Assets</span>
@@ -57,7 +57,7 @@ export default function EquipmentPage() {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center py-14 border-b border-white/5">
           <div className="h-96 rounded-sm overflow-hidden border border-white/10 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" alt="Heavy machinery" />
+            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-all duration-500" alt="Heavy machinery" />
           </div>
           <div className="space-y-6">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Self-Owned Fleet</span>
@@ -82,7 +82,7 @@ export default function EquipmentPage() {
             <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-xl" data-testid={`card-equipment-${i}`}>
               <div className="grid lg:grid-cols-3">
                 <div className="h-52 lg:h-auto overflow-hidden">
-                  <img src={item.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt={item.name} loading="lazy" />
+                  <img src={item.image} className="w-full h-full object-cover transition-all duration-700" alt={item.name} loading="lazy" />
                 </div>
                 <div className="lg:col-span-2 p-8 flex flex-col justify-between gap-6">
                   <div className="space-y-4">
