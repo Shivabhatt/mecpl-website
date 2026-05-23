@@ -23,7 +23,7 @@ export default function OngoingProjectsPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Active Construction</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Ongoing Projects</h1>
@@ -42,9 +42,9 @@ export default function OngoingProjectsPage() {
       {/* Live indicator bar */}
       <div className="bg-[#2C2C2C] border-b border-white/5 py-3">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-3">
-          <Activity size={14} className="text-green-500" />
+          <Activity size={14} className="text-[#C41E3A]" />
           <span className="text-white text-[10px] font-black uppercase tracking-widest">10 Projects Currently Active</span>
-          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
         </div>
       </div>
 
@@ -66,8 +66,8 @@ export default function OngoingProjectsPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-sm">
-                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                  <span className="text-green-400 text-[9px] font-black uppercase tracking-widest">Active Build</span>
+                  <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full animate-pulse"></span>
+                  <span className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">Active Build</span>
                 </div>
                 <div className="absolute bottom-4 left-4">
                   <span className="text-white/30 text-xs font-black">0{i + 1}</span>

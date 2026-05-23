@@ -102,7 +102,7 @@ export default function ClientsPage() {
             <p className="text-white/70 text-sm mt-1">Become MECPL's next success story. Contact us for project collaboration.</p>
           </div>
           <Link href="/contact" data-testid="button-clients-contact">
-            <span className="inline-block bg-white text-[#C41E3A] px-8 py-4 font-black text-xs tracking-widest uppercase rounded-sm hover:bg-gray-100 transition-colors cursor-pointer">
+            <span className="inline-block bg-white text-[#C41E3A] px-8 py-4 font-black text-xs tracking-widest uppercase rounded-sm hover:bg-gray-200 transition-colors cursor-pointer">
               Start a Conversation
             </span>
           </Link>

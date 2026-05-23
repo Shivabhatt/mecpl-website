@@ -94,8 +94,8 @@ export default function ContactPage() {
 
             {submitted ? (
               <div className="text-center py-14">
-                <div className="w-16 h-16 bg-green-500/10 rounded-sm flex items-center justify-center mx-auto mb-5">
-                  <span className="text-green-400 text-3xl">✓</span>
+                <div className="w-16 h-16 bg-[#C41E3A]/10 rounded-sm flex items-center justify-center mx-auto mb-5">
+                  <span className="text-[#C41E3A] text-3xl">✓</span>
                 </div>
                 <h3 className="text-white font-black text-2xl uppercase mb-3">Enquiry Logged</h3>
                 <p className="text-gray-400 text-sm max-w-sm mx-auto">Thank you for reaching out. Our team will respond to your project enquiry within 24 hours.</p>

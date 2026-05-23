@@ -37,10 +37,10 @@ const allProjects = [
 const filters = ["All", "Residential", "Commercial", "Industrial", "Special"];
 
 const typeBadge: Record<string, string> = {
-  Residential: "bg-blue-900/60 text-blue-300",
-  Commercial: "bg-violet-900/60 text-violet-300",
-  Industrial: "bg-orange-900/60 text-orange-300",
-  Special: "bg-emerald-900/60 text-emerald-300",
+  Residential: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
+  Commercial: "bg-white/5 text-white/60 border border-white/10",
+  Industrial: "bg-white/5 text-white/60 border border-white/10",
+  Special: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
 };
 
 export default function CompletedProjectsPage() {

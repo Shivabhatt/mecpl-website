@@ -158,7 +158,7 @@ export default function AboutPage() {
             <p className="text-white/70 text-sm mt-1">Join 50+ enterprise clients who trust us with their most ambitious projects.</p>
           </div>
           <Link href="/contact" data-testid="button-about-contact">
-            <span className="inline-flex items-center gap-2 bg-white text-[#C41E3A] px-8 py-4 font-black text-xs tracking-widest uppercase rounded-sm hover:bg-gray-100 transition-colors cursor-pointer">
+            <span className="inline-flex items-center gap-2 bg-white text-[#C41E3A] px-8 py-4 font-black text-xs tracking-widest uppercase rounded-sm hover:bg-gray-200 transition-colors cursor-pointer">
               Get in Touch <ArrowRight size={14} />
             </span>
           </Link>

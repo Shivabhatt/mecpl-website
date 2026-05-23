@@ -81,7 +81,9 @@ export default function CareersPage() {
           <div className="lg:col-span-7 bg-[#2C2C2C] border border-white/5 rounded-sm p-8 shadow-2xl" data-testid="section-application-form">
             {submitted ? (
               <div className="text-center py-12">
-                <div className="text-4xl mb-4">✓</div>
+                <div className="w-14 h-14 bg-[#C41E3A]/10 rounded-sm flex items-center justify-center mx-auto mb-4">
+                  <span className="text-[#C41E3A] text-2xl">✓</span>
+                </div>
                 <h3 className="text-white font-black text-xl uppercase mb-2">Application Submitted!</h3>
                 <p className="text-gray-400 text-sm">Our HR team will contact you shortly.</p>
                 <button onClick={() => setSubmitted(false)} className="mt-5 text-[#C41E3A] text-xs font-black uppercase tracking-widest hover:underline" data-testid="button-send-another">
