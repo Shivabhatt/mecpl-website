@@ -44,7 +44,6 @@ export default function Footer() {
               { label: "Projects", path: "/completed-projects" },
               { label: "Awards", path: "/awards" },
               { label: "Careers", path: "/careers" },
-              { label: "Contact", path: "/contact" },
             ].map((link) => (
               <li key={link.path}>
                 <Link href={link.path} data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -86,11 +85,11 @@ export default function Footer() {
               { code: "ISO 9001:2015", label: "Quality Mgmt" },
               { code: "ISO 14001:2015", label: "Environmental" },
               { code: "ISO 45001:2018", label: "Occ. Safety" },
-              { code: "CRISIL SME 1", label: "Since 2007" },
+              { code: "CRISIL SME 1", label: "" },
             ].map((cert) => (
               <div key={cert.code} className="p-3 bg-white/5 border border-white/5 rounded-sm">
                 <div className="text-white font-black text-xs">{cert.code}</div>
-                <div className="text-white/40 text-[10px] mt-0.5">{cert.label}</div>
+                {cert.label && <div className="text-white/40 text-[10px] mt-0.5">{cert.label}</div>}
               </div>
             ))}
           </div>
