@@ -3,135 +3,118 @@ import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0d1a42] text-white" data-testid="footer">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Company */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-[#F47920] rounded flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-black text-sm">M</span>
-              </div>
-              <div>
-                <div className="text-white font-black text-sm leading-tight">MECPL</div>
-                <div className="text-white/60 text-[9px] leading-tight font-medium tracking-wider uppercase">Millennium Engineers</div>
-              </div>
+    <footer className="bg-black border-t border-white/10 text-gray-400 text-xs" data-testid="footer">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
+        {/* Brand */}
+        <div className="md:col-span-4 space-y-5">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-[#C41E3A] flex items-center justify-between p-2 rounded-sm flex-shrink-0">
+              <div className="w-1 h-full bg-white rounded-full"></div>
+              <div className="w-1 h-full bg-white rounded-full"></div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-5">
-              Building excellence and delivering trust since 1998. India's premier civil engineering contractor with 25+ years of landmark projects.
-            </p>
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-[#F47920]"></div>
-              <div className="w-8 h-2 rounded-full bg-[#F47920]/40"></div>
+            <div>
+              <div className="text-white font-black text-lg tracking-tighter">MECPL</div>
+              <div className="text-white/30 text-[8px] font-bold tracking-widest uppercase">Millennium Engineers</div>
             </div>
           </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-5 pb-2 border-b border-[#F47920]/30">Contact Us</h4>
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <MapPin size={16} className="text-[#F47920] flex-shrink-0 mt-0.5" />
-                <p className="text-white/60 text-sm leading-relaxed">
-                  Office No. 501-504, 5th Floor,<br />
-                  Elite Transbay, Sr. No. 3,<br />
-                  Opp. S.K.P Campus, Balewadi,<br />
-                  Pune - 411045, Maharashtra
-                </p>
-              </div>
-              <a href="tel:02066865858" className="flex gap-3 items-center hover:text-[#F47920] transition-colors group" data-testid="link-footer-phone">
-                <Phone size={16} className="text-[#F47920] flex-shrink-0" />
-                <span className="text-white/60 text-sm group-hover:text-[#F47920]">020 6686 5858</span>
-              </a>
-              <a href="tel:+917066865858" className="flex gap-3 items-center hover:text-[#F47920] transition-colors group" data-testid="link-footer-mobile">
-                <Phone size={16} className="text-[#F47920] flex-shrink-0" />
-                <span className="text-white/60 text-sm group-hover:text-[#F47920]">+91 7066865858</span>
-              </a>
-              <a href="mailto:contact@mecpl.in" className="flex gap-3 items-center hover:text-[#F47920] transition-colors group" data-testid="link-footer-email">
-                <Mail size={16} className="text-[#F47920] flex-shrink-0" />
-                <span className="text-white/60 text-sm group-hover:text-[#F47920]">contact@mecpl.in</span>
-              </a>
+          <p className="text-gray-500 text-xs leading-relaxed">
+            Pune's premier civil engineering contractor delivering landmark structures since 1998. ISO certified, CRISIL SME 1 rated.
+          </p>
+          <div className="space-y-2">
+            <div className="flex items-start gap-2">
+              <MapPin size={12} className="text-[#C41E3A] flex-shrink-0 mt-0.5" />
+              <span className="leading-relaxed">Office No. 501-504, 5th Floor, Elite Transbay, Balewadi, Pune - 411045</span>
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-5 pb-2 border-b border-[#F47920]/30">Quick Links</h4>
-            <ul className="space-y-2.5">
-              {[
-                { label: "About Us", path: "/about" },
-                { label: "Completed Projects", path: "/completed-projects" },
-                { label: "Ongoing Projects", path: "/ongoing-projects" },
-                { label: "Our Clients", path: "/clients" },
-                { label: "Equipment", path: "/equipment" },
-                { label: "Awards", path: "/awards" },
-                { label: "Investor Relations", path: "/investors" },
-                { label: "Careers", path: "/careers" },
-                { label: "Contact", path: "/contact" },
-              ].map((link) => (
-                <li key={link.path}>
-                  <Link href={link.path} data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                    <span className="text-white/60 text-sm hover:text-[#F47920] transition-colors cursor-pointer flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-[#F47920] rounded-full inline-block flex-shrink-0"></span>
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Certifications */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-5 pb-2 border-b border-[#F47920]/30">Certifications</h4>
-            <div className="space-y-3">
-              {[
-                { code: "ISO 9001:2015", label: "Quality Management" },
-                { code: "ISO 14001:2015", label: "Environmental Management" },
-                { code: "ISO 45001:2018", label: "Occupational Safety" },
-                { code: "CRISIL SME 1", label: "Financial Rating Since 2007" },
-              ].map((cert) => (
-                <div key={cert.code} className="flex items-start gap-3 p-2.5 bg-white/5 rounded">
-                  <div className="w-1.5 h-1.5 bg-[#F47920] rounded-full mt-1.5 flex-shrink-0"></div>
-                  <div>
-                    <div className="text-white text-xs font-bold">{cert.code}</div>
-                    <div className="text-white/50 text-xs">{cert.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <a
-              href="https://www.mecpl.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 flex items-center gap-1.5 text-[#F47920] text-xs font-medium hover:underline"
-              data-testid="link-footer-official-site"
-            >
-              <ExternalLink size={12} /> Visit Official Website
+            <a href="tel:02066865858" className="flex items-center gap-2 hover:text-white transition-colors" data-testid="link-footer-phone">
+              <Phone size={12} className="text-[#C41E3A]" /> 020 6686 5858
+            </a>
+            <a href="mailto:contact@mecpl.in" className="flex items-center gap-2 hover:text-white transition-colors" data-testid="link-footer-email">
+              <Mail size={12} className="text-[#C41E3A]" /> contact@mecpl.in
             </a>
           </div>
         </div>
+
+        {/* Navigation */}
+        <div className="md:col-span-2 space-y-4">
+          <h4 className="text-white font-black text-[10px] tracking-widest uppercase">Navigation</h4>
+          <ul className="space-y-2.5">
+            {[
+              { label: "Home", path: "/" },
+              { label: "About Us", path: "/about" },
+              { label: "Completed Projects", path: "/completed-projects" },
+              { label: "Ongoing Projects", path: "/ongoing-projects" },
+              { label: "Awards", path: "/awards" },
+              { label: "Careers", path: "/careers" },
+              { label: "Contact", path: "/contact" },
+            ].map((link) => (
+              <li key={link.path}>
+                <Link href={link.path} data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <span className="hover:text-white hover:text-[#C41E3A] transition-colors cursor-pointer flex items-center gap-1.5">
+                    <span className="w-1 h-1 bg-[#C41E3A] rounded-full"></span> {link.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div className="md:col-span-2 space-y-4">
+          <h4 className="text-white font-black text-[10px] tracking-widest uppercase">About</h4>
+          <ul className="space-y-2.5">
+            {[
+              { label: "Our Profile", path: "/about" },
+              { label: "Clients", path: "/clients" },
+              { label: "Equipment", path: "/equipment" },
+              { label: "Investors", path: "/investors" },
+            ].map((link) => (
+              <li key={link.path}>
+                <Link href={link.path}>
+                  <span className="hover:text-[#C41E3A] transition-colors cursor-pointer flex items-center gap-1.5">
+                    <span className="w-1 h-1 bg-[#C41E3A] rounded-full"></span> {link.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Certifications */}
+        <div className="md:col-span-4 space-y-4">
+          <h4 className="text-white font-black text-[10px] tracking-widest uppercase">Certifications</h4>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { code: "ISO 9001:2015", label: "Quality Mgmt" },
+              { code: "ISO 14001:2015", label: "Environmental" },
+              { code: "ISO 45001:2018", label: "Occ. Safety" },
+              { code: "CRISIL SME 1", label: "Since 2007" },
+            ].map((cert) => (
+              <div key={cert.code} className="p-3 bg-white/5 border border-white/5 rounded-sm">
+                <div className="text-white font-black text-xs">{cert.code}</div>
+                <div className="text-white/40 text-[10px] mt-0.5">{cert.label}</div>
+              </div>
+            ))}
+          </div>
+          <a
+            href="https://www.mecpl.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[#C41E3A] hover:underline"
+            data-testid="link-footer-official-site"
+          >
+            <ExternalLink size={11} /> www.mecpl.in
+          </a>
+        </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/40 text-xs text-center sm:text-left">
-            &copy; {new Date().getFullYear()} Millennium Engineers &amp; Contractors Pvt. Ltd. All rights reserved.
+      <div className="border-t border-white/5 py-6">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/30 text-[10px] tracking-wider">
+            &copy; {new Date().getFullYear()} MILLENNIUM ENGINEERS & CONTRACTORS PVT. LTD. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex items-center gap-4">
-            <Link href="/investors">
-              <span className="text-white/40 text-xs hover:text-[#F47920] cursor-pointer transition-colors">Privacy Policy</span>
-            </Link>
-            <span className="text-white/20">|</span>
-            <Link href="/investors">
-              <span className="text-white/40 text-xs hover:text-[#F47920] cursor-pointer transition-colors">CSR Policy</span>
-            </Link>
-            <span className="text-white/20">|</span>
-            <Link href="/contact">
-              <span className="text-white/40 text-xs hover:text-[#F47920] cursor-pointer transition-colors">Contact</span>
-            </Link>
+          <div className="flex gap-5 text-white/30 text-[10px] tracking-wider">
+            <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">PRIVACY POLICY</span>
+            <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">CSR POLICY</span>
           </div>
         </div>
       </div>
