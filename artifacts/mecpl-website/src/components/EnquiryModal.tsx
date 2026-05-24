@@ -75,7 +75,7 @@ export default function EnquiryModal() {
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#1A1A1A] border border-white/10 rounded-sm shadow-2xl flex flex-col lg:flex-row">
+      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-mecpl-dark border border-white/10 rounded-sm shadow-2xl flex flex-col lg:flex-row">
         {/* Close button */}
         <button
           onClick={closeModal}
@@ -167,7 +167,7 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="E.g., Rahul Sharma"
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -178,7 +178,7 @@ export default function EnquiryModal() {
                     value={form.company}
                     onChange={handleChange}
                     placeholder="E.g., Panchshil Realty"
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
@@ -193,7 +193,7 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="you@company.com"
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -205,7 +205,7 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="+91 98765 43210"
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
@@ -218,11 +218,11 @@ export default function EnquiryModal() {
                     value={form.projectType}
                     onChange={handleChange}
                     required
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
                   >
-                    <option value="" className="bg-[#2C2C2C]">Select type...</option>
+                    <option value="" className="bg-mecpl-card">Select type...</option>
                     {projectTypes.map((t) => (
-                      <option key={t} value={t} className="bg-[#2C2C2C]">{t}</option>
+                      <option key={t} value={t} className="bg-mecpl-card">{t}</option>
                     ))}
                   </select>
                 </div>
@@ -234,7 +234,7 @@ export default function EnquiryModal() {
                     value={form.location}
                     onChange={handleChange}
                     placeholder="E.g., Kharadi, Pune"
-                    className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
@@ -245,11 +245,11 @@ export default function EnquiryModal() {
                   name="budget"
                   value={form.budget}
                   onChange={handleChange}
-                  className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
+                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
                 >
-                  <option value="" className="bg-[#2C2C2C]">Select range...</option>
+                  <option value="" className="bg-mecpl-card">Select range...</option>
                   {budgetRanges.map((b) => (
-                    <option key={b} value={b} className="bg-[#2C2C2C]">{b}</option>
+                    <option key={b} value={b} className="bg-mecpl-card">{b}</option>
                   ))}
                 </select>
               </div>
@@ -263,7 +263,7 @@ export default function EnquiryModal() {
                   required
                   rows={3}
                   placeholder="Briefly describe your project requirements, scale, timeline, and any specific challenges..."
-                  className="w-full bg-[#2C2C2C] border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20 resize-none"
+                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20 resize-none"
                 />
               </div>
 

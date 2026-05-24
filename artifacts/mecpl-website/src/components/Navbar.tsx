@@ -52,8 +52,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled || menuOpen
-          ? "bg-[#1A1A1A]/95 backdrop-blur-md shadow-2xl"
-          : "bg-[#1A1A1A]/80 backdrop-blur-md"
+          ? "bg-mecpl-dark/95 backdrop-blur-md shadow-2xl"
+          : "bg-mecpl-dark/80 backdrop-blur-md"
       } border-b border-white/10`}
       data-testid="navbar"
     >
@@ -94,7 +94,7 @@ export default function Navbar() {
                   <ChevronDown size={10} className="opacity-60 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
                 <div
-                  className={`absolute top-full left-0 w-52 bg-[#2C2C2C] border border-white/10 shadow-2xl transition-all duration-200 flex flex-col p-2 gap-0.5 ${
+                  className={`absolute top-full left-0 w-52 bg-mecpl-card border border-white/10 shadow-2xl transition-all duration-200 flex flex-col p-2 gap-0.5 ${
                     openDropdown === link.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
                   }`}
                 >
@@ -168,7 +168,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-[#1A1A1A] border-b border-white/10 px-6 py-6 space-y-4 text-sm font-bold uppercase tracking-wider">
+        <div className="lg:hidden bg-mecpl-dark border-b border-white/10 px-6 py-6 space-y-4 text-sm font-bold uppercase tracking-wider">
           {navLinks.map((link) =>
             link.children ? (
               <div key={link.path}>

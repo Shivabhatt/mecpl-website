@@ -48,11 +48,11 @@ export default function CompletedProjectsPage() {
   const filtered = active === "All" ? allProjects : allProjects.filter(p => p.type === active);
 
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Our Portfolio</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Completed Projects</h1>
@@ -76,14 +76,14 @@ export default function CompletedProjectsPage() {
       </div>
 
       {/* Filters */}
-      <div className="sticky top-20 z-30 bg-[#1A1A1A] border-b border-white/5 py-5" data-testid="section-project-filters">
+      <div className="sticky top-20 z-30 bg-mecpl-dark border-b border-white/5 py-5" data-testid="section-project-filters">
         <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-2 justify-center">
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setActive(f)}
               className={`px-6 py-2.5 text-xs font-black uppercase tracking-widest rounded-sm transition-all ${
-                active === f ? "bg-[#C41E3A] text-white" : "bg-[#2C2C2C] text-white/50 hover:text-white border border-white/5 hover:border-white/20"
+                active === f ? "bg-[#C41E3A] text-white" : "bg-mecpl-card text-white/50 hover:text-white border border-white/5 hover:border-white/20"
               }`}
               data-testid={`button-filter-${f.toLowerCase()}`}
             >
@@ -100,7 +100,7 @@ export default function CompletedProjectsPage() {
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
-            <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300" data-testid={`card-project-${i}`}>
+            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300" data-testid={`card-project-${i}`}>
               <div className="h-44 overflow-hidden relative">
                 <img
                   src={project.image}

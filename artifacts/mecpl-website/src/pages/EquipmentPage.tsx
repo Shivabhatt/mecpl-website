@@ -35,11 +35,11 @@ const equipment = [
 
 export default function EquipmentPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Heavy machinery" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Infrastructure Assets</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Advanced Machinery Inventory</h1>
@@ -79,7 +79,7 @@ export default function EquipmentPage() {
       <section className="max-w-7xl mx-auto px-6 py-10" data-testid="section-equipment">
         <div className="space-y-6">
           {equipment.map((item, i) => (
-            <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-xl" data-testid={`card-equipment-${i}`}>
+            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-xl" data-testid={`card-equipment-${i}`}>
               <div className="grid lg:grid-cols-3">
                 <div className="h-52 lg:h-auto overflow-hidden">
                   <img src={item.image} className="w-full h-full object-cover transition-all duration-700" alt={item.name} loading="lazy" />

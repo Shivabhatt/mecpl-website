@@ -22,7 +22,7 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Page header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img
@@ -30,7 +30,7 @@ export default function AboutPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-15"
           alt="Construction"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Who We Are</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">About MECPL</h1>
@@ -65,7 +65,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-3 gap-4">
               {[{ val: "25+", label: "Years" }, { val: "150+", label: "Projects" }, { val: "100%", label: "Quality" }].map(s => (
-                <div key={s.label} className="p-4 bg-[#2C2C2C] border border-white/5 text-center rounded-sm">
+                <div key={s.label} className="p-4 bg-mecpl-card border border-white/5 text-center rounded-sm">
                   <div className="text-2xl font-black text-[#C41E3A]">{s.val}</div>
                   <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-1">{s.label}</div>
                 </div>
@@ -87,8 +87,8 @@ export default function AboutPage() {
         <SectionHeader label="Our Team" title="Executive Leadership" center />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {leaders.map((leader, i) => (
-            <div key={i} className="bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all" data-testid={`card-leader-${i}`}>
-              <div className="h-28 bg-gradient-to-br from-[#C41E3A]/20 to-[#1A1A1A] flex items-center justify-center relative overflow-hidden">
+            <div key={i} className="bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all" data-testid={`card-leader-${i}`}>
+              <div className="h-28 bg-gradient-to-br from-[#C41E3A]/20 to-mecpl-dark flex items-center justify-center relative overflow-hidden">
                 <div className="w-16 h-16 bg-[#C41E3A] rounded-sm flex items-center justify-center text-white font-black text-2xl z-10">
                   {leader.name.split(" ").pop()![0]}
                 </div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="bg-[#2C2C2C]/40 border-y border-white/5 py-20" data-testid="section-certifications">
+      <section className="bg-mecpl-card/40 border-y border-white/5 py-20" data-testid="section-certifications">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeader label="Standards" title="Certifications & Compliance" center />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
@@ -115,7 +115,7 @@ export default function AboutPage() {
               { code: "ISO 45001:2018", label: "Occupational Health & Safety", icon: "✦" },
               { code: "CRISIL SME 1", label: "Financial Rating — Since 2007", icon: "✦" },
             ].map((cert) => (
-              <div key={cert.code} className="text-center p-8 bg-[#1A1A1A] border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-all" data-testid={`card-cert-${cert.code}`}>
+              <div key={cert.code} className="text-center p-8 bg-mecpl-dark border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-all" data-testid={`card-cert-${cert.code}`}>
                 <div className="text-[#C41E3A] text-3xl mb-4">{cert.icon}</div>
                 <h3 className="text-white font-black text-base uppercase mb-2">{cert.code}</h3>
                 <p className="text-gray-500 text-xs leading-relaxed">{cert.label}</p>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                   <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-[#1A1A1A] shadow"></div>
                 </div>
                 <div className="flex-1 pb-1">
-                  <div className="bg-[#2C2C2C] border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors">
+                  <div className="bg-mecpl-card border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors">
                     <p className="text-gray-300 text-sm">{item.event}</p>
                   </div>
                 </div>

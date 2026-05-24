@@ -55,7 +55,7 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-24 border-b border-white/5 overflow-hidden">
         <img
@@ -63,7 +63,7 @@ export default function ServicesPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-15"
           alt="Services"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">What We Do</span>
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none mb-6">
@@ -105,7 +105,7 @@ export default function ServicesPage() {
         <SectionHeader label="Service Verticals" title="Built for India's Most Demanding Projects" center subtitle="Six specialized service pillars, each backed by 25+ years of execution experience and ISO-certified quality standards." />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {services.map((svc, i) => (
-            <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300 flex flex-col">
               <div className="h-48 overflow-hidden relative">
                 <img src={svc.image} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" alt={svc.title} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -134,7 +134,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Why partner CTA */}
-      <section className="bg-[#2C2C2C] border-y border-white/5 py-20">
+      <section className="bg-mecpl-card border-y border-white/5 py-20">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Get Started</span>
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">

@@ -19,11 +19,11 @@ const awards = [
 
 export default function AwardsPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-10" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/90 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Recognition</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Awards & Honors</h1>
@@ -48,7 +48,7 @@ export default function AwardsPage() {
       <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-awards-highlights">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
           {awards.slice(0, 6).map((a, i) => (
-            <div key={i} className="bg-[#2C2C2C] border border-white/5 rounded-sm p-5 text-center hover:border-[#C41E3A]/30 transition-all" data-testid={`card-award-highlight-${i}`}>
+            <div key={i} className="bg-mecpl-card border border-white/5 rounded-sm p-5 text-center hover:border-[#C41E3A]/30 transition-all" data-testid={`card-award-highlight-${i}`}>
               <div className="text-3xl mb-2">{a.icon}</div>
               <div className="text-[#C41E3A] font-black text-xl">{a.year}</div>
               <div className="text-white/50 text-[9px] uppercase tracking-widest mt-1 font-bold leading-snug">{a.award.split(" ").slice(0, 3).join(" ")}</div>
@@ -71,7 +71,7 @@ export default function AwardsPage() {
                     <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-[#1A1A1A] shadow"></div>
                   </div>
                   <div className="flex-1">
-                    <div className="bg-[#2C2C2C] border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors group">
+                    <div className="bg-mecpl-card border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors group">
                       <div className="flex items-start gap-3">
                         <span className="text-lg flex-shrink-0">{award.icon}</span>
                         <div>

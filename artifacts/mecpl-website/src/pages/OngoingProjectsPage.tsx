@@ -16,11 +16,11 @@ const ongoingProjects = [
 
 export default function OngoingProjectsPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
@@ -40,7 +40,7 @@ export default function OngoingProjectsPage() {
       </div>
 
       {/* Live indicator bar */}
-      <div className="bg-[#2C2C2C] border-b border-white/5 py-3">
+      <div className="bg-mecpl-card border-b border-white/5 py-3">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-3">
           <Activity size={14} className="text-[#C41E3A]" />
           <span className="text-white text-[10px] font-black uppercase tracking-widest">10 Projects Currently Active</span>
@@ -54,7 +54,7 @@ export default function OngoingProjectsPage() {
           {ongoingProjects.map((project, i) => (
             <div
               key={i}
-              className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all duration-300 shadow-xl flex flex-col"
+              className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all duration-300 shadow-xl flex flex-col"
               data-testid={`card-ongoing-project-${i}`}
             >
               <div className="h-48 overflow-hidden relative">
@@ -90,7 +90,7 @@ export default function OngoingProjectsPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-white/5 bg-gradient-to-b from-[#1A1A1A] to-black py-20" data-testid="section-ongoing-cta">
+      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black py-20" data-testid="section-ongoing-cta">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white">Partner on Your Next Project</h2>
           <p className="text-gray-400 text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>

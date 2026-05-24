@@ -12,11 +12,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Project Intake Channel</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Let's Build Something<br />Extraordinary Together</h1>
@@ -39,7 +39,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-black uppercase tracking-tight text-white">Get in Touch</h2>
 
             <div className="space-y-4">
-              <div className="flex gap-4 p-5 bg-[#2C2C2C] border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-address">
+              <div className="flex gap-4 p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-address">
                 <div className="w-10 h-10 bg-[#C41E3A] rounded-sm flex items-center justify-center flex-shrink-0">
                   <MapPin size={16} className="text-white" />
                 </div>
@@ -54,7 +54,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex gap-4 p-5 bg-[#2C2C2C] border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-phone">
+              <div className="flex gap-4 p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-phone">
                 <div className="w-10 h-10 bg-[#C41E3A] rounded-sm flex items-center justify-center flex-shrink-0">
                   <Phone size={16} className="text-white" />
                 </div>
@@ -65,7 +65,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex gap-4 p-5 bg-[#2C2C2C] border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-email">
+              <div className="flex gap-4 p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-email">
                 <div className="w-10 h-10 bg-[#C41E3A] rounded-sm flex items-center justify-center flex-shrink-0">
                   <Mail size={16} className="text-white" />
                 </div>
@@ -75,8 +75,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex gap-4 p-5 bg-[#2C2C2C] border border-white/5 rounded-sm" data-testid="info-hours">
-                <div className="w-10 h-10 bg-[#2C2C2C] border border-white/10 rounded-sm flex items-center justify-center flex-shrink-0">
+              <div className="flex gap-4 p-5 bg-mecpl-card border border-white/5 rounded-sm" data-testid="info-hours">
+                <div className="w-10 h-10 bg-mecpl-card border border-white/10 rounded-sm flex items-center justify-center flex-shrink-0">
                   <Clock size={16} className="text-gray-500" />
                 </div>
                 <div>
@@ -89,7 +89,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <div className="lg:col-span-3 bg-[#2C2C2C] border border-white/5 rounded-sm p-8 shadow-2xl relative overflow-hidden">
+          <div className="lg:col-span-3 bg-mecpl-card border border-white/5 rounded-sm p-8 shadow-2xl relative overflow-hidden">
             <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none translate-x-8 translate-y-8 text-[200px] leading-none font-black text-white">⬡</div>
 
             {submitted ? (
@@ -123,7 +123,7 @@ export default function ContactPage() {
                       value={form.name}
                       onChange={e => setForm({...form, name: e.target.value})}
                       placeholder="E.g., Amit Patel"
-                      className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                      className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
                       data-testid="input-contact-name"
                     />
                   </div>
@@ -135,7 +135,7 @@ export default function ContactPage() {
                       value={form.email}
                       onChange={e => setForm({...form, email: e.target.value})}
                       placeholder="E.g., patel@enterprise.co.in"
-                      className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                      className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
                       data-testid="input-contact-email"
                     />
                   </div>
@@ -149,7 +149,7 @@ export default function ContactPage() {
                     value={form.phone}
                     onChange={e => setForm({...form, phone: e.target.value})}
                     placeholder="E.g., +91 98765 43210"
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
                     data-testid="input-contact-phone"
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     placeholder="Outline square footage parameters, regional zoning coordinates, or physical structural demands..."
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
                     data-testid="textarea-contact-message"
                   />
                 </div>

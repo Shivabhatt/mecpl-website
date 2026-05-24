@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   @theme — Registers all Tailwind utilities for MECPL colors.
+   --color-mecpl-dark and --color-mecpl-card reference CSS vars
+   so every bg-mecpl-dark / from-mecpl-dark / via-mecpl-dark /
+   bg-mecpl-card/50 etc. automatically follows the theme var.
+   ============================================================ */
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -28,8 +34,18 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
+
+  /* MECPL brand colors — these generate bg-mecpl-dark, from-mecpl-dark,
+     via-mecpl-card/60, text-mecpl-card, border-mecpl-dark, etc. */
+  --color-mecpl-dark: var(--mecpl-dark);
+  --color-mecpl-card: var(--mecpl-card);
+  --color-mecpl-red:  #c41e3a;
 }
 
+/* ============================================================
+   CSS Custom Properties — dark theme (default)
+   Override these in html[data-theme="light"] to flip the palette.
+   ============================================================ */
 :root {
   --background: 0 0% 10%;
   --foreground: 0 0% 96%;
@@ -53,10 +69,26 @@
   --app-font-sans: 'Montserrat', sans-serif;
   --radius: 0.125rem;
 
-  /* MECPL Brand */
-  --mecpl-red: #C41E3A;
-  --mecpl-dark: #1A1A1A;
-  --mecpl-stone: #2C2C2C;
+  /* MECPL palette — dark theme */
+  --mecpl-dark: #1a1a1a;
+  --mecpl-card: #2c2c2c;
+  --mecpl-red:  #c41e3a;
+
+  /* Text colour for the current theme (used in body) */
+  --mecpl-text: #ffffff;
+  --mecpl-text-muted: #9ca3af; /* gray-400 */
+}
+
+/* ============================================================
+   LIGHT THEME — flip the CSS variables.
+   ALL bg-mecpl-dark / bg-mecpl-card / from-mecpl-dark etc.
+   automatically pick up the new values. No class targeting needed.
+   ============================================================ */
+html[data-theme="light"] {
+  --mecpl-dark: #f5f3ee;
+  --mecpl-card: #e8e5df;
+  --mecpl-text: #1a1a1a;
+  --mecpl-text-muted: #5a5a5a;
 }
 
 @layer base {
@@ -64,7 +96,7 @@
   html { scroll-behavior: smooth; }
   body {
     background-color: var(--mecpl-dark);
-    color: white;
+    color: var(--mecpl-text);
     font-family: 'Montserrat', sans-serif;
     @apply antialiased overflow-x-hidden;
   }
@@ -74,16 +106,9 @@
 }
 
 @layer utilities {
-  .mecpl-red { color: #C41E3A; }
-  .bg-mecpl-red { background-color: #C41E3A; }
-  .bg-mecpl-dark { background-color: #1A1A1A; }
-  .bg-mecpl-stone { background-color: #2C2C2C; }
-  .border-mecpl-red { border-color: #C41E3A; }
-  .text-mecpl-red { color: #C41E3A; }
-
-  /* Certification ticker */
+  /* Ticker animation */
   @keyframes ticker {
-    0% { transform: translateX(0); }
+    0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
   .animate-ticker {
@@ -91,123 +116,55 @@
     display: flex;
     width: max-content;
   }
-  .animate-ticker:hover {
-    animation-play-state: paused;
-  }
-
-  /* Grayscale hover */
-  .img-grayscale {
-    filter: grayscale(100%);
-    transition: filter 0.5s ease;
-  }
-  .img-grayscale:hover {
-    filter: grayscale(0%);
-  }
-
-  /* Section label */
-  .section-label {
-    color: #C41E3A;
-    font-size: 0.65rem;
-    font-weight: 900;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  /* Card dark */
-  .card-dark {
-    background-color: #2C2C2C;
-    border: 1px solid rgba(255,255,255,0.05);
-  }
+  .animate-ticker:hover { animation-play-state: paused; }
 }
 
-/* ============================
-   LIGHT THEME OVERRIDES
-   Tailwind v4 lowercases hex in class selectors, so we target both
-   lowercase (what Tailwind generates) and uppercase (as written in JSX).
-   ============================ */
+/* ============================================================
+   LIGHT THEME — text / border / static-bg overrides.
+   Only targets standard Tailwind utility names (no hex), so
+   these selectors match reliably across Tailwind versions.
+   ============================================================ */
 
-html[data-theme="light"] body {
-  background-color: #F5F3EE !important;
-  color: #1A1A1A !important;
-}
+/* bg-black is used by the footer; flip it to off-white */
+html[data-theme="light"] .bg-black { background-color: #eae7e1 !important; }
 
-/* ---- Backgrounds (lowercase = what Tailwind v4 actually generates) ---- */
-html[data-theme="light"] .bg-\[#1a1a1a\],
-html[data-theme="light"] .bg-\[#1A1A1A\] { background-color: #F5F3EE !important; }
+/* Standard text colours */
+html[data-theme="light"] .text-white     { color: #1a1a1a !important; }
+html[data-theme="light"] .text-white\/80 { color: rgba(26,26,26,0.80) !important; }
+html[data-theme="light"] .text-white\/70 { color: rgba(26,26,26,0.70) !important; }
+html[data-theme="light"] .text-white\/60 { color: rgba(26,26,26,0.60) !important; }
+html[data-theme="light"] .text-white\/50 { color: rgba(26,26,26,0.50) !important; }
+html[data-theme="light"] .text-white\/40 { color: rgba(26,26,26,0.40) !important; }
+html[data-theme="light"] .text-white\/30 { color: rgba(26,26,26,0.30) !important; }
+html[data-theme="light"] .text-gray-400  { color: #5a5a5a !important; }
+html[data-theme="light"] .text-gray-300  { color: #6a6a6a !important; }
+html[data-theme="light"] .text-gray-500  { color: #6a6a6a !important; }
 
-html[data-theme="light"] .bg-\[#2c2c2c\],
-html[data-theme="light"] .bg-\[#2C2C2C\] { background-color: #E8E5DF !important; }
-
-html[data-theme="light"] .bg-black { background-color: #EAE7E1 !important; }
-
-/* Opacity backgrounds */
-html[data-theme="light"] .bg-\[#2c2c2c\]\/30,
-html[data-theme="light"] .bg-\[#2C2C2C\]\/30 { background-color: rgba(0,0,0,0.04) !important; }
-
-html[data-theme="light"] .bg-\[#2c2c2c\]\/50,
-html[data-theme="light"] .bg-\[#2C2C2C\]\/50 { background-color: rgba(0,0,0,0.06) !important; }
-
-html[data-theme="light"] .bg-\[#1a1a1a\]\/80,
-html[data-theme="light"] .bg-\[#1A1A1A\]\/80 { background-color: rgba(245,243,238,0.95) !important; }
-
-html[data-theme="light"] .bg-\[#1a1a1a\]\/95,
-html[data-theme="light"] .bg-\[#1A1A1A\]\/95 { background-color: rgba(245,243,238,0.98) !important; }
-
-html[data-theme="light"] .bg-white\/5 { background-color: rgba(0,0,0,0.05) !important; }
-
-/* ---- Text ---- */
-html[data-theme="light"] .text-white { color: #1A1A1A !important; }
-html[data-theme="light"] .text-white\/80 { color: rgba(26,26,26,0.8) !important; }
-html[data-theme="light"] .text-white\/70 { color: rgba(26,26,26,0.7) !important; }
-html[data-theme="light"] .text-white\/60 { color: rgba(26,26,26,0.6) !important; }
-html[data-theme="light"] .text-white\/50 { color: rgba(26,26,26,0.5) !important; }
-html[data-theme="light"] .text-white\/40 { color: rgba(26,26,26,0.4) !important; }
-html[data-theme="light"] .text-white\/30 { color: rgba(26,26,26,0.3) !important; }
-html[data-theme="light"] .text-gray-400 { color: #5A5A5A !important; }
-html[data-theme="light"] .text-gray-300 { color: #6A6A6A !important; }
-html[data-theme="light"] .text-gray-500 { color: #7A7A7A !important; }
-
-/* ---- Borders ---- */
+/* Borders */
 html[data-theme="light"] .border-white\/5  { border-color: rgba(0,0,0,0.08) !important; }
 html[data-theme="light"] .border-white\/10 { border-color: rgba(0,0,0,0.12) !important; }
-html[data-theme="light"] .border-white\/20 { border-color: rgba(0,0,0,0.2)  !important; }
+html[data-theme="light"] .border-white\/20 { border-color: rgba(0,0,0,0.20) !important; }
 html[data-theme="light"] .border-white\/30 { border-color: rgba(0,0,0,0.25) !important; }
 
-/* ---- Gradients ---- */
-html[data-theme="light"] .from-\[#1a1a1a\],
-html[data-theme="light"] .from-\[#1A1A1A\] {
-  --tw-gradient-from: #F5F3EE !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(245,243,238,0)) !important;
-}
+/* bg-white/5 accent panels */
+html[data-theme="light"] .bg-white\/5  { background-color: rgba(0,0,0,0.04) !important; }
+html[data-theme="light"] .bg-white\/10 { background-color: rgba(0,0,0,0.07) !important; }
 
-html[data-theme="light"] .to-black { --tw-gradient-to: #E0DDD7 !important; }
+/* to-black gradient endpoint */
+html[data-theme="light"] .to-black { --tw-gradient-to: #e0ddd7 var(--tw-gradient-to-position) !important; }
 
-html[data-theme="light"] .via-\[#1a1a1a\]\/60,
-html[data-theme="light"] .via-\[#1A1A1A\]\/60 {
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(245,243,238,0.7), var(--tw-gradient-to, rgba(245,243,238,0)) !important;
-}
-html[data-theme="light"] .via-\[#1a1a1a\]\/80,
-html[data-theme="light"] .via-\[#1A1A1A\]\/80 {
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(245,243,238,0.85), var(--tw-gradient-to, rgba(245,243,238,0)) !important;
-}
-html[data-theme="light"] .via-\[#1a1a1a\]\/40,
-html[data-theme="light"] .via-\[#1A1A1A\]\/40 {
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(245,243,238,0.5), var(--tw-gradient-to, rgba(245,243,238,0)) !important;
-}
-
-/* ---- Form inputs ---- */
+/* Form inputs — force white background so they stay legible */
 html[data-theme="light"] input,
 html[data-theme="light"] textarea,
 html[data-theme="light"] select {
-  background-color: #FFFFFF !important;
-  color: #1A1A1A !important;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
   border-color: rgba(0,0,0,0.15) !important;
 }
 html[data-theme="light"] input::placeholder,
 html[data-theme="light"] textarea::placeholder {
-  color: rgba(0,0,0,0.35) !important;
+  color: rgba(0,0,0,0.30) !important;
 }
 
-/* ---- Dropdown menus ---- */
-html[data-theme="light"] .bg-\[#2c2c2c\].border,
-html[data-theme="light"] .bg-\[#2C2C2C\].border { background-color: #FFFFFF !important; border-color: rgba(0,0,0,0.12) !important; }
+/* Navbar dropdown panels */
+html[data-theme="light"] nav .border { border-color: rgba(0,0,0,0.10) !important; }

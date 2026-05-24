@@ -21,11 +21,11 @@ export default function CareersPage() {
   };
 
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Engineering team" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Join Team MECPL</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Construct Your<br />Engineering Career</h1>
@@ -55,7 +55,7 @@ export default function CareersPage() {
             <div className="space-y-3" data-testid="section-openings">
               <div className="text-[9px] font-black uppercase tracking-widest text-gray-500 mb-3">Current Openings</div>
               {openings.map((job, i) => (
-                <div key={i} className="p-4 bg-[#2C2C2C] border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-all group" data-testid={`card-job-${i}`}>
+                <div key={i} className="p-4 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-all group" data-testid={`card-job-${i}`}>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
                       <h3 className="text-white font-bold text-sm uppercase group-hover:text-[#C41E3A] transition-colors">{job.title}</h3>
@@ -78,7 +78,7 @@ export default function CareersPage() {
           </div>
 
           {/* Application form */}
-          <div className="lg:col-span-7 bg-[#2C2C2C] border border-white/5 rounded-sm p-8 shadow-2xl" data-testid="section-application-form">
+          <div className="lg:col-span-7 bg-mecpl-card border border-white/5 rounded-sm p-8 shadow-2xl" data-testid="section-application-form">
             {submitted ? (
               <div className="text-center py-12">
                 <div className="w-14 h-14 bg-[#C41E3A]/10 rounded-sm flex items-center justify-center mx-auto mb-4">
@@ -104,7 +104,7 @@ export default function CareersPage() {
                     value={form.name}
                     onChange={e => setForm({...form, name: e.target.value})}
                     placeholder="E.g., Rahul Sharma"
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
                     data-testid="input-applicant-name"
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function CareersPage() {
                     value={form.email}
                     onChange={e => setForm({...form, email: e.target.value})}
                     placeholder="E.g., r.sharma@domain.com"
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
                     data-testid="input-applicant-email"
                   />
                 </div>
@@ -125,7 +125,7 @@ export default function CareersPage() {
                   <select
                     value={form.exp}
                     onChange={e => setForm({...form, exp: e.target.value})}
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-gray-300 focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-gray-300 focus:outline-none focus:border-[#C41E3A] transition-colors"
                     data-testid="select-applicant-exp"
                   >
                     <option>0 - 2 Years Baseline</option>
@@ -141,11 +141,11 @@ export default function CareersPage() {
                     value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     placeholder="Tell us about your experience and why you'd like to join MECPL..."
-                    className="w-full bg-[#1A1A1A] border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
+                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
                     data-testid="textarea-applicant-message"
                   />
                 </div>
-                <div className="border-2 border-dashed border-white/10 hover:border-[#C41E3A]/40 bg-[#1A1A1A] p-5 rounded-sm text-center transition-colors cursor-pointer relative">
+                <div className="border-2 border-dashed border-white/10 hover:border-[#C41E3A]/40 bg-mecpl-dark p-5 rounded-sm text-center transition-colors cursor-pointer relative">
                   <div className="text-gray-500 text-xl mb-1">↑</div>
                   <p className="text-xs text-gray-500">Drag and drop CV/Portfolio here, or browse</p>
                   <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" />

@@ -129,7 +129,7 @@ export default function HomePage() {
   const s = heroSlides[slide];
 
   return (
-    <div className="bg-[#1A1A1A]">
+    <div className="bg-mecpl-dark">
       {/* HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
         <div className="absolute inset-0 z-0">
@@ -139,7 +139,7 @@ export default function HomePage() {
             className="w-full h-full object-cover opacity-30 transition-opacity duration-1000"
             alt="Construction backdrop"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/60 to-[#1A1A1A]/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-mecpl-dark via-mecpl-dark/60 to-mecpl-dark/40"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8">
@@ -185,7 +185,7 @@ export default function HomePage() {
       </section>
 
       {/* CERTIFICATION TICKER */}
-      <section className="bg-[#2C2C2C] border-y border-white/5 py-4 overflow-hidden select-none" data-testid="section-ticker">
+      <section className="bg-mecpl-card border-y border-white/5 py-4 overflow-hidden select-none" data-testid="section-ticker">
         <div className="animate-ticker">
           {[...tickerItems, ...tickerItems].map((item, i) => (
             <span key={i} className="inline-flex items-center gap-6 px-6 text-[10px] font-black uppercase tracking-widest text-white/50 whitespace-nowrap">
@@ -199,7 +199,7 @@ export default function HomePage() {
       {/* STATS */}
       <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center" data-testid="section-stats">
         {stats.map((stat) => (
-          <div key={stat.label} className="p-6 border-l-2 border-[#C41E3A] bg-[#2C2C2C]/30 rounded-sm" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
+          <div key={stat.label} className="p-6 border-l-2 border-[#C41E3A] bg-mecpl-card/30 rounded-sm" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
             <AnimatedCounter value={stat.value} suffix={stat.suffix} />
             <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider mt-2">{stat.label}</div>
           </div>
@@ -207,7 +207,7 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-services">
+      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-services">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <SectionHeader label="What We Do" title="Our Service Verticals" subtitle="Six specialized service pillars covering the entire construction lifecycle." />
@@ -220,7 +220,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, i) => (
               <Link href={svc.path} key={i}>
-                <div className="group bg-[#2C2C2C] border border-white/5 rounded-sm p-7 flex flex-col gap-4 hover:border-[#C41E3A]/40 hover:shadow-xl transition-all duration-300 cursor-pointer h-full" data-testid={`card-service-${i}`}>
+                <div className="group bg-mecpl-card border border-white/5 rounded-sm p-7 flex flex-col gap-4 hover:border-[#C41E3A]/40 hover:shadow-xl transition-all duration-300 cursor-pointer h-full" data-testid={`card-service-${i}`}>
                   <div className="w-10 h-10 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
                     <svc.icon size={18} className="text-[#C41E3A] group-hover:text-white transition-colors" />
                   </div>
@@ -249,7 +249,7 @@ export default function HomePage() {
             </p>
             <div className="grid grid-cols-3 gap-4 pt-2">
               {["ISO 9001", "ISO 14001", "ISO 45001"].map(cert => (
-                <div key={cert} className="p-4 bg-[#2C2C2C] rounded-sm border border-white/5 text-center">
+                <div key={cert} className="p-4 bg-mecpl-card rounded-sm border border-white/5 text-center">
                   <div className="text-[#C41E3A] text-lg mb-1">✓</div>
                   <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider">{cert}</div>
                 </div>
@@ -283,7 +283,7 @@ export default function HomePage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col" data-testid="card-featured-project">
+          <div className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col" data-testid="card-featured-project">
             <div className="h-72 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=700&auto=format&fit=crop"
@@ -316,7 +316,7 @@ export default function HomePage() {
               { name: "VTP Bel Air, Pune", desc: "High-density multi-tower structural contract completed with uncompromised asset alignment.", type: "Complex Core Works" },
               { name: "Gera Commerzone, Kharadi", desc: "Advanced commercial glass-and-steel infrastructure mapped precisely to technical layouts.", type: "Commercial Core Infra" },
             ].map((p, i) => (
-              <div key={i} className="bg-[#2C2C2C] border border-white/5 p-6 rounded-sm flex flex-col justify-between gap-4 shadow-xl hover:border-[#C41E3A]/30 transition-colors" data-testid={`card-small-project-${i}`}>
+              <div key={i} className="bg-mecpl-card border border-white/5 p-6 rounded-sm flex flex-col justify-between gap-4 shadow-xl hover:border-[#C41E3A]/30 transition-colors" data-testid={`card-small-project-${i}`}>
                 <h4 className="text-base font-bold uppercase text-white tracking-tight border-b border-white/5 pb-3">{p.name}</h4>
                 <p className="text-xs text-gray-400 leading-relaxed flex-1">{p.desc}</p>
                 <span className="text-[9px] font-black uppercase text-[#C41E3A] tracking-widest">{p.type}</span>
@@ -327,12 +327,12 @@ export default function HomePage() {
       </section>
 
       {/* WHY CHOOSE MECPL */}
-      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-why-mecpl">
+      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-why-mecpl">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <SectionHeader label="Our Advantage" title="Why Choose MECPL" center subtitle="Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {whyChoose.map((item, i) => (
-              <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm p-8 space-y-4 hover:border-[#C41E3A]/30 hover:shadow-xl transition-all duration-300" data-testid={`card-why-${i}`}>
+              <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm p-8 space-y-4 hover:border-[#C41E3A]/30 hover:shadow-xl transition-all duration-300" data-testid={`card-why-${i}`}>
                 <div className="w-12 h-12 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
                   <item.icon size={20} className="text-[#C41E3A] group-hover:text-white transition-colors" />
                 </div>
@@ -382,7 +382,7 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-testimonials">
+      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-testimonials">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <SectionHeader label="Client Voices" title="What Our Partners Say" center />
           <div className="max-w-4xl mx-auto">
@@ -393,7 +393,7 @@ export default function HomePage() {
                   className={`transition-all duration-500 ${i === activeTestimonial ? "block" : "hidden"}`}
                   data-testid={`testimonial-${i}`}
                 >
-                  <div className="bg-[#2C2C2C] border border-white/5 rounded-sm p-10 space-y-6 text-center relative">
+                  <div className="bg-mecpl-card border border-white/5 rounded-sm p-10 space-y-6 text-center relative">
                     <Quote size={32} className="text-[#C41E3A]/30 mx-auto" />
                     <p className="text-white text-lg leading-relaxed font-medium italic">
                       "{t.quote}"
@@ -449,7 +449,7 @@ export default function HomePage() {
               { year: "2017", award: "India's Small Giants", icon: "🏅" },
               { year: "2007", award: "BAI First Prize", icon: "🎖" },
             ].map((a) => (
-              <div key={a.year} className="p-5 bg-[#2C2C2C] border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-colors text-center" data-testid={`card-award-${a.year}`}>
+              <div key={a.year} className="p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-colors text-center" data-testid={`card-award-${a.year}`}>
                 <div className="text-2xl mb-2">{a.icon}</div>
                 <div className="text-[#C41E3A] font-black text-lg">{a.year}</div>
                 <div className="text-white/50 text-[10px] uppercase tracking-wide mt-1 font-bold">{a.award}</div>
@@ -460,7 +460,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA ENQUIRY */}
-      <section className="border-t border-white/5 bg-gradient-to-b from-[#1A1A1A] to-black py-24" data-testid="section-cta">
+      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black py-24" data-testid="section-cta">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-8">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">

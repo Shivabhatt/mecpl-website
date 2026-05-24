@@ -25,11 +25,11 @@ const clients = [
 
 export default function ClientsPage() {
   return (
-    <div className="bg-[#1A1A1A] pt-20">
+    <div className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Corporate" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Our Network</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Clients & Partners</h1>
@@ -47,7 +47,7 @@ export default function ClientsPage() {
       <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-trust">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
           {[{ val: "50+", label: "Enterprise Clients" }, { val: "150+", label: "Projects Delivered" }, { val: "25+", label: "Years of Trust" }, { val: "100%", label: "Quality Record" }].map(s => (
-            <div key={s.label} className="p-6 border-l-2 border-[#C41E3A] bg-[#2C2C2C]/30 text-center rounded-sm">
+            <div key={s.label} className="p-6 border-l-2 border-[#C41E3A] bg-mecpl-card/30 text-center rounded-sm">
               <div className="text-4xl font-black text-[#C41E3A]">{s.val}</div>
               <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-2">{s.label}</div>
             </div>
@@ -73,14 +73,14 @@ export default function ClientsPage() {
       </section>
 
       {/* Full client grid */}
-      <section className="bg-[#2C2C2C]/30 border-t border-white/5 py-14" data-testid="section-clients-grid">
+      <section className="bg-mecpl-card/30 border-t border-white/5 py-14" data-testid="section-clients-grid">
         <div className="max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-6">Full Portfolio</span>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {clients.map((client, i) => (
               <div
                 key={i}
-                className="bg-[#2C2C2C] border border-white/5 p-5 rounded-sm hover:border-[#C41E3A]/30 transition-all group"
+                className="bg-mecpl-card border border-white/5 p-5 rounded-sm hover:border-[#C41E3A]/30 transition-all group"
                 data-testid={`card-client-${i}`}
               >
                 <div className="w-10 h-10 bg-[#C41E3A]/10 border border-[#C41E3A]/20 rounded-sm flex items-center justify-center text-[#C41E3A] font-black text-lg mb-3 group-hover:bg-[#C41E3A] group-hover:text-white transition-all">
