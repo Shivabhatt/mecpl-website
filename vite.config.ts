@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import fs from "fs";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
@@ -19,6 +20,15 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    {
+      name: "copy-index-to-404",
+      writeBundle() {
+        const outDir = path.resolve(import.meta.dirname, "dist/public");
+        const index = path.join(outDir, "index.html");
+        const fallback = path.join(outDir, "404.html");
+        fs.copyFileSync(index, fallback);
+      },
+    },
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
