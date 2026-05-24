@@ -4,6 +4,7 @@ import SectionHeader from "../components/SectionHeader";
 import ClientsPage from "@/pages/ClientsPage";
 import EquipmentPage from "@/pages/EquipmentPage";
 import InvestorsPage from "@/pages/InvestorsPage";
+const assetBase = import.meta.env.BASE_URL;
 
 const services = [
   {
@@ -45,10 +46,10 @@ const services = [
 ];
 
 const leaders = [
-  { name: "Mr. M B Nambiar", role: "Chairman", desc: "Visionary leadership steering MECPL's growth and legacy protection over 25+ years of landmark engineering.", image: "/assets/leaders/leader-01.jpg" },
-  { name: "Mr. Jeevan K", role: "Managing Director", desc: "Operational strategy and cross-industry technology deployment driving MECPL's competitive advantage.", image: "/assets/leaders/leader-03.jpg" },
-  { name: "Mr. Manojkumar M R", role: "Director Finance", desc: "Fiscal governance, financial compliance, and credit rating maintenance ensuring MECPL's financial integrity.", image: "/assets/leaders/leader-02.jpg" },
-  { name: "Mr. Jitin Nambiar", role: "Executive Director", desc: "Infrastructure delivery monitoring and on-site engineering execution across all active projects.", image: "/assets/leaders/jitin.png" },
+  { name: "Mr. M B Nambiar", role: "Chairman", desc: "Visionary leadership steering MECPL's growth and legacy protection over 25+ years of landmark engineering.", image: `${assetBase}assets/leaders/leader-01.jpg` },
+  { name: "Mr. Jeevan K", role: "Managing Director", desc: "Operational strategy and cross-industry technology deployment driving MECPL's competitive advantage.", image: `${assetBase}assets/leaders/leader-03.jpg` },
+  { name: "Mr. Manojkumar M R", role: "Director Finance", desc: "Fiscal governance, financial compliance, and credit rating maintenance ensuring MECPL's financial integrity.", image: `${assetBase}assets/leaders/leader-02.jpg` },
+  { name: "Mr. Jitin Nambiar", role: "Executive Director", desc: "Infrastructure delivery monitoring and on-site engineering execution across all active projects.", image: `${assetBase}assets/leaders/jitin.png` },
 ];
 
 const milestones = [

@@ -1,37 +1,38 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { MapPin } from "lucide-react";
+const assetBase = import.meta.env.BASE_URL;
 
 const allProjects = [
   // Residential
-  { name: "Kingsbury Pride Purple Group", type: "Residential", location: "Charoli, Pune", image: "/assets/projects/Kingsbury.jpg" },
-  { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: "/assets/projects/gera-songs-of-joy-01-large.png" },
-  { name: "Godrej Rejuve", type: "Residential", location: "Keshav Nagar, Pune", image: "/assets/projects/Rejuve.jpg" },
-  { name: "Kalpataru Jade Residences", type: "Residential", location: "Baner, Pune", image: "/assets/projects/Kalpataru.jpeg" },
-  { name: "Yoo Villas", type: "Residential", location: "Wagholi, Pune", image: "/assets/projects/yoovilla-1.png" },
-  { name: "Trump Tower", type: "Residential", location: "Kalyani Nagar, Pune", image: "/assets/projects/Trump-Tower.jpg" },
-  { name: "Godrej Nurture", type: "Residential", location: "Mamurdi, Pune", image: "/assets/projects/nurture-scaled.jpg" },
-  { name: "Pride Atlantic", type: "Residential", location: "Charholi, Pune", image: "/assets/projects/Atlantic.png" },
-  { name: "Highrise-Panchshil Tower", type: "Residential", location: "Wagholi, Pune", image: "/assets/projects/HIGH-RISE-1-scaled.jpg" },
-  { name: "Godrej Forest Grove", type: "Residential", location: "Mamurdi, Pune", image: "/assets/projects/Godrej-Forest-grove.jpg" },
-  { name: "Godrej Infinity", type: "Residential", location: "Keshav Nagar, Pune", image: "/assets/projects/GODREJ-INFINITY.jpg" },
-  { name: "Emirus Project", type: "Residential", location: "Balewadi, Pune", image: "/assets/projects/Emirus-scaled.jpg" },
+  { name: "Kingsbury Pride Purple Group", type: "Residential", location: "Charoli, Pune", image: `${assetBase}assets/projects/Kingsbury.jpg` },
+  { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: `${assetBase}assets/projects/gera-songs-of-joy-01-large.png` },
+  { name: "Godrej Rejuve", type: "Residential", location: "Keshav Nagar, Pune", image: `${assetBase}assets/projects/Rejuve.jpg` },
+  { name: "Kalpataru Jade Residences", type: "Residential", location: "Baner, Pune", image: `${assetBase}assets/projects/Kalpataru.jpeg` },
+  { name: "Yoo Villas", type: "Residential", location: "Wagholi, Pune", image: `${assetBase}assets/projects/yoovilla-1.png` },
+  { name: "Trump Tower", type: "Residential", location: "Kalyani Nagar, Pune", image: `${assetBase}assets/projects/Trump-Tower.jpg` },
+  { name: "Godrej Nurture", type: "Residential", location: "Mamurdi, Pune", image: `${assetBase}assets/projects/nurture-scaled.jpg` },
+  { name: "Pride Atlantic", type: "Residential", location: "Charholi, Pune", image: `${assetBase}assets/projects/Atlantic.png` },
+  { name: "Highrise-Panchshil Tower", type: "Residential", location: "Wagholi, Pune", image: `${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg` },
+  { name: "Godrej Forest Grove", type: "Residential", location: "Mamurdi, Pune", image: `${assetBase}assets/projects/Godrej-Forest-grove.jpg` },
+  { name: "Godrej Infinity", type: "Residential", location: "Keshav Nagar, Pune", image: `${assetBase}assets/projects/GODREJ-INFINITY.jpg` },
+  { name: "Emirus Project", type: "Residential", location: "Balewadi, Pune", image: `${assetBase}assets/projects/Emirus-scaled.jpg` },
   // Commercial
-  { name: "Eon West LP II", type: "Commercial", location: "Wakad, Pune", image: "/assets/projects/Eonwest.jpg" },
-  { name: "Panchshil Tech Park", type: "Commercial", location: "Viman Nagar, Pune", image: "/assets/projects/TechPark.jpg" },
-  { name: "Gera Commerzone", type: "Commercial", location: "Kharadi, Pune", image: "/assets/projects/KRC-scaled-e1700730314593.jpg" },
-  { name: "Syntel Phase I & II", type: "Commercial", location: "Talawade IT Park", image: "/assets/projects/syntel-03-large.png" },
-  { name: "Indira College of Engineering", type: "Commercial", location: "Tathawade, Pune", image: "/assets/projects/indira-01-large-1.png" },
-  { name: "Golden Bell Complex", type: "Commercial", location: "Mundhwa, Pune", image: "/assets/projects/Golden-Bell.jpg" },
-  { name: "43 Privet Drive", type: "Commercial", location: "Balewadi, Pune", image: "/assets/projects/43PD-1-scaled.jpg" },
-  { name: "Connect Project", type: "Commercial", location: "Baudhan, Pune", image: "/assets/projects/connect-01.png" },
+  { name: "Eon West LP II", type: "Commercial", location: "Wakad, Pune", image: `${assetBase}assets/projects/Eonwest.jpg` },
+  { name: "Panchshil Tech Park", type: "Commercial", location: "Viman Nagar, Pune", image: `${assetBase}assets/projects/TechPark.jpg` },
+  { name: "Gera Commerzone", type: "Commercial", location: "Kharadi, Pune", image: `${assetBase}assets/projects/KRC-scaled-e1700730314593.jpg` },
+  { name: "Syntel Phase I & II", type: "Commercial", location: "Talawade IT Park", image: `${assetBase}assets/projects/syntel-03-large.png` },
+  { name: "Indira College of Engineering", type: "Commercial", location: "Tathawade, Pune", image: `${assetBase}assets/projects/indira-01-large-1.png` },
+  { name: "Golden Bell Complex", type: "Commercial", location: "Mundhwa, Pune", image: `${assetBase}assets/projects/Golden-Bell.jpg` },
+  { name: "43 Privet Drive", type: "Commercial", location: "Balewadi, Pune", image: `${assetBase}assets/projects/43PD-1-scaled.jpg` },
+  { name: "Connect Project", type: "Commercial", location: "Baudhan, Pune", image: `${assetBase}assets/projects/connect-01.png` },
   // Industrial
-  { name: "Mahindra Electric", type: "Industrial", location: "Chakan, Pune", image: "/assets/projects/MAHINDRA-1.png" },
-  { name: "Praj Industries Ltd.", type: "Industrial", location: "Pirangut, Pune", image: "/assets/projects/PRAJ-INDUSTRIES.png" },
-  { name: "Amtek Auto Ltd.", type: "Industrial", location: "Sanaswadi, Pune", image: "/assets/projects/AMTEK-AUTO-LTD.png" },
-  { name: "Bekaert Industries", type: "Industrial", location: "Ranjangaon, Pune", image: "/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.png" },
+  { name: "Mahindra Electric", type: "Industrial", location: "Chakan, Pune", image: `${assetBase}assets/projects/MAHINDRA-1.png` },
+  { name: "Praj Industries Ltd.", type: "Industrial", location: "Pirangut, Pune", image: `${assetBase}assets/projects/PRAJ-INDUSTRIES.png` },
+  { name: "Amtek Auto Ltd.", type: "Industrial", location: "Sanaswadi, Pune", image: `${assetBase}assets/projects/AMTEK-AUTO-LTD.png` },
+  { name: "Bekaert Industries", type: "Industrial", location: "Ranjangaon, Pune", image: `${assetBase}assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.png` },
   // Special
-  { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: "/assets/projects/Ramkrishna-Math.jpg" },
+  { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: `${assetBase}assets/projects/Ramkrishna-Math.jpg` },
 ];
 
 const filters = ["All", "Residential", "Commercial", "Industrial", "Special"];

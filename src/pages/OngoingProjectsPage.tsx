@@ -1,17 +1,18 @@
 import { Link } from "wouter";
 import { MapPin, Activity } from "lucide-react";
+const assetBase = import.meta.env.BASE_URL;
 
 const ongoingProjects = [
-  { name: "Panchshil SRA Dhanori", location: "Vishrantwadi, Pune", desc: "Structural rehabilitation development for SRA housing. Advanced concrete execution on high-density residential blocks.", image: "/assets/projects/SRA-DHANORI-scaled.jpg" },
-  { name: "VTP Township Framework", location: "Baner Highrise Sector, Pune", desc: "Large-scale township infrastructure framework. Multi-tower concrete structure execution across phased development zones.", image: "/assets/projects/VTP-scaled.jpg" },
-  { name: "Solitaire World Kothrud", location: "Kothrud, Pune", desc: "Premium residential towers development. High-specification concrete work for luxury residential project.", image: "/assets/projects/2.Solitaire-World-Kothrud.jpg" },
-  { name: "Wellington Sector — 01", location: "Charholi, Pune", desc: "Mass mega-township infrastructure block. Large-scale civil engineering execution across Pune's largest township projects.", image: "/assets/projects/WhatsApp-Image-2025-05-06-at-17.24.37_0a4a5d3c-scaled.jpg" },
-  { name: "Malpani Soul String", location: "Baner, Pune", desc: "Multi-tower residential structural execution. Precision concrete delivery for premium mid-rise residential towers.", image: "/assets/projects/Malpani-Soul-String-scaled.jpg" },
-  { name: "Raheja Sterling Frame", location: "Mohammedwadi, Pune", desc: "High-density precision residential blocks. Complex formwork and structural engineering for premium residential development.", image: "/assets/projects/WhatsApp-Image-2024-01-06-at-11.01.23_faa333d0.jpg" },
-  { name: "Solitaire Business Hub II", location: "Baner, Pune", desc: "Premium integrated commercial workspace platform. State-of-the-art structural engineering for next-generation office spaces.", image: "/assets/projects/Solitaire-Business-Hub-II.jpeg" },
-  { name: "Godrej Emerald Waters", location: "Pimpri, Pune", desc: "High-scale concrete engineering matrix. Advanced structural systems for premium residential development by Godrej Properties.", image: "/assets/projects/Godrej-Emerald-Waters.jpg" },
-  { name: "Raheja Vista NIBM", location: "Mohammedwadi, Pune", desc: "Residential structural development in prime NIBM corridor. High-quality concrete execution for luxury residential towers.", image: "/assets/projects/Raheja-Vistas-scaled.jpg" },
-  { name: "Godrej Park Ridge", location: "Mohammedwadi, Pune", desc: "Premium residential cluster pipeline. Multi-phase residential development with complex structural engineering requirements.", image: "/assets/projects/Godrej-Park-Ridge-.jpg" },
+  { name: "Panchshil SRA Dhanori", location: "Vishrantwadi, Pune", desc: "Structural rehabilitation development for SRA housing. Advanced concrete execution on high-density residential blocks.", image: `${assetBase}assets/projects/SRA-DHANORI-scaled.jpg` },
+  { name: "VTP Township Framework", location: "Baner Highrise Sector, Pune", desc: "Large-scale township infrastructure framework. Multi-tower concrete structure execution across phased development zones.", image: `${assetBase}assets/projects/VTP-scaled.jpg` },
+  { name: "Solitaire World Kothrud", location: "Kothrud, Pune", desc: "Premium residential towers development. High-specification concrete work for luxury residential project.", image: `${assetBase}assets/projects/2.Solitaire-World-Kothrud.jpg` },
+  { name: "Wellington Sector — 01", location: "Charholi, Pune", desc: "Mass mega-township infrastructure block. Large-scale civil engineering execution across Pune's largest township projects.", image: `${assetBase}assets/projects/WhatsApp-Image-2025-05-06-at-17.24.37_0a4a5d3c-scaled.jpg` },
+  { name: "Malpani Soul String", location: "Baner, Pune", desc: "Multi-tower residential structural execution. Precision concrete delivery for premium mid-rise residential towers.", image: `${assetBase}assets/projects/Malpani-Soul-String-scaled.jpg` },
+  { name: "Raheja Sterling Frame", location: "Mohammedwadi, Pune", desc: "High-density precision residential blocks. Complex formwork and structural engineering for premium residential development.", image: `${assetBase}assets/projects/WhatsApp-Image-2024-01-06-at-11.01.23_faa333d0.jpg` },
+  { name: "Solitaire Business Hub II", location: "Baner, Pune", desc: "Premium integrated commercial workspace platform. State-of-the-art structural engineering for next-generation office spaces.", image: `${assetBase}assets/projects/Solitaire-Business-Hub-II.jpeg` },
+  { name: "Godrej Emerald Waters", location: "Pimpri, Pune", desc: "High-scale concrete engineering matrix. Advanced structural systems for premium residential development by Godrej Properties.", image: `${assetBase}assets/projects/Godrej-Emerald-Waters.jpg` },
+  { name: "Raheja Vista NIBM", location: "Mohammedwadi, Pune", desc: "Residential structural development in prime NIBM corridor. High-quality concrete execution for luxury residential towers.", image: `${assetBase}assets/projects/Raheja-Vistas-scaled.jpg` },
+  { name: "Godrej Park Ridge", location: "Mohammedwadi, Pune", desc: "Premium residential cluster pipeline. Multi-phase residential development with complex structural engineering requirements.", image: `${assetBase}assets/projects/Godrej-Park-Ridge-.jpg` },
 ];
 
 export default function OngoingProjectsPage() {

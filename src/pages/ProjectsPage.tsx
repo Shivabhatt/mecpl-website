@@ -12,7 +12,7 @@ export default function ProjectsPage() {
 
   return (
     <div data-animate-page className="bg-mecpl-dark pt-20">
-      <div className="px-6 py-5">
+      {/* <div className="px-6 py-5">
         <div className="grid grid-cols-2 rounded-full border border-white/10 bg-white/5 p-1 w-full lg:inline-flex lg:w-auto">
           {tabs.map((tab) => (
             <button
@@ -27,7 +27,7 @@ export default function ProjectsPage() {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {activeTab === "completed" ? <CompletedProjectsPage /> : <OngoingProjectsPage />}
     </div>

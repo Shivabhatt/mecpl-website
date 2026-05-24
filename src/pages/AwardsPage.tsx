@@ -1,20 +1,21 @@
 import { Link } from "wouter";
+const assetBase = import.meta.env.BASE_URL;
 
 const awards = [
-  { year: "2023", award: "BAI Well-Built Structure", subtitle: "Special Jury's Recommendation Award", org: "BAI", icon: "/assets/awards/WhatsApp-Image-2023-12-27.jpg" },
-  { year: "2022", award: "PCERF Constro Silver Trophy", subtitle: "Eon West Project Phase", org: "PCERF", icon: "/assets/awards/EON-WEST.jpeg.jpg" },
-  { year: "2021", award: "PCERF Constro Gold Trophy", subtitle: "Godrej Nurture Project Phase", org: "PCERF", icon: "/assets/awards/GODREJ-NURTURE.jpeg.jpg" },
-  { year: "2020", award: "MPL Tournament Runner-Up", subtitle: "Corporate Champions Honors", org: "MPL", icon: "/assets/awards/mpl_2020_04.jpg" },
-  { year: "2019", award: "MPL Operations & RASS Champions", subtitle: "Champions League Trophy", org: "MPL", icon: "/assets/awards/rss_2019_01-scaled.jpg" },
-  { year: "2018", award: "PCERF CONSTRO Industry Excellence", subtitle: "Gold Trophy Achievement", org: "PCERF", icon: "/assets/awards/mpl_2018_01-scaled.jpg" },
-  { year: "2017", award: "India's Small Giants Elite Index", subtitle: "PCERF CONSTRO Safety Commendation", org: "PCERF", icon: "/assets/awards/2017-02-large.webp" },
-  { year: "2016", award: "National SME Excellence Awards", subtitle: "Corporate Recognition Award", org: "National", icon: "/assets/awards/2016-01-large.webp" },
-  { year: "2015", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "/assets/awards/2015-01-large.webp" },
-  { year: "2014", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "/assets/awards/2014-01-large.webp" },
-  { year: "2013", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "/assets/awards/2013-01-large.webp" },
-  { year: "2012", award: "CONSTRO Safety Medal", subtitle: "Excellence in Construction Safety", org: "CONSTRO", icon: "/assets/awards/2012-01-large.webp" },
-  { year: "2007", award: "BAI First Prize — Well-Built Structures", subtitle: "Syntel Campus Phase II", org: "BAI", icon: "/assets/awards/2010-01-large.webp" },
-  { year: "2002", award: "CONSTRO Safety Medal", subtitle: "Early safety leadership recognition", org: "CONSTRO", icon: "/assets/awards/2002-01-large.webp" },
+  { year: "2023", award: "BAI Well-Built Structure", subtitle: "Special Jury's Recommendation Award", org: "BAI", icon: `${assetBase}assets/awards/WhatsApp-Image-2023-12-27.jpg` },
+  { year: "2022", award: "PCERF Constro Silver Trophy", subtitle: "Eon West Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/EON-WEST.jpeg.jpg` },
+  { year: "2021", award: "PCERF Constro Gold Trophy", subtitle: "Godrej Nurture Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/GODREJ-NURTURE.jpeg.jpg` },
+  { year: "2020", award: "MPL Tournament Runner-Up", subtitle: "Corporate Champions Honors", org: "MPL", icon: `${assetBase}assets/awards/mpl_2020_04.jpg` },
+  { year: "2019", award: "MPL Operations & RASS Champions", subtitle: "Champions League Trophy", org: "MPL", icon: `${assetBase}assets/awards/rss_2019_01-scaled.jpg` },
+  { year: "2018", award: "PCERF CONSTRO Industry Excellence", subtitle: "Gold Trophy Achievement", org: "PCERF", icon: `${assetBase}assets/awards/mpl_2018_01-scaled.jpg` },
+  { year: "2017", award: "India's Small Giants Elite Index", subtitle: "PCERF CONSTRO Safety Commendation", org: "PCERF", icon: `${assetBase}assets/awards/2017-02-large.webp` },
+  { year: "2016", award: "National SME Excellence Awards", subtitle: "Corporate Recognition Award", org: "National", icon: `${assetBase}assets/awards/2016-01-large.webp` },
+  { year: "2015", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2015-01-large.webp` },
+  { year: "2014", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2014-01-large.webp` },
+  { year: "2013", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2013-01-large.webp` },
+  { year: "2012", award: "CONSTRO Safety Medal", subtitle: "Excellence in Construction Safety", org: "CONSTRO", icon: `${assetBase}assets/awards/2012-01-large.webp` },
+  { year: "2007", award: "BAI First Prize — Well-Built Structures", subtitle: "Syntel Campus Phase II", org: "BAI", icon: `${assetBase}assets/awards/2010-01-large.webp` },
+  { year: "2002", award: "CONSTRO Safety Medal", subtitle: "Early safety leadership recognition", org: "CONSTRO", icon: `${assetBase}assets/awards/2002-01-large.webp` },
 ];
 
 export default function AwardsPage() {
