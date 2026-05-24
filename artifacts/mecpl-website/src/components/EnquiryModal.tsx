@@ -75,7 +75,7 @@ export default function EnquiryModal() {
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-mecpl-dark border border-white/10 rounded-sm shadow-2xl flex flex-col lg:flex-row">
+      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-mecpl-dark border border-white/10 rounded-sm shadow-2xl flex flex-col">
         {/* Close button */}
         <button
           onClick={closeModal}
@@ -84,6 +84,9 @@ export default function EnquiryModal() {
         >
           <X size={16} />
         </button>
+
+        {/* Panels row */}
+        <div className="flex flex-col lg:flex-row flex-1">
 
         {/* Left panel */}
         <div className="lg:w-2/5 bg-[#C41E3A] p-10 flex flex-col justify-between space-y-8">
@@ -131,7 +134,7 @@ export default function EnquiryModal() {
         </div>
 
         {/* Right panel — form */}
-        <div className="lg:w-3/5 p-10">
+        <div className="lg:w-3/5 p-10 flex flex-col">
           {submitted ? (
             <div className="h-full flex flex-col items-center justify-center text-center space-y-6 py-12">
               <div className="w-16 h-16 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center">
@@ -280,6 +283,25 @@ export default function EnquiryModal() {
               </p>
             </form>
           )}
+        </div>
+        </div>
+        <div className="border-t border-white/10 bg-mecpl-card px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-6 h-6 bg-[#C41E3A] flex items-center justify-between p-1 rounded-sm flex-shrink-0">
+              <div className="w-0.5 h-full bg-white rounded-full"></div>
+              <div className="w-0.5 h-full bg-white rounded-full"></div>
+            </div>
+            <div>
+              <span className="text-white text-[11px] font-black tracking-widest uppercase">MECPL</span>
+              <span className="text-white/40 text-[10px] ml-2">Millennium Engineers &amp; Contractors Pvt. Ltd.</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-white/30 text-[10px] font-black tracking-wider uppercase">
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />ISO 9001</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />ISO 14001</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />CRISIL SME 1</span>
+          </div>
+          <p className="text-white/20 text-[10px] tracking-wide hidden sm:block">&#169; 2026 MECPL. All rights reserved.</p>
         </div>
       </div>
     </div>
