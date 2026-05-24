@@ -4,9 +4,9 @@ import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/10 text-gray-400 text-xs" data-testid="footer">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Brand */}
-        <div className="md:col-span-4 space-y-5">
+        <div className="space-y-5">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-[#C41E3A] flex items-center justify-between p-2 rounded-sm flex-shrink-0">
               <div className="w-1 h-full bg-white rounded-full"></div>
@@ -34,51 +34,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="md:col-span-2 space-y-4">
-          <h4 className="text-white font-black text-[10px] tracking-widest uppercase">Navigation</h4>
-          <ul className="space-y-2.5">
-            {[
-              { label: "Home", path: "/" },
-              { label: "About Us", path: "/about" },
-              { label: "Projects", path: "/completed-projects" },
-              { label: "Awards", path: "/awards" },
-              { label: "Careers", path: "/careers" },
-            ].map((link) => (
-              <li key={link.path}>
-                <Link href={link.path} data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                  <span className="hover:text-white hover:text-[#C41E3A] transition-colors cursor-pointer flex items-center gap-1.5">
-                    <span className="w-1 h-1 bg-[#C41E3A] rounded-full"></span> {link.label}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div className="md:col-span-2 space-y-4">
-          <h4 className="text-white font-black text-[10px] tracking-widest uppercase">About</h4>
-          <ul className="space-y-2.5">
-            {[
-              { label: "Our Profile", path: "/about" },
-              { label: "Clients", path: "/clients" },
-              { label: "Equipment", path: "/equipment" },
-              { label: "Investors", path: "/investors" },
-            ].map((link) => (
-              <li key={link.path}>
-                <Link href={link.path}>
-                  <span className="hover:text-[#C41E3A] transition-colors cursor-pointer flex items-center gap-1.5">
-                    <span className="w-1 h-1 bg-[#C41E3A] rounded-full"></span> {link.label}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         {/* Certifications */}
-        <div className="md:col-span-4 space-y-4">
+        <div className="space-y-4">
           <h4 className="text-white font-black text-[10px] tracking-widest uppercase">Certifications</h4>
           <div className="grid grid-cols-2 gap-2">
             {[
