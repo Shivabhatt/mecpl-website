@@ -3,8 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { ModalProvider } from "@/context/ModalContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import EnquiryModal from "@/components/EnquiryModal";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import ServicesPage from "@/pages/ServicesPage";
@@ -61,6 +63,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <EnquiryModal />
       <WhatsAppButton />
     </div>
   );
@@ -71,10 +74,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <ThemeProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router />
-          </WouterRouter>
-          <Toaster />
+          <ModalProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Router />
+            </WouterRouter>
+            <Toaster />
+          </ModalProvider>
         </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>

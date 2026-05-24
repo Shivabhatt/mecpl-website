@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, Phone, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { useModal } from "@/context/ModalContext";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -34,6 +35,7 @@ export default function Navbar() {
   const [location] = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, toggleTheme } = useTheme();
+  const { openModal } = useModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -135,11 +137,14 @@ export default function Navbar() {
             {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
           </button>
 
-          <Link href="/contact" data-testid="button-contact-nav">
-            <span className="bg-[#C41E3A] hover:bg-red-700 text-white text-xs font-black tracking-widest uppercase px-6 py-3 rounded-sm transition-all cursor-pointer shadow-lg shadow-[#C41E3A]/20">
-              Enquire Now
-            </span>
-          </Link>
+          {/* Enquire Now — opens modal */}
+          <button
+            onClick={openModal}
+            className="bg-[#C41E3A] hover:bg-red-700 text-white text-xs font-black tracking-widest uppercase px-6 py-3 rounded-sm transition-all cursor-pointer shadow-lg shadow-[#C41E3A]/20"
+            data-testid="button-contact-nav"
+          >
+            Enquire Now
+          </button>
         </div>
 
         {/* Mobile: theme toggle + hamburger */}
@@ -188,11 +193,13 @@ export default function Navbar() {
             <a href="tel:02066865858" className="flex items-center gap-2 text-white/50 text-xs">
               <Phone size={12} /> 020 6686 5858
             </a>
-            <Link href="/contact">
-              <div className="block text-center bg-[#C41E3A] text-white py-3 text-xs font-black tracking-widest uppercase cursor-pointer mt-2">
-                Enquire Now
-              </div>
-            </Link>
+            <button
+              onClick={() => { setMenuOpen(false); openModal(); }}
+              className="w-full text-center bg-[#C41E3A] text-white py-3 text-xs font-black tracking-widest uppercase cursor-pointer mt-2 rounded-sm"
+              data-testid="button-mobile-enquire"
+            >
+              Enquire Now
+            </button>
           </div>
         </div>
       )}
