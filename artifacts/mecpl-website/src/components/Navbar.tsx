@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, Phone, Mail } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -14,6 +15,7 @@ const navLinks = [
       { label: "Investors", path: "/investors" },
     ],
   },
+  { label: "Services", path: "/services" },
   {
     label: "Projects",
     path: "/completed-projects",
@@ -31,6 +33,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -116,11 +119,22 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* Enquire CTA */}
+        {/* Right controls */}
         <div className="hidden lg:flex items-center gap-4">
           <a href="tel:02066865858" className="flex items-center gap-1.5 text-white/50 hover:text-white text-xs transition-colors" data-testid="link-phone-nav">
             <Phone size={12} /> 020 6686 5858
           </a>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            className="w-9 h-9 border border-white/20 hover:border-[#C41E3A] flex items-center justify-center text-white/50 hover:text-[#C41E3A] transition-all rounded-sm"
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            data-testid="button-theme-toggle"
+          >
+            {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+          </button>
+
           <Link href="/contact" data-testid="button-contact-nav">
             <span className="bg-[#C41E3A] hover:bg-red-700 text-white text-xs font-black tracking-widest uppercase px-6 py-3 rounded-sm transition-all cursor-pointer shadow-lg shadow-[#C41E3A]/20">
               Enquire Now
@@ -128,14 +142,23 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden text-white text-xl focus:outline-none"
-          data-testid="button-hamburger"
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="lg:hidden flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/50 transition-all rounded-sm"
+            data-testid="button-theme-toggle-mobile"
+          >
+            {theme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-white text-xl focus:outline-none"
+            data-testid="button-hamburger"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -155,7 +178,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link key={link.path} href={link.path} data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, '-')}`}>
-                <div className={`block py-2 text-sm hover:text-[#C41E3A] transition-colors cursor-pointer ${(location === link.path || (link.children?.some(c => location === c.path))) ? "text-[#C41E3A]" : "text-white/70"}`}>
+                <div className={`block py-2 text-sm hover:text-[#C41E3A] transition-colors cursor-pointer ${location === link.path ? "text-[#C41E3A]" : "text-white/70"}`}>
                   {link.label}
                 </div>
               </Link>
@@ -164,9 +187,6 @@ export default function Navbar() {
           <div className="pt-4 border-t border-white/10 space-y-3">
             <a href="tel:02066865858" className="flex items-center gap-2 text-white/50 text-xs">
               <Phone size={12} /> 020 6686 5858
-            </a>
-            <a href="mailto:contact@mecpl.in" className="flex items-center gap-2 text-white/50 text-xs">
-              <Mail size={12} /> contact@mecpl.in
             </a>
             <Link href="/contact">
               <div className="block text-center bg-[#C41E3A] text-white py-3 text-xs font-black tracking-widest uppercase cursor-pointer mt-2">

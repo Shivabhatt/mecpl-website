@@ -1,0 +1,125 @@
+Revamp the existing MECPL construction website into a modern premium construction company website focused on lead generation, trust building, and conversion optimization.
+
+Current website already exists but needs major UX, content, branding, and conversion improvements.
+
+OBJECTIVES:
+- Make the website look premium and enterprise-level
+- Improve homepage engagement
+- Improve conversion funnel
+- Add strong CTAs across the site
+- Showcase MECPL credibility and portfolio
+- Improve visual storytelling
+- Add measurable trust metrics
+- Make visitors understand why MECPL is better than competitors
+
+DESIGN STYLE:
+- Modern premium construction website
+- Dark professional theme with red accents
+- Smooth animations and scroll effects
+- Clean typography
+- Enterprise-level UI
+- Responsive for mobile and desktop
+- Use high-quality construction imagery
+
+HOMEPAGE REQUIREMENTS:
+
+1. HERO SECTION
+- Add strong headline:
+  “Engineering Excellence. Building Tomorrow.”
+- Add subheading about MECPL expertise
+- Add CTA buttons:
+   - Start Your Project
+   - Explore Projects
+- Add animated statistics:
+   - 25+ Years Experience
+   - 100+ Projects Delivered
+   - 20M+ Sq Ft Constructed
+   - 50+ Clients
+
+2. TRUST SECTION
+- Add ISO certifications
+- Add client logos
+- Add awards and recognitions
+- Add safety & quality badges
+- Add trust indicators
+
+3. ABOUT SECTION
+- Strong brand positioning
+- Explain MECPL’s expertise
+- Add company mission and vision
+- Add construction milestones
+
+4. SERVICES SECTION
+Create modern cards for:
+- Civil Construction
+- Turnkey Projects
+- Industrial Projects
+- Residential Projects
+- Interior Fitouts
+- Project Management
+
+5. PORTFOLIO SECTION
+Transform existing projects into detailed case studies:
+- Project name
+- Client name
+- Location
+- Timeline
+- Challenge solved
+- Outcome delivered
+- Project metrics
+- High-quality gallery
+- “View Case Study” button
+
+6. CLIENTS & PARTNERS
+Add premium logo carousel of clients and partners.
+
+7. WHY CHOOSE MECPL
+Add feature cards:
+- Timely Delivery
+- Safety First
+- Engineering Excellence
+- Quality Assurance
+- Experienced Team
+- End-to-End Solutions
+
+8. TESTIMONIALS
+Add testimonial slider with client reviews.
+
+9. CONVERSION IMPROVEMENTS
+- Sticky “Enquire Now” button
+- CTA after every major section
+- Floating WhatsApp button
+- Quick contact form
+- Consultation booking section
+- Footer enquiry CTA
+
+10. FOOTER
+Add:
+- Quick links
+- Contact details
+- Office address
+- Social media links
+- Certifications
+- Careers
+- Legal pages
+
+UX REQUIREMENTS:
+- Smooth scrolling
+- Scroll animations
+- Hover interactions
+- Mobile optimized
+- Fast loading
+- SEO-friendly structure
+- Accessibility support
+
+TECH REQUIREMENTS:
+- Use React/Vite
+- Use Tailwind CSS
+- Component-based structure
+- Reusable cards and sections
+- Optimized images
+- Modern animations
+
+IMPORTANT:
+The website should feel strategic and conversion-focused, not just informational.
+Every section should guide users toward contacting MECPL.

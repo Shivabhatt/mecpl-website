@@ -1,5 +1,4 @@
-import { Link } from "wouter";
-import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, ExternalLink, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -31,6 +30,53 @@ export default function Footer() {
             <a href="mailto:contact@mecpl.in" className="flex items-center gap-2 hover:text-white transition-colors" data-testid="link-footer-email">
               <Mail size={12} className="text-[#C41E3A]" /> contact@mecpl.in
             </a>
+          </div>
+
+          {/* Social Media */}
+          <div className="space-y-3 pt-2">
+            <div className="text-white font-black text-[10px] tracking-widest uppercase">Follow Us</div>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/mecpl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#C41E3A] hover:bg-[#C41E3A] transition-all rounded-sm"
+                title="LinkedIn"
+                data-testid="link-social-linkedin"
+              >
+                <Linkedin size={13} />
+              </a>
+              <a
+                href="https://www.facebook.com/mecpl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#C41E3A] hover:bg-[#C41E3A] transition-all rounded-sm"
+                title="Facebook"
+                data-testid="link-social-facebook"
+              >
+                <Facebook size={13} />
+              </a>
+              <a
+                href="https://www.instagram.com/mecpl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#C41E3A] hover:bg-[#C41E3A] transition-all rounded-sm"
+                title="Instagram"
+                data-testid="link-social-instagram"
+              >
+                <Instagram size={13} />
+              </a>
+              <a
+                href="https://www.youtube.com/@mecpl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#C41E3A] hover:bg-[#C41E3A] transition-all rounded-sm"
+                title="YouTube"
+                data-testid="link-social-youtube"
+              >
+                <Youtube size={13} />
+              </a>
+            </div>
           </div>
         </div>
 

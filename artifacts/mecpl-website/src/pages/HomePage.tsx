@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ChevronLeft, ChevronRight, CheckCircle, Clock } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Clock, Building2, HardHat, Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield, Star, Users, Wrench, Quote } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 
 const heroSlides = [
   {
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop",
     tag: "25+ Years of Excellence",
-    headline: "Shaping Skylines.",
-    accent: "Building Trust.",
+    headline: "Engineering Excellence.",
+    accent: "Building Tomorrow.",
     sub: "Delivering precision infrastructure, high-scale residential marvels, and advanced industrial complexes across India since 1998.",
   },
   {
@@ -34,39 +34,43 @@ const stats = [
   { value: 50, suffix: "+", label: "Tier-1 Clients" },
 ];
 
-const capabilities = [
-  {
-    image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=600&auto=format&fit=crop",
-    title: "Civil Structural Works",
-    desc: "High-performance foundational engineering for complex architectural blueprints and structural demands across residential, commercial, and industrial sectors.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
-    title: "Heavy Turnkey Infrastructure",
-    desc: "Comprehensive, end-to-end site layout design and massive building logistics handled transparently with precision concrete execution.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=600&auto=format&fit=crop",
-    title: "Management & Planning",
-    desc: "Strict safety frameworks and scheduling protocols guaranteeing systematic risk mitigation and milestone handovers on every project.",
-  },
+const services = [
+  { icon: Building2, title: "Civil Construction", desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.", path: "/services" },
+  { icon: ClipboardList, title: "Turnkey Projects", desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.", path: "/services" },
+  { icon: Factory, title: "Industrial Projects", desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.", path: "/services" },
+  { icon: Home, title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.", path: "/services" },
+  { icon: Layers, title: "Interior Fitouts", desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.", path: "/services" },
+  { icon: HardHat, title: "Project Management", desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.", path: "/services" },
 ];
 
-const featuredProjects = [
-  {
-    image: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=600&auto=format&fit=crop",
-    name: "Panchshil Highrise Towers, Kharadi",
-    scope: "Comprehensive Concrete Civil Construction Frame",
-    desc: "Managing intricate deep structural reinforcement frameworks under aggressive real-time milestone constraints cleanly.",
-    tag: "Featured Landmark",
-  },
+const whyChoose = [
+  { icon: Timer, title: "Timely Delivery", desc: "Over 95% of projects handed over on or ahead of schedule. Our milestone-driven model eliminates delays." },
+  { icon: Shield, title: "Safety First", desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, every day." },
+  { icon: Star, title: "Engineering Excellence", desc: "25+ years of structural engineering expertise applied to India's most complex construction challenges." },
+  { icon: CheckCircle, title: "Quality Assurance", desc: "ISO 9001:2015 certified quality management across every phase — materials, execution, and handover." },
+  { icon: Users, title: "Experienced Team", desc: "300+ highly trained engineers, site managers, and safety officers with decades of domain expertise." },
+  { icon: Wrench, title: "End-to-End Solutions", desc: "From concept to completion — MECPL manages the entire construction lifecycle under one roof." },
 ];
 
-const smallProjects = [
-  { name: "Trump Towers, Pune", desc: "Iconic luxury double-tower architecture using cutting edge performance mix metrics.", type: "Civil Structural Handover" },
-  { name: "Godrej Boulevard, Pune", desc: "Sprawling residential infrastructure with synchronized foundational deployment.", type: "Residential Framework" },
-  { name: "VTP Bel Air, Pune", desc: "High-density multi-tower structural contract completed with uncompromised asset alignment.", type: "Complex Core Works" },
-  { name: "Gera Commerzone, Kharadi", desc: "Advanced commercial glass-and-steel infrastructure mapped precisely to technical layouts.", type: "Commercial Core Infra" },
+const testimonials = [
+  {
+    quote: "MECPL delivered our 42-storey tower ahead of schedule with exceptional structural quality. Their site management and safety protocols set a new benchmark in the industry.",
+    name: "Mr. Atul Chordia",
+    title: "Chairman, Panchshil Realty",
+    rating: 5,
+  },
+  {
+    quote: "Working with MECPL on Trump Towers Pune was a seamless experience. Their technical precision, proactive communication, and zero-compromise quality made them an invaluable partner.",
+    name: "Project Director",
+    title: "Trump Towers Pune",
+    rating: 5,
+  },
+  {
+    quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",
+    name: "Senior Project Head",
+    title: "Godrej Properties",
+    rating: 5,
+  },
 ];
 
 const clients = ["TRUMP TOWERS", "GODREJ PROPS", "VTP REALTY", "PANCHSHIL", "KALPATARU", "K RAHEJA", "MALPANI", "GERA DEVS"];
@@ -110,9 +114,15 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function HomePage() {
   const [slide, setSlide] = useState(0);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {
     const t = setInterval(() => setSlide(p => (p + 1) % heroSlides.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => setActiveTestimonial(p => (p + 1) % testimonials.length), 5000);
     return () => clearInterval(t);
   }, []);
 
@@ -122,7 +132,6 @@ export default function HomePage() {
     <div className="bg-[#1A1A1A]">
       {/* HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
-        {/* Background image */}
         <div className="absolute inset-0 z-0">
           <img
             key={slide}
@@ -162,7 +171,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Slide dots */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10">
           <button onClick={() => setSlide(p => (p - 1 + heroSlides.length) % heroSlides.length)} className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/50 hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors rounded-sm" data-testid="button-slide-prev">
             <ChevronLeft size={14} />
@@ -198,25 +206,33 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* CAPABILITIES */}
-      <section className="max-w-7xl mx-auto px-6 py-12" data-testid="section-capabilities">
-        <SectionHeader label="Expertise" title="Core Capabilities Matrix" center subtitle="From structural execution to project management — MECPL delivers across every phase of construction." />
-        <div className="grid md:grid-cols-3 gap-8 mt-8">
-          {capabilities.map((cap, i) => (
-            <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden shadow-2xl hover:border-[#C41E3A]/30 transition-all duration-300" data-testid={`card-capability-${i}`}>
-              <div className="h-52 overflow-hidden relative">
-                <img
-                  src={cap.image}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                  alt={cap.title}
-                />
-              </div>
-              <div className="p-8 space-y-4">
-                <h3 className="text-xl font-bold uppercase tracking-tight text-white">{cap.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{cap.desc}</p>
-              </div>
-            </div>
-          ))}
+      {/* SERVICES */}
+      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-services">
+        <div className="max-w-7xl mx-auto px-6 space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <SectionHeader label="What We Do" title="Our Service Verticals" subtitle="Six specialized service pillars covering the entire construction lifecycle." />
+            <Link href="/services" data-testid="button-all-services">
+              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer mb-10 flex-shrink-0">
+                All Services <ArrowRight size={14} />
+              </span>
+            </Link>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((svc, i) => (
+              <Link href={svc.path} key={i}>
+                <div className="group bg-[#2C2C2C] border border-white/5 rounded-sm p-7 flex flex-col gap-4 hover:border-[#C41E3A]/40 hover:shadow-xl transition-all duration-300 cursor-pointer h-full" data-testid={`card-service-${i}`}>
+                  <div className="w-10 h-10 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
+                    <svc.icon size={18} className="text-[#C41E3A] group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="text-base font-black uppercase tracking-tight text-white">{svc.title}</h3>
+                  <p className="text-gray-400 text-xs leading-relaxed flex-1">{svc.desc}</p>
+                  <span className="inline-flex items-center gap-1.5 text-[#C41E3A] text-[10px] font-black tracking-widest uppercase group-hover:gap-3 transition-all">
+                    Learn More <ArrowRight size={11} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -267,7 +283,6 @@ export default function HomePage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Featured large card */}
           <div className="group bg-[#2C2C2C] border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col" data-testid="card-featured-project">
             <div className="h-72 overflow-hidden relative">
               <img
@@ -294,9 +309,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Small project cards grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {smallProjects.map((p, i) => (
+            {[
+              { name: "Trump Towers, Pune", desc: "Iconic luxury double-tower architecture using cutting edge performance mix metrics.", type: "Civil Structural Handover" },
+              { name: "Godrej Boulevard, Pune", desc: "Sprawling residential infrastructure with synchronized foundational deployment.", type: "Residential Framework" },
+              { name: "VTP Bel Air, Pune", desc: "High-density multi-tower structural contract completed with uncompromised asset alignment.", type: "Complex Core Works" },
+              { name: "Gera Commerzone, Kharadi", desc: "Advanced commercial glass-and-steel infrastructure mapped precisely to technical layouts.", type: "Commercial Core Infra" },
+            ].map((p, i) => (
               <div key={i} className="bg-[#2C2C2C] border border-white/5 p-6 rounded-sm flex flex-col justify-between gap-4 shadow-xl hover:border-[#C41E3A]/30 transition-colors" data-testid={`card-small-project-${i}`}>
                 <h4 className="text-base font-bold uppercase text-white tracking-tight border-b border-white/5 pb-3">{p.name}</h4>
                 <p className="text-xs text-gray-400 leading-relaxed flex-1">{p.desc}</p>
@@ -307,8 +326,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* WHY CHOOSE MECPL */}
+      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-why-mecpl">
+        <div className="max-w-7xl mx-auto px-6 space-y-12">
+          <SectionHeader label="Our Advantage" title="Why Choose MECPL" center subtitle="Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects." />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyChoose.map((item, i) => (
+              <div key={i} className="group bg-[#2C2C2C] border border-white/5 rounded-sm p-8 space-y-4 hover:border-[#C41E3A]/30 hover:shadow-xl transition-all duration-300" data-testid={`card-why-${i}`}>
+                <div className="w-12 h-12 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
+                  <item.icon size={20} className="text-[#C41E3A] group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="text-base font-black uppercase tracking-tight text-white">{item.title}</h3>
+                <p className="text-gray-400 text-xs leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center pt-4">
+            <Link href="/contact">
+              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
+                Start Your Project <ArrowRight size={14} />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CLIENTS */}
-      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-clients">
+      <section className="py-24" data-testid="section-clients">
         <div className="max-w-7xl mx-auto px-6 space-y-14">
           <SectionHeader label="Ecosystem" title="Clients & Premium Partners" center subtitle="We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises." />
 
@@ -332,6 +376,51 @@ export default function HomePage() {
                   View All Clients
                 </span>
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="bg-[#2C2C2C]/50 border-y border-white/5 py-24" data-testid="section-testimonials">
+        <div className="max-w-7xl mx-auto px-6 space-y-12">
+          <SectionHeader label="Client Voices" title="What Our Partners Say" center />
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {testimonials.map((t, i) => (
+                <div
+                  key={i}
+                  className={`transition-all duration-500 ${i === activeTestimonial ? "block" : "hidden"}`}
+                  data-testid={`testimonial-${i}`}
+                >
+                  <div className="bg-[#2C2C2C] border border-white/5 rounded-sm p-10 space-y-6 text-center relative">
+                    <Quote size={32} className="text-[#C41E3A]/30 mx-auto" />
+                    <p className="text-white text-lg leading-relaxed font-medium italic">
+                      "{t.quote}"
+                    </p>
+                    <div className="flex justify-center gap-1">
+                      {Array.from({ length: t.rating }).map((_, j) => (
+                        <Star key={j} size={14} className="text-[#C41E3A] fill-[#C41E3A]" />
+                      ))}
+                    </div>
+                    <div>
+                      <div className="text-white font-black text-sm uppercase tracking-wider">{t.name}</div>
+                      <div className="text-gray-400 text-xs mt-1">{t.title}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Testimonial dots */}
+            <div className="flex justify-center gap-3 mt-8">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveTestimonial(i)}
+                  className={`h-1.5 rounded-full transition-all ${i === activeTestimonial ? "w-8 bg-[#C41E3A]" : "w-3 bg-white/20"}`}
+                  data-testid={`button-testimonial-${i}`}
+                />
+              ))}
             </div>
           </div>
         </div>
