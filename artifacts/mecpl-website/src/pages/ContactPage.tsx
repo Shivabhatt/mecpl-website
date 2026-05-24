@@ -181,7 +181,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map placeholder */}
-      <section className="h-64 bg-[#0d0d0d] flex items-center justify-center relative overflow-hidden border-t border-white/5" data-testid="section-map">
+      <section className="h-64 bg-mecpl-card flex items-center justify-center relative overflow-hidden border-t border-white/5" data-testid="section-map">
         <div className="absolute inset-0 opacity-5">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="absolute border border-white rounded-full" style={{ width: `${(i + 1) * 150}px`, height: `${(i + 1) * 150}px`, left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }} />

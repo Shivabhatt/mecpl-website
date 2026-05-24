@@ -5,10 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   @theme — Registers all Tailwind utilities for MECPL colors.
-   --color-mecpl-dark and --color-mecpl-card reference CSS vars
-   so every bg-mecpl-dark / from-mecpl-dark / via-mecpl-dark /
-   bg-mecpl-card/50 etc. automatically follows the theme var.
+   @theme inline — shadcn/ui tokens (resolved at build time, fine
+   because they come from :root HSL vars that don't change theme).
    ============================================================ */
 @theme inline {
   --color-background: hsl(var(--background));
@@ -34,9 +32,19 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
+}
 
-  /* MECPL brand colors — these generate bg-mecpl-dark, from-mecpl-dark,
-     via-mecpl-card/60, text-mecpl-card, border-mecpl-dark, etc. */
+/* ============================================================
+   @theme (NOT inline) — MECPL brand colors.
+   Using a separate non-inline block ensures Tailwind generates
+   utilities like:
+     .bg-mecpl-dark { background-color: var(--color-mecpl-dark); }
+   instead of inlining the resolved value. This means the runtime
+   CSS variable override in html[data-theme="light"] is respected.
+   Generates: bg-mecpl-dark, bg-mecpl-card, from-mecpl-dark,
+   via-mecpl-dark/60, bg-mecpl-card/30, text-mecpl-dark, etc.
+   ============================================================ */
+@theme {
   --color-mecpl-dark: var(--mecpl-dark);
   --color-mecpl-card: var(--mecpl-card);
   --color-mecpl-red:  #c41e3a;
