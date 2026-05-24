@@ -19,7 +19,7 @@ pnpm run build
 
 Deploying to GitHub Pages
 
-I included a GitHub Actions workflow that builds the site and publishes the `dist/` folder to the `gh-pages` branch. To enable deployment:
+I included a GitHub Actions workflow that builds the site and publishes the `dist/public/` folder to the `gh-pages` branch. To enable deployment:
 
 - Create a GitHub repository (e.g. `mecpl-website`).
 - Add the remote and push `main`/`master`.
