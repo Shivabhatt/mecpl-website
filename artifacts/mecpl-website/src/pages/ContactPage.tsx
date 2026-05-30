@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import SectionHeader from "@/components/SectionHeader";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -12,17 +13,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-mecpl-dark pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Project Intake Channel</span>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Let's Build Something<br />Extraordinary Together</h1>
-          <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
-          <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Transmit your structural blueprints or enterprise construction specifications. Our central operations bureau will analyze your requirements immediately.</p>
-          <div className="flex items-center gap-2 mt-5 text-white/30 text-xs tracking-widest uppercase font-bold">
+          <SectionHeader label="Project Intake Channel" title={`Let's Build Something Extraordinary Together`} subtitle="Transmit your structural blueprints or enterprise construction specifications. Our central operations bureau will analyze your requirements immediately." />
+          <div className="flex items-center gap-2 mt-2 text-white/30 text-xs tracking-widest uppercase font-bold">
             <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
             <span>/</span>
             <span className="text-white/60">Contact</span>
@@ -36,7 +34,7 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="lg:col-span-2 space-y-5">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Contact Details</span>
-            <h2 className="text-2xl font-black uppercase tracking-tight text-white">Get in Touch</h2>
+            <h3 className="text-2xl font-black uppercase tracking-tight text-white">Get in Touch</h3>
 
             <div className="space-y-4">
               <div className="flex gap-4 p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/20 transition-colors" data-testid="info-address">

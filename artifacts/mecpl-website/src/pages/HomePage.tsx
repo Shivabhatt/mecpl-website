@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
+import Footer from "../components/Footer";
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, Building2, HardHat, Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield, Star, Users, Wrench, Quote } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 
@@ -109,12 +110,13 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
     return () => observer.disconnect();
   }, [value]);
 
-  return <div ref={ref} className="text-5xl md:text-6xl font-black text-[#C41E3A] tracking-tight">{count}{suffix}</div>;
+  return <div ref={ref} className="text-3xl font-black text-[#C41E3A] tracking-tight">{count}{suffix}</div>;
 }
 
 export default function HomePage() {
   const [slide, setSlide] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const assetBase = import.meta.env.BASE_URL;
 
   useEffect(() => {
     const t = setInterval(() => setSlide(p => (p + 1) % heroSlides.length), 6000);
@@ -129,29 +131,33 @@ export default function HomePage() {
   const s = heroSlides[slide];
 
   return (
-    <div className="bg-mecpl-dark">
+    <div data-animate-page className="bg-mecpl-dark">
       {/* HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
         <div className="absolute inset-0 z-0">
+          {/* Prefer a local hero video if provided, otherwise fall back to images */}
+          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
+            <source src="/assets/video/hero.mp4" type="video/mp4" />
+          </video>
+
+          {/* fallback image if video not available / for browsers that can't play */}
           <img
             key={slide}
             src={s.image}
-            className="w-full h-full object-cover opacity-30 transition-opacity duration-1000"
+            className="absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-1000"
             alt="Construction backdrop"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-mecpl-dark via-mecpl-dark/60 to-mecpl-dark/40"></div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 border border-[#C41E3A]/40 bg-[#C41E3A]/10 px-4 py-1.5 rounded-sm">
-            <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full animate-pulse"></span>
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">{s.tag}</span>
-          </div>
 
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none text-white">
+
+          <h3 className="text-3xl font-black tracking-tighter uppercase leading-none text-white">
             {s.headline}<br />
             <span className="text-[#C41E3A]">{s.accent}</span>
-          </h1>
+          </h3>
 
           <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-lg tracking-wide leading-relaxed">
             {s.sub}
@@ -206,6 +212,41 @@ export default function HomePage() {
         ))}
       </section>
 
+      {/* ABOUT STRIP */}
+      <section className="border-t border-white/5 py-24" data-testid="section-about-strip">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-6">
+            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Corporate Profile</span>
+            <h3 className="text-3xl font-black tracking-tight uppercase text-white">
+              A Legacy Of<br />Quality & Commitment
+              </h3>
+            <p className="text-gray-300 leading-relaxed">
+              Millennium Engineers & Contractors Pvt. Ltd. (MECPL) is a Pune-based engineering powerhouse recognized for delivering heavy complex structural projects with absolute safety, premium workmanship, and financial integrity since 1998.
+            </p>
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              {["ISO 9001", "ISO 14001", "ISO 45001"].map(cert => (
+                <div key={cert} className="p-4 bg-mecpl-card rounded-sm border border-white/5 text-center">
+                  <div className="text-[#C41E3A] text-lg mb-1">✓</div>
+                  <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider">{cert}</div>
+                </div>
+              ))}
+            </div>
+            <Link href="/about" data-testid="button-about-strip">
+              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer">
+                Read Corporate Profile <ArrowRight size={14} />
+              </span>
+            </Link>
+          </div>
+          <div className="h-96 rounded-sm overflow-hidden relative shadow-2xl border border-white/10">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
+              className="w-full h-full object-cover transition-all duration-500"
+              alt="MECPL structural integrity"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* SERVICES */}
       <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-services">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
@@ -236,41 +277,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT STRIP */}
-      <section className="border-t border-white/5 py-24" data-testid="section-about-strip">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Corporate Profile</span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight uppercase text-white">
-              A Legacy Of<br />Quality & Commitment
-            </h2>
-            <p className="text-gray-300 leading-relaxed">
-              Millennium Engineers & Contractors Pvt. Ltd. (MECPL) is a Pune-based engineering powerhouse recognized for delivering heavy complex structural projects with absolute safety, premium workmanship, and financial integrity since 1998.
-            </p>
-            <div className="grid grid-cols-3 gap-4 pt-2">
-              {["ISO 9001", "ISO 14001", "ISO 45001"].map(cert => (
-                <div key={cert} className="p-4 bg-mecpl-card rounded-sm border border-white/5 text-center">
-                  <div className="text-[#C41E3A] text-lg mb-1">✓</div>
-                  <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider">{cert}</div>
-                </div>
-              ))}
-            </div>
-            <Link href="/about" data-testid="button-about-strip">
-              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer">
-                Read Corporate Profile <ArrowRight size={14} />
-              </span>
-            </Link>
-          </div>
-          <div className="h-96 rounded-sm overflow-hidden relative shadow-2xl border border-white/10">
-            <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
-              className="w-full h-full object-cover transition-all duration-500"
-              alt="MECPL structural integrity"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* FEATURED PROJECTS */}
       <section className="max-w-7xl mx-auto px-6 py-16" data-testid="section-projects">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -286,9 +292,9 @@ export default function HomePage() {
           <div className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col" data-testid="card-featured-project">
             <div className="h-72 overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=700&auto=format&fit=crop"
+                src={`${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                alt="Panchshil Highrise"
+                alt="Panchshil Highrise Towers"
               />
               <div className="absolute top-4 right-4 bg-[#C41E3A] text-white font-black uppercase text-[9px] tracking-widest px-3 py-1.5 rounded-sm">
                 Featured Landmark
@@ -322,6 +328,31 @@ export default function HomePage() {
                 <span className="text-[9px] font-black uppercase text-[#C41E3A] tracking-widest">{p.type}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CAREERS LEAD */}
+      <section className="max-w-7xl mx-auto px-6 py-20" data-testid="section-careers-lead">
+        <div className="relative overflow-hidden border border-white/10 bg-mecpl-card rounded-sm p-8 md:p-12">
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#C41E3A]/20 via-transparent to-transparent" />
+          <div className="relative grid md:grid-cols-[1.5fr_auto] items-center gap-8">
+            <div className="space-y-4">
+              <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Careers at MECPL</span>
+              <h3 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">
+                Build the Next Generation of Landmarks
+              </h3>
+              <p className="text-gray-300 text-sm leading-relaxed max-w-2xl">
+                Great execution comes from great teams. Explore opportunities across engineering, project management, safety, and quality to build your career with MECPL.
+              </p>
+            </div>
+            <div className="flex md:justify-end">
+              <Link href="/careers" data-testid="button-home-careers">
+                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
+                  Explore Careers <ArrowRight size={14} />
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -459,30 +490,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA ENQUIRY */}
-      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black py-24" data-testid="section-cta">
-        <div className="max-w-3xl mx-auto px-6 text-center space-y-8">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">
-            Let's Build Something<br />Extraordinary Together
-          </h2>
-          <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Transmit your structural blueprints or enterprise construction specifications directly. Our central operations team will analyze your requirements immediately.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" data-testid="button-cta-enquire">
-              <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
-                Enquire Now
-              </span>
-            </Link>
-            <Link href="/completed-projects" data-testid="button-cta-projects">
-              <span className="inline-block border border-white/20 hover:border-white text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
-                View Portfolio
-              </span>
-            </Link>
+      {/* CTA ENQUIRY — Project Intake Section */}
+      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black" data-testid="section-cta">
+        <div className="flex items-center justify-center py-20">
+          <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
+            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
+            <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">
+              Let's Build Something<br />Extraordinary Together
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
+              Transmit your structural blueprints or enterprise construction specifications directly. Our central operations team will analyze your requirements immediately.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" data-testid="button-cta-enquire">
+                <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
+                  Enquire Now
+                </span>
+              </Link>
+              <Link href="/completed-projects" data-testid="button-cta-projects">
+                <span className="inline-block border border-white/20 hover:border-white text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
+                  View Portfolio
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

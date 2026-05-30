@@ -2,18 +2,17 @@ import { MapPin, Phone, Mail, ExternalLink, Linkedin, Facebook, Instagram, Youtu
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/10 text-gray-400 text-xs" data-testid="footer">
+    <footer className="bg-mecpl-dark border-t border-white/10 text-gray-400 text-xs" data-testid="footer">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Brand */}
         <div className="space-y-5">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[#C41E3A] flex items-center justify-between p-2 rounded-sm flex-shrink-0">
-              <div className="w-1 h-full bg-white rounded-full"></div>
-              <div className="w-1 h-full bg-white rounded-full"></div>
+          <div className="flex items-center gap-4">
+            <div className="flex-shrink-0">
+              <img src="/assets/logo/mecpl-logo.png" alt="MECPL logo" className="h-12 w-auto object-contain" />
             </div>
             <div>
               <div className="text-white font-black text-lg tracking-tighter">MECPL</div>
-              <div className="text-white/30 text-[8px] font-bold tracking-widest uppercase">Millennium Engineers</div>
+              <div className="text-white/60 text-[8px] font-bold tracking-widest uppercase">Millennium Engineers</div>
             </div>
           </div>
           <p className="text-gray-500 text-xs leading-relaxed">
@@ -110,10 +109,10 @@ export default function Footer() {
 
       <div className="border-t border-white/5 py-6">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/30 text-[10px] tracking-wider">
+            <p className="text-white/60 text-[10px] tracking-wider">
             &copy; {new Date().getFullYear()} MILLENNIUM ENGINEERS & CONTRACTORS PVT. LTD. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex gap-5 text-white/30 text-[10px] tracking-wider">
+          <div className="flex gap-5 text-white/60 text-[10px] tracking-wider">
             <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">PRIVACY POLICY</span>
             <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">CSR POLICY</span>
           </div>

@@ -1,39 +1,34 @@
 import { Link } from "wouter";
+import SectionHeader from "@/components/SectionHeader";
+const assetBase = import.meta.env.BASE_URL;
 
 const awards = [
-  { year: "2023", award: "BAI Well-Built Structure", subtitle: "Special Jury's Recommendation Award", org: "BAI", icon: "🏆" },
-  { year: "2022", award: "PCERF Constro Silver Trophy", subtitle: "Eon West Project Phase", org: "PCERF", icon: "🥈" },
-  { year: "2021", award: "PCERF Constro Gold Trophy", subtitle: "Godrej Nurture Project Phase", org: "PCERF", icon: "🥇" },
-  { year: "2020", award: "MPL Tournament Runner-Up", subtitle: "Corporate Champions Honors", org: "MPL", icon: "🏅" },
-  { year: "2019", award: "MPL Operations & RASS Champions", subtitle: "Champions League Trophy", org: "MPL", icon: "⭐" },
-  { year: "2018", award: "PCERF CONSTRO Industry Excellence", subtitle: "Gold Trophy Achievement", org: "PCERF", icon: "🥇" },
-  { year: "2017", award: "India's Small Giants Elite Index", subtitle: "PCERF CONSTRO Safety Commendation", org: "PCERF", icon: "🏅" },
-  { year: "2016", award: "National SME Excellence Awards", subtitle: "Corporate Recognition Award", org: "National", icon: "⭐" },
-  { year: "2015", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "🎖" },
-  { year: "2014", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "🎖" },
-  { year: "2013", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: "🎖" },
-  { year: "2012", award: "CONSTRO Safety Medal", subtitle: "Excellence in Construction Safety", org: "CONSTRO", icon: "🏆" },
-  { year: "2007", award: "BAI First Prize — Well-Built Structures", subtitle: "Syntel Campus Phase II", org: "BAI", icon: "🥇" },
-  { year: "2002", award: "CONSTRO Safety Medal", subtitle: "Early safety leadership recognition", org: "CONSTRO", icon: "🏅" },
+  { year: "2023", award: "BAI Well-Built Structure", subtitle: "Special Jury's Recommendation Award", org: "BAI", icon: `${assetBase}assets/awards/WhatsApp-Image-2023-12-27.jpg` },
+  { year: "2022", award: "PCERF Constro Silver Trophy", subtitle: "Eon West Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/EON-WEST.jpeg.jpg` },
+  { year: "2021", award: "PCERF Constro Gold Trophy", subtitle: "Godrej Nurture Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/GODREJ-NURTURE.jpeg.jpg` },
+  { year: "2020", award: "MPL Tournament Runner-Up", subtitle: "Corporate Champions Honors", org: "MPL", icon: `${assetBase}assets/awards/mpl_2020_04.jpg` },
+  { year: "2019", award: "MPL Operations & RASS Champions", subtitle: "Champions League Trophy", org: "MPL", icon: `${assetBase}assets/awards/rss_2019_01-scaled.jpg` },
+  { year: "2018", award: "PCERF CONSTRO Industry Excellence", subtitle: "Gold Trophy Achievement", org: "PCERF", icon: `${assetBase}assets/awards/mpl_2018_01-scaled.jpg` },
+  { year: "2017", award: "India's Small Giants Elite Index", subtitle: "PCERF CONSTRO Safety Commendation", org: "PCERF", icon: `${assetBase}assets/awards/2017-02-large.webp` },
+  { year: "2016", award: "National SME Excellence Awards", subtitle: "Corporate Recognition Award", org: "National", icon: `${assetBase}assets/awards/2016-01-large.webp` },
+  { year: "2015", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2015-01-large.webp` },
+  { year: "2014", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2014-01-large.webp` },
+  { year: "2013", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2013-01-large.webp` },
+  { year: "2012", award: "CONSTRO Safety Medal", subtitle: "Excellence in Construction Safety", org: "CONSTRO", icon: `${assetBase}assets/awards/2012-01-large.webp` },
+  { year: "2007", award: "BAI First Prize — Well-Built Structures", subtitle: "Syntel Campus Phase II", org: "BAI", icon: `${assetBase}assets/awards/2010-01-large.webp` },
+  { year: "2002", award: "CONSTRO Safety Medal", subtitle: "Early safety leadership recognition", org: "CONSTRO", icon: `${assetBase}assets/awards/2002-01-large.webp` },
 ];
 
 export default function AwardsPage() {
   return (
-    <div className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-mecpl-dark">
       {/* Header */}
       <div className="relative py-20 border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-10" alt="Construction" />
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/90 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Recognition</span>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Awards & Honors</h1>
-          <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
-          <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Over two decades of consecutive industry recognition for structural excellence, safety leadership, and construction quality.</p>
-          <div className="flex items-center gap-2 mt-5 text-white/30 text-xs tracking-widest uppercase font-bold">
-            <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
-            <span>/</span>
-            <span className="text-white/60">Awards</span>
-          </div>
+        <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
+          <SectionHeader label="Recognition" title="Awards & Honors" subtitle="Over two decades of consecutive industry recognition for structural excellence, safety leadership, and construction quality." center light />
+         
         </div>
       </div>
 
@@ -49,7 +44,9 @@ export default function AwardsPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
           {awards.slice(0, 6).map((a, i) => (
             <div key={i} className="bg-mecpl-card border border-white/5 rounded-sm p-5 text-center hover:border-[#C41E3A]/30 transition-all" data-testid={`card-award-highlight-${i}`}>
-              <div className="text-3xl mb-2">{a.icon}</div>
+              <div className="w-16 h-16 mx-auto mb-3 rounded-sm overflow-hidden border border-white/10 bg-black/20">
+                <img src={a.icon} alt={a.award} className="w-full h-full object-cover" />
+              </div>
               <div className="text-[#C41E3A] font-black text-xl">{a.year}</div>
               <div className="text-white/50 text-[9px] uppercase tracking-widest mt-1 font-bold leading-snug">{a.award.split(" ").slice(0, 3).join(" ")}</div>
             </div>
@@ -73,7 +70,9 @@ export default function AwardsPage() {
                   <div className="flex-1">
                     <div className="bg-mecpl-card border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors group">
                       <div className="flex items-start gap-3">
-                        <span className="text-lg flex-shrink-0">{award.icon}</span>
+                        <span className="w-12 h-12 rounded-sm overflow-hidden border border-white/10 flex-shrink-0 bg-black/20">
+                          <img src={award.icon} alt={award.award} className="w-full h-full object-cover" />
+                        </span>
                         <div>
                           <h3 className="text-white font-bold text-sm group-hover:text-[#C41E3A] transition-colors">{award.award}</h3>
                           <p className="text-gray-500 text-xs mt-1">{award.subtitle}</p>

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, Building2, HardHat, Factory, Home, Layers, ClipboardList } from "lucide-react";
-import SectionHeader from "../components/SectionHeader";
+import SectionHeader from "@/components/SectionHeader";
 
 const services = [
   {
@@ -55,7 +55,7 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-mecpl-dark">
       {/* Header */}
       <div className="relative py-24 border-b border-white/5 overflow-hidden">
         <img
@@ -64,15 +64,8 @@ export default function ServicesPage() {
           alt="Services"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">What We Do</span>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none mb-6">
-            Our Services
-          </h1>
-          <div className="w-16 h-1 bg-[#C41E3A] mb-6"></div>
-          <p className="text-gray-300 max-w-xl text-sm leading-relaxed">
-            From civil structural works to full turnkey delivery — six core service pillars that cover the entire construction lifecycle for India's most demanding projects.
-          </p>
+        <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
+          <SectionHeader label="What We Do" title="Our Services" subtitle="From civil structural works to full turnkey delivery — six core service pillars that cover the entire construction lifecycle for India's most demanding projects." center light />
           <div className="flex items-center gap-3 mt-4 text-white/40 text-[10px] font-bold tracking-widest uppercase">
             <Link href="/">
               <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">Home</span>
@@ -134,12 +127,12 @@ export default function ServicesPage() {
       </section>
 
       {/* Why partner CTA */}
-      <section className="bg-mecpl-card border-y border-white/5 py-20">
+      <section className="bg-mecpl-card border-y border-white/5 py-20" data-animate-exclude="true">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Get Started</span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
             Ready to Discuss Your Project?
-          </h2>
+          </h3>
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
             Share your structural blueprints or project brief and our senior engineering team will respond within 24 hours with a tailored assessment.
           </p>

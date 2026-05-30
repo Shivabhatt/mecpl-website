@@ -1,114 +1,298 @@
-import { Link } from "wouter";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const equipment = [
   {
-    name: "Automated Concrete Batching Plants",
-    desc: "Complete high-output automated concrete batching plants equipped with specialized Star Batcher Management Core Systems. Delivers precise concrete mixes at scale for mega-projects.",
-    specs: ["Star Batcher Management System", "High-output automated mixing", "Precise batch control", "Quality consistency assurance"],
-    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=600&auto=format&fit=crop",
+    title: "Automated Concrete Batching Plants",
+    desc: "Complete high-output automated concrete batching plants equipped with specialized Star Batcher Management Core Systems.",
+    image:
+      "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1600&auto=format&fit=crop",
   },
+
   {
-    name: "Schwing Stetter Concrete Pumps",
-    desc: "High-pressure industrial mobile concrete delivery pumps for tall vertical structural pours. Enables efficient concrete placement at significant heights for highrise construction.",
-    specs: ["High-pressure delivery system", "Vertical pour capability", "Mobile deployment", "Highrise-ready engineering"],
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+    title: "Schwing Stetter Concrete Pumps",
+    desc: "High-pressure industrial mobile concrete delivery pumps for tall vertical structural pours.",
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600&auto=format&fit=crop",
   },
+
   {
-    name: "Boomplacer Fleet Systems",
-    desc: "High-reach heavy articulate concrete distribution mechanisms providing maximum concrete reach and flexibility on large, complex construction sites.",
-    specs: ["High-reach articulation", "360-degree rotation", "Precise placement", "Large-site coverage"],
-    image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=600&auto=format&fit=crop",
+    title: "Boomplacer Fleet Systems",
+    desc: "High-reach heavy articulate concrete distribution mechanisms providing maximum concrete reach.",
+    image:
+      "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=1600&auto=format&fit=crop",
   },
+
   {
-    name: "Mobile Boom Placer Machinery",
-    desc: "Rapid deployment vehicular systems for dynamic job-site requirements. Provides flexible concrete distribution across varying site configurations and locations.",
-    specs: ["Rapid deployment capability", "Vehicular mobility", "Dynamic site adaptation", "Multi-project deployment"],
-    image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=600&auto=format&fit=crop",
+    title: "Mobile Boom Placer Machinery",
+    desc: "Rapid deployment vehicular systems for dynamic job-site requirements.",
+    image:
+      "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1600&auto=format&fit=crop",
   },
+
   {
-    name: "Tower Boom Placer Infrastructure",
-    desc: "Pinned structural steel tower systems for vertical concrete placement at extreme heights. Essential for highrise and multi-tower residential and commercial projects.",
-    specs: ["Extreme height placement", "Structural steel frame", "Pinned installation", "Highrise specialized"],
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600&auto=format&fit=crop",
+    title: "Tower Boom Placer Infrastructure",
+    desc: "Pinned structural steel tower systems for vertical concrete placement at extreme heights.",
+    image:
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1600&auto=format&fit=crop",
   },
 ];
 
 export default function EquipmentPage() {
+
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+
+    const ctx = gsap.context(() => {
+
+      const imageAnchor =
+        document.querySelector(".image-anchor");
+
+      const images =
+        gsap.utils.toArray<HTMLElement>(".image-layer");
+
+      const contents =
+        gsap.utils.toArray<HTMLElement>(".content-block");
+
+      // =========================
+      // INITIAL STATES
+      // =========================
+
+      gsap.set(images, {
+        position: "absolute",
+        inset: 0,
+        clipPath: "inset(100% 0% 0% 0%)",
+        zIndex: 1,
+      });
+
+      gsap.set(images[0], {
+        clipPath: "inset(0% 0% 0% 0%)",
+        zIndex: 10,
+      });
+
+      gsap.set(contents, {
+        position: "absolute",
+        opacity: 0,
+        scale: 0.8,
+        y: 80,
+      });
+
+      gsap.set(contents[0], {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+      });
+
+      // =========================
+      // MASTER TIMELINE
+      // =========================
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".scroll-wrapper",
+          start: "top top",
+          end: `+=${equipment.length * 1400}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      equipment.forEach((_, index) => {
+
+        if (index === equipment.length - 1) return;
+
+        const currentImage = images[index];
+        const nextImage = images[index + 1];
+
+        const currentContent = contents[index];
+        const nextContent = contents[index + 1];
+
+        tl
+
+          // IMAGE ANCHOR MOVE
+          .to(
+            imageAnchor,
+            {
+              left:
+                index % 2 === 0
+                  ? "50%"
+                  : "6%",
+
+              duration: 1,
+              ease: "power3.inOut",
+            },
+            index
+          )
+
+          // CURRENT CONTENT OUT
+          .to(
+            currentContent,
+            {
+              opacity: 0,
+              scale: 0.8,
+              y: -60,
+              duration: 0.8,
+              ease: "power3.out",
+            },
+            index
+          )
+
+          // NEXT CONTENT IN
+          .to(
+            nextContent,
+            {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 1,
+              ease: "power4.out",
+            },
+            index + 0.15
+          )
+
+          // CURRENT IMAGE CLOSE
+          .to(
+            currentImage,
+            {
+              clipPath:
+                "inset(0% 0% 100% 0%)",
+
+              duration: 1,
+              ease: "power4.inOut",
+            },
+            index
+          )
+
+          // NEXT IMAGE OPEN
+          .to(
+            nextImage,
+            {
+              clipPath:
+                "inset(0% 0% 0% 0%)",
+
+              duration: 1,
+              ease: "power4.inOut",
+            },
+            index
+          );
+
+      });
+
+      ScrollTrigger.refresh();
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+
+  }, []);
+
   return (
-    <div className="bg-mecpl-dark pt-20">
-      {/* Header */}
-      <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Heavy machinery" />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Infrastructure Assets</span>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Advanced Machinery Inventory</h1>
-          <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
-          <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Our execution velocity stems directly from total strategic ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
-          <div className="flex items-center gap-2 mt-5 text-white/30 text-xs tracking-widest uppercase font-bold">
-            <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
-            <span>/</span>
-            <span className="text-white/60">Equipment</span>
-          </div>
-        </div>
-      </div>
+    <div
+      ref={sectionRef}
+      className="bg-[#f5f5f3] overflow-hidden"
+    >
 
-      {/* Equipment grid+image layout */}
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center py-14 border-b border-white/5">
-          <div className="h-96 rounded-sm overflow-hidden border border-white/10 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-all duration-500" alt="Heavy machinery" />
-          </div>
-          <div className="space-y-6">
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Self-Owned Fleet</span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">Total Operational Independence</h2>
-            <p className="text-gray-400 text-sm leading-relaxed">MECPL's self-owned equipment fleet ensures operational independence, consistent quality, and cost efficiency on every project — a key competitive advantage in large-scale tender bidding.</p>
-            <ul className="space-y-3">
-              {["Automated High-Capacity Tower Cranes & Heavy Material Lifts", "Computerized Central Concrete Batching Plants", "Heavy Earth Excavation Machinery & Transit Mixer Fleets", "Certified Modular Formwork & Heavy Infrastructure Shuttering Systems"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
-                  <span className="text-[#C41E3A] mt-0.5 flex-shrink-0">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+      {/* HERO */}
+      <section className="py-32 border-b border-black/10">
 
-      {/* Equipment list */}
-      <section className="max-w-7xl mx-auto px-6 py-10" data-testid="section-equipment">
-        <div className="space-y-6">
-          {equipment.map((item, i) => (
-            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-xl" data-testid={`card-equipment-${i}`}>
-              <div className="grid lg:grid-cols-3">
-                <div className="h-52 lg:h-auto overflow-hidden">
-                  <img src={item.image} className="w-full h-full object-cover transition-all duration-700" alt={item.name} loading="lazy" />
-                </div>
-                <div className="lg:col-span-2 p-8 flex flex-col justify-between gap-6">
-                  <div className="space-y-4">
-                    <div>
-                      <span className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">Equipment 0{i + 1}</span>
-                      <h3 className="text-white font-black text-xl uppercase tracking-tight mt-1">{item.name}</h3>
-                      <div className="w-8 h-0.5 bg-[#C41E3A] mt-3"></div>
-                    </div>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Key Features</div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {item.specs.map((spec, j) => (
-                        <div key={j} className="flex items-center gap-2 text-xs text-gray-400">
-                          <span className="text-[#C41E3A]">→</span> {spec}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="max-w-7xl mx-auto px-6">
+
+          <span className="text-[#C41E3A] uppercase tracking-[0.3em] text-xs font-bold">
+            Infrastructure Assets
+          </span>
+
+          <h3 className="text-3xl font-black uppercase leading-none mt-6 text-black">
+            Advanced Machinery Inventory
+          </h3>
+
+          <div className="w-20 h-[2px] bg-[#C41E3A] mt-8"></div>
+
+          <p className="text-gray-600 text-lg mt-8 max-w-2xl leading-relaxed">
+            Our execution velocity stems directly from total strategic ownership
+            over heavy industrial machinery assets.
+          </p>
+
         </div>
+
       </section>
+
+      {/* SCROLL STORY */}
+      <section
+        className="scroll-wrapper relative"
+        style={{
+          height: `${equipment.length * 140}vh`,
+        }}
+      >
+
+        {/* STICKY CONTAINER */}
+        <div className="sticky-container h-screen overflow-hidden relative">
+
+          {/* IMAGE ANCHOR */}
+          <div className="image-anchor absolute left-[6%] top-1/2 -translate-y-1/2 w-[42vw] h-[72vh]">
+
+            {equipment.map((item, i) => (
+
+              <div
+                key={i}
+                className="image-layer overflow-hidden"
+              >
+
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                />
+
+              </div>
+
+            ))}
+
+          </div>
+
+          {/* CONTENT BLOCKS */}
+          {equipment.map((item, i) => (
+
+            <div
+              key={i}
+              className="content-block absolute w-[36vw] max-w-[620px]"
+              style={{
+                left:
+                  i % 2 === 0
+                    ? "58%"
+                    : "8%",
+
+                top: "28%",
+              }}
+            >
+
+              <span className="text-[#C41E3A] uppercase tracking-[0.3em] text-xs font-bold">
+                Equipment 0{i + 1}
+              </span>
+
+              <h3 className="text-3xl leading-[0.9] font-black uppercase mt-6 text-black">
+                {item.title}
+              </h3>
+
+              <div className="w-20 h-[2px] bg-[#C41E3A] mt-8"></div>
+
+              <p className="text-gray-600 text-lg leading-relaxed mt-8">
+                {item.desc}
+              </p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
+
     </div>
   );
 }

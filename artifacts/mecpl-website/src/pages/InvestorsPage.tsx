@@ -21,22 +21,12 @@ const annualReturns = [
 
 export default function InvestorsPage() {
   return (
-    <div className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-mecpl-dark ">
       {/* Header */}
-      <div className="relative py-20 border-b border-white/5 overflow-hidden">
+      <div className="relative border-b border-white/5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Compliance" />
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Governance</span>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Investor Transparency</h1>
-          <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
-          <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Access authenticated credit audits, balance confirmations, compliance verifications, and corporate statutory records overseen under internal legal auditing rules.</p>
-          <div className="flex items-center gap-2 mt-5 text-white/30 text-xs tracking-widest uppercase font-bold">
-            <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
-            <span>/</span>
-            <span className="text-white/60">Investors</span>
-          </div>
-        </div>
+     
       </div>
 
       {/* Compliance overview */}
@@ -44,7 +34,7 @@ export default function InvestorsPage() {
         <div className="grid md:grid-cols-3 gap-12 items-center border-b border-white/5 pb-14">
           <div className="md:col-span-2 space-y-6">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Compliance</span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">Investor Transparency & Legal Compliance</h2>
+            <h3 className="text-3xl font-black tracking-tight uppercase text-white">Investor Transparency & Legal Compliance</h3>
             <p className="text-gray-400 text-sm leading-relaxed">MECPL maintains rigorous corporate governance standards ensuring complete transparency and regulatory compliance for all stakeholders. CRISIL SME 1 rated since 2007 — India's highest financial credibility for SMEs.</p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#" className="flex items-center justify-between p-4 bg-mecpl-dark hover:bg-mecpl-card border border-white/10 rounded-sm text-[10px] font-bold tracking-wider uppercase transition-all" data-testid="link-crisil">
