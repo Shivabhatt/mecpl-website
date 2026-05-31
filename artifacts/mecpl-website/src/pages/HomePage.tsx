@@ -251,7 +251,7 @@ export default function HomePage() {
       <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-services">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <SectionHeader label="What We Do" title="Our Service Verticals" subtitle="Six specialized service pillars covering the entire construction lifecycle." />
+            <SectionHeader label="What We Do" title="Our Service Verticals" subtitle="Six specialized service pillars covering the entire construction lifecycle." useH1={false} />
             <Link href="/services" data-testid="button-all-services">
               <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer mb-10 flex-shrink-0">
                 All Services <ArrowRight size={14} />
@@ -280,7 +280,7 @@ export default function HomePage() {
       {/* FEATURED PROJECTS */}
       <section className="max-w-7xl mx-auto px-6 py-16" data-testid="section-projects">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <SectionHeader label="Showcase" title="Engineering Landmarks at Scale" />
+          <SectionHeader label="Showcase" title="Engineering Landmarks at Scale" useH1={false} />
           <Link href="/completed-projects" data-testid="button-all-projects">
             <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer mb-10 flex-shrink-0">
               View All Projects <ArrowRight size={14} />
@@ -360,7 +360,7 @@ export default function HomePage() {
       {/* WHY CHOOSE MECPL */}
       <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-why-mecpl">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
-          <SectionHeader label="Our Advantage" title="Why Choose MECPL" center subtitle="Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects." />
+          <SectionHeader label="Our Advantage" title="Why Choose MECPL" center subtitle="Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects." useH1={false} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {whyChoose.map((item, i) => (
               <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm p-8 space-y-4 hover:border-[#C41E3A]/30 hover:shadow-xl transition-all duration-300" data-testid={`card-why-${i}`}>
@@ -385,7 +385,7 @@ export default function HomePage() {
       {/* CLIENTS */}
       <section className="py-24" data-testid="section-clients">
         <div className="max-w-7xl mx-auto px-6 space-y-14">
-          <SectionHeader label="Ecosystem" title="Clients & Premium Partners" center subtitle="We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises." />
+          <SectionHeader label="Ecosystem" title="Clients & Premium Partners" center subtitle="We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises." useH1={false} />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center text-sm font-black tracking-widest uppercase text-white/30">
             {clients.map((client, i) => (
@@ -415,7 +415,7 @@ export default function HomePage() {
       {/* TESTIMONIALS */}
       <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-testimonials">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
-          <SectionHeader label="Client Voices" title="What Our Partners Say" center />
+          <SectionHeader label="Client Voices" title="What Our Partners Say" center useH1={false} />
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {testimonials.map((t, i) => (
@@ -461,7 +461,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-6 py-20" data-testid="section-awards-strip">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           <div className="lg:w-1/3 space-y-6">
-            <SectionHeader label="Recognition" title="Award-Winning Excellence" />
+            <SectionHeader label="Recognition" title="Award-Winning Excellence" useH1={false} />
             <p className="text-gray-400 text-sm leading-relaxed">
               20+ years of consecutive industry awards for structural quality, safety leadership, and on-time delivery.
             </p>
@@ -495,7 +495,7 @@ export default function HomePage() {
         <div className="flex items-center justify-center py-20">
           <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
-            <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">
+            <h3 className="text-3xl font-black tracking-tighter uppercase text-white">
               Let's Build Something<br />Extraordinary Together
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
