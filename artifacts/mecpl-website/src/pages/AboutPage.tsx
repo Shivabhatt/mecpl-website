@@ -144,7 +144,7 @@ export default function AboutPage() {
 
       {/* Services */}
       <section id="abt2" className="max-w-7xl mx-auto px-6 py-20 border-b border-white/5 scroll-mt-28" data-testid="section-about-services">
-        <SectionHeader label="Services" title="What MECPL Delivers" center />
+        <SectionHeader label="Services" title="What MECPL Delivers" center useH1={false} />
         <p className="max-w-3xl mx-auto text-center text-gray-400 text-sm leading-relaxed mt-4">
           Our service portfolio covers the full construction lifecycle, from civil execution to project management, with the same precision and accountability across every delivery.
         </p>
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
       {/* Leadership */}
       <section id="abt3" className="max-w-7xl mx-auto px-6 py-20 border-b border-white/5 scroll-mt-28" data-testid="section-leadership">
-        <SectionHeader label="Our Team" title="Executive Leadership" center />
+        <SectionHeader label="Our Team" title="Executive Leadership" center useH1={false} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {leaders.map((leader, i) => (
             <div key={i} className="bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all" data-testid={`card-leader-${i}`}>
@@ -202,7 +202,7 @@ export default function AboutPage() {
       {/* Certifications */}
       <section className="bg-mecpl-card/40 border-y border-white/5 py-20 scroll-mt-28" data-testid="section-certifications">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader label="Standards" title="Certifications & Compliance" center />
+          <SectionHeader label="Standards" title="Certifications & Compliance" center useH1={false} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
             {[
               { code: "ISO 9001:2015", label: "Quality Management System", icon: "✦" },
@@ -222,7 +222,7 @@ export default function AboutPage() {
 
       {/* Milestones */}
       <section id="abt4" className="max-w-5xl mx-auto px-6 py-20 scroll-mt-28" data-testid="section-milestones">
-        <SectionHeader label="Journey" title="Our Milestone Timeline" />
+        <SectionHeader label="Journey" title="Our Milestone Timeline" useH1={false} />
           <div className="relative mt-10">
           <div className="absolute left-16 top-0 bottom-0 w-px bg-white/10"></div>
           <div className="space-y-5">

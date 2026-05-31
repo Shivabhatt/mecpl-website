@@ -42,7 +42,7 @@ export default function EquipmentPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Infrastructure Assets</span>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tighter uppercase text-white">Advanced Machinery Inventory</h1>
+          <h3 className="text-3xl font-black tracking-tighter uppercase text-white">Advanced Machinery Inventory</h3>
           <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
           <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Our execution velocity stems directly from total strategic ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
          
@@ -57,7 +57,7 @@ export default function EquipmentPage() {
           </div>
           <div className="space-y-6">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Self-Owned Fleet</span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">Total Operational Independence</h2>
+            <h3 className="text-3xl font-black tracking-tight uppercase text-white">Total Operational Independence</h3>
             <p className="text-gray-400 text-sm leading-relaxed">MECPL's self-owned equipment fleet ensures operational independence, consistent quality, and cost efficiency on every project — a key competitive advantage in large-scale tender bidding.</p>
             <ul className="space-y-3">
               {["Automated High-Capacity Tower Cranes & Heavy Material Lifts", "Computerized Central Concrete Batching Plants", "Heavy Earth Excavation Machinery & Transit Mixer Fleets", "Certified Modular Formwork & Heavy Infrastructure Shuttering Systems"].map((item, i) => (

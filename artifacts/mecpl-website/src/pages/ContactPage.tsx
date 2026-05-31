@@ -19,6 +19,9 @@ export default function ContactPage() {
         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
         <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-6">
+          <div className="mb-8">
+            <img src="/assets/logo/mecpl-logo.webp" alt="MECPL logo" className="h-16 w-auto object-contain" />
+          </div>
           <SectionHeader label="Project Intake Channel" title={`Let's Build Something Extraordinary Together`} subtitle="Transmit your structural blueprints or enterprise construction specifications. Our central operations bureau will analyze your requirements immediately." />
           <div className="flex items-center gap-2 mt-2 text-white/30 text-xs tracking-widest uppercase font-bold">
             <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>

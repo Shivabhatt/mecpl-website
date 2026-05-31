@@ -339,7 +339,7 @@ export default function HomePage() {
           <div className="relative grid md:grid-cols-[1.5fr_auto] items-center gap-8">
             <div className="space-y-4">
               <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Careers at MECPL</span>
-              <h3 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">
+              <h3 className="text-3xl font-black tracking-tight uppercase text-white">
                 Build the Next Generation of Landmarks
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed max-w-2xl">

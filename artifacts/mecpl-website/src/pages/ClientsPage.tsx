@@ -64,7 +64,7 @@ export default function ClientsPage() {
         {/* Marquee client logos */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Ecosystem</span>
-          <h3 className="text-3xl md:text-4xl font-black tracking-tight uppercase text-white">Clients & Premium Architects</h3>
+          <h3 className="text-3xl font-black tracking-tight uppercase text-white">Clients & Premium Architects</h3>
           <p className="text-gray-400 text-sm">We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises and global master planners.</p>
         </div>
 
