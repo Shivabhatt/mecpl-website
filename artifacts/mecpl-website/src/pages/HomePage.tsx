@@ -315,10 +315,22 @@ export default function HomePage() {
              fight SplitText over its children — safe to split here */
           const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
           splits.push(split);
+        });
 
-          /* VwbywPd exact pattern: pure opacity scrub, no blur.
-             Each word illuminates as it enters the reading zone
-             (top 85% → top 30%) — wider zone = more cinematic pacing */
+        /* Set all words to dim BEFORE refresh so ScrollTrigger measures
+           the correct post-split layout — this is the standard fix when
+           SplitText repositions DOM nodes and shifts element offsets */
+        splits.forEach(split => {
+          gsap.set(split.words, { opacity: 0.12 });
+        });
+
+        /* Recalculate all ScrollTrigger positions after SplitText mutated
+           the DOM — without this, trigger start/end coords are stale */
+        ScrollTrigger.refresh();
+
+        /* VwbywPd exact pattern: pure opacity scrub, each word gets its
+           own scrubbed trigger so it illuminates as it enters the reading zone */
+        splits.forEach(split => {
           split.words.forEach(word => {
             gsap.fromTo(word,
               { opacity: 0.12 },
@@ -832,18 +844,18 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
-      {/* Dark section — VwbywPd style: pure large type, word-by-word opacity scrub */}
+      {/* Light section — VwbywPd style: pure large type, word-by-word opacity scrub */}
       <section ref={testimonialsRef}
-        style={{ background: "#0c0c0c" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         data-testid="section-testimonials">
 
         {/* Section header */}
         <div className="max-w-4xl mx-auto px-6 pt-28 pb-0">
-          <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
             Client Voices
           </span>
-          <h2 style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "rgba(255,255,255,0.9)", fontWeight: 700, textTransform: "uppercase" }}>
-            What Our <span style={{ fontStyle: "italic", color: "#C41E3A" }}>Partners Say</span>
+          <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700, textTransform: "uppercase" }}>
+            What Our <span style={{ color: "#C41E3A" }}>Partners Say</span>
           </h2>
         </div>
 
@@ -851,13 +863,13 @@ export default function HomePage() {
         {testimonials.map((t, i) => (
           <div key={i} className="testi-block max-w-4xl mx-auto px-6"
             style={{
-              paddingTop: i === 0 ? "5rem" : "5rem",
+              paddingTop: "5rem",
               paddingBottom: "5rem",
-              borderTop: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+              borderTop: i > 0 ? "1px solid rgba(0,0,0,0.07)" : "none",
             }}>
 
             {/* Opening quote mark — decorative only */}
-            <div style={{ fontFamily: "Georgia, serif", fontSize: "5.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "2rem", opacity: 0.35, userSelect: "none" }}>
+            <div style={{ fontFamily: "Georgia, serif", fontSize: "5.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "2rem", opacity: 0.25, userSelect: "none" }}>
               &ldquo;
             </div>
 
@@ -865,12 +877,11 @@ export default function HomePage() {
                 React does not own these text fibers when GSAP wraps each word */}
             <p className="testi-quote"
               style={{
-                fontFamily: "var(--font-raleway)",
-                fontSize: "clamp(1.2rem,2.4vw,1.9rem)",
-                fontWeight: 300,
-                fontStyle: "italic",
-                color: "rgba(255,255,255,0.95)",
-                lineHeight: 1.75,
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "clamp(1.15rem,2.4vw,1.85rem)",
+                fontWeight: 400,
+                color: "#111827",
+                lineHeight: 1.8,
                 marginBottom: "3rem",
               }}
               dangerouslySetInnerHTML={{ __html: t.quote }}
@@ -880,10 +891,10 @@ export default function HomePage() {
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <div style={{ width: "28px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
               <div>
-                <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 700, color: "#C41E3A", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.15em", textTransform: "uppercase" }}>
                   {t.name}
                 </div>
-                <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", color: "rgba(255,255,255,0.3)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
                   {t.role}
                 </div>
               </div>
