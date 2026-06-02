@@ -296,7 +296,10 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: SplitText word scrub ── */
+  /* ── TESTIMONIALS: per-word ScrollTrigger opacity+blur reveal
+      Pattern from codepen.io/GreenSock/pen/VwbywPd — each word gets its
+      own scrubbed trigger so it illuminates exactly as it enters the
+      reading zone, producing a cinematic "word-by-word" reading lamp. ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
@@ -308,14 +311,27 @@ export default function HomePage() {
         const splits: SplitText[] = [];
 
         quotes.forEach(q => {
+          /* testi-quote uses dangerouslySetInnerHTML so React won't
+             fight SplitText over its children — safe to split here */
           const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
           splits.push(split);
-          gsap.from(split.words, {
-            opacity: 0.1, stagger: { each: 0.06 }, ease: "none",
-            scrollTrigger: {
-              trigger: q.closest(".testi-block") as HTMLElement,
-              start: "top 75%", end: "bottom 25%", scrub: 1.2,
-            },
+
+          /* Each word gets its own scrubbed ScrollTrigger */
+          split.words.forEach(word => {
+            gsap.fromTo(word,
+              { opacity: 0.12, filter: "blur(4px)" },
+              {
+                opacity: 1,
+                filter: "blur(0px)",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: word,
+                  start: "top 88%",
+                  end: "top 55%",
+                  scrub: 1,
+                },
+              }
+            );
           });
         });
 
