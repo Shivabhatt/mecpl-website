@@ -161,7 +161,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── STATS: pinned sequence + SplitText numerals ── */
+  /* ── STATS: pinned sequence + scroll-scrub count-up ── */
   useEffect(() => {
     const sec = statsRef.current;
     if (!sec) return;
@@ -171,7 +171,6 @@ export default function HomePage() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const ruler = sec.querySelector<HTMLElement>(".stat-ruler");
         const items = gsap.utils.toArray<HTMLElement>(".stat-item", sec);
-        const splits: SplitText[] = [];
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -188,18 +187,24 @@ export default function HomePage() {
         items.forEach((item, i) => {
           const numEl = item.querySelector<HTMLElement>(".stat-num");
           gsap.set(item, { opacity: 0, y: 50 });
+
           if (numEl) {
-            const split = new SplitText(numEl, { type: "chars", charsClass: "inline-block" });
-            splits.push(split);
-            gsap.set(split.chars, { yPercent: 110 });
-            tl.to(item,        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45)
-              .to(split.chars, { yPercent: 0, duration: 0.7, stagger: 0.04, ease: "power4.out" }, "<0.05");
+            /* Read the target value + suffix baked into data-attributes */
+            const target = parseFloat(numEl.dataset.value || "0");
+            const suffix = numEl.dataset.suffix || "";
+            const proxy  = { val: 0 };
+
+            /* Reveal the item, then count the number in sync with scrub */
+            tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45)
+              .to(proxy, {
+                val: target, duration: 1.2, ease: "power2.out",
+                snap: { val: 1 },
+                onUpdate() { numEl.textContent = Math.round(proxy.val) + suffix; },
+              }, "<");
           } else {
             tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45);
           }
         });
-
-        return () => splits.forEach(s => s.revert());
       });
     }, sec);
 
@@ -275,14 +280,16 @@ export default function HomePage() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".why-card", sec);
-        gsap.set(cards, { opacity: 0, y: 60 });
+        /* Initial state: invisible, offset, and slightly scaled down */
+        gsap.set(cards, { opacity: 0, y: 60, scale: 0.92 });
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sec, start: "top top", end: `+=${cards.length * 180 + 200}`,
             pin: true, scrub: 1.5, anticipatePin: 1, invalidateOnRefresh: true,
           },
         });
-        cards.forEach((card, i) => tl.to(card, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, i * 0.4));
+        /* Scale lands at 1 — gives each card a satisfying "pop-in" feel */
+        cards.forEach((card, i) => tl.to(card, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, i * 0.4));
       });
     }, sec);
 
@@ -496,9 +503,12 @@ export default function HomePage() {
             {stats.map((st, i) => (
               <div key={i} className="stat-item px-0 lg:px-10 first:pl-0 last:pr-0 space-y-3">
                 <div className="overflow-hidden">
+                  {/* data-value/data-suffix read by GSAP count-up; textContent updated by onUpdate */}
                   <div className="stat-num font-bold uppercase"
+                    data-value={st.value}
+                    data-suffix={st.suffix}
                     style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}>
-                    {st.value}{st.suffix}
+                    0{st.suffix}
                   </div>
                 </div>
                 <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase" }}>
