@@ -296,52 +296,69 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: Layered Pinning — VwbywPda pattern
-     Each card pins to the top (pinSpacing:false) so the next card
-     scrolls up and stacks over it, creating a "deck of cards" reveal.
-     z-index increases per card so each new card appears on top. ── */
+  /* ── TESTIMONIALS: AutoSplit line-mask reveal — GggpRoB pattern
+     SplitText.create with mask:"lines" wraps each line in overflow:hidden,
+     then slides lines up from yPercent:120 scrubbed to scroll position.
+     Waits for document.fonts.ready so line-breaks are font-accurate. ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
+
+    const splits: { revert: () => void }[] = [];
+    let cancelled = false;
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".testi-block", sec);
 
-        cards.forEach((card, i) => {
-          /* Raise z-index so each new card renders over the previous */
-          gsap.set(card, { zIndex: i + 1 });
+        /* Wait for fonts before splitting — ensures correct line-breaks */
+        document.fonts.ready.then(() => {
+          if (cancelled) return;
 
-          /* Core layered-pin: no extra spacing so the next card
-             scrolls directly over the pinned one */
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            pin: true,
-            pinSpacing: false,
-          });
+          cards.forEach((card) => {
+            const quoteEl = card.querySelector<HTMLElement>(".testi-quote");
+            if (!quoteEl) return;
 
-          /* Cards 2+ fade + lift in as they enter — opacity only
-             (avoid autoAlpha/visibility which conflicts with React HMR) */
-          if (i > 0) {
-            gsap.from(card, {
-              opacity: 0,
-              y: 30,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 98%",
-                end: "top top",
-                scrub: 1,
+            /* GggpRoB exact pattern:
+               - mask:"lines" = overflow:hidden wrapper per line
+               - autoSplit:true = re-splits on resize and returns new animation
+               - onSplit returns the tween so GSAP can kill+recreate on resize */
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const split = (SplitText as any).create(quoteEl, {
+              type: "words,lines",
+              mask: "lines",
+              linesClass: "testi-line",
+              autoSplit: true,
+              onSplit: (instance: { lines: HTMLElement[] }) => {
+                return gsap.from(instance.lines, {
+                  yPercent: 120,
+                  stagger: 0.1,
+                  scrollTrigger: {
+                    trigger: card,
+                    scrub: true,
+                    start: "clamp(top center)",
+                    end: "clamp(bottom center)",
+                  },
+                });
               },
             });
-          }
+            splits.push(split);
+          });
         });
+
+        return () => {
+          cancelled = true;
+          splits.forEach(s => s.revert());
+        };
       });
     }, sec);
 
-    return () => ctx.revert();
+    return () => {
+      cancelled = true;
+      splits.forEach(s => s.revert());
+      ctx.revert();
+    };
   }, []);
 
   /* ── CLIENTS: bento cell clip-path mask reveal ── */
@@ -844,15 +861,13 @@ export default function HomePage() {
           return (
             <div key={i} className="testi-block"
               style={{
-                height: "100vh",
+                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 background: bg,
                 borderTop: "1px solid rgba(0,0,0,0.07)",
-                boxShadow: i > 0 ? "0 -8px 40px rgba(0,0,0,0.08)" : "none",
                 position: "relative",
-                overflow: "hidden",
               }}>
 
               {/* Card content — centered column */}
@@ -903,12 +918,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Card counter dots */}
-              <div style={{ position: "absolute", bottom: "2rem", right: "2rem", display: "flex", gap: "6px" }}>
-                {testimonials.map((_, di) => (
-                  <div key={di} style={{ width: "6px", height: "6px", borderRadius: "50%", background: di === i ? "#C41E3A" : "rgba(17,24,39,0.15)" }} />
-                ))}
-              </div>
             </div>
           );
         })}

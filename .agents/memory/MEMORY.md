@@ -1,3 +1,4 @@
 - [MECPL ThemeProvider override](mecpl-theme-override.md) — ThemeProvider always forces data-theme="light"; use hp-root inline styles + html[data-theme="light"] .hp-root rules (specificity 31) for dark homepage.
 - [MECPL Preloader fix](mecpl-preloader-fix.md) — global `html[data-theme="light"] .bg-black` turns preloader white; fix with `.preloader-force-text` CSS override + guard empty NodeList in Preloader GSAP.
 - [MECPL GSAP ScrollTrigger patterns](mecpl-gsap-scrolltrigger.md) — containerAnimation must be the gsap tween, NOT ScrollTrigger.getById(); correct ctx+mm nesting for React Strict Mode.
+- [MECPL testimonials AutoSplit](mecpl-testimonials-autosplit.md) — GggpRoB pattern: SplitText.create with mask:"lines" + autoSplit:true; wait document.fonts.ready; cancelled flag for async cleanup.
