@@ -296,10 +296,10 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: per-word ScrollTrigger opacity+blur reveal
-      Pattern from codepen.io/GreenSock/pen/VwbywPd — each word gets its
-      own scrubbed trigger so it illuminates exactly as it enters the
-      reading zone, producing a cinematic "word-by-word" reading lamp. ── */
+  /* ── TESTIMONIALS: Layered Pinning — VwbywPda pattern
+     Each card pins to the top (pinSpacing:false) so the next card
+     scrolls up and stacks over it, creating a "deck of cards" reveal.
+     z-index increases per card so each new card appears on top. ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
@@ -307,48 +307,37 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const quotes = gsap.utils.toArray<HTMLElement>(".testi-quote", sec);
-        const splits: SplitText[] = [];
+        const cards = gsap.utils.toArray<HTMLElement>(".testi-block", sec);
 
-        quotes.forEach(q => {
-          /* testi-quote uses dangerouslySetInnerHTML so React won't
-             fight SplitText over its children — safe to split here */
-          const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
-          splits.push(split);
-        });
+        cards.forEach((card, i) => {
+          /* Raise z-index so each new card renders over the previous */
+          gsap.set(card, { zIndex: i + 1 });
 
-        /* Set all words to dim BEFORE refresh so ScrollTrigger measures
-           the correct post-split layout — this is the standard fix when
-           SplitText repositions DOM nodes and shifts element offsets */
-        splits.forEach(split => {
-          gsap.set(split.words, { opacity: 0.12 });
-        });
-
-        /* Recalculate all ScrollTrigger positions after SplitText mutated
-           the DOM — without this, trigger start/end coords are stale */
-        ScrollTrigger.refresh();
-
-        /* VwbywPd exact pattern: pure opacity scrub, each word gets its
-           own scrubbed trigger so it illuminates as it enters the reading zone */
-        splits.forEach(split => {
-          split.words.forEach(word => {
-            gsap.fromTo(word,
-              { opacity: 0.12 },
-              {
-                opacity: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: word,
-                  start: "top 85%",
-                  end: "top 30%",
-                  scrub: 1,
-                },
-              }
-            );
+          /* Core layered-pin: no extra spacing so the next card
+             scrolls directly over the pinned one */
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            pin: true,
+            pinSpacing: false,
           });
-        });
 
-        return () => splits.forEach(s => s.revert());
+          /* Cards 2+ fade + lift in as they enter — opacity only
+             (avoid autoAlpha/visibility which conflicts with React HMR) */
+          if (i > 0) {
+            gsap.from(card, {
+              opacity: 0,
+              y: 30,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 98%",
+                end: "top top",
+                scrub: 1,
+              },
+            });
+          }
+        });
       });
     }, sec);
 
@@ -844,65 +833,85 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
-      {/* Light section — VwbywPd style: pure large type, word-by-word opacity scrub */}
+      {/* VwbywPda layered-pinning: each card is 100vh and pins at the top;
+          next card scrolls up and stacks over it — "deck of cards" reveal */}
       <section ref={testimonialsRef}
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
+        style={{ background: "#ffffff" }}
         data-testid="section-testimonials">
 
-        {/* Section header */}
-        <div className="max-w-4xl mx-auto px-6 pt-28 pb-0">
-          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-            Client Voices
-          </span>
-          <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700, textTransform: "uppercase" }}>
-            What Our <span style={{ color: "#C41E3A" }}>Partners Say</span>
-          </h2>
-        </div>
-
-        {/* Testimonial blocks — pure typographic, no cards, matching VwbywPd layout */}
-        {testimonials.map((t, i) => (
-          <div key={i} className="testi-block max-w-4xl mx-auto px-6"
-            style={{
-              paddingTop: "5rem",
-              paddingBottom: "5rem",
-              borderTop: i > 0 ? "1px solid rgba(0,0,0,0.07)" : "none",
-            }}>
-
-            {/* Opening quote mark — decorative only */}
-            <div style={{ fontFamily: "Georgia, serif", fontSize: "5.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "2rem", opacity: 0.25, userSelect: "none" }}>
-              &ldquo;
-            </div>
-
-            {/* Quote text — SplitText target; dangerouslySetInnerHTML required so
-                React does not own these text fibers when GSAP wraps each word */}
-            <p className="testi-quote"
+        {(["#ffffff", "#f9f9f9", "#f4f4f4"] as const).map((bg, i) => {
+          const t = testimonials[i];
+          return (
+            <div key={i} className="testi-block"
               style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: "clamp(1.15rem,2.4vw,1.85rem)",
-                fontWeight: 400,
-                color: "#111827",
-                lineHeight: 1.8,
-                marginBottom: "3rem",
-              }}
-              dangerouslySetInnerHTML={{ __html: t.quote }}
-            />
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                background: bg,
+                borderTop: "1px solid rgba(0,0,0,0.07)",
+                boxShadow: i > 0 ? "0 -8px 40px rgba(0,0,0,0.08)" : "none",
+                position: "relative",
+                overflow: "hidden",
+              }}>
 
-            {/* Attribution */}
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <div style={{ width: "28px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
-              <div>
-                <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                  {t.name}
+              {/* Card content — centered column */}
+              <div className="max-w-3xl mx-auto w-full px-8 md:px-16">
+
+                {/* Index + eyebrow */}
+                <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "3rem" }}>
+                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "clamp(3.5rem,6vw,5rem)", fontWeight: 800, color: "rgba(196,30,58,0.07)", lineHeight: 1, userSelect: "none" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "4px" }}>
+                      Client Voice
+                    </div>
+                    <div style={{ width: "40px", height: "1px", background: "rgba(196,30,58,0.3)" }} />
+                  </div>
                 </div>
-                <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                  {t.role}
+
+                {/* Opening quote mark */}
+                <div style={{ fontFamily: "Georgia, serif", fontSize: "4rem", color: "#C41E3A", lineHeight: 0.6, marginBottom: "1.5rem", opacity: 0.2, userSelect: "none" }}>
+                  &ldquo;
+                </div>
+
+                {/* Quote — no italic, Montserrat; dangerouslySetInnerHTML safe for GSAP */}
+                <p className="testi-quote"
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "clamp(1.1rem,2.2vw,1.7rem)",
+                    fontWeight: 400,
+                    color: "#111827",
+                    lineHeight: 1.8,
+                    marginBottom: "3rem",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: t.quote }}
+                />
+
+                {/* Attribution */}
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  <div style={{ width: "32px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                      {t.name}
+                    </div>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                      {t.role}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
 
-        <div className="h-8" />
+              {/* Card counter dots */}
+              <div style={{ position: "absolute", bottom: "2rem", right: "2rem", display: "flex", gap: "6px" }}>
+                {testimonials.map((_, di) => (
+                  <div key={di} style={{ width: "6px", height: "6px", borderRadius: "50%", background: di === i ? "#C41E3A" : "rgba(17,24,39,0.15)" }} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </section>
 
       {/* ══════════ CLIENTS — BENTO GALLERY + TICKER ══════════ */}
