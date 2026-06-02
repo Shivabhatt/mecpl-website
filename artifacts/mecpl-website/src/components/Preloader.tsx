@@ -12,14 +12,17 @@ export default function Preloader() {
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: () => setHidden(true) });
 
-    // animate the text lines in, then fade out the whole preloader
-    tl.from(lines, {
-      yPercent: 100,
-      opacity: 0,
-      duration: 0.65,
-      stagger: 0.08,
-    })
-      .to(wrapperRef.current, {
+    // animate text lines if any exist (simplified preloader may have none)
+    if (lines.length > 0) {
+      tl.from(lines, {
+        yPercent: 100,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.08,
+      });
+    }
+
+    tl.to(wrapperRef.current, {
         opacity: 0,
         duration: 0.55,
         ease: "power2.inOut",

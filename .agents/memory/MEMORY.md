@@ -1,0 +1,2 @@
+- [MECPL ThemeProvider override](mecpl-theme-override.md) — ThemeProvider always forces data-theme="light"; use hp-root inline styles + html[data-theme="light"] .hp-root rules (specificity 31) for dark homepage.
+- [MECPL Preloader fix](mecpl-preloader-fix.md) — global `html[data-theme="light"] .bg-black` turns preloader white; fix with `.preloader-force-text` CSS override + guard empty NodeList in Preloader GSAP.

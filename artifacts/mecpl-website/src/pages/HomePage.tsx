@@ -1,355 +1,843 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
-import { ArrowRight, ChevronLeft, ChevronRight, Clock, Building2, HardHat, Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield, Star, Users, Wrench, Quote } from "lucide-react";
-import SectionHeader from "../components/SectionHeader";
+import {
+  ArrowRight, ChevronLeft, ChevronRight, Clock, Building2, HardHat,
+  Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield,
+  Star, Users, Wrench, Quote, Award,
+} from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+/* ─── DATA ──────────────────────────────────────────────────────────── */
 
 const heroSlides = [
   {
     image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop",
-    tag: "25+ Years of Excellence",
-    headline: "Engineering Excellence.",
-    accent: "Building Tomorrow.",
-    sub: "Delivering precision infrastructure, high-scale residential marvels, and advanced industrial complexes across India since 1998.",
+    tag: "25+ Years of Structural Excellence",
   },
   {
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop",
-    tag: "150+ Landmark Projects",
-    headline: "Structural Mastery.",
-    accent: "At Scale.",
-    sub: "From highrise towers to industrial megacomplexes — MECPL executes with precision, quality, and zero compromise.",
+    tag: "150+ Landmark Projects Delivered",
   },
   {
     image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=1920&auto=format&fit=crop",
     tag: "ISO 9001 · 14001 · 45001 Certified",
-    headline: "Certified Quality.",
-    accent: "Proven Safety.",
-    sub: "Triple ISO certified with CRISIL SME 1 financial rating — the gold standard of India's construction industry.",
   },
 ];
 
 const stats = [
-  { value: 25, suffix: "+", label: "Years Legacy" },
-  { value: 150, suffix: "+", label: "Projects Handed Over" },
-  { value: 20, suffix: "M+", label: "Sq. Ft. Executed" },
-  { value: 50, suffix: "+", label: "Tier-1 Clients" },
+  { value: 25,  suffix: "+",  label: "Years Legacy",          sub: "Since 1998" },
+  { value: 150, suffix: "+",  label: "Projects Handed Over",  sub: "Across India" },
+  { value: 20,  suffix: "M+", label: "Sq. Ft. Executed",      sub: "Structural Work" },
+  { value: 50,  suffix: "+",  label: "Tier-1 Clients",        sub: "Trust MECPL" },
 ];
 
 const services = [
-  { icon: Building2, title: "Civil Construction", desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.", path: "/services" },
-  { icon: ClipboardList, title: "Turnkey Projects", desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.", path: "/services" },
-  { icon: Factory, title: "Industrial Projects", desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.", path: "/services" },
-  { icon: Home, title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.", path: "/services" },
-  { icon: Layers, title: "Interior Fitouts", desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.", path: "/services" },
-  { icon: HardHat, title: "Project Management", desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.", path: "/services" },
+  {
+    icon: Building2,
+    title: "Civil Construction",
+    desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+  {
+    icon: ClipboardList,
+    title: "Turnkey Projects",
+    desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+  {
+    icon: Factory,
+    title: "Industrial Projects",
+    desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",
+    image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+  {
+    icon: Home,
+    title: "Residential Projects",
+    desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+  {
+    icon: Layers,
+    title: "Interior Fitouts",
+    desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+  {
+    icon: HardHat,
+    title: "Project Management",
+    desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop",
+    path: "/services",
+  },
+];
+
+const projects = [
+  {
+    name: "Panchshil Highrise Towers",
+    location: "Kharadi, Pune",
+    type: "Civil Structural Framework",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop",
+    featured: true,
+  },
+  {
+    name: "Trump Towers Pune",
+    location: "Kalyani Nagar, Pune",
+    type: "Luxury Highrise · Civil Handover",
+    image: "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "Godrej Boulevard",
+    location: "Mamurdi, Pune",
+    type: "Residential Framework",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "VTP Bel Air",
+    location: "Mahalunge, Pune",
+    type: "Complex Core Works",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "Gera Commerzone",
+    location: "Kharadi, Pune",
+    type: "Commercial Core Infrastructure",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "Industrial Megaplex",
+    location: "Chakan, Pune",
+    type: "Industrial Structural Works",
+    image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=1200&auto=format&fit=crop",
+  },
 ];
 
 const whyChoose = [
-  { icon: Timer, title: "Timely Delivery", desc: "Over 95% of projects handed over on or ahead of schedule. Our milestone-driven model eliminates delays." },
-  { icon: Shield, title: "Safety First", desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, every day." },
-  { icon: Star, title: "Engineering Excellence", desc: "25+ years of structural engineering expertise applied to India's most complex construction challenges." },
-  { icon: CheckCircle, title: "Quality Assurance", desc: "ISO 9001:2015 certified quality management across every phase — materials, execution, and handover." },
-  { icon: Users, title: "Experienced Team", desc: "300+ highly trained engineers, site managers, and safety officers with decades of domain expertise." },
-  { icon: Wrench, title: "End-to-End Solutions", desc: "From concept to completion — MECPL manages the entire construction lifecycle under one roof." },
+  { icon: Timer,        title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule." },
+  { icon: Shield,       title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site." },
+  { icon: Star,         title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most complex projects." },
+  { icon: CheckCircle,  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management across every project phase." },
+  { icon: Users,        title: "Experienced Team",       desc: "300+ trained engineers, site managers, and safety officers." },
+  { icon: Wrench,       title: "End-to-End Solutions",   desc: "From concept to completion — MECPL manages the full construction lifecycle." },
 ];
 
 const testimonials = [
   {
     quote: "MECPL delivered our 42-storey tower ahead of schedule with exceptional structural quality. Their site management and safety protocols set a new benchmark in the industry.",
     name: "Mr. Atul Chordia",
-    title: "Chairman, Panchshil Realty",
-    rating: 5,
+    role: "Chairman, Panchshil Realty",
   },
   {
     quote: "Working with MECPL on Trump Towers Pune was a seamless experience. Their technical precision, proactive communication, and zero-compromise quality made them an invaluable partner.",
     name: "Project Director",
-    title: "Trump Towers Pune",
-    rating: 5,
+    role: "Trump Towers Pune",
   },
   {
     quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",
     name: "Senior Project Head",
-    title: "Godrej Properties",
-    rating: 5,
+    role: "Godrej Properties",
   },
 ];
 
 const clients = ["TRUMP TOWERS", "GODREJ PROPS", "VTP REALTY", "PANCHSHIL", "KALPATARU", "K RAHEJA", "MALPANI", "GERA DEVS"];
 
 const tickerItems = [
-  "ISO 9001:2015 Certified Company",
+  "ISO 9001:2015 Certified",
   "ISO 14001:2015 Environmental Integrity",
   "ISO 45001:2018 Occupational Safety",
-  "CRISIL SME 1 Rating — Highest Financial Reliability",
+  "CRISIL SME 1 Rating",
   "25+ Years of Structural Excellence",
-  "150+ Landmark Projects Completed",
+  "150+ Landmark Projects",
+  "MECPL — Building India's Future",
 ];
 
+/* ─── ANIMATED COUNTER ───────────────────────────────────────────────── */
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started.current) {
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
         started.current = true;
-        const steps = 60;
-        const increment = value / steps;
-        let current = 0;
+        const steps = 80;
+        const inc = value / steps;
+        let cur = 0;
         const timer = setInterval(() => {
-          current += increment;
-          if (current >= value) { setCount(value); clearInterval(timer); }
-          else setCount(Math.floor(current));
-        }, 2000 / steps);
+          cur += inc;
+          if (cur >= value) { setCount(value); clearInterval(timer); }
+          else setCount(Math.floor(cur));
+        }, 1800 / steps);
       }
-    }, { threshold: 0.3 });
-    observer.observe(el);
-    return () => observer.disconnect();
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [value]);
 
-  return <div ref={ref} className="text-3xl font-black text-[#C41E3A] tracking-tight">{count}{suffix}</div>;
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
+/* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
   const [slide, setSlide] = useState(0);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const assetBase = import.meta.env.BASE_URL;
 
+  /* refs */
+  const heroSectionRef   = useRef<HTMLElement>(null);
+  const heroBgRef        = useRef<HTMLDivElement>(null);
+  const heroHeadlineRef  = useRef<HTMLDivElement>(null);
+  const heroTagRef       = useRef<HTMLSpanElement>(null);
+  const heroSubRef       = useRef<HTMLParagraphElement>(null);
+  const heroCTARef       = useRef<HTMLDivElement>(null);
+  const statsRef         = useRef<HTMLElement>(null);
+  const servicesRef      = useRef<HTMLElement>(null);
+  const projectsRef      = useRef<HTMLElement>(null);
+  const projectsTrackRef = useRef<HTMLDivElement>(null);
+  const whyRef           = useRef<HTMLElement>(null);
+  const testimonialsRef  = useRef<HTMLElement>(null);
+  const clientsRef       = useRef<HTMLElement>(null);
+
+  /* Hero auto-slide */
   useEffect(() => {
     const t = setInterval(() => setSlide(p => (p + 1) % heroSlides.length), 6000);
     return () => clearInterval(t);
   }, []);
 
+  /* ── HERO: SplitText chars reveal + tag/sub/cta stagger + bg parallax */
   useEffect(() => {
-    const t = setInterval(() => setActiveTestimonial(p => (p + 1) % testimonials.length), 5000);
-    return () => clearInterval(t);
+    const headline = heroHeadlineRef.current;
+    const heroBg   = heroBgRef.current;
+    const section  = heroSectionRef.current;
+    if (!headline || !heroBg || !section) return;
+
+    const ctx = gsap.context(() => {
+      const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
+      const splits: SplitText[] = [];
+
+      lines.forEach((line, i) => {
+        const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
+        splits.push(split);
+        gsap.from(split.chars, {
+          yPercent: 115,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.022,
+          ease: "power4.out",
+          delay: 0.35 + i * 0.18,
+        });
+      });
+
+      /* tag */
+      const tagEl = heroTagRef.current;
+      if (tagEl) {
+        gsap.from(tagEl, { opacity: 0, y: 16, duration: 0.9, delay: 0.2, ease: "power3.out" });
+      }
+      /* sub */
+      const subEl = heroSubRef.current;
+      if (subEl) {
+        gsap.from(subEl, { opacity: 0, y: 20, duration: 0.9, delay: 1.05, ease: "power3.out" });
+      }
+      /* CTAs */
+      const ctaEl = heroCTARef.current;
+      if (ctaEl && ctaEl.children.length > 0) {
+        gsap.from(Array.from(ctaEl.children), {
+          opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.25, ease: "power3.out",
+        });
+      }
+
+      /* bg parallax */
+      gsap.to(heroBg, {
+        yPercent: 28,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      return () => splits.forEach(s => s.revert());
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── STATS: section entry stagger + line draw */
+  useEffect(() => {
+    const sec = statsRef.current;
+    if (!sec) return;
+
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>(".stat-item", sec);
+      const ruler = sec.querySelector<HTMLElement>(".stat-ruler");
+
+      if (ruler) {
+        gsap.from(ruler, {
+          scaleX: 0,
+          transformOrigin: "left center",
+          duration: 1.4,
+          ease: "power3.out",
+          scrollTrigger: { trigger: sec, start: "top 75%", toggleActions: "play none none none" },
+        });
+      }
+
+      items.forEach((item, i) => {
+        gsap.from(item, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          delay: i * 0.12,
+          ease: "power3.out",
+          scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
+        });
+      });
+    }, sec);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── SERVICES: scroll-triggered entry + hover tilt via separate wrapper */
+  useEffect(() => {
+    const sec = servicesRef.current;
+    if (!sec) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".flip-card", sec);
+
+      cards.forEach((card, i) => {
+        /* slide-in from below on scroll enter */
+        gsap.from(card, {
+          y: 60,
+          opacity: 0,
+          duration: 0.9,
+          delay: (i % 3) * 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        /* 3D hover tilt using a data-tilt wrapper (separate from flip-inner) */
+        const tiltEl = card.querySelector<HTMLElement>(".flip-tilt");
+        if (!tiltEl) return;
+
+        const xTo = gsap.quickTo(tiltEl, "rotationY", { duration: 0.4, ease: "power2.out" });
+        const yTo = gsap.quickTo(tiltEl, "rotationX", { duration: 0.4, ease: "power2.out" });
+
+        const onMove = (e: MouseEvent) => {
+          const rect = card.getBoundingClientRect();
+          const nx = ((e.clientX - rect.left) / rect.width  - 0.5) * 12;
+          const ny = ((e.clientY - rect.top)  / rect.height - 0.5) * -8;
+          xTo(nx);
+          yTo(ny);
+        };
+        const onLeave = () => { xTo(0); yTo(0); };
+
+        card.addEventListener("mousemove", onMove);
+        card.addEventListener("mouseleave", onLeave);
+      });
+    }, sec);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── PROJECTS: horizontal scroll panel (RwKwLWK style) */
+  useEffect(() => {
+    const container = projectsRef.current;
+    const track     = projectsTrackRef.current;
+    if (!container || !track) return;
+
+    const ctx = gsap.context(() => {
+      const getAmt = () => -(track.scrollWidth - window.innerWidth);
+
+      gsap.to(track, {
+        x: getAmt,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: () => `+=${Math.abs(getAmt())}`,
+          pin: true,
+          scrub: 1.5,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+
+      /* project card image parallax */
+      const imgs = gsap.utils.toArray<HTMLElement>(".proj-img", track);
+      imgs.forEach(img => {
+        gsap.to(img, {
+          x: "8%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.closest(".h-scroll-card") as HTMLElement,
+            containerAnimation: ScrollTrigger.getById("proj-scroll") as gsap.core.Tween,
+            start: "left right",
+            end: "right left",
+            scrub: true,
+          },
+        });
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── WHY CHOOSE: staggered scale-in (oNjgEjm style) */
+  useEffect(() => {
+    const sec = whyRef.current;
+    if (!sec) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".why-card", sec);
+      cards.forEach((card, i) => {
+        gsap.from(card, {
+          scale: 0.88,
+          opacity: 0,
+          y: 50,
+          duration: 0.85,
+          delay: i * 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+    }, sec);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── TESTIMONIALS: SplitText word scrub (bGRdvMy style) */
+  useEffect(() => {
+    const sec = testimonialsRef.current;
+    if (!sec) return;
+
+    const ctx = gsap.context(() => {
+      const quotes = gsap.utils.toArray<HTMLElement>(".testi-quote", sec);
+      const splits: SplitText[] = [];
+
+      quotes.forEach(q => {
+        const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
+        splits.push(split);
+
+        gsap.from(split.words, {
+          opacity: 0.08,
+          duration: 0.1,
+          stagger: { each: 0.06 },
+          ease: "none",
+          scrollTrigger: {
+            trigger: q.closest(".testi-block") as HTMLElement,
+            start: "top 75%",
+            end: "bottom 25%",
+            scrub: 1.2,
+          },
+        });
+      });
+
+      return () => splits.forEach(s => s.revert());
+    }, sec);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* ── CLIENTS: section fade-in */
+  useEffect(() => {
+    const sec = clientsRef.current;
+    if (!sec) return;
+
+    const ctx = gsap.context(() => {
+      const boxes = gsap.utils.toArray<HTMLElement>(".client-box", sec);
+      boxes.forEach((b, i) => {
+        gsap.from(b, {
+          opacity: 0,
+          y: 24,
+          duration: 0.6,
+          delay: i * 0.06,
+          ease: "power3.out",
+          scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
+        });
+      });
+    }, sec);
+
+    return () => ctx.revert();
   }, []);
 
   const s = heroSlides[slide];
 
+  /* ─── JSX ─────────────────────────────────────────────────────────── */
   return (
-    <div data-animate-page className="bg-mecpl-dark">
-      {/* HERO */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
-        <div className="absolute inset-0 z-0">
-          {/* Prefer a local hero video if provided, otherwise fall back to images */}
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-80">
-            <source src="/assets/video/hero.mp4" type="video/mp4" />
+    <div className="hp-root" style={{ background: "#0a0a0a", color: "#f0f0f0" }}>
+
+      {/* ══════════ HERO ══════════ */}
+      <section
+        ref={heroSectionRef}
+        className="relative h-screen flex items-center justify-center overflow-hidden"
+        data-testid="section-hero"
+      >
+        {/* Parallax background */}
+        <div ref={heroBgRef} className="absolute inset-0 z-0 scale-110 will-change-transform">
+          {heroSlides.map((sl, i) => (
+            <img
+              key={i}
+              src={sl.image}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1200 ${i === slide ? "opacity-50" : "opacity-0"}`}
+              alt="Construction backdrop"
+            />
+          ))}
+          {/* video overlay */}
+          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-30">
+            <source src={`${assetBase}assets/video/hero.mp4`} type="video/mp4" />
           </video>
-
-          {/* fallback image if video not available / for browsers that can't play */}
-          <img
-            key={slide}
-            src={s.image}
-            className="absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-1000"
-            alt="Construction backdrop"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-8">
+        {/* Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          {/* Tag */}
+          <span
+            ref={heroTagRef}
+            key={slide}
+            className="inline-block text-[10px] font-bold uppercase tracking-[0.25em] text-[#C41E3A] border border-[#C41E3A]/30 px-4 py-2 mb-8"
+            style={{ fontFamily: "var(--font-inter)" }}
+          >
+            {s.tag}
+          </span>
 
+          {/* Headline — SplitText target */}
+          <div ref={heroHeadlineRef}>
+            <div
+              className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white mb-1"
+              style={{ fontFamily: "var(--font-raleway)" }}
+            >
+              Engineering
+            </div>
+            <div
+              className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold italic leading-none tracking-tight mb-8"
+              style={{ fontFamily: "var(--font-raleway)", color: "#C41E3A" }}
+            >
+              Excellence.
+            </div>
+          </div>
 
-          <h3 className="text-3xl font-black tracking-tighter uppercase leading-none text-white">
-            {s.headline}<br />
-            <span className="text-[#C41E3A]">{s.accent}</span>
-          </h3>
-
-          <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-lg tracking-wide leading-relaxed">
-            {s.sub}
+          {/* Sub */}
+          <p
+            ref={heroSubRef}
+            className="max-w-xl mx-auto text-sm leading-relaxed mb-10"
+            style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.55)" }}
+          >
+            Delivering precision infrastructure, high-scale residential marvels, and advanced
+            industrial complexes across India since 1998.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          {/* CTAs */}
+          <div ref={heroCTARef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/contact" data-testid="button-hero-enquire">
-              <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/30 cursor-pointer">
+              <span className="hero-cta inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-9 py-4 text-[10px] font-bold tracking-[0.2em] uppercase transition-all shadow-lg shadow-[#C41E3A]/25 cursor-pointer"
+                style={{ fontFamily: "var(--font-inter)" }}>
                 Start Your Project
               </span>
             </Link>
             <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span className="inline-block border border-white/30 hover:border-white bg-white/5 backdrop-blur-sm text-white px-8 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
-                Explore Projects
+              <span className="hero-cta inline-flex items-center gap-2 border border-white/25 hover:border-white bg-transparent text-white px-9 py-4 text-[10px] font-bold tracking-[0.2em] uppercase transition-all cursor-pointer"
+                style={{ fontFamily: "var(--font-inter)" }}>
+                Explore Projects <ArrowRight size={12} />
               </span>
             </Link>
           </div>
         </div>
 
+        {/* Slide dots */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10">
-          <button onClick={() => setSlide(p => (p - 1 + heroSlides.length) % heroSlides.length)} className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/50 hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors rounded-sm" data-testid="button-slide-prev">
+          <button onClick={() => setSlide(p => (p - 1 + heroSlides.length) % heroSlides.length)}
+            className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/40 hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors"
+            data-testid="button-slide-prev">
             <ChevronLeft size={14} />
           </button>
           {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => setSlide(i)} className={`h-1 rounded-full transition-all ${i === slide ? "w-8 bg-[#C41E3A]" : "w-3 bg-white/30"}`} data-testid={`button-slide-${i}`} />
+            <button key={i} onClick={() => setSlide(i)}
+              className={`h-px rounded-none transition-all ${i === slide ? "w-10 bg-[#C41E3A]" : "w-4 bg-white/25"}`}
+              data-testid={`button-slide-${i}`} />
           ))}
-          <button onClick={() => setSlide(p => (p + 1) % heroSlides.length)} className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/50 hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors rounded-sm" data-testid="button-slide-next">
+          <button onClick={() => setSlide(p => (p + 1) % heroSlides.length)}
+            className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/40 hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors"
+            data-testid="button-slide-next">
             <ChevronRight size={14} />
           </button>
         </div>
       </section>
 
-      {/* CERTIFICATION TICKER */}
-      <section className="bg-mecpl-card border-y border-white/5 py-4 overflow-hidden select-none" data-testid="section-ticker">
+      {/* ══════════ CERTIFICATION TICKER ══════════ */}
+      <section className="border-y py-4 overflow-hidden select-none" style={{ borderColor: "rgba(255,255,255,0.07)", background: "#111" }}
+        data-testid="section-ticker">
         <div className="animate-ticker">
           {[...tickerItems, ...tickerItems].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-6 px-6 text-[10px] font-black uppercase tracking-widest text-white/50 whitespace-nowrap">
+            <span key={i}
+              className="inline-flex items-center gap-5 px-6 whitespace-nowrap"
+              style={{ fontSize: "10px", fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.4)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
               {item}
-              <span className="text-[#C41E3A] text-base">•</span>
+              <span style={{ color: "#C41E3A", fontSize: "14px" }}>·</span>
             </span>
           ))}
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center" data-testid="section-stats">
-        {stats.map((stat) => (
-          <div key={stat.label} className="p-6 border-l-2 border-[#C41E3A] bg-mecpl-card/30 rounded-sm" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
-            <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-            <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider mt-2">{stat.label}</div>
+      {/* ══════════ STATS ══════════ */}
+      <section
+        ref={statsRef}
+        className="py-32 px-6"
+        style={{ background: "#0a0a0a" }}
+        data-testid="section-stats"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Ruler */}
+          <div className="stat-ruler h-px bg-[#C41E3A] w-full mb-20" style={{ transformOrigin: "left center" }} />
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+            {stats.map((stat) => (
+              <div key={stat.label} className="stat-item space-y-3">
+                <div
+                  className="font-bold italic leading-none"
+                  style={{
+                    fontFamily: "var(--font-raleway)",
+                    fontSize: "clamp(3.5rem,6vw,5.5rem)",
+                    color: "#C41E3A",
+                    fontFeatureSettings: '"tnum"',
+                  }}
+                  data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.8)", textTransform: "uppercase" }}>
+                  {stat.label}
+                </div>
+                <div style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase" }}>
+                  {stat.sub}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+
+          <div className="h-px mt-20" style={{ background: "rgba(255,255,255,0.06)" }} />
+        </div>
       </section>
 
-      {/* ABOUT STRIP */}
-      <section className="border-t border-white/5 py-24" data-testid="section-about-strip">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Corporate Profile</span>
-            <h3 className="text-3xl font-black tracking-tight uppercase text-white">
-              A Legacy Of<br />Quality & Commitment
-              </h3>
-            <p className="text-gray-300 leading-relaxed">
-              Millennium Engineers & Contractors Pvt. Ltd. (MECPL) is a Pune-based engineering powerhouse recognized for delivering heavy complex structural projects with absolute safety, premium workmanship, and financial integrity since 1998.
+      {/* ══════════ ABOUT STRIP ══════════ */}
+      <section className="py-28 px-6 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }} data-testid="section-about-strip">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-7" data-animate="fade">
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+              Corporate Profile
+            </span>
+            <h2
+              className="font-bold uppercase leading-tight"
+              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#fff", fontWeight: 700 }}
+            >
+              A Legacy Of<br />
+              <span className="italic" style={{ color: "#C41E3A" }}>Quality &amp; Commitment</span>
+            </h2>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "14px", lineHeight: 1.8, color: "rgba(255,255,255,0.5)" }}>
+              Millennium Engineers &amp; Contractors Pvt. Ltd. (MECPL) is a Pune-based engineering powerhouse
+              recognized for delivering heavy complex structural projects with absolute safety, premium
+              workmanship, and financial integrity since 1998.
             </p>
-            <div className="grid grid-cols-3 gap-4 pt-2">
+            <div className="grid grid-cols-3 gap-4">
               {["ISO 9001", "ISO 14001", "ISO 45001"].map(cert => (
-                <div key={cert} className="p-4 bg-mecpl-card rounded-sm border border-white/5 text-center">
-                  <div className="text-[#C41E3A] text-lg mb-1">✓</div>
-                  <div className="text-[10px] font-bold uppercase text-gray-400 tracking-wider">{cert}</div>
+                <div key={cert} className="p-4 text-center border" style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(196,30,58,0.05)" }}>
+                  <div style={{ color: "#C41E3A", fontSize: "18px", marginBottom: "6px" }}>✓</div>
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.15em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>{cert}</div>
                 </div>
               ))}
             </div>
             <Link href="/about" data-testid="button-about-strip">
-              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer">
-                Read Corporate Profile <ArrowRight size={14} />
+              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                Read Corporate Profile <ArrowRight size={12} />
               </span>
             </Link>
           </div>
-          <div className="h-96 rounded-sm overflow-hidden relative shadow-2xl border border-white/10">
+          <div className="h-96 overflow-hidden relative" style={{ borderRadius: "1px" }} data-animate="fade">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
-              className="w-full h-full object-cover transition-all duration-500"
+              className="w-full h-full object-cover"
               alt="MECPL structural integrity"
+              style={{ transition: "transform 0.7s ease" }}
+              onMouseEnter={e => gsap.to(e.currentTarget, { scale: 1.05, duration: 0.7 })}
+              onMouseLeave={e => gsap.to(e.currentTarget, { scale: 1, duration: 0.7 })}
             />
+            <div className="absolute bottom-0 left-0 right-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)" }}>
+              <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>
+                Structural Works · Since 1998
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-services">
-        <div className="max-w-7xl mx-auto px-6 space-y-12">
+      {/* ══════════ SERVICES — 3D FLIP CARDS ══════════ */}
+      <section
+        ref={servicesRef}
+        className="py-28 px-6 border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "#0d0d0d" }}
+        data-testid="section-services"
+      >
+        <div className="max-w-7xl mx-auto space-y-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <SectionHeader label="What We Do" title="Our Service Verticals" subtitle="Six specialized service pillars covering the entire construction lifecycle." useH1={false} />
+            <div>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+                What We Do
+              </span>
+              <h2 className="font-bold uppercase leading-tight"
+                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", fontWeight: 700 }}>
+                Our Service<br />
+                <span className="italic" style={{ color: "#C41E3A" }}>Verticals</span>
+              </h2>
+            </div>
             <Link href="/services" data-testid="button-all-services">
-              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer mb-10 flex-shrink-0">
-                All Services <ArrowRight size={14} />
+              <span className="inline-flex items-center gap-2 mb-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                All Services <ArrowRight size={12} />
               </span>
             </Link>
           </div>
+
+          {/* Flip cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, i) => (
               <Link href={svc.path} key={i}>
-                <div className="group bg-mecpl-card border border-white/5 rounded-sm p-7 flex flex-col gap-4 hover:border-[#C41E3A]/40 hover:shadow-xl transition-all duration-300 cursor-pointer h-full" data-testid={`card-service-${i}`}>
-                  <div className="w-10 h-10 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
-                    <svc.icon size={18} className="text-[#C41E3A] group-hover:text-white transition-colors" />
+                <div className="flip-card cursor-pointer" data-testid={`card-service-${i}`}>
+                  <div className="flip-inner">
+                    {/* FRONT — image + title */}
+                    <div className="flip-face">
+                      <img src={svc.image} alt={svc.title} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }} />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <div className="w-9 h-9 flex items-center justify-center mb-3" style={{ background: "rgba(196,30,58,0.15)", border: "1px solid rgba(196,30,58,0.4)" }}>
+                          <svc.icon size={16} style={{ color: "#C41E3A" }} />
+                        </div>
+                        <h3 className="font-bold uppercase"
+                          style={{ fontFamily: "var(--font-raleway)", fontSize: "18px", color: "#fff", letterSpacing: "0.05em" }}>
+                          {svc.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* BACK — description */}
+                    <div className="flip-back">
+                      <div className="w-10 h-10 flex items-center justify-center mb-5" style={{ background: "#C41E3A" }}>
+                        <svc.icon size={18} style={{ color: "#fff" }} />
+                      </div>
+                      <h3 className="font-bold uppercase mb-4"
+                        style={{ fontFamily: "var(--font-raleway)", fontSize: "17px", color: "#fff", letterSpacing: "0.05em" }}>
+                        {svc.title}
+                      </h3>
+                      <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "rgba(255,255,255,0.55)" }}>
+                        {svc.desc}
+                      </p>
+                      <span className="inline-flex items-center gap-2 mt-6"
+                        style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                        Learn More <ArrowRight size={11} />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-base font-black uppercase tracking-tight text-white">{svc.title}</h3>
-                  <p className="text-gray-400 text-xs leading-relaxed flex-1">{svc.desc}</p>
-                  <span className="inline-flex items-center gap-1.5 text-[#C41E3A] text-[10px] font-black tracking-widest uppercase group-hover:gap-3 transition-all">
-                    Learn More <ArrowRight size={11} />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ PROJECTS — HORIZONTAL SCROLL ══════════ */}
+      <section
+        ref={projectsRef}
+        className="h-scroll-section"
+        style={{ background: "#080808" }}
+        data-testid="section-projects"
+      >
+        {/* Header outside track so it's visible */}
+        <div className="absolute top-10 left-8 z-10 pointer-events-none select-none" style={{ width: "400px" }}>
+          <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
+            Showcase
+          </span>
+          <h2 className="font-bold uppercase leading-tight"
+            style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", color: "#fff", fontWeight: 700 }}>
+            Engineering<br />
+            <span className="italic" style={{ color: "#C41E3A" }}>Landmarks</span>
+          </h2>
+          <div className="mt-4 text-xs" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>
+            ← Scroll to explore →
+          </div>
+        </div>
+
+        <div ref={projectsTrackRef} className="h-scroll-track" style={{ height: "100vh" }}>
+          {/* Spacer so first card isn't at edge */}
+          <div style={{ width: "480px", flexShrink: 0 }} />
+
+          {projects.map((proj, i) => (
+            <div
+              key={i}
+              className="h-scroll-card"
+              style={{ width: proj.featured ? "72vw" : "52vw", height: "100vh", marginRight: "24px" }}
+            >
+              <img
+                src={proj.image}
+                alt={proj.name}
+                className="proj-img absolute inset-0 w-full h-full object-cover"
+                style={{ scale: "1.12", transformOrigin: "center" }}
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)" }} />
+              {proj.featured && (
+                <div className="absolute top-8 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
+                  style={{ background: "#C41E3A", color: "#fff", fontFamily: "var(--font-inter)" }}>
+                  Featured
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 right-0 p-10">
+                <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "8px" }}>
+                  {proj.type}
+                </div>
+                <h3 className="font-bold uppercase"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.4rem,2.5vw,2.2rem)", color: "#fff", letterSpacing: "0.03em" }}>
+                  {proj.name}
+                </h3>
+                <div className="flex items-center gap-2 mt-2">
+                  <Clock size={11} style={{ color: "#C41E3A" }} />
+                  <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em" }}>
+                    {proj.location}
                   </span>
                 </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURED PROJECTS */}
-      <section className="max-w-7xl mx-auto px-6 py-16" data-testid="section-projects">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <SectionHeader label="Showcase" title="Engineering Landmarks at Scale" useH1={false} />
-          <Link href="/completed-projects" data-testid="button-all-projects">
-            <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer mb-10 flex-shrink-0">
-              View All Projects <ArrowRight size={14} />
-            </span>
-          </Link>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden shadow-2xl flex flex-col" data-testid="card-featured-project">
-            <div className="h-72 overflow-hidden relative">
-              <img
-                src={`${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                alt="Panchshil Highrise Towers"
-              />
-              <div className="absolute top-4 right-4 bg-[#C41E3A] text-white font-black uppercase text-[9px] tracking-widest px-3 py-1.5 rounded-sm">
-                Featured Landmark
               </div>
             </div>
-            <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
-              <div className="space-y-2">
-                <h3 className="text-2xl font-black uppercase tracking-tight text-white">Panchshil Highrise Towers, Kharadi</h3>
-                <p className="text-[10px] font-bold text-[#C41E3A] uppercase tracking-widest">Scope: Comprehensive Concrete Civil Construction Frame</p>
-                <p className="text-gray-400 text-sm leading-relaxed">Managing intricate deep structural reinforcement frameworks under aggressive real-time milestone constraints cleanly.</p>
-              </div>
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-gray-400">
-                <span className="flex items-center gap-1.5"><Clock size={11} className="text-[#C41E3A]" /> 100% On-Time Handover</span>
-                <Link href="/completed-projects">
-                  <span className="text-white hover:text-[#C41E3A] flex items-center gap-1 cursor-pointer transition-colors">View All <ArrowRight size={10} /></span>
-                </Link>
-              </div>
-            </div>
-          </div>
+          ))}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              { name: "Trump Towers, Pune", desc: "Iconic luxury double-tower architecture using cutting edge performance mix metrics.", type: "Civil Structural Handover" },
-              { name: "Godrej Boulevard, Pune", desc: "Sprawling residential infrastructure with synchronized foundational deployment.", type: "Residential Framework" },
-              { name: "VTP Bel Air, Pune", desc: "High-density multi-tower structural contract completed with uncompromised asset alignment.", type: "Complex Core Works" },
-              { name: "Gera Commerzone, Kharadi", desc: "Advanced commercial glass-and-steel infrastructure mapped precisely to technical layouts.", type: "Commercial Core Infra" },
-            ].map((p, i) => (
-              <div key={i} className="bg-mecpl-card border border-white/5 p-6 rounded-sm flex flex-col justify-between gap-4 shadow-xl hover:border-[#C41E3A]/30 transition-colors" data-testid={`card-small-project-${i}`}>
-                <h4 className="text-base font-bold uppercase text-white tracking-tight border-b border-white/5 pb-3">{p.name}</h4>
-                <p className="text-xs text-gray-400 leading-relaxed flex-1">{p.desc}</p>
-                <span className="text-[9px] font-black uppercase text-[#C41E3A] tracking-widest">{p.type}</span>
+          {/* End card — View all CTA */}
+          <div className="h-scroll-card flex items-center justify-center" style={{ width: "40vw", height: "100vh", background: "#111" }}>
+            <div className="text-center p-10">
+              <div style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.5rem)", color: "rgba(255,255,255,0.08)", fontWeight: 700, lineHeight: 1, marginBottom: "28px", textTransform: "uppercase" }}>
+                150+<br />Projects
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CAREERS LEAD */}
-      <section className="max-w-7xl mx-auto px-6 py-20" data-testid="section-careers-lead">
-        <div className="relative overflow-hidden border border-white/10 bg-mecpl-card rounded-sm p-8 md:p-12">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#C41E3A]/20 via-transparent to-transparent" />
-          <div className="relative grid md:grid-cols-[1.5fr_auto] items-center gap-8">
-            <div className="space-y-4">
-              <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Careers at MECPL</span>
-              <h3 className="text-3xl font-black tracking-tight uppercase text-white">
-                Build the Next Generation of Landmarks
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed max-w-2xl">
-                Great execution comes from great teams. Explore opportunities across engineering, project management, safety, and quality to build your career with MECPL.
-              </p>
-            </div>
-            <div className="flex md:justify-end">
-              <Link href="/careers" data-testid="button-home-careers">
-                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
-                  Explore Careers <ArrowRight size={14} />
+              <Link href="/completed-projects" data-testid="button-all-projects">
+                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(196,30,58,0.3)", padding: "14px 24px" }}>
+                  View All Projects <ArrowRight size={12} />
                 </span>
               </Link>
             </div>
@@ -357,158 +845,312 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WHY CHOOSE MECPL */}
-      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-why-mecpl">
-        <div className="max-w-7xl mx-auto px-6 space-y-12">
-          <SectionHeader label="Our Advantage" title="Why Choose MECPL" center subtitle="Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects." useH1={false} />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* ══════════ CAREERS STRIP ══════════ */}
+      <section className="py-20 px-6 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }} data-testid="section-careers-lead">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative overflow-hidden border p-10 md:p-14" style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.04)" }}>
+            <div className="absolute top-0 left-0 w-1 h-full bg-[#C41E3A]" />
+            <div className="grid md:grid-cols-[1fr_auto] items-center gap-8 pl-4">
+              <div className="space-y-4">
+                <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+                  Careers at MECPL
+                </span>
+                <h2 className="font-bold uppercase"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3vw,2.6rem)", color: "#fff", fontWeight: 700 }}>
+                  Build the Next Generation<br />of Landmarks
+                </h2>
+                <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "rgba(255,255,255,0.45)", maxWidth: "520px" }}>
+                  Great execution comes from great teams. Explore opportunities across engineering, project management, safety, and quality.
+                </p>
+              </div>
+              <Link href="/careers" data-testid="button-home-careers">
+                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 cursor-pointer transition-all"
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                  Explore Careers <ArrowRight size={12} />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ WHY CHOOSE — STAGGERED SCALE REVEAL ══════════ */}
+      <section
+        ref={whyRef}
+        className="py-28 px-6 border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "#0d0d0d" }}
+        data-testid="section-why-mecpl"
+      >
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="text-center">
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+              Our Advantage
+            </span>
+            <h2 className="font-bold uppercase"
+              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#fff", fontWeight: 700 }}>
+              Why Choose{" "}
+              <span className="italic" style={{ color: "#C41E3A" }}>MECPL</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-2xl" style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "rgba(255,255,255,0.4)" }}>
+              Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {whyChoose.map((item, i) => (
-              <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm p-8 space-y-4 hover:border-[#C41E3A]/30 hover:shadow-xl transition-all duration-300" data-testid={`card-why-${i}`}>
-                <div className="w-12 h-12 bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center rounded-sm group-hover:bg-[#C41E3A] transition-colors">
-                  <item.icon size={20} className="text-[#C41E3A] group-hover:text-white transition-colors" />
+              <div
+                key={i}
+                className="why-card group border p-8 space-y-4 transition-all duration-300 cursor-default"
+                style={{ borderColor: "rgba(255,255,255,0.06)", background: "#111" }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = "rgba(196,30,58,0.35)";
+                  el.style.background = "rgba(196,30,58,0.04)";
+                  gsap.to(el, { y: -6, duration: 0.3, ease: "power2.out" });
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = "rgba(255,255,255,0.06)";
+                  el.style.background = "#111";
+                  gsap.to(el, { y: 0, duration: 0.3, ease: "power2.out" });
+                }}
+                data-testid={`card-why-${i}`}
+              >
+                <div className="w-11 h-11 flex items-center justify-center transition-all duration-300"
+                  style={{ background: "rgba(196,30,58,0.1)", border: "1px solid rgba(196,30,58,0.25)" }}>
+                  <item.icon size={20} style={{ color: "#C41E3A" }} />
                 </div>
-                <h3 className="text-base font-black uppercase tracking-tight text-white">{item.title}</h3>
-                <p className="text-gray-400 text-xs leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold uppercase"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "15px", color: "#fff", letterSpacing: "0.05em" }}>
+                  {item.title}
+                </h3>
+                <p style={{ fontFamily: "var(--font-inter)", fontSize: "12px", lineHeight: 1.75, color: "rgba(255,255,255,0.45)" }}>
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
-          <div className="text-center pt-4">
+
+          <div className="text-center">
             <Link href="/contact">
-              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
-                Start Your Project <ArrowRight size={14} />
+              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
+                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                Start Your Project <ArrowRight size={13} />
               </span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* CLIENTS */}
-      <section className="py-24" data-testid="section-clients">
-        <div className="max-w-7xl mx-auto px-6 space-y-14">
-          <SectionHeader label="Ecosystem" title="Clients & Premium Partners" center subtitle="We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises." useH1={false} />
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center text-sm font-black tracking-widest uppercase text-white/30">
-            {clients.map((client, i) => (
-              <div key={i} className="p-6 border border-white/5 rounded-sm hover:text-white hover:border-[#C41E3A] transition-all cursor-default" data-testid={`card-client-${i}`}>
-                {client}
-              </div>
-            ))}
+      {/* ══════════ TESTIMONIALS — WORD SCRUB ══════════ */}
+      <section
+        ref={testimonialsRef}
+        className="py-28 px-6 border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "#0a0a0a" }}
+        data-testid="section-testimonials"
+      >
+        <div className="max-w-5xl mx-auto space-y-20">
+          <div className="text-center">
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+              Client Voices
+            </span>
+            <h2 className="font-bold uppercase"
+              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", fontWeight: 700 }}>
+              What Our{" "}
+              <span className="italic" style={{ color: "#C41E3A" }}>Partners Say</span>
+            </h2>
           </div>
 
-          <div className="w-full h-56 rounded-sm overflow-hidden relative shadow-inner border border-white/5">
-            <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
-              className="w-full h-full object-cover opacity-40"
-              alt="Corporate architecture partners"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Link href="/clients" data-testid="button-all-clients">
-                <span className="bg-[#C41E3A] text-white text-xs font-black tracking-widest uppercase px-8 py-4 rounded-sm hover:bg-red-700 transition-colors cursor-pointer">
-                  View All Clients
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="bg-mecpl-card/50 border-y border-white/5 py-24" data-testid="section-testimonials">
-        <div className="max-w-7xl mx-auto px-6 space-y-12">
-          <SectionHeader label="Client Voices" title="What Our Partners Say" center useH1={false} />
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {testimonials.map((t, i) => (
-                <div
-                  key={i}
-                  className={`transition-all duration-500 ${i === activeTestimonial ? "block" : "hidden"}`}
-                  data-testid={`testimonial-${i}`}
-                >
-                  <div className="bg-mecpl-card border border-white/5 rounded-sm p-10 space-y-6 text-center relative">
-                    <Quote size={32} className="text-[#C41E3A]/30 mx-auto" />
-                    <p className="text-white text-lg leading-relaxed font-medium italic">
-                      "{t.quote}"
-                    </p>
-                    <div className="flex justify-center gap-1">
-                      {Array.from({ length: t.rating }).map((_, j) => (
-                        <Star key={j} size={14} className="text-[#C41E3A] fill-[#C41E3A]" />
-                      ))}
-                    </div>
-                    <div>
-                      <div className="text-white font-black text-sm uppercase tracking-wider">{t.name}</div>
-                      <div className="text-gray-400 text-xs mt-1">{t.title}</div>
-                    </div>
+          {testimonials.map((t, i) => (
+            <div key={i} className="testi-block border-l-2 pl-8" style={{ borderColor: "rgba(196,30,58,0.4)" }}>
+              <Quote size={28} style={{ color: "rgba(196,30,58,0.25)", marginBottom: "20px" }} />
+              <p
+                className="testi-quote font-light italic leading-relaxed mb-8"
+                style={{
+                  fontFamily: "var(--font-raleway)",
+                  fontSize: "clamp(1.1rem,2.2vw,1.5rem)",
+                  color: "#fff",
+                  lineHeight: 1.65,
+                }}
+              >
+                "{t.quote}"
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 flex items-center justify-center" style={{ background: "rgba(196,30,58,0.15)", border: "1px solid rgba(196,30,58,0.3)" }}>
+                  <span style={{ color: "#C41E3A", fontSize: "16px" }}>★</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "12px", fontWeight: 600, color: "#fff", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                    {t.name}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "10px", color: "rgba(255,255,255,0.35)", marginTop: "3px", letterSpacing: "0.1em" }}>
+                    {t.role}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-            {/* Testimonial dots */}
-            <div className="flex justify-center gap-3 mt-8">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTestimonial(i)}
-                  className={`h-1.5 rounded-full transition-all ${i === activeTestimonial ? "w-8 bg-[#C41E3A]" : "w-3 bg-white/20"}`}
-                  data-testid={`button-testimonial-${i}`}
-                />
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* AWARDS STRIP */}
-      <section className="max-w-7xl mx-auto px-6 py-20" data-testid="section-awards-strip">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
-          <div className="lg:w-1/3 space-y-6">
-            <SectionHeader label="Recognition" title="Award-Winning Excellence" useH1={false} />
-            <p className="text-gray-400 text-sm leading-relaxed">
-              20+ years of consecutive industry awards for structural quality, safety leadership, and on-time delivery.
-            </p>
-            <Link href="/awards" data-testid="button-awards-more">
-              <span className="inline-flex items-center gap-2 text-[#C41E3A] text-xs font-black tracking-widest uppercase hover:gap-4 transition-all cursor-pointer">
-                Full Awards History <ArrowRight size={14} />
-              </span>
-            </Link>
+      {/* ══════════ CLIENTS — DOUBLE TICKER ══════════ */}
+      <section
+        ref={clientsRef}
+        className="py-28 px-6 border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "#0d0d0d" }}
+        data-testid="section-clients"
+      >
+        <div className="max-w-7xl mx-auto space-y-14">
+          <div className="text-center">
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+              Ecosystem
+            </span>
+            <h2 className="font-bold uppercase"
+              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", fontWeight: 700 }}>
+              Clients &amp;{" "}
+              <span className="italic" style={{ color: "#C41E3A" }}>Premium Partners</span>
+            </h2>
           </div>
-          <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {[
-              { year: "2023", award: "BAI Special Jury", icon: "🏆" },
-              { year: "2022", award: "Constro Silver Trophy", icon: "🥈" },
-              { year: "2021", award: "Constro Gold Trophy", icon: "🥇" },
-              { year: "2018", award: "Industry Excellence Gold", icon: "⭐" },
-              { year: "2017", award: "India's Small Giants", icon: "🏅" },
-              { year: "2007", award: "BAI First Prize", icon: "🎖" },
-            ].map((a) => (
-              <div key={a.year} className="p-5 bg-mecpl-card border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-colors text-center" data-testid={`card-award-${a.year}`}>
-                <div className="text-2xl mb-2">{a.icon}</div>
-                <div className="text-[#C41E3A] font-black text-lg">{a.year}</div>
-                <div className="text-white/50 text-[10px] uppercase tracking-wide mt-1 font-bold">{a.award}</div>
+
+          {/* Client boxes grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {clients.map((c, i) => (
+              <div key={i}
+                className="client-box p-6 text-center border cursor-default transition-all duration-300"
+                style={{ borderColor: "rgba(255,255,255,0.06)", fontFamily: "var(--font-raleway)", fontSize: "12px", fontWeight: 700, letterSpacing: "0.15em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase" }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = "rgba(196,30,58,0.5)";
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.background = "rgba(196,30,58,0.05)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.color = "rgba(255,255,255,0.3)";
+                  e.currentTarget.style.background = "transparent";
+                }}
+                data-testid={`card-client-${i}`}
+              >
+                {c}
               </div>
             ))}
           </div>
+
+          {/* Double ticker */}
+          <div className="space-y-3 overflow-hidden border-y py-5" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+            <div className="animate-ticker overflow-hidden">
+              {[...clients, ...clients, ...clients].map((c, i) => (
+                <span key={i}
+                  className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>
+                  {c}
+                  <span style={{ color: "#C41E3A" }}>◆</span>
+                </span>
+              ))}
+            </div>
+            <div className="h-px" style={{ background: "linear-gradient(to right, transparent, rgba(196,30,58,0.3), transparent)" }} />
+            <div className="animate-ticker-rev overflow-hidden">
+              {[...clients, ...clients, ...clients].map((c, i) => (
+                <span key={i}
+                  className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>
+                  {c}
+                  <span style={{ color: "rgba(196,30,58,0.4)" }}>◆</span>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link href="/clients" data-testid="button-all-clients">
+              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                View All Clients <ArrowRight size={12} />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* CTA ENQUIRY — Project Intake Section */}
-      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black" data-testid="section-cta">
-        <div className="flex items-center justify-center py-20">
-          <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
-            <h3 className="text-3xl font-black tracking-tighter uppercase text-white">
-              Let's Build Something<br />Extraordinary Together
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-              Transmit your structural blueprints or enterprise construction specifications directly. Our central operations team will analyze your requirements immediately.
+      {/* ══════════ AWARDS STRIP ══════════ */}
+      <section className="py-28 px-6 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }} data-testid="section-awards-strip">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3 space-y-6" data-animate="fade">
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+                Recognition
+              </span>
+              <h2 className="font-bold uppercase"
+                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3vw,2.5rem)", color: "#fff", fontWeight: 700 }}>
+                Award-Winning<br />
+                <span className="italic" style={{ color: "#C41E3A" }}>Excellence</span>
+              </h2>
+              <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "rgba(255,255,255,0.4)" }}>
+                20+ consecutive industry awards for structural quality, safety leadership, and on-time delivery.
+              </p>
+              <Link href="/awards" data-testid="button-awards-more">
+                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                  Full Awards History <ArrowRight size={12} />
+                </span>
+              </Link>
+            </div>
+            <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                { year: "2023", award: "BAI Special Jury" },
+                { year: "2022", award: "Constro Silver Trophy" },
+                { year: "2021", award: "Constro Gold Trophy" },
+                { year: "2018", award: "Industry Excellence Gold" },
+                { year: "2017", award: "India's Small Giants" },
+                { year: "2007", award: "BAI First Prize" },
+              ].map(a => (
+                <div key={a.year}
+                  className="p-6 border text-center transition-all duration-300 cursor-default"
+                  style={{ borderColor: "rgba(255,255,255,0.06)", background: "#111" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(196,30,58,0.3)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; }}
+                  data-testid={`card-award-${a.year}`}
+                >
+                  <Award size={20} style={{ color: "#C41E3A", margin: "0 auto 10px" }} />
+                  <div style={{ fontFamily: "var(--font-raleway)", fontSize: "22px", fontWeight: 700, color: "#C41E3A" }}>{a.year}</div>
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.12em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginTop: "6px" }}>{a.award}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ CTA ══════════ */}
+      <section
+        className="border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "linear-gradient(to bottom, #0a0a0a, #000)" }}
+        data-testid="section-cta"
+      >
+        <div className="flex items-center justify-center py-28 px-6">
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <div className="h-px w-16 mx-auto" style={{ background: "#C41E3A" }} />
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+              Project Intake
+            </span>
+            <h2 className="font-bold uppercase"
+              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2.2rem,5vw,4rem)", color: "#fff", fontWeight: 700, lineHeight: 1.1 }}>
+              Let's Build Something<br />
+              <span className="italic" style={{ color: "#C41E3A" }}>Extraordinary</span>
+            </h2>
+            <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.8, color: "rgba(255,255,255,0.4)", maxWidth: "480px", margin: "0 auto" }}>
+              Transmit your structural blueprints or enterprise construction specifications directly.
+              Our central operations team will analyze your requirements immediately.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" data-testid="button-cta-enquire">
-                <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 cursor-pointer">
-                  Enquire Now
+                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                  Enquire Now <ArrowRight size={12} />
                 </span>
               </Link>
               <Link href="/completed-projects" data-testid="button-cta-projects">
-                <span className="inline-block border border-white/20 hover:border-white text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
+                <span className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-10 py-4 cursor-pointer transition-all"
+                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
                   View Portfolio
                 </span>
               </Link>
@@ -517,7 +1159,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
