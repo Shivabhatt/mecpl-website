@@ -10,10 +10,6 @@ export default function Footer() {
             <div className="flex-shrink-0">
               <img src="/assets/logo/mecpl-logo.png" alt="MECPL logo" className="h-12 w-auto object-contain" />
             </div>
-            <div>
-              <div className="text-white font-black text-lg tracking-tighter">MECPL</div>
-              <div className="text-white/60 text-[8px] font-bold tracking-widest uppercase">Millennium Engineers</div>
-            </div>
           </div>
           <p className="text-gray-500 text-xs leading-relaxed">
             Pune's premier civil engineering contractor delivering landmark structures since 1998. ISO certified, CRISIL SME 1 rated.

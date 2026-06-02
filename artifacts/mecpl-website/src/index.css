@@ -58,19 +58,18 @@
   --ring: 352 73% 43%;
   --app-font-sans: 'Montserrat', sans-serif;
   --radius: 0.125rem;
-  --mecpl-dark: #ffffff;
+  --mecpl-dark: #111827;
   --mecpl-card: #ffffff;
   --mecpl-red: #c41e3a;
   --mecpl-text: #111827;
   --mecpl-text-muted: #4b5563;
 
-  /* Premium typography vars */
   --font-raleway: 'Raleway', sans-serif;
   --font-inter: 'Inter', sans-serif;
 }
 
 html[data-theme="light"] {
-  --mecpl-dark: #ffffff;
+  --mecpl-dark: #111827;
   --mecpl-card: #ffffff;
   --mecpl-text: #111827;
   --mecpl-text-muted: #4b5563;
@@ -80,15 +79,13 @@ html[data-theme="light"] {
   * { @apply border-border box-border; }
   html { scroll-behavior: smooth; }
   body {
-    background-color: var(--mecpl-card);
+    background-color: #ffffff;
     background-image: none;
-    color: var(--mecpl-text);
+    color: #111827;
     font-family: 'Montserrat', sans-serif;
     @apply antialiased overflow-x-hidden;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-  }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
   h3 { font-weight: 300 !important; }
   h1 { font-weight: 300 !important; }
 }
@@ -96,8 +93,6 @@ html[data-theme="light"] {
 .bg-mecpl-dark,
 [class*="bg-mecpl-dark"] {
   background-color: var(--mecpl-dark) !important;
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
 }
 
 .bg-mecpl-card,
@@ -105,21 +100,9 @@ html[data-theme="light"] {
   background-color: var(--mecpl-card) !important;
   border-color: rgba(17,24,39,0.08) !important;
   box-shadow: inset 0 0 0.75px rgba(17,24,39,0.04), 0 24px 70px rgba(17,24,39,0.06);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-}
-
-[class*="bg-mecpl-card/"] {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-}
-
-nav .bg-mecpl-card,
-nav [class*="bg-mecpl-card"] {
-  border-color: rgba(17,24,39,0.08) !important;
 }
 
 @layer utilities {
-  /* Forward ticker */
   @keyframes ticker {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -131,7 +114,6 @@ nav [class*="bg-mecpl-card"] {
   }
   .animate-ticker:hover { animation-play-state: paused; }
 
-  /* Reverse ticker */
   @keyframes ticker-rev {
     0%   { transform: translateX(-50%); }
     100% { transform: translateX(0); }
@@ -143,66 +125,27 @@ nav [class*="bg-mecpl-card"] {
   }
   .animate-ticker-rev:hover { animation-play-state: paused; }
 
-  /* Line draw */
-  @keyframes line-draw {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
-
-  /* Pulse glow */
   @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(196, 30, 58, 0.3); }
-    50%       { box-shadow: 0 0 40px rgba(196, 30, 58, 0.7); }
+    0%, 100% { box-shadow: 0 0 20px rgba(196,30,58,0.3); }
+    50%       { box-shadow: 0 0 40px rgba(196,30,58,0.7); }
   }
 }
 
-/* ============================================================
-   HOMEPAGE DARK PREMIUM OVERRIDES
-   Applied via .hp-root on the homepage root div only.
-   Does NOT affect any other page.
-   ============================================================ */
-.hp-root {
-  background-color: #0a0a0a !important;
-  color: #f0f0f0;
+/* ── Preloader: always dark ── */
+.preloader-force-text {
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
-.hp-root .bg-mecpl-dark,
-.hp-root [class*="bg-mecpl-dark"] {
-  background-color: #0a0a0a !important;
-  border-color: rgba(255,255,255,0.06) !important;
-  box-shadow: none;
-}
-
-.hp-root .bg-mecpl-card,
-.hp-root [class*="bg-mecpl-card"] {
-  background-color: #141414 !important;
-  border-color: rgba(255,255,255,0.06) !important;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-}
-
-.hp-root [class*="bg-mecpl-card/"] {
-  background-color: rgba(20, 20, 20, 0.95) !important;
-}
-
-.hp-root .text-white     { color: #f0f0f0 !important; }
-.hp-root .text-gray-400  { color: rgba(255,255,255,0.5) !important; }
-.hp-root .text-gray-300  { color: rgba(255,255,255,0.6) !important; }
-.hp-root .bg-black       { background-color: #0a0a0a !important; }
-.hp-root .border-white\/5  { border-color: rgba(255,255,255,0.06) !important; }
-.hp-root .border-white\/10 { border-color: rgba(255,255,255,0.10) !important; }
-
-/* SplitText helpers */
+/* ── SplitText helpers ── */
 .hp-word { overflow: hidden; display: inline-block; vertical-align: bottom; }
 .hp-char { display: inline-block; }
 
-/* ============================================================
-   3D FLIP CARDS (service section)
-   ============================================================ */
+/* ── 3-D Flip Cards ── */
 .flip-card {
   perspective: 1200px;
   height: 400px;
 }
-
 .flip-inner {
   position: relative;
   width: 100%;
@@ -211,10 +154,7 @@ nav [class*="bg-mecpl-card"] {
   will-change: transform;
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.flip-card:hover .flip-inner {
-  transform: rotateY(180deg);
-}
+.flip-card:hover .flip-inner { transform: rotateY(180deg); }
 
 .flip-face {
   position: absolute;
@@ -224,73 +164,33 @@ nav [class*="bg-mecpl-card"] {
   border-radius: 2px;
   overflow: hidden;
 }
-
 .flip-back {
+  position: absolute;
+  inset: 0;
   transform: rotateY(180deg);
-  background: #141414;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #111827;
   border: 1px solid rgba(255,255,255,0.06);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
+  border-radius: 2px;
 }
 
-/* ============================================================
-   HORIZONTAL SCROLL TRACK
-   ============================================================ */
-.h-scroll-section {
-  overflow: hidden;
-  position: relative;
-}
-.h-scroll-track {
-  display: flex;
-  will-change: transform;
-}
-.h-scroll-card {
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
+/* ── Horizontal Scroll ── */
+.h-scroll-section { overflow: hidden; position: relative; }
+.h-scroll-track   { display: flex; will-change: transform; }
+.h-scroll-card    { flex-shrink: 0; position: relative; overflow: hidden; }
 
-/* ============================================================
-   STAT LINE DRAW
-   ============================================================ */
-.stat-ruler {
-  transform-origin: left center;
-}
+/* ── Stat ruler ── */
+.stat-ruler { transform-origin: left center; }
 
-/* ============================================================
-   LIGHT THEME OVERRIDES (non-homepage pages)
-   ============================================================ */
-html[data-theme="light"] .bg-black { background-color: #ffffff !important; }
-/* Preloader must stay black regardless of theme */
-html[data-theme="light"] .preloader-force-text { background-color: #000000 !important; color: #ffffff !important; }
-html[data-theme="light"] .text-white     { color: #111827 !important; }
-html[data-theme="light"] .text-white\/80 { color: rgba(17,24,39,0.80) !important; }
-html[data-theme="light"] .text-white\/70 { color: rgba(17,24,39,0.70) !important; }
-html[data-theme="light"] .text-white\/60 { color: rgba(17,24,39,0.60) !important; }
-html[data-theme="light"] .text-white\/50 { color: rgba(17,24,39,0.50) !important; }
-html[data-theme="light"] .text-white\/40 { color: rgba(17,24,39,0.40) !important; }
-html[data-theme="light"] .text-white\/30 { color: rgba(17,24,39,0.30) !important; }
-html[data-theme="light"] .text-gray-400  { color: #4b5563 !important; }
-html[data-theme="light"] .text-gray-300  { color: #4b5563 !important; }
-html[data-theme="light"] .text-gray-500  { color: #4b5563 !important; }
-html[data-theme="light"] .bg-mecpl-dark .text-white,
-html[data-theme="light"] [class*="bg-mecpl-dark"] .text-white { color: #111827 !important; }
-html[data-theme="light"] .bg-mecpl-card .text-white,
-html[data-theme="light"] [class*="bg-mecpl-card"] .text-white,
-html[data-theme="light"] .bg-white .text-white { color: #111827 !important; }
-html[data-theme="light"] [class*="bg-[#C41E3A]"].text-white,
-html[data-theme="light"] [class*="bg-[#ab1831]"].text-white,
-html[data-theme="light"] [class*="bg-red-700"].text-white { color: #ffffff !important; }
-html[data-theme="light"] [class*="bg-[#C41E3A]"] .text-white { color: #ffffff !important; }
-html[data-theme="light"] .border-white\/5  { border-color: rgba(0,0,0,0.08) !important; }
-html[data-theme="light"] .border-white\/10 { border-color: rgba(0,0,0,0.12) !important; }
-html[data-theme="light"] .border-white\/20 { border-color: rgba(0,0,0,0.20) !important; }
-html[data-theme="light"] .border-white\/30 { border-color: rgba(0,0,0,0.25) !important; }
-html[data-theme="light"] .bg-white\/5  { background-color: rgba(0,0,0,0.04) !important; }
-html[data-theme="light"] .bg-white\/10 { background-color: rgba(0,0,0,0.07) !important; }
-html[data-theme="light"] .to-black { --tw-gradient-to: #e0ddd7 var(--tw-gradient-to-position) !important; }
+/* ── Bento gallery cells ── */
+.bento-cell { overflow: hidden; }
+
+/* ── Light-theme form inputs ── */
 html[data-theme="light"] input,
 html[data-theme="light"] textarea,
 html[data-theme="light"] select {
@@ -298,73 +198,5 @@ html[data-theme="light"] select {
   color: #1a1a1a !important;
   border-color: rgba(0,0,0,0.15) !important;
 }
-html[data-theme="light"] nav .border { border-color: rgba(0,0,0,0.10) !important; }
-html[data-theme="light"] .bg-mecpl-dark,
-html[data-theme="light"] [class*="bg-mecpl-dark"] {
-  background-color: #ffffff !important;
-  border-color: rgba(17,24,39,0.08) !important;
-  box-shadow: inset 0 0 0.75px rgba(17,24,39,0.04), 0 24px 70px rgba(17,24,39,0.06);
-}
-html[data-theme="light"] .bg-mecpl-card,
-html[data-theme="light"] [class*="bg-mecpl-card"] {
-  background-color: #ffffff !important;
-  border-color: rgba(17,24,39,0.08) !important;
-  box-shadow: inset 0 0 0.75px rgba(17,24,39,0.04), 0 24px 70px rgba(17,24,39,0.06);
-}
-html[data-theme="light"] #abt2 .slide h3,
-html[data-theme="light"] #abt2 .slide p,
-html[data-theme="light"] #abt2 .slide .inline-flex span,
-html[data-theme="light"] #abt2 .list li { color: #111827 !important; text-shadow: none; }
-html[data-theme="light"] #abt2 .slide::before {
-  background: linear-gradient(to top, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.1) 70%) !important;
-}
-html[data-theme="light"] [class*="bg-mecpl-card/"] { background-color: rgba(255,255,255,1) !important; }
 
-/* Helpers */
 .opacity-15 { opacity: 0.15 !important; }
-
-/* ============================================================
-   HOMEPAGE — force dark palette over html[data-theme="light"]
-   These rules need specificity > html[data-theme="light"] .foo (score 21)
-   We use html[data-theme="light"] .hp-root .foo (score 31) to win.
-   ============================================================ */
-html[data-theme="light"] .hp-root { background-color: #0a0a0a !important; color: #f0f0f0 !important; }
-
-html[data-theme="light"] .hp-root .text-white     { color: #f0f0f0 !important; }
-html[data-theme="light"] .hp-root .text-white\/80 { color: rgba(240,240,240,0.80) !important; }
-html[data-theme="light"] .hp-root .text-white\/70 { color: rgba(240,240,240,0.70) !important; }
-html[data-theme="light"] .hp-root .text-white\/60 { color: rgba(240,240,240,0.60) !important; }
-html[data-theme="light"] .hp-root .text-white\/50 { color: rgba(240,240,240,0.50) !important; }
-html[data-theme="light"] .hp-root .text-white\/40 { color: rgba(240,240,240,0.40) !important; }
-html[data-theme="light"] .hp-root .text-white\/30 { color: rgba(240,240,240,0.30) !important; }
-html[data-theme="light"] .hp-root .text-gray-400  { color: rgba(255,255,255,0.45) !important; }
-html[data-theme="light"] .hp-root .text-gray-300  { color: rgba(255,255,255,0.55) !important; }
-html[data-theme="light"] .hp-root .text-gray-500  { color: rgba(255,255,255,0.35) !important; }
-
-html[data-theme="light"] .hp-root .border-white\/5   { border-color: rgba(255,255,255,0.06) !important; }
-html[data-theme="light"] .hp-root .border-white\/10  { border-color: rgba(255,255,255,0.10) !important; }
-html[data-theme="light"] .hp-root .border-white\/20  { border-color: rgba(255,255,255,0.20) !important; }
-html[data-theme="light"] .hp-root .border-white\/25  { border-color: rgba(255,255,255,0.25) !important; }
-html[data-theme="light"] .hp-root .border-white\/30  { border-color: rgba(255,255,255,0.30) !important; }
-
-html[data-theme="light"] .hp-root .bg-white\/5   { background-color: rgba(255,255,255,0.05) !important; }
-html[data-theme="light"] .hp-root .bg-white\/10  { background-color: rgba(255,255,255,0.08) !important; }
-html[data-theme="light"] .hp-root .bg-black      { background-color: #0a0a0a !important; }
-html[data-theme="light"] .hp-root .to-black      { --tw-gradient-to: #000 var(--tw-gradient-to-position) !important; }
-
-/* Red buttons inside hp-root must keep white text */
-html[data-theme="light"] .hp-root [class*="bg-[#C41E3A]"] { color: #ffffff !important; }
-html[data-theme="light"] .hp-root [class*="bg-[#C41E3A]"] .text-white { color: #ffffff !important; }
-html[data-theme="light"] .hp-root [class*="bg-red-700"] { color: #ffffff !important; }
-
-/* bg-mecpl-card / bg-mecpl-dark inside hp-root stay dark */
-html[data-theme="light"] .hp-root .bg-mecpl-dark,
-html[data-theme="light"] .hp-root [class*="bg-mecpl-dark"] { background-color: #0a0a0a !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: none !important; }
-html[data-theme="light"] .hp-root .bg-mecpl-card,
-html[data-theme="light"] .hp-root [class*="bg-mecpl-card"] { background-color: #141414 !important; border-color: rgba(255,255,255,0.06) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important; }
-html[data-theme="light"] .hp-root [class*="bg-mecpl-card/"] { background-color: rgba(20,20,20,0.95) !important; }
-
-/* gradient overlays: from-black/60 etc. stay dark */
-html[data-theme="light"] .hp-root .from-black\/60 { --tw-gradient-from: rgba(0,0,0,0.6) var(--tw-gradient-from-position) !important; }
-html[data-theme="light"] .hp-root .via-black\/30  { --tw-gradient-via: rgba(0,0,0,0.3) var(--tw-gradient-via-position) !important; }
-html[data-theme="light"] .hp-root .to-black\/80   { --tw-gradient-to: rgba(0,0,0,0.8) var(--tw-gradient-to-position) !important; }
