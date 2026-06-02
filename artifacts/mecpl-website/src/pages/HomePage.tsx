@@ -215,145 +215,161 @@ export default function HomePage() {
     return () => clearInterval(t);
   }, []);
 
-  /* ── HERO: SplitText chars reveal + tag/sub/cta stagger + bg parallax */
+  /* ── HERO: bGRdvMy SplitText chars reveal + tag/sub/cta stagger + bg parallax */
   useEffect(() => {
     const headline = heroHeadlineRef.current;
     const heroBg   = heroBgRef.current;
     const section  = heroSectionRef.current;
     if (!headline || !heroBg || !section) return;
 
-    const ctx = gsap.context(() => {
-      const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
-      const splits: SplitText[] = [];
+    const mm = gsap.matchMedia();
+    mm.add({
+      "(prefers-reduced-motion: no-preference)": () => {
+        const ctx = gsap.context(() => {
+          const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
+          const splits: SplitText[] = [];
 
-      lines.forEach((line, i) => {
-        const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
-        splits.push(split);
-        gsap.from(split.chars, {
-          yPercent: 115,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.022,
-          ease: "power4.out",
-          delay: 0.35 + i * 0.18,
+          lines.forEach((line, i) => {
+            const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
+            splits.push(split);
+            gsap.from(split.chars, {
+              yPercent: 115,
+              opacity: 0,
+              duration: 1.2,
+              stagger: 0.022,
+              ease: "power4.out",
+              delay: 0.35 + i * 0.18,
+            });
+          });
+
+          const tagEl = heroTagRef.current;
+          if (tagEl) {
+            gsap.from(tagEl, { opacity: 0, y: 16, duration: 0.9, delay: 0.2, ease: "power3.out" });
+          }
+          const subEl = heroSubRef.current;
+          if (subEl) {
+            gsap.from(subEl, { opacity: 0, y: 20, duration: 0.9, delay: 1.05, ease: "power3.out" });
+          }
+          const ctaEl = heroCTARef.current;
+          if (ctaEl && ctaEl.children.length > 0) {
+            gsap.from(Array.from(ctaEl.children), {
+              opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.25, ease: "power3.out",
+            });
+          }
+
+          gsap.to(heroBg, {
+            yPercent: 28,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+
+          return () => splits.forEach(s => s.revert());
         });
-      });
 
-      /* tag */
-      const tagEl = heroTagRef.current;
-      if (tagEl) {
-        gsap.from(tagEl, { opacity: 0, y: 16, duration: 0.9, delay: 0.2, ease: "power3.out" });
-      }
-      /* sub */
-      const subEl = heroSubRef.current;
-      if (subEl) {
-        gsap.from(subEl, { opacity: 0, y: 20, duration: 0.9, delay: 1.05, ease: "power3.out" });
-      }
-      /* CTAs */
-      const ctaEl = heroCTARef.current;
-      if (ctaEl && ctaEl.children.length > 0) {
-        gsap.from(Array.from(ctaEl.children), {
-          opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.25, ease: "power3.out",
-        });
-      }
-
-      /* bg parallax */
-      gsap.to(heroBg, {
-        yPercent: 28,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      return () => splits.forEach(s => s.revert());
+        return () => ctx.revert();
+      },
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
-  /* ── STATS: section entry stagger + line draw */
+  /* ── STATS: pinned full-screen sequence + SplitText char reveal on numerals */
   useEffect(() => {
     const sec = statsRef.current;
     if (!sec) return;
 
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(".stat-item", sec);
-      const ruler = sec.querySelector<HTMLElement>(".stat-ruler");
+    const mm = gsap.matchMedia();
+    mm.add({
+      "(prefers-reduced-motion: no-preference)": () => {
+        const ruler = sec.querySelector<HTMLElement>(".stat-ruler");
+        const items = gsap.utils.toArray<HTMLElement>(".stat-item", sec);
+        const splits: SplitText[] = [];
 
-      if (ruler) {
-        gsap.from(ruler, {
-          scaleX: 0,
-          transformOrigin: "left center",
-          duration: 1.4,
-          ease: "power3.out",
-          scrollTrigger: { trigger: sec, start: "top 75%", toggleActions: "play none none none" },
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sec,
+            start: "top top",
+            end: "+=900",
+            pin: true,
+            scrub: 1.5,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
         });
-      }
 
-      items.forEach((item, i) => {
-        gsap.from(item, {
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          delay: i * 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
+        if (ruler) {
+          gsap.set(ruler, { scaleX: 0, transformOrigin: "left center" });
+          tl.to(ruler, { scaleX: 1, duration: 1, ease: "power3.out" });
+        }
+
+        items.forEach((item, i) => {
+          const numEl = item.querySelector<HTMLElement>(".stat-num");
+          gsap.set(item, { opacity: 0, y: 50 });
+
+          if (numEl) {
+            const split = new SplitText(numEl, { type: "chars", charsClass: "inline-block" });
+            splits.push(split);
+            gsap.set(split.chars, { yPercent: 110 });
+
+            tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45)
+              .to(split.chars, { yPercent: 0, duration: 0.7, stagger: 0.04, ease: "power4.out" }, "<0.05");
+          } else {
+            tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45);
+          }
         });
-      });
-    }, sec);
 
-    return () => ctx.revert();
+        return () => { splits.forEach(s => s.revert()); };
+      },
+    });
+
+    return () => mm.revert();
   }, []);
 
-  /* ── SERVICES: scroll-triggered entry + hover tilt via separate wrapper */
+  /* ── SERVICES: vYMzKZx scroll-driven rotateY flip-in per card */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
 
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".flip-card", sec);
+    const mm = gsap.matchMedia();
+    mm.add({
+      "(prefers-reduced-motion: no-preference)": () => {
+        const ctx = gsap.context(() => {
+          const cards = gsap.utils.toArray<HTMLElement>(".flip-card", sec);
 
-      cards.forEach((card, i) => {
-        /* slide-in from below on scroll enter */
-        gsap.from(card, {
-          y: 60,
-          opacity: 0,
-          duration: 0.9,
-          delay: (i % 3) * 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        });
+          cards.forEach((card, i) => {
+            const inner = card.querySelector<HTMLElement>(".flip-inner");
+            if (!inner) return;
 
-        /* 3D hover tilt using a data-tilt wrapper (separate from flip-inner) */
-        const tiltEl = card.querySelector<HTMLElement>(".flip-tilt");
-        if (!tiltEl) return;
+            /* Set initial state: rotated 90° away, invisible */
+            gsap.set(inner, { rotationY: -90, opacity: 0, transformOrigin: "left center" });
 
-        const xTo = gsap.quickTo(tiltEl, "rotationY", { duration: 0.4, ease: "power2.out" });
-        const yTo = gsap.quickTo(tiltEl, "rotationX", { duration: 0.4, ease: "power2.out" });
+            /* Scroll triggers the rotateY flip-in; clearProps lets CSS hover take over */
+            gsap.to(inner, {
+              rotationY: 0,
+              opacity: 1,
+              duration: 1.1,
+              delay: (i % 3) * 0.13,
+              ease: "power3.out",
+              clearProps: "transform",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                toggleActions: "play none none none",
+              },
+            });
+          });
+        }, sec);
 
-        const onMove = (e: MouseEvent) => {
-          const rect = card.getBoundingClientRect();
-          const nx = ((e.clientX - rect.left) / rect.width  - 0.5) * 12;
-          const ny = ((e.clientY - rect.top)  / rect.height - 0.5) * -8;
-          xTo(nx);
-          yTo(ny);
-        };
-        const onLeave = () => { xTo(0); yTo(0); };
+        return () => ctx.revert();
+      },
+    });
 
-        card.addEventListener("mousemove", onMove);
-        card.addEventListener("mouseleave", onLeave);
-      });
-    }, sec);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   /* ── PROJECTS: horizontal scroll panel (RwKwLWK style) */
@@ -369,6 +385,7 @@ export default function HomePage() {
         x: getAmt,
         ease: "none",
         scrollTrigger: {
+          id: "proj-scroll",
           trigger: container,
           start: "top top",
           end: () => `+=${Math.abs(getAmt())}`,
@@ -399,31 +416,38 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── WHY CHOOSE: staggered scale-in (oNjgEjm style) */
+  /* ── WHY CHOOSE: oNjgEjm pinned sequential reveal — cards appear one-by-one while section is pinned */
   useEffect(() => {
     const sec = whyRef.current;
     if (!sec) return;
 
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".why-card", sec);
-      cards.forEach((card, i) => {
-        gsap.from(card, {
-          scale: 0.88,
-          opacity: 0,
-          y: 50,
-          duration: 0.85,
-          delay: i * 0.08,
-          ease: "power3.out",
+    const mm = gsap.matchMedia();
+    mm.add({
+      "(prefers-reduced-motion: no-preference)": () => {
+        const cards = gsap.utils.toArray<HTMLElement>(".why-card", sec);
+
+        /* Hide all cards initially; pinned timeline reveals them in sequence */
+        gsap.set(cards, { opacity: 0, y: 60 });
+
+        const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            toggleActions: "play none none none",
+            trigger: sec,
+            start: "top top",
+            end: `+=${cards.length * 180 + 200}`,
+            pin: true,
+            scrub: 1.5,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
           },
         });
-      });
-    }, sec);
 
-    return () => ctx.revert();
+        cards.forEach((card, i) => {
+          tl.to(card, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, i * 0.4);
+        });
+      },
+    });
+
+    return () => mm.revert();
   }, []);
 
   /* ── TESTIMONIALS: SplitText word scrub (bGRdvMy style) */
@@ -431,32 +455,39 @@ export default function HomePage() {
     const sec = testimonialsRef.current;
     if (!sec) return;
 
-    const ctx = gsap.context(() => {
-      const quotes = gsap.utils.toArray<HTMLElement>(".testi-quote", sec);
-      const splits: SplitText[] = [];
+    const mm = gsap.matchMedia();
+    mm.add({
+      "(prefers-reduced-motion: no-preference)": () => {
+        const ctx = gsap.context(() => {
+          const quotes = gsap.utils.toArray<HTMLElement>(".testi-quote", sec);
+          const splits: SplitText[] = [];
 
-      quotes.forEach(q => {
-        const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
-        splits.push(split);
+          quotes.forEach(q => {
+            const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
+            splits.push(split);
 
-        gsap.from(split.words, {
-          opacity: 0.08,
-          duration: 0.1,
-          stagger: { each: 0.06 },
-          ease: "none",
-          scrollTrigger: {
-            trigger: q.closest(".testi-block") as HTMLElement,
-            start: "top 75%",
-            end: "bottom 25%",
-            scrub: 1.2,
-          },
-        });
-      });
+            gsap.from(split.words, {
+              opacity: 0.08,
+              duration: 0.1,
+              stagger: { each: 0.06 },
+              ease: "none",
+              scrollTrigger: {
+                trigger: q.closest(".testi-block") as HTMLElement,
+                start: "top 75%",
+                end: "bottom 25%",
+                scrub: 1.2,
+              },
+            });
+          });
 
-      return () => splits.forEach(s => s.revert());
-    }, sec);
+          return () => splits.forEach(s => s.revert());
+        }, sec);
 
-    return () => ctx.revert();
+        return () => ctx.revert();
+      },
+    });
+
+    return () => mm.revert();
   }, []);
 
   /* ── CLIENTS: section fade-in */
@@ -603,19 +634,19 @@ export default function HomePage() {
       {/* ══════════ STATS ══════════ */}
       <section
         ref={statsRef}
-        className="py-32 px-6"
+        className="min-h-screen flex items-center px-6"
         style={{ background: "#0a0a0a" }}
         data-testid="section-stats"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full py-20">
           {/* Ruler */}
-          <div className="stat-ruler h-px bg-[#C41E3A] w-full mb-20" style={{ transformOrigin: "left center" }} />
+          <div className="stat-ruler h-px w-full mb-20" style={{ background: "#C41E3A", transformOrigin: "left center" }} />
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
             {stats.map((stat) => (
               <div key={stat.label} className="stat-item space-y-3">
                 <div
-                  className="font-bold italic leading-none"
+                  className="font-bold italic leading-none overflow-hidden"
                   style={{
                     fontFamily: "var(--font-raleway)",
                     fontSize: "clamp(3.5rem,6vw,5.5rem)",
@@ -624,7 +655,7 @@ export default function HomePage() {
                   }}
                   data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
                 >
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  <span className="stat-num">{stat.value}{stat.suffix}</span>
                 </div>
                 <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.8)", textTransform: "uppercase" }}>
                   {stat.label}
