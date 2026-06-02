@@ -219,14 +219,15 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        /* Animate the outer wrapper only — never touch .flip-inner so the
+           CSS hover rotateY(180deg) stays clean with no leftover inline
+           transformOrigin that would break the flip axis. */
         const cards = gsap.utils.toArray<HTMLElement>(".flip-card", sec);
         cards.forEach((card, i) => {
-          const inner = card.querySelector<HTMLElement>(".flip-inner");
-          if (!inner) return;
-          gsap.set(inner, { rotationY: -90, opacity: 0, transformOrigin: "left center" });
-          gsap.to(inner, {
-            rotationY: 0, opacity: 1, duration: 1.1, delay: (i % 3) * 0.13,
-            ease: "power3.out", clearProps: "transform,opacity",
+          gsap.from(card, {
+            opacity: 0, y: 48,
+            duration: 1.0, delay: (i % 3) * 0.12,
+            ease: "power3.out",
             scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none none" },
           });
         });
