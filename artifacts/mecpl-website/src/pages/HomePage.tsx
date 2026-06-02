@@ -832,41 +832,84 @@ export default function HomePage() {
 
       {/* ══════════ TESTIMONIALS ══════════ */}
       <section ref={testimonialsRef}
-        className="py-28 px-6 border-b"
+        className="border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
         data-testid="section-testimonials">
-        <div className="max-w-5xl mx-auto space-y-20">
-          <div className="text-center">
-            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-              Client Voices
+
+        {/* Section header */}
+        <div className="max-w-7xl mx-auto px-6 pt-28 pb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+                Client Voices
+              </span>
+              <h2 className="font-bold uppercase"
+                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
+                What Our <span className="italic" style={{ color: "#C41E3A" }}>Partners Say</span>
+              </h2>
+            </div>
+            {/* Thin decorative rule */}
+            <div className="hidden md:block flex-1 mx-12 h-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.18em", color: "rgba(17,24,39,0.35)", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+              {testimonials.length} Testimonials
             </span>
-            <h2 className="font-bold uppercase"
-              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
-              What Our <span className="italic" style={{ color: "#C41E3A" }}>Partners Say</span>
-            </h2>
           </div>
-          {testimonials.map((t, i) => (
-            <div key={i} className="testi-block border-l-2 pl-8" style={{ borderColor: "rgba(196,30,58,0.4)" }}>
-              <Quote size={28} style={{ color: "rgba(196,30,58,0.2)", marginBottom: "20px" }} />
-              {/* dangerouslySetInnerHTML: SplitText splits word-by-word here;
-                  React must not own these text fibers or removeChild errors fire */}
-              <p className="testi-quote font-light italic leading-relaxed mb-8"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.1rem,2.2vw,1.5rem)", color: "#111827", lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: `&ldquo;${t.quote}&rdquo;` }}
-              />
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 flex items-center justify-center"
-                  style={{ background: "rgba(196,30,58,0.08)", border: "1px solid rgba(196,30,58,0.2)" }}>
-                  <span style={{ color: "#C41E3A", fontSize: "14px" }}>★</span>
+        </div>
+
+        {/* Full-bleed testimonial rows */}
+        {testimonials.map((t, i) => (
+          <div key={i} className="testi-block border-t"
+            style={{ borderColor: "rgba(0,0,0,0.07)", background: i % 2 === 1 ? "#f9f9f9" : "#ffffff" }}>
+            <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-[72px_1fr_200px] gap-10 items-start">
+
+              {/* Index number */}
+              <div className="hidden md:block"
+                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,5vw,4rem)", fontWeight: 800, color: "rgba(196,30,58,0.08)", lineHeight: 1, userSelect: "none" }}>
+                {String(i + 1).padStart(2, "0")}
+              </div>
+
+              {/* Quote body */}
+              <div className="space-y-8">
+                {/* Giant decorative mark */}
+                <div style={{ fontFamily: "Georgia, serif", fontSize: "5rem", color: "#C41E3A", lineHeight: 0.6, opacity: 0.18, userSelect: "none" }}>&ldquo;</div>
+
+                {/* testi-quote — dangerouslySetInnerHTML lets GSAP SplitText own children */}
+                <p className="testi-quote"
+                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.05rem,2vw,1.4rem)", fontWeight: 300, fontStyle: "italic", color: "#111827", lineHeight: 1.75 }}
+                  dangerouslySetInnerHTML={{ __html: t.quote }}
+                />
+
+                {/* Hairline + attribution */}
+                <div className="pt-6 border-t flex items-center gap-5" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+                  <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center"
+                    style={{ background: "#C41E3A" }}>
+                    <span style={{ color: "#fff", fontSize: "11px", fontWeight: 700 }}>★</span>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                      {t.name}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                      {t.role}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "12px", fontWeight: 600, color: "#111827", letterSpacing: "0.05em", textTransform: "uppercase" }}>{t.name}</div>
-                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "10px", color: "rgba(17,24,39,0.4)", marginTop: "3px", letterSpacing: "0.1em" }}>{t.role}</div>
+              </div>
+
+              {/* Right metadata column */}
+              <div className="hidden md:flex flex-col items-end justify-between h-full gap-6 pt-2">
+                <Quote size={20} style={{ color: "rgba(196,30,58,0.15)" }} />
+                <div className="text-right">
+                  <div className="h-12 w-px ml-auto mb-3" style={{ background: "linear-gradient(to bottom, transparent, rgba(196,30,58,0.3))" }} />
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.15em", color: "rgba(17,24,39,0.3)", textTransform: "uppercase" }}>Verified</div>
+                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.15em", color: "#C41E3A", textTransform: "uppercase", marginTop: "3px" }}>Client</div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+
+        <div className="h-16" />
       </section>
 
       {/* ══════════ CLIENTS — BENTO GALLERY + TICKER ══════════ */}
