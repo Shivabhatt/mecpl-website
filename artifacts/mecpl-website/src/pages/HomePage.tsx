@@ -316,18 +316,19 @@ export default function HomePage() {
           const split = new SplitText(q, { type: "words", wordsClass: "inline-block" });
           splits.push(split);
 
-          /* Each word gets its own scrubbed ScrollTrigger */
+          /* VwbywPd exact pattern: pure opacity scrub, no blur.
+             Each word illuminates as it enters the reading zone
+             (top 85% → top 30%) — wider zone = more cinematic pacing */
           split.words.forEach(word => {
             gsap.fromTo(word,
-              { opacity: 0.12, filter: "blur(4px)" },
+              { opacity: 0.12 },
               {
                 opacity: 1,
-                filter: "blur(0px)",
                 ease: "none",
                 scrollTrigger: {
                   trigger: word,
-                  start: "top 88%",
-                  end: "top 55%",
+                  start: "top 85%",
+                  end: "top 30%",
                   scrub: 1,
                 },
               }
@@ -831,85 +832,66 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
+      {/* Dark section — VwbywPd style: pure large type, word-by-word opacity scrub */}
       <section ref={testimonialsRef}
-        className="border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
+        style={{ background: "#0c0c0c" }}
         data-testid="section-testimonials">
 
         {/* Section header */}
-        <div className="max-w-7xl mx-auto px-6 pt-28 pb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-                Client Voices
-              </span>
-              <h2 className="font-bold uppercase"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
-                What Our <span className="italic" style={{ color: "#C41E3A" }}>Partners Say</span>
-              </h2>
-            </div>
-            {/* Thin decorative rule */}
-            <div className="hidden md:block flex-1 mx-12 h-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
-            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.18em", color: "rgba(17,24,39,0.35)", textTransform: "uppercase", whiteSpace: "nowrap" }}>
-              {testimonials.length} Testimonials
-            </span>
-          </div>
+        <div className="max-w-4xl mx-auto px-6 pt-28 pb-0">
+          <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+            Client Voices
+          </span>
+          <h2 style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "rgba(255,255,255,0.9)", fontWeight: 700, textTransform: "uppercase" }}>
+            What Our <span style={{ fontStyle: "italic", color: "#C41E3A" }}>Partners Say</span>
+          </h2>
         </div>
 
-        {/* Full-bleed testimonial rows */}
+        {/* Testimonial blocks — pure typographic, no cards, matching VwbywPd layout */}
         {testimonials.map((t, i) => (
-          <div key={i} className="testi-block border-t"
-            style={{ borderColor: "rgba(0,0,0,0.07)", background: i % 2 === 1 ? "#f9f9f9" : "#ffffff" }}>
-            <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-[72px_1fr_200px] gap-10 items-start">
+          <div key={i} className="testi-block max-w-4xl mx-auto px-6"
+            style={{
+              paddingTop: i === 0 ? "5rem" : "5rem",
+              paddingBottom: "5rem",
+              borderTop: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+            }}>
 
-              {/* Index number */}
-              <div className="hidden md:block"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,5vw,4rem)", fontWeight: 800, color: "rgba(196,30,58,0.08)", lineHeight: 1, userSelect: "none" }}>
-                {String(i + 1).padStart(2, "0")}
-              </div>
+            {/* Opening quote mark — decorative only */}
+            <div style={{ fontFamily: "Georgia, serif", fontSize: "5.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "2rem", opacity: 0.35, userSelect: "none" }}>
+              &ldquo;
+            </div>
 
-              {/* Quote body */}
-              <div className="space-y-8">
-                {/* Giant decorative mark */}
-                <div style={{ fontFamily: "Georgia, serif", fontSize: "5rem", color: "#C41E3A", lineHeight: 0.6, opacity: 0.18, userSelect: "none" }}>&ldquo;</div>
+            {/* Quote text — SplitText target; dangerouslySetInnerHTML required so
+                React does not own these text fibers when GSAP wraps each word */}
+            <p className="testi-quote"
+              style={{
+                fontFamily: "var(--font-raleway)",
+                fontSize: "clamp(1.2rem,2.4vw,1.9rem)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                color: "rgba(255,255,255,0.95)",
+                lineHeight: 1.75,
+                marginBottom: "3rem",
+              }}
+              dangerouslySetInnerHTML={{ __html: t.quote }}
+            />
 
-                {/* testi-quote — dangerouslySetInnerHTML lets GSAP SplitText own children */}
-                <p className="testi-quote"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.05rem,2vw,1.4rem)", fontWeight: 300, fontStyle: "italic", color: "#111827", lineHeight: 1.75 }}
-                  dangerouslySetInnerHTML={{ __html: t.quote }}
-                />
-
-                {/* Hairline + attribution */}
-                <div className="pt-6 border-t flex items-center gap-5" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-                  <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center"
-                    style={{ background: "#C41E3A" }}>
-                    <span style={{ color: "#fff", fontSize: "11px", fontWeight: 700 }}>★</span>
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                      {t.name}
-                    </div>
-                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                      {t.role}
-                    </div>
-                  </div>
+            {/* Attribution */}
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <div style={{ width: "28px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
+              <div>
+                <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 700, color: "#C41E3A", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                  {t.name}
                 </div>
-              </div>
-
-              {/* Right metadata column */}
-              <div className="hidden md:flex flex-col items-end justify-between h-full gap-6 pt-2">
-                <Quote size={20} style={{ color: "rgba(196,30,58,0.15)" }} />
-                <div className="text-right">
-                  <div className="h-12 w-px ml-auto mb-3" style={{ background: "linear-gradient(to bottom, transparent, rgba(196,30,58,0.3))" }} />
-                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.15em", color: "rgba(17,24,39,0.3)", textTransform: "uppercase" }}>Verified</div>
-                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.15em", color: "#C41E3A", textTransform: "uppercase", marginTop: "3px" }}>Client</div>
+                <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", color: "rgba(255,255,255,0.3)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                  {t.role}
                 </div>
               </div>
             </div>
           </div>
         ))}
 
-        <div className="h-16" />
+        <div className="h-8" />
       </section>
 
       {/* ══════════ CLIENTS — BENTO GALLERY + TICKER ══════════ */}
