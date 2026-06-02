@@ -373,7 +373,8 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── CTA: SplitText word reveal ── */
+  /* ── CTA: fade-up reveal (h2 has nested children so SplitText is skipped
+      to avoid React text-fiber conflicts; whole heading animates as a unit) ── */
   useEffect(() => {
     const sec = ctaRef.current;
     if (!sec) return;
@@ -381,17 +382,27 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const splits: SplitText[] = [];
         const headingEl = sec.querySelector<HTMLElement>("h2");
+        const subEl     = sec.querySelector<HTMLElement>("p");
+        const btnsEl    = sec.querySelector<HTMLElement>(".flex.flex-col");
         if (headingEl) {
-          const split = new SplitText(headingEl, { type: "words", wordsClass: "inline-block overflow-hidden" });
-          splits.push(split);
-          gsap.from(split.words, {
-            yPercent: 100, opacity: 0, duration: 0.9, stagger: 0.07, ease: "power4.out",
+          gsap.from(headingEl, {
+            y: 50, opacity: 0, duration: 1, ease: "power3.out",
             scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
           });
         }
-        return () => splits.forEach(s => s.revert());
+        if (subEl) {
+          gsap.from(subEl, {
+            y: 30, opacity: 0, duration: 0.9, delay: 0.18, ease: "power3.out",
+            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
+          });
+        }
+        if (btnsEl) {
+          gsap.from(Array.from(btnsEl.children), {
+            y: 20, opacity: 0, duration: 0.7, stagger: 0.12, delay: 0.35, ease: "power3.out",
+            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
+          });
+        }
       });
     }, sec);
 
@@ -429,7 +440,6 @@ export default function HomePage() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <span
             ref={heroTagRef}
-            key={slide}
             className="inline-block text-[10px] font-bold uppercase tracking-[0.25em] text-[#C41E3A] border border-[#C41E3A]/30 px-4 py-2 mb-8"
             style={{ fontFamily: "var(--font-inter)" }}
           >
@@ -437,12 +447,17 @@ export default function HomePage() {
           </span>
 
           <div ref={heroHeadlineRef}>
+            {/* dangerouslySetInnerHTML prevents React from creating text fibers
+                that SplitText's char-splitting would later conflict with */}
             <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white mb-1"
-              style={{ fontFamily: "var(--font-raleway)" }}>Engineering</div>
+              style={{ fontFamily: "var(--font-raleway)" }}
+              dangerouslySetInnerHTML={{ __html: "Engineering" }} />
             <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight mb-1 italic"
-              style={{ fontFamily: "var(--font-raleway)", color: "#C41E3A" }}>Excellence</div>
+              style={{ fontFamily: "var(--font-raleway)", color: "#C41E3A" }}
+              dangerouslySetInnerHTML={{ __html: "Excellence" }} />
             <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white"
-              style={{ fontFamily: "var(--font-raleway)" }}>Delivered</div>
+              style={{ fontFamily: "var(--font-raleway)" }}
+              dangerouslySetInnerHTML={{ __html: "Delivered" }} />
           </div>
 
           <p ref={heroSubRef}
@@ -503,13 +518,14 @@ export default function HomePage() {
             {stats.map((st, i) => (
               <div key={i} className="stat-item px-0 lg:px-10 first:pl-0 last:pr-0 space-y-3">
                 <div className="overflow-hidden">
-                  {/* data-value/data-suffix read by GSAP count-up; textContent updated by onUpdate */}
+                  {/* dangerouslySetInnerHTML lets GSAP own the text — prevents React
+                      reconciliation from fighting the count-up onUpdate mutation */}
                   <div className="stat-num font-bold uppercase"
                     data-value={st.value}
                     data-suffix={st.suffix}
-                    style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}>
-                    0{st.suffix}
-                  </div>
+                    style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}
+                    dangerouslySetInnerHTML={{ __html: `0${st.suffix}` }}
+                  />
                 </div>
                 <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase" }}>
                   {st.label}
@@ -816,10 +832,12 @@ export default function HomePage() {
           {testimonials.map((t, i) => (
             <div key={i} className="testi-block border-l-2 pl-8" style={{ borderColor: "rgba(196,30,58,0.4)" }}>
               <Quote size={28} style={{ color: "rgba(196,30,58,0.2)", marginBottom: "20px" }} />
+              {/* dangerouslySetInnerHTML: SplitText splits word-by-word here;
+                  React must not own these text fibers or removeChild errors fire */}
               <p className="testi-quote font-light italic leading-relaxed mb-8"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.1rem,2.2vw,1.5rem)", color: "#111827", lineHeight: 1.65 }}>
-                "{t.quote}"
-              </p>
+                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.1rem,2.2vw,1.5rem)", color: "#111827", lineHeight: 1.65 }}
+                dangerouslySetInnerHTML={{ __html: `&ldquo;${t.quote}&rdquo;` }}
+              />
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 flex items-center justify-center"
                   style={{ background: "rgba(196,30,58,0.08)", border: "1px solid rgba(196,30,58,0.2)" }}>

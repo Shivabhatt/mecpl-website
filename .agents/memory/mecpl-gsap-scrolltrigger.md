@@ -46,3 +46,17 @@ useEffect(() => {
 ```
 
 **Why:** `gsap.context()` handles React Strict Mode double-invocation cleanup. Nesting `gsap.context()` inside `mm.add()` double-scopes animations and breaks ScrollTrigger init. The outer context's revert also cleans up any matchMedia instances created inside it.
+
+---
+
+## SplitText + React state: always use dangerouslySetInnerHTML
+
+If any React component that uses SplitText also has `useState`, state changes trigger re-renders. React reconciles the component's VDOM (which has text fiber children) against the real DOM (which now has SplitText `<span>` children). React calls `removeChild` on the text fiber → `NotFoundError: The node to be removed is not a child of this node` → full crash.
+
+**Fix:** Add `dangerouslySetInnerHTML={{ __html: "text content" }}` to every element SplitText will operate on. React then owns only the outer element, not its children — SplitText can freely replace them with spans without conflict.
+
+**Also avoid `key={stateVar}` on GSAP-animated elements.** Using a state-driven `key` causes React to unmount/remount the element on each state change, removing the DOM node GSAP is currently animating → `removeChild` on a detached node.
+
+**Why:** React's text fiber reconciliation expects the DOM to match the VDOM at the text-node level. SplitText breaks this invariant. `dangerouslySetInnerHTML` tells React "I own this innerHTML; don't touch children."
+
+**How to apply:** Any `hero-line`, `testi-quote`, or other SplitText target that lives in a component with state must use `dangerouslySetInnerHTML`. For elements with mixed JSX children (e.g. `<br/>` + nested `<span>`), skip SplitText and use a whole-element `gsap.from(el, {y, opacity})` instead.
