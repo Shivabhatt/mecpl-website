@@ -201,7 +201,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: row entrance + scroll-driven image scale ── */
+  /* ── SERVICES: oNjgEjm — pin image full-screen, text panel slides in from right ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -209,24 +209,26 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".svc-row", sec).forEach(row => {
-          gsap.from(row, {
-            opacity: 0, y: 50, duration: 1.0, ease: "power3.out",
-            scrollTrigger: { trigger: row, start: "top 85%", toggleActions: "play none none none" },
-          });
-        });
+        const panels = gsap.utils.toArray<HTMLElement>(".svc-reveal-panel", sec);
+        panels.forEach((panel) => {
+          const textEl  = panel.querySelector<HTMLElement>(".svc-reveal-text");
+          const imgEl   = panel.querySelector<HTMLElement>(".svc-reveal-img");
+          const labelEl = panel.querySelector<HTMLElement>(".svc-reveal-label");
 
-        gsap.utils.toArray<HTMLElement>(".svc-img", sec).forEach(img => {
-          gsap.fromTo(img,
-            { scale: 1.0 },
-            {
-              scale: 1.08, ease: "none",
-              scrollTrigger: {
-                trigger: img.closest(".svc-img-wrap") as HTMLElement,
-                start: "top bottom", end: "bottom top", scrub: true,
-              },
-            }
-          );
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: panel,
+              start: "top top",
+              end: "+=90%",
+              pin: true,
+              pinSpacing: true,
+              scrub: 1,
+            },
+          });
+
+          if (imgEl)   tl.fromTo(imgEl,   { scale: 1.08 }, { scale: 1.0,   ease: "none" }, 0);
+          if (labelEl) tl.fromTo(labelEl, { opacity: 1   }, { opacity: 0,   ease: "none", duration: 0.25 }, 0);
+          if (textEl)  tl.fromTo(textEl,  { xPercent: 100 }, { xPercent: 0, ease: "none", duration: 0.75 }, 0.15);
         });
       });
     }, sec);
@@ -601,64 +603,96 @@ export default function HomePage() {
 
       </section>
 
-      {/* ══════════ SERVICES ══════════ */}
-      <section ref={servicesRef}
-        className="border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
-        data-testid="section-services">
-
-        <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-              What We Build
-            </span>
-            <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-              Our Services
-            </h2>
-          </div>
-          <Link href="/services" data-testid="button-all-services">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-              All Services <ArrowRight size={12} />
-            </span>
-          </Link>
-        </div>
-
+      {/* ══════════ SERVICES — oNjgEjm: image first, text slides in ══════════ */}
+      <section ref={servicesRef} data-testid="section-services">
         {serviceRows.map((row, i) => (
-          <div key={i}
-            className={`svc-row flex flex-col ${row.imgRight ? "md:flex-row" : "md:flex-row-reverse"}`}
-            style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+          <div key={i} className="svc-reveal-panel" style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
 
-            <div className="flex-1 flex flex-col justify-center px-8 md:px-16 py-16 md:py-24 relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none" style={{ zIndex: 0 }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,10vw,9rem)", fontWeight: 800, color: "rgba(17,24,39,0.04)", lineHeight: 1, whiteSpace: "nowrap" }}>
+            {/* Full-bleed background image */}
+            <img
+              src={row.image}
+              alt={row.title}
+              className="svc-reveal-img"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            {/* Dark scrim */}
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 1 }} />
+
+            {/* Section label — visible before text arrives, fades out as text slides in */}
+            <div className="svc-reveal-label" style={{ position: "absolute", top: "52px", left: "64px", zIndex: 3, pointerEvents: "none" }}>
+              {i === 0 && (
+                <>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+                    What We Build
+                  </span>
+                  <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#ffffff", fontWeight: 400 }}>
+                    Our Services
+                  </h2>
+                </>
+              )}
+              <div style={{ marginTop: i === 0 ? "28px" : "0" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(5rem,10vw,11rem)", fontWeight: 700, color: "rgba(255,255,255,0.06)", lineHeight: 1, display: "block" }}>
                   {row.word}
                 </span>
               </div>
-              <div className="relative space-y-6" style={{ zIndex: 1 }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
-                  {String(i + 1).padStart(2, "0")}
+            </div>
+
+            {/* Scroll hint — bottom-left, only on first panel */}
+            {i === 0 && (
+              <div style={{ position: "absolute", bottom: "48px", left: "64px", zIndex: 3 }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>
+                  Scroll to explore
                 </span>
-                <h3 className="font-bold uppercase text-3xl"
-                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700, letterSpacing: "0.03em" }}>
+              </div>
+            )}
+
+            {/* Panel counter — bottom right always */}
+            <div style={{ position: "absolute", bottom: "48px", right: "64px", zIndex: 3 }}>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em" }}>
+                {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Text panel — starts off-screen right, slides in on scroll */}
+            <div className="svc-reveal-text" style={{
+              position: "absolute", top: 0, right: 0,
+              width: "clamp(300px, 42%, 540px)", height: "100%",
+              background: "#ffffff",
+              display: "flex", alignItems: "center",
+              padding: "0 clamp(28px, 5vw, 68px)",
+              zIndex: 4,
+              willChange: "transform",
+            }}>
+              <div style={{ width: "100%" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
+                  {String(i + 1).padStart(2, "0")} — {row.title.split(" ")[0].toUpperCase()}
+                </span>
+                <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
+                <h3 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.6rem,2.4vw,2.2rem)", fontWeight: 400, color: "#111827", letterSpacing: "0.04em", lineHeight: 1.18, marginBottom: "20px" }}>
                   {row.title}
                 </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.85, color: "#4b5563", maxWidth: "440px" }}>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.85, color: "#4b5563", marginBottom: "32px" }}>
                   {row.desc}
                 </p>
-                <Link href={row.path}>
+                <Link href={row.path} data-testid={`button-service-${i}`}>
                   <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
                     style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
                     Learn More <ArrowRight size={11} />
                   </span>
                 </Link>
+                {i === serviceRows.length - 1 && (
+                  <div style={{ marginTop: "40px", paddingTop: "28px", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+                    <Link href="/services" data-testid="button-all-services">
+                      <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase", fontWeight: 500 }}>
+                        All Services <ArrowRight size={11} />
+                      </span>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="svc-img-wrap flex-1 relative" style={{ minHeight: "420px" }}>
-              <img src={row.image} alt={row.title} className="svc-img absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%)" }} />
-            </div>
           </div>
         ))}
       </section>
