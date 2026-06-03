@@ -475,6 +475,58 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ══════════ AWARDS STRIP ══════════ */}
+      <section className="py-20 px-6 border-b"
+        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
+        data-testid="section-awards-home">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+                Recognition
+              </span>
+              <h2 className="font-bold uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+                Award-Winning Excellence
+              </h2>
+            </div>
+            <Link href="/awards">
+              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                All Awards <ArrowRight size={12} />
+              </span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { year: "2023", award: "BAI Special Jury Award",   org: "Builders Assoc. of India",  img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop" },
+              { year: "2022", award: "Constro Silver Trophy",    org: "Constro Awards",             img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop" },
+              { year: "2021", award: "Constro Gold Trophy",      org: "Constro Awards",             img: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=600&auto=format&fit=crop" },
+              { year: "2018", award: "Industry Excellence Gold", org: "National Construction",      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600&auto=format&fit=crop" },
+              { year: "2017", award: "India's Small Giants",     org: "Forbes India",               img: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=600&auto=format&fit=crop" },
+            ].map(a => (
+              <div key={a.year} className="group relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+                <img src={a.img} alt={a.award}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)" }} />
+                <div className="absolute top-4 left-4">
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, color: "#C41E3A", letterSpacing: "0.15em", background: "rgba(0,0,0,0.55)", padding: "3px 8px" }}>
+                    {a.year}
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "12px", fontWeight: 700, color: "#ffffff", lineHeight: 1.3, marginBottom: "5px" }}>
+                    {a.award}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.12em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>
+                    {a.org}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══════════ ABOUT STRIP ══════════ */}
       <section className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
