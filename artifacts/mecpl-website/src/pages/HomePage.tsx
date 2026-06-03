@@ -295,96 +295,41 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS:
-       LAYOUT  → VwbywPd: layered pinning — each 100vh card pins at top,
-                 next card scrolls over it (pinSpacing:false, z-index stack)
-       TEXT    → GggpRoB: AutoSplit mask:"lines" — when a card pins into
-                 view its quote lines slide up from yPercent:120 (overflow
-                 hidden per line), staggered, playing once on entry. ── */
+  /* ── TESTIMONIALS: RwKwLWK infinite horizontal ticker ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
 
-    const splits: { revert: () => void }[] = [];
-    let cancelled = false;
+    const track = sec.querySelector<HTMLElement>(".testi-track");
+    if (!track) return;
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(".testi-block", sec);
+    const mm = gsap.matchMedia();
+    let tween: gsap.core.Tween | null = null;
 
-        /* ── VwbywPd: layered pin each card ── */
-        cards.forEach((card, i) => {
-          gsap.set(card, { zIndex: i + 1 });
-
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            pin: true,
-            pinSpacing: false,
-          });
-
-          /* Cards 2+ lift in over the pinned card below */
-          if (i > 0) {
-            gsap.from(card, {
-              opacity: 0,
-              y: 24,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 98%",
-                end: "top top",
-                scrub: 1,
-              },
-            });
-          }
-        });
-
-        /* ── GggpRoB: AutoSplit line-mask reveal on each card ── */
-        document.fonts.ready.then(() => {
-          if (cancelled) return;
-
-          cards.forEach((card) => {
-            const quoteEl = card.querySelector<HTMLElement>(".testi-quote");
-            if (!quoteEl) return;
-
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const split = (SplitText as any).create(quoteEl, {
-              type: "words,lines",
-              mask: "lines",
-              linesClass: "testi-line",
-              autoSplit: true,
-              onSplit: (instance: { lines: HTMLElement[] }) => {
-                /* Play line-reveal once when the card pins to top */
-                return gsap.from(instance.lines, {
-                  yPercent: 120,
-                  stagger: 0.12,
-                  duration: 0.9,
-                  ease: "power3.out",
-                  scrollTrigger: {
-                    trigger: card,
-                    start: "top top+=2",
-                    toggleActions: "play none none reset",
-                  },
-                });
-              },
-            });
-            splits.push(split);
-          });
-        });
-
-        return () => {
-          cancelled = true;
-          splits.forEach(s => s.revert());
-        };
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      /* Seamless loop: track contains cards×2, animate x → -(half width) */
+      tween = gsap.to(track, {
+        x: () => -(track.scrollWidth / 2),
+        duration: 30,
+        ease: "none",
+        repeat: -1,
+        onRepeat: () => gsap.set(track, { x: 0 }),
       });
-    }, sec);
 
-    return () => {
-      cancelled = true;
-      splits.forEach(s => s.revert());
-      ctx.revert();
-    };
+      /* Pause on hover */
+      const pause = () => tween?.pause();
+      const play  = () => tween?.play();
+      sec.addEventListener("mouseenter", pause);
+      sec.addEventListener("mouseleave", play);
+
+      return () => {
+        sec.removeEventListener("mouseenter", pause);
+        sec.removeEventListener("mouseleave", play);
+        tween?.kill();
+      };
+    });
+
+    return () => mm.revert();
   }, []);
 
   /* ── CLIENTS: name grid entrance ── */
@@ -800,77 +745,74 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
-      {/* VwbywPda layered-pinning: each card is 100vh and pins at the top;
-          next card scrolls up and stacks over it — "deck of cards" reveal */}
+      {/* RwKwLWK: infinite horizontal ticker — cards×2, GSAP x loop, pause on hover */}
       <section ref={testimonialsRef}
-        style={{ background: "#ffffff" }}
+        className="py-24"
+        style={{ background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
         data-testid="section-testimonials">
 
-        {(["#ffffff", "#f9f9f9", "#f4f4f4"] as const).map((bg, i) => {
-          const t = testimonials[i];
-          return (
-            <div key={i} className="testi-block"
-              style={{
-                minHeight: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                background: bg,
-                borderTop: "1px solid rgba(0,0,0,0.07)",
-                position: "relative",
-              }}>
+        {/* ── Header ── */}
+        <div className="text-center mb-16 px-6">
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+            Client Voices
+          </span>
+          <h2 className="uppercase text-3xl"
+            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+            What Our Clients Say
+          </h2>
+        </div>
 
-              {/* Card content — centered column */}
-              <div className="max-w-3xl mx-auto w-full px-8 md:px-16">
+        {/* ── Infinite track ── */}
+        <div style={{ overflow: "hidden", cursor: "default" }}>
+          <div className="testi-track" style={{ display: "flex", gap: "28px", width: "max-content" }}>
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i}
+                style={{
+                  width: "500px",
+                  flexShrink: 0,
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: "6px",
+                  padding: "44px 40px 40px",
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+                  position: "relative",
+                }}>
 
-                {/* Index + eyebrow */}
-                <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "3rem" }}>
-                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "clamp(3.5rem,6vw,5rem)", fontWeight: 800, color: "rgba(196,30,58,0.07)", lineHeight: 1, userSelect: "none" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "4px" }}>
-                      Client Voice
-                    </div>
-                    <div style={{ width: "40px", height: "1px", background: "rgba(196,30,58,0.3)" }} />
-                  </div>
-                </div>
-
-                {/* Opening quote mark */}
-                <div style={{ fontFamily: "Georgia, serif", fontSize: "4rem", color: "#C41E3A", lineHeight: 0.6, marginBottom: "1.5rem", opacity: 0.2, userSelect: "none" }}>
+                {/* Quote mark */}
+                <div style={{ fontFamily: "Georgia, serif", fontSize: "3.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "1.5rem", opacity: 0.15, userSelect: "none" }}>
                   &ldquo;
                 </div>
 
-                {/* Quote — no italic, Montserrat; dangerouslySetInnerHTML safe for GSAP */}
-                <p className="testi-quote"
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "1.125rem",
-                    fontWeight: 400,
-                    color: "#111827",
-                    lineHeight: 1.8,
-                    marginBottom: "3rem",
-                  }}
-                  dangerouslySetInnerHTML={{ __html: t.quote }}
-                />
+                {/* Quote */}
+                <p style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: "13.5px",
+                  fontWeight: 400,
+                  color: "#374151",
+                  lineHeight: 1.85,
+                  marginBottom: "2rem",
+                }}>
+                  {t.quote}
+                </p>
 
                 {/* Attribution */}
-                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                  <div style={{ width: "32px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: "20px" }}>
+                  <div style={{ width: "28px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
                   <div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "10px", fontWeight: 700, color: "#111827", letterSpacing: "0.14em", textTransform: "uppercase" }}>
                       {t.name}
                     </div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "4px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                       {t.role}
                     </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
-          );
-        })}
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
 
       {/* ══════════ CLIENTS ══════════ */}
