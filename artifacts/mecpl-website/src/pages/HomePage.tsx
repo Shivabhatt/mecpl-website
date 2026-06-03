@@ -201,7 +201,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: oNjgEjm — pin image full-screen, text panel slides in from right ── */
+  /* ── SERVICES: oNjgEjm — clipPath wipe reveals image first, text fades in after ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -209,26 +209,43 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const panels = gsap.utils.toArray<HTMLElement>(".svc-reveal-panel", sec);
-        panels.forEach((panel) => {
-          const textEl  = panel.querySelector<HTMLElement>(".svc-reveal-text");
-          const imgEl   = panel.querySelector<HTMLElement>(".svc-reveal-img");
-          const labelEl = panel.querySelector<HTMLElement>(".svc-reveal-label");
+        gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
+          const imgClip = panel.querySelector<HTMLElement>(".svc-img-clip");
+          const imgEl   = panel.querySelector<HTMLElement>(".svc-img-clip img");
+          const textEl  = panel.querySelector<HTMLElement>(".svc-text-block");
 
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: panel,
-              start: "top top",
-              end: "+=90%",
-              pin: true,
-              pinSpacing: true,
-              scrub: 1,
+              start: "top 78%",
+              end: "top 5%",
+              scrub: 1.2,
+              invalidateOnRefresh: true,
             },
           });
 
-          if (imgEl)   tl.fromTo(imgEl,   { scale: 1.08 }, { scale: 1.0,   ease: "none" }, 0);
-          if (labelEl) tl.fromTo(labelEl, { opacity: 1   }, { opacity: 0,   ease: "none", duration: 0.25 }, 0);
-          if (textEl)  tl.fromTo(textEl,  { xPercent: 100 }, { xPercent: 0, ease: "none", duration: 0.75 }, 0.15);
+          /* Phase 1 — image wipes in left→right via clipPath */
+          if (imgClip) {
+            tl.fromTo(
+              imgClip,
+              { clipPath: "inset(0 100% 0 0)" },
+              { clipPath: "inset(0 0% 0 0)", ease: "none", duration: 0.55 },
+              0,
+            );
+          }
+          /* Subtle zoom-out while revealing */
+          if (imgEl) {
+            tl.fromTo(imgEl, { scale: 1.1 }, { scale: 1.0, ease: "none", duration: 0.55 }, 0);
+          }
+          /* Phase 2 — text slides left + fades in after image is ~60% revealed */
+          if (textEl) {
+            tl.fromTo(
+              textEl,
+              { opacity: 0, x: 40 },
+              { opacity: 1, x: 0,  ease: "none", duration: 0.45 },
+              0.35,
+            );
+          }
         });
       });
     }, sec);
@@ -603,75 +620,92 @@ export default function HomePage() {
 
       </section>
 
-      {/* ══════════ SERVICES — oNjgEjm: image first, text slides in ══════════ */}
-      <section ref={servicesRef} data-testid="section-services">
+      {/* ══════════ SERVICES — oNjgEjm: image wipe first, text after ══════════ */}
+      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff" }}>
+
+        {/* Section header */}
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+              What We Build
+            </span>
+            <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+              Our Services
+            </h2>
+          </div>
+          <Link href="/services" data-testid="button-all-services">
+            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+              All Services <ArrowRight size={12} />
+            </span>
+          </Link>
+        </div>
+
+        {/* Service panels — image wipes in via clipPath, then text fades in */}
         {serviceRows.map((row, i) => (
-          <div key={i} className="svc-reveal-panel" style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+          <div key={i} className="svc-panel" style={{
+            position: "relative",
+            height: "100vh",
+            display: "flex",
+            alignItems: "stretch",
+            borderTop: "1px solid rgba(0,0,0,0.07)",
+            background: i % 2 === 0 ? "#f8f8f8" : "#ffffff",
+          }}>
 
-            {/* Full-bleed background image */}
-            <img
-              src={row.image}
-              alt={row.title}
-              className="svc-reveal-img"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-            />
-            {/* Dark scrim */}
-            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 1 }} />
-
-            {/* Section label — visible before text arrives, fades out as text slides in */}
-            <div className="svc-reveal-label" style={{ position: "absolute", top: "52px", left: "64px", zIndex: 3, pointerEvents: "none" }}>
-              {i === 0 && (
-                <>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
-                    What We Build
-                  </span>
-                  <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#ffffff", fontWeight: 400 }}>
-                    Our Services
-                  </h2>
-                </>
-              )}
-              <div style={{ marginTop: i === 0 ? "28px" : "0" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(5rem,10vw,11rem)", fontWeight: 700, color: "rgba(255,255,255,0.06)", lineHeight: 1, display: "block" }}>
+            {/* ── Image side (left 58%) — clipPath wipes left→right on scroll ── */}
+            <div className="svc-img-clip" style={{
+              position: "relative",
+              width: "58%",
+              overflow: "hidden",
+              flexShrink: 0,
+              clipPath: "inset(0 100% 0 0)",
+            }}>
+              <img
+                src={row.image}
+                alt={row.title}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              {/* Light scrim */}
+              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.22)" }} />
+              {/* Ghost word watermark on image */}
+              <div style={{ position: "absolute", bottom: "32px", left: "40px", pointerEvents: "none", userSelect: "none" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.08)", lineHeight: 1 }}>
                   {row.word}
                 </span>
               </div>
-            </div>
-
-            {/* Scroll hint — bottom-left, only on first panel */}
-            {i === 0 && (
-              <div style={{ position: "absolute", bottom: "48px", left: "64px", zIndex: 3 }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>
-                  Scroll to explore
+              {/* Panel counter */}
+              <div style={{ position: "absolute", top: "40px", left: "40px" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.12em" }}>
+                  {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
                 </span>
               </div>
-            )}
-
-            {/* Panel counter — bottom right always */}
-            <div style={{ position: "absolute", bottom: "48px", right: "64px", zIndex: 3 }}>
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em" }}>
-                {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
-              </span>
             </div>
 
-            {/* Text panel — starts off-screen right, slides in on scroll */}
-            <div className="svc-reveal-text" style={{
-              position: "absolute", top: 0, right: 0,
-              width: "clamp(300px, 42%, 540px)", height: "100%",
-              background: "#ffffff",
-              display: "flex", alignItems: "center",
-              padding: "0 clamp(28px, 5vw, 68px)",
-              zIndex: 4,
-              willChange: "transform",
+            {/* ── Text side (right 42%) — fades in after image reveals ── */}
+            <div className="svc-text-block" style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              padding: "0 clamp(32px, 5vw, 72px)",
+              opacity: 0,
             }}>
               <div style={{ width: "100%" }}>
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
-                  {String(i + 1).padStart(2, "0")} — {row.title.split(" ")[0].toUpperCase()}
+                  {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
                 </span>
                 <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
-                <h3 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.6rem,2.4vw,2.2rem)", fontWeight: 400, color: "#111827", letterSpacing: "0.04em", lineHeight: 1.18, marginBottom: "20px" }}>
+                <h3 className="uppercase" style={{
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
+                  fontWeight: 400,
+                  color: "#111827",
+                  letterSpacing: "0.04em",
+                  lineHeight: 1.18,
+                  marginBottom: "20px",
+                }}>
                   {row.title}
                 </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.85, color: "#4b5563", marginBottom: "32px" }}>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "400px", marginBottom: "32px" }}>
                   {row.desc}
                 </p>
                 <Link href={row.path} data-testid={`button-service-${i}`}>
@@ -680,16 +714,6 @@ export default function HomePage() {
                     Learn More <ArrowRight size={11} />
                   </span>
                 </Link>
-                {i === serviceRows.length - 1 && (
-                  <div style={{ marginTop: "40px", paddingTop: "28px", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
-                    <Link href="/services" data-testid="button-all-services">
-                      <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase", fontWeight: 500 }}>
-                        All Services <ArrowRight size={11} />
-                      </span>
-                    </Link>
-                  </div>
-                )}
               </div>
             </div>
 

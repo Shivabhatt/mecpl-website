@@ -1,6 +1,6 @@
 ---
 name: MECPL GSAP ScrollTrigger patterns
-description: Correct GSAP+React patterns for the MECPL site; critical containerAnimation bug fix
+description: Correct GSAP+React patterns for the MECPL site; containerAnimation, ctx+mm nesting, oNjgEjm clipPath
 ---
 
 ## containerAnimation must be the tween, not the ScrollTrigger instance
@@ -46,6 +46,20 @@ useEffect(() => {
 ```
 
 **Why:** `gsap.context()` handles React Strict Mode double-invocation cleanup. Nesting `gsap.context()` inside `mm.add()` double-scopes animations and breaks ScrollTrigger init. The outer context's revert also cleans up any matchMedia instances created inside it.
+
+---
+
+## oNjgEjm pattern — clipPath wipe reveal (NO pinning)
+
+Panels stay in **normal flow** (100vh each). No `pin:true` on these panels.
+
+- Image wrapper (`.svc-img-clip`): `overflow:hidden` + `clipPath: inset(0 100% 0 0)` → animates to `inset(0 0% 0 0)` = wipes left→right
+- Text block (`.svc-text-block`): starts `opacity:0, x:40` → fades in after image is ~60% visible (position 0.35 in timeline)
+- Always add `invalidateOnRefresh:true` to prevent position drift after any upstream `pinSpacing:false` sections
+
+**Why pinning breaks here:** `overflow:hidden` on a pinned element conflicts with GSAP's `position:fixed` pin mechanism. Multiple pins stacking after `pinSpacing:false` blocks cause scroll position miscalculations. clipPath on a non-pinned wrapper avoids all of this.
+
+**How to apply:** Use this for any "image first, then text" reveal on MECPL. Keep `.svc-img-clip` with its own `overflow:hidden` separate from the panel container.
 
 ---
 
