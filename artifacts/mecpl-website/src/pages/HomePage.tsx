@@ -937,16 +937,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── View all link ── */}
-        <div className="text-center mt-14">
-          <Link href="/clients" data-testid="button-all-clients">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-              View All Clients <ArrowRight size={12} />
-            </span>
-          </Link>
-        </div>
-
       </section>
 
 
