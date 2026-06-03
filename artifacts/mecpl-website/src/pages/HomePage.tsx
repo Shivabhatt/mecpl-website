@@ -121,7 +121,6 @@ export default function HomePage() {
 
   const heroSectionRef   = useRef<HTMLElement>(null);
   const heroBgRef        = useRef<HTMLDivElement>(null);
-  const heroFrameRef     = useRef<HTMLDivElement>(null);
   const heroHeadlineRef  = useRef<HTMLDivElement>(null);
   const heroTagRef       = useRef<HTMLSpanElement>(null);
   const heroSubRef       = useRef<HTMLParagraphElement>(null);
@@ -181,17 +180,8 @@ export default function HomePage() {
             });
           }
 
-          const heroFrame = heroFrameRef.current;
-          if (heroFrame) {
-            gsap.set(heroFrame, { clipPath: "inset(0% 0% 0% 0% round 0px)" });
-            gsap.to(heroFrame, {
-              clipPath: "inset(8% 5% 8% 5% round 12px)",
-              ease: "none",
-              scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: 1.2 },
-            });
-          }
           gsap.to(heroBg, {
-            yPercent: -18, ease: "none",
+            yPercent: -30, ease: "none",
             scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: 1.2 },
           });
         };
@@ -505,55 +495,36 @@ export default function HomePage() {
       {/* ══════════ HERO ══════════ */}
       <section
         ref={heroSectionRef}
-        className="relative h-screen"
-        style={{ background: "#000" }}
+        className="relative h-screen flex items-center justify-center overflow-hidden"
         data-testid="section-hero"
       >
-        {/* heroFrame: clip-path shrinks on scroll — video + text stay inside */}
-        <div ref={heroFrameRef} className="absolute inset-0 overflow-hidden will-change-transform">
-          <div ref={heroBgRef} className="absolute inset-0 scale-110 will-change-transform">
-            {heroSlides.map((sl, i) => (
-              <img
-                key={i}
-                src={sl.image}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1200 ${i === slide ? "opacity-40" : "opacity-0"}`}
-                alt="Construction backdrop"
-              />
-            ))}
-            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-70">
-              <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
-          </div>
-
-          <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span className="font-sans inline-flex items-center cursor-pointer"
-                style={{ fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
-                VIEW PROJECTS
-              </span>
-            </Link>
-          </div>
+        <div ref={heroBgRef} className="absolute inset-0 z-0 scale-110 will-change-transform">
+          {heroSlides.map((sl, i) => (
+            <img
+              key={i}
+              src={sl.image}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1200 ${i === slide ? "opacity-40" : "opacity-0"}`}
+              alt="Construction backdrop"
+            />
+          ))}
+          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-70">
+            <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
         </div>
 
         {/* invisible anchor so heroHeadlineRef stays non-null for GSAP */}
         <div ref={heroHeadlineRef} className="sr-only" />
-      </section>
 
-      {/* ══════════ CERTIFICATION TICKER ══════════ */}
-      <div className="overflow-hidden border-y py-3.5"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f7f7f7" }}
-        data-testid="section-ticker">
-        <div className="animate-ticker">
-          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-5 px-8 whitespace-nowrap"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.22em", color: "rgba(17,24,39,0.45)", textTransform: "uppercase" }}>
-              {item}
-              <span style={{ color: "#C41E3A", fontSize: "6px" }}>◆</span>
+        <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
+          <Link href="/completed-projects" data-testid="button-hero-projects">
+            <span className="font-sans inline-flex items-center cursor-pointer"
+              style={{ fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
+              VIEW PROJECTS
             </span>
-          ))}
+          </Link>
         </div>
-      </div>
+      </section>
 
       {/* ══════════ STATS ══════════ */}
       <section ref={statsRef}
