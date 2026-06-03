@@ -283,11 +283,11 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".why-row", sec).forEach((row, i) => {
-          gsap.from(row, {
-            y: 30, opacity: 0, duration: 0.8, ease: "power3.out",
-            delay: i * 0.06,
-            scrollTrigger: { trigger: row, start: "top 90%", toggleActions: "play none none none" },
+        gsap.utils.toArray<HTMLElement>(".why-card", sec).forEach((card, i) => {
+          gsap.from(card, {
+            y: 36, opacity: 0, duration: 0.75, ease: "power3.out",
+            delay: i * 0.08,
+            scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
           });
         });
       });
@@ -781,39 +781,79 @@ export default function HomePage() {
 
       {/* ══════════ WHY CHOOSE ══════════ */}
       <section ref={whyRef}
-        className="py-20 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
+        className="py-24 px-6"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         data-testid="section-why-mecpl">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="mb-16">
+        <div className="max-w-6xl mx-auto">
+
+          {/* ── Centered header ── */}
+          <div className="text-center mb-16">
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               Our Advantage
             </span>
             <h2 className="uppercase text-3xl"
-              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, marginBottom: "18px" }}>
               Why Choose MECPL
             </h2>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", lineHeight: 1.85, color: "#6b7280", maxWidth: "500px", margin: "0 auto" }}>
+              India's most trusted construction partner — built on precision, safety, and 25 years of structural performance.
+            </p>
           </div>
-          <div className="border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-            {whyChoose.map((item, i) => (
-              <div key={i}
-                className="why-row border-b py-8 items-start gap-6 md:gap-12"
-                style={{ borderColor: "rgba(0,0,0,0.07)", display: "grid", gridTemplateColumns: "72px 1fr 1fr" }}
-                data-testid={`card-why-${i}`}>
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2.2rem,4vw,3rem)", fontWeight: 800, color: "rgba(196,30,58,0.1)", lineHeight: 1 }}>
-                  {String(i + 1).padStart(2, "0")}
+
+          {/* ── Cards grid — 3 columns × 2 rows ── */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+            {whyChoose.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={i}
+                  className="why-card"
+                  data-testid={`card-why-${i}`}
+                  style={{
+                    background: "#ffffff",
+                    border: "1px solid rgba(0,0,0,0.09)",
+                    borderRadius: "6px",
+                    padding: "40px 32px 36px",
+                    boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+                    transition: "box-shadow 0.25s, transform 0.25s",
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 8px 32px rgba(196,30,58,0.10)"; el.style.transform = "translateY(-3px)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)"; el.style.transform = "translateY(0)"; }}
+                >
+                  {/* Icon circle */}
+                  <div style={{
+                    width: "56px", height: "56px", borderRadius: "50%",
+                    background: "rgba(196,30,58,0.07)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "24px",
+                  }}>
+                    <Icon size={22} color="#C41E3A" strokeWidth={1.5} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
+                    fontWeight: 700, color: "#111827",
+                    letterSpacing: "0.1em", textTransform: "uppercase",
+                    marginBottom: "14px",
+                  }}>
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+                    lineHeight: 1.85, color: "#6b7280",
+                  }}>
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="font-bold uppercase pt-1"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em" }}>
-                  {item.title}
-                </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563", paddingTop: "2px" }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <div className="mt-12 text-center">
+
+          {/* ── CTA ── */}
+          <div className="mt-14 text-center">
             <Link href="/contact">
               <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
                 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
@@ -821,6 +861,7 @@ export default function HomePage() {
               </span>
             </Link>
           </div>
+
         </div>
       </section>
 
