@@ -147,7 +147,7 @@ export default function HomePage() {
     const section  = heroSectionRef.current;
     if (!headline || !heroBg || !section) return;
 
-    gsap.set(section, { y: 80, scale: 0.98 });
+    gsap.set(section, { y: "100vh", scale: 0.98 });
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -512,7 +512,7 @@ export default function HomePage() {
             <source src={`${assetBase}assets/video/hero.webm`} type="video/webm" />
             <source src={`${assetBase}assets/video/hero.mp4`}  type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -762,7 +762,7 @@ export default function HomePage() {
               <img src={proj.image} alt={proj.name}
                 className="proj-img absolute inset-0 w-full h-full object-cover will-change-transform"
                 style={{ transformOrigin: "center" }} />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)" }} />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)" }} />
               {proj.featured && (
                 <div className="absolute top-8 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
                   style={{ background: "#C41E3A", color: "#fff", fontFamily: "'Montserrat',sans-serif" }}>Featured</div>
