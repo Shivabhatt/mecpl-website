@@ -131,7 +131,6 @@ export default function HomePage() {
   const whyRef           = useRef<HTMLElement>(null);
   const testimonialsRef  = useRef<HTMLElement>(null);
   const clientsRef       = useRef<HTMLElement>(null);
-  const awardsRef        = useRef<HTMLElement>(null);
   const stackedRef       = useRef<HTMLElement>(null);
 
   /* Hero auto-slide */
@@ -408,32 +407,6 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── AWARDS: rows enter from right ── */
-  useEffect(() => {
-    const sec = awardsRef.current;
-    if (!sec) return;
-
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const fadeEl = sec.querySelector<HTMLElement>("[data-animate='fade']");
-        if (fadeEl) {
-          gsap.from(fadeEl, {
-            y: 30, opacity: 0, duration: 0.9, ease: "power3.out",
-            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
-          });
-        }
-        gsap.utils.toArray<HTMLElement>(".award-row", sec).forEach((row, i) => {
-          gsap.from(row, {
-            x: 40, opacity: 0, duration: 0.7, ease: "power3.out", delay: i * 0.07,
-            scrollTrigger: { trigger: row, start: "top 90%", toggleActions: "play none none none" },
-          });
-        });
-      });
-    }, sec);
-
-    return () => ctx.revert();
-  }, []);
 
 
   /* ── STACKED INTRO: CSS sticky stack — Recognition (z1) + About Us (z2) ── */
@@ -986,58 +959,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ AWARDS ══════════ */}
-      <section ref={awardsRef} className="py-20 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
-        data-testid="section-awards-strip">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-16 items-start">
-            <div className="lg:w-1/3 space-y-6" data-animate="fade">
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>Recognition</span>
-              <h2 className="uppercase text-3xl"
-                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-                Award-Winning<br />Excellence
-              </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
-                20+ consecutive industry awards for structural quality, safety leadership, and on-time delivery.
-              </p>
-              <Link href="/awards" data-testid="button-awards-more">
-                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                  Full Awards History <ArrowRight size={12} />
-                </span>
-              </Link>
-            </div>
-
-            <div className="lg:w-2/3 border-t w-full" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-              {[
-                { year: "2023", award: "BAI Special Jury Award",    org: "Builders Association of India" },
-                { year: "2022", award: "Constro Silver Trophy",     org: "Constro Awards" },
-                { year: "2021", award: "Constro Gold Trophy",       org: "Constro Awards" },
-                { year: "2018", award: "Industry Excellence Gold",  org: "National Construction" },
-                { year: "2017", award: "India's Small Giants",      org: "Forbes India" },
-                { year: "2007", award: "BAI First Prize",           org: "Builders Association of India" },
-              ].map(a => (
-                <div key={a.year} className="award-row py-7 border-b flex items-center gap-8"
-                  style={{ borderColor: "rgba(0,0,0,0.07)" }}
-                  data-testid={`card-award-${a.year}`}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 800, color: "#C41E3A", lineHeight: 1, flexShrink: 0, minWidth: "80px" }}>
-                    {a.year}
-                  </div>
-                  <div className="flex-1">
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>
-                      {a.award}
-                    </div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(17,24,39,0.4)", textTransform: "uppercase" }}>
-                      {a.org}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
 
       <Footer />
