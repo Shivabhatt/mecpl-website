@@ -40,8 +40,8 @@ const filters = ["All", "Residential", "Commercial", "Industrial", "Special"];
 
 const typeBadge: Record<string, string> = {
   Residential: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
-  Commercial: "bg-white/5 text-white/60 border border-white/10",
-  Industrial: "bg-white/5 text-white/60 border border-white/10",
+  Commercial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
+  Industrial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
   Special: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
 };
 
@@ -50,14 +50,13 @@ export default function CompletedProjectsPage() {
   const filtered = active === "All" ? allProjects : allProjects.filter(p => p.type === active);
 
   return (
-    <div data-animate-page className="bg-mecpl-dark">
+    <div data-animate-page className="bg-white">
       {/* Header */}
-      <div className="relative py-14 md:py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
+      <div className="relative py-14 md:py-20 border-b border-black/[0.06] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Construction" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="Our Portfolio" title="Completed Projects" subtitle="150+ landmark structures delivered across residential, commercial, and industrial sectors." center light />
-       
+          <SectionHeader label="Our Portfolio" title="Completed Projects" subtitle="150+ landmark structures delivered across residential, commercial, and industrial sectors." center />
         </div>
       </div>
 
@@ -71,14 +70,14 @@ export default function CompletedProjectsPage() {
       </div>
 
       {/* Filters */}
-      <div className="sticky top-20 z-30 bg-mecpl-dark border-b border-white/5 py-4 md:py-5" data-testid="section-project-filters">
+      <div className="sticky top-20 z-30 bg-white border-b border-black/[0.06] py-4 md:py-5" data-testid="section-project-filters">
         <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-2 justify-center">
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setActive(f)}
               className={`px-6 py-2.5 text-xs font-black uppercase tracking-widest rounded-sm transition-all ${
-                active === f ? "bg-[#C41E3A] text-white" : "bg-mecpl-card text-white/50 hover:text-white border border-white/5 hover:border-white/20"
+                active === f ? "bg-[#C41E3A] text-white" : "bg-white text-[#6b7280] hover:text-[#111827] border border-black/[0.1] hover:border-black/[0.2]"
               }`}
               data-testid={`button-filter-${f.toLowerCase()}`}
             >
@@ -90,12 +89,12 @@ export default function CompletedProjectsPage() {
 
       {/* Projects Grid */}
       <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-projects-grid">
-        <p className="text-gray-500 text-xs uppercase tracking-widest font-bold mb-6">
+        <p className="text-[#6b7280] text-xs uppercase tracking-widest font-bold mb-6">
           Showing {filtered.length} projects{active !== "All" ? ` · ${active}` : ""}
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
-            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300" data-testid={`card-project-${i}`}>
+            <div key={i} className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-lg transition-all duration-300 shadow-sm" data-testid={`card-project-${i}`}>
               <div className="h-44 overflow-hidden relative">
                 <img
                   src={project.image}
@@ -111,10 +110,10 @@ export default function CompletedProjectsPage() {
                 </div>
               </div>
               <div className="p-5">
-                <h3 className="text-white font-bold text-sm uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors leading-snug">{project.name}</h3>
+                <h3 className="text-[#111827] font-bold text-sm uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors leading-snug">{project.name}</h3>
                 <div className="flex items-center gap-1.5 mt-2">
                   <MapPin size={11} className="text-[#C41E3A] flex-shrink-0" />
-                  <span className="text-gray-500 text-xs">{project.location}</span>
+                  <span className="text-[#6b7280] text-xs">{project.location}</span>
                 </div>
               </div>
             </div>

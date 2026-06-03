@@ -35,33 +35,32 @@ const equipment = [
 
 export default function EquipmentPage() {
   return (
-    <div data-animate-page className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-white pt-20">
       {/* Header */}
-      <div className="relative py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Heavy machinery" />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
+      <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.12]" alt="Heavy machinery" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-3">Infrastructure Assets</span>
-          <h3 className="text-3xl font-black tracking-tighter uppercase text-white">Advanced Machinery Inventory</h3>
+          <h3 className="text-3xl font-black tracking-tighter uppercase text-[#111827]">Advanced Machinery Inventory</h3>
           <div className="w-16 h-0.5 bg-[#C41E3A] mt-4"></div>
-          <p className="text-gray-400 text-base mt-4 max-w-xl leading-relaxed">Our execution velocity stems directly from total strategic ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
-         
+          <p className="text-[#4b5563] text-base mt-4 max-w-xl leading-relaxed">Our execution velocity stems directly from total strategic ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
         </div>
       </div>
 
       {/* Equipment grid+image layout */}
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center py-14 border-b border-white/5">
-          <div className="h-96 rounded-sm overflow-hidden border border-white/10 shadow-2xl">
+        <div className="grid lg:grid-cols-2 gap-12 items-center py-14 border-b border-black/[0.06]">
+          <div className="h-96 rounded-sm overflow-hidden border border-black/[0.1] shadow-xl">
             <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-all duration-500" alt="Heavy machinery" />
           </div>
           <div className="space-y-6">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Self-Owned Fleet</span>
-            <h3 className="text-3xl font-black tracking-tight uppercase text-white">Total Operational Independence</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">MECPL's self-owned equipment fleet ensures operational independence, consistent quality, and cost efficiency on every project — a key competitive advantage in large-scale tender bidding.</p>
+            <h3 className="text-3xl font-black tracking-tight uppercase text-[#111827]">Total Operational Independence</h3>
+            <p className="text-[#4b5563] text-sm leading-relaxed">MECPL's self-owned equipment fleet ensures operational independence, consistent quality, and cost efficiency on every project — a key competitive advantage in large-scale tender bidding.</p>
             <ul className="space-y-3">
               {["Automated High-Capacity Tower Cranes & Heavy Material Lifts", "Computerized Central Concrete Batching Plants", "Heavy Earth Excavation Machinery & Transit Mixer Fleets", "Certified Modular Formwork & Heavy Infrastructure Shuttering Systems"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                <li key={i} className="flex items-start gap-3 text-sm text-[#374151]">
                   <span className="text-[#C41E3A] mt-0.5 flex-shrink-0">✓</span>
                   <span>{item}</span>
                 </li>
@@ -75,7 +74,7 @@ export default function EquipmentPage() {
       <section className="max-w-7xl mx-auto px-6 py-10" data-testid="section-equipment">
         <div className="space-y-6">
           {equipment.map((item, i) => (
-            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-xl lg:h-[22rem]" data-testid={`card-equipment-${i}`}>
+            <div key={i} className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-sm lg:h-[22rem]" data-testid={`card-equipment-${i}`}>
               <div className="grid h-full lg:grid-cols-3">
                 <div className="h-52 lg:h-full overflow-hidden">
                   <img src={item.image} className="w-full h-full object-cover transition-all duration-700" alt={item.name} loading="lazy" />
@@ -84,16 +83,16 @@ export default function EquipmentPage() {
                   <div className="space-y-4">
                     <div>
                       <span className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">Equipment 0{i + 1}</span>
-                      <h3 className="text-white font-black text-xl uppercase tracking-tight mt-1">{item.name}</h3>
+                      <h3 className="text-[#111827] font-black text-xl uppercase tracking-tight mt-1">{item.name}</h3>
                       <div className="w-8 h-0.5 bg-[#C41E3A] mt-3"></div>
                     </div>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-[#4b5563] text-sm leading-relaxed">{item.desc}</p>
                   </div>
                   <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-gray-500 mb-2">Key Features</div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-[#6b7280] mb-2">Key Features</div>
                     <div className="grid grid-cols-2 gap-2">
                       {item.specs.map((spec, j) => (
-                        <div key={j} className="flex items-center gap-2 text-xs text-gray-400">
+                        <div key={j} className="flex items-center gap-2 text-xs text-[#4b5563]">
                           <span className="text-[#C41E3A]">→</span> {spec}
                         </div>
                       ))}

@@ -225,26 +225,26 @@ useEffect(() => {
   };
 
   return (
-    <div data-animate-page className="bg-mecpl-dark">
+    <div data-animate-page className="bg-white">
       {/* Hero Section */}
-      <div className="relative overflow-hidden border-b border-white/5">
+      <div className="relative overflow-hidden border-b border-black/[0.06]">
         <img
           src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1920&auto=format&fit=crop"
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.1]"
           alt="Engineering team"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/90 to-mecpl-dark/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40" />
         <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-24" style={{ paddingTop: 95, paddingBottom: 60 }}>
-          <SectionHeader label="Join Team MECPL" title={`Build Your\nEngineering Career`} subtitle="Work with a team that values safety, quality, and professional growth. We create opportunities for engineers, managers and operations teams to grow inside high-impact projects." center light />
+          <SectionHeader label="Join Team MECPL" title={`Build Your\nEngineering Career`} subtitle="Work with a team that values safety, quality, and professional growth. We create opportunities for engineers, managers and operations teams to grow inside high-impact projects." center />
        
         
         </div>
       </div>
 
       {/* Sticky Navigation */}
-      <div className="sticky top-20 z-30 bg-mecpl-dark/95 backdrop-blur-xl border-b border-white/5">
+      <div className="sticky top-20 z-30 bg-white/95 backdrop-blur-xl border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-4 overflow-x-auto">
-          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.28em] whitespace-nowrap text-white/50">
+          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.28em] whitespace-nowrap text-[#6b7280]">
             <a href="#abt1" className="hover:text-[#C41E3A] hover:font-black transition-colors">Life at MECPL</a>
             <a href="#abt2" className="hover:text-[#C41E3A] hover:font-black transition-colors">Our Values</a>
             <a href="#abt3" className="hover:text-[#C41E3A] hover:font-black transition-colors">Open Roles</a>
@@ -255,19 +255,19 @@ useEffect(() => {
 
       {/* Workplace Culture & Stories */}
       <section id="abt1" className="max-w-7xl mx-auto px-6 py-18 md:py-24 scroll-mt-28" style={{paddingBottom: 0}}>
-        <div className="relative overflow-hidden rounded-[28px]">
+        <div className="relative overflow-hidden rounded-[28px] border border-black/[0.07]">
           <img
             src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1800&auto=format&fit=crop"
-            className="absolute inset-0 w-full h-full object-cover opacity-15"
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
             alt="Workplace"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/95 to-mecpl-dark/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/70" />
 
           <div className="relative p-8 md:p-12 grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <span className="text-[#C41E3A] text-[10px] font-black tracking-[0.28em] uppercase block mb-3">Our Workplace</span>
-              <h3 className="text-3xl font-light uppercase tracking-tight text-white leading-[0.95]">A Culture That Enables Growth</h3>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mt-5 max-w-xl">
+              <h3 className="text-3xl font-light uppercase tracking-tight text-[#111827] leading-[0.95]">A Culture That Enables Growth</h3>
+              <p className="text-[#374151] text-sm md:text-base leading-relaxed mt-5 max-w-xl">
                 We encourage our employees to achieve growth by creating opportunities to learn, lead, and contribute.
                 Our teams work on landmark projects with disciplined standards and strong collaboration.
               </p>
@@ -282,18 +282,18 @@ useEffect(() => {
           </div>
 
           <div className="relative px-8 md:px-12 py-7 md:py-8">
-            <div className="text-white/60 text-[10px] font-black tracking-[0.3em] uppercase mb-4">Employee Stories</div>
+            <div className="text-[#6b7280] text-[10px] font-black tracking-[0.3em] uppercase mb-4">Employee Stories</div>
             <div className="grid md:grid-cols-3 gap-4">
               {employeeStories.map((story) => (
-                <div key={story.name} className="rounded-2xl bg-mecpl-dark shadow-2xl shadow-black/20 p-4 md:p-5">
+                <div key={story.name} className="rounded-2xl bg-white border border-black/[0.07] shadow-sm p-4 md:p-5">
                   <div className="flex items-start gap-3">
-                    <img src={story.image} alt={story.name} className="w-16 h-16 rounded-lg object-cover border border-white/10" />
+                    <img src={story.image} alt={story.name} className="w-16 h-16 rounded-lg object-cover border border-black/[0.1]" />
                     <div>
-                      <div className="text-white font-black uppercase text-sm tracking-tight leading-tight">{story.name}</div>
+                      <div className="text-[#111827] font-black uppercase text-sm tracking-tight leading-tight">{story.name}</div>
                       <div className="text-[#C41E3A] text-[10px] font-black tracking-[0.24em] uppercase mt-1 leading-snug">{story.role}</div>
                     </div>
                   </div>
-                  <p className="text-gray-300 text-sm mt-4 leading-relaxed">{story.quote}</p>
+                  <p className="text-[#374151] text-sm mt-4 leading-relaxed">{story.quote}</p>
                 </div>
               ))}
             </div>
@@ -305,7 +305,7 @@ useEffect(() => {
 <section
   id="abt2"
   ref={pinRef}
-  className="relative bg-mecpl-dark"
+  className="relative bg-white"
   style={{
     height: `${values.length * 100}vh`,
   }}
@@ -319,9 +319,9 @@ useEffect(() => {
   <div className="flex items-end justify-between gap-6">
     <div>
       <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">CORE VALUES</span>
-      <h3 className="text-3xl font-light uppercase tracking-tighter text-white mt-2">WHAT DRIVES MECPL</h3>
+      <h3 className="text-3xl font-light uppercase tracking-tighter text-[#111827] mt-2">WHAT DRIVES MECPL</h3>
     </div>
-    <div className="hidden md:flex items-center gap-2 text-white/40 text-[10px] font-black tracking-[0.28em] uppercase">
+    <div className="hidden md:flex items-center gap-2 text-[#6b7280] text-[10px] font-black tracking-[0.28em] uppercase">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-badge-check" aria-hidden="true">
         <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
         <path d="m9 12 2 2 4-4"></path>
@@ -336,7 +336,7 @@ useEffect(() => {
         <div className="relative flex items-start gap-8 w-[320px] shrink-0">
 
           {/* LINE */}
-          <div className="relative w-[3px] h-[420px] bg-white/10 rounded-full overflow-hidden mt-1">
+          <div className="relative w-[3px] h-[420px] bg-black/[0.08] rounded-full overflow-hidden mt-1">
             <div
               ref={fillRef}
               className="absolute inset-0 bg-[#C41E3A]"
@@ -392,7 +392,7 @@ useEffect(() => {
                     {v.title}
                   </h3>
 
-                  <p className="text-gray-300 text-sm md:text-base leading-relaxed mt-5 max-w-xl">
+                  <p className="text-[#374151] text-sm md:text-base leading-relaxed mt-5 max-w-xl">
                     {v.desc}
                   </p>
 
@@ -418,10 +418,10 @@ useEffect(() => {
           </div>
           <div className="max-w-2xl lg:pl-2 w-full pr-6 md:pr-12 lg:pr-16">
             <span className="block text-[#C41E3A] text-[10px] font-black tracking-[0.28em] uppercase mb-3">Build Your Career With Us</span>
-            <h1 className="text-3xl font-light tracking-tight text-mecpl-text leading-[0.96] max-w-xl">
+            <h1 className="text-3xl font-light tracking-tight text-[#111827] leading-[0.96] max-w-xl">
               Build your Career with Us
             </h1>
-            <p className="text-mecpl-text-muted text-sm md:text-[17px] leading-relaxed mt-8 max-w-xl">
+            <p className="text-[#4b5563] text-sm md:text-[17px] leading-relaxed mt-8 max-w-xl">
               Explore exciting growth opportunities and work in a conducive culture that will help you achieve your career goals.
             </p>
             <a
@@ -443,12 +443,12 @@ useEffect(() => {
           <div className="lg:col-span-7">
             <div className="grid gap-4">
               {openings.map((job, i) => (
-                <div key={i} className="w-full rounded-[20px] bg-mecpl-dark p-5 md:p-6 transition-all" data-testid={`card-job-${i}`}>
+                <div key={i} className="w-full rounded-[20px] bg-white border border-black/[0.07] shadow-sm p-5 md:p-6 transition-all hover:border-[#C41E3A]/30" data-testid={`card-job-${i}`}>
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="space-y-2">
                       <div className="text-[10px] font-black uppercase tracking-[0.28em] text-[#C41E3A]">{job.dept} | {job.type}</div>
-                      <h3 className="text-xl font-light uppercase tracking-tight text-white">{job.title}</h3>
-                      <div className="flex flex-wrap gap-3 text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+                      <h3 className="text-xl font-light uppercase tracking-tight text-[#111827]">{job.title}</h3>
+                      <div className="flex flex-wrap gap-3 text-[#6b7280] text-[10px] font-bold uppercase tracking-widest">
                         <span className="inline-flex items-center gap-1.5"><MapPin size={10} /> {job.location}</span>
                         <span className="inline-flex items-center gap-1.5"><Clock size={10} /> {job.exp}</span>
                       </div>
@@ -489,13 +489,13 @@ useEffect(() => {
           Benefits
         </span>
 
-        <h3 className="text-4xl md:text-6xl font-light uppercase tracking-tight text-white leading-[0.92]">
+        <h3 className="text-4xl md:text-6xl font-light uppercase tracking-tight text-[#111827] leading-[0.92]">
           Live Your
           <br />
           Best Life
         </h3>
 
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-md">
+        <p className="text-[#4b5563] text-sm md:text-base leading-relaxed max-w-md">
           Learn about the benefits of working with MECPL and how we prioritise our employees at every step of the way.
         </p>
 
@@ -515,14 +515,14 @@ useEffect(() => {
         {benefits.map((benefit, i) => (
           <div
             key={benefit.title}
-            className="benefit-card group relative rounded-[28px] border border-white/5 bg-white/[0.03] backdrop-blur-xl p-7 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-[#C41E3A]/30 hover:bg-[#C41E3A]/[0.04]"
+            className="benefit-card group relative rounded-[28px] border border-black/[0.07] bg-white shadow-sm p-7 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-[#C41E3A]/30 hover:bg-[#C41E3A]/[0.04]"
           >
 
             {/* GLOW */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_right,rgba(196,30,58,0.18),transparent_45%)]" />
 
             {/* NUMBER */}
-            <div className="absolute top-6 right-6 text-white/5 text-5xl font-black">
+            <div className="absolute top-6 right-6 text-black/[0.04] text-5xl font-black">
               0{i + 1}
             </div>
 
@@ -537,11 +537,11 @@ useEffect(() => {
             {/* CONTENT */}
             <div className="relative z-10">
 
-              <h3 className="text-white text-xl font-light uppercase tracking-tight mb-4">
+              <h3 className="text-[#111827] text-xl font-light uppercase tracking-tight mb-4">
                 {benefit.title}
               </h3>
 
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-[#4b5563] text-sm leading-relaxed">
                 {benefit.desc}
               </p>
 
@@ -563,8 +563,8 @@ useEffect(() => {
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-5 space-y-5">
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Application</span>
-            <h3 className="text-3xl md:text-4xl font-light uppercase tracking-tight text-white">Submit Corporate Application</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Share your background, the role you're interested in, and any portfolio or CV details. We review applications on a rolling basis.</p>
+            <h3 className="text-3xl md:text-4xl font-light uppercase tracking-tight text-[#111827]">Submit Corporate Application</h3>
+            <p className="text-[#4b5563] text-sm leading-relaxed">Share your background, the role you're interested in, and any portfolio or CV details. We review applications on a rolling basis.</p>
           </div>
           <div className="lg:col-span-7 rounded-[24px] p-6 md:p-8" data-testid="section-application-form">
             {submitted ? (
@@ -572,7 +572,7 @@ useEffect(() => {
                 <div className="w-14 h-14 bg-[#C41E3A]/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-[#C41E3A] text-2xl">✓</span>
                 </div>
-                <h3 className="text-white font-light text-xl uppercase mb-2">Application Submitted!</h3>
+                <h3 className="text-[#111827] font-light text-xl uppercase mb-2">Application Submitted!</h3>
                 <p className="text-gray-400 text-sm">Our HR team will contact you shortly.</p>
                 <button onClick={() => setSubmitted(false)} className="mt-5 text-[#C41E3A] text-xs font-black uppercase tracking-widest hover:underline" data-testid="button-send-another">
                   Submit Another
@@ -582,36 +582,36 @@ useEffect(() => {
               <form onSubmit={handleSubmit} className="space-y-5" data-testid="form-application">
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Full Legal Name</label>
+                    <label className="text-[9px] font-black uppercase tracking-widest text-[#6b7280] block mb-1.5">Full Legal Name</label>
                     <input
                       type="text"
                       required
                       value={form.name}
                       onChange={e => setForm({ ...form, name: e.target.value })}
                       placeholder="E.g., Rahul Sharma"
-                      className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                      className="w-full bg-[#f9f9f9] border border-black/[0.1] rounded-sm p-3 text-sm text-[#111827] focus:outline-none focus:border-[#C41E3A] transition-colors"
                       data-testid="input-applicant-name"
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Email Address</label>
+                    <label className="text-[9px] font-black uppercase tracking-widest text-[#6b7280] block mb-1.5">Email Address</label>
                     <input
                       type="email"
                       required
                       value={form.email}
                       onChange={e => setForm({ ...form, email: e.target.value })}
                       placeholder="E.g., r.sharma@domain.com"
-                      className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors"
+                      className="w-full bg-[#f9f9f9] border border-black/[0.1] rounded-sm p-3 text-sm text-[#111827] focus:outline-none focus:border-[#C41E3A] transition-colors"
                       data-testid="input-applicant-email"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Experience Level</label>
+                  <label className="text-[9px] font-black uppercase tracking-widest text-[#6b7280] block mb-1.5">Experience Level</label>
                   <select
                     value={form.exp}
                     onChange={e => setForm({ ...form, exp: e.target.value })}
-                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-gray-300 focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-[#f9f9f9] border border-black/[0.1] rounded-sm p-3 text-sm text-[#374151] focus:outline-none focus:border-[#C41E3A] transition-colors"
                     data-testid="select-applicant-exp"
                   >
                     <option>0 - 2 Years Baseline</option>
@@ -621,19 +621,19 @@ useEffect(() => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Cover Message</label>
+                  <label className="text-[9px] font-black uppercase tracking-widest text-[#6b7280] block mb-1.5">Cover Message</label>
                   <textarea
                     rows={4}
                     value={form.message}
                     onChange={e => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell us about your experience and why you'd like to join MECPL..."
-                    className="w-full bg-mecpl-dark border border-white/10 rounded-sm p-3 text-sm text-white focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
+                    className="w-full bg-[#f9f9f9] border border-black/[0.1] rounded-sm p-3 text-sm text-[#111827] focus:outline-none focus:border-[#C41E3A] transition-colors resize-none"
                     data-testid="textarea-applicant-message"
                   />
                 </div>
-                <div className="border-2 border-dashed border-white/10 hover:border-[#C41E3A]/40 bg-mecpl-dark p-5 rounded-sm text-center transition-colors cursor-pointer relative">
-                  <div className="text-gray-500 text-xl mb-1">↑</div>
-                  <p className="text-xs text-gray-500">Drag and drop CV/Portfolio here, or browse</p>
+                <div className="border-2 border-dashed border-black/[0.1] hover:border-[#C41E3A]/40 bg-[#f9f9f9] p-5 rounded-sm text-center transition-colors cursor-pointer relative">
+                  <div className="text-[#9ca3af] text-xl mb-1">↑</div>
+                  <p className="text-xs text-[#6b7280]">Drag and drop CV/Portfolio here, or browse</p>
                   <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" />
                 </div>
                 <button

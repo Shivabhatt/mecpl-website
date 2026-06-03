@@ -77,7 +77,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div className="space-y-5">
-          <img src="/assets/logo/mecpl-logo.png" alt="MECPL logo" className="h-12 w-auto object-contain" style={{ filter: "brightness(0)" }} />
+          <img src="/assets/logo/mecpl-logo.webp" alt="MECPL logo" className="h-12 w-auto object-contain" />
           <p style={{ fontSize: "12px", lineHeight: 1.8, color: "rgba(17,24,39,0.45)" }}>
             Engineering India's skyline, one landmark at a time. ISO certified, CRISIL SME 1 rated — since 1998.
           </p>

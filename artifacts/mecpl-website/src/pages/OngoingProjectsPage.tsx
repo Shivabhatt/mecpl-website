@@ -18,30 +18,30 @@ const ongoingProjects = [
 
 export default function OngoingProjectsPage() {
   return (
-    <div data-animate-page className="bg-mecpl-dark pt-20">
+    <div data-animate-page className="bg-white pt-20">
       {/* Header */}
-      <div className="relative py-14 md:py-20 border-b border-white/5 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-15" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
+      <div className="relative py-14 md:py-20 border-b border-black/[0.06] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Construction" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
             <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Active Construction</span>
           </div>
-          <SectionHeader title="Ongoing Projects" subtitle="10 active engineering pipelines currently under construction across Pune's premier development zones." center light />
-          <div className="flex items-center gap-2 mt-3 text-white/30 text-[10px] md:text-xs tracking-widest uppercase font-bold">
+          <SectionHeader title="Ongoing Projects" subtitle="10 active engineering pipelines currently under construction across Pune's premier development zones." center />
+          <div className="flex items-center gap-2 mt-3 text-[#9ca3af] text-[10px] md:text-xs tracking-widest uppercase font-bold">
             <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
             <span>/</span>
-            <span className="text-white/60">Ongoing Projects</span>
+            <span className="text-[#6b7280]">Ongoing Projects</span>
           </div>
         </div>
       </div>
 
       {/* Live indicator bar */}
-      <div className="bg-mecpl-card border-b border-white/5 py-3">
+      <div className="bg-white border-b border-black/[0.06] py-3">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-3 text-center">
           <Activity size={14} className="text-[#C41E3A]" />
-          <span className="text-white text-[10px] md:text-xs font-black uppercase tracking-widest">10 Projects Currently Active</span>
+          <span className="text-[#111827] text-[10px] md:text-xs font-black uppercase tracking-widest">10 Projects Currently Active</span>
           <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function OngoingProjectsPage() {
           {ongoingProjects.map((project, i) => (
             <div
               key={i}
-              className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all duration-300 shadow-xl flex flex-col"
+              className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all duration-300 shadow-sm flex flex-col"
               data-testid={`card-ongoing-project-${i}`}
             >
               <div className="h-48 overflow-hidden relative">
@@ -62,24 +62,24 @@ export default function OngoingProjectsPage() {
                   alt={project.name}
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-sm">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-sm">
                   <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full animate-pulse"></span>
                   <span className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">Active Build</span>
                 </div>
                 <div className="absolute bottom-4 left-4">
-                  <span className="text-white/30 text-xs font-black">0{i + 1}</span>
+                  <span className="text-white/60 text-xs font-black">0{i + 1}</span>
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between gap-4">
                 <div className="space-y-3">
-                  <h3 className="text-white font-black text-lg uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors">{project.name}</h3>
+                  <h3 className="text-[#111827] font-black text-lg uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors">{project.name}</h3>
                   <div className="flex items-center gap-1.5">
                     <MapPin size={12} className="text-[#C41E3A]" />
-                    <span className="text-gray-500 text-xs">{project.location}</span>
+                    <span className="text-[#6b7280] text-xs">{project.location}</span>
                   </div>
                   <div className="w-8 h-0.5 bg-[#C41E3A]"></div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{project.desc}</p>
+                  <p className="text-[#4b5563] text-sm leading-relaxed">{project.desc}</p>
                 </div>
               </div>
             </div>
@@ -88,10 +88,10 @@ export default function OngoingProjectsPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-white/5 bg-gradient-to-b from-mecpl-dark to-black py-20" data-testid="section-ongoing-cta">
+      <section className="border-t border-black/[0.06] bg-[#f9f9f9] py-20" data-testid="section-ongoing-cta">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white">Partner on Your Next Project</h3>
-          <p className="text-gray-400 text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>
+          <h3 className="text-3xl font-black uppercase tracking-tighter text-[#111827]">Partner on Your Next Project</h3>
+          <p className="text-[#4b5563] text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>
           <Link href="/contact" data-testid="button-ongoing-contact">
             <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg cursor-pointer">
               Contact Our Team

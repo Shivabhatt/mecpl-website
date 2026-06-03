@@ -55,23 +55,23 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div data-animate-page className="bg-mecpl-dark">
+    <div data-animate-page className="bg-white">
       {/* Header */}
-      <div className="relative py-24 border-b border-white/5 overflow-hidden">
+      <div className="relative py-24 border-b border-black/[0.06] overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop"
-          className="absolute inset-0 w-full h-full object-cover opacity-15"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
           alt="Services"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="What We Do" title="Our Services" subtitle="From civil structural works to full turnkey delivery — six core service pillars that cover the entire construction lifecycle for India's most demanding projects." center light />
-          <div className="flex items-center gap-3 mt-4 text-white/40 text-[10px] font-bold tracking-widest uppercase">
+          <SectionHeader label="What We Do" title="Our Services" subtitle="From civil structural works to full turnkey delivery — six core service pillars that cover the entire construction lifecycle for India's most demanding projects." center />
+          <div className="flex items-center gap-3 mt-4 text-[#9ca3af] text-[10px] font-bold tracking-widest uppercase">
             <Link href="/">
               <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">Home</span>
             </Link>
             <span>/</span>
-            <span className="text-white">Services</span>
+            <span className="text-[#6b7280]">Services</span>
           </div>
         </div>
       </div>
@@ -98,10 +98,10 @@ export default function ServicesPage() {
         <SectionHeader label="Service Verticals" title="Built for India's Most Demanding Projects" center subtitle="Six specialized service pillars, each backed by 25+ years of execution experience and ISO-certified quality standards." />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {services.map((svc, i) => (
-            <div key={i} className="group bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            <div key={i} className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-lg transition-all duration-300 flex flex-col shadow-sm">
               <div className="h-48 overflow-hidden relative">
                 <img src={svc.image} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" alt={svc.title} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
                   <svc.icon size={20} className="text-[#C41E3A]" />
                 </div>
@@ -109,12 +109,12 @@ export default function ServicesPage() {
               <div className="p-8 space-y-4 flex-1 flex flex-col">
                 <div>
                   <span className="text-[#C41E3A] text-[9px] font-black tracking-widest uppercase">{svc.subtitle}</span>
-                  <h3 className="text-xl font-black uppercase tracking-tight text-white mt-1">{svc.title}</h3>
+                  <h3 className="text-xl font-black uppercase tracking-tight text-[#111827] mt-1">{svc.title}</h3>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed flex-1">{svc.desc}</p>
-                <ul className="space-y-1.5 pt-2 border-t border-white/5">
+                <p className="text-[#4b5563] text-sm leading-relaxed flex-1">{svc.desc}</p>
+                <ul className="space-y-1.5 pt-2 border-t border-black/[0.06]">
                   {svc.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-2 text-[11px] text-gray-400 font-bold uppercase tracking-wide">
+                    <li key={h} className="flex items-center gap-2 text-[11px] text-[#4b5563] font-bold uppercase tracking-wide">
                       <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full flex-shrink-0"></span>
                       {h}
                     </li>
@@ -127,13 +127,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Why partner CTA */}
-      <section className="bg-mecpl-card border-y border-white/5 py-20" data-animate-exclude="true">
+      <section className="bg-[#f9f9f9] border-y border-black/[0.06] py-20" data-animate-exclude="true">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Get Started</span>
-          <h3 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-[#111827]">
             Ready to Discuss Your Project?
           </h3>
-          <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
+          <p className="text-[#4b5563] text-sm leading-relaxed max-w-xl mx-auto">
             Share your structural blueprints or project brief and our senior engineering team will respond within 24 hours with a tailored assessment.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -143,7 +143,7 @@ export default function ServicesPage() {
               </span>
             </Link>
             <Link href="/completed-projects">
-              <span className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
+              <span className="inline-flex items-center gap-2 border border-black/[0.15] hover:border-[#111827] text-[#111827] px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all cursor-pointer">
                 View Portfolio <ArrowRight size={14} />
               </span>
             </Link>

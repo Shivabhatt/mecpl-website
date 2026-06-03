@@ -618,7 +618,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ ABOUT STRIP ══════════ */}
-      <section className="py-28 px-6 border-b"
+      <section className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-about-strip">
         <div className="max-w-7xl mx-auto">
@@ -831,7 +831,7 @@ export default function HomePage() {
 
       {/* ══════════ WHY CHOOSE ══════════ */}
       <section ref={whyRef}
-        className="py-28 px-6 border-b"
+        className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-why-mecpl">
         <div className="max-w-7xl mx-auto w-full">
@@ -950,7 +950,7 @@ export default function HomePage() {
 
       {/* ══════════ CLIENTS ══════════ */}
       <section ref={clientsRef}
-        className="py-28 px-6 border-b"
+        className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-clients">
         <div className="max-w-7xl mx-auto space-y-14">
@@ -1013,7 +1013,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ AWARDS ══════════ */}
-      <section ref={awardsRef} className="py-28 px-6 border-b"
+      <section ref={awardsRef} className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
         data-testid="section-awards-strip">
         <div className="max-w-7xl mx-auto">

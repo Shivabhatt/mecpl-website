@@ -79,15 +79,15 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div data-animate-page className="bg-mecpl-dark">
+    <div data-animate-page className="bg-white">
       {/* Page header */}
-      <div className="relative py-20 border-b border-white/5 overflow-hidden">
+      <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop"
-          className="absolute inset-0 w-full h-full object-cover opacity-15"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
           alt="Construction"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-mecpl-dark via-mecpl-dark/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
           <SectionHeader label="Who We Are" title="About MECPL" subtitle="25+ years of building trust, delivering excellence, and shaping Pune's skyline." />
         
@@ -95,9 +95,9 @@ export default function AboutPage() {
       </div>
 
       {/* Sticky Navigation */}
-      <div className="sticky top-20 z-30 bg-mecpl-dark/95 backdrop-blur-xl border-b border-white/5">
+      <div className="sticky top-20 z-30 bg-white/95 backdrop-blur-xl border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-4 overflow-x-auto">
-          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.28em] whitespace-nowrap text-white/50">
+          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.28em] whitespace-nowrap text-[#6b7280]">
             <a href="#abt1" className="hover:text-[#C41E3A] hover:font-black transition-colors">Vision &amp; Mission</a>
             <a href="#abt2" className="hover:text-[#C41E3A] hover:font-black transition-colors">Services</a>
             <a href="#abt3" className="hover:text-[#C41E3A] hover:font-black transition-colors">Leadership</a>
@@ -107,32 +107,32 @@ export default function AboutPage() {
       </div>
 
       {/* Vision & Mission */}
-      <section id="abt1" className="max-w-7xl mx-auto px-6 py-20 border-b border-white/5 scroll-mt-28" data-testid="section-vision-mission">
+      <section id="abt1" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-vision-mission">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
               <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Vision</span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-white">Becoming India's Most Preferred Contractor</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <h3 className="text-3xl font-black uppercase tracking-tight text-[#111827]">Becoming India's Most Preferred Contractor</h3>
+              <p className="text-[#4b5563] text-sm leading-relaxed">
                 To become the country's most preferred civil engineering contractor by delivering exceptional client satisfaction while ensuring strict regulatory compliance, health-first worker safety, and eco-friendly practices that sustain our environment for future generations.
               </p>
             </div>
             <div className="space-y-4">
               <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Mission</span>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-[#4b5563] text-sm leading-relaxed">
                 Providing elite structural quality and timely execution through continuous adaptation of modern building technologies and personnel training programs — delivering projects that stand as testaments to engineering excellence and client trust.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4">
               {[{ val: "25+", label: "Years" }, { val: "150+", label: "Projects" }, { val: "100%", label: "Quality" }].map(s => (
-                <div key={s.label} className="p-4 bg-mecpl-card border border-white/5 text-center rounded-sm">
+                <div key={s.label} className="p-4 bg-[#f9f9f9] border border-black/[0.07] text-center rounded-sm">
                   <div className="text-2xl font-black text-[#C41E3A]">{s.val}</div>
-                  <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-1">{s.label}</div>
+                  <div className="text-[10px] text-[#4b5563] font-bold uppercase tracking-wider mt-1">{s.label}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="h-96 rounded-sm overflow-hidden shadow-2xl border border-white/10">
+          <div className="h-96 rounded-sm overflow-hidden shadow-sm border border-black/[0.1]">
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
               className="w-full h-full object-cover transition-all duration-500"
@@ -143,28 +143,28 @@ export default function AboutPage() {
       </section>
 
       {/* Services */}
-      <section id="abt2" className="max-w-7xl mx-auto px-6 py-20 border-b border-white/5 scroll-mt-28" data-testid="section-about-services">
+      <section id="abt2" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-about-services">
         <SectionHeader label="Services" title="What MECPL Delivers" center useH1={false} />
-        <p className="max-w-3xl mx-auto text-center text-gray-400 text-sm leading-relaxed mt-4">
+        <p className="max-w-3xl mx-auto text-center text-[#4b5563] text-sm leading-relaxed mt-4">
           Our service portfolio covers the full construction lifecycle, from civil execution to project management, with the same precision and accountability across every delivery.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {services.map((service) => (
-            <div key={service.title} className="group bg-mecpl-card border border-white/5 rounded-[24px] p-6 hover:border-[#C41E3A]/30 transition-all duration-300" data-testid={`card-about-service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
+            <div key={service.title} className="group bg-white border border-black/[0.07] rounded-[24px] p-6 hover:border-[#C41E3A]/30 transition-all duration-300 shadow-sm" data-testid={`card-about-service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
               <div className="flex items-center justify-between gap-4 mb-5">
                 <div className="w-11 h-11 rounded-2xl bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center">
                   <span className="w-2 h-2 rounded-full bg-[#C41E3A]" />
                 </div>
-                <div className="h-px flex-1 bg-white/10 group-hover:bg-[#C41E3A]/40 transition-colors" />
+                <div className="h-px flex-1 bg-black/[0.07] group-hover:bg-[#C41E3A]/40 transition-colors" />
               </div>
               <div>
                 <span className="text-[#C41E3A] text-[9px] font-black tracking-widest uppercase">{service.subtitle}</span>
-                <h3 className="text-white font-black text-base uppercase tracking-tight mt-1">{service.title}</h3>
+                <h3 className="text-[#111827] font-black text-base uppercase tracking-tight mt-1">{service.title}</h3>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mt-3">{service.desc}</p>
-              <ul className="space-y-1.5 pt-4 mt-4 border-t border-white/5">
+              <p className="text-[#4b5563] text-sm leading-relaxed mt-3">{service.desc}</p>
+              <ul className="space-y-1.5 pt-4 mt-4 border-t border-black/[0.06]">
                 {service.highlights.map((highlight) => (
-                  <li key={highlight} className="flex items-center gap-2 text-[11px] text-gray-400 font-bold uppercase tracking-wide">
+                  <li key={highlight} className="flex items-center gap-2 text-[11px] text-[#4b5563] font-bold uppercase tracking-wide">
                     <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full flex-shrink-0" />
                     {highlight}
                   </li>
@@ -176,12 +176,12 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section id="abt3" className="max-w-7xl mx-auto px-6 py-20 border-b border-white/5 scroll-mt-28" data-testid="section-leadership">
+      <section id="abt3" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-leadership">
         <SectionHeader label="Our Team" title="Executive Leadership" center useH1={false} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {leaders.map((leader, i) => (
-            <div key={i} className="bg-mecpl-card border border-white/5 rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all" data-testid={`card-leader-${i}`}>
-              <div className="h-40 flex items-center justify-center relative overflow-hidden bg-black/5">
+            <div key={i} className="bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-sm" data-testid={`card-leader-${i}`}>
+              <div className="h-40 flex items-center justify-center relative overflow-hidden bg-[#f9f9f9]">
                 <img
                   src={leader.image}
                   alt={leader.name}
@@ -189,10 +189,10 @@ export default function AboutPage() {
                 />
               </div>
               <div className="p-5 space-y-2">
-                <h3 className="text-white font-black text-sm uppercase tracking-tight leading-snug">{leader.name}</h3>
+                <h3 className="text-[#111827] font-black text-sm uppercase tracking-tight leading-snug">{leader.name}</h3>
                 <div className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">{leader.role}</div>
                 <div className="w-6 h-0.5 bg-[#C41E3A]"></div>
-                <p className="text-gray-500 text-xs leading-relaxed">{leader.desc}</p>
+                <p className="text-[#6b7280] text-xs leading-relaxed">{leader.desc}</p>
               </div>
             </div>
           ))}
@@ -200,7 +200,7 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="bg-mecpl-card/40 border-y border-white/5 py-20 scroll-mt-28" data-testid="section-certifications">
+      <section className="bg-[#f9f9f9] border-y border-black/[0.06] py-20 scroll-mt-28" data-testid="section-certifications">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeader label="Standards" title="Certifications & Compliance" center useH1={false} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
@@ -210,10 +210,10 @@ export default function AboutPage() {
               { code: "ISO 45001:2018", label: "Occupational Health & Safety", icon: "✦" },
               { code: "CRISIL SME 1", label: "Financial Rating — Since 2007", icon: "✦" },
             ].map((cert) => (
-              <div key={cert.code} className="text-center p-8 bg-mecpl-dark border border-white/5 rounded-sm hover:border-[#C41E3A]/30 transition-all" data-testid={`card-cert-${cert.code}`}>
+              <div key={cert.code} className="text-center p-8 bg-white border border-black/[0.07] rounded-sm hover:border-[#C41E3A]/30 transition-all shadow-sm" data-testid={`card-cert-${cert.code}`}>
                 <div className="text-[#C41E3A] text-3xl mb-4">{cert.icon}</div>
-                <h3 className="text-white font-black text-base uppercase mb-2">{cert.code}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{cert.label}</p>
+                <h3 className="text-[#111827] font-black text-base uppercase mb-2">{cert.code}</h3>
+                <p className="text-[#6b7280] text-xs leading-relaxed">{cert.label}</p>
               </div>
             ))}
           </div>
@@ -224,7 +224,7 @@ export default function AboutPage() {
       <section id="abt4" className="max-w-5xl mx-auto px-6 py-20 scroll-mt-28" data-testid="section-milestones">
         <SectionHeader label="Journey" title="Our Milestone Timeline" useH1={false} />
           <div className="relative mt-10">
-          <div className="absolute left-16 top-0 bottom-0 w-px bg-white/10"></div>
+          <div className="absolute left-16 top-0 bottom-0 w-px bg-black/[0.08]"></div>
           <div className="space-y-5">
             {milestones.slice().reverse().map((item) => (
               <div key={item.year} className="flex gap-8 items-start" data-testid={`milestone-${item.year}`}>
@@ -232,11 +232,11 @@ export default function AboutPage() {
                   <span className="text-[#C41E3A] font-black text-sm">{item.year}</span>
                 </div>
                 <div className="flex-shrink-0 mt-1.5 relative z-10">
-                  <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-[#1A1A1A] shadow"></div>
+                  <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-white shadow"></div>
                 </div>
                 <div className="flex-1 pb-1">
-                  <div className="bg-mecpl-card border border-white/5 rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors">
-                    <p className="text-gray-300 text-sm">{item.event}</p>
+                  <div className="bg-white border border-black/[0.07] rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors shadow-sm">
+                    <p className="text-[#374151] text-sm">{item.event}</p>
                   </div>
                 </div>
               </div>
