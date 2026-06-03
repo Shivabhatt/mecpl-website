@@ -566,14 +566,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <Link href="/awards">
-              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                Full Awards History <ArrowRight size={12} />
-              </span>
-            </Link>
-          </div>
         </div>
       </section>
 
