@@ -76,7 +76,7 @@ const serviceRows = [
     word: "CONSTRUCT",
     title: "Civil Construction",
     desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+    image: "/assets/projects/HIGH-RISE-1-scaled.jpg",
     path: "/services",
     imgRight: true,
   },
@@ -84,7 +84,7 @@ const serviceRows = [
     word: "DELIVER",
     title: "Turnkey Projects",
     desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop",
+    image: "/assets/projects/GODREJ-INFINITY.jpg",
     path: "/services",
     imgRight: false,
   },
@@ -92,7 +92,7 @@ const serviceRows = [
     word: "BUILD",
     title: "Industrial & Residential",
     desc: "From warehouse megaplexes to ultra-high-rise residential towers — built to the tightest tolerances in the industry.",
-    image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=1200&auto=format&fit=crop",
+    image: "/assets/projects/AMTEK-AUTO-LTD.png",
     path: "/services",
     imgRight: true,
   },
@@ -147,7 +147,7 @@ export default function HomePage() {
     const section  = heroSectionRef.current;
     if (!headline || !heroBg || !section) return;
 
-    gsap.set(section, { y: 50 });
+    gsap.set(section, { y: 80, scale: 0.98 });
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -155,7 +155,7 @@ export default function HomePage() {
         const splits: SplitText[] = [];
 
         const runHeroAnims = () => {
-          gsap.to(section, { y: 0, duration: 0.9, ease: "power3.out" });
+          gsap.to(section, { y: 0, scale: 1, duration: 1.0, ease: "power3.out" });
 
           const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
           lines.forEach((line, i) => {
@@ -187,7 +187,7 @@ export default function HomePage() {
         };
 
         if ((window as any)._preloaderDone) {
-          gsap.set(section, { y: 0 });
+          gsap.set(section, { y: 0, scale: 1 });
           runHeroAnims();
         } else {
           window.addEventListener("preloader-exit", () => runHeroAnims(), { once: true });
@@ -197,8 +197,8 @@ export default function HomePage() {
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(section, { y: 0 });
-        window.addEventListener("preloader-exit", () => gsap.set(section, { y: 0 }), { once: true });
+        gsap.set(section, { y: 0, scale: 1 });
+        window.addEventListener("preloader-exit", () => gsap.set(section, { y: 0, scale: 1 }), { once: true });
       });
     });
 
@@ -255,7 +255,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: alternating row entrance ── */
+  /* ── SERVICES: row entrance + scroll-driven image scale ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -268,6 +268,19 @@ export default function HomePage() {
             opacity: 0, y: 50, duration: 1.0, ease: "power3.out",
             scrollTrigger: { trigger: row, start: "top 85%", toggleActions: "play none none none" },
           });
+        });
+
+        gsap.utils.toArray<HTMLElement>(".svc-img", sec).forEach(img => {
+          gsap.fromTo(img,
+            { scale: 1.0 },
+            {
+              scale: 1.08, ease: "none",
+              scrollTrigger: {
+                trigger: img.closest(".svc-img-wrap") as HTMLElement,
+                start: "top bottom", end: "bottom top", scrub: true,
+              },
+            }
+          );
         });
       });
     }, sec);
