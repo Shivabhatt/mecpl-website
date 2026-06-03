@@ -526,40 +526,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ STATS ══════════ */}
-      <section ref={statsRef}
-        className="min-h-screen flex items-center border-b"
-        style={{ background: "#ffffff", borderColor: "rgba(0,0,0,0.07)" }}
-        data-testid="section-stats">
-        <div className="max-w-7xl mx-auto px-6 py-24 w-full">
-          <div className="mb-16">
-            <div className="stat-ruler h-px w-full" style={{ background: "#C41E3A" }} />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-0 lg:divide-x" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-            {stats.map((st, i) => (
-              <div key={i} className="stat-item px-0 lg:px-10 first:pl-0 last:pr-0 space-y-3">
-                <div className="overflow-hidden">
-                  {/* dangerouslySetInnerHTML lets GSAP own the text — prevents React
-                      reconciliation from fighting the count-up onUpdate mutation */}
-                  <div className="stat-num font-bold uppercase"
-                    data-value={st.value}
-                    data-suffix={st.suffix}
-                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}
-                    dangerouslySetInnerHTML={{ __html: `0${st.suffix}` }}
-                  />
-                </div>
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase" }}>
-                  {st.label}
-                </div>
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.4)", letterSpacing: "0.1em" }}>
-                  {st.sub}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ══════════ ABOUT STRIP ══════════ */}
       <section className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
