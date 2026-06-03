@@ -179,10 +179,6 @@ export default function HomePage() {
             });
           }
 
-          gsap.to(heroBg, {
-            yPercent: -30, ease: "none",
-            scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: 1.2 },
-          });
         };
 
         if ((window as any)._preloaderDone) {
