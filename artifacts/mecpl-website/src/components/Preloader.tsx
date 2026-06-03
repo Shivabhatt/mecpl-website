@@ -4,46 +4,48 @@ import gsap from "gsap";
 export default function Preloader() {
   const [hidden, setHidden] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  // swipeRefs removed: preloader simplified to mobile style for all viewports
+  const barRef     = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!wrapperRef.current) return;
-    const lines = wrapperRef.current.querySelectorAll<HTMLElement>(".preloader-line");
+    const wrapper = wrapperRef.current;
+    const bar     = barRef.current;
+    if (!wrapper || !bar) return;
 
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: () => setHidden(true) });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        (window as any)._preloaderDone = true;
+        setHidden(true);
+      },
+    });
 
-    // animate text lines if any exist (simplified preloader may have none)
-    if (lines.length > 0) {
-      tl.from(lines, {
-        yPercent: 100,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.08,
-      });
-    }
-
-    tl.to(wrapperRef.current, {
-        opacity: 0,
-        duration: 0.55,
-        ease: "power2.inOut",
-        delay: 0.25,
+    tl.to(bar, { width: "100%", duration: 1.2, ease: "power2.inOut" })
+      .call(() => {
+        window.dispatchEvent(new CustomEvent("preloader-exit"));
       })
-      .set(wrapperRef.current, { display: "none" });
+      .to(wrapper, { y: "-100vh", duration: 0.8, ease: "power3.inOut" }, ">");
 
-    return () => {
-      tl.kill();
-    };
+    return () => { tl.kill(); };
   }, []);
 
   if (hidden) return null;
 
   return (
-    <div ref={wrapperRef} className="preloader-force-text fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-black text-white">
-      <div className="relative z-10 space-y-6 px-6 text-center">
-        <img
-          src="/assets/logo/mecpl-logo.webp"
-          alt="MECPL logo"
-          className="mx-auto h-16 w-auto object-contain"
+    <div
+      ref={wrapperRef}
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
+      style={{ background: "#f5f3ef" }}
+    >
+      <img
+        src="/assets/logo/mecpl-logo.webp"
+        alt="MECPL"
+        className="h-16 w-auto object-contain mb-10"
+        style={{ filter: "brightness(0)" }}
+      />
+      <div className="relative" style={{ width: "160px", height: "2px", background: "rgba(17,24,39,0.12)" }}>
+        <div
+          ref={barRef}
+          className="absolute left-0 top-0 h-full"
+          style={{ width: "0%", background: "#C41E3A" }}
         />
       </div>
     </div>

@@ -71,6 +71,33 @@ const testimonials = [
 
 const clients = ["TRUMP TOWERS", "GODREJ PROPS", "VTP REALTY", "PANCHSHIL", "KALPATARU", "K RAHEJA", "MALPANI", "GERA DEVS"];
 
+const serviceRows = [
+  {
+    word: "CONSTRUCT",
+    title: "Civil Construction",
+    desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+    path: "/services",
+    imgRight: true,
+  },
+  {
+    word: "DELIVER",
+    title: "Turnkey Projects",
+    desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop",
+    path: "/services",
+    imgRight: false,
+  },
+  {
+    word: "BUILD",
+    title: "Industrial & Residential",
+    desc: "From warehouse megaplexes to ultra-high-rise residential towers — built to the tightest tolerances in the industry.",
+    image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=1200&auto=format&fit=crop",
+    path: "/services",
+    imgRight: true,
+  },
+];
+
 const tickerItems = [
   "ISO 9001:2015 Certified", "ISO 14001:2015 Environmental Integrity", "ISO 45001:2018 Occupational Safety",
   "CRISIL SME 1 Rating", "25+ Years of Structural Excellence", "150+ Landmark Projects", "MECPL — Building India's Future",
@@ -106,7 +133,6 @@ export default function HomePage() {
   const testimonialsRef  = useRef<HTMLElement>(null);
   const clientsRef       = useRef<HTMLElement>(null);
   const awardsRef        = useRef<HTMLElement>(null);
-  const ctaRef           = useRef<HTMLElement>(null);
 
   /* Hero auto-slide */
   useEffect(() => {
@@ -114,47 +140,65 @@ export default function HomePage() {
     return () => clearInterval(t);
   }, []);
 
-  /* ── HERO: SplitText chars + parallax bg ── */
+  /* ── HERO: SplitText chars + parallax bg — waits for preloader-exit ── */
   useEffect(() => {
     const headline = heroHeadlineRef.current;
     const heroBg   = heroBgRef.current;
     const section  = heroSectionRef.current;
     if (!headline || !heroBg || !section) return;
 
+    gsap.set(section, { y: 50 });
+
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const lines  = headline.querySelectorAll<HTMLElement>(".hero-line");
         const splits: SplitText[] = [];
 
-        lines.forEach((line, i) => {
-          const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
-          splits.push(split);
-          gsap.from(split.chars, {
-            yPercent: 115, opacity: 0, duration: 1.2, stagger: 0.022,
-            ease: "power4.out", delay: 0.35 + i * 0.18,
+        const runHeroAnims = () => {
+          gsap.to(section, { y: 0, duration: 0.9, ease: "power3.out" });
+
+          const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
+          lines.forEach((line, i) => {
+            const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
+            splits.push(split);
+            gsap.from(split.chars, {
+              yPercent: 115, opacity: 0, duration: 1.2, stagger: 0.022,
+              ease: "power4.out", delay: 0.15 + i * 0.18,
+            });
           });
-        });
 
-        const tagEl = heroTagRef.current;
-        if (tagEl) gsap.from(tagEl, { opacity: 0, y: 16, duration: 0.9, delay: 0.2, ease: "power3.out" });
+          const tagEl = heroTagRef.current;
+          if (tagEl) gsap.from(tagEl, { opacity: 0, y: 16, duration: 0.9, delay: 0.1, ease: "power3.out" });
 
-        const subEl = heroSubRef.current;
-        if (subEl) gsap.from(subEl, { opacity: 0, y: 20, duration: 0.9, delay: 1.05, ease: "power3.out" });
+          const subEl = heroSubRef.current;
+          if (subEl) gsap.from(subEl, { opacity: 0, y: 20, duration: 0.9, delay: 0.8, ease: "power3.out" });
 
-        const ctaEl = heroCTARef.current;
-        if (ctaEl?.children.length) {
-          gsap.from(Array.from(ctaEl.children), {
-            opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.25, ease: "power3.out",
+          const ctaEl = heroCTARef.current;
+          if (ctaEl?.children.length) {
+            gsap.from(Array.from(ctaEl.children), {
+              opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.0, ease: "power3.out",
+            });
+          }
+
+          gsap.to(heroBg, {
+            yPercent: 28, ease: "none",
+            scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
           });
+        };
+
+        if ((window as any)._preloaderDone) {
+          gsap.set(section, { y: 0 });
+          runHeroAnims();
+        } else {
+          window.addEventListener("preloader-exit", () => runHeroAnims(), { once: true });
         }
 
-        gsap.to(heroBg, {
-          yPercent: 28, ease: "none",
-          scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
-        });
-
         return () => splits.forEach(s => s.revert());
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(section, { y: 0 });
+        window.addEventListener("preloader-exit", () => gsap.set(section, { y: 0 }), { once: true });
       });
     });
 
@@ -211,7 +255,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: rotateY flip-in per card ── */
+  /* ── SERVICES: alternating row entrance ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -219,16 +263,10 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        /* Animate the outer wrapper only — never touch .flip-inner so the
-           CSS hover rotateY(180deg) stays clean with no leftover inline
-           transformOrigin that would break the flip axis. */
-        const cards = gsap.utils.toArray<HTMLElement>(".flip-card", sec);
-        cards.forEach((card, i) => {
-          gsap.from(card, {
-            opacity: 0, y: 48,
-            duration: 1.0, delay: (i % 3) * 0.12,
-            ease: "power3.out",
-            scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none none" },
+        gsap.utils.toArray<HTMLElement>(".svc-row", sec).forEach(row => {
+          gsap.from(row, {
+            opacity: 0, y: 50, duration: 1.0, ease: "power3.out",
+            scrollTrigger: { trigger: row, start: "top 85%", toggleActions: "play none none none" },
           });
         });
       });
@@ -258,21 +296,24 @@ export default function HomePage() {
 
       const imgs = gsap.utils.toArray<HTMLElement>(".proj-img", track);
       imgs.forEach(img => {
-        gsap.to(img, {
-          x: "8%", ease: "none",
-          scrollTrigger: {
-            trigger: img.closest(".h-scroll-card") as HTMLElement,
-            containerAnimation: projTween,   /* tween, not ScrollTrigger instance */
-            start: "left right", end: "right left", scrub: true,
-          },
-        });
+        gsap.fromTo(img,
+          { scale: 1.0 },
+          {
+            scale: 1.08, ease: "none",
+            scrollTrigger: {
+              trigger: img.closest(".h-scroll-card") as HTMLElement,
+              containerAnimation: projTween,
+              start: "left right", end: "right left", scrub: true,
+            },
+          }
+        );
       });
     });
 
     return () => ctx.revert();
   }, []);
 
-  /* ── WHY CHOOSE: pinned sequential reveal ── */
+  /* ── WHY CHOOSE: stacked rows slide-in ── */
   useEffect(() => {
     const sec = whyRef.current;
     if (!sec) return;
@@ -280,17 +321,13 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(".why-card", sec);
-        /* Initial state: invisible, offset, and slightly scaled down */
-        gsap.set(cards, { opacity: 0, y: 60, scale: 0.92 });
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sec, start: "top top", end: `+=${cards.length * 180 + 200}`,
-            pin: true, scrub: 1.5, anticipatePin: 1, invalidateOnRefresh: true,
-          },
+        gsap.utils.toArray<HTMLElement>(".why-row", sec).forEach((row, i) => {
+          gsap.from(row, {
+            y: 30, opacity: 0, duration: 0.8, ease: "power3.out",
+            delay: i * 0.06,
+            scrollTrigger: { trigger: row, start: "top 90%", toggleActions: "play none none none" },
+          });
         });
-        /* Scale lands at 1 — gives each card a satisfying "pop-in" feel */
-        cards.forEach((card, i) => tl.to(card, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, i * 0.4));
       });
     }, sec);
 
@@ -389,7 +426,7 @@ export default function HomePage() {
     };
   }, []);
 
-  /* ── CLIENTS: bento cell clip-path mask reveal ── */
+  /* ── CLIENTS: name grid entrance ── */
   useEffect(() => {
     const sec = clientsRef.current;
     if (!sec) return;
@@ -397,11 +434,10 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cells = gsap.utils.toArray<HTMLElement>(".bento-cell", sec);
-        cells.forEach((cell, i) => {
+        gsap.utils.toArray<HTMLElement>(".client-name", sec).forEach((cell, i) => {
           gsap.from(cell, {
-            clipPath: "inset(0 100% 0 0)", duration: 0.9, ease: "power3.out", delay: i * 0.06,
-            scrollTrigger: { trigger: cell, start: "top 90%", toggleActions: "play none none none" },
+            opacity: 0, y: 24, duration: 0.7, ease: "power3.out", delay: i * 0.05,
+            scrollTrigger: { trigger: sec, start: "top 85%", toggleActions: "play none none none" },
           });
         });
       });
@@ -410,7 +446,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── AWARDS: stagger slide-up ── */
+  /* ── AWARDS: rows enter from right ── */
   useEffect(() => {
     const sec = awardsRef.current;
     if (!sec) return;
@@ -418,59 +454,25 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cards  = gsap.utils.toArray<HTMLElement>(".award-card", sec);
         const fadeEl = sec.querySelector<HTMLElement>("[data-animate='fade']");
-        gsap.from(cards, {
-          y: 50, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
-          scrollTrigger: { trigger: sec, start: "top 78%", toggleActions: "play none none none" },
-        });
         if (fadeEl) {
           gsap.from(fadeEl, {
             y: 30, opacity: 0, duration: 0.9, ease: "power3.out",
             scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
           });
         }
+        gsap.utils.toArray<HTMLElement>(".award-row", sec).forEach((row, i) => {
+          gsap.from(row, {
+            x: 40, opacity: 0, duration: 0.7, ease: "power3.out", delay: i * 0.07,
+            scrollTrigger: { trigger: row, start: "top 90%", toggleActions: "play none none none" },
+          });
+        });
       });
     }, sec);
 
     return () => ctx.revert();
   }, []);
 
-  /* ── CTA: fade-up reveal (h2 has nested children so SplitText is skipped
-      to avoid React text-fiber conflicts; whole heading animates as a unit) ── */
-  useEffect(() => {
-    const sec = ctaRef.current;
-    if (!sec) return;
-
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const headingEl = sec.querySelector<HTMLElement>("h2");
-        const subEl     = sec.querySelector<HTMLElement>("p");
-        const btnsEl    = sec.querySelector<HTMLElement>(".flex.flex-col");
-        if (headingEl) {
-          gsap.from(headingEl, {
-            y: 50, opacity: 0, duration: 1, ease: "power3.out",
-            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
-          });
-        }
-        if (subEl) {
-          gsap.from(subEl, {
-            y: 30, opacity: 0, duration: 0.9, delay: 0.18, ease: "power3.out",
-            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
-          });
-        }
-        if (btnsEl) {
-          gsap.from(Array.from(btnsEl.children), {
-            y: 20, opacity: 0, duration: 0.7, stagger: 0.12, delay: 0.35, ease: "power3.out",
-            scrollTrigger: { trigger: sec, start: "top 80%", toggleActions: "play none none none" },
-          });
-        }
-      });
-    }, sec);
-
-    return () => ctx.revert();
-  }, []);
 
   const s = heroSlides[slide];
 
@@ -504,7 +506,7 @@ export default function HomePage() {
           <span
             ref={heroTagRef}
             className="inline-block text-[10px] font-bold uppercase tracking-[0.25em] text-[#C41E3A] border border-[#C41E3A]/30 px-4 py-2 mb-8"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "'Montserrat',sans-serif" }}
           >
             {s.tag}
           </span>
@@ -513,32 +515,32 @@ export default function HomePage() {
             {/* dangerouslySetInnerHTML prevents React from creating text fibers
                 that SplitText's char-splitting would later conflict with */}
             <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white mb-1"
-              style={{ fontFamily: "var(--font-raleway)" }}
+              style={{ fontFamily: "'Montserrat',sans-serif" }}
               dangerouslySetInnerHTML={{ __html: "Engineering" }} />
-            <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight mb-1 italic"
-              style={{ fontFamily: "var(--font-raleway)", color: "#C41E3A" }}
+            <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight mb-1"
+              style={{ fontFamily: "'Montserrat',sans-serif", color: "#C41E3A" }}
               dangerouslySetInnerHTML={{ __html: "Excellence" }} />
             <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white"
-              style={{ fontFamily: "var(--font-raleway)" }}
+              style={{ fontFamily: "'Montserrat',sans-serif" }}
               dangerouslySetInnerHTML={{ __html: "Delivered" }} />
           </div>
 
           <p ref={heroSubRef}
             className="mt-8 text-white/65 max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(0.9rem,1.5vw,1.1rem)" }}>
+            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(0.9rem,1.5vw,1.1rem)" }}>
             Pune's premier structural engineering contractor — 25 years, 150+ landmark projects, and India's most trusted development partners.
           </p>
 
           <div ref={heroCTARef} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/completed-projects" data-testid="button-hero-projects">
               <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-[#ab1831] text-white px-8 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
                 View Projects <ArrowRight size={12} />
               </span>
             </Link>
             <Link href="/about" data-testid="button-hero-about">
               <span className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white px-8 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
                 Our Story
               </span>
             </Link>
@@ -560,7 +562,7 @@ export default function HomePage() {
         <div className="animate-ticker">
           {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
             <span key={i} className="inline-flex items-center gap-5 px-8 whitespace-nowrap"
-              style={{ fontFamily: "var(--font-inter)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.22em", color: "rgba(17,24,39,0.45)", textTransform: "uppercase" }}>
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.22em", color: "rgba(17,24,39,0.45)", textTransform: "uppercase" }}>
               {item}
               <span style={{ color: "#C41E3A", fontSize: "6px" }}>◆</span>
             </span>
@@ -586,14 +588,14 @@ export default function HomePage() {
                   <div className="stat-num font-bold uppercase"
                     data-value={st.value}
                     data-suffix={st.suffix}
-                    style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}
+                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(3rem,6vw,5rem)", color: "#C41E3A", lineHeight: 1 }}
                     dangerouslySetInnerHTML={{ __html: `0${st.suffix}` }}
                   />
                 </div>
-                <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase" }}>
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase" }}>
                   {st.label}
                 </div>
-                <div style={{ fontFamily: "var(--font-inter)", fontSize: "10px", color: "rgba(17,24,39,0.4)", letterSpacing: "0.1em" }}>
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.4)", letterSpacing: "0.1em" }}>
                   {st.sub}
                 </div>
               </div>
@@ -610,16 +612,16 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div>
-                <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
                   Our Foundation
                 </span>
                 <h2 className="font-bold uppercase leading-tight"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
                   Structural Precision.<br />
-                  <span className="italic" style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
+                  <span style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
                 </h2>
               </div>
-              <p style={{ fontFamily: "var(--font-inter)", fontSize: "14px", lineHeight: 1.8, color: "#4b5563" }}>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.8, color: "#4b5563" }}>
                 Since 1998, MECPL has been the structural partner of choice for India's leading developers — from Trump Towers to Panchshil's skyline-defining highrises. We combine ISO-certified processes with 25 years of on-site wisdom to deliver structures that stand for generations.
               </p>
               <div className="grid grid-cols-2 gap-4">
@@ -631,14 +633,14 @@ export default function HomePage() {
                 ].map(cert => (
                   <div key={cert.label} className="p-4 border"
                     style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.03)" }}>
-                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em" }}>{cert.label}</div>
-                    <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", color: "rgba(17,24,39,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "3px" }}>{cert.sub}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em" }}>{cert.label}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "3px" }}>{cert.sub}</div>
                   </div>
                 ))}
               </div>
               <Link href="/about" data-testid="button-about-more">
                 <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
                   Our Full Story <ArrowRight size={12} />
                 </span>
               </Link>
@@ -652,7 +654,7 @@ export default function HomePage() {
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)" }} />
               <div className="absolute bottom-6 left-6">
                 <div className="inline-block px-4 py-2" style={{ background: "#C41E3A" }}>
-                  <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", color: "#fff", textTransform: "uppercase" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", color: "#fff", textTransform: "uppercase" }}>
                     Pune HQ · Balewadi
                   </span>
                 </div>
@@ -664,81 +666,77 @@ export default function HomePage() {
 
       {/* ══════════ SERVICES ══════════ */}
       <section ref={servicesRef}
-        className="py-28 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f4f4f4" }}
+        className="border-b"
+        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
         data-testid="section-services">
-        <div className="max-w-7xl mx-auto space-y-14">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-                What We Build
-              </span>
-              <h2 className="font-bold uppercase"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
-                Our <span className="italic" style={{ color: "#C41E3A" }}>Services</span>
-              </h2>
-            </div>
-            <Link href="/services" data-testid="button-all-services">
-              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                All Services <ArrowRight size={12} />
-              </span>
-            </Link>
-          </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((svc, i) => (
-              <Link key={i} href={svc.path} data-testid={`card-service-${i}`}>
-                <div className="flip-card cursor-pointer">
-                  <div className="flip-inner">
-                    <div className="flip-face">
-                      <img src={svc.image} alt={svc.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }} />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <div className="w-9 h-9 flex items-center justify-center mb-3" style={{ background: "rgba(196,30,58,0.15)", border: "1px solid rgba(196,30,58,0.4)" }}>
-                          <svc.icon size={16} style={{ color: "#C41E3A" }} />
-                        </div>
-                        <h3 className="font-bold uppercase"
-                          style={{ fontFamily: "var(--font-raleway)", fontSize: "18px", color: "#fff", letterSpacing: "0.05em" }}>
-                          {svc.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="flip-back">
-                      <div className="w-10 h-10 flex items-center justify-center mb-5" style={{ background: "#C41E3A" }}>
-                        <svc.icon size={18} style={{ color: "#fff" }} />
-                      </div>
-                      <h3 className="font-bold uppercase mb-4"
-                        style={{ fontFamily: "var(--font-raleway)", fontSize: "17px", color: "#fff", letterSpacing: "0.05em" }}>
-                        {svc.title}
-                      </h3>
-                      <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "rgba(255,255,255,0.55)" }}>
-                        {svc.desc}
-                      </p>
-                      <span className="inline-flex items-center gap-2 mt-6"
-                        style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                        Learn More <ArrowRight size={11} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+        <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+              What We Build
+            </span>
+            <h2 className="font-bold uppercase" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+              Our Services
+            </h2>
           </div>
+          <Link href="/services" data-testid="button-all-services">
+            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+              All Services <ArrowRight size={12} />
+            </span>
+          </Link>
         </div>
+
+        {serviceRows.map((row, i) => (
+          <div key={i}
+            className={`svc-row flex flex-col ${row.imgRight ? "md:flex-row" : "md:flex-row-reverse"}`}
+            style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+
+            <div className="flex-1 flex flex-col justify-center px-8 md:px-16 py-16 md:py-24 relative overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none" style={{ zIndex: 0 }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,10vw,9rem)", fontWeight: 800, color: "rgba(17,24,39,0.04)", lineHeight: 1, whiteSpace: "nowrap" }}>
+                  {row.word}
+                </span>
+              </div>
+              <div className="relative space-y-6" style={{ zIndex: 1 }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-bold uppercase"
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.5rem,3vw,2.2rem)", color: "#111827", fontWeight: 700, letterSpacing: "0.03em" }}>
+                  {row.title}
+                </h3>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.85, color: "#4b5563", maxWidth: "440px" }}>
+                  {row.desc}
+                </p>
+                <Link href={row.path}>
+                  <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                    Learn More <ArrowRight size={11} />
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="svc-img-wrap flex-1 relative" style={{ minHeight: "420px" }}>
+              <img src={row.image} alt={row.title} className="svc-img absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%)" }} />
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* ══════════ PROJECTS — HORIZONTAL SCROLL ══════════ */}
-      <section ref={projectsRef} className="h-scroll-section" style={{ background: "#080808" }} data-testid="section-projects">
+      <section ref={projectsRef} className="h-scroll-section" style={{ background: "#faf9f7" }} data-testid="section-projects">
         <div className="absolute top-10 left-8 z-10 pointer-events-none select-none" style={{ width: "400px" }}>
-          <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
             Showcase
           </span>
           <h2 className="font-bold uppercase leading-tight"
-            style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", color: "#fff", fontWeight: 700 }}>
-            Engineering<br /><span className="italic" style={{ color: "#C41E3A" }}>Landmarks</span>
+            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", color: "#111827", fontWeight: 700 }}>
+            Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
           </h2>
-          <div className="mt-4 text-xs" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>
+          <div className="mt-4 text-xs" style={{ fontFamily: "'Montserrat',sans-serif", color: "rgba(17,24,39,0.35)", letterSpacing: "0.1em" }}>
             ← Scroll to explore →
           </div>
         </div>
@@ -749,38 +747,38 @@ export default function HomePage() {
             <div key={i} className="h-scroll-card"
               style={{ width: proj.featured ? "72vw" : "52vw", height: "100vh", marginRight: "24px" }}>
               <img src={proj.image} alt={proj.name}
-                className="proj-img absolute inset-0 w-full h-full object-cover"
-                style={{ scale: "1.12", transformOrigin: "center" }} />
+                className="proj-img absolute inset-0 w-full h-full object-cover will-change-transform"
+                style={{ transformOrigin: "center" }} />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)" }} />
               {proj.featured && (
                 <div className="absolute top-8 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
-                  style={{ background: "#C41E3A", color: "#fff", fontFamily: "var(--font-inter)" }}>Featured</div>
+                  style={{ background: "#C41E3A", color: "#fff", fontFamily: "'Montserrat',sans-serif" }}>Featured</div>
               )}
               <div className="absolute bottom-0 left-0 right-0 p-10">
-                <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "8px" }}>
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "8px" }}>
                   {proj.type}
                 </div>
                 <h3 className="font-bold uppercase"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.4rem,2.5vw,2.2rem)", color: "#fff", letterSpacing: "0.03em" }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.4rem,2.5vw,2.2rem)", color: "#fff", letterSpacing: "0.03em" }}>
                   {proj.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-2">
                   <Clock size={11} style={{ color: "#C41E3A" }} />
-                  <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em" }}>
                     {proj.location}
                   </span>
                 </div>
               </div>
             </div>
           ))}
-          <div className="h-scroll-card flex items-center justify-center" style={{ width: "40vw", height: "100vh", background: "#111" }}>
+          <div className="h-scroll-card flex items-center justify-center" style={{ width: "40vw", height: "100vh", background: "#ffffff", borderLeft: "1px solid rgba(0,0,0,0.07)" }}>
             <div className="text-center p-10">
-              <div style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.5rem)", color: "rgba(255,255,255,0.08)", fontWeight: 700, lineHeight: 1, marginBottom: "28px", textTransform: "uppercase" }}>
+              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.5rem)", color: "rgba(17,24,39,0.06)", fontWeight: 800, lineHeight: 1, marginBottom: "28px", textTransform: "uppercase" }}>
                 150+<br />Projects
               </div>
               <Link href="/completed-projects" data-testid="button-all-projects">
                 <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(196,30,58,0.3)", padding: "14px 24px" }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(196,30,58,0.3)", padding: "14px 24px" }}>
                   View All Projects <ArrowRight size={12} />
                 </span>
               </Link>
@@ -796,20 +794,20 @@ export default function HomePage() {
             <div className="absolute top-0 left-0 w-1 h-full bg-[#C41E3A]" />
             <div className="grid md:grid-cols-[1fr_auto] items-center gap-8 pl-4">
               <div className="space-y-4">
-                <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
                   Careers at MECPL
                 </span>
                 <h2 className="font-bold uppercase"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3vw,2.6rem)", color: "#111827", fontWeight: 700 }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", color: "#111827", fontWeight: 700 }}>
                   Build the Next Generation<br />of Landmarks
                 </h2>
-                <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "#4b5563", maxWidth: "520px" }}>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563", maxWidth: "520px" }}>
                   Great execution comes from great teams. Explore opportunities across engineering, project management, safety, and quality.
                 </p>
               </div>
               <Link href="/careers" data-testid="button-home-careers">
                 <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 cursor-pointer transition-all"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
                   Explore Careers <ArrowRight size={12} />
                 </span>
               </Link>
@@ -820,56 +818,42 @@ export default function HomePage() {
 
       {/* ══════════ WHY CHOOSE ══════════ */}
       <section ref={whyRef}
-        className="py-28 px-6 border-b min-h-screen flex items-center"
+        className="py-28 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-why-mecpl">
-        <div className="max-w-7xl mx-auto w-full space-y-16">
-          <div className="text-center">
-            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="mb-16">
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               Our Advantage
             </span>
             <h2 className="font-bold uppercase"
-              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
-              Why Choose <span className="italic" style={{ color: "#C41E3A" }}>MECPL</span>
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+              Why Choose MECPL
             </h2>
-            <p className="mt-4 mx-auto max-w-2xl" style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
-              Six reasons India's top developers and industrialists repeatedly choose MECPL for their most critical projects.
-            </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
             {whyChoose.map((item, i) => (
               <div key={i}
-                className="why-card group border p-8 space-y-4 transition-all duration-300 cursor-default"
-                style={{ borderColor: "rgba(0,0,0,0.08)", background: "#ffffff" }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "rgba(196,30,58,0.35)";
-                  e.currentTarget.style.background = "rgba(196,30,58,0.03)";
-                  gsap.to(e.currentTarget, { y: -6, duration: 0.3, ease: "power2.out" });
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)";
-                  e.currentTarget.style.background = "#ffffff";
-                  gsap.to(e.currentTarget, { y: 0, duration: 0.3, ease: "power2.out" });
-                }}
+                className="why-row border-b py-8 items-start gap-6 md:gap-12"
+                style={{ borderColor: "rgba(0,0,0,0.07)", display: "grid", gridTemplateColumns: "72px 1fr 1fr" }}
                 data-testid={`card-why-${i}`}>
-                <div className="w-11 h-11 flex items-center justify-center"
-                  style={{ background: "rgba(196,30,58,0.08)", border: "1px solid rgba(196,30,58,0.2)" }}>
-                  <item.icon size={20} style={{ color: "#C41E3A" }} />
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2.2rem,4vw,3rem)", fontWeight: 800, color: "rgba(196,30,58,0.1)", lineHeight: 1 }}>
+                  {String(i + 1).padStart(2, "0")}
                 </div>
-                <h3 className="font-bold uppercase"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "15px", color: "#111827", letterSpacing: "0.05em" }}>
+                <h3 className="font-bold uppercase pt-1"
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em" }}>
                   {item.title}
                 </h3>
-                <p style={{ fontFamily: "var(--font-inter)", fontSize: "12px", lineHeight: 1.75, color: "#4b5563" }}>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563", paddingTop: "2px" }}>
                   {item.desc}
                 </p>
               </div>
             ))}
           </div>
-          <div className="text-center">
+          <div className="mt-12 text-center">
             <Link href="/contact">
               <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
                 Start Your Project <ArrowRight size={13} />
               </span>
             </Link>
@@ -951,52 +935,53 @@ export default function HomePage() {
         })}
       </section>
 
-      {/* ══════════ CLIENTS — BENTO GALLERY + TICKER ══════════ */}
+      {/* ══════════ CLIENTS ══════════ */}
       <section ref={clientsRef}
         className="py-28 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-clients">
         <div className="max-w-7xl mx-auto space-y-14">
-          <div className="text-center">
-            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-              Ecosystem
-            </span>
-            <h2 className="font-bold uppercase"
-              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
-              Clients &amp; <span className="italic" style={{ color: "#C41E3A" }}>Premium Partners</span>
-            </h2>
-          </div>
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3 space-y-5">
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block" }}>
+                Ecosystem
+              </span>
+              <h2 className="font-bold uppercase"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
+                Clients &amp; Partners
+              </h2>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563" }}>
+                India's most trusted developers and industrialists have chosen MECPL for their landmark projects.
+              </p>
+              <Link href="/clients" data-testid="button-all-clients">
+                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                  View All Clients <ArrowRight size={12} />
+                </span>
+              </Link>
+            </div>
 
-          {/* Bento gallery grid */}
-          <div className="grid grid-cols-4 gap-3">
-            {bentoClients.map((cell, i) => (
-              <div key={i}
-                className={`bento-cell flex flex-col items-center justify-center ${cell.col === 2 ? "col-span-2" : "col-span-1"}`}
-                style={{ background: cell.bg, border: cell.border ? `1px solid ${cell.border}` : undefined, height: cell.height }}
-                data-testid={`card-client-${i}`}>
-                <div className="text-center px-6"
-                  style={{
-                    fontFamily: "var(--font-raleway)",
-                    fontSize: cell.col === 2 ? "clamp(0.85rem,1.8vw,1.2rem)" : "clamp(0.7rem,1.2vw,0.9rem)",
-                    fontWeight: 700,
-                    letterSpacing: "0.2em",
-                    color: cell.text,
-                    textTransform: "uppercase",
-                  }}>
-                  {cell.name}
-                </div>
-                <div className="mt-2 w-8 h-px"
-                  style={{ background: cell.text === "#ffffff" ? "rgba(255,255,255,0.2)" : "rgba(196,30,58,0.3)" }} />
+            <div className="lg:w-2/3">
+              <div className="grid grid-cols-2 border-t border-l" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+                {clients.map((c, i) => (
+                  <div key={i} className="client-name py-7 px-6 border-b border-r"
+                    style={{ borderColor: "rgba(0,0,0,0.07)" }}
+                    data-testid={`card-client-${i}`}>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(0.75rem,1.5vw,1rem)", fontWeight: 700, letterSpacing: "0.15em", color: "#111827", textTransform: "uppercase" }}>
+                      {c}
+                    </div>
+                    <div className="mt-2 w-6 h-px" style={{ background: "rgba(196,30,58,0.35)" }} />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
 
-          {/* Double ticker */}
           <div className="space-y-3 overflow-hidden border-y py-5" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
             <div className="animate-ticker overflow-hidden">
               {[...clients, ...clients, ...clients].map((c, i) => (
                 <span key={i} className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.25)", textTransform: "uppercase" }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.25)", textTransform: "uppercase" }}>
                   {c} <span style={{ color: "#C41E3A" }}>◆</span>
                 </span>
               ))}
@@ -1005,20 +990,11 @@ export default function HomePage() {
             <div className="animate-ticker-rev overflow-hidden">
               {[...clients, ...clients, ...clients].map((c, i) => (
                 <span key={i} className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
-                  style={{ fontFamily: "var(--font-raleway)", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.15)", textTransform: "uppercase" }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.15)", textTransform: "uppercase" }}>
                   {c} <span style={{ color: "rgba(196,30,58,0.4)" }}>◆</span>
                 </span>
               ))}
             </div>
-          </div>
-
-          <div className="text-center">
-            <Link href="/clients" data-testid="button-all-clients">
-              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                View All Clients <ArrowRight size={12} />
-              </span>
-            </Link>
           </div>
         </div>
       </section>
@@ -1030,38 +1006,45 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/3 space-y-6" data-animate="fade">
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>Recognition</span>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>Recognition</span>
               <h2 className="font-bold uppercase"
-                style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(1.8rem,3vw,2.5rem)", color: "#111827", fontWeight: 700 }}>
-                Award-Winning<br /><span className="italic" style={{ color: "#C41E3A" }}>Excellence</span>
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3vw,2.5rem)", color: "#111827", fontWeight: 700 }}>
+                Award-Winning<br />Excellence
               </h2>
-              <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
                 20+ consecutive industry awards for structural quality, safety leadership, and on-time delivery.
               </p>
               <Link href="/awards" data-testid="button-awards-more">
                 <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
                   Full Awards History <ArrowRight size={12} />
                 </span>
               </Link>
             </div>
-            <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+            <div className="lg:w-2/3 border-t w-full" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
               {[
-                { year: "2023", award: "BAI Special Jury" },
-                { year: "2022", award: "Constro Silver Trophy" },
-                { year: "2021", award: "Constro Gold Trophy" },
-                { year: "2018", award: "Industry Excellence Gold" },
-                { year: "2017", award: "India's Small Giants" },
-                { year: "2007", award: "BAI First Prize" },
+                { year: "2023", award: "BAI Special Jury Award",    org: "Builders Association of India" },
+                { year: "2022", award: "Constro Silver Trophy",     org: "Constro Awards" },
+                { year: "2021", award: "Constro Gold Trophy",       org: "Constro Awards" },
+                { year: "2018", award: "Industry Excellence Gold",  org: "National Construction" },
+                { year: "2017", award: "India's Small Giants",      org: "Forbes India" },
+                { year: "2007", award: "BAI First Prize",           org: "Builders Association of India" },
               ].map(a => (
-                <div key={a.year} className="award-card p-6 border text-center transition-all duration-300 cursor-default"
-                  style={{ borderColor: "rgba(0,0,0,0.08)", background: "#f9f9f9" }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(196,30,58,0.3)"; e.currentTarget.style.background = "rgba(196,30,58,0.03)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)"; e.currentTarget.style.background = "#f9f9f9"; }}
+                <div key={a.year} className="award-row py-7 border-b flex items-center gap-8"
+                  style={{ borderColor: "rgba(0,0,0,0.07)" }}
                   data-testid={`card-award-${a.year}`}>
-                  <Award size={20} style={{ color: "#C41E3A", margin: "0 auto 10px" }} />
-                  <div style={{ fontFamily: "var(--font-raleway)", fontSize: "22px", fontWeight: 700, color: "#C41E3A" }}>{a.year}</div>
-                  <div style={{ fontFamily: "var(--font-inter)", fontSize: "9px", letterSpacing: "0.12em", color: "rgba(17,24,39,0.4)", textTransform: "uppercase", marginTop: "6px" }}>{a.award}</div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 800, color: "#C41E3A", lineHeight: 1, flexShrink: 0, minWidth: "80px" }}>
+                    {a.year}
+                  </div>
+                  <div className="flex-1">
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>
+                      {a.award}
+                    </div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(17,24,39,0.4)", textTransform: "uppercase" }}>
+                      {a.org}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1069,42 +1052,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ CTA ══════════ */}
-      <section ref={ctaRef}
-        style={{ background: "#111827" }}
-        data-testid="section-cta">
-        <div className="flex items-center justify-center py-28 px-6">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="h-px w-16 mx-auto" style={{ background: "#C41E3A" }} />
-            <span style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
-              Project Intake
-            </span>
-            <h2 className="font-bold uppercase"
-              style={{ fontFamily: "var(--font-raleway)", fontSize: "clamp(2.2rem,5vw,4rem)", color: "#ffffff", fontWeight: 700, lineHeight: 1.1 }}>
-              Let's Build Something<br />
-              <span className="italic" style={{ color: "#C41E3A" }}>Extraordinary</span>
-            </h2>
-            <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", lineHeight: 1.8, color: "rgba(255,255,255,0.4)", maxWidth: "480px", margin: "0 auto" }}>
-              Transmit your structural blueprints or enterprise construction specifications directly.
-              Our central operations team will analyze your requirements immediately.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" data-testid="button-cta-enquire">
-                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                  Enquire Now <ArrowRight size={12} />
-                </span>
-              </Link>
-              <Link href="/completed-projects" data-testid="button-cta-projects">
-                <span className="inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-10 py-4 cursor-pointer transition-all"
-                  style={{ fontFamily: "var(--font-inter)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                  View Portfolio
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
