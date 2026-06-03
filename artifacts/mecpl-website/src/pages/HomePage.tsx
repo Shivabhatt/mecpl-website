@@ -210,42 +210,27 @@ export default function HomePage() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
-          const imgClip = panel.querySelector<HTMLElement>(".svc-img-clip");
-          const imgEl   = panel.querySelector<HTMLElement>(".svc-img-clip img");
-          const textEl  = panel.querySelector<HTMLElement>(".svc-text-block");
+          const afterEl = panel.querySelector<HTMLElement>(".svc-after-text");
+          const innerEl = panel.querySelector<HTMLElement>(".svc-after-inner");
 
+          /* oNjgEjm pattern: pin panel, wipe text from right over the image */
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: panel,
-              start: "top 78%",
-              end: "top 5%",
-              scrub: 1.2,
+              start: "center center",
+              end: () => "+=" + panel.offsetWidth,
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
               invalidateOnRefresh: true,
             },
+            defaults: { ease: "none" },
           });
 
-          /* Phase 1 — image wipes in left→right via clipPath */
-          if (imgClip) {
-            tl.fromTo(
-              imgClip,
-              { clipPath: "inset(0 100% 0 0)" },
-              { clipPath: "inset(0 0% 0 0)", ease: "none", duration: 0.55 },
-              0,
-            );
-          }
-          /* Subtle zoom-out while revealing */
-          if (imgEl) {
-            tl.fromTo(imgEl, { scale: 1.1 }, { scale: 1.0, ease: "none", duration: 0.55 }, 0);
-          }
-          /* Phase 2 — text slides left + fades in after image is ~60% revealed */
-          if (textEl) {
-            tl.fromTo(
-              textEl,
-              { opacity: 0, x: 40 },
-              { opacity: 1, x: 0,  ease: "none", duration: 0.45 },
-              0.35,
-            );
-          }
+          /* Container wipes in from the right */
+          if (afterEl) tl.fromTo(afterEl, { xPercent: 100, x: 0 }, { xPercent: 0 });
+          /* Inner content counter-animates so it appears stationary */
+          if (innerEl) tl.fromTo(innerEl, { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
         });
       });
     }, sec);
@@ -635,79 +620,82 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Service panels — image wipes in via clipPath, then text fades in */}
+        {/* Service panels — oNjgEjm: full-bleed image (before) + text wipes in from right (after) */}
         {serviceRows.map((row, i) => (
           <div key={i} className="svc-panel" style={{
             position: "relative",
             height: "100vh",
-            display: "flex",
-            alignItems: "stretch",
+            overflow: "hidden",
             borderTop: "1px solid rgba(0,0,0,0.07)",
-            background: i % 2 === 0 ? "#f8f8f8" : "#ffffff",
           }}>
 
-            {/* ── Image side (left 58%) — clipPath wipes left→right on scroll ── */}
-            <div className="svc-img-clip" style={{
-              position: "relative",
-              width: "58%",
-              overflow: "hidden",
-              flexShrink: 0,
-              clipPath: "inset(0 100% 0 0)",
-            }}>
+            {/* ── BEFORE: full-bleed image ── */}
+            <div style={{ position: "absolute", inset: 0 }}>
               <img
                 src={row.image}
                 alt={row.title}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-              {/* Light scrim */}
-              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.22)" }} />
-              {/* Ghost word watermark on image */}
+              {/* Scrim */}
+              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.30)" }} />
+              {/* Ghost word watermark */}
               <div style={{ position: "absolute", bottom: "32px", left: "40px", pointerEvents: "none", userSelect: "none" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.08)", lineHeight: 1 }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.07)", lineHeight: 1 }}>
                   {row.word}
                 </span>
               </div>
               {/* Panel counter */}
               <div style={{ position: "absolute", top: "40px", left: "40px" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.35)", letterSpacing: "0.12em" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.40)", letterSpacing: "0.14em" }}>
                   {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
                 </span>
               </div>
             </div>
 
-            {/* ── Text side (right 42%) — fades in after image reveals ── */}
-            <div className="svc-text-block" style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              padding: "0 clamp(32px, 5vw, 72px)",
-              opacity: 0,
+            {/* ── AFTER: text panel wipes in from right (oNjgEjm) ── */}
+            <div className="svc-after-text" style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "45%",
+              height: "100%",
+              overflow: "hidden",
+              background: i % 2 === 0 ? "#ffffff" : "#f8f8f8",
             }}>
-              <div style={{ width: "100%" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
-                  {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
-                </span>
-                <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
-                <h3 className="uppercase" style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
-                  fontWeight: 400,
-                  color: "#111827",
-                  letterSpacing: "0.04em",
-                  lineHeight: 1.18,
-                  marginBottom: "20px",
-                }}>
-                  {row.title}
-                </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "400px", marginBottom: "32px" }}>
-                  {row.desc}
-                </p>
-                <Link href={row.path} data-testid={`button-service-${i}`}>
-                  <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                    Learn More <ArrowRight size={11} />
+              {/* Counter-animated inner keeps content visually stationary during wipe */}
+              <div className="svc-after-inner" style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                padding: "0 clamp(32px, 5vw, 64px)",
+              }}>
+                <div style={{ width: "100%" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
+                    {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
                   </span>
-                </Link>
+                  <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
+                  <h3 className="uppercase" style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
+                    fontWeight: 400,
+                    color: "#111827",
+                    letterSpacing: "0.04em",
+                    lineHeight: 1.18,
+                    marginBottom: "20px",
+                  }}>
+                    {row.title}
+                  </h3>
+                  <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "380px", marginBottom: "32px" }}>
+                    {row.desc}
+                  </p>
+                  <Link href={row.path} data-testid={`button-service-${i}`}>
+                    <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                      style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                      Learn More <ArrowRight size={11} />
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
 
