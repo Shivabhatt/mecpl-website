@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import {
   ArrowRight, Clock, Building2, HardHat,
   Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield,
-  Star, Users, Wrench, Quote, Award,
+  Star, Users, Wrench, Quote, Award, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -64,9 +64,9 @@ const whyChoose = [
 ];
 
 const testimonials = [
-  { quote: "MECPL delivered our 42-storey tower ahead of schedule with exceptional structural quality. Their site management and safety protocols set a new benchmark in the industry.",                   name: "Mr. Atul Chordia",   role: "Chairman, Panchshil Realty" },
-  { quote: "Working with MECPL on Trump Towers Pune was a seamless experience. Their technical precision, proactive communication, and zero-compromise quality made them an invaluable partner.",          name: "Project Director",    role: "Trump Towers Pune" },
-  { quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",                        name: "Senior Project Head", role: "Godrej Properties" },
+  { quote: "MECPL delivered our 42-storey tower ahead of schedule with exceptional structural quality. Their site management and safety protocols set a new benchmark in the industry.",                name: "Mr. Atul Chordia",   role: "Chairman, Panchshil Realty", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { quote: "Working with MECPL on Trump Towers Pune was a seamless experience. Their technical precision, proactive communication, and zero-compromise quality made them an invaluable partner.",       name: "Project Director",    role: "Trump Towers Pune",          image: "assets/projects/Trump-Tower.jpg"          },
+  { quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",                     name: "Senior Project Head", role: "Godrej Properties",          image: "assets/projects/GODREJ-INFINITY.jpg"      },
 ];
 
 const clients = [
@@ -127,7 +127,8 @@ const bentoClients = [
 
 /* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
-  const [slide, setSlide] = useState(0);
+  const [slide, setSlide]           = useState(0);
+  const [activeTesti, setActiveTesti] = useState(0);
   const assetBase = import.meta.env.BASE_URL;
 
   const heroSectionRef   = useRef<HTMLElement>(null);
@@ -306,42 +307,45 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: RwKwLWK infinite horizontal ticker ── */
+  /* ── TESTIMONIALS: coverflow carousel ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
 
-    const track = sec.querySelector<HTMLElement>(".testi-track");
-    if (!track) return;
+    const n = testimonials.length;
+    const cards  = Array.from(sec.querySelectorAll<HTMLElement>(".testi-cover-card"));
+    const quotes = Array.from(sec.querySelectorAll<HTMLElement>(".testi-quote-block"));
 
-    const mm = gsap.matchMedia();
-    let tween: gsap.core.Tween | null = null;
+    cards.forEach((card, i) => {
+      let dist = i - activeTesti;
+      if (dist >  Math.floor(n / 2)) dist -= n;
+      if (dist < -Math.floor(n / 2)) dist += n;
+      const absD = Math.abs(dist);
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      /* Seamless loop: track contains cards×2, animate x → -(half width) */
-      tween = gsap.to(track, {
-        x: () => -(track.scrollWidth / 2),
-        duration: 30,
-        ease: "none",
-        repeat: -1,
-        onRepeat: () => gsap.set(track, { x: 0 }),
+      gsap.to(card, {
+        x: dist * 420,
+        scale: absD === 0 ? 1 : 0.72,
+        opacity: absD === 0 ? 1 : 0.55,
+        zIndex: absD === 0 ? 10 : 1,
+        duration: 0.65,
+        ease: "power3.inOut",
       });
-
-      /* Pause on hover */
-      const pause = () => tween?.pause();
-      const play  = () => tween?.play();
-      sec.addEventListener("mouseenter", pause);
-      sec.addEventListener("mouseleave", play);
-
-      return () => {
-        sec.removeEventListener("mouseenter", pause);
-        sec.removeEventListener("mouseleave", play);
-        tween?.kill();
-      };
     });
 
-    return () => mm.revert();
-  }, []);
+    quotes.forEach((q, i) => {
+      gsap.to(q, {
+        autoAlpha: i === activeTesti ? 1 : 0,
+        y: i === activeTesti ? 0 : 12,
+        duration: 0.45,
+        ease: "power2.out",
+      });
+    });
+
+    return () => {
+      cards.forEach(c  => gsap.killTweensOf(c));
+      quotes.forEach(q => gsap.killTweensOf(q));
+    };
+  }, [activeTesti]);
 
   /* ── CLIENTS: infinite horizontal logo ticker ── */
   useEffect(() => {
@@ -771,14 +775,14 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
-      {/* RwKwLWK: infinite horizontal ticker — cards×2, GSAP x loop, pause on hover */}
+      {/* Coverflow carousel — 3 cards, center large, sides scaled/faded, GSAP x */}
       <section ref={testimonialsRef}
         className="py-24"
-        style={{ background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
+        style={{ background: "#f8f6f2", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
         data-testid="section-testimonials">
 
         {/* ── Header ── */}
-        <div className="text-center mb-16 px-6">
+        <div className="text-center mb-14 px-6">
           <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
             Client Voices
           </span>
@@ -788,55 +792,98 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* ── Infinite track ── */}
-        <div style={{ overflow: "hidden", cursor: "default" }}>
-          <div className="testi-track" style={{ display: "flex", gap: "28px", width: "max-content" }}>
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <div key={i}
+        {/* ── Coverflow ── */}
+        <div style={{ position: "relative", height: "460px" }}>
+          {/* Anchor div centred horizontally */}
+          <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0 }}>
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="testi-cover-card"
+                onClick={() => setActiveTesti(i)}
                 style={{
-                  width: "500px",
-                  flexShrink: 0,
-                  background: "#ffffff",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: "6px",
-                  padding: "44px 40px 40px",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
-                  position: "relative",
+                  position: "absolute",
+                  width: "380px",
+                  height: "440px",
+                  marginLeft: "-190px",
+                  top: "10px",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  boxShadow: "0 12px 48px rgba(0,0,0,0.18)",
+                }}
+              >
+                <img
+                  src={`${assetBase}${t.image}`}
+                  alt={t.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+                {/* Bottom label gradient */}
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  background: "linear-gradient(transparent, rgba(0,0,0,0.65))",
+                  padding: "48px 24px 20px",
                 }}>
-
-                {/* Quote mark */}
-                <div style={{ fontFamily: "Georgia, serif", fontSize: "3.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "1.5rem", opacity: 0.15, userSelect: "none" }}>
-                  &ldquo;
-                </div>
-
-                {/* Quote */}
-                <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontSize: "13.5px",
-                  fontWeight: 400,
-                  color: "#374151",
-                  lineHeight: 1.85,
-                  marginBottom: "2rem",
-                }}>
-                  {t.quote}
-                </p>
-
-                {/* Attribution */}
-                <div style={{ display: "flex", alignItems: "center", gap: "14px", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: "20px" }}>
-                  <div style={{ width: "28px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
-                  <div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "10px", fontWeight: 700, color: "#111827", letterSpacing: "0.14em", textTransform: "uppercase" }}>
-                      {t.name}
-                    </div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                      {t.role}
-                    </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, color: "#ffffff", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+                    {t.name}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(255,255,255,0.6)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                    {t.role}
                   </div>
                 </div>
-
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ── Quote (crossfades per active card) ── */}
+        <div style={{ position: "relative", maxWidth: "620px", margin: "0 auto", padding: "0 32px", height: "180px" }}>
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="testi-quote-block"
+              style={{ position: "absolute", top: 0, left: "32px", right: "32px", opacity: 0, visibility: "hidden" }}
+            >
+              <div style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "14px", opacity: 0.18, userSelect: "none" }}>
+                &ldquo;
+              </div>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", fontWeight: 400, color: "#374151", lineHeight: 1.85 }}>
+                {t.quote}
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "18px" }}>
+                <div style={{ width: "24px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
+                <div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, color: "#111827", letterSpacing: "0.12em", textTransform: "uppercase" }}>{t.name}</div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Navigation ── */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "20px", marginTop: "24px" }}>
+          <button
+            onClick={() => setActiveTesti(p => (p - 1 + testimonials.length) % testimonials.length)}
+            style={{ width: "44px", height: "44px", borderRadius: "50%", border: "1px solid rgba(0,0,0,0.12)", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
+          >
+            <ChevronLeft size={18} color="#111827" />
+          </button>
+
+          {testimonials.map((_, i) => (
+            <div
+              key={i}
+              onClick={() => setActiveTesti(i)}
+              style={{ width: i === activeTesti ? "20px" : "6px", height: "6px", borderRadius: "3px", background: i === activeTesti ? "#C41E3A" : "rgba(0,0,0,0.18)", cursor: "pointer", transition: "width 0.3s, background 0.3s" }}
+            />
+          ))}
+
+          <button
+            onClick={() => setActiveTesti(p => (p + 1) % testimonials.length)}
+            style={{ width: "44px", height: "44px", borderRadius: "50%", border: "1px solid rgba(0,0,0,0.12)", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
+          >
+            <ChevronRight size={18} color="#111827" />
+          </button>
         </div>
 
       </section>
@@ -883,9 +930,7 @@ export default function HomePage() {
                 <img
                   src={`${assetBase}${c.logo}`}
                   alt={c.name}
-                  style={{ maxWidth: "100%", maxHeight: "56px", objectFit: "contain", filter: "grayscale(100%)", opacity: 0.7, transition: "filter 0.3s, opacity 0.3s" }}
-                  onMouseEnter={e => { const img = e.currentTarget; img.style.filter = "grayscale(0%)"; img.style.opacity = "1"; }}
-                  onMouseLeave={e => { const img = e.currentTarget; img.style.filter = "grayscale(100%)"; img.style.opacity = "0.7"; }}
+                  style={{ maxWidth: "100%", maxHeight: "56px", objectFit: "contain" }}
                 />
               </div>
             ))}
