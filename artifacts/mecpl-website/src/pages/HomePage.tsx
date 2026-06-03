@@ -933,16 +933,10 @@ export default function HomePage() {
 
         {/* ── Header ── */}
         <div className="text-center mb-16 px-6">
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-            Ecosystem
-          </span>
-          <h2 className="uppercase text-3xl"
-            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, marginBottom: "18px" }}>
+          <h2 className="text-3xl"
+            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
             Trusted By Leading Brands
           </h2>
-          <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", lineHeight: 1.85, color: "#6b7280", maxWidth: "480px", margin: "0 auto 0" }}>
-            A continuous showcase of the developers, institutions, and enterprises that trust MECPL across landmark projects.
-          </p>
         </div>
 
         {/* ── Infinite logo ticker ── */}
