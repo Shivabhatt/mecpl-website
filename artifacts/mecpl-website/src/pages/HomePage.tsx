@@ -201,7 +201,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: fifthanddune — dark split panel, clip-path image reveal + text stagger ── */
+  /* ── SERVICES: oNjgEjm — full-bleed image, text wipes in from alternating sides ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -210,45 +210,27 @@ export default function HomePage() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
-          const imgClip  = panel.querySelector<HTMLElement>(".svc-img-clip");
-          const textEls  = gsap.utils.toArray<HTMLElement>(".svc-anim", panel);
-          /* data-imgright="true" → image on right, clip from right; else clip from left */
-          const imgRight = panel.dataset.imgright === "true";
+          const afterEl  = panel.querySelector<HTMLElement>(".svc-after-text");
+          const innerEl  = panel.querySelector<HTMLElement>(".svc-after-inner");
+          const isAlt    = panel.dataset.alt === "true";
+          const startX   = isAlt ? -100 : 100;
+          const counterX = isAlt ? 100 : -100;
 
-          /* Clip-path reveal: image box wipes in from its outer edge */
-          if (imgClip) {
-            gsap.fromTo(
-              imgClip,
-              { clipPath: imgRight ? "inset(0 100% 0 0)" : "inset(0 0% 0 100%)" },
-              {
-                clipPath: "inset(0 0% 0 0%)",
-                ease: "power2.inOut",
-                duration: 1.2,
-                scrollTrigger: {
-                  trigger: panel,
-                  start: "top 72%",
-                  toggleActions: "play none none none",
-                },
-              },
-            );
-          }
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: panel,
+              start: "center center",
+              end: () => "+=" + panel.offsetWidth,
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+            defaults: { ease: "none" },
+          });
 
-          /* Text: stagger fade + lift as panel enters */
-          if (textEls.length) {
-            gsap.fromTo(
-              textEls,
-              { y: 24, opacity: 0 },
-              {
-                y: 0, opacity: 1,
-                duration: 0.8, ease: "power3.out", stagger: 0.12,
-                scrollTrigger: {
-                  trigger: panel,
-                  start: "top 75%",
-                  toggleActions: "play none none none",
-                },
-              },
-            );
-          }
+          if (afterEl) tl.fromTo(afterEl, { xPercent: startX, x: 0 }, { xPercent: 0 });
+          if (innerEl) tl.fromTo(innerEl, { xPercent: counterX, x: 0 }, { xPercent: 0 }, 0);
         });
       });
     }, sec);
@@ -638,119 +620,66 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Service panels — fifthanddune: dark split panel, contained image with clip-path reveal */}
+        {/* Service panels — oNjgEjm: full-bleed image + text wipes in, alternating sides */}
         {serviceRows.map((row, i) => {
-          const imgRight = i % 2 === 0; /* even → image right; odd → image left */
+          const isAlt = i % 2 !== 0;
           return (
-            <div
-              key={i}
-              className="svc-panel"
-              data-imgright={imgRight ? "true" : "false"}
-              style={{
-                display: "flex",
-                flexDirection: imgRight ? "row" : "row-reverse",
-                alignItems: "stretch",
-                minHeight: "100vh",
-                background: "#111827",
-              }}
-            >
-              {/* ── TEXT SIDE ── */}
-              <div style={{
-                flex: "0 0 45%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "clamp(48px,6vw,88px) clamp(40px,5.5vw,80px)",
-                borderRight: imgRight ? "1px solid rgba(255,255,255,0.07)" : "none",
-                borderLeft: imgRight ? "none" : "1px solid rgba(255,255,255,0.07)",
-              }}>
-                <span className="svc-anim" style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase",
-                  display: "block", marginBottom: "18px",
-                }}>
-                  {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
-                </span>
-                <div className="svc-anim" style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
-                <h3 className="svc-anim uppercase" style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "clamp(2rem,3vw,2.8rem)",
-                  fontWeight: 400,
-                  color: "#f1f5f9",
-                  letterSpacing: "0.03em",
-                  lineHeight: 1.1,
-                  marginBottom: "22px",
-                }}>
-                  {row.title}
-                </h3>
-                <p className="svc-anim" style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
-                  lineHeight: 1.85, color: "rgba(241,245,249,0.55)",
-                  maxWidth: "340px", marginBottom: "40px",
-                }}>
-                  {row.desc}
-                </p>
-                <div className="svc-anim">
-                  <Link href={row.path} data-testid={`button-service-${i}`}>
-                    <span style={{
-                      display: "inline-block",
-                      fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "10px", letterSpacing: "0.2em",
-                      color: "#f1f5f9", textTransform: "uppercase", fontWeight: 600,
-                      border: "1px solid rgba(241,245,249,0.35)",
-                      padding: "14px 28px", cursor: "pointer",
-                      transition: "border-color 0.25s, color 0.25s, background 0.25s",
-                    }}
-                      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#C41E3A"; el.style.borderColor = "#C41E3A"; }}
-                      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.borderColor = "rgba(241,245,249,0.35)"; }}
-                    >
-                      Learn More
-                    </span>
-                  </Link>
+            <div key={i} className="svc-panel" data-alt={isAlt ? "true" : "false"} style={{
+              position: "relative",
+              paddingBottom: "56.25%",
+              overflow: "hidden",
+              borderTop: "1px solid rgba(0,0,0,0.07)",
+            }}>
+
+              {/* ── BEFORE: full-bleed image ── */}
+              <div style={{ position: "absolute", inset: 0 }}>
+                <img src={row.image} alt={row.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.30)" }} />
+                <div style={{ position: "absolute", bottom: "32px", [isAlt ? "right" : "left"]: "40px", pointerEvents: "none", userSelect: "none" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.07)", lineHeight: 1 }}>
+                    {row.word}
+                  </span>
+                </div>
+                <div style={{ position: "absolute", top: "40px", [isAlt ? "right" : "left"]: "40px" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.40)", letterSpacing: "0.14em" }}>
+                    {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
+                  </span>
                 </div>
               </div>
 
-              {/* ── IMAGE SIDE ── */}
-              <div style={{
-                flex: "0 0 55%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "clamp(32px,4vw,52px)",
+              {/* ── AFTER: text panel wipes in (right for even, left for odd) ── */}
+              <div className="svc-after-text" style={{
+                position: "absolute", top: 0,
+                [isAlt ? "left" : "right"]: 0,
+                width: "45%", height: "100%", overflow: "hidden",
+                background: isAlt ? "#f8f8f8" : "#ffffff",
               }}>
-                {/* .svc-img-clip → GSAP clip-path wipes from outer edge */}
-                <div className="svc-img-clip" style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  position: "relative",
+                <div className="svc-after-inner" style={{
+                  width: "100%", height: "100%",
+                  display: "flex", alignItems: "center",
+                  padding: "0 clamp(32px, 5vw, 64px)",
                 }}>
-                  <img
-                    src={row.image}
-                    alt={row.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                  {/* Ghost word watermark */}
-                  <div style={{ position: "absolute", bottom: "24px", right: "28px", pointerEvents: "none", userSelect: "none" }}>
-                    <span style={{
-                      fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "clamp(3rem,5vw,6rem)",
-                      fontWeight: 800,
-                      color: "rgba(255,255,255,0.06)",
-                      lineHeight: 1,
-                    }}>
-                      {row.word}
+                  <div style={{ width: "100%" }}>
+                    <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
+                      {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
                     </span>
-                  </div>
-                  {/* Panel counter */}
-                  <div style={{ position: "absolute", top: "20px", left: "24px" }}>
-                    <span style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
-                      color: "rgba(255,255,255,0.45)", letterSpacing: "0.14em",
+                    <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
+                    <h3 className="uppercase" style={{
+                      fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
+                      fontWeight: 400, color: "#111827", letterSpacing: "0.04em",
+                      lineHeight: 1.18, marginBottom: "20px",
                     }}>
-                      {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
-                    </span>
+                      {row.title}
+                    </h3>
+                    <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "380px", marginBottom: "32px" }}>
+                      {row.desc}
+                    </p>
+                    <Link href={row.path} data-testid={`button-service-${i}`}>
+                      <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                        Learn More <ArrowRight size={11} />
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
