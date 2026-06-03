@@ -778,7 +778,7 @@ export default function HomePage() {
       {/* Coverflow carousel — 3 cards, center large, sides scaled/faded, GSAP x */}
       <section ref={testimonialsRef}
         className="py-24"
-        style={{ background: "#f8f6f2", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
         data-testid="section-testimonials">
 
         {/* ── Header ── */}
