@@ -297,10 +297,12 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: word-by-word opacity scrub (VwbywPd pattern)
-     SplitText splits each quote into words, then each word scrubs from
-     opacity:0.08 → 1 tied to scroll position — words light up one by one
-     as the user scrolls through the card. ── */
+  /* ── TESTIMONIALS:
+       LAYOUT  → VwbywPd: layered pinning — each 100vh card pins at top,
+                 next card scrolls over it (pinSpacing:false, z-index stack)
+       TEXT    → GggpRoB: AutoSplit mask:"lines" — when a card pins into
+                 view its quote lines slide up from yPercent:120 (overflow
+                 hidden per line), staggered, playing once on entry. ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
@@ -313,6 +315,34 @@ export default function HomePage() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".testi-block", sec);
 
+        /* ── VwbywPd: layered pin each card ── */
+        cards.forEach((card, i) => {
+          gsap.set(card, { zIndex: i + 1 });
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            pin: true,
+            pinSpacing: false,
+          });
+
+          /* Cards 2+ lift in over the pinned card below */
+          if (i > 0) {
+            gsap.from(card, {
+              opacity: 0,
+              y: 24,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 98%",
+                end: "top top",
+                scrub: 1,
+              },
+            });
+          }
+        });
+
+        /* ── GggpRoB: AutoSplit line-mask reveal on each card ── */
         document.fonts.ready.then(() => {
           if (cancelled) return;
 
@@ -322,21 +352,21 @@ export default function HomePage() {
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const split = (SplitText as any).create(quoteEl, {
-              type: "words",
+              type: "words,lines",
+              mask: "lines",
+              linesClass: "testi-line",
               autoSplit: true,
-              onSplit: (instance: { words: HTMLElement[] }) => {
-                /* Set all words dim to start */
-                gsap.set(instance.words, { opacity: 0.08 });
-                /* Scrub each word from dim → full opacity sequentially */
-                return gsap.to(instance.words, {
-                  opacity: 1,
-                  stagger: 0.4,
-                  ease: "none",
+              onSplit: (instance: { lines: HTMLElement[] }) => {
+                /* Play line-reveal once when the card pins to top */
+                return gsap.from(instance.lines, {
+                  yPercent: 120,
+                  stagger: 0.12,
+                  duration: 0.9,
+                  ease: "power3.out",
                   scrollTrigger: {
                     trigger: card,
-                    scrub: true,
-                    start: "top 60%",
-                    end: "bottom 40%",
+                    start: "top top+=2",
+                    toggleActions: "play none none reset",
                   },
                 });
               },
