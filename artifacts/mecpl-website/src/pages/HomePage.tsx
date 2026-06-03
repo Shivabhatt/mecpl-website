@@ -309,17 +309,16 @@ export default function HomePage() {
 
       const imgs = gsap.utils.toArray<HTMLElement>(".proj-img", track);
       imgs.forEach(img => {
-        gsap.fromTo(img,
-          { scale: 1.0 },
-          {
-            scale: 1.08, ease: "none",
-            scrollTrigger: {
-              trigger: img.closest(".h-scroll-card") as HTMLElement,
-              containerAnimation: projTween,
-              start: "left right", end: "right left", scrub: true,
-            },
-          }
-        );
+        const card = img.closest(".h-scroll-card") as HTMLElement;
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: projTween,
+            start: "left right", end: "right left", scrub: true,
+          },
+        });
+        tl.fromTo(img, { scale: 1.0 }, { scale: 1.08, ease: "none" })
+          .to(img, { scale: 1.0, ease: "none" });
       });
     });
 
@@ -527,13 +526,13 @@ export default function HomePage() {
           <div ref={heroHeadlineRef}>
             {/* dangerouslySetInnerHTML prevents React from creating text fibers
                 that SplitText's char-splitting would later conflict with */}
-            <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white mb-1"
+            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight text-white mb-1"
               style={{ fontFamily: "'Montserrat',sans-serif" }}
               dangerouslySetInnerHTML={{ __html: "Engineering" }} />
-            <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight mb-1"
+            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight mb-1"
               style={{ fontFamily: "'Montserrat',sans-serif", color: "#C41E3A" }}
               dangerouslySetInnerHTML={{ __html: "Excellence" }} />
-            <div className="hero-line overflow-hidden block text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-none tracking-tight text-white"
+            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight text-white"
               style={{ fontFamily: "'Montserrat',sans-serif" }}
               dangerouslySetInnerHTML={{ __html: "Delivered" }} />
           </div>
@@ -628,8 +627,8 @@ export default function HomePage() {
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
                   Our Foundation
                 </span>
-                <h2 className="font-bold uppercase leading-tight"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+                <h2 className="font-bold uppercase leading-tight text-3xl"
+                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
                   Structural Precision.<br />
                   <span style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
                 </h2>
@@ -688,7 +687,7 @@ export default function HomePage() {
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               What We Build
             </span>
-            <h2 className="font-bold uppercase" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+            <h2 className="font-bold uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
               Our Services
             </h2>
           </div>
@@ -715,8 +714,8 @@ export default function HomePage() {
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-bold uppercase"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.5rem,3vw,2.2rem)", color: "#111827", fontWeight: 700, letterSpacing: "0.03em" }}>
+                <h3 className="font-bold uppercase text-3xl"
+                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700, letterSpacing: "0.03em" }}>
                   {row.title}
                 </h3>
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.85, color: "#4b5563", maxWidth: "440px" }}>
@@ -745,8 +744,8 @@ export default function HomePage() {
           <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
             Showcase
           </span>
-          <h2 className="font-bold uppercase leading-tight"
-            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3.5vw,2.8rem)", color: "#111827", fontWeight: 700 }}>
+          <h2 className="font-bold uppercase leading-tight text-3xl"
+            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
             Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
           </h2>
           <div className="mt-4 text-xs" style={{ fontFamily: "'Montserrat',sans-serif", color: "rgba(17,24,39,0.35)", letterSpacing: "0.1em" }}>
@@ -771,8 +770,8 @@ export default function HomePage() {
                 <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "8px" }}>
                   {proj.type}
                 </div>
-                <h3 className="font-bold uppercase"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.4rem,2.5vw,2.2rem)", color: "#fff", letterSpacing: "0.03em" }}>
+                <h3 className="font-bold uppercase text-3xl"
+                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#fff", letterSpacing: "0.03em" }}>
                   {proj.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-2">
@@ -810,8 +809,8 @@ export default function HomePage() {
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
                   Careers at MECPL
                 </span>
-                <h2 className="font-bold uppercase"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3vw,2.6rem)", color: "#111827", fontWeight: 700 }}>
+                <h2 className="font-bold uppercase text-3xl"
+                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
                   Build the Next Generation<br />of Landmarks
                 </h2>
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563", maxWidth: "520px" }}>
@@ -839,8 +838,8 @@ export default function HomePage() {
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               Our Advantage
             </span>
-            <h2 className="font-bold uppercase"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.2rem)", color: "#111827", fontWeight: 700 }}>
+            <h2 className="font-bold uppercase text-3xl"
+              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
               Why Choose MECPL
             </h2>
           </div>
@@ -920,7 +919,7 @@ export default function HomePage() {
                 <p className="testi-quote"
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "clamp(1.1rem,2.2vw,1.7rem)",
+                    fontSize: "1.125rem",
                     fontWeight: 400,
                     color: "#111827",
                     lineHeight: 1.8,
@@ -953,40 +952,42 @@ export default function HomePage() {
         className="py-20 px-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
         data-testid="section-clients">
-        <div className="max-w-7xl mx-auto space-y-14">
-          <div className="flex flex-col lg:flex-row gap-16 items-start">
-            <div className="lg:w-1/3 space-y-5">
+        <div className="max-w-7xl mx-auto space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-4">
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block" }}>
                 Ecosystem
               </span>
-              <h2 className="font-bold uppercase"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#111827", fontWeight: 700 }}>
+              <h2 className="font-bold uppercase text-3xl"
+                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
                 Clients &amp; Partners
               </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563" }}>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563", maxWidth: "480px" }}>
                 India's most trusted developers and industrialists have chosen MECPL for their landmark projects.
               </p>
-              <Link href="/clients" data-testid="button-all-clients">
-                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                  View All Clients <ArrowRight size={12} />
-                </span>
-              </Link>
             </div>
+            <Link href="/clients" data-testid="button-all-clients">
+              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                View All Clients <ArrowRight size={12} />
+              </span>
+            </Link>
+          </div>
 
-            <div className="lg:w-2/3">
-              <div className="grid grid-cols-2 border-t border-l" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-                {clients.map((c, i) => (
-                  <div key={i} className="client-name py-7 px-6 border-b border-r"
-                    style={{ borderColor: "rgba(0,0,0,0.07)" }}
-                    data-testid={`card-client-${i}`}>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(0.75rem,1.5vw,1rem)", fontWeight: 700, letterSpacing: "0.15em", color: "#111827", textTransform: "uppercase" }}>
+          <div className="border-t border-b overflow-x-auto" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+            <div className="flex min-w-max">
+              {clients.map((c, i) => (
+                <div key={i} className="client-name flex items-center"
+                  data-testid={`card-client-${i}`}>
+                  {i > 0 && <div className="w-px self-stretch" style={{ background: "rgba(0,0,0,0.07)" }} />}
+                  <div className="py-8 px-10">
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase", whiteSpace: "nowrap" }}>
                       {c}
                     </div>
                     <div className="mt-2 w-6 h-px" style={{ background: "rgba(196,30,58,0.35)" }} />
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -1020,8 +1021,8 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/3 space-y-6" data-animate="fade">
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>Recognition</span>
-              <h2 className="font-bold uppercase"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.8rem,3vw,2.5rem)", color: "#111827", fontWeight: 700 }}>
+              <h2 className="font-bold uppercase text-3xl"
+                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
                 Award-Winning<br />Excellence
               </h2>
               <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
