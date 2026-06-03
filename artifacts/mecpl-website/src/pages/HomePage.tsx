@@ -125,7 +125,6 @@ export default function HomePage() {
   const heroTagRef       = useRef<HTMLSpanElement>(null);
   const heroSubRef       = useRef<HTMLParagraphElement>(null);
   const heroCTARef       = useRef<HTMLDivElement>(null);
-  const statsRef         = useRef<HTMLElement>(null);
   const servicesRef      = useRef<HTMLElement>(null);
   const projectsRef      = useRef<HTMLElement>(null);
   const projectsTrackRef = useRef<HTMLDivElement>(null);
@@ -201,56 +200,6 @@ export default function HomePage() {
         window.addEventListener("preloader-exit", () => gsap.set(section, { y: 0, scale: 1 }), { once: true });
       });
     });
-
-    return () => ctx.revert();
-  }, []);
-
-  /* ── STATS: pinned sequence + scroll-scrub count-up ── */
-  useEffect(() => {
-    const sec = statsRef.current;
-    if (!sec) return;
-
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const ruler = sec.querySelector<HTMLElement>(".stat-ruler");
-        const items = gsap.utils.toArray<HTMLElement>(".stat-item", sec);
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sec, start: "top top", end: "+=900",
-            pin: true, scrub: 1.5, anticipatePin: 1, invalidateOnRefresh: true,
-          },
-        });
-
-        if (ruler) {
-          gsap.set(ruler, { scaleX: 0 });
-          tl.to(ruler, { scaleX: 1, duration: 1, ease: "power3.out" });
-        }
-
-        items.forEach((item, i) => {
-          const numEl = item.querySelector<HTMLElement>(".stat-num");
-          gsap.set(item, { opacity: 0, y: 50 });
-
-          if (numEl) {
-            /* Read the target value + suffix baked into data-attributes */
-            const target = parseFloat(numEl.dataset.value || "0");
-            const suffix = numEl.dataset.suffix || "";
-            const proxy  = { val: 0 };
-
-            /* Reveal the item, then count the number in sync with scrub */
-            tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45)
-              .to(proxy, {
-                val: target, duration: 1.2, ease: "power2.out",
-                snap: { val: 1 },
-                onUpdate() { numEl.textContent = Math.round(proxy.val) + suffix; },
-              }, "<");
-          } else {
-            tl.to(item, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8 + i * 0.45);
-          }
-        });
-      });
-    }, sec);
 
     return () => ctx.revert();
   }, []);
