@@ -307,7 +307,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: coverflow carousel ── */
+  /* ── TESTIMONIALS: coverflow carousel + GggpRoB SplitText reveal ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
@@ -316,12 +316,12 @@ export default function HomePage() {
     const cards  = Array.from(sec.querySelectorAll<HTMLElement>(".testi-cover-card"));
     const quotes = Array.from(sec.querySelectorAll<HTMLElement>(".testi-quote-block"));
 
+    /* Coverflow card positions */
     cards.forEach((card, i) => {
       let dist = i - activeTesti;
       if (dist >  Math.floor(n / 2)) dist -= n;
       if (dist < -Math.floor(n / 2)) dist += n;
       const absD = Math.abs(dist);
-
       gsap.to(card, {
         x: dist * 420,
         scale: absD === 0 ? 1 : 0.72,
@@ -332,18 +332,56 @@ export default function HomePage() {
       });
     });
 
+    /* Hide all non-active quote blocks instantly */
     quotes.forEach((q, i) => {
-      gsap.to(q, {
-        autoAlpha: i === activeTesti ? 1 : 0,
-        y: i === activeTesti ? 0 : 12,
-        duration: 0.45,
-        ease: "power2.out",
+      if (i !== activeTesti) gsap.set(q, { autoAlpha: 0 });
+    });
+
+    /* GggpRoB SplitText line-mask reveal on active quote */
+    const activeQuote = quotes[activeTesti];
+    if (!activeQuote) return;
+
+    let cancelled = false;
+    let split: any = null;
+    const quoteP = activeQuote.querySelector<HTMLElement>("p");
+    const attr   = activeQuote.querySelector<HTMLElement>(".testi-attribution");
+
+    gsap.set(activeQuote, { autoAlpha: 1 });
+    if (attr) gsap.set(attr, { autoAlpha: 0, y: 8 });
+
+    document.fonts.ready.then(() => {
+      if (cancelled || !quoteP) return;
+
+      split = (SplitText as any).create(quoteP, {
+        type: "words,lines",
+        mask: "lines",
+        autoSplit: true,
+        onSplit(self: any) {
+          if (attr) {
+            gsap.to(attr, {
+              autoAlpha: 1,
+              y: 0,
+              delay: self.lines.length * 0.09 + 0.1,
+              duration: 0.45,
+              ease: "power2.out",
+            });
+          }
+          return gsap.from(self.lines, {
+            yPercent: 120,
+            stagger: 0.09,
+            duration: 0.7,
+            ease: "power3.out",
+          });
+        },
       });
     });
 
     return () => {
+      cancelled = true;
+      split?.revert();
       cards.forEach(c  => gsap.killTweensOf(c));
       quotes.forEach(q => gsap.killTweensOf(q));
+      if (attr) gsap.killTweensOf(attr);
     };
   }, [activeTesti]);
 
@@ -810,7 +848,7 @@ export default function HomePage() {
                   borderRadius: "8px",
                   overflow: "hidden",
                   cursor: "pointer",
-                  boxShadow: "0 12px 48px rgba(0,0,0,0.18)",
+                  boxShadow: "0 24px 64px rgba(0,0,0,0.28), 0 8px 20px rgba(0,0,0,0.14)",
                 }}
               >
                 <img
@@ -850,7 +888,7 @@ export default function HomePage() {
               <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", fontWeight: 400, color: "#374151", lineHeight: 1.85 }}>
                 {t.quote}
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "18px" }}>
+              <div className="testi-attribution" style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "18px" }}>
                 <div style={{ width: "24px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
                 <div>
                   <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, color: "#111827", letterSpacing: "0.12em", textTransform: "uppercase" }}>{t.name}</div>
