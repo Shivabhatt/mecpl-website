@@ -125,6 +125,30 @@ const bentoClients = [
   { name: "GERA DEVS",     col: 2, bg: "#ffffff",              text: "#111827",  border: "rgba(0,0,0,0.10)", height: 120 },
 ];
 
+/* ─── SLIDE BUTTON ──────────────────────────────────────────────────── */
+function SlideBtn({
+  href, testId, children, ghost = false, small = false,
+}: {
+  href: string; testId?: string; children: React.ReactNode; ghost?: boolean; small?: boolean;
+}) {
+  const iconSize = small ? 11 : 12;
+  return (
+    <Link href={href} data-testid={testId}>
+      <span className={`slide-btn${ghost ? " slide-btn--ghost" : ""}`}>
+        <span className="slide-btn__label"
+          style={small ? { fontSize: "9px", padding: "11px 16px" } : {}}>
+          {children}
+        </span>
+        <span className="slide-btn__icon"
+          style={small ? { width: "38px" } : {}}>
+          <span className="slide-btn__arrow-a"><ArrowRight size={iconSize} /></span>
+          <span className="slide-btn__arrow-b"><ArrowRight size={iconSize} /></span>
+        </span>
+      </span>
+    </Link>
+  );
+}
+
 /* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
   const [slide, setSlide]           = useState(0);
@@ -474,12 +498,9 @@ export default function HomePage() {
         <div ref={heroHeadlineRef} className="sr-only" />
 
         <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
-          <Link href="/completed-projects" data-testid="button-hero-projects">
-            <span className="font-sans inline-flex items-center cursor-pointer"
-              style={{ fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
-              VIEW PROJECTS
-            </span>
-          </Link>
+          <SlideBtn href="/completed-projects" testId="button-hero-projects" ghost>
+            View Projects
+          </SlideBtn>
         </div>
       </section>
 
@@ -560,12 +581,9 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
-                <Link href="/about" data-testid="button-about-more">
-                  <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                    Our Full Story <ArrowRight size={12} />
-                  </span>
-                </Link>
+                <SlideBtn href="/about" testId="button-about-more">
+                  Our Full Story
+                </SlideBtn>
               </div>
               <div className="relative h-[480px] overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop" alt="MECPL construction site" className="absolute inset-0 w-full h-full object-cover" />
@@ -597,12 +615,9 @@ export default function HomePage() {
               Our Services
             </h2>
           </div>
-          <Link href="/services" data-testid="button-all-services">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-              All Services <ArrowRight size={12} />
-            </span>
-          </Link>
+          <SlideBtn href="/services" testId="button-all-services">
+            All Services
+          </SlideBtn>
         </div>
 
         {/* Service panels — oNjgEjm: full-bleed image + text wipes in, alternating sides */}
@@ -659,12 +674,9 @@ export default function HomePage() {
                     <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "380px", marginBottom: "32px" }}>
                       {row.desc}
                     </p>
-                    <Link href={row.path} data-testid={`button-service-${i}`}>
-                      <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                        Learn More <ArrowRight size={11} />
-                      </span>
-                    </Link>
+                    <SlideBtn href={row.path} testId={`button-service-${i}`} small>
+                      Learn More
+                    </SlideBtn>
                   </div>
                 </div>
               </div>
@@ -724,12 +736,9 @@ export default function HomePage() {
               <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.5rem)", color: "rgba(17,24,39,0.06)", fontWeight: 800, lineHeight: 1, marginBottom: "28px", textTransform: "uppercase" }}>
                 150+<br />Projects
               </div>
-              <Link href="/completed-projects" data-testid="button-all-projects">
-                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(196,30,58,0.3)", padding: "14px 24px" }}>
-                  View All Projects <ArrowRight size={12} />
-                </span>
-              </Link>
+              <SlideBtn href="/completed-projects" testId="button-all-projects">
+                View All Projects
+              </SlideBtn>
             </div>
           </div>
         </div>

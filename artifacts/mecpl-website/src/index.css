@@ -160,3 +160,71 @@ html[data-theme="light"] select {
 }
 
 .opacity-15 { opacity: 0.15 !important; }
+
+/* ── Icon Slide Button ─────────────────────────────────────────────────── */
+.slide-btn {
+  display: inline-flex;
+  align-items: stretch;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slide-btn__label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 14px 22px;
+  background: #111827;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.slide-btn__icon {
+  width: 46px;
+  background: #C41E3A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-btn__arrow-a,
+.slide-btn__arrow-b {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-btn__arrow-b {
+  transform: translateX(-130%);
+}
+
+.slide-btn:hover .slide-btn__arrow-a { transform: translateX(130%); }
+.slide-btn:hover .slide-btn__arrow-b { transform: translateX(0); }
+
+/* Ghost (hero/dark background) */
+.slide-btn--ghost .slide-btn__label {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-right: none;
+}
+
+.slide-btn--ghost .slide-btn__icon {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-left: none;
+}
+
+.slide-btn--ghost:hover .slide-btn__label { background: rgba(255,255,255,0.08); }
