@@ -212,8 +212,11 @@ export default function HomePage() {
         gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
           const afterEl = panel.querySelector<HTMLElement>(".svc-after-text");
           const innerEl = panel.querySelector<HTMLElement>(".svc-after-inner");
+          /* data-alt="true" → text is on the left, wipes from left */
+          const isAlt   = panel.dataset.alt === "true";
+          const startX  = isAlt ? -100 : 100;   // direction the panel enters from
+          const counterX = isAlt ? 100 : -100;   // inner counter-moves opposite
 
-          /* oNjgEjm pattern: pin panel, wipe text from right over the image */
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: panel,
@@ -227,10 +230,10 @@ export default function HomePage() {
             defaults: { ease: "none" },
           });
 
-          /* Container wipes in from the right */
-          if (afterEl) tl.fromTo(afterEl, { xPercent: 100, x: 0 }, { xPercent: 0 });
-          /* Inner content counter-animates so it appears stationary */
-          if (innerEl) tl.fromTo(innerEl, { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
+          /* Text panel wipes in (direction depends on which side it sits) */
+          if (afterEl) tl.fromTo(afterEl, { xPercent: startX, x: 0 }, { xPercent: 0 });
+          /* Inner counter-animates so content appears stationary */
+          if (innerEl) tl.fromTo(innerEl, { xPercent: counterX, x: 0 }, { xPercent: 0 }, 0);
         });
       });
     }, sec);
@@ -620,11 +623,13 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Service panels — oNjgEjm: full-bleed image (before) + text wipes in from right (after) */}
-        {serviceRows.map((row, i) => (
-          <div key={i} className="svc-panel" style={{
+        {/* Service panels — oNjgEjm: full-bleed image + text wipes in, alternating sides */}
+        {serviceRows.map((row, i) => {
+          const isAlt = i % 2 !== 0; /* odd panels: text on LEFT, wipes from left */
+          return (
+          <div key={i} className="svc-panel" data-alt={isAlt ? "true" : "false"} style={{
             position: "relative",
-            height: "100vh",
+            paddingBottom: "56.25%", /* 16:9 aspect ratio — same as the codepen example */
             overflow: "hidden",
             borderTop: "1px solid rgba(0,0,0,0.07)",
           }}>
@@ -638,29 +643,29 @@ export default function HomePage() {
               />
               {/* Scrim */}
               <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.30)" }} />
-              {/* Ghost word watermark */}
-              <div style={{ position: "absolute", bottom: "32px", left: "40px", pointerEvents: "none", userSelect: "none" }}>
+              {/* Ghost word watermark — opposite corner to text panel */}
+              <div style={{ position: "absolute", bottom: "32px", [isAlt ? "right" : "left"]: "40px", pointerEvents: "none", userSelect: "none" }}>
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.07)", lineHeight: 1 }}>
                   {row.word}
                 </span>
               </div>
-              {/* Panel counter */}
-              <div style={{ position: "absolute", top: "40px", left: "40px" }}>
+              {/* Panel counter — opposite corner to text panel */}
+              <div style={{ position: "absolute", top: "40px", [isAlt ? "right" : "left"]: "40px" }}>
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.40)", letterSpacing: "0.14em" }}>
                   {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
                 </span>
               </div>
             </div>
 
-            {/* ── AFTER: text panel wipes in from right (oNjgEjm) ── */}
+            {/* ── AFTER: text panel wipes in (right for even, left for odd) ── */}
             <div className="svc-after-text" style={{
               position: "absolute",
               top: 0,
-              right: 0,
+              [isAlt ? "left" : "right"]: 0,
               width: "45%",
               height: "100%",
               overflow: "hidden",
-              background: i % 2 === 0 ? "#ffffff" : "#f8f8f8",
+              background: isAlt ? "#f8f8f8" : "#ffffff",
             }}>
               {/* Counter-animated inner keeps content visually stationary during wipe */}
               <div className="svc-after-inner" style={{
@@ -700,7 +705,8 @@ export default function HomePage() {
             </div>
 
           </div>
-        ))}
+          );
+        })}
       </section>
 
       {/* ══════════ PROJECTS — HORIZONTAL SCROLL ══════════ */}
