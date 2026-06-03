@@ -508,8 +508,7 @@ export default function HomePage() {
             />
           ))}
           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-70">
-            <source src={`${assetBase}assets/video/hero.webm`} type="video/webm" />
-            <source src={`${assetBase}assets/video/hero.mp4`}  type="video/mp4" />
+            <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
         </div>
