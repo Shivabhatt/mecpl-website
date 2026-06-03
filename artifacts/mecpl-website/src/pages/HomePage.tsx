@@ -513,46 +513,18 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <span
-            ref={heroTagRef}
-            className="inline-block text-[10px] font-bold uppercase tracking-[0.25em] text-[#C41E3A] border border-[#C41E3A]/30 px-4 py-2 mb-8"
-            style={{ fontFamily: "'Montserrat',sans-serif" }}
-          >
-            {s.tag}
-          </span>
-
-          <div ref={heroHeadlineRef}>
-            {/* dangerouslySetInnerHTML prevents React from creating text fibers
-                that SplitText's char-splitting would later conflict with */}
-            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight text-white mb-1"
-              style={{ fontFamily: "'Montserrat',sans-serif" }}
-              dangerouslySetInnerHTML={{ __html: "Engineering" }} />
-            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight mb-1"
-              style={{ fontFamily: "'Montserrat',sans-serif", color: "#C41E3A" }}
-              dangerouslySetInnerHTML={{ __html: "Excellence" }} />
-            <div className="hero-line overflow-hidden block text-5xl md:text-7xl font-bold uppercase leading-none tracking-tight text-white"
-              style={{ fontFamily: "'Montserrat',sans-serif" }}
-              dangerouslySetInnerHTML={{ __html: "Delivered" }} />
-          </div>
-
-          <p ref={heroSubRef}
-            className="mt-8 text-white/65 max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(0.9rem,1.5vw,1.1rem)" }}>
-            Pune's premier structural engineering contractor — 25 years, 150+ landmark projects, and India's most trusted development partners.
-          </p>
-
-          <div ref={heroCTARef} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-[#ab1831] text-white px-8 py-4 cursor-pointer transition-all"
+        <div className="relative z-10 flex flex-col items-center gap-10">
+          <div ref={heroHeadlineRef} className="flex flex-col items-center gap-10">
+            <img
+              src={`${assetBase}assets/logo/mecpl-logo.webp`}
+              alt="MECPL"
+              className="h-24 md:h-32 w-auto object-contain"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+            <Link href="/contact" data-testid="button-hero-start">
+              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-[#ab1831] text-white px-10 py-4 cursor-pointer transition-all"
                 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                View Projects <ArrowRight size={12} />
-              </span>
-            </Link>
-            <Link href="/about" data-testid="button-hero-about">
-              <span className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white px-8 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                Our Story
+                Start Your Project <ArrowRight size={12} />
               </span>
             </Link>
           </div>
