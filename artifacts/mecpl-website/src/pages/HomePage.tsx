@@ -513,28 +513,18 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center gap-10">
-          <div ref={heroHeadlineRef} className="flex flex-col items-center gap-10">
-            <img
-              src={`${assetBase}assets/logo/mecpl-logo.webp`}
-              alt="MECPL"
-              className="h-24 md:h-32 w-auto object-contain"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-            <Link href="/contact" data-testid="button-hero-start">
-              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-[#ab1831] text-white px-10 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                Start Your Project <ArrowRight size={12} />
-              </span>
-            </Link>
-          </div>
-        </div>
+        {/* invisible anchor so heroHeadlineRef stays non-null for GSAP */}
+        <div ref={heroHeadlineRef} className="sr-only" />
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-          {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => setSlide(i)}
-              className={`transition-all duration-300 cursor-pointer ${i === slide ? "w-8 h-1 bg-[#C41E3A]" : "w-2 h-1 bg-white/30 hover:bg-white/60"}`} />
-          ))}
+        <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
+          <Link href="/completed-projects" data-testid="button-hero-projects">
+            <span className="inline-flex items-center gap-4 cursor-pointer group hover:gap-6 transition-all duration-300"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
+              <span style={{ color: "rgba(255,255,255,0.45)", fontSize: "9px" }}>◇</span>
+              VIEW PROJECTS
+              <span style={{ color: "rgba(255,255,255,0.45)", fontSize: "9px" }}>◇</span>
+            </span>
+          </Link>
         </div>
       </section>
 

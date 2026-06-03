@@ -50,9 +50,7 @@ export default function Navbar() {
             <img
               src={logoAsset}
               alt="MECPL"
-              className={`h-10 w-auto object-contain transition-all duration-500 ${
-                transparent ? "brightness-0 invert drop-shadow-lg" : ""
-              }`}
+              className="h-10 w-auto object-contain transition-all duration-500"
               onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
             />
           </div>
