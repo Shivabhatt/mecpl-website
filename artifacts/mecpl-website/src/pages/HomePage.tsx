@@ -210,30 +210,41 @@ export default function HomePage() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
-          const afterEl = panel.querySelector<HTMLElement>(".svc-after-text");
-          const innerEl = panel.querySelector<HTMLElement>(".svc-after-inner");
-          /* data-alt="true" → text is on the left, wipes from left */
-          const isAlt   = panel.dataset.alt === "true";
-          const startX  = isAlt ? -100 : 100;   // direction the panel enters from
-          const counterX = isAlt ? 100 : -100;   // inner counter-moves opposite
+          const imgWrap  = panel.querySelector<HTMLElement>(".svc-img-wrap");
+          const textEls  = gsap.utils.toArray<HTMLElement>(".svc-anim", panel);
 
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: panel,
-              start: "center center",
-              end: () => "+=" + panel.offsetWidth,
-              scrub: true,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-            defaults: { ease: "none" },
-          });
+          /* Image: scale up + fade in as panel enters viewport */
+          if (imgWrap) {
+            gsap.fromTo(imgWrap,
+              { scale: 0.88, opacity: 0, y: 24 },
+              {
+                scale: 1, opacity: 1, y: 0,
+                duration: 1.1, ease: "power3.out",
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 78%",
+                  toggleActions: "play none none none",
+                },
+              },
+            );
+          }
 
-          /* Text panel wipes in (direction depends on which side it sits) */
-          if (afterEl) tl.fromTo(afterEl, { xPercent: startX, x: 0 }, { xPercent: 0 });
-          /* Inner counter-animates so content appears stationary */
-          if (innerEl) tl.fromTo(innerEl, { xPercent: counterX, x: 0 }, { xPercent: 0 }, 0);
+          /* Text elements: stagger-fade up */
+          if (textEls.length) {
+            gsap.fromTo(textEls,
+              { y: 28, opacity: 0 },
+              {
+                y: 0, opacity: 1,
+                duration: 0.75, ease: "power3.out",
+                stagger: 0.1,
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+              },
+            );
+          }
         });
       });
     }, sec);
@@ -623,88 +634,106 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Service panels — oNjgEjm: full-bleed image + text wipes in, alternating sides */}
+        {/* Service panels — fifthanddune style: side-by-side split, image scales in on scroll */}
         {serviceRows.map((row, i) => {
-          const isAlt = i % 2 !== 0; /* odd panels: text on LEFT, wipes from left */
+          const imgRight = i % 2 === 0; /* even: text left + image right; odd: image left + text right */
           return (
-          <div key={i} className="svc-panel" data-alt={isAlt ? "true" : "false"} style={{
-            position: "relative",
-            paddingBottom: "56.25%", /* 16:9 aspect ratio — same as the codepen example */
-            overflow: "hidden",
-            borderTop: "1px solid rgba(0,0,0,0.07)",
-          }}>
-
-            {/* ── BEFORE: full-bleed image ── */}
-            <div style={{ position: "absolute", inset: 0 }}>
-              <img
-                src={row.image}
-                alt={row.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-              {/* Scrim */}
-              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.30)" }} />
-              {/* Ghost word watermark — opposite corner to text panel */}
-              <div style={{ position: "absolute", bottom: "32px", [isAlt ? "right" : "left"]: "40px", pointerEvents: "none", userSelect: "none" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.07)", lineHeight: 1 }}>
-                  {row.word}
-                </span>
-              </div>
-              {/* Panel counter — opposite corner to text panel */}
-              <div style={{ position: "absolute", top: "40px", [isAlt ? "right" : "left"]: "40px" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.40)", letterSpacing: "0.14em" }}>
-                  {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
-                </span>
-              </div>
-            </div>
-
-            {/* ── AFTER: text panel wipes in (right for even, left for odd) ── */}
-            <div className="svc-after-text" style={{
-              position: "absolute",
-              top: 0,
-              [isAlt ? "left" : "right"]: 0,
-              width: "45%",
-              height: "100%",
-              overflow: "hidden",
-              background: isAlt ? "#f8f8f8" : "#ffffff",
-            }}>
-              {/* Counter-animated inner keeps content visually stationary during wipe */}
-              <div className="svc-after-inner" style={{
-                width: "100%",
-                height: "100%",
+            <div
+              key={i}
+              className="svc-panel"
+              style={{
                 display: "flex",
-                alignItems: "center",
-                padding: "0 clamp(32px, 5vw, 64px)",
+                flexDirection: imgRight ? "row" : "row-reverse",
+                alignItems: "stretch",
+                minHeight: "100vh",
+                borderTop: "1px solid rgba(0,0,0,0.07)",
+                background: i % 2 === 0 ? "#ffffff" : "#f8f8f8",
+              }}
+            >
+              {/* ── TEXT SIDE ── */}
+              <div style={{
+                flex: "0 0 45%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                padding: "clamp(48px,7vw,96px) clamp(32px,5vw,72px)",
               }}>
-                <div style={{ width: "100%" }}>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
-                    {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
-                  </span>
-                  <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
-                  <h3 className="uppercase" style={{
-                    fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
-                    fontWeight: 400,
-                    color: "#111827",
-                    letterSpacing: "0.04em",
-                    lineHeight: 1.18,
-                    marginBottom: "20px",
-                  }}>
-                    {row.title}
-                  </h3>
-                  <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "380px", marginBottom: "32px" }}>
-                    {row.desc}
-                  </p>
+                <span className="svc-anim" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
+                  {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
+                </span>
+                <div className="svc-anim" style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
+                <h3 className="svc-anim uppercase" style={{
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontSize: "clamp(2rem,3.2vw,3rem)",
+                  fontWeight: 400,
+                  color: "#111827",
+                  letterSpacing: "0.03em",
+                  lineHeight: 1.12,
+                  marginBottom: "24px",
+                }}>
+                  {row.title}
+                </h3>
+                <p className="svc-anim" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.9, color: "#6b7280", maxWidth: "360px", marginBottom: "40px" }}>
+                  {row.desc}
+                </p>
+                <div className="svc-anim">
                   <Link href={row.path} data-testid={`button-service-${i}`}>
-                    <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                      style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                      Learn More <ArrowRight size={11} />
+                    <span
+                      style={{
+                        display: "inline-block",
+                        fontFamily: "'Montserrat',sans-serif",
+                        fontSize: "10px",
+                        letterSpacing: "0.2em",
+                        color: "#111827",
+                        textTransform: "uppercase",
+                        fontWeight: 600,
+                        border: "1px solid rgba(17,24,39,0.35)",
+                        padding: "14px 28px",
+                        cursor: "pointer",
+                        transition: "background 0.25s, color 0.25s, border-color 0.25s",
+                      }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background="#C41E3A"; (e.currentTarget as HTMLElement).style.color="#fff"; (e.currentTarget as HTMLElement).style.borderColor="#C41E3A"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background="transparent"; (e.currentTarget as HTMLElement).style.color="#111827"; (e.currentTarget as HTMLElement).style.borderColor="rgba(17,24,39,0.35)"; }}
+                    >
+                      Learn More
                     </span>
                   </Link>
                 </div>
               </div>
-            </div>
 
-          </div>
+              {/* ── IMAGE SIDE ── */}
+              <div style={{
+                flex: "0 0 55%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "clamp(32px,4vw,56px)",
+                overflow: "hidden",
+              }}>
+                {/* .svc-img-wrap is what GSAP scales from 0.88→1 */}
+                <div className="svc-img-wrap" style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  position: "relative",
+                  boxShadow: "0 24px 64px rgba(0,0,0,0.13)",
+                }}>
+                  <img
+                    src={row.image}
+                    alt={row.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                  {/* Panel counter on the image */}
+                  <div style={{ position: "absolute", bottom: "20px", right: "24px" }}>
+                    <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em" }}>
+                      {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           );
         })}
       </section>
