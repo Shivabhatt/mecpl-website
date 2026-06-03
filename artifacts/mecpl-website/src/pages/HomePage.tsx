@@ -723,35 +723,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ CAREERS STRIP ══════════ */}
-      <section className="py-20 px-6 border-b" style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }} data-testid="section-careers-lead">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden border p-10 md:p-14" style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.03)" }}>
-            <div className="absolute top-0 left-0 w-1 h-full bg-[#C41E3A]" />
-            <div className="grid md:grid-cols-[1fr_auto] items-center gap-8 pl-4">
-              <div className="space-y-4">
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
-                  Careers at MECPL
-                </span>
-                <h2 className="uppercase text-3xl"
-                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-                  Build the Next Generation<br />of Landmarks
-                </h2>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563", maxWidth: "520px" }}>
-                  Great execution comes from great teams. Explore opportunities across engineering, project management, safety, and quality.
-                </p>
-              </div>
-              <Link href="/careers" data-testid="button-home-careers">
-                <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-4 cursor-pointer transition-all"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                  Explore Careers <ArrowRight size={12} />
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ══════════ WHY CHOOSE ══════════ */}
       <section ref={whyRef}
         className="py-24 px-6"
