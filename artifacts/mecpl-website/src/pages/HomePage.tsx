@@ -132,6 +132,7 @@ export default function HomePage() {
   const testimonialsRef  = useRef<HTMLElement>(null);
   const clientsRef       = useRef<HTMLElement>(null);
   const awardsRef        = useRef<HTMLElement>(null);
+  const stackedRef       = useRef<HTMLElement>(null);
 
   /* Hero auto-slide */
   useEffect(() => {
@@ -431,6 +432,34 @@ export default function HomePage() {
   }, []);
 
 
+  /* ── STACKED INTRO: VwbywPd layered pin — Recognition + About Us ── */
+  useEffect(() => {
+    const sec = stackedRef.current;
+    if (!sec) return;
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>(".stack-intro-card", sec);
+        cards.forEach((card, i) => {
+          gsap.set(card, { zIndex: i + 1 });
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            pin: true,
+            pinSpacing: false,
+          });
+          if (i > 0) {
+            gsap.from(card, {
+              opacity: 0, y: 24, ease: "none",
+              scrollTrigger: { trigger: card, start: "top 98%", end: "top top", scrub: 1 },
+            });
+          }
+        });
+      });
+    }, sec);
+    return () => ctx.revert();
+  }, []);
+
   const s = heroSlides[slide];
 
   /* ─── JSX ─────────────────────────────────────────────────────────── */
@@ -471,162 +500,105 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ AWARDS STRIP ══════════ */}
-      <section className="py-20 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#ffffff" }}
-        data-testid="section-awards-home">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
-              Recognition
-            </span>
-            <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-              Award-Winning Excellence
-            </h2>
-          </div>
+      {/* ══════════ STACKED: RECOGNITION + ABOUT US (VwbywPd) ══════════ */}
+      <section ref={stackedRef} data-testid="section-stacked-intro">
 
-          {/* Story row */}
-          <div className="flex items-start justify-center gap-8 flex-wrap md:flex-nowrap">
-            {[
-              { year: "2023", award: "BAI Special\nJury Award",   org: "Builders Assoc. of India",  img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop" },
-              { year: "2022", award: "Constro\nSilver Trophy",    org: "Constro Awards",             img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop" },
-              { year: "2021", award: "Constro\nGold Trophy",      org: "Constro Awards",             img: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=400&auto=format&fit=crop" },
-              { year: "2018", award: "Industry\nExcellence Gold", org: "National Construction",      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=400&auto=format&fit=crop" },
-              { year: "2017", award: "India's\nSmall Giants",     org: "Forbes India",               img: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=400&auto=format&fit=crop" },
-            ].map((a, i) => (
-              <div key={a.year} className="group flex flex-col items-center gap-3" style={{ flexShrink: 0, width: "140px" }}>
-                {/* Story ring — gradient border */}
-                <div style={{
-                  padding: "3px",
-                  borderRadius: "50%",
-                  background: i === 0
-                    ? "linear-gradient(135deg, #C41E3A 0%, #ff6b35 100%)"
-                    : "linear-gradient(135deg, #C41E3A 0%, #8b0000 100%)",
-                  boxShadow: "0 4px 20px rgba(196,30,58,0.25)",
-                  transition: "transform 0.3s ease",
-                }}>
-                  {/* White gap ring (like IG) */}
-                  <div style={{ padding: "3px", borderRadius: "50%", background: "#ffffff" }}>
-                    <div style={{
-                      width: "110px",
-                      height: "110px",
-                      borderRadius: "50%",
-                      overflow: "hidden",
-                      position: "relative",
-                    }}>
-                      <img src={a.img} alt={a.award}
-                        style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }}
-                        className="group-hover:scale-110" />
+        {/* Card 1 — Recognition */}
+        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", position: "relative", padding: "80px 24px" }}>
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="text-center mb-16">
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+                Recognition
+              </span>
+              <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+                Award-Winning Excellence
+              </h2>
+            </div>
+            <div className="flex items-start justify-center gap-8 flex-wrap md:flex-nowrap">
+              {[
+                { year: "2023", award: "BAI Special\nJury Award",   org: "Builders Assoc. of India",  img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop" },
+                { year: "2022", award: "Constro\nSilver Trophy",    org: "Constro Awards",             img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop" },
+                { year: "2021", award: "Constro\nGold Trophy",      org: "Constro Awards",             img: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=400&auto=format&fit=crop" },
+                { year: "2018", award: "Industry\nExcellence Gold", org: "National Construction",      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=400&auto=format&fit=crop" },
+                { year: "2017", award: "India's\nSmall Giants",     org: "Forbes India",               img: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=400&auto=format&fit=crop" },
+              ].map((a, i) => (
+                <div key={a.year} className="group flex flex-col items-center gap-3" style={{ flexShrink: 0, width: "140px" }}>
+                  <div style={{ padding: "3px", borderRadius: "50%", background: i === 0 ? "linear-gradient(135deg, #C41E3A 0%, #ff6b35 100%)" : "linear-gradient(135deg, #C41E3A 0%, #8b0000 100%)", boxShadow: "0 4px 20px rgba(196,30,58,0.25)" }}>
+                    <div style={{ padding: "3px", borderRadius: "50%", background: "#ffffff" }}>
+                      <div style={{ width: "110px", height: "110px", borderRadius: "50%", overflow: "hidden" }}>
+                        <img src={a.img} alt={a.award} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} className="group-hover:scale-110" />
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Year badge */}
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "9px",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  color: "#C41E3A",
-                  textTransform: "uppercase",
-                  background: "rgba(196,30,58,0.07)",
-                  padding: "3px 10px",
-                  borderRadius: "20px",
-                }}>
-                  {a.year}
-                </div>
-
-                {/* Award name */}
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  color: "#111827",
-                  letterSpacing: "0.05em",
-                  textAlign: "center",
-                  lineHeight: 1.4,
-                  whiteSpace: "pre-line",
-                }}>
-                  {a.award}
-                </div>
-
-                {/* Org */}
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "9px",
-                  color: "rgba(17,24,39,0.4)",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  textAlign: "center",
-                  lineHeight: 1.4,
-                }}>
-                  {a.org}
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ══════════ ABOUT STRIP ══════════ */}
-      <section className="py-20 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
-        data-testid="section-about-strip">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-                  Our Foundation
-                </span>
-                <h2 className="font-bold uppercase leading-tight text-3xl"
-                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
-                  Structural Precision.<br />
-                  <span style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
-                </h2>
-              </div>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.8, color: "#4b5563" }}>
-                Since 1998, MECPL has been the structural partner of choice for India's leading developers — from Trump Towers to Panchshil's skyline-defining highrises. We combine ISO-certified processes with 25 years of on-site wisdom to deliver structures that stand for generations.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "ISO 9001:2015", sub: "Quality" },
-                  { label: "ISO 45001:2018", sub: "Safety" },
-                  { label: "CRISIL SME 1", sub: "Rating" },
-                  { label: "ISO 14001:2015", sub: "Environment" },
-                ].map(cert => (
-                  <div key={cert.label} className="p-4 border"
-                    style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.03)" }}>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", letterSpacing: "0.1em" }}>{cert.label}</div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "3px" }}>{cert.sub}</div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600, letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", background: "rgba(196,30,58,0.07)", padding: "3px 10px", borderRadius: "20px" }}>
+                    {a.year}
                   </div>
-                ))}
-              </div>
-              <Link href="/about" data-testid="button-about-more">
-                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                  Our Full Story <ArrowRight size={12} />
-                </span>
-              </Link>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 500, color: "#111827", letterSpacing: "0.05em", textAlign: "center", lineHeight: 1.4, whiteSpace: "pre-line" }}>
+                    {a.award}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", textAlign: "center", lineHeight: 1.4 }}>
+                    {a.org}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="relative h-[480px] overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
-                alt="MECPL construction site"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)" }} />
-              <div className="absolute bottom-6 left-6">
-                <div className="inline-block px-4 py-2" style={{ background: "#C41E3A" }}>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", color: "#fff", textTransform: "uppercase" }}>
-                    Pune HQ · Balewadi
+          </div>
+        </div>
+
+        {/* Card 2 — About Us */}
+        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", position: "relative", padding: "80px 24px" }}>
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-8">
+                <div>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+                    About Us
                   </span>
+                  <h2 className="uppercase leading-tight text-3xl"
+                    style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+                    Structural Precision.<br />
+                    <span style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
+                  </h2>
+                </div>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.8, color: "#4b5563" }}>
+                  Since 1998, MECPL has been the structural partner of choice for India's leading developers — from Trump Towers to Panchshil's skyline-defining highrises. We combine ISO-certified processes with 25 years of on-site wisdom to deliver structures that stand for generations.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: "ISO 9001:2015", sub: "Quality" },
+                    { label: "ISO 45001:2018", sub: "Safety" },
+                    { label: "CRISIL SME 1", sub: "Rating" },
+                    { label: "ISO 14001:2015", sub: "Environment" },
+                  ].map(cert => (
+                    <div key={cert.label} className="p-4 border"
+                      style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.03)" }}>
+                      <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 500, color: "#111827", letterSpacing: "0.1em" }}>{cert.label}</div>
+                      <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "3px" }}>{cert.sub}</div>
+                    </div>
+                  ))}
+                </div>
+                <Link href="/about" data-testid="button-about-more">
+                  <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                    Our Full Story <ArrowRight size={12} />
+                  </span>
+                </Link>
+              </div>
+              <div className="relative h-[480px] overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop" alt="MECPL construction site" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)" }} />
+                <div className="absolute bottom-6 left-6">
+                  <div className="inline-block px-4 py-2" style={{ background: "#C41E3A" }}>
+                    <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", color: "#fff", textTransform: "uppercase" }}>
+                      Pune HQ · Balewadi
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </section>
 
       {/* ══════════ SERVICES ══════════ */}
@@ -640,7 +612,7 @@ export default function HomePage() {
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               What We Build
             </span>
-            <h2 className="font-bold uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+            <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
               Our Services
             </h2>
           </div>
@@ -697,8 +669,8 @@ export default function HomePage() {
           <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
             Showcase
           </span>
-          <h2 className="font-bold uppercase leading-tight text-3xl"
-            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+          <h2 className="uppercase leading-tight text-3xl"
+            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
             Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
           </h2>
           <div className="mt-4 text-xs" style={{ fontFamily: "'Montserrat',sans-serif", color: "rgba(17,24,39,0.35)", letterSpacing: "0.1em" }}>
@@ -762,8 +734,8 @@ export default function HomePage() {
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>
                   Careers at MECPL
                 </span>
-                <h2 className="font-bold uppercase text-3xl"
-                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+                <h2 className="uppercase text-3xl"
+                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
                   Build the Next Generation<br />of Landmarks
                 </h2>
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563", maxWidth: "520px" }}>
@@ -791,8 +763,8 @@ export default function HomePage() {
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
               Our Advantage
             </span>
-            <h2 className="font-bold uppercase text-3xl"
-              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+            <h2 className="uppercase text-3xl"
+              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
               Why Choose MECPL
             </h2>
           </div>
@@ -911,8 +883,8 @@ export default function HomePage() {
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block" }}>
                 Ecosystem
               </span>
-              <h2 className="font-bold uppercase text-3xl"
-                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+              <h2 className="uppercase text-3xl"
+                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
                 Clients &amp; Partners
               </h2>
               <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563", maxWidth: "480px" }}>
@@ -955,8 +927,8 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/3 space-y-6" data-animate="fade">
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase" }}>Recognition</span>
-              <h2 className="font-bold uppercase text-3xl"
-                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 700 }}>
+              <h2 className="uppercase text-3xl"
+                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
                 Award-Winning<br />Excellence
               </h2>
               <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.75, color: "#4b5563" }}>
