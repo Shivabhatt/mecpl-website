@@ -798,7 +798,7 @@ export default function HomePage() {
                     width: "56px", height: "56px", borderRadius: "50%",
                     background: "rgba(196,30,58,0.07)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "24px",
+                    marginBottom: "24px", marginLeft: "auto", marginRight: "auto",
                   }}>
                     <Icon size={22} color="#C41E3A" strokeWidth={1.5} />
                   </div>
@@ -808,7 +808,7 @@ export default function HomePage() {
                     fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
                     fontWeight: 700, color: "#111827",
                     letterSpacing: "0.1em", textTransform: "uppercase",
-                    marginBottom: "14px",
+                    marginBottom: "14px", textAlign: "center",
                   }}>
                     {item.title}
                   </h3>
@@ -816,23 +816,13 @@ export default function HomePage() {
                   {/* Description */}
                   <p style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-                    lineHeight: 1.85, color: "#6b7280",
+                    lineHeight: 1.85, color: "#6b7280", textAlign: "center",
                   }}>
                     {item.desc}
                   </p>
                 </div>
               );
             })}
-          </div>
-
-          {/* ── CTA ── */}
-          <div className="mt-14 text-center">
-            <Link href="/contact">
-              <span className="inline-flex items-center gap-2 bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 cursor-pointer transition-all"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>
-                Start Your Project <ArrowRight size={13} />
-              </span>
-            </Link>
           </div>
 
         </div>
