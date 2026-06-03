@@ -963,7 +963,7 @@ export default function HomePage() {
                   alignItems: "center",
                   justifyContent: "center",
                   padding: "20px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
                 }}>
                 <img
                   src={`${assetBase}${c.logo}`}
