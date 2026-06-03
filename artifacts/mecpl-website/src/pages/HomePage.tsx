@@ -353,24 +353,23 @@ export default function HomePage() {
       if (cancelled || !quoteP) return;
 
       split = (SplitText as any).create(quoteP, {
-        type: "words,lines",
-        mask: "lines",
+        type: "words",
         autoSplit: true,
         onSplit(self: any) {
           if (attr) {
             gsap.to(attr, {
               autoAlpha: 1,
               y: 0,
-              delay: self.lines.length * 0.09 + 0.1,
-              duration: 0.45,
+              delay: self.words.length * 0.04 + 0.05,
+              duration: 0.4,
               ease: "power2.out",
             });
           }
-          return gsap.from(self.lines, {
-            yPercent: 120,
-            stagger: 0.09,
-            duration: 0.7,
-            ease: "power3.out",
+          return gsap.from(self.words, {
+            opacity: 0.08,
+            stagger: 0.04,
+            duration: 0.55,
+            ease: "power1.inOut",
           });
         },
       });
