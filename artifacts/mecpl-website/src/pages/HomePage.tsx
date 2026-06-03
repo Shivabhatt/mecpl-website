@@ -181,8 +181,8 @@ export default function HomePage() {
           }
 
           gsap.to(heroBg, {
-            yPercent: 28, ease: "none",
-            scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: true },
+            yPercent: -30, ease: "none",
+            scrollTrigger: { trigger: section, start: "top top", end: "bottom top", scrub: 1.2 },
           });
         };
 
@@ -518,11 +518,9 @@ export default function HomePage() {
 
         <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
           <Link href="/completed-projects" data-testid="button-hero-projects">
-            <span className="inline-flex items-center gap-4 cursor-pointer group hover:gap-6 transition-all duration-300"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
-              <span style={{ color: "rgba(255,255,255,0.45)", fontSize: "9px" }}>◇</span>
+            <span className="font-sans inline-flex items-center cursor-pointer"
+              style={{ fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
               VIEW PROJECTS
-              <span style={{ color: "rgba(255,255,255,0.45)", fontSize: "9px" }}>◇</span>
             </span>
           </Link>
         </div>
