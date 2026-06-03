@@ -935,25 +935,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="space-y-3 overflow-hidden border-y py-5" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-            <div className="animate-ticker overflow-hidden">
-              {[...clients, ...clients, ...clients].map((c, i) => (
-                <span key={i} className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.25)", textTransform: "uppercase" }}>
-                  {c} <span style={{ color: "#C41E3A" }}>◆</span>
-                </span>
-              ))}
-            </div>
-            <div className="h-px" style={{ background: "linear-gradient(to right, transparent, rgba(196,30,58,0.25), transparent)" }} />
-            <div className="animate-ticker-rev overflow-hidden">
-              {[...clients, ...clients, ...clients].map((c, i) => (
-                <span key={i} className="inline-flex items-center gap-6 px-6 whitespace-nowrap"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(17,24,39,0.15)", textTransform: "uppercase" }}>
-                  {c} <span style={{ color: "rgba(196,30,58,0.4)" }}>◆</span>
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
