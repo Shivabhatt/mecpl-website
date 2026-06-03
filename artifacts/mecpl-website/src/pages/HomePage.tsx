@@ -69,7 +69,18 @@ const testimonials = [
   { quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",                        name: "Senior Project Head", role: "Godrej Properties" },
 ];
 
-const clients = ["TRUMP TOWERS", "GODREJ PROPS", "VTP REALTY", "PANCHSHIL", "KALPATARU", "K RAHEJA", "MALPANI", "GERA DEVS"];
+const clients = [
+  { name: "Panchshil Realty",  logo: "assets/clients/client-09-1.webp" },
+  { name: "VTP Realty",        logo: "assets/clients/vtp-realty.webp"  },
+  { name: "Godrej Properties", logo: "assets/clients/client-12-1.webp" },
+  { name: "TCS",               logo: "assets/clients/client-06.webp"   },
+  { name: "Kalpataru",         logo: "assets/clients/client-14.webp"   },
+  { name: "K Raheja Corp",     logo: "assets/clients/client-17.webp"   },
+  { name: "Malpani Group",     logo: "assets/clients/client-13.webp"   },
+  { name: "Gera Developments", logo: "assets/clients/client-05.webp"   },
+  { name: "Pride Purple",      logo: "assets/clients/client-15-1.webp" },
+  { name: "OmniActive",        logo: "assets/clients/omniactive.webp"  },
+];
 
 const serviceRows = [
   {
@@ -332,24 +343,39 @@ export default function HomePage() {
     return () => mm.revert();
   }, []);
 
-  /* ── CLIENTS: name grid entrance ── */
+  /* ── CLIENTS: infinite horizontal logo ticker ── */
   useEffect(() => {
     const sec = clientsRef.current;
     if (!sec) return;
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".client-name", sec).forEach((cell, i) => {
-          gsap.from(cell, {
-            opacity: 0, y: 24, duration: 0.7, ease: "power3.out", delay: i * 0.05,
-            scrollTrigger: { trigger: sec, start: "top 85%", toggleActions: "play none none none" },
-          });
-        });
-      });
-    }, sec);
+    const track = sec.querySelector<HTMLElement>(".clients-track");
+    if (!track) return;
 
-    return () => ctx.revert();
+    const mm = gsap.matchMedia();
+    let tween: gsap.core.Tween | null = null;
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      tween = gsap.to(track, {
+        x: () => -(track.scrollWidth / 2),
+        duration: 22,
+        ease: "none",
+        repeat: -1,
+        onRepeat: () => gsap.set(track, { x: 0 }),
+      });
+
+      const pause = () => tween?.pause();
+      const play  = () => tween?.play();
+      sec.addEventListener("mouseenter", pause);
+      sec.addEventListener("mouseleave", play);
+
+      return () => {
+        sec.removeEventListener("mouseenter", pause);
+        sec.removeEventListener("mouseleave", play);
+        tween?.kill();
+      };
+    });
+
+    return () => mm.revert();
   }, []);
 
 
@@ -817,49 +843,65 @@ export default function HomePage() {
 
       {/* ══════════ CLIENTS ══════════ */}
       <section ref={clientsRef}
-        className="py-20 px-6 border-b"
-        style={{ borderColor: "rgba(0,0,0,0.07)", background: "#f9f9f9" }}
+        className="py-24"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}
         data-testid="section-clients">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-4">
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block" }}>
-                Ecosystem
-              </span>
-              <h2 className="uppercase text-3xl"
-                style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-                Clients &amp; Partners
-              </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.8, color: "#4b5563", maxWidth: "480px" }}>
-                India's most trusted developers and industrialists have chosen MECPL for their landmark projects.
-              </p>
-            </div>
-            <Link href="/clients" data-testid="button-all-clients">
-              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                View All Clients <ArrowRight size={12} />
-              </span>
-            </Link>
-          </div>
 
-          <div className="border-t border-b overflow-x-auto" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-            <div className="flex min-w-max">
-              {clients.map((c, i) => (
-                <div key={i} className="client-name flex items-center"
-                  data-testid={`card-client-${i}`}>
-                  {i > 0 && <div className="w-px self-stretch" style={{ background: "rgba(0,0,0,0.07)" }} />}
-                  <div className="py-8 px-10">
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", color: "#111827", textTransform: "uppercase", whiteSpace: "nowrap" }}>
-                      {c}
-                    </div>
-                    <div className="mt-2 w-6 h-px" style={{ background: "rgba(196,30,58,0.35)" }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        {/* ── Header ── */}
+        <div className="text-center mb-16 px-6">
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
+            Ecosystem
+          </span>
+          <h2 className="uppercase text-3xl"
+            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, marginBottom: "18px" }}>
+            Trusted By Leading Brands
+          </h2>
+          <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", lineHeight: 1.85, color: "#6b7280", maxWidth: "480px", margin: "0 auto 0" }}>
+            A continuous showcase of the developers, institutions, and enterprises that trust MECPL across landmark projects.
+          </p>
         </div>
+
+        {/* ── Infinite logo ticker ── */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "24px", width: "max-content" }}>
+            {[...clients, ...clients].map((c, i) => (
+              <div key={i}
+                data-testid={i < clients.length ? `card-client-${i}` : undefined}
+                style={{
+                  width: "180px",
+                  height: "100px",
+                  flexShrink: 0,
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: "6px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "20px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                }}>
+                <img
+                  src={`${assetBase}${c.logo}`}
+                  alt={c.name}
+                  style={{ maxWidth: "100%", maxHeight: "56px", objectFit: "contain", filter: "grayscale(100%)", opacity: 0.7, transition: "filter 0.3s, opacity 0.3s" }}
+                  onMouseEnter={e => { const img = e.currentTarget; img.style.filter = "grayscale(0%)"; img.style.opacity = "1"; }}
+                  onMouseLeave={e => { const img = e.currentTarget; img.style.filter = "grayscale(100%)"; img.style.opacity = "0.7"; }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── View all link ── */}
+        <div className="text-center mt-14">
+          <Link href="/clients" data-testid="button-all-clients">
+            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+              View All Clients <ArrowRight size={12} />
+            </span>
+          </Link>
+        </div>
+
       </section>
 
 
