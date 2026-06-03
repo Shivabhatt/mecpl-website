@@ -451,7 +451,7 @@ export default function HomePage() {
   }, []);
 
 
-  /* ── STACKED INTRO: VwbywPd layered pin — Recognition + About Us ── */
+  /* ── STACKED INTRO: CSS sticky stack — Recognition (z1) + About Us (z2) ── */
   useEffect(() => {
     const sec = stackedRef.current;
     if (!sec) return;
@@ -459,21 +459,15 @@ export default function HomePage() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".stack-intro-card", sec);
-        cards.forEach((card, i) => {
-          gsap.set(card, { zIndex: i + 1 });
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            pin: true,
-            pinSpacing: false,
+        /* Set stacking order so About Us slides on top of Recognition */
+        cards.forEach((card, i) => gsap.set(card, { zIndex: i + 1 }));
+        /* Card 2 fades + lifts as it enters from below */
+        if (cards[1]) {
+          gsap.from(cards[1], {
+            opacity: 0, y: 32, ease: "none",
+            scrollTrigger: { trigger: cards[1], start: "top 95%", end: "top top", scrub: 1 },
           });
-          if (i > 0) {
-            gsap.from(card, {
-              opacity: 0, y: 24, ease: "none",
-              scrollTrigger: { trigger: card, start: "top 98%", end: "top top", scrub: 1 },
-            });
-          }
-        });
+        }
       });
     }, sec);
     return () => ctx.revert();
@@ -523,7 +517,7 @@ export default function HomePage() {
       <section ref={stackedRef} data-testid="section-stacked-intro">
 
         {/* Card 1 — Recognition */}
-        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", position: "relative", padding: "80px 24px" }}>
+        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", position: "sticky", top: 0, padding: "80px 24px" }}>
           <div className="max-w-7xl mx-auto w-full">
             <div className="text-center mb-16">
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
@@ -565,7 +559,7 @@ export default function HomePage() {
         </div>
 
         {/* Card 2 — About Us */}
-        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", position: "relative", padding: "80px 24px" }}>
+        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", position: "sticky", top: 0, padding: "80px 24px" }}>
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
