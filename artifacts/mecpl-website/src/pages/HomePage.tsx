@@ -297,10 +297,10 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: AutoSplit line-mask reveal — GggpRoB pattern
-     SplitText.create with mask:"lines" wraps each line in overflow:hidden,
-     then slides lines up from yPercent:120 scrubbed to scroll position.
-     Waits for document.fonts.ready so line-breaks are font-accurate. ── */
+  /* ── TESTIMONIALS: word-by-word opacity scrub (VwbywPd pattern)
+     SplitText splits each quote into words, then each word scrubs from
+     opacity:0.08 → 1 tied to scroll position — words light up one by one
+     as the user scrolls through the card. ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
     if (!sec) return;
@@ -313,7 +313,6 @@ export default function HomePage() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".testi-block", sec);
 
-        /* Wait for fonts before splitting — ensures correct line-breaks */
         document.fonts.ready.then(() => {
           if (cancelled) return;
 
@@ -321,25 +320,23 @@ export default function HomePage() {
             const quoteEl = card.querySelector<HTMLElement>(".testi-quote");
             if (!quoteEl) return;
 
-            /* GggpRoB exact pattern:
-               - mask:"lines" = overflow:hidden wrapper per line
-               - autoSplit:true = re-splits on resize and returns new animation
-               - onSplit returns the tween so GSAP can kill+recreate on resize */
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const split = (SplitText as any).create(quoteEl, {
-              type: "words,lines",
-              mask: "lines",
-              linesClass: "testi-line",
+              type: "words",
               autoSplit: true,
-              onSplit: (instance: { lines: HTMLElement[] }) => {
-                return gsap.from(instance.lines, {
-                  yPercent: 120,
-                  stagger: 0.1,
+              onSplit: (instance: { words: HTMLElement[] }) => {
+                /* Set all words dim to start */
+                gsap.set(instance.words, { opacity: 0.08 });
+                /* Scrub each word from dim → full opacity sequentially */
+                return gsap.to(instance.words, {
+                  opacity: 1,
+                  stagger: 0.4,
+                  ease: "none",
                   scrollTrigger: {
                     trigger: card,
                     scrub: true,
-                    start: "clamp(top center)",
-                    end: "clamp(bottom center)",
+                    start: "top 60%",
+                    end: "bottom 40%",
                   },
                 });
               },
