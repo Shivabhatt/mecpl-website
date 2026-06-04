@@ -45,8 +45,8 @@ export default function Footer() {
             Let's Work Together
           </span>
           <h2
-            className="font-bold uppercase mx-auto"
-            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4.5vw,3.5rem)", color: "#111827", fontWeight: 800, lineHeight: 1.1, maxWidth: "680px", marginBottom: "32px" }}
+            className="uppercase mx-auto"
+            style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.6rem,3.5vw,2.8rem)", color: "#111827", fontWeight: 400, lineHeight: 1.15, maxWidth: "680px", marginBottom: "32px" }}
           >
             Ready to Build Something Extraordinary
           </h2>

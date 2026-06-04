@@ -285,24 +285,27 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: editorial numbered list — stagger row entry on scroll ── */
+  /* ── SERVICES: VwbywPd stacking cards (sticky + scale-down) ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
 
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".svc-row", sec).forEach((row) => {
-          gsap.from(row, {
-            y: 30, opacity: 0, duration: 0.75, ease: "power3.out",
+      const cards = gsap.utils.toArray<HTMLElement>(".svc-stack-card", sec);
+      cards.forEach((card, i) => {
+        if (i < cards.length - 1) {
+          gsap.to(card, {
+            scale: 0.88,
+            transformOrigin: "center top",
+            ease: "none",
             scrollTrigger: {
-              trigger: row,
-              start: "top 88%",
-              toggleActions: "play none none none",
+              trigger: cards[i + 1] as Element,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
             },
           });
-        });
+        }
       });
     }, sec);
 
@@ -653,99 +656,120 @@ export default function HomePage() {
 
       </section>
 
-      {/* ══════════ SERVICES — Editorial numbered list ══════════ */}
-      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {/* ══════════ SERVICES — VwbywPd stacking cards ══════════ */}
+      <section ref={servicesRef} data-testid="section-services" style={{ background: "#111827" }}>
 
         {/* Section header */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-4">
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
-            What We Build
-          </span>
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-20 pb-12 flex items-end justify-between gap-4">
+          <div>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+              What We Build
+            </span>
+            <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#ffffff", fontWeight: 400, fontSize: "clamp(1.5rem,3vw,2.2rem)", margin: 0 }}>
               Our Services
             </h2>
-            <Link href="/services" data-testid="button-all-services">
-              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                All Services <ArrowRight size={12} />
-              </span>
-            </Link>
           </div>
+          <Link href="/services" data-testid="button-all-services">
+            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+              All Services <ArrowRight size={12} />
+            </span>
+          </Link>
         </div>
 
-        {/* Editorial numbered rows */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pb-20">
+        {/* Stacking cards — each sticky at top:0, previous scales down as next arrives */}
+        <div style={{ position: "relative" }}>
           {services.map((svc, i) => {
             const Icon = svc.icon;
             return (
-              <div key={i} className="svc-row" style={{ borderTop: "1px solid rgba(0,0,0,0.08)", position: "relative" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "clamp(20px, 3vw, 48px)", padding: "clamp(24px, 3vw, 36px) 0" }}>
-
-                  {/* Large muted number */}
+              <div
+                key={i}
+                className="svc-stack-card"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  zIndex: i + 1,
+                  minHeight: "80vh",
+                  display: "flex",
+                  overflow: "hidden",
+                  willChange: "transform",
+                }}
+              >
+                {/* Left: dark info panel */}
+                <div style={{
+                  width: "clamp(280px, 42%, 520px)",
+                  flexShrink: 0,
+                  background: i % 2 === 0 ? "#0f172a" : "#111827",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  padding: "clamp(32px, 6vw, 88px)",
+                  position: "relative",
+                  zIndex: 2,
+                }}>
+                  {/* Ghost number */}
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(2.8rem, 4.5vw, 5rem)",
+                    fontSize: "clamp(5rem, 9vw, 9rem)",
                     fontWeight: 800,
-                    color: "rgba(17,24,39,0.06)",
+                    color: "rgba(255,255,255,0.04)",
                     lineHeight: 1,
-                    width: "clamp(60px, 7vw, 90px)",
-                    flexShrink: 0,
+                    position: "absolute",
+                    top: "clamp(20px, 4vw, 40px)",
+                    left: "clamp(32px, 6vw, 88px)",
                     userSelect: "none",
                   }}>
                     {String(i + 1).padStart(2, "0")}
                   </div>
 
-                  {/* Title + CTA */}
-                  <div style={{ flexShrink: 0, width: "clamp(160px, 22vw, 260px)" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                      <Icon size={15} color="#C41E3A" strokeWidth={1.5} />
-                      <h3 className="uppercase" style={{
-                        fontFamily: "'Montserrat',sans-serif",
-                        fontSize: "12px", fontWeight: 600,
-                        color: "#111827", letterSpacing: "0.1em", margin: 0,
-                      }}>
-                        {svc.title}
-                      </h3>
-                    </div>
-                    <Link href={svc.path} data-testid={`button-service-${i}`}>
-                      <span className="inline-flex items-center gap-1.5 cursor-pointer transition-all hover:gap-3"
-                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                        Learn More <ArrowRight size={9} />
-                      </span>
-                    </Link>
-                  </div>
+                  <Icon size={20} color="#C41E3A" strokeWidth={1.5} style={{ marginBottom: "20px" }} />
 
-                  {/* Description */}
+                  <h3 className="uppercase" style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "clamp(1.1rem, 2vw, 1.6rem)",
+                    fontWeight: 400,
+                    color: "#ffffff",
+                    letterSpacing: "0.06em",
+                    margin: "16px 0",
+                    lineHeight: 1.2,
+                  }}>
+                    {svc.title}
+                  </h3>
+
                   <p style={{
                     fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "13px", lineHeight: 1.85,
-                    color: "#6b7280", flex: 1,
-                    margin: 0,
+                    fontSize: "13px",
+                    lineHeight: 1.85,
+                    color: "rgba(255,255,255,0.5)",
+                    margin: "0 0 24px",
                   }}>
                     {svc.desc}
                   </p>
 
-                  {/* Hover-reveal image */}
-                  <div className="svc-row-img-wrap hidden md:block" style={{ width: "200px", height: "118px", overflow: "hidden", flexShrink: 0 }}>
-                    <img
-                      src={svc.image}
-                      alt={svc.title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
-                    />
-                  </div>
+                  <Link href={svc.path} data-testid={`button-service-${i}`}>
+                    <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                      style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                      Explore Service <ArrowRight size={9} />
+                    </span>
+                  </Link>
                 </div>
 
-                {/* Red accent line that draws on hover */}
-                <div className="svc-row-accent-line" style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  height: "1px", background: "rgba(196,30,58,0.28)",
-                }} />
+                {/* Right: full image */}
+                <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,23,42,0.5) 0%, transparent 60%)" }} />
+                </div>
               </div>
             );
           })}
-          <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }} />
         </div>
+
+        {/* Bottom cap */}
+        <div style={{ height: "2px", background: "rgba(255,255,255,0.04)" }} />
       </section>
 
       {/* ══════════ PROJECTS — HORIZONTAL LOOP ══════════ */}
