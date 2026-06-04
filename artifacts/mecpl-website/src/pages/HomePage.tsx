@@ -59,8 +59,6 @@ const whyChoose = [
   { icon: Shield,      title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site." },
   { icon: Star,        title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most complex projects." },
   { icon: CheckCircle, title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management across every project phase." },
-  { icon: Users,       title: "Experienced Team",       desc: "300+ trained engineers, site managers, and safety officers." },
-  { icon: Wrench,      title: "End-to-End Solutions",   desc: "From concept to completion — MECPL manages the full construction lifecycle." },
 ];
 
 const testimonials = [
