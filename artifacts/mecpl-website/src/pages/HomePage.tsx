@@ -491,32 +491,29 @@ export default function HomePage() {
               LET'S BUILD TOGETHER <ArrowRight size={11} />
             </button>
           </Link>
-          <Link href="/careers" data-testid="button-hero-careers">
-            <button
-              style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                background: "transparent", color: "rgba(255,255,255,0.88)",
-                padding: "13px 26px", border: "1px solid rgba(255,255,255,0.42)",
-                cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "8px",
-                transition: "border-color 0.2s, color 0.2s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.78)"; e.currentTarget.style.color = "#ffffff"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.42)"; e.currentTarget.style.color = "rgba(255,255,255,0.88)"; }}
-            >
-              EXPLORE CAREERS
-            </button>
-          </Link>
-          <Link href="/completed-projects" data-testid="button-hero-projects">
-            <span
-              className="inline-flex items-center gap-1.5 cursor-pointer"
-              style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
-            >
-              VIEW PROJECTS <ArrowRight size={10} />
-            </span>
-          </Link>
+          <div className="inline-flex items-center gap-4">
+            <Link href="/completed-projects" data-testid="button-hero-projects">
+              <span
+                className="inline-flex items-center gap-1.5 cursor-pointer"
+                style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+              >
+                VIEW PROJECTS <ArrowRight size={10} />
+              </span>
+            </Link>
+            <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.22)", flexShrink: 0 }} />
+            <Link href="/careers" data-testid="button-hero-careers">
+              <span
+                className="inline-flex items-center gap-1.5 cursor-pointer"
+                style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+              >
+                EXPLORE CAREERS <ArrowRight size={10} />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
