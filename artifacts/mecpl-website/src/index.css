@@ -144,6 +144,23 @@ html[data-theme="light"] {
 .h-scroll-track   { display: flex; will-change: transform; }
 .h-scroll-card    { flex-shrink: 0; position: relative; overflow: hidden; }
 
+/* ── Service rows (editorial numbered list) ── */
+.svc-row-img-wrap {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.svc-row:hover .svc-row-img-wrap {
+  clip-path: inset(0 0% 0 0);
+}
+.svc-row-accent-line {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.42s ease;
+}
+.svc-row:hover .svc-row-accent-line {
+  transform: scaleX(1);
+}
+
 /* ── Stat ruler ── */
 .stat-ruler { transform-origin: left center; }
 

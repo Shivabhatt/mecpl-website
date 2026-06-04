@@ -212,7 +212,7 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: oNjgEjm — full-bleed image, text wipes in from alternating sides ── */
+  /* ── SERVICES: editorial numbered list — stagger row entry on scroll ── */
   useEffect(() => {
     const sec = servicesRef.current;
     if (!sec) return;
@@ -220,28 +220,15 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".svc-panel", sec).forEach((panel) => {
-          const afterEl  = panel.querySelector<HTMLElement>(".svc-after-text");
-          const innerEl  = panel.querySelector<HTMLElement>(".svc-after-inner");
-          const isAlt    = panel.dataset.alt === "true";
-          const startX   = isAlt ? -100 : 100;
-          const counterX = isAlt ? 100 : -100;
-
-          const tl = gsap.timeline({
+        gsap.utils.toArray<HTMLElement>(".svc-row", sec).forEach((row) => {
+          gsap.from(row, {
+            y: 30, opacity: 0, duration: 0.75, ease: "power3.out",
             scrollTrigger: {
-              trigger: panel,
-              start: "center center",
-              end: () => "+=" + panel.offsetWidth,
-              scrub: true,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
+              trigger: row,
+              start: "top 88%",
+              toggleActions: "play none none none",
             },
-            defaults: { ease: "none" },
           });
-
-          if (afterEl) tl.fromTo(afterEl, { xPercent: startX, x: 0 }, { xPercent: 0 });
-          if (innerEl) tl.fromTo(innerEl, { xPercent: counterX, x: 0 }, { xPercent: 0 }, 0);
         });
       });
     }, sec);
@@ -473,11 +460,47 @@ export default function HomePage() {
         {/* invisible anchor so heroHeadlineRef stays non-null for GSAP */}
         <div ref={heroHeadlineRef} className="sr-only" />
 
-        <div className="absolute bottom-12 left-0 right-0 flex justify-center z-20">
+        <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
+          <Link href="/contact" data-testid="button-hero-build">
+            <button
+              style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700,
+                letterSpacing: "0.18em", textTransform: "uppercase",
+                background: "#C41E3A", color: "#ffffff",
+                padding: "14px 30px", border: "none", cursor: "pointer",
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                transition: "background 0.2s ease",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#a01830")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#C41E3A")}
+            >
+              LET'S BUILD TOGETHER <ArrowRight size={11} />
+            </button>
+          </Link>
+          <Link href="/careers" data-testid="button-hero-careers">
+            <button
+              style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600,
+                letterSpacing: "0.18em", textTransform: "uppercase",
+                background: "transparent", color: "rgba(255,255,255,0.88)",
+                padding: "13px 26px", border: "1px solid rgba(255,255,255,0.42)",
+                cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "8px",
+                transition: "border-color 0.2s, color 0.2s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.78)"; e.currentTarget.style.color = "#ffffff"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.42)"; e.currentTarget.style.color = "rgba(255,255,255,0.88)"; }}
+            >
+              EXPLORE CAREERS
+            </button>
+          </Link>
           <Link href="/completed-projects" data-testid="button-hero-projects">
-            <span className="font-sans inline-flex items-center cursor-pointer"
-              style={{ fontSize: "11px", letterSpacing: "0.35em", color: "rgba(255,255,255,0.85)", textTransform: "uppercase", fontWeight: 400 }}>
-              VIEW PROJECTS
+            <span
+              className="inline-flex items-center gap-1.5 cursor-pointer"
+              style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+            >
+              VIEW PROJECTS <ArrowRight size={10} />
             </span>
           </Link>
         </div>
@@ -584,94 +607,99 @@ export default function HomePage() {
 
       </section>
 
-      {/* ══════════ SERVICES — oNjgEjm: image wipe first, text after ══════════ */}
-      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff" }}>
+      {/* ══════════ SERVICES — Editorial numbered list ══════════ */}
+      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
 
         {/* Section header */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
-              What We Build
-            </span>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-4">
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+            What We Build
+          </span>
+          <div className="flex items-end justify-between gap-4">
             <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
               Our Services
             </h2>
+            <Link href="/services" data-testid="button-all-services">
+              <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                All Services <ArrowRight size={12} />
+              </span>
+            </Link>
           </div>
-          <Link href="/services" data-testid="button-all-services">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-              All Services <ArrowRight size={12} />
-            </span>
-          </Link>
         </div>
 
-        {/* Service panels — oNjgEjm: full-bleed image + text wipes in, alternating sides */}
-        {serviceRows.map((row, i) => {
-          const isAlt = i % 2 !== 0;
-          return (
-            <div key={i} className="svc-panel" data-alt={isAlt ? "true" : "false"} style={{
-              position: "relative",
-              paddingBottom: "56.25%",
-              overflow: "hidden",
-              borderTop: "1px solid rgba(0,0,0,0.07)",
-            }}>
+        {/* Editorial numbered rows */}
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pb-20">
+          {services.map((svc, i) => {
+            const Icon = svc.icon;
+            return (
+              <div key={i} className="svc-row" style={{ borderTop: "1px solid rgba(0,0,0,0.08)", position: "relative" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "clamp(20px, 3vw, 48px)", padding: "clamp(24px, 3vw, 36px) 0" }}>
 
-              {/* ── BEFORE: full-bleed image ── */}
-              <div style={{ position: "absolute", inset: 0 }}>
-                <img src={row.image} alt={row.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.30)" }} />
-                <div style={{ position: "absolute", bottom: "32px", [isAlt ? "right" : "left"]: "40px", pointerEvents: "none", userSelect: "none" }}>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(4rem,7vw,8rem)", fontWeight: 800, color: "rgba(255,255,255,0.07)", lineHeight: 1 }}>
-                    {row.word}
-                  </span>
-                </div>
-                <div style={{ position: "absolute", top: "40px", [isAlt ? "right" : "left"]: "40px" }}>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.40)", letterSpacing: "0.14em" }}>
-                    {String(i + 1).padStart(2, "0")} / {String(serviceRows.length).padStart(2, "0")}
-                  </span>
-                </div>
-              </div>
+                  {/* Large muted number */}
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "clamp(2.8rem, 4.5vw, 5rem)",
+                    fontWeight: 800,
+                    color: "rgba(17,24,39,0.06)",
+                    lineHeight: 1,
+                    width: "clamp(60px, 7vw, 90px)",
+                    flexShrink: 0,
+                    userSelect: "none",
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
 
-              {/* ── AFTER: text panel wipes in (right for even, left for odd) ── */}
-              <div className="svc-after-text" style={{
-                position: "absolute", top: 0,
-                [isAlt ? "left" : "right"]: 0,
-                width: "45%", height: "100%", overflow: "hidden",
-                background: isAlt ? "#f8f8f8" : "#ffffff",
-              }}>
-                <div className="svc-after-inner" style={{
-                  width: "100%", height: "100%",
-                  display: "flex", alignItems: "center",
-                  padding: "0 clamp(32px, 5vw, 64px)",
-                }}>
-                  <div style={{ width: "100%" }}>
-                    <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "20px" }}>
-                      {String(i + 1).padStart(2, "0")} — {row.title.split(/\s+/)[0].toUpperCase()}
-                    </span>
-                    <div style={{ width: "28px", height: "1px", background: "#C41E3A", marginBottom: "28px" }} />
-                    <h3 className="uppercase" style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(1.6rem,2.3vw,2.1rem)",
-                      fontWeight: 400, color: "#111827", letterSpacing: "0.04em",
-                      lineHeight: 1.18, marginBottom: "20px",
-                    }}>
-                      {row.title}
-                    </h3>
-                    <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", lineHeight: 1.9, color: "#4b5563", maxWidth: "380px", marginBottom: "32px" }}>
-                      {row.desc}
-                    </p>
-                    <Link href={row.path} data-testid={`button-service-${i}`}>
-                      <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                        Learn More <ArrowRight size={11} />
+                  {/* Title + CTA */}
+                  <div style={{ flexShrink: 0, width: "clamp(160px, 22vw, 260px)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+                      <Icon size={15} color="#C41E3A" strokeWidth={1.5} />
+                      <h3 className="uppercase" style={{
+                        fontFamily: "'Montserrat',sans-serif",
+                        fontSize: "12px", fontWeight: 600,
+                        color: "#111827", letterSpacing: "0.1em", margin: 0,
+                      }}>
+                        {svc.title}
+                      </h3>
+                    </div>
+                    <Link href={svc.path} data-testid={`button-service-${i}`}>
+                      <span className="inline-flex items-center gap-1.5 cursor-pointer transition-all hover:gap-3"
+                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
+                        Learn More <ArrowRight size={9} />
                       </span>
                     </Link>
                   </div>
-                </div>
-              </div>
 
-            </div>
-          );
-        })}
+                  {/* Description */}
+                  <p style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "13px", lineHeight: 1.85,
+                    color: "#6b7280", flex: 1,
+                    margin: 0,
+                  }}>
+                    {svc.desc}
+                  </p>
+
+                  {/* Hover-reveal image */}
+                  <div className="svc-row-img-wrap hidden md:block" style={{ width: "200px", height: "118px", overflow: "hidden", flexShrink: 0 }}>
+                    <img
+                      src={svc.image}
+                      alt={svc.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Red accent line that draws on hover */}
+                <div className="svc-row-accent-line" style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  height: "1px", background: "rgba(196,30,58,0.28)",
+                }} />
+              </div>
+            );
+          })}
+          <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }} />
+        </div>
       </section>
 
       {/* ══════════ PROJECTS — HORIZONTAL SCROLL ══════════ */}
@@ -693,40 +721,72 @@ export default function HomePage() {
           <div style={{ width: "480px", flexShrink: 0 }} />
           {projects.map((proj, i) => (
             <div key={i} className="h-scroll-card"
-              style={{ width: proj.featured ? "72vw" : "52vw", height: "100vh", marginRight: "24px" }}>
+              style={{ width: proj.featured ? "70vw" : "50vw", height: "100vh", marginRight: "20px" }}>
               <img src={proj.image} alt={proj.name}
                 className="proj-img absolute inset-0 w-full h-full object-cover will-change-transform"
                 style={{ transformOrigin: "center" }} />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)" }} />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)" }} />
+
+              {/* Large card index number — editorial */}
+              <div style={{
+                position: "absolute", top: "36px", left: "40px",
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "clamp(3.5rem, 6vw, 7rem)",
+                fontWeight: 800,
+                color: "rgba(255,255,255,0.07)",
+                lineHeight: 1,
+                userSelect: "none",
+                pointerEvents: "none",
+                letterSpacing: "-0.03em",
+              }}>
+                {String(i + 1).padStart(2, "0")}
+              </div>
+
               {proj.featured && (
-                <div className="absolute top-8 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
+                <div className="absolute top-9 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
                   style={{ background: "#C41E3A", color: "#fff", fontFamily: "'Montserrat',sans-serif" }}>Featured</div>
               )}
               <div className="absolute bottom-0 left-0 right-0 p-10">
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "8px" }}>
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "10px" }}>
                   {proj.type}
                 </div>
-                <h3 className="font-bold uppercase text-3xl"
-                  style={{ fontFamily: "'Montserrat',sans-serif", color: "#fff", letterSpacing: "0.03em" }}>
+                <h3 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#fff", letterSpacing: "0.03em", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 700, marginBottom: "8px" }}>
                   {proj.name}
                 </h3>
-                <div className="flex items-center gap-2 mt-2">
-                  <Clock size={11} style={{ color: "#C41E3A" }} />
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <div style={{ width: "16px", height: "1px", background: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em" }}>
                     {proj.location}
                   </span>
                 </div>
               </div>
             </div>
           ))}
-          <div className="h-scroll-card flex items-center justify-center" style={{ width: "40vw", height: "100vh", background: "#ffffff", borderLeft: "1px solid rgba(0,0,0,0.07)" }}>
-            <div className="text-center p-10">
-              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2rem,4vw,3.5rem)", color: "rgba(17,24,39,0.06)", fontWeight: 800, lineHeight: 1, marginBottom: "28px", textTransform: "uppercase" }}>
-                150+<br />Projects
+
+          {/* End-cap — editorial CTA card */}
+          <div className="h-scroll-card flex items-center justify-center" style={{ width: "44vw", height: "100vh", background: "#fafafa", borderLeft: "1px solid rgba(0,0,0,0.06)" }}>
+            <div style={{ textAlign: "center", padding: "0 clamp(32px, 5vw, 64px)", position: "relative" }}>
+              <div style={{
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "clamp(5rem, 9vw, 11rem)",
+                fontWeight: 900,
+                color: "rgba(17,24,39,0.045)",
+                lineHeight: 0.9,
+                marginBottom: "40px",
+                letterSpacing: "-0.04em",
+                userSelect: "none",
+              }}>
+                150+
               </div>
+              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "14px" }}>
+                Projects Delivered
+              </div>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", color: "rgba(17,24,39,0.38)", letterSpacing: "0.03em", marginBottom: "36px", lineHeight: 1.75 }}>
+                Across India's most<br />iconic addresses
+              </p>
               <Link href="/completed-projects" data-testid="button-all-projects">
                 <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(196,30,58,0.3)", padding: "14px 24px" }}>
+                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, borderBottom: "1px solid rgba(196,30,58,0.32)", paddingBottom: "5px" }}>
                   View All Projects <ArrowRight size={12} />
                 </span>
               </Link>
