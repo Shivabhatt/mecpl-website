@@ -161,6 +161,23 @@ html[data-theme="light"] {
   transform: scaleX(1);
 }
 
+/* ── Services stacking cards ── */
+.svc-stack-card {
+  min-height: 55vw;
+}
+@media (min-width: 768px) {
+  .svc-stack-card {
+    min-height: 80vh;
+  }
+}
+
+/* ── Why Choose cards equal height ── */
+.why-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+
 /* ── Projects horizontal loop ── */
 .proj-loop-strip {
   display: flex;

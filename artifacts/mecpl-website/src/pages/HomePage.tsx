@@ -657,24 +657,16 @@ export default function HomePage() {
       </section>
 
       {/* ══════════ SERVICES — VwbywPd stacking cards ══════════ */}
-      <section ref={servicesRef} data-testid="section-services" style={{ background: "#111827" }}>
+      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
 
         {/* Section header */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-20 pb-12 flex items-end justify-between gap-4">
-          <div>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
-              What We Build
-            </span>
-            <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#ffffff", fontWeight: 400, fontSize: "clamp(1.5rem,3vw,2.2rem)", margin: 0 }}>
-              Our Services
-            </h2>
-          </div>
-          <Link href="/services" data-testid="button-all-services">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-              All Services <ArrowRight size={12} />
-            </span>
-          </Link>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-20 pb-12">
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+            What We Build
+          </span>
+          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.5rem,3vw,2.2rem)", margin: 0 }}>
+            Our Services
+          </h2>
         </div>
 
         {/* Stacking cards — each sticky at top:0, previous scales down as next arrives */}
@@ -689,48 +681,31 @@ export default function HomePage() {
                   position: "sticky",
                   top: 0,
                   zIndex: i + 1,
-                  minHeight: "80vh",
                   display: "flex",
                   overflow: "hidden",
                   willChange: "transform",
                 }}
               >
-                {/* Left: dark info panel */}
+                {/* Left: light info panel — exactly 50% */}
                 <div style={{
-                  width: "clamp(280px, 42%, 520px)",
+                  width: "50%",
                   flexShrink: 0,
-                  background: i % 2 === 0 ? "#0f172a" : "#111827",
+                  background: i % 2 === 0 ? "#ffffff" : "#f8fafc",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
-                  padding: "clamp(32px, 6vw, 88px)",
-                  position: "relative",
-                  zIndex: 2,
+                  padding: "clamp(28px, 5vw, 72px)",
+                  borderRight: "1px solid rgba(0,0,0,0.06)",
                 }}>
-                  {/* Ghost number */}
-                  <div style={{
-                    fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(5rem, 9vw, 9rem)",
-                    fontWeight: 800,
-                    color: "rgba(255,255,255,0.04)",
-                    lineHeight: 1,
-                    position: "absolute",
-                    top: "clamp(20px, 4vw, 40px)",
-                    left: "clamp(32px, 6vw, 88px)",
-                    userSelect: "none",
-                  }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-
-                  <Icon size={20} color="#C41E3A" strokeWidth={1.5} style={{ marginBottom: "20px" }} />
+                  <Icon size={20} color="#C41E3A" strokeWidth={1.5} />
 
                   <h3 className="uppercase" style={{
                     fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(1.1rem, 2vw, 1.6rem)",
+                    fontSize: "clamp(1rem, 1.8vw, 1.5rem)",
                     fontWeight: 400,
-                    color: "#ffffff",
+                    color: "#111827",
                     letterSpacing: "0.06em",
-                    margin: "16px 0",
+                    margin: "18px 0 16px",
                     lineHeight: 1.2,
                   }}>
                     {svc.title}
@@ -740,36 +715,27 @@ export default function HomePage() {
                     fontFamily: "'Montserrat',sans-serif",
                     fontSize: "13px",
                     lineHeight: 1.85,
-                    color: "rgba(255,255,255,0.5)",
-                    margin: "0 0 24px",
+                    color: "#6b7280",
+                    margin: 0,
                   }}>
                     {svc.desc}
                   </p>
-
-                  <Link href={svc.path} data-testid={`button-service-${i}`}>
-                    <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                      style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                      Explore Service <ArrowRight size={9} />
-                    </span>
-                  </Link>
                 </div>
 
-                {/* Right: full image */}
-                <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                {/* Right: full image — exactly 50% */}
+                <div style={{ width: "50%", position: "relative", overflow: "hidden" }}>
                   <img
                     src={svc.image}
                     alt={svc.title}
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                   />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,23,42,0.5) 0%, transparent 60%)" }} />
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Bottom cap */}
-        <div style={{ height: "2px", background: "rgba(255,255,255,0.04)" }} />
+        <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
       </section>
 
       {/* ══════════ PROJECTS — HORIZONTAL LOOP ══════════ */}
@@ -865,6 +831,7 @@ export default function HomePage() {
                     padding: "40px 32px 36px",
                     boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
                     transition: "box-shadow 0.25s, transform 0.25s",
+                    minHeight: "260px",
                   }}
                   onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 8px 32px rgba(196,30,58,0.10)"; el.style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)"; el.style.transform = "translateY(0)"; }}
