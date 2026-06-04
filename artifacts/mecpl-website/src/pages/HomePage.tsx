@@ -39,7 +39,7 @@ const stats = [
 const services = [
   { icon: Building2,   title: "Civil Construction",  desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",           image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop", path: "/services" },
   { icon: ClipboardList, title: "Turnkey Projects",    desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",                   image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: Factory,     title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                                  image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=800&auto=format&fit=crop", path: "/services" },
+  { icon: Factory,     title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                                  image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=800&auto=format&fit=crop", path: "/services" },
   { icon: Home,        title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                           image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop", path: "/services" },
   { icon: Layers,      title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                              image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop", path: "/services" },
   { icon: HardHat,     title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",                        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop", path: "/services" },
@@ -51,7 +51,7 @@ const projects = [
   { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",           image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
   { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",              image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" },
   { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",  image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=1200&auto=format&fit=crop" },
-  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",     image: "https://images.unsplash.com/photo-1567361672830-f7aa558020c4?q=80&w=1200&auto=format&fit=crop" },
+  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",     image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1200&auto=format&fit=crop" },
 ];
 
 const whyChoose = [
@@ -815,8 +815,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* ── Cards grid — 3 columns × 2 rows ── */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+          {/* ── Cards grid — responsive, single col mobile → 3 col desktop ── */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
             {whyChoose.map((item, i) => {
               const Icon = item.icon;
               return (
@@ -826,32 +826,30 @@ export default function HomePage() {
                   data-testid={`card-why-${i}`}
                   style={{
                     background: "#ffffff",
-                    border: "1px solid rgba(0,0,0,0.09)",
-                    borderRadius: "6px",
-                    padding: "40px 32px 36px",
-                    boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+                    border: "1px solid rgba(0,0,0,0.07)",
+                    borderRadius: "20px",
+                    padding: "48px 28px 44px",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
                     transition: "box-shadow 0.25s, transform 0.25s",
-                    minHeight: "260px",
                   }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 8px 32px rgba(196,30,58,0.10)"; el.style.transform = "translateY(-3px)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)"; el.style.transform = "translateY(0)"; }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 12px 40px rgba(196,30,58,0.10)"; el.style.transform = "translateY(-4px)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)"; el.style.transform = "translateY(0)"; }}
                 >
                   {/* Icon circle */}
                   <div style={{
-                    width: "56px", height: "56px", borderRadius: "50%",
-                    background: "rgba(196,30,58,0.07)",
+                    width: "80px", height: "80px", borderRadius: "50%",
+                    background: "rgba(196,30,58,0.08)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "24px", marginLeft: "auto", marginRight: "auto",
+                    marginBottom: "28px", marginLeft: "auto", marginRight: "auto",
                   }}>
-                    <Icon size={22} color="#C41E3A" strokeWidth={1.5} />
+                    <Icon size={30} color="#C41E3A" strokeWidth={1.5} />
                   </div>
 
                   {/* Title */}
                   <h3 style={{
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
-                    fontWeight: 700, color: "#111827",
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    marginBottom: "14px", textAlign: "center",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "15px",
+                    fontWeight: 500, color: "#111827",
+                    marginBottom: "14px", textAlign: "center", lineHeight: 1.3,
                   }}>
                     {item.title}
                   </h3>
@@ -860,6 +858,7 @@ export default function HomePage() {
                   <p style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
                     lineHeight: 1.85, color: "#6b7280", textAlign: "center",
+                    margin: 0,
                   }}>
                     {item.desc}
                   </p>
