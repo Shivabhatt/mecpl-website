@@ -497,7 +497,7 @@ export default function HomePage() {
         {/* invisible anchor so heroHeadlineRef stays non-null for GSAP */}
         <div ref={heroHeadlineRef} className="sr-only" />
 
-        <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
+        <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 hidden md:flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
           <div className="inline-flex items-center gap-4">
             <Link href="/completed-projects" data-testid="button-hero-projects">
               <span
