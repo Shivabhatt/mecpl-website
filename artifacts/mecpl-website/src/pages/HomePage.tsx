@@ -309,41 +309,29 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: right-to-left marquee strip ── */
+  /* ── PROJECTS: pinned scroll-driven strip (right-to-left) ── */
   useEffect(() => {
     const sec   = projectsRef.current;
     const strip = projectsTrackRef.current;
     if (!sec || !strip) return;
 
     const ctx = gsap.context(() => {
-      /* One tick delay so layout is settled and scrollWidth is accurate */
       gsap.delayedCall(0.05, () => {
-        const totalW = strip.scrollWidth / 2; /* 2× cards rendered → half = one set */
+        const totalW = strip.scrollWidth / 2; /* 2× cards → half = one full set */
         if (!totalW) return;
 
-        /* Animate the container LEFT continuously — seamless because the
-           two halves of the strip are identical (projects rendered twice)  */
-        const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
-        tl.fromTo(strip, { x: 0 }, { x: -totalW, duration: totalW / 90 });
-
-        ScrollTrigger.create({
-          trigger: sec,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate(self) {
-            const v = self.getVelocity();
-            if (Math.abs(v) > 20) {
-              gsap.to(tl, {
-                timeScale: Math.min(6, 1 + Math.abs(v) / 300),
-                overwrite: true,
-                duration: 0.25,
-                ease: "power2.out",
-                onComplete: () =>
-                  gsap.to(tl, { timeScale: 1, duration: 1, ease: "power2.inOut" }),
-              });
-            }
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sec,
+            start: "top top",
+            end: () => `+=${totalW}`,   /* scroll distance = strip width */
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
           },
         });
+
+        tl.fromTo(strip, { x: 0 }, { x: -totalW, ease: "none" });
       });
     }, sec);
 
