@@ -509,15 +509,7 @@ export default function HomePage() {
         data-testid="section-hero"
       >
         <div ref={heroBgRef} className="absolute inset-0 z-0 scale-110 will-change-transform">
-          {heroSlides.map((sl, i) => (
-            <img
-              key={i}
-              src={sl.image}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1200 ${i === slide ? "opacity-40" : "opacity-0"}`}
-              alt="Construction backdrop"
-            />
-          ))}
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-70">
+          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
             <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
