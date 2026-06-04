@@ -46,17 +46,14 @@ export default function Footer() {
         >
           <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 24px", textAlign: "center" }}>
             <div style={{ maxWidth: "720px", width: "100%" }}>
-              <div style={{ height: "1px", width: "48px", background: "#C41E3A", margin: "0 auto 28px" }} />
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "28px" }}>
-                Let's Work Together
-              </span>
+              <div style={{ height: "1px", width: "48px", background: "#C41E3A", margin: "0 auto 40px" }} />
 
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2.6rem,6vw,5.5rem)", color: "#111827", fontWeight: 300, lineHeight: 1.05, marginBottom: "0", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+              <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "3rem", color: "#111827", fontWeight: 300, lineHeight: 1.05, marginBottom: "0", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
                 LET'S BUILD
-              </h2>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(2.6rem,6vw,5.5rem)", color: "#C41E3A", fontWeight: 800, lineHeight: 1.05, marginBottom: "40px", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+              </h1>
+              <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "3rem", color: "#C41E3A", fontWeight: 800, lineHeight: 1.05, marginBottom: "40px", textTransform: "uppercase", letterSpacing: "-0.02em" }}>
                 TOGETHER
-              </h2>
+              </h1>
 
               <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", lineHeight: 1.85, color: "#6b7280", maxWidth: "460px", margin: "0 auto 52px" }}>
                 India's most trusted construction partner — built on precision, safety, and 25 years of structural performance.
