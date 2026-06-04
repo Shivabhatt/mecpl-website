@@ -125,6 +125,79 @@ const bentoClients = [
   { name: "GERA DEVS",     col: 2, bg: "#ffffff",              text: "#111827",  border: "rgba(0,0,0,0.10)", height: 120 },
 ];
 
+/* ─── GSAP horizontalLoop helper (official GreenSock utility) ──────── */
+function horizontalLoop(
+  items: HTMLElement[],
+  config: {
+    repeat?: number;
+    speed?: number;
+    paused?: boolean;
+    paddingRight?: number;
+    snap?: number | false;
+  } = {}
+): gsap.core.Timeline {
+  const tl = gsap.timeline({
+    repeat: config.repeat ?? -1,
+    paused: !!config.paused,
+    defaults: { ease: "none" },
+    onReverseComplete() { tl.totalTime(tl.rawTime() + tl.duration() * 100); },
+  });
+  const length           = items.length;
+  const startX           = items[0].offsetLeft;
+  const times: number[]  = [];
+  const widths: number[] = [];
+  const xPercents: number[] = [];
+  const pixelsPerSecond  = (config.speed ?? 1) * 100;
+  const snap = config.snap === false
+    ? (v: number) => v
+    : gsap.utils.snap(config.snap ?? 1);
+
+  gsap.set(items, {
+    xPercent: (i: number, el: Element) => {
+      const w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string);
+      xPercents[i] = snap(
+        parseFloat(gsap.getProperty(el, "x", "px") as string) / w * 100 +
+        parseFloat(gsap.getProperty(el, "xPercent") as string)
+      );
+      return xPercents[i];
+    },
+  });
+  gsap.set(items, { x: 0 });
+
+  const totalWidth =
+    items[length - 1].offsetLeft +
+    (xPercents[length - 1] / 100) * widths[length - 1] -
+    startX +
+    items[length - 1].offsetWidth *
+      parseFloat(gsap.getProperty(items[length - 1], "scaleX") as string) +
+    (config.paddingRight ?? 0);
+
+  for (let i = 0; i < length; i++) {
+    const item            = items[i];
+    const curX            = (xPercents[i] / 100) * widths[i];
+    const distanceToStart = item.offsetLeft + curX - startX;
+    const distanceToLoop  = distanceToStart +
+      widths[i] * parseFloat(gsap.getProperty(item, "scaleX") as string);
+    tl.to(item, {
+      xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
+      duration: distanceToLoop / pixelsPerSecond,
+    }, 0)
+      .fromTo(
+        item,
+        { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) },
+        {
+          xPercent: xPercents[i],
+          duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+          immediateRender: false,
+        },
+        distanceToLoop / pixelsPerSecond
+      );
+    times[i] = distanceToStart / pixelsPerSecond;
+  }
+
+  return tl;
+}
+
 /* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
   const [slide, setSlide]           = useState(0);
@@ -236,51 +309,40 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: orbital wheel carousel (sin/cos) ── */
+  /* ── PROJECTS: horizontalLoop infinite scroll ── */
   useEffect(() => {
-    const sec = projectsRef.current;
-    if (!sec) return;
+    const sec   = projectsRef.current;
+    const strip = projectsTrackRef.current;
+    if (!sec || !strip) return;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".wheel-card", sec);
-      const n = cards.length;
-      if (!n) return;
-      const step   = 360 / n;
-      const radius = 520;
+      const cards = gsap.utils.toArray<HTMLElement>(".proj-loop-card", strip);
+      if (!cards.length) return;
 
-      const proxy = { rotation: 0 };
+      const loop = horizontalLoop(cards, {
+        repeat: -1,
+        speed: 0.9,
+        paddingRight: 20,
+      });
 
-      const updateWheel = () => {
-        cards.forEach((card, i) => {
-          const angleDeg = step * i + proxy.rotation;
-          const angleRad = angleDeg * (Math.PI / 180);
-          const x   = Math.sin(angleRad) * radius;
-          const y   = -Math.cos(angleRad) * radius;
-          const cos = Math.cos(angleRad);
-          gsap.set(card, {
-            x, y,
-            scale:   0.72 + 0.28 * Math.max(0, cos),
-            opacity: 0.35 + 0.65 * Math.max(0, cos),
-            zIndex:  Math.round((cos + 1) * 5),
-          });
-        });
-      };
-
-      updateWheel();
-
-      gsap.to(proxy, {
-        rotation: 360,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sec,
-          start: "top top",
-          end: "+=3000",
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
+      ScrollTrigger.create({
+        trigger: sec,
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate(self) {
+          const v = self.getVelocity();
+          if (Math.abs(v) > 20) {
+            const ts = Math.sign(v) * Math.min(6, 1 + Math.abs(v) / 300);
+            gsap.to(loop, {
+              timeScale: ts,
+              overwrite: true,
+              duration: 0.25,
+              ease: "power2.out",
+              onComplete: () =>
+                gsap.to(loop, { timeScale: 1, duration: 1, ease: "power2.inOut" }),
+            });
+          }
         },
-        onUpdate: updateWheel,
       });
     }, sec);
 
@@ -697,73 +759,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ PROJECTS — WHEEL CAROUSEL ══════════ */}
+      {/* ══════════ PROJECTS — HORIZONTAL LOOP ══════════ */}
       <section
         ref={projectsRef}
         data-testid="section-projects"
-        style={{ position: "relative", overflow: "hidden", height: "100vh", background: "#fafafa", borderTop: "1px solid rgba(0,0,0,0.06)" }}
+        style={{ background: "#fafafa", padding: "80px 0 70px", borderTop: "1px solid rgba(0,0,0,0.06)" }}
       >
-        {/* Header — centered at top */}
-        <div style={{ position: "absolute", top: "44px", left: 0, right: 0, textAlign: "center", zIndex: 20, pointerEvents: "none", userSelect: "none" }}>
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "52px" }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
             Showcase
           </span>
-          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.3rem, 2vw, 1.75rem)", lineHeight: 1.25 }}>
+          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)", lineHeight: 1.2 }}>
             Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
           </h2>
-          <div style={{ marginTop: "10px", fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.28)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
-            Scroll to rotate
-          </div>
         </div>
 
-        {/* Red spotlight dot — fixed at the "active" top position */}
-        <div style={{
-          position: "absolute",
-          top: "calc(100% - 440px)",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "6px", height: "6px",
-          borderRadius: "50%",
-          background: "#C41E3A",
-          zIndex: 18,
-          pointerEvents: "none",
-        }} />
-
-        {/* Wheel origin — 80px below the section's bottom edge so only the top arc shows */}
-        <div style={{ position: "absolute", top: "calc(100% + 80px)", left: "50%", width: 0, height: 0 }}>
-          {projects.map((proj, i) => (
-            <div key={i} className="wheel-card" style={{
-              position: "absolute",
-              width: "268px", height: "178px",
-              marginLeft: "-134px", marginTop: "-89px",
-              willChange: "transform, opacity",
-              cursor: "pointer",
-            }}>
-              <div style={{ width: "100%", height: "100%", overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.20)" }}>
+        {/* Overflow-hidden wrapper — clips the looping strip */}
+        <div style={{ overflow: "hidden" }}>
+          <div ref={projectsTrackRef} className="proj-loop-strip">
+            {[...projects, ...projects].map((proj, i) => (
+              <div key={i} className="proj-loop-card">
                 <img
                   src={proj.image}
                   alt={proj.name}
                   style={{ width: "100%", height: "65%", objectFit: "cover", display: "block" }}
                 />
-                <div style={{ padding: "9px 13px", background: "#ffffff", height: "35%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "7px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "4px" }}>
+                <div style={{ padding: "12px 16px", background: "#ffffff", height: "35%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "7px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "5px" }}>
                     {proj.type}
                   </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", lineHeight: 1.25, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "12px", fontWeight: 700, color: "#111827", lineHeight: 1.25, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {proj.name}
                   </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "#9ca3af", marginTop: "2px", letterSpacing: "0.05em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "#9ca3af", marginTop: "3px", letterSpacing: "0.05em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {proj.location}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ position: "absolute", bottom: "36px", left: 0, right: 0, textAlign: "center", zIndex: 20 }}>
-          <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.3)", letterSpacing: "0.12em", marginBottom: "14px" }}>
+        <div style={{ textAlign: "center", marginTop: "52px" }}>
+          <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.3)", letterSpacing: "0.12em", marginBottom: "16px" }}>
             150+ landmark projects across India
           </div>
           <Link href="/completed-projects" data-testid="button-all-projects">
