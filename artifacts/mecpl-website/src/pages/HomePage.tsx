@@ -309,44 +309,41 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: horizontalLoop infinite scroll ── */
+  /* ── PROJECTS: right-to-left marquee strip ── */
   useEffect(() => {
     const sec   = projectsRef.current;
     const strip = projectsTrackRef.current;
     if (!sec || !strip) return;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".proj-loop-card", strip);
-      if (!cards.length) return;
+      /* One tick delay so layout is settled and scrollWidth is accurate */
+      gsap.delayedCall(0.05, () => {
+        const totalW = strip.scrollWidth / 2; /* 2× cards rendered → half = one set */
+        if (!totalW) return;
 
-      const loop = horizontalLoop(cards, {
-        repeat: -1,
-        speed: 0.9,
-        paddingRight: 20,
-      });
+        /* Animate the container LEFT continuously — seamless because the
+           two halves of the strip are identical (projects rendered twice)  */
+        const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
+        tl.fromTo(strip, { x: 0 }, { x: -totalW, duration: totalW / 90 });
 
-      /* Right-to-left: negative timeScale reverses the timeline direction */
-      loop.timeScale(-1);
-
-      ScrollTrigger.create({
-        trigger: sec,
-        start: "top bottom",
-        end: "bottom top",
-        onUpdate(self) {
-          const v = self.getVelocity();
-          if (Math.abs(v) > 20) {
-            /* Always accelerate leftward — clamp between -6 and -1 */
-            const ts = Math.max(-6, -(1 + Math.abs(v) / 300));
-            gsap.to(loop, {
-              timeScale: ts,
-              overwrite: true,
-              duration: 0.25,
-              ease: "power2.out",
-              onComplete: () =>
-                gsap.to(loop, { timeScale: -1, duration: 1, ease: "power2.inOut" }),
-            });
-          }
-        },
+        ScrollTrigger.create({
+          trigger: sec,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate(self) {
+            const v = self.getVelocity();
+            if (Math.abs(v) > 20) {
+              gsap.to(tl, {
+                timeScale: Math.min(6, 1 + Math.abs(v) / 300),
+                overwrite: true,
+                duration: 0.25,
+                ease: "power2.out",
+                onComplete: () =>
+                  gsap.to(tl, { timeScale: 1, duration: 1, ease: "power2.inOut" }),
+              });
+            }
+          },
+        });
       });
     }, sec);
 
