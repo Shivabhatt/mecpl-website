@@ -325,6 +325,9 @@ export default function HomePage() {
         paddingRight: 20,
       });
 
+      /* Right-to-left: negative timeScale reverses the timeline direction */
+      loop.timeScale(-1);
+
       ScrollTrigger.create({
         trigger: sec,
         start: "top bottom",
@@ -332,14 +335,15 @@ export default function HomePage() {
         onUpdate(self) {
           const v = self.getVelocity();
           if (Math.abs(v) > 20) {
-            const ts = Math.sign(v) * Math.min(6, 1 + Math.abs(v) / 300);
+            /* Always accelerate leftward — clamp between -6 and -1 */
+            const ts = Math.max(-6, -(1 + Math.abs(v) / 300));
             gsap.to(loop, {
               timeScale: ts,
               overwrite: true,
               duration: 0.25,
               ease: "power2.out",
               onComplete: () =>
-                gsap.to(loop, { timeScale: 1, duration: 1, ease: "power2.inOut" }),
+                gsap.to(loop, { timeScale: -1, duration: 1, ease: "power2.inOut" }),
             });
           }
         },
