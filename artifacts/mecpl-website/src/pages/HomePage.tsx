@@ -14,20 +14,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ─── DATA ──────────────────────────────────────────────────────────── */
 
-const heroSlides = [
-  {
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop",
-    tag: "25+ Years of Structural Excellence",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop",
-    tag: "150+ Landmark Projects Delivered",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=1920&auto=format&fit=crop",
-    tag: "ISO 9001 · 14001 · 45001 Certified",
-  },
-];
 
 const stats = [
   { value: 25,  suffix: "+",  label: "Years Legacy",         sub: "Since 1998" },
@@ -198,7 +184,6 @@ function horizontalLoop(
 
 /* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
-  const [slide, setSlide]           = useState(0);
   const [activeTesti, setActiveTesti] = useState(0);
   const assetBase = import.meta.env.BASE_URL;
 
@@ -216,11 +201,7 @@ export default function HomePage() {
   const clientsRef       = useRef<HTMLElement>(null);
   const stackedRef       = useRef<HTMLElement>(null);
 
-  /* Hero auto-slide */
-  useEffect(() => {
-    const t = setInterval(() => setSlide(p => (p + 1) % heroSlides.length), 6000);
-    return () => clearInterval(t);
-  }, []);
+
 
   /* ── HERO: SplitText chars + parallax bg — waits for preloader-exit ── */
   useEffect(() => {
@@ -495,8 +476,6 @@ export default function HomePage() {
     }, sec);
     return () => ctx.revert();
   }, []);
-
-  const s = heroSlides[slide];
 
   /* ─── JSX ─────────────────────────────────────────────────────────── */
   return (
