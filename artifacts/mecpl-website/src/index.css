@@ -171,6 +171,13 @@ html[data-theme="light"] {
   }
 }
 
+/* ── Footer stacking cards (VwbywPd) ── */
+.footer-stack-card {
+  position: sticky;
+  top: 0;
+  will-change: transform;
+}
+
 /* ── Why Choose cards equal height ── */
 .why-card {
   display: flex;
