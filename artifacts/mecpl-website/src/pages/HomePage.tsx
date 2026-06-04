@@ -236,39 +236,53 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: horizontal scroll panel ── */
+  /* ── PROJECTS: orbital wheel carousel (sin/cos) ── */
   useEffect(() => {
-    const container = projectsRef.current;
-    const track     = projectsTrackRef.current;
-    if (!container || !track) return;
+    const sec = projectsRef.current;
+    if (!sec) return;
 
     const ctx = gsap.context(() => {
-      const getAmt = () => -(track.scrollWidth - window.innerWidth);
+      const cards = gsap.utils.toArray<HTMLElement>(".wheel-card", sec);
+      const n = cards.length;
+      if (!n) return;
+      const step   = 360 / n;
+      const radius = 520;
 
-      /* Save the tween — containerAnimation needs the tween, NOT the ScrollTrigger */
-      const projTween = gsap.to(track, {
-        x: getAmt, ease: "none",
-        scrollTrigger: {
-          trigger: container, start: "top top",
-          end: () => `+=${Math.abs(getAmt())}`,
-          pin: true, scrub: 1.5, invalidateOnRefresh: true, anticipatePin: 1,
-        },
-      });
+      const proxy = { rotation: 0 };
 
-      const imgs = gsap.utils.toArray<HTMLElement>(".proj-img", track);
-      imgs.forEach(img => {
-        const card = img.closest(".h-scroll-card") as HTMLElement;
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            containerAnimation: projTween,
-            start: "left right", end: "right left", scrub: true,
-          },
+      const updateWheel = () => {
+        cards.forEach((card, i) => {
+          const angleDeg = step * i + proxy.rotation;
+          const angleRad = angleDeg * (Math.PI / 180);
+          const x   = Math.sin(angleRad) * radius;
+          const y   = -Math.cos(angleRad) * radius;
+          const cos = Math.cos(angleRad);
+          gsap.set(card, {
+            x, y,
+            scale:   0.72 + 0.28 * Math.max(0, cos),
+            opacity: 0.35 + 0.65 * Math.max(0, cos),
+            zIndex:  Math.round((cos + 1) * 5),
+          });
         });
-        tl.fromTo(img, { scale: 1.0 }, { scale: 1.08, ease: "none" })
-          .to(img, { scale: 1.0, ease: "none" });
+      };
+
+      updateWheel();
+
+      gsap.to(proxy, {
+        rotation: 360,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sec,
+          start: "top top",
+          end: "+=3000",
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+        onUpdate: updateWheel,
       });
-    });
+    }, sec);
 
     return () => ctx.revert();
   }, []);
@@ -702,96 +716,81 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ PROJECTS — HORIZONTAL SCROLL ══════════ */}
-      <section ref={projectsRef} className="h-scroll-section" style={{ background: "#faf9f7" }} data-testid="section-projects">
-        <div className="absolute top-10 left-8 z-10 pointer-events-none select-none" style={{ width: "400px" }}>
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
+      {/* ══════════ PROJECTS — WHEEL CAROUSEL ══════════ */}
+      <section
+        ref={projectsRef}
+        data-testid="section-projects"
+        style={{ position: "relative", overflow: "hidden", height: "100vh", background: "#fafafa", borderTop: "1px solid rgba(0,0,0,0.06)" }}
+      >
+        {/* Header — centered at top */}
+        <div style={{ position: "absolute", top: "44px", left: 0, right: 0, textAlign: "center", zIndex: 20, pointerEvents: "none", userSelect: "none" }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
             Showcase
           </span>
-          <h2 className="uppercase leading-tight text-3xl"
-            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
+          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.3rem, 2vw, 1.75rem)", lineHeight: 1.25 }}>
             Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
           </h2>
-          <div className="mt-4 text-xs" style={{ fontFamily: "'Montserrat',sans-serif", color: "rgba(17,24,39,0.35)", letterSpacing: "0.1em" }}>
-            ← Scroll to explore →
+          <div style={{ marginTop: "10px", fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.28)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
+            Scroll to rotate
           </div>
         </div>
 
-        <div ref={projectsTrackRef} className="h-scroll-track" style={{ height: "100vh" }}>
-          <div style={{ width: "480px", flexShrink: 0 }} />
+        {/* Red spotlight dot — fixed at the "active" top position */}
+        <div style={{
+          position: "absolute",
+          top: "calc(100% - 440px)",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "6px", height: "6px",
+          borderRadius: "50%",
+          background: "#C41E3A",
+          zIndex: 18,
+          pointerEvents: "none",
+        }} />
+
+        {/* Wheel origin — 80px below the section's bottom edge so only the top arc shows */}
+        <div style={{ position: "absolute", top: "calc(100% + 80px)", left: "50%", width: 0, height: 0 }}>
           {projects.map((proj, i) => (
-            <div key={i} className="h-scroll-card"
-              style={{ width: proj.featured ? "70vw" : "50vw", height: "100vh", marginRight: "20px" }}>
-              <img src={proj.image} alt={proj.name}
-                className="proj-img absolute inset-0 w-full h-full object-cover will-change-transform"
-                style={{ transformOrigin: "center" }} />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)" }} />
-
-              {/* Large card index number — editorial */}
-              <div style={{
-                position: "absolute", top: "36px", left: "40px",
-                fontFamily: "'Montserrat',sans-serif",
-                fontSize: "clamp(3.5rem, 6vw, 7rem)",
-                fontWeight: 800,
-                color: "rgba(255,255,255,0.07)",
-                lineHeight: 1,
-                userSelect: "none",
-                pointerEvents: "none",
-                letterSpacing: "-0.03em",
-              }}>
-                {String(i + 1).padStart(2, "0")}
-              </div>
-
-              {proj.featured && (
-                <div className="absolute top-9 right-8 text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
-                  style={{ background: "#C41E3A", color: "#fff", fontFamily: "'Montserrat',sans-serif" }}>Featured</div>
-              )}
-              <div className="absolute bottom-0 left-0 right-0 p-10">
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "10px" }}>
-                  {proj.type}
-                </div>
-                <h3 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#fff", letterSpacing: "0.03em", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 700, marginBottom: "8px" }}>
-                  {proj.name}
-                </h3>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <div style={{ width: "16px", height: "1px", background: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em" }}>
+            <div key={i} className="wheel-card" style={{
+              position: "absolute",
+              width: "268px", height: "178px",
+              marginLeft: "-134px", marginTop: "-89px",
+              willChange: "transform, opacity",
+              cursor: "pointer",
+            }}>
+              <div style={{ width: "100%", height: "100%", overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.20)" }}>
+                <img
+                  src={proj.image}
+                  alt={proj.name}
+                  style={{ width: "100%", height: "65%", objectFit: "cover", display: "block" }}
+                />
+                <div style={{ padding: "9px 13px", background: "#ffffff", height: "35%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "7px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "4px" }}>
+                    {proj.type}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 700, color: "#111827", lineHeight: 1.25, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {proj.name}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "#9ca3af", marginTop: "2px", letterSpacing: "0.05em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {proj.location}
-                  </span>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
 
-          {/* End-cap — editorial CTA card */}
-          <div className="h-scroll-card flex items-center justify-center" style={{ width: "44vw", height: "100vh", background: "#fafafa", borderLeft: "1px solid rgba(0,0,0,0.06)" }}>
-            <div style={{ textAlign: "center", padding: "0 clamp(32px, 5vw, 64px)", position: "relative" }}>
-              <div style={{
-                fontFamily: "'Montserrat',sans-serif",
-                fontSize: "clamp(5rem, 9vw, 11rem)",
-                fontWeight: 900,
-                color: "rgba(17,24,39,0.045)",
-                lineHeight: 0.9,
-                marginBottom: "40px",
-                letterSpacing: "-0.04em",
-                userSelect: "none",
-              }}>
-                150+
-              </div>
-              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "14px" }}>
-                Projects Delivered
-              </div>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13px", color: "rgba(17,24,39,0.38)", letterSpacing: "0.03em", marginBottom: "36px", lineHeight: 1.75 }}>
-                Across India's most<br />iconic addresses
-              </p>
-              <Link href="/completed-projects" data-testid="button-all-projects">
-                <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                  style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, borderBottom: "1px solid rgba(196,30,58,0.32)", paddingBottom: "5px" }}>
-                  View All Projects <ArrowRight size={12} />
-                </span>
-              </Link>
-            </div>
+        {/* Bottom CTA */}
+        <div style={{ position: "absolute", bottom: "36px", left: 0, right: 0, textAlign: "center", zIndex: 20 }}>
+          <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.3)", letterSpacing: "0.12em", marginBottom: "14px" }}>
+            150+ landmark projects across India
           </div>
+          <Link href="/completed-projects" data-testid="button-all-projects">
+            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
+              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, borderBottom: "1px solid rgba(196,30,58,0.32)", paddingBottom: "5px" }}>
+              View All Projects <ArrowRight size={12} />
+            </span>
+          </Link>
         </div>
       </section>
 
