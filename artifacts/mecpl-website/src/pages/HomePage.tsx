@@ -475,22 +475,6 @@ export default function HomePage() {
         <div ref={heroHeadlineRef} className="sr-only" />
 
         <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
-          <Link href="/contact" data-testid="button-hero-build">
-            <button
-              style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                background: "#C41E3A", color: "#ffffff",
-                padding: "14px 30px", border: "none", cursor: "pointer",
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                transition: "background 0.2s ease",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.background = "#a01830")}
-              onMouseLeave={e => (e.currentTarget.style.background = "#C41E3A")}
-            >
-              LET'S BUILD TOGETHER <ArrowRight size={11} />
-            </button>
-          </Link>
           <div className="inline-flex items-center gap-4">
             <Link href="/completed-projects" data-testid="button-hero-projects">
               <span
