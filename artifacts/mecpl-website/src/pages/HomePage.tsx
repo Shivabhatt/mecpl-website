@@ -535,7 +535,7 @@ export default function HomePage() {
                 onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
                 onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
               >
-                VIEW PROJECTS <ArrowRight size={10} />
+                VIEW PROJECTS
               </span>
             </Link>
             <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.22)", flexShrink: 0 }} />
@@ -546,7 +546,7 @@ export default function HomePage() {
                 onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
                 onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
               >
-                EXPLORE CAREERS <ArrowRight size={10} />
+                EXPLORE CAREERS
               </span>
             </Link>
           </div>
