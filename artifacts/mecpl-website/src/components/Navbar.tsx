@@ -67,7 +67,7 @@ export default function Navbar() {
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <span
-                  className={`relative inline-block px-4 py-2 text-[11px] font-semibold tracking-[0.22em] uppercase cursor-pointer transition-colors duration-300 group ${
+                  className={`relative inline-block px-4 py-2 text-[13px] font-bold tracking-[0.18em] uppercase cursor-pointer transition-colors duration-300 group ${
                     transparent
                       ? active ? "text-white" : "text-white/70 hover:text-white"
                       : active ? "text-[#111827]" : "text-[#6b7280] hover:text-[#111827]"

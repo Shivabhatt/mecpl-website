@@ -498,27 +498,27 @@ export default function HomePage() {
         <div ref={heroHeadlineRef} className="sr-only" />
 
         <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
-          <div className="inline-flex items-center gap-4">
+          <div className="inline-flex items-center gap-6">
             <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span
-                className="inline-flex items-center gap-1.5 cursor-pointer"
-                style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+              <h3
+                className="inline-flex items-center gap-1.5 cursor-pointer m-0"
+                style={{ fontSize: "1.875rem", letterSpacing: "0.08em", color: "#ffffff", textTransform: "uppercase", fontWeight: 700, fontFamily: "'Montserrat',sans-serif", transition: "opacity 0.2s", lineHeight: 1 }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = "0.75")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = "1")}
               >
-                VIEW PROJECTS
-              </span>
+                View Projects
+              </h3>
             </Link>
-            <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.22)", flexShrink: 0 }} />
+            <div style={{ width: "1px", height: "28px", background: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
             <Link href="/careers" data-testid="button-hero-careers">
-              <span
-                className="inline-flex items-center gap-1.5 cursor-pointer"
-                style={{ fontSize: "10px", letterSpacing: "0.28em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", fontWeight: 400, fontFamily: "'Montserrat',sans-serif", transition: "color 0.2s" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+              <h3
+                className="inline-flex items-center gap-1.5 cursor-pointer m-0"
+                style={{ fontSize: "1.875rem", letterSpacing: "0.08em", color: "#ffffff", textTransform: "uppercase", fontWeight: 700, fontFamily: "'Montserrat',sans-serif", transition: "opacity 0.2s", lineHeight: 1 }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = "0.75")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = "1")}
               >
-                EXPLORE CAREERS
-              </span>
+                Explore Careers
+              </h3>
             </Link>
           </div>
         </div>
