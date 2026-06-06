@@ -826,72 +826,59 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ CLIENTS & ARCHITECTS — two-row tickers ══════════ */}
+      {/* ══════════ CLIENTS — heading + single auto-scroll row ══════════ */}
       <section
         ref={clientsRef}
         data-testid="section-clients"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "60px 0" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "80px 0" }}
       >
-        {/* Row label 1 */}
-        <div style={{
-          padding: "0 40px", marginBottom: "16px",
-          fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-          fontWeight: 700, letterSpacing: "0.28em",
-          textTransform: "uppercase", color: "rgba(17,24,39,0.28)",
-        }}>
-          CLIENTS
+        {/* Section heading */}
+        <div style={{ padding: "0 40px", marginBottom: "56px", textAlign: "center" }}>
+          <span style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 700,
+            letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase",
+            display: "block", marginBottom: "16px",
+          }}>
+            OUR CLIENTS
+          </span>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "clamp(2rem,4.5vw,3.6rem)",
+            fontWeight: 700, color: "#111827",
+            lineHeight: 1.05, margin: "0 0 4px",
+            textTransform: "uppercase", letterSpacing: "-0.02em",
+          }}>
+            Trusted by India's
+          </h2>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "clamp(2rem,4.5vw,3.6rem)",
+            fontWeight: 200, color: "rgba(17,24,39,0.45)",
+            lineHeight: 1.05, margin: 0,
+            textTransform: "uppercase", letterSpacing: "-0.02em",
+          }}>
+            finest developers
+          </h2>
         </div>
 
-        {/* Row 1: scrolls left (GSAP) */}
-        <div style={{ overflow: "hidden", marginBottom: "1px" }}>
-          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "20px", width: "max-content" }}>
+        {/* Single auto-scrolling ticker row */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "24px", width: "max-content" }}>
             {[...clients, ...clients].map((c, i) => (
-              <div key={i}
+              <div
+                key={i}
                 data-testid={i < clients.length ? `card-client-${i}` : undefined}
                 style={{
-                  width: "160px", height: "88px", flexShrink: 0,
+                  width: "180px", height: "96px", flexShrink: 0,
                   background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: "4px", display: "flex",
-                  alignItems: "center", justifyContent: "center", padding: "18px",
-                }}>
+                  borderRadius: "6px", display: "flex",
+                  alignItems: "center", justifyContent: "center", padding: "20px",
+                }}
+              >
                 <img
                   src={`${assetBase}${c.logo}`}
                   alt={c.name}
-                  style={{ maxWidth: "100%", maxHeight: "48px", objectFit: "contain" }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Separator */}
-        <div style={{ height: "1px", background: "rgba(0,0,0,0.06)", margin: "24px 0" }} />
-
-        {/* Row label 2 */}
-        <div style={{
-          padding: "0 40px", marginBottom: "16px",
-          fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-          fontWeight: 700, letterSpacing: "0.28em",
-          textTransform: "uppercase", color: "rgba(17,24,39,0.28)",
-        }}>
-          ARCHITECTS &amp; PARTNERS
-        </div>
-
-        {/* Row 2: scrolls right (CSS animation) */}
-        <div style={{ overflow: "hidden" }}>
-          <div className="animate-ticker-rev" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            {[...clients, ...clients].map((c, i) => (
-              <div key={i}
-                style={{
-                  width: "160px", height: "88px", flexShrink: 0,
-                  background: "#f8fafc", border: "1px solid rgba(0,0,0,0.07)",
-                  borderRadius: "4px", display: "flex",
-                  alignItems: "center", justifyContent: "center", padding: "18px",
-                }}>
-                <img
-                  src={`${assetBase}${c.logo}`}
-                  alt={c.name}
-                  style={{ maxWidth: "100%", maxHeight: "48px", objectFit: "contain", filter: "grayscale(40%)", opacity: 0.75 }}
+                  style={{ maxWidth: "100%", maxHeight: "52px", objectFit: "contain" }}
                 />
               </div>
             ))}
