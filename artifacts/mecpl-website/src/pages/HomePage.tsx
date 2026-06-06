@@ -49,10 +49,10 @@ const projects = [
 ];
 
 const whyChoose: WhyCard[] = [
-  { stat: "95%+",      title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule — backed by rigorous scheduling and proactive site governance.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400&auto=format&fit=crop" },
-  { stat: "ISO 45001", title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, protecting our teams on India's most complex builds.", image: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=1400&auto=format&fit=crop" },
-  { stat: "25+ Years", title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most ambitious and technically demanding projects.", image: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=1400&auto=format&fit=crop" },
-  { stat: "ISO 9001",  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management applied across every project phase — from structural planning to final handover.", image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1400&auto=format&fit=crop" },
+  { stat: "95%+",      title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule — backed by rigorous scheduling and proactive site governance.", image: "assets/projects/Trump-Tower.jpg" },
+  { stat: "ISO 45001", title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, protecting our teams on India's most complex builds.", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { stat: "25+ Years", title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most ambitious and technically demanding projects.", image: "assets/projects/Godrej-Forest-grove.jpg" },
+  { stat: "ISO 9001",  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management applied across every project phase — from structural planning to final handover.", image: "assets/projects/Emirus-scaled.jpg" },
 ];
 
 const testimonials = [
@@ -1015,7 +1015,7 @@ export default function HomePage() {
                 pointerEvents: "none",
               }}>
                 <img
-                  src={item.image} alt={item.title}
+                  src={`${assetBase}${item.image}`} alt={item.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
               </div>
