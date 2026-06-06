@@ -406,7 +406,7 @@ export default function HomePage() {
         {/* Cinematic gradient overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.62) 100%)",
+          background: "rgba(0,0,0,0.32)",
         }} />
 
         {/* TOP RIGHT: video counter + progress */}
