@@ -459,8 +459,9 @@ export default function HomePage() {
                 {slide.heading.map((line, i) => (
                   <div key={i} style={{
                     fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                    fontSize: "clamp(1.6rem, 3.8vw, 3rem)",
-                    lineHeight: 1.1, color: "#ffffff", letterSpacing: "-0.01em",
+                    fontSize: "clamp(1.4rem, 3.2vw, 2.6rem)",
+                    lineHeight: 1.15, color: "#ffffff", letterSpacing: "-0.01em",
+                    whiteSpace: "nowrap",
                   }}>
                     {line}
                   </div>
