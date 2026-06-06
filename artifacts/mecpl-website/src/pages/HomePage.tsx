@@ -346,32 +346,6 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── CERTIFICATIONS: GSAP infinite ticker ── */
-  useEffect(() => {
-    const sec = certSectionRef.current;
-    if (!sec) return;
-    const track = sec.querySelector<HTMLElement>(".cert-track");
-    if (!track) return;
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const tween = gsap.to(track, {
-        x: () => -(track.scrollWidth / 2),
-        duration: 32, ease: "none", repeat: -1,
-        onRepeat: () => gsap.set(track, { x: 0 }),
-      });
-      const pause = () => tween.pause();
-      const play  = () => tween.play();
-      sec.addEventListener("mouseenter", pause);
-      sec.addEventListener("mouseleave", play);
-      return () => {
-        sec.removeEventListener("mouseenter", pause);
-        sec.removeEventListener("mouseleave", play);
-        tween.kill();
-      };
-    });
-    return () => mm.revert();
-  }, []);
-
   /* ── CLIENTS: GSAP infinite ticker ── */
   useEffect(() => {
     const sec = clientsRef.current;
@@ -561,52 +535,54 @@ export default function HomePage() {
           </h3>
         </div>
 
-        {/* Auto-scrolling ticker of certificate images */}
-        <div style={{ overflow: "hidden" }}>
-          <div className="cert-track" style={{ display: "flex", gap: "24px", width: "max-content" }}>
+        {/* 4 certificate cards — static grid */}
+        <div className="max-w-5xl mx-auto" style={{ padding: "0 40px" }}>
+          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: "24px" }}>
             {[
-              "assets/awards/2002-01-large.webp",
-              "assets/awards/2010-01-large.webp",
-              "assets/awards/2012-01-large.webp",
-              "assets/awards/2013-01-large.webp",
-              "assets/awards/2014-01-large.webp",
-              "assets/awards/2015-01-large.webp",
-              "assets/awards/2016-01-large.webp",
-              "assets/awards/2017-02-large.webp",
-              "assets/awards/mpl_2018_01-scaled.jpg",
-              "assets/awards/rss_2019_01-scaled.jpg",
-              "assets/awards/mpl_2020_04.jpg",
-              "assets/awards/WhatsApp-Image-2023-12-27.jpg",
-              "assets/awards/2002-01-large.webp",
-              "assets/awards/2010-01-large.webp",
-              "assets/awards/2012-01-large.webp",
-              "assets/awards/2013-01-large.webp",
-              "assets/awards/2014-01-large.webp",
-              "assets/awards/2015-01-large.webp",
-              "assets/awards/2016-01-large.webp",
-              "assets/awards/2017-02-large.webp",
-              "assets/awards/mpl_2018_01-scaled.jpg",
-              "assets/awards/rss_2019_01-scaled.jpg",
-              "assets/awards/mpl_2020_04.jpg",
-              "assets/awards/WhatsApp-Image-2023-12-27.jpg",
-            ].map((src, i) => (
+              { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "ISO 9001:2015" },
+              { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "ISO 14001:2015" },
+              { src: "assets/awards/mpl_2020_04.jpg",                label: "ISO 45001:2018" },
+              { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "CRISIL SME 1" },
+            ].map((cert, i) => (
               <div
                 key={i}
                 style={{
-                  flexShrink: 0, width: "200px", height: "160px",
-                  background: "#f8fafc",
-                  border: "1px solid rgba(0,0,0,0.07)",
-                  borderRadius: "4px",
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: "8px",
                   overflow: "hidden",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  padding: "12px",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                  display: "flex", flexDirection: "column",
+                  transition: "box-shadow 0.25s, transform 0.25s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = "0 8px 40px rgba(196,30,58,0.12)";
+                  el.style.transform = "translateY(-4px)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)";
+                  el.style.transform = "translateY(0)";
                 }}
               >
-                <img
-                  src={`${assetBase}${src}`}
-                  alt="Certificate"
-                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                />
+                <div style={{ background: "#f8fafc", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
+                  <img
+                    src={`${assetBase}${cert.src}`}
+                    alt={cert.label}
+                    style={{ width: "100%", maxHeight: "160px", objectFit: "contain", display: "block" }}
+                  />
+                </div>
+                <div style={{
+                  padding: "14px 16px",
+                  borderTop: "2px solid #C41E3A",
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+                  fontWeight: 700, letterSpacing: "0.16em",
+                  textTransform: "uppercase", color: "#111827",
+                  textAlign: "center",
+                }}>
+                  {cert.label}
+                </div>
               </div>
             ))}
           </div>
