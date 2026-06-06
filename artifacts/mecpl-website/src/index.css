@@ -112,6 +112,11 @@ html[data-theme="light"] {
     animation: hero-progress 8s linear forwards;
   }
 
+  @keyframes heroSlideIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* ── Service tab progress line ── */
   @keyframes svc-tab-progress {
     from { width: 0%; }
