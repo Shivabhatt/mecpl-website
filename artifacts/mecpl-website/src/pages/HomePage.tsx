@@ -18,7 +18,21 @@ interface WhyCard {
 
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
-  "assets/video/hero.mp4",
+  "assets/video/banner-video-1.mp4",
+  "assets/video/banner-video-2.mp4",
+];
+
+const heroSlides = [
+  {
+    label: "Millennium Engineers & Contractors",
+    heading: ["Architecting Landmarks,", "Engineering Excellence."],
+    mission: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
+  },
+  {
+    label: "Millennium Engineers & Contractors",
+    heading: ["GIANT BEHIND THE GIANT"],
+    mission: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
+  },
 ];
 
 const stats = [
@@ -421,76 +435,62 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* CENTER: heading + description + buttons */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 10,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <div style={{ textAlign: "center", maxWidth: "720px", padding: "0 40px" }}>
-            <h1 ref={heroHeadlineRef} style={{ margin: 0 }}>
-              <div className="hero-line" style={{
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                fontSize: "clamp(1.5rem, 5vw, 4rem)",
-                lineHeight: 1.05, textTransform: "uppercase", letterSpacing: "-0.02em",
-                whiteSpace: "nowrap", overflow: "hidden",
-                color: "#ffffff",
+        {/* BOTTOM-LEFT: per-slide text overlay */}
+        {(() => {
+          const slide = heroSlides[videoIdx] ?? heroSlides[0];
+          return (
+            <div
+              key={videoIdx}
+              style={{
+                position: "absolute", bottom: "100px", left: "60px", zIndex: 10,
+                maxWidth: "540px",
+                animation: "heroSlideIn 0.7s ease forwards",
+              }}
+            >
+              <div style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
+                fontWeight: 500, color: "rgba(255,255,255,0.7)",
+                letterSpacing: "0.18em", textTransform: "uppercase",
+                marginBottom: "14px",
               }}>
-                WE BUILD
+                {slide.label}
               </div>
-              <div className="hero-line" style={{
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                fontSize: "clamp(1.5rem, 5vw, 4rem)",
-                lineHeight: 1.15, textTransform: "uppercase", letterSpacing: "-0.02em",
-                whiteSpace: "nowrap", overflow: "hidden",
-                color: "#C41E3A",
+              <h1 style={{ margin: "0 0 16px" }}>
+                {slide.heading.map((line, i) => (
+                  <div key={i} style={{
+                    fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                    fontSize: "clamp(1.6rem, 3.8vw, 3rem)",
+                    lineHeight: 1.1, color: "#ffffff", letterSpacing: "-0.01em",
+                  }}>
+                    {line}
+                  </div>
+                ))}
+              </h1>
+              <p style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
+                fontWeight: 300, color: "rgba(255,255,255,0.65)",
+                lineHeight: 1.7, margin: "0 0 28px", maxWidth: "420px",
               }}>
-                INDIA'S SKYLINE
-              </div>
-            </h1>
-
-            <p ref={heroTagRef} className="hero-sub-item" style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-              fontWeight: 300, color: "rgba(255,255,255,0.65)",
-              lineHeight: 1.75, margin: "28px 0 0",
-            }}>
-              From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
-            </p>
-
-            <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap", justifyContent: "center" }}>
+                {slide.mission}
+              </p>
               <Link href="/completed-projects" data-testid="button-hero-projects">
                 <span
-                  className="hero-sub-item"
                   style={{
-                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
+                    display: "inline-flex", alignItems: "center", gap: "8px",
+                    background: "#C41E3A", color: "#ffffff",
                     fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                     letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
+                    padding: "14px 32px", cursor: "pointer",
                   }}
                   onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
                 >
-                  View Projects <ArrowRight size={11} />
-                </span>
-              </Link>
-              <Link href="/careers" data-testid="button-hero-careers">
-                <span
-                  className="hero-sub-item"
-                  style={{
-                    background: "transparent", color: "#ffffff", padding: "12px 28px",
-                    border: "1.5px solid rgba(255,255,255,0.45)",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.08)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.45)"; el.style.background = "transparent"; }}
-                >
-                  Explore Careers <ArrowRight size={11} />
+                  EXPLORE OUR WORK <ArrowRight size={11} />
                 </span>
               </Link>
             </div>
-          </div>
-        </div>
+          );
+        })()}
 
         {/* BOTTOM: scroll indicator */}
         <div style={{
