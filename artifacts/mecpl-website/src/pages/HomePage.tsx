@@ -137,11 +137,11 @@ export default function HomePage() {
 
           const lines = headline.querySelectorAll<HTMLElement>(".hero-line");
           lines.forEach((line, i) => {
-            const split = new SplitText(line, { type: "chars", charsClass: "hp-char" });
+            const split = new SplitText(line, { type: "words", wordsClass: "hp-word" });
             splits.push(split);
-            gsap.from(split.chars, {
-              yPercent: 115, opacity: 0, duration: 1.2, stagger: 0.025,
-              ease: "power4.out", delay: 0.15 + i * 0.2,
+            gsap.from(split.words, {
+              yPercent: 115, opacity: 0, duration: 1.0, stagger: 0.12,
+              ease: "power4.out", delay: 0.15 + i * 0.25,
             });
           });
 
@@ -261,23 +261,34 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: ScrollTrigger pin ── */
+  /* ── PROJECTS: sticky stacking + scrub clip-path reveal ── */
   useEffect(() => {
     const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
     if (panels.length < 2) return;
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        panels.forEach((panel, i) => {
-          if (i === panels.length - 1) return;
-          ScrollTrigger.create({
-            trigger: panel,
-            start: "top top",
-            end: () => `+=${panel.offsetHeight}`,
-            pin: true,
-            pinSpacing: true,
-          });
+        // First panel always visible
+        gsap.set(panels[0], { clipPath: "inset(0% 0 0 0)" });
+        // Each subsequent panel wipes in from top as it scrolls into position
+        panels.slice(1).forEach(panel => {
+          gsap.fromTo(panel,
+            { clipPath: "inset(100% 0 0 0)" },
+            {
+              clipPath: "inset(0% 0 0 0)",
+              ease: "none",
+              scrollTrigger: {
+                trigger: panel,
+                start: "top bottom",
+                end: "top top",
+                scrub: true,
+              },
+            }
+          );
         });
+      });
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        panels.forEach(p => gsap.set(p, { clipPath: "inset(0% 0 0 0)" }));
       });
     });
     return () => ctx.revert();
@@ -650,11 +661,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 4. SERVICES — Dark bg hover-card grid ══════════ */}
+      {/* ══════════ 4. SERVICES — Light bg hover-card grid ══════════ */}
       <section
         ref={servicesRef}
         data-testid="section-services"
-        style={{ background: "#111827", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "100px 0" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 0" }}
       >
         <div className="max-w-7xl mx-auto px-10">
           <div style={{ marginBottom: "56px" }}>
@@ -667,7 +678,7 @@ export default function HomePage() {
             </span>
             <h3 style={{
               fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "1.875rem", color: "#ffffff",
+              fontSize: "1.875rem", color: "#111827",
               textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
             }}>
               Our Services
@@ -675,7 +686,7 @@ export default function HomePage() {
           </div>
 
           {/* 3×2 hover-reveal card grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px", background: "rgba(255,255,255,0.07)" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px", background: "rgba(0,0,0,0.06)" }}>
             {services.map((svc, i) => (
               <div key={i} className="svc-hover-card" data-testid={`card-service-${i}`}>
                 <img src={svc.image} alt={svc.title} />
@@ -720,7 +731,7 @@ export default function HomePage() {
             <div
               key={i}
               ref={el => { panelRefs.current[i] = el; }}
-              style={{ height: "100vh", zIndex: i + 1, overflow: "hidden", position: "relative" }}
+              style={{ height: "100vh", zIndex: i + 1, overflow: "hidden", position: "sticky", top: 0 }}
             >
               <img
                 src={proj.image} alt={proj.name}

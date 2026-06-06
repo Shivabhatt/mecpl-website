@@ -308,6 +308,9 @@ html[data-theme="light"] select {
 .scroll-bounce {
   animation: scroll-bounce 2s ease-in-out infinite;
 }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-bounce { animation: none; }
+}
 
 /* ── About image grid ── */
 .about-img {
