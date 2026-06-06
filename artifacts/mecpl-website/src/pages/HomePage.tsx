@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
-import {
-  ArrowRight, Clock, Building2, HardHat,
-  Factory, Home, Layers, ClipboardList, CheckCircle, Timer, Shield,
-  Star, Users, Wrench, Quote, Award, ChevronLeft, ChevronRight,
-} from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -14,37 +10,35 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ─── DATA ──────────────────────────────────────────────────────────── */
 
-
-const stats = [
-  { value: 25,  suffix: "+",  label: "Years Legacy",         sub: "Since 1998" },
-  { value: 150, suffix: "+",  label: "Projects Handed Over", sub: "Across India" },
-  { value: 20,  suffix: "M+", label: "Sq. Ft. Executed",     sub: "Structural Work" },
-  { value: 50,  suffix: "+",  label: "Tier-1 Clients",       sub: "Trust MECPL" },
+const heroImages = [
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1920&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop",
 ];
 
 const services = [
-  { icon: Building2,   title: "Civil Construction",  desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",           image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: ClipboardList, title: "Turnkey Projects",    desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",                   image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: Factory,     title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                                  image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: Home,        title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                           image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: Layers,      title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                              image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop", path: "/services" },
-  { icon: HardHat,     title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",                        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop", path: "/services" },
+  { title: "Civil Construction",   desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",          image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop" },
+  { title: "Turnkey Projects",     desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",                    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop" },
+  { title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                                   image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1200&auto=format&fit=crop" },
+  { title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
+  { title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                               image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop" },
+  { title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",                         image: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=1200&auto=format&fit=crop" },
 ];
 
 const projects = [
-  { name: "Panchshil Highrise Towers", location: "Kharadi, Pune",       type: "Civil Structural Framework",      image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop", featured: true },
-  { name: "Trump Towers Pune",         location: "Kalyani Nagar, Pune", type: "Luxury Highrise · Civil Handover", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200&auto=format&fit=crop" },
-  { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",           image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop" },
-  { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",              image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" },
-  { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",  image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=1200&auto=format&fit=crop" },
-  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",     image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1200&auto=format&fit=crop" },
+  { name: "Panchshil Highrise Towers", location: "Kharadi, Pune",       type: "Civil Structural Framework",      image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1920&auto=format&fit=crop" },
+  { name: "Trump Towers Pune",         location: "Kalyani Nagar, Pune", type: "Luxury Highrise · Civil Handover", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1920&auto=format&fit=crop" },
+  { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",           image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop" },
+  { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",              image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" },
+  { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",  image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=1920&auto=format&fit=crop" },
+  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",     image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1920&auto=format&fit=crop" },
 ];
 
 const whyChoose = [
-  { icon: Timer,       title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule." },
-  { icon: Shield,      title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site." },
-  { icon: Star,        title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most complex projects." },
-  { icon: CheckCircle, title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management across every project phase." },
+  { stat: "95%+",       title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule." },
+  { stat: "ISO\n45001", title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site." },
+  { stat: "25+\nYrs",   title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most complex projects." },
+  { stat: "ISO\n9001",  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management across every project phase." },
 ];
 
 const testimonials = [
@@ -66,149 +60,57 @@ const clients = [
   { name: "OmniActive",        logo: "assets/clients/omniactive.webp"  },
 ];
 
-const serviceRows = [
-  {
-    word: "CONSTRUCT",
-    title: "Civil Construction",
-    desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.",
-    image: "/assets/projects/HIGH-RISE-1-scaled.jpg",
-    path: "/services",
-    imgRight: true,
-  },
-  {
-    word: "DELIVER",
-    title: "Turnkey Projects",
-    desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",
-    image: "/assets/projects/GODREJ-INFINITY.jpg",
-    path: "/services",
-    imgRight: false,
-  },
-  {
-    word: "BUILD",
-    title: "Industrial & Residential",
-    desc: "From warehouse megaplexes to ultra-high-rise residential towers — built to the tightest tolerances in the industry.",
-    image: "/assets/projects/AMTEK-AUTO-LTD.png",
-    path: "/services",
-    imgRight: true,
-  },
+/* masonry: 6 columns, 2 items each — heights crafted for stagger variety */
+const masonryCols = [
+  [
+    { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=400&auto=format&fit=crop", h: 280 },
+    { src: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=400&auto=format&fit=crop", h: 200 },
+  ],
+  [
+    { src: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=400&auto=format&fit=crop", h: 190 },
+    { src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop", h: 280 },
+  ],
+  [
+    { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop", h: 340 },
+    { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=400&auto=format&fit=crop", h: 150 },
+  ],
+  [
+    { src: "https://images.unsplash.com/photo-1564182842519-8a3b2af3e228?q=80&w=400&auto=format&fit=crop", h: 220 },
+    { src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=400&auto=format&fit=crop", h: 265 },
+  ],
+  [
+    { src: "https://images.unsplash.com/photo-1481253127861-534498168948?q=80&w=400&auto=format&fit=crop", h: 305 },
+    { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop", h: 175 },
+  ],
+  [
+    { src: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=400&auto=format&fit=crop", h: 210 },
+    { src: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=400&auto=format&fit=crop", h: 275 },
+  ],
 ];
-
-const tickerItems = [
-  "ISO 9001:2015 Certified", "ISO 14001:2015 Environmental Integrity", "ISO 45001:2018 Occupational Safety",
-  "CRISIL SME 1 Rating", "25+ Years of Structural Excellence", "150+ Landmark Projects", "MECPL — Building India's Future",
-];
-
-const bentoClients = [
-  { name: "TRUMP TOWERS",  col: 2, bg: "#111827",              text: "#ffffff",  height: 176 },
-  { name: "VTP REALTY",    col: 1, bg: "rgba(196,30,58,0.05)", text: "#C41E3A",  border: "rgba(196,30,58,0.2)", height: 176 },
-  { name: "PANCHSHIL",     col: 1, bg: "#f0f0f0",              text: "#111827",  height: 176 },
-  { name: "GODREJ PROPS",  col: 1, bg: "#ffffff",              text: "#111827",  border: "rgba(0,0,0,0.10)", height: 144 },
-  { name: "KALPATARU",     col: 1, bg: "#C41E3A",              text: "#ffffff",  height: 144 },
-  { name: "K RAHEJA",      col: 2, bg: "#1e293b",              text: "#ffffff",  height: 144 },
-  { name: "MALPANI",       col: 2, bg: "#f5f5f5",              text: "#111827",  height: 120 },
-  { name: "GERA DEVS",     col: 2, bg: "#ffffff",              text: "#111827",  border: "rgba(0,0,0,0.10)", height: 120 },
-];
-
-/* ─── GSAP horizontalLoop helper (official GreenSock utility) ──────── */
-function horizontalLoop(
-  items: HTMLElement[],
-  config: {
-    repeat?: number;
-    speed?: number;
-    paused?: boolean;
-    paddingRight?: number;
-    snap?: number | false;
-  } = {}
-): gsap.core.Timeline {
-  const tl = gsap.timeline({
-    repeat: config.repeat ?? -1,
-    paused: !!config.paused,
-    defaults: { ease: "none" },
-    onReverseComplete() { tl.totalTime(tl.rawTime() + tl.duration() * 100); },
-  });
-  const length           = items.length;
-  const startX           = items[0].offsetLeft;
-  const times: number[]  = [];
-  const widths: number[] = [];
-  const xPercents: number[] = [];
-  const pixelsPerSecond  = (config.speed ?? 1) * 100;
-  const snap = config.snap === false
-    ? (v: number) => v
-    : gsap.utils.snap(config.snap ?? 1);
-
-  gsap.set(items, {
-    xPercent: (i: number, el: Element) => {
-      const w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string);
-      xPercents[i] = snap(
-        parseFloat(gsap.getProperty(el, "x", "px") as string) / w * 100 +
-        parseFloat(gsap.getProperty(el, "xPercent") as string)
-      );
-      return xPercents[i];
-    },
-  });
-  gsap.set(items, { x: 0 });
-
-  const totalWidth =
-    items[length - 1].offsetLeft +
-    (xPercents[length - 1] / 100) * widths[length - 1] -
-    startX +
-    items[length - 1].offsetWidth *
-      parseFloat(gsap.getProperty(items[length - 1], "scaleX") as string) +
-    (config.paddingRight ?? 0);
-
-  for (let i = 0; i < length; i++) {
-    const item            = items[i];
-    const curX            = (xPercents[i] / 100) * widths[i];
-    const distanceToStart = item.offsetLeft + curX - startX;
-    const distanceToLoop  = distanceToStart +
-      widths[i] * parseFloat(gsap.getProperty(item, "scaleX") as string);
-    tl.to(item, {
-      xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
-      duration: distanceToLoop / pixelsPerSecond,
-    }, 0)
-      .fromTo(
-        item,
-        { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) },
-        {
-          xPercent: xPercents[i],
-          duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
-          immediateRender: false,
-        },
-        distanceToLoop / pixelsPerSecond
-      );
-    times[i] = distanceToStart / pixelsPerSecond;
-  }
-
-  return tl;
-}
 
 /* ─── HOME PAGE ──────────────────────────────────────────────────────── */
 export default function HomePage() {
-  const [activeTesti, setActiveTesti] = useState(0);
+  const [videoIdx, setVideoIdx]     = useState(0);
+  const [activeSvc, setActiveSvc]   = useState(0);
+  const [svcKey, setSvcKey]         = useState(0);
+
   const assetBase = import.meta.env.BASE_URL;
 
-  const heroSectionRef   = useRef<HTMLElement>(null);
-  const heroBgRef        = useRef<HTMLDivElement>(null);
-  const heroHeadlineRef  = useRef<HTMLDivElement>(null);
-  const heroTagRef       = useRef<HTMLSpanElement>(null);
-  const heroSubRef       = useRef<HTMLParagraphElement>(null);
-  const heroCTARef       = useRef<HTMLDivElement>(null);
-  const servicesRef      = useRef<HTMLElement>(null);
-  const projectsRef      = useRef<HTMLElement>(null);
-  const projectsTrackRef = useRef<HTMLDivElement>(null);
-  const whyRef           = useRef<HTMLElement>(null);
-  const testimonialsRef  = useRef<HTMLElement>(null);
-  const clientsRef       = useRef<HTMLElement>(null);
-  const stackedRef       = useRef<HTMLElement>(null);
+  /* refs */
+  const heroSectionRef  = useRef<HTMLElement>(null);
+  const heroBgRef       = useRef<HTMLDivElement>(null);
+  const heroHeadlineRef = useRef<HTMLDivElement>(null);
+  const heroTagRef      = useRef<HTMLSpanElement>(null);
+  const heroSubRef      = useRef<HTMLParagraphElement>(null);
+  const heroCTARef      = useRef<HTMLDivElement>(null);
+  const whyRef          = useRef<HTMLElement>(null);
+  const clientsRef      = useRef<HTMLElement>(null);
 
-
-
-  /* ── HERO: SplitText chars + parallax bg — waits for preloader-exit ── */
+  /* ── HERO: initial entrance anim (SplitText chars) ── */
   useEffect(() => {
     const headline = heroHeadlineRef.current;
-    const heroBg   = heroBgRef.current;
     const section  = heroSectionRef.current;
-    if (!headline || !heroBg || !section) return;
+    if (!headline || !section) return;
 
     gsap.set(section, { y: "100vh", scale: 0.98 });
 
@@ -242,7 +144,6 @@ export default function HomePage() {
               opacity: 0, y: 20, duration: 0.8, stagger: 0.12, delay: 1.0, ease: "power3.out",
             });
           }
-
         };
 
         if ((window as any)._preloaderDone) {
@@ -264,217 +165,67 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── SERVICES: VwbywPd stacking cards (sticky + scale-down) ── */
+  /* ── HERO: video/image cycling ── */
   useEffect(() => {
-    const sec = servicesRef.current;
-    if (!sec) return;
-
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".svc-stack-card", sec);
-      cards.forEach((card, i) => {
-        if (i < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.88,
-            transformOrigin: "center top",
-            ease: "none",
-            scrollTrigger: {
-              trigger: cards[i + 1] as Element,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
-        }
-      });
-    }, sec);
-
-    return () => ctx.revert();
+    const total = 1 + heroImages.length; /* 1 video + 3 images = 4 */
+    const id = setInterval(() => setVideoIdx(v => (v + 1) % total), 8000);
+    return () => clearInterval(id);
   }, []);
 
-  /* ── PROJECTS: pinned scroll-driven strip (right-to-left) ── */
+  /* ── SERVICES: auto-advance active tab every 5s ── */
   useEffect(() => {
-    const sec   = projectsRef.current;
-    const strip = projectsTrackRef.current;
-    if (!sec || !strip) return;
-
-    const ctx = gsap.context(() => {
-      gsap.delayedCall(0.05, () => {
-        const totalW = strip.scrollWidth / 2; /* 2× cards → half = one full set */
-        if (!totalW) return;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sec,
-            start: "top top",
-            end: () => `+=${totalW}`,   /* scroll distance = strip width */
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-          },
-        });
-
-        tl.fromTo(strip, { x: 0 }, { x: -totalW, ease: "none" });
+    const id = setInterval(() => {
+      setActiveSvc(v => {
+        const next = (v + 1) % services.length;
+        setSvcKey(k => k + 1);
+        return next;
       });
-    }, sec);
-
-    return () => ctx.revert();
+    }, 5000);
+    return () => clearInterval(id);
   }, []);
 
-  /* ── WHY CHOOSE: stacked rows slide-in ── */
+  /* ── WHY CHOOSE: scroll reveal ── */
   useEffect(() => {
     const sec = whyRef.current;
     if (!sec) return;
-
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.utils.toArray<HTMLElement>(".why-card", sec).forEach((card, i) => {
           gsap.from(card, {
-            y: 36, opacity: 0, duration: 0.75, ease: "power3.out",
-            delay: i * 0.08,
+            y: 36, opacity: 0, duration: 0.75, ease: "power3.out", delay: i * 0.08,
             scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
           });
         });
       });
     }, sec);
-
     return () => ctx.revert();
   }, []);
 
-  /* ── TESTIMONIALS: coverflow carousel + GggpRoB SplitText reveal ── */
-  useEffect(() => {
-    const sec = testimonialsRef.current;
-    if (!sec) return;
-
-    const n = testimonials.length;
-    const cards  = Array.from(sec.querySelectorAll<HTMLElement>(".testi-cover-card"));
-    const quotes = Array.from(sec.querySelectorAll<HTMLElement>(".testi-quote-block"));
-
-    /* Coverflow card positions */
-    cards.forEach((card, i) => {
-      let dist = i - activeTesti;
-      if (dist >  Math.floor(n / 2)) dist -= n;
-      if (dist < -Math.floor(n / 2)) dist += n;
-      const absD = Math.abs(dist);
-      gsap.to(card, {
-        x: dist * 420,
-        scale: absD === 0 ? 1 : 0.72,
-        opacity: absD === 0 ? 1 : 0.55,
-        zIndex: absD === 0 ? 10 : 1,
-        duration: 0.65,
-        ease: "power3.inOut",
-      });
-    });
-
-    /* Hide all non-active quote blocks instantly */
-    quotes.forEach((q, i) => {
-      if (i !== activeTesti) gsap.set(q, { autoAlpha: 0 });
-    });
-
-    /* GggpRoB SplitText line-mask reveal on active quote */
-    const activeQuote = quotes[activeTesti];
-    if (!activeQuote) return;
-
-    let cancelled = false;
-    let split: any = null;
-    const quoteP = activeQuote.querySelector<HTMLElement>("p");
-    const attr   = activeQuote.querySelector<HTMLElement>(".testi-attribution");
-
-    gsap.set(activeQuote, { autoAlpha: 1 });
-    if (attr) gsap.set(attr, { autoAlpha: 0, y: 8 });
-
-    document.fonts.ready.then(() => {
-      if (cancelled || !quoteP) return;
-
-      split = (SplitText as any).create(quoteP, {
-        type: "words",
-        autoSplit: true,
-        onSplit(self: any) {
-          if (attr) {
-            gsap.to(attr, {
-              autoAlpha: 1,
-              y: 0,
-              delay: self.words.length * 0.04 + 0.05,
-              duration: 0.4,
-              ease: "power2.out",
-            });
-          }
-          return gsap.from(self.words, {
-            opacity: 0.08,
-            stagger: 0.04,
-            duration: 0.55,
-            ease: "power1.inOut",
-          });
-        },
-      });
-    });
-
-    return () => {
-      cancelled = true;
-      split?.revert();
-      cards.forEach(c  => gsap.killTweensOf(c));
-      quotes.forEach(q => gsap.killTweensOf(q));
-      if (attr) gsap.killTweensOf(attr);
-    };
-  }, [activeTesti]);
-
-  /* ── CLIENTS: infinite horizontal logo ticker ── */
+  /* ── CLIENTS: infinite logo ticker (row 1) ── */
   useEffect(() => {
     const sec = clientsRef.current;
     if (!sec) return;
-
     const track = sec.querySelector<HTMLElement>(".clients-track");
     if (!track) return;
-
     const mm = gsap.matchMedia();
-    let tween: gsap.core.Tween | null = null;
-
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      tween = gsap.to(track, {
+      const tween = gsap.to(track, {
         x: () => -(track.scrollWidth / 2),
-        duration: 22,
-        ease: "none",
-        repeat: -1,
+        duration: 22, ease: "none", repeat: -1,
         onRepeat: () => gsap.set(track, { x: 0 }),
       });
-
-      const pause = () => tween?.pause();
-      const play  = () => tween?.play();
+      const pause = () => tween.pause();
+      const play  = () => tween.play();
       sec.addEventListener("mouseenter", pause);
       sec.addEventListener("mouseleave", play);
-
       return () => {
         sec.removeEventListener("mouseenter", pause);
         sec.removeEventListener("mouseleave", play);
-        tween?.kill();
+        tween.kill();
       };
     });
-
     return () => mm.revert();
-  }, []);
-
-
-
-  /* ── STACKED INTRO: CSS sticky stack — Recognition (z1) + About Us (z2) ── */
-  useEffect(() => {
-    const sec = stackedRef.current;
-    if (!sec) return;
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(".stack-intro-card", sec);
-        /* Set stacking order so About Us slides on top of Recognition */
-        cards.forEach((card, i) => gsap.set(card, { zIndex: i + 1 }));
-        /* Card 2 fades + lifts as it enters from below */
-        if (cards[1]) {
-          gsap.from(cards[1], {
-            opacity: 0, y: 32, ease: "none",
-            scrollTrigger: { trigger: cards[1], start: "top 95%", end: "top top", scrub: 1 },
-          });
-        }
-      });
-    }, sec);
-    return () => ctx.revert();
   }, []);
 
   /* ─── JSX ─────────────────────────────────────────────────────────── */
@@ -484,520 +235,756 @@ export default function HomePage() {
       {/* ══════════ HERO ══════════ */}
       <section
         ref={heroSectionRef}
-        className="relative h-screen flex items-center justify-center overflow-hidden"
+        className="relative h-screen overflow-hidden"
         data-testid="section-hero"
       >
-        <div ref={heroBgRef} className="absolute inset-0 z-0 scale-110 will-change-transform">
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+        {/* Background: cycling video + images */}
+        <div ref={heroBgRef} className="absolute inset-0 z-0">
+          {/* Slide 0 — video */}
+          <video
+            autoPlay muted loop playsInline
+            style={{
+              position: "absolute", inset: 0, width: "100%", height: "100%",
+              objectFit: "cover",
+              opacity: videoIdx === 0 ? 1 : 0,
+              transition: "opacity 1.2s ease",
+            }}
+          >
             <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/35 pointer-events-none" />
+          {/* Slides 1–3 — images */}
+          {heroImages.map((src, i) => (
+            <div key={i} style={{
+              position: "absolute", inset: 0,
+              backgroundImage: `url(${src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: videoIdx === i + 1 ? 1 : 0,
+              transition: "opacity 1.2s ease",
+            }} />
+          ))}
+          {/* Gradient overlay */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.28) 100%)",
+          }} />
         </div>
 
-        {/* invisible anchor so heroHeadlineRef stays non-null for GSAP */}
-        <div ref={heroHeadlineRef} className="sr-only" />
+        {/* Counter + progress — top right */}
+        <div style={{
+          position: "absolute", top: "96px", right: "40px",
+          zIndex: 20, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "10px",
+        }}>
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+            fontWeight: 300, color: "rgba(255,255,255,0.65)", letterSpacing: "0.22em",
+          }}>
+            {String(videoIdx + 1).padStart(2, "0")} / 04
+          </div>
+          <div style={{ width: "72px", height: "1px", background: "rgba(255,255,255,0.18)", position: "relative", overflow: "hidden" }}>
+            <div key={videoIdx} className="hero-progress-bar" style={{
+              position: "absolute", left: 0, top: 0, height: "100%", background: "#ffffff",
+            }} />
+          </div>
+        </div>
 
-        <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 hidden md:flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-6">
-          <div className="inline-flex items-center gap-4">
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span
-                className="inline-flex items-center cursor-pointer"
-                style={{ background: "#C41E3A", color: "#ffffff", padding: "12px 28px", fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700, transition: "background 0.2s" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
-              >
-                View Projects
+        {/* Editorial text — bottom left */}
+        <div style={{
+          position: "absolute", bottom: "128px", left: "40px", right: "200px", zIndex: 20,
+        }}>
+          <span ref={heroTagRef} style={{
+            display: "block",
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "9px", fontWeight: 300, letterSpacing: "0.32em",
+            color: "rgba(255,255,255,0.55)", textTransform: "uppercase", marginBottom: "22px",
+          }}>
+            EST. 1998 · PUNE, INDIA
+          </span>
+
+          <div ref={heroHeadlineRef} style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+            fontSize: "clamp(2.8rem,6.5vw,5.5rem)",
+            color: "#ffffff", lineHeight: 0.98,
+            textTransform: "uppercase", letterSpacing: "-0.02em",
+            marginBottom: "24px",
+          }}>
+            <div className="hero-line" style={{ overflow: "hidden" }}>BUILDING</div>
+            <div className="hero-line" style={{ overflow: "hidden", color: "#C41E3A" }}>INDIA'S SKYLINE</div>
+          </div>
+
+          <p ref={heroSubRef} style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 400,
+            color: "rgba(255,255,255,0.65)", letterSpacing: "0.04em", margin: 0,
+          }}>
+            Structural engineering for landmark projects
+          </p>
+        </div>
+
+        {/* CTA buttons — bottom center */}
+        <div ref={heroCTARef} className="absolute bottom-10 left-0 right-0 z-20 hidden md:flex items-center justify-center gap-4 px-6">
+          <Link href="/completed-projects" data-testid="button-hero-projects">
+            <span
+              className="inline-flex items-center cursor-pointer"
+              style={{ background: "#C41E3A", color: "#ffffff", padding: "12px 28px", fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700, transition: "background 0.2s" }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+            >
+              View Projects
+            </span>
+          </Link>
+          <Link href="/careers" data-testid="button-hero-careers">
+            <span
+              className="inline-flex items-center cursor-pointer"
+              style={{ background: "transparent", color: "#ffffff", padding: "12px 28px", fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700, border: "1.5px solid rgba(255,255,255,0.55)", transition: "border-color 0.2s" }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = "#ffffff")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)")}
+            >
+              Explore Careers
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      {/* ══════════ ABOUT US ══════════ */}
+      <section
+        data-testid="section-about"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px" }}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: editorial heading */}
+            <div>
+              <span style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 700,
+                letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase",
+                display: "block", marginBottom: "20px",
+              }}>
+                EST. 1998
               </span>
-            </Link>
-            <Link href="/careers" data-testid="button-hero-careers">
-              <span
-                className="inline-flex items-center cursor-pointer"
-                style={{ background: "transparent", color: "#ffffff", padding: "12px 28px", fontFamily: "'Montserrat',sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700, border: "1.5px solid rgba(255,255,255,0.6)", transition: "border-color 0.2s, color 0.2s" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#ffffff"; (e.currentTarget as HTMLElement).style.color = "#ffffff"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)"; }}
-              >
-                Explore Careers
-              </span>
-            </Link>
+              <h2 style={{
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "clamp(3rem,7vw,6rem)",
+                fontWeight: 200, color: "#111827",
+                lineHeight: 0.95, letterSpacing: "-0.03em",
+                textTransform: "uppercase", margin: "0 0 32px",
+              }}>
+                About
+              </h2>
+              <div style={{ width: "48px", height: "2px", background: "#C41E3A" }} />
+            </div>
+
+            {/* Right: content */}
+            <div className="space-y-8">
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.85, color: "#4b5563" }}>
+                Since 1998, MECPL has been the structural partner of choice for India's leading developers — from Trump Towers to Panchshil's skyline-defining highrises. We combine ISO-certified processes with 25 years of on-site wisdom to deliver structures that stand for generations.
+              </p>
+
+              {/* ISO cert pills */}
+              <div className="flex flex-wrap gap-2">
+                {["ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "CRISIL SME 1"].map(cert => (
+                  <span key={cert} style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
+                    letterSpacing: "0.14em", textTransform: "uppercase",
+                    color: "#111827", border: "1px solid rgba(17,24,39,0.18)",
+                    padding: "5px 12px", borderRadius: "2px",
+                  }}>
+                    {cert}
+                  </span>
+                ))}
+              </div>
+
+              <Link href="/about" data-testid="button-about-more">
+                <span className="inline-flex items-center gap-2 cursor-pointer hover:gap-4 transition-all" style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em",
+                  color: "#C41E3A", textTransform: "uppercase", fontWeight: 600,
+                }}>
+                  Our Full Story <ArrowRight size={12} />
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════ STACKED: RECOGNITION + ABOUT US (VwbywPd) ══════════ */}
-      <section ref={stackedRef} data-testid="section-stacked-intro">
+      {/* ══════════ SERVICES — Hometi tab layout ══════════ */}
+      <section
+        data-testid="section-services"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 0" }}
+      >
+        <div className="max-w-7xl mx-auto px-10">
+          {/* Header */}
+          <div style={{ marginBottom: "56px" }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 700,
+              letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase",
+              display: "block", marginBottom: "12px",
+            }}>
+              WHAT WE BUILD
+            </span>
+            <h2 style={{
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
+              fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#111827",
+              textTransform: "uppercase", letterSpacing: "0.04em", margin: 0,
+            }}>
+              Our Services
+            </h2>
+          </div>
 
-        {/* Card 1 — Recognition */}
-        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", position: "sticky", top: 0, padding: "80px 24px" }}>
-          <div className="max-w-7xl mx-auto w-full">
-            <div className="text-center mb-16">
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
-                Recognition
-              </span>
-              <h2 className="uppercase text-3xl" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-                Award-Winning Excellence
-              </h2>
-            </div>
-            <div className="flex items-start justify-center gap-8 flex-wrap md:flex-nowrap">
-              {[
-                { year: "2023", award: "BAI Special\nJury Award",   org: "Builders Assoc. of India",  img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop" },
-                { year: "2022", award: "Constro\nSilver Trophy",    org: "Constro Awards",             img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop" },
-                { year: "2021", award: "Constro\nGold Trophy",      org: "Constro Awards",             img: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=400&auto=format&fit=crop" },
-                { year: "2018", award: "Industry\nExcellence Gold", org: "National Construction",      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=400&auto=format&fit=crop" },
-                { year: "2017", award: "India's\nSmall Giants",     org: "Forbes India",               img: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=400&auto=format&fit=crop" },
-              ].map((a, i) => (
-                <div key={a.year} className="group flex flex-col items-center gap-3" style={{ flexShrink: 0, width: "140px" }}>
-                  <div style={{ padding: "3px", borderRadius: "50%", background: i === 0 ? "linear-gradient(135deg, #C41E3A 0%, #ff6b35 100%)" : "linear-gradient(135deg, #C41E3A 0%, #8b0000 100%)", boxShadow: "0 4px 20px rgba(196,30,58,0.25)" }}>
-                    <div style={{ padding: "3px", borderRadius: "50%", background: "#ffffff" }}>
-                      <div style={{ width: "110px", height: "110px", borderRadius: "50%", overflow: "hidden" }}>
-                        <img src={a.img} alt={a.award} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} className="group-hover:scale-110" />
+          {/* Two-column: left tabs | right image */}
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 3fr", minHeight: "520px" }}>
+            {/* Left: tab rows */}
+            <div style={{ borderRight: "1px solid rgba(0,0,0,0.07)" }}>
+              {services.map((svc, i) => {
+                const isActive = activeSvc === i;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => { setActiveSvc(i); setSvcKey(k => k + 1); }}
+                    style={{
+                      padding: "22px 28px",
+                      borderBottom: "1px solid rgba(0,0,0,0.06)",
+                      borderLeft: isActive ? "3px solid #C41E3A" : "3px solid transparent",
+                      background: isActive ? "rgba(196,30,58,0.02)" : "transparent",
+                      cursor: "pointer",
+                      transition: "border-color 0.25s, background 0.25s",
+                      position: "relative",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: "18px" }}>
+                      <span style={{
+                        fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                        fontWeight: 300, letterSpacing: "0.1em", lineHeight: 1.9,
+                        color: isActive ? "#C41E3A" : "rgba(17,24,39,0.28)",
+                        transition: "color 0.25s", flexShrink: 0, minWidth: "24px",
+                      }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <div style={{
+                          fontFamily: "'Montserrat',sans-serif",
+                          fontSize: "12px",
+                          fontWeight: isActive ? 700 : 500,
+                          color: isActive ? "#111827" : "rgba(17,24,39,0.55)",
+                          letterSpacing: "0.14em", textTransform: "uppercase",
+                          marginBottom: "5px", transition: "color 0.25s",
+                        }}>
+                          {svc.title}
+                        </div>
+                        <div style={{
+                          fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
+                          color: "rgba(17,24,39,0.4)", lineHeight: 1.6,
+                        }}>
+                          {svc.desc.split(".")[0]}.
+                        </div>
                       </div>
                     </div>
+
+                    {/* Progress line at bottom of active row */}
+                    {isActive && (
+                      <div style={{
+                        position: "absolute", bottom: 0, left: 0, right: 0,
+                        height: "2px", background: "rgba(196,30,58,0.10)", overflow: "hidden",
+                      }}>
+                        <div
+                          key={svcKey}
+                          className="svc-tab-progress"
+                          style={{ height: "100%", background: "#C41E3A" }}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600, letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", background: "rgba(196,30,58,0.07)", padding: "3px 10px", borderRadius: "20px" }}>
-                    {a.year}
-                  </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 500, color: "#111827", letterSpacing: "0.05em", textAlign: "center", lineHeight: 1.4, whiteSpace: "pre-line" }}>
-                    {a.award}
-                  </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", textAlign: "center", lineHeight: 1.4 }}>
-                    {a.org}
-                  </div>
-                </div>
+                );
+              })}
+            </div>
+
+            {/* Right: image panel */}
+            <div style={{ position: "relative", overflow: "hidden", background: "#f0f0f0" }}>
+              {services.map((svc, i) => (
+                <img
+                  key={i}
+                  src={svc.image}
+                  alt={svc.title}
+                  style={{
+                    position: "absolute", inset: 0,
+                    width: "100%", height: "100%", objectFit: "cover",
+                    opacity: activeSvc === i ? 1 : 0,
+                    transition: "opacity 0.4s ease",
+                  }}
+                />
               ))}
+              {/* Service name overlay bottom */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0,
+                background: "linear-gradient(transparent, rgba(0,0,0,0.55))",
+                padding: "48px 32px 28px",
+              }}>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                  letterSpacing: "0.22em", color: "rgba(255,255,255,0.6)",
+                  textTransform: "uppercase", marginBottom: "6px",
+                }}>
+                  {String(activeSvc + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "18px",
+                  fontWeight: 700, color: "#ffffff", letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                }}>
+                  {services[activeSvc].title}
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Card 2 — About Us */}
-        <div className="stack-intro-card" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#f9f9f9", borderTop: "1px solid rgba(0,0,0,0.07)", position: "sticky", top: 0, padding: "80px 24px" }}>
-          <div className="max-w-7xl mx-auto w-full">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
+      {/* ══════════ PROJECTS — full-bleed sticky panels ══════════ */}
+      <section data-testid="section-projects" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <div style={{ position: "relative" }}>
+          {projects.map((proj, i) => (
+            <div
+              key={i}
+              style={{
+                position: "sticky", top: 0,
+                height: "100vh", zIndex: i + 1,
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={proj.image}
+                alt={proj.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+              {/* Bottom gradient */}
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 55%)",
+              }} />
+              {/* Text — bottom */}
+              <div style={{
+                position: "absolute", bottom: "48px", left: "48px", right: "48px",
+                display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+              }}>
                 <div>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-                    About Us
-                  </span>
-                  <h2 className="uppercase leading-tight text-3xl"
-                    style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-                    Structural Precision.<br />
-                    <span style={{ color: "#C41E3A" }}>Timeless Legacy.</span>
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+                    letterSpacing: "0.26em", color: "rgba(255,255,255,0.45)",
+                    textTransform: "uppercase", marginBottom: "12px",
+                  }}>
+                    {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  </div>
+                  <h2 style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "clamp(2rem,4.5vw,4rem)",
+                    fontWeight: 800, color: "#ffffff",
+                    lineHeight: 0.96, margin: 0,
+                    textTransform: "uppercase", letterSpacing: "-0.01em",
+                  }}>
+                    {proj.name}
                   </h2>
                 </div>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "14px", lineHeight: 1.8, color: "#4b5563" }}>
-                  Since 1998, MECPL has been the structural partner of choice for India's leading developers — from Trump Towers to Panchshil's skyline-defining highrises. We combine ISO-certified processes with 25 years of on-site wisdom to deliver structures that stand for generations.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { label: "ISO 9001:2015", sub: "Quality" },
-                    { label: "ISO 45001:2018", sub: "Safety" },
-                    { label: "CRISIL SME 1", sub: "Rating" },
-                    { label: "ISO 14001:2015", sub: "Environment" },
-                  ].map(cert => (
-                    <div key={cert.label} className="p-4 border"
-                      style={{ borderColor: "rgba(196,30,58,0.2)", background: "rgba(196,30,58,0.03)" }}>
-                      <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "11px", fontWeight: 500, color: "#111827", letterSpacing: "0.1em" }}>{cert.label}</div>
-                      <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "3px" }}>{cert.sub}</div>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/about" data-testid="button-about-more">
-                  <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-                    style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600 }}>
-                    Our Full Story <ArrowRight size={12} />
-                  </span>
-                </Link>
-              </div>
-              <div className="relative h-[480px] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop" alt="MECPL construction site" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)" }} />
-                <div className="absolute bottom-6 left-6">
-                  <div className="inline-block px-4 py-2" style={{ background: "#C41E3A" }}>
-                    <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", color: "#fff", textTransform: "uppercase" }}>
-                      Pune HQ · Balewadi
-                    </span>
+                <div style={{ textAlign: "right", flexShrink: 0, paddingLeft: "24px" }}>
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    fontWeight: 500, color: "rgba(255,255,255,0.65)",
+                    letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "5px",
+                  }}>
+                    {proj.location}
+                  </div>
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+                    color: "rgba(255,255,255,0.38)", letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                  }}>
+                    {proj.type}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
 
-      </section>
-
-      {/* ══════════ SERVICES — VwbywPd stacking cards ══════════ */}
-      <section ref={servicesRef} data-testid="section-services" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-
-        {/* Section header */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-20 pb-12">
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
-            What We Build
-          </span>
-          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.5rem,3vw,2.2rem)", margin: 0 }}>
-            Our Services
-          </h2>
-        </div>
-
-        {/* Stacking cards — each sticky at top:0, previous scales down as next arrives */}
-        <div style={{ position: "relative" }}>
-          {services.map((svc, i) => {
-            const Icon = svc.icon;
-            return (
-              <div
-                key={i}
-                className="svc-stack-card"
-                style={{
-                  position: "sticky",
-                  top: 0,
-                  zIndex: i + 1,
-                  display: "flex",
-                  overflow: "hidden",
-                  willChange: "transform",
-                }}
-              >
-                {/* Left: light info panel — exactly 50% */}
-                <div style={{
-                  width: "50%",
-                  flexShrink: 0,
-                  background: i % 2 === 0 ? "#ffffff" : "#f8fafc",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  padding: "clamp(28px, 5vw, 72px)",
-                  borderRight: "1px solid rgba(0,0,0,0.06)",
-                }}>
-                  <Icon size={20} color="#C41E3A" strokeWidth={1.5} />
-
-                  <h3 className="uppercase" style={{
-                    fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(1rem, 1.8vw, 1.5rem)",
-                    fontWeight: 400,
-                    color: "#111827",
-                    letterSpacing: "0.06em",
-                    margin: "18px 0 16px",
-                    lineHeight: 1.2,
-                  }}>
-                    {svc.title}
-                  </h3>
-
-                  <p style={{
-                    fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "13px",
-                    lineHeight: 1.85,
-                    color: "#6b7280",
-                    margin: 0,
-                  }}>
-                    {svc.desc}
-                  </p>
-                </div>
-
-                {/* Right: full image — exactly 50% */}
-                <div style={{ width: "50%", position: "relative", overflow: "hidden" }}>
-                  <img
-                    src={svc.image}
-                    alt={svc.title}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
-      </section>
-
-      {/* ══════════ PROJECTS — HORIZONTAL LOOP ══════════ */}
-      <section
-        ref={projectsRef}
-        data-testid="section-projects"
-        style={{ background: "#fafafa", padding: "80px 0 70px", borderTop: "1px solid rgba(0,0,0,0.06)" }}
-      >
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "52px" }}>
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "10px" }}>
-            Showcase
-          </span>
-          <h2 className="uppercase" style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)", lineHeight: 1.2 }}>
-            Engineering<br /><span style={{ color: "#C41E3A" }}>Landmarks</span>
-          </h2>
-        </div>
-
-        {/* Overflow-hidden wrapper — clips the looping strip */}
-        <div style={{ overflow: "hidden" }}>
-          <div ref={projectsTrackRef} className="proj-loop-strip">
-            {[...projects, ...projects].map((proj, i) => (
-              <div key={i} className="proj-loop-card">
-                <img
-                  src={proj.image}
-                  alt={proj.name}
-                  style={{ width: "100%", height: "65%", objectFit: "cover", display: "block" }}
-                />
-                <div style={{ padding: "12px 16px", background: "#ffffff", height: "35%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "7px", letterSpacing: "0.18em", color: "#C41E3A", textTransform: "uppercase", marginBottom: "5px" }}>
-                    {proj.type}
-                  </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "12px", fontWeight: 700, color: "#111827", lineHeight: 1.25, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {proj.name}
-                  </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "#9ca3af", marginTop: "3px", letterSpacing: "0.05em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {proj.location}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div style={{ textAlign: "center", marginTop: "52px" }}>
-          <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.3)", letterSpacing: "0.12em", marginBottom: "16px" }}>
+        {/* After panels CTA */}
+        <div style={{
+          background: "#ffffff", padding: "80px 48px",
+          borderTop: "1px solid rgba(0,0,0,0.07)", textAlign: "center",
+        }}>
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+            color: "rgba(17,24,39,0.3)", letterSpacing: "0.14em",
+            textTransform: "uppercase", marginBottom: "20px",
+          }}>
             150+ landmark projects across India
           </div>
           <Link href="/completed-projects" data-testid="button-all-projects">
-            <span className="inline-flex items-center gap-2 cursor-pointer transition-all hover:gap-4"
-              style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", fontWeight: 600, borderBottom: "1px solid rgba(196,30,58,0.32)", paddingBottom: "5px" }}>
+            <span className="inline-flex items-center gap-2 cursor-pointer hover:gap-4 transition-all" style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+              letterSpacing: "0.2em", color: "#C41E3A",
+              textTransform: "uppercase", fontWeight: 600,
+              borderBottom: "1px solid rgba(196,30,58,0.32)", paddingBottom: "5px",
+            }}>
               View All Projects <ArrowRight size={12} />
             </span>
           </Link>
         </div>
       </section>
 
-      {/* ══════════ WHY CHOOSE ══════════ */}
-      <section ref={whyRef}
-        className="py-24 px-6"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
-        data-testid="section-why-mecpl">
-        <div className="max-w-6xl mx-auto">
-
-          {/* ── Centered header ── */}
-          <div className="text-center mb-16">
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-              Our Advantage
+      {/* ══════════ WHY CHOOSE — 2×2 grid ══════════ */}
+      <section
+        ref={whyRef}
+        data-testid="section-why-mecpl"
+        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px" }}
+      >
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div style={{ marginBottom: "64px" }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 700,
+              letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase",
+              display: "block", marginBottom: "12px",
+            }}>
+              OUR ADVANTAGE
             </span>
-            <h2 className="uppercase text-3xl"
-              style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400, marginBottom: "18px" }}>
+            <h2 style={{
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
+              fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#111827",
+              textTransform: "uppercase", letterSpacing: "0.04em", margin: 0,
+            }}>
               Why Choose MECPL
             </h2>
-            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", lineHeight: 1.85, color: "#6b7280", maxWidth: "500px", margin: "0 auto" }}>
-              India's most trusted construction partner — built on precision, safety, and 25 years of structural performance.
-            </p>
           </div>
 
-          {/* ── Cards grid — responsive, single col mobile → 3 col desktop ── */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
-            {whyChoose.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={i}
-                  className="why-card"
-                  data-testid={`card-why-${i}`}
-                  style={{
-                    background: "#ffffff",
-                    border: "1px solid rgba(0,0,0,0.07)",
-                    borderRadius: "20px",
-                    padding: "48px 28px 44px",
-                    boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                    transition: "box-shadow 0.25s, transform 0.25s",
-                  }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 12px 40px rgba(196,30,58,0.10)"; el.style.transform = "translateY(-4px)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)"; el.style.transform = "translateY(0)"; }}
-                >
-                  {/* Icon circle */}
-                  <div style={{
-                    width: "80px", height: "80px", borderRadius: "50%",
-                    background: "rgba(196,30,58,0.08)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "28px", marginLeft: "auto", marginRight: "auto",
-                  }}>
-                    <Icon size={30} color="#C41E3A" strokeWidth={1.5} />
-                  </div>
-
-                  {/* Title */}
-                  <h3 style={{
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "15px",
-                    fontWeight: 500, color: "#111827",
-                    marginBottom: "14px", textAlign: "center", lineHeight: 1.3,
-                  }}>
-                    {item.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p style={{
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-                    lineHeight: 1.85, color: "#6b7280", textAlign: "center",
-                    margin: 0,
-                  }}>
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ══════════ TESTIMONIALS ══════════ */}
-      {/* Coverflow carousel — 3 cards, center large, sides scaled/faded, GSAP x */}
-      <section ref={testimonialsRef}
-        className="py-24"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", borderBottom: "1px solid rgba(0,0,0,0.07)", overflow: "hidden" }}
-        data-testid="section-testimonials">
-
-        {/* ── Header ── */}
-        <div className="text-center mb-14 px-6">
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", letterSpacing: "0.22em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: "16px" }}>
-            Client Voices
-          </span>
-          <h2 className="uppercase text-3xl"
-            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-            What Our Clients Say
-          </h2>
-        </div>
-
-        {/* ── Coverflow ── */}
-        <div style={{ position: "relative", height: "460px" }}>
-          {/* Anchor div centred horizontally */}
-          <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0 }}>
-            {testimonials.map((t, i) => (
+          {/* 2×2 grid */}
+          <div style={{
+            display: "grid", gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "1px", background: "rgba(0,0,0,0.07)",
+          }}>
+            {whyChoose.map((item, i) => (
               <div
                 key={i}
-                className="testi-cover-card"
-                onClick={() => setActiveTesti(i)}
+                className="why-card"
+                data-testid={`card-why-${i}`}
                 style={{
-                  position: "absolute",
-                  width: "380px",
-                  height: "440px",
-                  marginLeft: "-190px",
-                  top: "10px",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  boxShadow: "0 24px 64px rgba(0,0,0,0.28), 0 8px 20px rgba(0,0,0,0.14)",
+                  background: "#ffffff", padding: "48px 40px",
+                  borderTop: "4px solid #C41E3A",
+                  transition: "background 0.2s",
                 }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#fef2f2")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#ffffff")}
               >
-                <img
-                  src={`${assetBase}${t.image}`}
-                  alt={t.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-                {/* Bottom label gradient */}
                 <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  background: "linear-gradient(transparent, rgba(0,0,0,0.65))",
-                  padding: "48px 24px 20px",
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontSize: "clamp(1.6rem,2.5vw,2.2rem)",
+                  fontWeight: 800, color: "#C41E3A",
+                  marginBottom: "12px", lineHeight: 1.1, whiteSpace: "pre-line",
                 }}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, color: "#ffffff", letterSpacing: "0.14em", textTransform: "uppercase" }}>
-                    {t.name}
-                  </div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(255,255,255,0.6)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                    {t.role}
-                  </div>
+                  {item.stat}
                 </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+                  fontWeight: 700, color: "#111827", marginBottom: "12px",
+                  textTransform: "uppercase", letterSpacing: "0.1em",
+                }}>
+                  {item.title}
+                </div>
+                <p style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+                  lineHeight: 1.75, color: "#6b7280", margin: 0,
+                }}>
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* ── Quote (crossfades per active card) ── */}
-        <div style={{ position: "relative", maxWidth: "620px", margin: "0 auto", padding: "0 32px", height: "180px" }}>
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="testi-quote-block"
-              style={{ position: "absolute", top: 0, left: "32px", right: "32px", opacity: 0, visibility: "hidden" }}
-            >
-              <div style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", color: "#C41E3A", lineHeight: 0.7, marginBottom: "14px", opacity: 0.18, userSelect: "none" }}>
-                &ldquo;
+      {/* ══════════ TESTIMONIALS — masonry collage + 3 cards ══════════ */}
+      <section
+        data-testid="section-testimonials"
+        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "80px 0" }}
+      >
+        {/* Top: masonry photo collage + text overlay */}
+        <div style={{ position: "relative", marginBottom: "64px", overflow: "hidden" }}>
+          {/* Masonry grid */}
+          <div style={{
+            display: "flex", gap: "10px",
+            padding: "0 32px",
+          }}>
+            {masonryCols.map((col, ci) => (
+              <div key={ci} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {col.map((photo, pi) => (
+                  <div key={pi} style={{
+                    height: `${photo.h}px`, borderRadius: "14px",
+                    overflow: "hidden", flexShrink: 0,
+                  }}>
+                    <img
+                      src={photo.src}
+                      alt=""
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    />
+                  </div>
+                ))}
               </div>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px", fontWeight: 400, color: "#374151", lineHeight: 1.85 }}>
-                {t.quote}
+            ))}
+          </div>
+
+          {/* Center overlay */}
+          <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+            display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center",
+            background: "linear-gradient(180deg, rgba(248,250,252,0.18) 0%, rgba(248,250,252,0.62) 100%)",
+            backdropFilter: "blur(1px)",
+          }}>
+            {/* Pill label */}
+            <div style={{
+              border: "1px solid rgba(17,24,39,0.18)", borderRadius: "100px",
+              padding: "6px 22px", marginBottom: "22px",
+              background: "rgba(255,255,255,0.92)",
+            }}>
+              <span style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+                fontWeight: 700, letterSpacing: "0.22em",
+                textTransform: "uppercase", color: "#111827",
+              }}>
+                CLIENT VOICES
+              </span>
+            </div>
+
+            <h2 style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "clamp(1.4rem,2.8vw,2.2rem)",
+              fontWeight: 700, color: "#111827",
+              textAlign: "center", lineHeight: 1.2,
+              margin: "0 0 6px", textShadow: "0 1px 8px rgba(248,250,252,0.9)",
+            }}>
+              Trusted by India's leading
+            </h2>
+            <h2 style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "clamp(1.4rem,2.8vw,2.2rem)",
+              fontWeight: 300, color: "rgba(17,24,39,0.6)",
+              textAlign: "center", lineHeight: 1.2, margin: 0,
+              textShadow: "0 1px 8px rgba(248,250,252,0.9)",
+            }}>
+              developers and structural partners
+            </h2>
+          </div>
+        </div>
+
+        {/* Bottom: 3 testimonial cards */}
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "24px", maxWidth: "1100px",
+          margin: "0 auto", padding: "0 40px",
+        }}>
+          {testimonials.map((t, i) => (
+            <div key={i} style={{
+              background: "#ffffff", borderRadius: "12px",
+              padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+              display: "flex", flexDirection: "column",
+            }}>
+              {/* Stars */}
+              <div style={{ display: "flex", gap: "3px", marginBottom: "20px" }}>
+                {[...Array(5)].map((_, s) => (
+                  <Star key={s} size={14} fill="#f59e0b" color="#f59e0b" />
+                ))}
+              </div>
+              {/* Quote */}
+              <p style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "12.5px",
+                lineHeight: 1.85, color: "#374151",
+                marginBottom: "24px", flex: 1,
+              }}>
+                "{t.quote}"
               </p>
-              <div className="testi-attribution" style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "18px" }}>
-                <div style={{ width: "24px", height: "2px", background: "#C41E3A", flexShrink: 0 }} />
+              {/* Attribution */}
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{
+                  width: "40px", height: "40px", borderRadius: "50%",
+                  overflow: "hidden", flexShrink: 0, background: "#e5e7eb",
+                }}>
+                  <img
+                    src={`${assetBase}${t.image}`}
+                    alt={t.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </div>
                 <div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, color: "#111827", letterSpacing: "0.12em", textTransform: "uppercase" }}>{t.name}</div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "9px", color: "rgba(17,24,39,0.4)", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>{t.role}</div>
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
+                    fontWeight: 700, color: "#111827", letterSpacing: "0.08em",
+                  }}>
+                    {t.name}
+                  </div>
+                  <div style={{
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    color: "rgba(17,24,39,0.45)", marginTop: "2px", letterSpacing: "0.06em",
+                  }}>
+                    {t.role}
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* ── Navigation ── */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "20px", marginTop: "24px" }}>
-          <button
-            onClick={() => setActiveTesti(p => (p - 1 + testimonials.length) % testimonials.length)}
-            style={{ width: "44px", height: "44px", borderRadius: "50%", border: "1px solid rgba(0,0,0,0.12)", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
-          >
-            <ChevronLeft size={18} color="#111827" />
-          </button>
-
-          {testimonials.map((_, i) => (
-            <div
-              key={i}
-              onClick={() => setActiveTesti(i)}
-              style={{ width: i === activeTesti ? "20px" : "6px", height: "6px", borderRadius: "3px", background: i === activeTesti ? "#C41E3A" : "rgba(0,0,0,0.18)", cursor: "pointer", transition: "width 0.3s, background 0.3s" }}
-            />
-          ))}
-
-          <button
-            onClick={() => setActiveTesti(p => (p + 1) % testimonials.length)}
-            style={{ width: "44px", height: "44px", borderRadius: "50%", border: "1px solid rgba(0,0,0,0.12)", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
-          >
-            <ChevronRight size={18} color="#111827" />
-          </button>
-        </div>
-
       </section>
 
-      {/* ══════════ CLIENTS ══════════ */}
-      <section ref={clientsRef}
-        className="py-24"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)" }}
-        data-testid="section-clients">
-
-        {/* ── Header ── */}
-        <div className="text-center mb-16 px-6">
-          <h2 className="text-3xl"
-            style={{ fontFamily: "'Montserrat',sans-serif", color: "#111827", fontWeight: 400 }}>
-            Trusted By Leading Brands
-          </h2>
+      {/* ══════════ CLIENTS & ARCHITECTS — two-row tickers ══════════ */}
+      <section
+        ref={clientsRef}
+        data-testid="section-clients"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "60px 0" }}
+      >
+        {/* Row label 1 */}
+        <div style={{
+          padding: "0 40px", marginBottom: "16px",
+          fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+          fontWeight: 700, letterSpacing: "0.28em",
+          textTransform: "uppercase", color: "rgba(17,24,39,0.28)",
+        }}>
+          CLIENTS
         </div>
 
-        {/* ── Infinite logo ticker ── */}
-        <div style={{ overflow: "hidden" }}>
-          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "24px", width: "max-content" }}>
+        {/* Row 1: scrolls left (GSAP) */}
+        <div style={{ overflow: "hidden", marginBottom: "1px" }}>
+          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "20px", width: "max-content" }}>
             {[...clients, ...clients].map((c, i) => (
               <div key={i}
                 data-testid={i < clients.length ? `card-client-${i}` : undefined}
                 style={{
-                  width: "180px",
-                  height: "100px",
-                  flexShrink: 0,
-                  background: "#ffffff",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: "6px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "20px",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
+                  width: "160px", height: "88px", flexShrink: 0,
+                  background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: "4px", display: "flex",
+                  alignItems: "center", justifyContent: "center", padding: "18px",
                 }}>
                 <img
                   src={`${assetBase}${c.logo}`}
                   alt={c.name}
-                  style={{ maxWidth: "100%", maxHeight: "56px", objectFit: "contain" }}
+                  style={{ maxWidth: "100%", maxHeight: "48px", objectFit: "contain" }}
                 />
               </div>
             ))}
           </div>
         </div>
 
+        {/* Separator */}
+        <div style={{ height: "1px", background: "rgba(0,0,0,0.06)", margin: "24px 0" }} />
+
+        {/* Row label 2 */}
+        <div style={{
+          padding: "0 40px", marginBottom: "16px",
+          fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+          fontWeight: 700, letterSpacing: "0.28em",
+          textTransform: "uppercase", color: "rgba(17,24,39,0.28)",
+        }}>
+          ARCHITECTS &amp; PARTNERS
+        </div>
+
+        {/* Row 2: scrolls right (CSS animation) */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="animate-ticker-rev" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            {[...clients, ...clients].map((c, i) => (
+              <div key={i}
+                style={{
+                  width: "160px", height: "88px", flexShrink: 0,
+                  background: "#f8fafc", border: "1px solid rgba(0,0,0,0.07)",
+                  borderRadius: "4px", display: "flex",
+                  alignItems: "center", justifyContent: "center", padding: "18px",
+                }}>
+                <img
+                  src={`${assetBase}${c.logo}`}
+                  alt={c.name}
+                  style={{ maxWidth: "100%", maxHeight: "48px", objectFit: "contain", filter: "grayscale(40%)", opacity: 0.75 }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
+      {/* ══════════ DUAL CTA ══════════ */}
+      <section
+        data-testid="section-dual-cta"
+        style={{ background: "#111827", padding: "100px 40px", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      >
+        <div className="max-w-5xl mx-auto" style={{
+          display: "grid", gridTemplateColumns: "1fr auto 1fr",
+          gap: "0", alignItems: "center",
+        }}>
+          {/* Left block */}
+          <div style={{ textAlign: "center", padding: "0 60px 0 0" }}>
+            <div style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "clamp(1.5rem,3vw,2.5rem)",
+              fontWeight: 800, color: "#ffffff",
+              textTransform: "uppercase", lineHeight: 1.05,
+              marginBottom: "16px", letterSpacing: "-0.01em",
+            }}>
+              LET'S BUILD<br />TOGETHER
+            </div>
+            <p style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+              color: "rgba(255,255,255,0.45)", marginBottom: "36px", lineHeight: 1.6,
+            }}>
+              Connect with our engineering team
+            </p>
+            <Link href="/contact" data-testid="button-cta-contact">
+              <span
+                className="inline-flex items-center gap-2 cursor-pointer transition-all"
+                style={{
+                  background: "#C41E3A", color: "#ffffff",
+                  padding: "14px 36px",
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+              >
+                Contact MECPL <ArrowRight size={11} />
+              </span>
+            </Link>
+          </div>
 
+          {/* Vertical divider */}
+          <div style={{ width: "1px", background: "rgba(255,255,255,0.1)", alignSelf: "stretch", minHeight: "180px" }} />
+
+          {/* Right block */}
+          <div style={{ textAlign: "center", padding: "0 0 0 60px" }}>
+            <div style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "clamp(1.5rem,3vw,2.5rem)",
+              fontWeight: 800, color: "#ffffff",
+              textTransform: "uppercase", lineHeight: 1.05,
+              marginBottom: "16px", letterSpacing: "-0.01em",
+            }}>
+              JOIN<br />OUR TEAM
+            </div>
+            <p style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+              color: "rgba(255,255,255,0.45)", marginBottom: "36px", lineHeight: 1.6,
+            }}>
+              Explore career opportunities at MECPL
+            </p>
+            <Link href="/careers" data-testid="button-cta-careers">
+              <span
+                className="inline-flex items-center gap-2 cursor-pointer transition-all"
+                style={{
+                  background: "transparent", color: "#ffffff",
+                  padding: "14px 36px", border: "1.5px solid rgba(255,255,255,0.35)",
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.06)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.35)"; el.style.background = "transparent"; }}
+              >
+                View Careers <ArrowRight size={11} />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

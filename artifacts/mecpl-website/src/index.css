@@ -103,6 +103,24 @@ html[data-theme="light"] {
 }
 
 @layer utilities {
+  /* ── Hero progress bar ── */
+  @keyframes hero-progress {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+  .hero-progress-bar {
+    animation: hero-progress 8s linear forwards;
+  }
+
+  /* ── Service tab progress line ── */
+  @keyframes svc-tab-progress {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+  .svc-tab-progress {
+    animation: svc-tab-progress 5s linear forwards;
+  }
+
   @keyframes ticker {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
