@@ -433,78 +433,80 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* CENTER: main narrative text */}
+        {/* BOTTOM: split layout — heading+buttons left, intro right */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 10,
-          display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center",
+          display: "flex", alignItems: "flex-end",
+          padding: "0 80px 100px",
+          gap: "80px",
         }}>
-          <span ref={heroTagRef} style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-            fontWeight: 300, letterSpacing: "0.44em", textTransform: "uppercase",
-            color: "rgba(255,255,255,0.42)", marginBottom: "32px",
-          }}>
-            EST. 1998 · PUNE, INDIA
-          </span>
-
-          <div ref={heroHeadlineRef} style={{ textAlign: "center" }}>
-            <div
-              className="hero-line"
-              style={{
+          {/* Left: heading + two buttons */}
+          <div style={{ flex: "0 0 auto", maxWidth: "52%" }}>
+            <div ref={heroHeadlineRef}>
+              <div className="hero-line" style={{
                 overflow: "hidden",
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                fontSize: "clamp(3.2rem, 9vw, 8rem)",
-                color: "#ffffff", lineHeight: 0.88,
-                textTransform: "uppercase", letterSpacing: "-0.035em",
-              }}
-            >
-              WE BUILD
+                fontSize: "3rem",
+                color: "#ffffff", lineHeight: 0.9,
+                textTransform: "uppercase", letterSpacing: "-0.025em",
+              }}>
+                WE BUILD
+              </div>
+              <div className="hero-line" style={{
+                overflow: "hidden",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+                fontSize: "3rem",
+                color: "#C41E3A", lineHeight: 1.1,
+                textTransform: "uppercase", letterSpacing: "-0.025em",
+              }}>
+                INDIA'S SKYLINE
+              </div>
             </div>
-            <div
-              className="hero-line"
-              style={{
-                overflow: "hidden",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                fontSize: "clamp(3.2rem, 9vw, 8rem)",
-                color: "#C41E3A", lineHeight: 0.88,
-                textTransform: "uppercase", letterSpacing: "-0.035em",
-              }}
-            >
-              INDIA'S SKYLINE
+
+            <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap" }}>
+              <Link href="/completed-projects" data-testid="button-hero-projects">
+                <span
+                  className="hero-sub-item"
+                  style={{
+                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+                >
+                  View Projects <ArrowRight size={11} />
+                </span>
+              </Link>
+              <Link href="/careers" data-testid="button-hero-careers">
+                <span
+                  className="hero-sub-item"
+                  style={{
+                    background: "transparent", color: "#ffffff", padding: "12px 28px",
+                    border: "1.5px solid rgba(255,255,255,0.45)",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.08)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.45)"; el.style.background = "transparent"; }}
+                >
+                  Explore Careers <ArrowRight size={11} />
+                </span>
+              </Link>
             </div>
           </div>
 
-          <div
-            ref={heroSubRef}
-            style={{ marginTop: "44px", display: "flex", flexDirection: "column", alignItems: "center", gap: "28px" }}
-          >
-            <p
-              className="hero-sub-item"
-              style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                fontWeight: 300, color: "rgba(255,255,255,0.45)",
-                letterSpacing: "0.26em", textTransform: "uppercase", margin: 0,
-              }}
-            >
-              Structural Engineering · Est. 1998 · ISO Certified
+          {/* Right: short intro */}
+          <div style={{ flex: 1, paddingBottom: "6px" }}>
+            <p ref={heroTagRef} className="hero-sub-item" style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+              fontWeight: 300, color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.75, margin: 0, maxWidth: "380px",
+            }}>
+              From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
             </p>
-
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span
-                className="hero-sub-item"
-                style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.3em", textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.75)", fontWeight: 500,
-                  display: "flex", alignItems: "center", gap: "18px",
-                  cursor: "pointer",
-                }}
-              >
-                <span style={{ color: "#C41E3A", fontSize: "6px" }}>◆</span>
-                VIEW PROJECTS
-                <span style={{ color: "#C41E3A", fontSize: "6px" }}>◆</span>
-              </span>
-            </Link>
           </div>
         </div>
 
@@ -1044,31 +1046,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 9. DUAL CTA ══════════ */}
+      {/* ══════════ 9. CTA ══════════ */}
       <section
         data-testid="section-dual-cta"
-        style={{ background: "#111827", padding: "100px 40px", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ background: "#111827", padding: "100px 40px", position: "relative" }}
       >
-        <div className="max-w-5xl mx-auto" style={{
-          display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center",
-        }}>
-          {/* Left */}
-          <div style={{ textAlign: "center", padding: "0 60px 0 0" }}>
-            <div style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-              fontWeight: 800, color: "#ffffff",
-              textTransform: "uppercase", lineHeight: 1.05,
-              marginBottom: "16px", letterSpacing: "-0.01em",
-            }}>
-              LET'S BUILD<br />TOGETHER
-            </div>
-            <p style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-              color: "rgba(255,255,255,0.45)", marginBottom: "36px", lineHeight: 1.6,
-            }}>
-              Connect with our engineering team
-            </p>
+        <div style={{ textAlign: "center", maxWidth: "640px", margin: "0 auto" }}>
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+            fontWeight: 800, color: "#ffffff",
+            textTransform: "uppercase", lineHeight: 1.0,
+            marginBottom: "52px", letterSpacing: "-0.02em",
+          }}>
+            LET'S BUILD<br />TOGETHER
+          </div>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/contact" data-testid="button-cta-contact">
               <span
                 className="inline-flex items-center gap-2 cursor-pointer"
@@ -1083,28 +1076,6 @@ export default function HomePage() {
                 Contact MECPL <ArrowRight size={11} />
               </span>
             </Link>
-          </div>
-
-          {/* Vertical divider */}
-          <div style={{ width: "1px", background: "rgba(255,255,255,0.1)", alignSelf: "stretch", minHeight: "180px" }} />
-
-          {/* Right */}
-          <div style={{ textAlign: "center", padding: "0 0 0 60px" }}>
-            <div style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-              fontWeight: 800, color: "#ffffff",
-              textTransform: "uppercase", lineHeight: 1.05,
-              marginBottom: "16px", letterSpacing: "-0.01em",
-            }}>
-              JOIN<br />OUR TEAM
-            </div>
-            <p style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-              color: "rgba(255,255,255,0.45)", marginBottom: "36px", lineHeight: 1.6,
-            }}>
-              Explore career opportunities at MECPL
-            </p>
             <Link href="/careers" data-testid="button-cta-careers">
               <span
                 className="inline-flex items-center gap-2 cursor-pointer"

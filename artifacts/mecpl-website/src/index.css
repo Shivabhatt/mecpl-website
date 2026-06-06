@@ -322,3 +322,42 @@ html[data-theme="light"] select {
 .about-img:hover img {
   transform: scale(1.04);
 }
+
+/* ── Section colour-transition gradients ── */
+/* Dark sections (after white): white-to-transparent at top */
+[data-testid="section-about"],
+[data-testid="section-projects"],
+[data-testid="section-testimonials"],
+[data-testid="section-dual-cta"] {
+  position: relative;
+}
+[data-testid="section-about"]::before,
+[data-testid="section-projects"]::before,
+[data-testid="section-testimonials"]::before,
+[data-testid="section-dual-cta"]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Light sections (after dark): dark-to-transparent at top */
+[data-testid="section-services"],
+[data-testid="section-why-mecpl"],
+[data-testid="section-clients"] {
+  position: relative;
+}
+[data-testid="section-services"]::before,
+[data-testid="section-why-mecpl"]::before,
+[data-testid="section-clients"]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.05), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
