@@ -1092,7 +1092,7 @@ export default function HomePage() {
       {/* ══════════ 9. CTA ══════════ */}
       <section
         data-testid="section-dual-cta"
-        style={{ background: "linear-gradient(135deg, #C41E3A 0%, #8b0f20 100%)", padding: "100px 40px", position: "relative" }}
+        style={{ background: "linear-gradient(135deg, #C41E3A 0%, #8b0f20 100%)", padding: "56px 40px", position: "relative" }}
       >
         <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto" }}>
           <div style={{
@@ -1101,7 +1101,7 @@ export default function HomePage() {
             fontWeight: 800, color: "#ffffff",
             textTransform: "uppercase", lineHeight: 1.0,
             letterSpacing: "-0.02em", whiteSpace: "nowrap",
-            marginBottom: "48px",
+            marginBottom: "28px",
           }}>
             LET'S BUILD TOGETHER
           </div>
