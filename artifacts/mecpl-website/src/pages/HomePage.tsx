@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
-import { ArrowRight, Star, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Star, ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -114,24 +114,7 @@ export default function HomePage() {
   const statsRef        = useRef<HTMLElement>(null);
   const aboutRef        = useRef<HTMLElement>(null);
   const servicesRef     = useRef<HTMLElement>(null);
-  /* carousel */
-  const [carouselIdx, setCarouselIdx]   = useState(0);
-  const carouselTrackRef                = useRef<HTMLDivElement>(null);
-  const carouselPausedRef               = useRef(false);
-  const PROJ_CARD_W = 400;
-  const PROJ_CARD_GAP = 20;
-
-  const goPrev = useCallback(() => {
-    setCarouselIdx(p => (p - 1 + projects.length) % projects.length);
-    carouselPausedRef.current = true;
-    setTimeout(() => { carouselPausedRef.current = false; }, 5000);
-  }, []);
-
-  const goNext = useCallback(() => {
-    setCarouselIdx(p => (p + 1) % projects.length);
-    carouselPausedRef.current = true;
-    setTimeout(() => { carouselPausedRef.current = false; }, 5000);
-  }, []);
+  const projTrackRef = useRef<HTMLDivElement>(null);
   const whyRef          = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
   const clientsRef      = useRef<HTMLElement>(null);
@@ -287,28 +270,29 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: GSAP animate carousel track ── */
+  /* ── PROJECTS: infinite ticker (same pattern as clients) ── */
   useEffect(() => {
-    const track = carouselTrackRef.current;
+    const track = projTrackRef.current;
     if (!track) return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    gsap.to(track, {
-      x: -(carouselIdx * (PROJ_CARD_W + PROJ_CARD_GAP)),
-      duration: prefersReduced ? 0 : 0.75,
-      ease: "power3.out",
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const tween = gsap.to(track, {
+        x: () => -(track.scrollWidth / 2),
+        duration: 36,
+        ease: "none",
+        repeat: -1,
+        onRepeat: () => gsap.set(track, { x: 0 }),
+      });
+      const pause = () => tween.pause();
+      const play  = () => tween.play();
+      track.addEventListener("mouseenter", pause);
+      track.addEventListener("mouseleave", play);
+      return () => {
+        track.removeEventListener("mouseenter", pause);
+        track.removeEventListener("mouseleave", play);
+      };
     });
-  }, [carouselIdx]);
-
-  /* ── PROJECTS: auto-scroll ── */
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-    const id = setInterval(() => {
-      if (!carouselPausedRef.current) {
-        setCarouselIdx(p => (p + 1) % projects.length);
-      }
-    }, 3500);
-    return () => clearInterval(id);
+    return () => mm.revert();
   }, []);
 
   /* ── WHY CHOOSE: count-up + stagger ── */
@@ -755,87 +739,33 @@ export default function HomePage() {
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
-        <div style={{
-          padding: "0 48px", marginBottom: "48px",
-          display: "flex", justifyContent: "space-between", alignItems: "flex-end",
-        }}>
-          <div>
-            <span style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
-              display: "block", marginBottom: "10px",
-            }}>
-              OUR PROJECTS
-            </span>
-            <h3 style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "1.875rem", color: "#111827",
-              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
-            }}>
-              Landmark Works
-            </h3>
-          </div>
-
-          {/* Progress indicator + arrows */}
-          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <span style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-              letterSpacing: "0.2em", color: "rgba(17,24,39,0.35)", textTransform: "uppercase",
-            }}>
-              {String(carouselIdx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-            </span>
-            <div style={{ display: "flex", gap: "8px" }}>
-              {/* Prev */}
-              <button
-                onClick={goPrev}
-                aria-label="Previous project"
-                style={{
-                  width: "44px", height: "44px", borderRadius: "50%",
-                  border: "1px solid rgba(17,24,39,0.15)", background: "transparent",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
-                  color: "#111827",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111827"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = "#111827"; }}
-              >
-                <ChevronLeft size={18} />
-              </button>
-              {/* Next */}
-              <button
-                onClick={goNext}
-                aria-label="Next project"
-                style={{
-                  width: "44px", height: "44px", borderRadius: "50%",
-                  border: "1px solid rgba(17,24,39,0.15)", background: "transparent",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
-                  color: "#111827",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111827"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = "#111827"; }}
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
+        <div style={{ padding: "0 48px", marginBottom: "48px" }}>
+          <span style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+            display: "block", marginBottom: "10px",
+          }}>
+            OUR PROJECTS
+          </span>
+          <h3 style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+            fontSize: "1.875rem", color: "#111827",
+            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+          }}>
+            Landmark Works
+          </h3>
         </div>
 
-        {/* Carousel track — overflow hidden, left-padded so partial right card peeks */}
-        <div style={{ overflow: "hidden", paddingLeft: "48px" }}>
+        {/* Infinite ticker — hover to pause */}
+        <div style={{ overflow: "hidden" }}>
           <div
-            ref={carouselTrackRef}
-            style={{
-              display: "flex",
-              gap: `${PROJ_CARD_GAP}px`,
-              willChange: "transform",
-            }}
+            ref={projTrackRef}
+            style={{ display: "flex", gap: "20px", width: "max-content", willChange: "transform" }}
           >
-            {projects.map((proj, i) => (
+            {[...projects, ...projects].map((proj, i) => (
               <div
                 key={i}
-                style={{ width: `${PROJ_CARD_W}px`, flexShrink: 0, cursor: "pointer" }}
-                onClick={() => { setCarouselIdx(i); carouselPausedRef.current = true; setTimeout(() => { carouselPausedRef.current = false; }, 5000); }}
+                style={{ width: "400px", flexShrink: 0 }}
               >
                 {/* Text above image */}
                 <div style={{ paddingBottom: "20px", paddingRight: "16px" }}>
@@ -844,15 +774,14 @@ export default function HomePage() {
                     letterSpacing: "0.24em", color: "rgba(17,24,39,0.3)",
                     textTransform: "uppercase", marginBottom: "10px",
                   }}>
-                    {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                    {String((i % projects.length) + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif",
                     fontSize: "1.25rem", fontWeight: 800,
-                    color: carouselIdx === i ? "#C41E3A" : "#111827",
+                    color: "#111827",
                     lineHeight: 1.15, textTransform: "uppercase",
                     letterSpacing: "-0.01em", marginBottom: "10px",
-                    transition: "color 0.3s",
                   }}>
                     {proj.name}
                   </div>
@@ -866,7 +795,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Image */}
-                <div style={{ height: "500px", overflow: "hidden", position: "relative" }}>
+                <div style={{ height: "500px", overflow: "hidden" }}>
                   <img
                     src={proj.image}
                     alt={proj.name}
