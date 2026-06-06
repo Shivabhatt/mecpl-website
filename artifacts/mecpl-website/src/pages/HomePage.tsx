@@ -10,10 +10,10 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ─── DATA ──────────────────────────────────────────────────────────── */
 
-const heroImages = [
-  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1920&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop",
+const heroVideos = [
+  "assets/video/hero-new.mp4",
+  "assets/video/hero.mp4",
+  "assets/video/istockphoto-891492418-640_adpp_is.mp4",
 ];
 
 const services = [
@@ -103,6 +103,7 @@ export default function HomePage() {
   const heroTagRef      = useRef<HTMLSpanElement>(null);
   const heroSubRef      = useRef<HTMLParagraphElement>(null);
   const heroCTARef      = useRef<HTMLDivElement>(null);
+  const panelRefs       = useRef<(HTMLDivElement | null)[]>([]);
   const whyRef          = useRef<HTMLElement>(null);
   const clientsRef      = useRef<HTMLElement>(null);
 
@@ -165,10 +166,9 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── HERO: video/image cycling ── */
+  /* ── HERO: video cycling (3 local videos) ── */
   useEffect(() => {
-    const total = 1 + heroImages.length; /* 1 video + 3 images = 4 */
-    const id = setInterval(() => setVideoIdx(v => (v + 1) % total), 8000);
+    const id = setInterval(() => setVideoIdx(v => (v + 1) % heroVideos.length), 8000);
     return () => clearInterval(id);
   }, []);
 
@@ -182,6 +182,28 @@ export default function HomePage() {
       });
     }, 5000);
     return () => clearInterval(id);
+  }, []);
+
+  /* ── PROJECTS: ScrollTrigger pin/reveal sequence ── */
+  useEffect(() => {
+    const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (panels.length < 2) return;
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        panels.forEach((panel, i) => {
+          if (i === panels.length - 1) return;
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top top",
+            end: () => `+=${panel.offsetHeight}`,
+            pin: true,
+            pinSpacing: true,
+          });
+        });
+      });
+    });
+    return () => ctx.revert();
   }, []);
 
   /* ── WHY CHOOSE: scroll reveal ── */
@@ -240,28 +262,20 @@ export default function HomePage() {
       >
         {/* Background: cycling video + images */}
         <div ref={heroBgRef} className="absolute inset-0 z-0">
-          {/* Slide 0 — video */}
-          <video
-            autoPlay muted loop playsInline
-            style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%",
-              objectFit: "cover",
-              opacity: videoIdx === 0 ? 1 : 0,
-              transition: "opacity 1.2s ease",
-            }}
-          >
-            <source src={`${assetBase}assets/video/hero-new.mp4`} type="video/mp4" />
-          </video>
-          {/* Slides 1–3 — images */}
-          {heroImages.map((src, i) => (
-            <div key={i} style={{
-              position: "absolute", inset: 0,
-              backgroundImage: `url(${src})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: videoIdx === i + 1 ? 1 : 0,
-              transition: "opacity 1.2s ease",
-            }} />
+          {/* 3 cycling construction videos */}
+          {heroVideos.map((src, i) => (
+            <video
+              key={i}
+              autoPlay muted loop playsInline
+              style={{
+                position: "absolute", inset: 0, width: "100%", height: "100%",
+                objectFit: "cover",
+                opacity: videoIdx === i ? 1 : 0,
+                transition: "opacity 1.2s ease",
+              }}
+            >
+              <source src={`${assetBase}${src}`} type="video/mp4" />
+            </video>
           ))}
           {/* Gradient overlay */}
           <div style={{
@@ -279,7 +293,7 @@ export default function HomePage() {
             fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
             fontWeight: 300, color: "rgba(255,255,255,0.65)", letterSpacing: "0.22em",
           }}>
-            {String(videoIdx + 1).padStart(2, "0")} / 04
+            {String(videoIdx + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
           </div>
           <div style={{ width: "72px", height: "1px", background: "rgba(255,255,255,0.18)", position: "relative", overflow: "hidden" }}>
             <div key={videoIdx} className="hero-progress-bar" style={{
@@ -544,10 +558,10 @@ export default function HomePage() {
           {projects.map((proj, i) => (
             <div
               key={i}
+              ref={el => { panelRefs.current[i] = el; }}
               style={{
-                position: "sticky", top: 0,
                 height: "100vh", zIndex: i + 1,
-                overflow: "hidden",
+                overflow: "hidden", position: "relative",
               }}
             >
               <img
@@ -773,9 +787,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Bottom: 3 testimonial cards */}
-        <div style={{
-          display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+        {/* Bottom: 3 testimonial cards — responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{
           gap: "24px", maxWidth: "1100px",
           margin: "0 auto", padding: "0 40px",
         }}>
