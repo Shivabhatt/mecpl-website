@@ -19,7 +19,6 @@ interface WhyCard {
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
   "assets/video/hero.mp4",
-  "assets/video/istockphoto-891492418-640_adpp_is.mp4",
 ];
 
 const stats = [
