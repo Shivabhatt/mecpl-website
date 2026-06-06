@@ -199,27 +199,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Certifications */}
-      <section className="bg-[#f9f9f9] border-y border-black/[0.06] py-20 scroll-mt-28" data-testid="section-certifications">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader label="Standards" title="Certifications & Compliance" center useH1={false} />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
-            {[
-              { code: "ISO 9001:2015", label: "Quality Management System", icon: "✦" },
-              { code: "ISO 14001:2015", label: "Environmental Management System", icon: "✦" },
-              { code: "ISO 45001:2018", label: "Occupational Health & Safety", icon: "✦" },
-              { code: "CRISIL SME 1", label: "Financial Rating — Since 2007", icon: "✦" },
-            ].map((cert) => (
-              <div key={cert.code} className="text-center p-8 bg-white border border-black/[0.07] rounded-sm hover:border-[#C41E3A]/30 transition-all shadow-sm" data-testid={`card-cert-${cert.code}`}>
-                <div className="text-[#C41E3A] text-3xl mb-4">{cert.icon}</div>
-                <h3 className="text-[#111827] font-black text-base uppercase mb-2">{cert.code}</h3>
-                <p className="text-[#6b7280] text-xs leading-relaxed">{cert.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+    
       {/* Milestones */}
       <section id="abt4" className="max-w-5xl mx-auto px-6 py-20 scroll-mt-28" data-testid="section-milestones">
         <SectionHeader label="Journey" title="Our Milestone Timeline" useH1={false} />

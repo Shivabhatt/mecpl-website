@@ -30,6 +30,12 @@
   --radius-lg: var(--radius);
 }
 
+/* Temporarily hide the About page Services section until source is removed */
+#abt2,
+[data-testid="section-about-services"] {
+  display: none !important;
+}
+
 @theme {
   --color-mecpl-dark: var(--mecpl-dark);
   --color-mecpl-card: var(--mecpl-card);
