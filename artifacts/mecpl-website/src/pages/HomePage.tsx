@@ -502,47 +502,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 2. STATS STRIP ══════════ */}
-      <section
-        ref={statsRef}
-        data-testid="section-stats"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "72px 40px" }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "1px", background: "rgba(0,0,0,0.06)" }}>
-            {stats.map((s, i) => (
-              <div
-                key={i}
-                style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
-              >
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
-                  <span
-                    className="stat-num"
-                    data-target={s.target}
-                    data-suffix={s.suffix}
-                    style={{
-                      fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
-                      fontWeight: 800, color: "#C41E3A", lineHeight: 1,
-                    }}
-                  >
-                    0
-                  </span>
-                </div>
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                  fontWeight: 600, letterSpacing: "0.18em",
-                  textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
-                }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════ 3. ABOUT — Storytelling ══════════ */}
+      {/* ══════════ 2. ABOUT — Storytelling ══════════ */}
       <section
         ref={aboutRef}
         data-testid="section-about"
@@ -642,6 +602,46 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ 3. STATS STRIP ══════════ */}
+      <section
+        ref={statsRef}
+        data-testid="section-stats"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "72px 40px" }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "1px", background: "rgba(0,0,0,0.06)" }}>
+            {stats.map((s, i) => (
+              <div
+                key={i}
+                style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
+                  <span
+                    className="stat-num"
+                    data-target={s.target}
+                    data-suffix={s.suffix}
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif",
+                      fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+                      fontWeight: 800, color: "#C41E3A", lineHeight: 1,
+                    }}
+                  >
+                    0
+                  </span>
+                </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+                  fontWeight: 600, letterSpacing: "0.18em",
+                  textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
+                }}>
+                  {s.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
