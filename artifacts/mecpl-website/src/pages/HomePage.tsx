@@ -502,7 +502,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 2. ABOUT — Storytelling ══════════ */}
+      {/* ══════════ 2. AWARDS STRIP ══════════ */}
+      <section
+        data-testid="section-awards"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 40px" }}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div style={{ textAlign: "center", marginBottom: "48px" }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+              display: "block", marginBottom: "10px",
+            }}>
+              RECOGNITION
+            </span>
+            <h3 style={{
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+              fontSize: "1.875rem", color: "#111827",
+              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+            }}>
+              Awards &amp; Accolades
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5" style={{ gap: "2px", background: "rgba(0,0,0,0.06)" }}>
+            {[
+              { year: "2023", body: "Construction World", title: "Best Structural Contractor — West India" },
+              { year: "2022", body: "CREDAI", title: "Excellence in Quality Construction" },
+              { year: "2021", body: "Indian Green Building Council", title: "Sustainable Construction Award" },
+              { year: "2019", body: "Builders Association of India", title: "Outstanding Project Delivery" },
+              { year: "2018", body: "CIDC Vishwakarma", title: "Best Emerging Contractor" },
+            ].map((award, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#ffffff", padding: "36px 28px",
+                  display: "flex", flexDirection: "column", gap: "12px",
+                  transition: "background 0.25s",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#fdf2f4"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#ffffff"; }}
+              >
+                <div style={{
+                  width: "40px", height: "40px", borderRadius: "50%",
+                  background: "rgba(196,30,58,0.08)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: "4px",
+                }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="#C41E3A" />
+                  </svg>
+                </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
+                  letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                }}>
+                  {award.year}
+                </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700,
+                  color: "#111827", lineHeight: 1.35, textTransform: "uppercase", letterSpacing: "0.02em",
+                }}>
+                  {award.title}
+                </div>
+                <div style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 400,
+                  color: "rgba(17,24,39,0.4)", letterSpacing: "0.08em",
+                }}>
+                  {award.body}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ 3. ABOUT — Storytelling ══════════ */}
       <section
         ref={aboutRef}
         data-testid="section-about"
