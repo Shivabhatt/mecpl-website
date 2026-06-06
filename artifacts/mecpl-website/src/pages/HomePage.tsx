@@ -107,7 +107,7 @@ export default function HomePage() {
   const assetBase = import.meta.env.BASE_URL;
 
   const heroSectionRef  = useRef<HTMLElement>(null);
-  const heroHeadlineRef = useRef<HTMLDivElement>(null);
+  const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
   const heroTagRef      = useRef<HTMLElement>(null);
   const [activeWhy, setActiveWhy] = useState<number>(0);
   const heroSubRef      = useRef<HTMLDivElement>(null);
@@ -428,26 +428,26 @@ export default function HomePage() {
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <div style={{ textAlign: "center", maxWidth: "720px", padding: "0 40px" }}>
-            <div ref={heroHeadlineRef}>
+            <h1 ref={heroHeadlineRef} style={{ margin: 0 }}>
               <div className="hero-line" style={{
                 overflow: "hidden",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                fontSize: "3rem",
-                color: "#ffffff", lineHeight: 0.9,
-                textTransform: "uppercase", letterSpacing: "-0.025em",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
+                fontSize: "clamp(3rem, 6vw, 5rem)",
+                color: "#ffffff", lineHeight: 0.95,
+                textTransform: "uppercase", letterSpacing: "-0.03em",
               }}>
                 WE BUILD
               </div>
               <div className="hero-line" style={{
                 overflow: "hidden",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                fontSize: "3rem",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
+                fontSize: "clamp(3rem, 6vw, 5rem)",
                 color: "#C41E3A", lineHeight: 1.1,
-                textTransform: "uppercase", letterSpacing: "-0.025em",
+                textTransform: "uppercase", letterSpacing: "-0.03em",
               }}>
                 INDIA'S SKYLINE
               </div>
-            </div>
+            </h1>
 
             <p ref={heroTagRef} className="hero-sub-item" style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
