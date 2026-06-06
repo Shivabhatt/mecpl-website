@@ -23,16 +23,8 @@ const heroVideos = [
 ];
 
 const heroSlides = [
-  {
-    label: "Millennium Engineers & Contractors",
-    heading: ["Architecting Landmarks,", "Engineering Excellence."],
-    mission: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
-  },
-  {
-    label: "Millennium Engineers & Contractors",
-    heading: ["GIANT BEHIND THE GIANT"],
-    mission: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
-  },
+  { heading: ["Architecting Landmarks,", "Engineering Excellence."] },
+  { heading: ["GIANT BEHIND THE GIANT"] },
 ];
 
 const stats = [
@@ -435,63 +427,61 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* BOTTOM-LEFT: per-slide text overlay */}
-        {(() => {
-          const slide = heroSlides[videoIdx] ?? heroSlides[0];
-          return (
-            <div
-              key={videoIdx}
-              style={{
-                position: "absolute", bottom: "100px", left: "60px", zIndex: 10,
-                maxWidth: "540px",
-                animation: "heroSlideIn 0.7s ease forwards",
-              }}
-            >
-              <div style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
-                fontWeight: 500, color: "rgba(255,255,255,0.7)",
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                marginBottom: "14px",
+        {/* BOTTOM-LEFT: hero text — label/mission/button constant, heading swaps per slide */}
+        <div style={{
+          position: "absolute", bottom: "100px", left: "36px", zIndex: 10,
+          maxWidth: "600px",
+        }}>
+          {/* Constant label */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
+            fontWeight: 500, color: "rgba(255,255,255,0.7)",
+            letterSpacing: "0.18em", textTransform: "uppercase",
+            marginBottom: "14px",
+          }}>
+            Millennium Engineers &amp; Contractors
+          </div>
+
+          {/* Per-slide heading — re-mounts with key to trigger animation */}
+          <h1 key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+            {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
+              <div key={i} style={{
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                fontSize: "clamp(1.4rem, 3.2vw, 2.6rem)",
+                lineHeight: 1.15, color: "#ffffff", letterSpacing: "-0.01em",
+                whiteSpace: "nowrap",
               }}>
-                {slide.label}
+                {line}
               </div>
-              <h1 style={{ margin: "0 0 16px" }}>
-                {slide.heading.map((line, i) => (
-                  <div key={i} style={{
-                    fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                    fontSize: "clamp(1.4rem, 3.2vw, 2.6rem)",
-                    lineHeight: 1.15, color: "#ffffff", letterSpacing: "-0.01em",
-                    whiteSpace: "nowrap",
-                  }}>
-                    {line}
-                  </div>
-                ))}
-              </h1>
-              <p style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
-                fontWeight: 300, color: "rgba(255,255,255,0.65)",
-                lineHeight: 1.7, margin: "0 0 28px", maxWidth: "420px",
-              }}>
-                {slide.mission}
-              </p>
-              <Link href="/completed-projects" data-testid="button-hero-projects">
-                <span
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "8px",
-                    background: "#C41E3A", color: "#ffffff",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                    padding: "14px 32px", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
-                >
-                  EXPLORE OUR WORK <ArrowRight size={11} />
-                </span>
-              </Link>
-            </div>
-          );
-        })()}
+            ))}
+          </h1>
+
+          {/* Constant mission */}
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
+            fontWeight: 300, color: "rgba(255,255,255,0.65)",
+            lineHeight: 1.7, margin: "0 0 28px", maxWidth: "420px",
+          }}>
+            Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.
+          </p>
+
+          {/* Constant button */}
+          <Link href="/completed-projects" data-testid="button-hero-projects">
+            <span
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                background: "#C41E3A", color: "#ffffff",
+                fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                padding: "14px 32px", cursor: "pointer",
+              }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+            >
+              EXPLORE OUR WORK <ArrowRight size={11} />
+            </span>
+          </Link>
+        </div>
 
         {/* BOTTOM: scroll indicator */}
         <div style={{
