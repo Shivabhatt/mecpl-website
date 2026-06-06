@@ -436,9 +436,9 @@ export default function HomePage() {
               WHAT WE BUILD
             </span>
             <h2 style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
               fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#111827",
-              textTransform: "uppercase", letterSpacing: "0.04em", margin: 0,
+              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
             }}>
               Our Services
             </h2>
@@ -660,9 +660,9 @@ export default function HomePage() {
               OUR ADVANTAGE
             </span>
             <h2 style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
               fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#111827",
-              textTransform: "uppercase", letterSpacing: "0.04em", margin: 0,
+              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
             }}>
               Why Choose MECPL
             </h2>
