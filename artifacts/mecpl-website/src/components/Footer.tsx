@@ -100,12 +100,6 @@ export default function Footer() {
                   </div>
                 ))}
               </div>
-              <a href="https://www.mecpl.in" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:underline"
-                style={{ color: "#C41E3A", fontSize: "11px" }}
-                data-testid="link-footer-official-site">
-                <ExternalLink size={11} /> www.mecpl.in
-              </a>
             </div>
 
           </div>
