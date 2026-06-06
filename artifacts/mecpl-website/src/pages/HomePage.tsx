@@ -793,7 +793,7 @@ export default function HomePage() {
         style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
-        <div style={{ padding: "0 48px", marginBottom: "48px" }}>
+        <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px" }}>
           <span style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
