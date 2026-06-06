@@ -431,9 +431,8 @@ export default function HomePage() {
             <h1 ref={heroHeadlineRef} style={{ margin: 0, overflow: "hidden" }}>
               <div className="hero-line" style={{
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+                fontSize: "clamp(1.6rem, 4.5vw, 3.8rem)",
                 lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "-0.02em",
-                whiteSpace: "nowrap",
               }}>
                 <span style={{ color: "#ffffff" }}>WE BUILD </span>
                 <span style={{ color: "#C41E3A" }}>INDIA'S SKYLINE</span>
@@ -887,7 +886,7 @@ export default function HomePage() {
         data-testid="section-why-mecpl"
         style={{ background: "#ffffff", position: "relative" }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "55% 45%", minHeight: "90vh" }}>
+        <div className="why-grid" style={{ display: "grid", gridTemplateColumns: "55% 45%", minHeight: "90vh" }}>
 
           {/* LEFT: header + buttons + accordion */}
           <div className="why-left-col" style={{
@@ -1165,8 +1164,8 @@ export default function HomePage() {
             fontFamily: "'Montserrat',sans-serif",
             fontSize: "clamp(2rem, 4vw, 3rem)",
             fontWeight: 800, color: "#ffffff",
-            textTransform: "uppercase", lineHeight: 1.0,
-            letterSpacing: "-0.02em", whiteSpace: "nowrap",
+            textTransform: "uppercase", lineHeight: 1.1,
+            letterSpacing: "-0.02em",
             marginBottom: "28px",
           }}>
             LET'S BUILD TOGETHER

@@ -371,3 +371,53 @@ html[data-theme="light"] select {
 .why-drawer-open {
   max-height: 180px;
 }
+
+/* ══════════ MOBILE RESPONSIVE ══════════ */
+@media (max-width: 768px) {
+
+  /* ── Hero ── */
+  .hero-line { white-space: normal !important; }
+
+  /* ── Section paddings ── */
+  [data-testid="section-awards"]      { padding: 48px 20px !important; }
+  [data-testid="section-about"]       { padding: 56px 20px !important; }
+  [data-testid="section-stats"]       { padding: 40px 20px !important; }
+  [data-testid="section-services"]    { padding: 56px 0 !important; }
+  [data-testid="section-projects"]    { padding-top: 56px !important; }
+  [data-testid="section-testimonials"]{ padding: 56px 0 !important; }
+  [data-testid="section-dual-cta"]    { padding: 48px 20px !important; }
+
+  /* ── Services inner header ── */
+  [data-testid="section-services"] .max-w-7xl { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* ── Projects header / footer ── */
+  [data-testid="section-projects"] > div:first-child { padding: 0 20px !important; margin-bottom: 32px !important; }
+  [data-testid="section-projects"] > div:last-child  { padding: 32px 20px 48px !important; }
+
+  /* ── Why Choose — stack image below accordion ── */
+  .why-grid {
+    grid-template-columns: 1fr !important;
+    min-height: unset !important;
+  }
+  .why-left-col {
+    padding: 56px 20px !important;
+  }
+  /* Show image below at fixed height on mobile */
+  .why-grid > div:last-child {
+    height: 280px;
+    position: relative !important;
+  }
+
+  /* ── Testimonials inner ── */
+  [data-testid="section-testimonials"] > div:first-child { padding: 0 20px !important; margin-bottom: 36px !important; }
+  [data-testid="section-testimonials"] > div:nth-child(2){ padding: 0 12px !important; margin-bottom: 36px !important; }
+
+  /* ── CTA buttons — stack on very small screens ── */
+  [data-testid="section-dual-cta"] > div > div:last-child {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* ── Navbar — tighter on mobile ── */
+  nav { padding-left: 16px !important; padding-right: 16px !important; }
+}
