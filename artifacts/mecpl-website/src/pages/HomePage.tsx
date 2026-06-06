@@ -428,24 +428,15 @@ export default function HomePage() {
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <div style={{ textAlign: "center", maxWidth: "720px", padding: "0 40px" }}>
-            <h1 ref={heroHeadlineRef} style={{ margin: 0 }}>
+            <h1 ref={heroHeadlineRef} style={{ margin: 0, overflow: "hidden" }}>
               <div className="hero-line" style={{
-                overflow: "hidden",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
-                fontSize: "clamp(3rem, 6vw, 5rem)",
-                color: "#ffffff", lineHeight: 0.95,
-                textTransform: "uppercase", letterSpacing: "-0.03em",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+                lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "-0.02em",
+                whiteSpace: "nowrap",
               }}>
-                WE BUILD
-              </div>
-              <div className="hero-line" style={{
-                overflow: "hidden",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
-                fontSize: "clamp(3rem, 6vw, 5rem)",
-                color: "#C41E3A", lineHeight: 1.1,
-                textTransform: "uppercase", letterSpacing: "-0.03em",
-              }}>
-                INDIA'S SKYLINE
+                <span style={{ color: "#ffffff" }}>WE BUILD </span>
+                <span style={{ color: "#C41E3A" }}>INDIA'S SKYLINE</span>
               </div>
             </h1>
 
