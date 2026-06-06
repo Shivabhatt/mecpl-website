@@ -424,7 +424,7 @@ export default function HomePage() {
 
         {/* TOP-LEFT: heading + buttons */}
         <div style={{
-          position: "absolute", top: "220px", left: "80px", zIndex: 10,
+          position: "absolute", top: "270px", left: "80px", zIndex: 10,
           maxWidth: "54%",
         }}>
           <div ref={heroHeadlineRef}>
