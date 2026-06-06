@@ -731,7 +731,7 @@ export default function HomePage() {
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 0" }}
       >
         <div className="max-w-7xl mx-auto px-10">
-          <div style={{ marginBottom: "56px" }}>
+          <div style={{ marginBottom: "56px", textAlign: "center" }}>
             <span style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
               letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
@@ -793,7 +793,7 @@ export default function HomePage() {
         style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
-        <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px" }}>
+        <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
           <span style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
