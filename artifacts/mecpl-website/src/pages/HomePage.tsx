@@ -422,79 +422,75 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* TOP-LEFT: heading + buttons */}
+        {/* CENTER: heading + description + buttons */}
         <div style={{
-          position: "absolute", top: "270px", left: "80px", zIndex: 10,
-          maxWidth: "54%",
+          position: "absolute", inset: 0, zIndex: 10,
+          display: "flex", alignItems: "center", justifyContent: "center",
         }}>
-          <div ref={heroHeadlineRef}>
-            <div className="hero-line" style={{
-              overflow: "hidden",
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "3rem",
-              color: "#ffffff", lineHeight: 0.9,
-              textTransform: "uppercase", letterSpacing: "-0.025em",
-            }}>
-              WE BUILD
+          <div style={{ textAlign: "center", maxWidth: "720px", padding: "0 40px" }}>
+            <div ref={heroHeadlineRef}>
+              <div className="hero-line" style={{
+                overflow: "hidden",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+                fontSize: "3rem",
+                color: "#ffffff", lineHeight: 0.9,
+                textTransform: "uppercase", letterSpacing: "-0.025em",
+              }}>
+                WE BUILD
+              </div>
+              <div className="hero-line" style={{
+                overflow: "hidden",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+                fontSize: "3rem",
+                color: "#C41E3A", lineHeight: 1.1,
+                textTransform: "uppercase", letterSpacing: "-0.025em",
+              }}>
+                INDIA'S SKYLINE
+              </div>
             </div>
-            <div className="hero-line" style={{
-              overflow: "hidden",
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "3rem",
-              color: "#C41E3A", lineHeight: 1.1,
-              textTransform: "uppercase", letterSpacing: "-0.025em",
+
+            <p ref={heroTagRef} className="hero-sub-item" style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+              fontWeight: 300, color: "rgba(255,255,255,0.65)",
+              lineHeight: 1.75, margin: "28px 0 0",
             }}>
-              INDIA'S SKYLINE
+              From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
+            </p>
+
+            <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap", justifyContent: "center" }}>
+              <Link href="/completed-projects" data-testid="button-hero-projects">
+                <span
+                  className="hero-sub-item"
+                  style={{
+                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+                >
+                  View Projects <ArrowRight size={11} />
+                </span>
+              </Link>
+              <Link href="/careers" data-testid="button-hero-careers">
+                <span
+                  className="hero-sub-item"
+                  style={{
+                    background: "transparent", color: "#ffffff", padding: "12px 28px",
+                    border: "1.5px solid rgba(255,255,255,0.45)",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.08)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.45)"; el.style.background = "transparent"; }}
+                >
+                  Explore Careers <ArrowRight size={11} />
+                </span>
+              </Link>
             </div>
           </div>
-
-          <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap" }}>
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span
-                className="hero-sub-item"
-                style={{
-                  background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                  display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
-                }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
-              >
-                View Projects <ArrowRight size={11} />
-              </span>
-            </Link>
-            <Link href="/careers" data-testid="button-hero-careers">
-              <span
-                className="hero-sub-item"
-                style={{
-                  background: "transparent", color: "#ffffff", padding: "12px 28px",
-                  border: "1.5px solid rgba(255,255,255,0.45)",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                  display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
-                }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.08)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.45)"; el.style.background = "transparent"; }}
-              >
-                Explore Careers <ArrowRight size={11} />
-              </span>
-            </Link>
-          </div>
-        </div>
-
-        {/* BOTTOM-RIGHT: short intro */}
-        <div style={{
-          position: "absolute", bottom: "110px", right: "80px", zIndex: 10,
-          maxWidth: "360px",
-        }}>
-          <p ref={heroTagRef} className="hero-sub-item" style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-            fontWeight: 300, color: "rgba(255,255,255,0.6)",
-            lineHeight: 1.75, margin: 0, textAlign: "right",
-          }}>
-            From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
-          </p>
         </div>
 
         {/* BOTTOM: scroll indicator */}
