@@ -570,7 +570,7 @@ export default function HomePage() {
       <section
         ref={aboutRef}
         data-testid="section-about"
-        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "100px 40px" }}
+        style={{ background: "#111827", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "100px 40px" }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -587,7 +587,7 @@ export default function HomePage() {
                 </span>
                 <h3 style={{
                   fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                  fontSize: "1.875rem", color: "#111827",
+                  fontSize: "1.875rem", color: "#ffffff",
                   textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px",
                 }}>
                   Building India's Tomorrow
@@ -607,7 +607,7 @@ export default function HomePage() {
                 <p style={{
                   fontFamily: "'Montserrat',sans-serif",
                   fontSize: "clamp(1.05rem, 1.8vw, 1.35rem)",
-                  fontWeight: 300, color: "#111827",
+                  fontWeight: 300, color: "rgba(255,255,255,0.85)",
                   lineHeight: 1.6, margin: 0, letterSpacing: "-0.01em",
                 }}>
                   "Structural partner of choice for India's most ambitious developers — delivering landmark projects, built to outlast generations, since 1998."
@@ -617,7 +617,7 @@ export default function HomePage() {
               <div className="about-fade">
                 <p style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
-                  lineHeight: 1.85, color: "#4b5563", marginBottom: "28px",
+                  lineHeight: 1.85, color: "rgba(255,255,255,0.6)", marginBottom: "28px",
                 }}>
                   From Trump Towers to Panchshil's skyline-defining highrises, MECPL brings ISO-certified precision and 25 years of on-site engineering wisdom to every project.
                 </p>
@@ -627,7 +627,7 @@ export default function HomePage() {
                     <span key={cert} style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
                       letterSpacing: "0.12em", textTransform: "uppercase",
-                      color: "#111827", border: "1px solid rgba(17,24,39,0.18)",
+                      color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.18)",
                       padding: "5px 12px", borderRadius: "2px",
                     }}>
                       {cert}
@@ -736,7 +736,7 @@ export default function HomePage() {
       {/* ══════════ 5. PROJECTS — Horizontal carousel ══════════ */}
       <section
         data-testid="section-projects"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
+        style={{ background: "#111827", borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
         <div style={{ padding: "0 48px", marginBottom: "48px" }}>
@@ -749,7 +749,7 @@ export default function HomePage() {
           </span>
           <h3 style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
+            fontSize: "1.875rem", color: "#ffffff",
             textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
           }}>
             Landmark Works
@@ -771,7 +771,7 @@ export default function HomePage() {
                 <div style={{ paddingBottom: "20px", paddingRight: "16px" }}>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    letterSpacing: "0.24em", color: "rgba(17,24,39,0.3)",
+                    letterSpacing: "0.24em", color: "rgba(255,255,255,0.25)",
                     textTransform: "uppercase", marginBottom: "10px",
                   }}>
                     {String((i % projects.length) + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
@@ -779,7 +779,7 @@ export default function HomePage() {
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif",
                     fontSize: "1.25rem", fontWeight: 800,
-                    color: "#111827",
+                    color: "rgba(255,255,255,0.9)",
                     lineHeight: 1.15, textTransform: "uppercase",
                     letterSpacing: "-0.01em", marginBottom: "10px",
                   }}>
@@ -787,7 +787,7 @@ export default function HomePage() {
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    color: "rgba(17,24,39,0.4)", letterSpacing: "0.16em",
+                    color: "rgba(255,255,255,0.4)", letterSpacing: "0.16em",
                     textTransform: "uppercase",
                   }}>
                     {proj.location}&nbsp;·&nbsp;{proj.type}
@@ -906,7 +906,7 @@ export default function HomePage() {
       <section
         ref={testimonialsRef}
         data-testid="section-testimonials"
-        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 0" }}
+        style={{ background: "#111827", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "100px 0" }}
       >
         {/* Heading */}
         <div style={{ padding: "0 40px", marginBottom: "60px", textAlign: "center" }}>
@@ -919,7 +919,7 @@ export default function HomePage() {
           </span>
           <h3 style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
+            fontSize: "1.875rem", color: "#ffffff",
             textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0, lineHeight: 1.15,
           }}>
             What Our Clients Say
@@ -951,10 +951,13 @@ export default function HomePage() {
         }}>
           {testimonials.map((t, i) => (
             <div key={i} className="testi-card" style={{
-              background: "#ffffff", borderRadius: "10px",
-              padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-              display: "flex", flexDirection: "column",
+              background: "rgba(255,255,255,0.05)", borderRadius: "10px",
+              padding: "32px",
               borderTop: "3px solid #C41E3A",
+              borderRight: "1px solid rgba(255,255,255,0.08)",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
+              display: "flex", flexDirection: "column",
             }}>
               <div style={{ display: "flex", gap: "3px", marginBottom: "20px" }}>
                 {[...Array(5)].map((_, s) => (
@@ -963,14 +966,14 @@ export default function HomePage() {
               </div>
               <p style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "12.5px",
-                lineHeight: 1.85, color: "#374151", marginBottom: "24px", flex: 1,
+                lineHeight: 1.85, color: "rgba(255,255,255,0.7)", marginBottom: "24px", flex: 1,
               }}>
                 "{t.quote}"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <div style={{
                   width: "40px", height: "40px", borderRadius: "50%",
-                  overflow: "hidden", flexShrink: 0, background: "#e5e7eb",
+                  overflow: "hidden", flexShrink: 0, background: "rgba(255,255,255,0.1)",
                 }}>
                   <img src={`${assetBase}${t.image}`} alt={t.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -978,13 +981,13 @@ export default function HomePage() {
                 <div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
-                    fontWeight: 700, color: "#111827", letterSpacing: "0.06em",
+                    fontWeight: 700, color: "#ffffff", letterSpacing: "0.06em",
                   }}>
                     {t.name}
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    color: "rgba(17,24,39,0.45)", marginTop: "2px",
+                    color: "rgba(255,255,255,0.4)", marginTop: "2px",
                   }}>
                     {t.role}
                   </div>
