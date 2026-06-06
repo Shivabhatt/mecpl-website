@@ -449,13 +449,13 @@ export default function HomePage() {
               </div>
             </h1>
 
-            <h3 ref={heroTagRef as React.RefObject<HTMLHeadingElement>} className="hero-sub-item text-3xl" style={{
-              fontFamily: "'Montserrat',sans-serif",
+            <p ref={heroTagRef} className="hero-sub-item" style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
               fontWeight: 300, color: "rgba(255,255,255,0.65)",
-              lineHeight: 1.5, margin: "28px 0 0",
+              lineHeight: 1.75, margin: "28px 0 0",
             }}>
               From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
-            </h3>
+            </p>
 
             <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap", justifyContent: "center" }}>
               <Link href="/completed-projects" data-testid="button-hero-projects">
