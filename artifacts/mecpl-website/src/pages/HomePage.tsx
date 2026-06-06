@@ -718,13 +718,38 @@ export default function HomePage() {
         data-testid="section-testimonials"
         style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "80px 0" }}
       >
-        {/* Top: masonry photo collage + text overlay */}
-        <div style={{ position: "relative", marginBottom: "64px", overflow: "hidden" }}>
-          {/* Masonry grid */}
-          <div style={{
-            display: "flex", gap: "10px",
-            padding: "0 32px",
+        {/* Section heading */}
+        <div style={{ padding: "0 40px", marginBottom: "56px", textAlign: "center" }}>
+          <span style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 700,
+            letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase",
+            display: "block", marginBottom: "16px",
           }}>
+            CLIENT VOICES
+          </span>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "clamp(2rem,4.5vw,3.6rem)",
+            fontWeight: 700, color: "#111827",
+            lineHeight: 1.05, margin: "0 0 4px",
+            textTransform: "uppercase", letterSpacing: "-0.02em",
+          }}>
+            Trusted by India's leading
+          </h2>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "clamp(2rem,4.5vw,3.6rem)",
+            fontWeight: 200, color: "rgba(17,24,39,0.45)",
+            lineHeight: 1.05, margin: 0,
+            textTransform: "uppercase", letterSpacing: "-0.02em",
+          }}>
+            developers and structural partners
+          </h2>
+        </div>
+
+        {/* Top: masonry photo collage */}
+        <div style={{ position: "relative", marginBottom: "64px", overflow: "hidden" }}>
+          <div style={{ display: "flex", gap: "10px", padding: "0 32px" }}>
             {masonryCols.map((col, ci) => (
               <div key={ci} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
                 {col.map((photo, pi) => (
@@ -741,49 +766,6 @@ export default function HomePage() {
                 ))}
               </div>
             ))}
-          </div>
-
-          {/* Center overlay */}
-          <div style={{
-            position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-            display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center",
-            background: "linear-gradient(180deg, rgba(248,250,252,0.18) 0%, rgba(248,250,252,0.62) 100%)",
-            backdropFilter: "blur(1px)",
-          }}>
-            {/* Pill label */}
-            <div style={{
-              border: "1px solid rgba(17,24,39,0.18)", borderRadius: "100px",
-              padding: "6px 22px", marginBottom: "22px",
-              background: "rgba(255,255,255,0.92)",
-            }}>
-              <span style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                fontWeight: 700, letterSpacing: "0.22em",
-                textTransform: "uppercase", color: "#111827",
-              }}>
-                CLIENT VOICES
-              </span>
-            </div>
-
-            <h2 style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "clamp(1.4rem,2.8vw,2.2rem)",
-              fontWeight: 700, color: "#111827",
-              textAlign: "center", lineHeight: 1.2,
-              margin: "0 0 6px", textShadow: "0 1px 8px rgba(248,250,252,0.9)",
-            }}>
-              Trusted by India's leading
-            </h2>
-            <h2 style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "clamp(1.4rem,2.8vw,2.2rem)",
-              fontWeight: 300, color: "rgba(17,24,39,0.6)",
-              textAlign: "center", lineHeight: 1.2, margin: 0,
-              textShadow: "0 1px 8px rgba(248,250,252,0.9)",
-            }}>
-              developers and structural partners
-            </h2>
           </div>
         </div>
 
