@@ -125,11 +125,12 @@ export default function HomePage() {
     const section  = heroSectionRef.current;
     if (!headline || !section) return;
 
-    gsap.set(section, { y: "100vh", scale: 0.98 });
-
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Hide section only in animated mode — reduced-motion users see it immediately
+        gsap.set(section, { y: "100vh", scale: 0.98 });
+
         const splits: SplitText[] = [];
 
         const runAnims = () => {
@@ -168,8 +169,8 @@ export default function HomePage() {
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(section, { y: 0, scale: 1 });
-        window.addEventListener("preloader-exit", () => gsap.set(section, { y: 0, scale: 1 }), { once: true });
+        // Section visible immediately — no entrance animation
+        gsap.set(section, { y: 0, scale: 1, clearProps: "all" });
       });
     });
 
@@ -206,6 +207,14 @@ export default function HomePage() {
               });
             });
           },
+        });
+      });
+      // Reduced-motion: show final values immediately
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        sec.querySelectorAll<HTMLElement>(".stat-num").forEach(el => {
+          const target = parseFloat(el.dataset.target ?? "0");
+          const suffix = el.dataset.suffix ?? "";
+          el.textContent = target + suffix;
         });
       });
     }, sec);
@@ -324,6 +333,14 @@ export default function HomePage() {
               });
             });
           },
+        });
+      });
+      // Reduced-motion: show final values immediately
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        sec.querySelectorAll<HTMLElement>(".why-stat-num").forEach(el => {
+          const target = parseFloat(el.dataset.target ?? "0");
+          const suffix = el.dataset.suffix ?? "";
+          el.textContent = target + suffix;
         });
       });
     }, sec);
@@ -903,10 +920,7 @@ export default function HomePage() {
             fontSize: "1.875rem", color: "#111827",
             textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0, lineHeight: 1.15,
           }}>
-            Trusted by India's leading<br />
-            <span style={{ fontWeight: 200, color: "rgba(17,24,39,0.4)" }}>
-              developers and structural partners
-            </span>
+            What Our Clients Say
           </h3>
         </div>
 
@@ -999,8 +1013,7 @@ export default function HomePage() {
             fontSize: "1.875rem", color: "#111827",
             textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0, lineHeight: 1.15,
           }}>
-            Trusted by India's<br />
-            <span style={{ fontWeight: 200, color: "rgba(17,24,39,0.4)" }}>finest developers</span>
+            Trusted Partners
           </h3>
         </div>
 
