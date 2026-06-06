@@ -1051,17 +1051,20 @@ export default function HomePage() {
         data-testid="section-dual-cta"
         style={{ background: "#111827", padding: "100px 40px", position: "relative" }}
       >
-        <div style={{ textAlign: "center", maxWidth: "640px", margin: "0 auto" }}>
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "center",
+          gap: "48px", flexWrap: "wrap", maxWidth: "1100px", margin: "0 auto",
+        }}>
           <div style={{
             fontFamily: "'Montserrat',sans-serif",
-            fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+            fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
             fontWeight: 800, color: "#ffffff",
             textTransform: "uppercase", lineHeight: 1.0,
-            marginBottom: "52px", letterSpacing: "-0.02em",
+            letterSpacing: "-0.02em", flexShrink: 0,
           }}>
             LET'S BUILD TOGETHER
           </div>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
             <Link href="/contact" data-testid="button-cta-contact">
               <span
                 className="inline-flex items-center gap-2 cursor-pointer"
