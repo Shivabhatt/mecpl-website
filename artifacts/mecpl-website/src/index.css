@@ -361,3 +361,13 @@ html[data-theme="light"] select {
   pointer-events: none;
   z-index: 1;
 }
+
+/* ── Why Choose accordion drawer ── */
+.why-drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.why-drawer-open {
+  max-height: 180px;
+}

@@ -11,10 +11,9 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 /* ─── TYPES ──────────────────────────────────────────────────────── */
 interface WhyCard {
   stat: string;
-  numericTarget?: number;
-  suffix?: string;
   title: string;
   desc: string;
+  image: string;
 }
 
 /* ─── DATA ───────────────────────────────────────────────────────── */
@@ -50,10 +49,10 @@ const projects = [
 ];
 
 const whyChoose: WhyCard[] = [
-  { stat: "95%+",      numericTarget: 95,  suffix: "%+", title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule." },
-  { stat: "ISO 45001",                                    title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site." },
-  { stat: "25+ Yrs",   numericTarget: 25,  suffix: "+",  title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most complex projects." },
-  { stat: "ISO 9001",                                     title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management across every project phase." },
+  { stat: "95%+",      title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule — backed by rigorous scheduling and proactive site governance.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400&auto=format&fit=crop" },
+  { stat: "ISO 45001", title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, protecting our teams on India's most complex builds.", image: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=1400&auto=format&fit=crop" },
+  { stat: "25+ Years", title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most ambitious and technically demanding projects.", image: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=1400&auto=format&fit=crop" },
+  { stat: "ISO 9001",  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management applied across every project phase — from structural planning to final handover.", image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1400&auto=format&fit=crop" },
 ];
 
 const testimonials = [
@@ -109,7 +108,8 @@ export default function HomePage() {
 
   const heroSectionRef  = useRef<HTMLElement>(null);
   const heroHeadlineRef = useRef<HTMLDivElement>(null);
-  const heroTagRef      = useRef<HTMLSpanElement>(null);
+  const heroTagRef      = useRef<HTMLElement>(null);
+  const [activeWhy, setActiveWhy] = useState<number>(0);
   const heroSubRef      = useRef<HTMLDivElement>(null);
   const statsRef        = useRef<HTMLElement>(null);
   const aboutRef        = useRef<HTMLElement>(null);
@@ -295,49 +295,38 @@ export default function HomePage() {
     return () => mm.revert();
   }, []);
 
-  /* ── WHY CHOOSE: count-up + stagger ── */
+  /* ── WHY CHOOSE: section entrance ── */
   useEffect(() => {
     const sec = whyRef.current;
     if (!sec) return;
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.utils.toArray<HTMLElement>(".why-card", sec).forEach((card, i) => {
-          gsap.from(card, {
-            y: 40, opacity: 0, duration: 0.7, ease: "power3.out", delay: i * 0.1,
-            scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
-          });
-        });
-        const numEls = sec.querySelectorAll<HTMLElement>(".why-stat-num");
-        let triggered = false;
-        ScrollTrigger.create({
-          trigger: sec, start: "top 70%", once: true,
-          onEnter: () => {
-            if (triggered) return;
-            triggered = true;
-            numEls.forEach(el => {
-              const target = parseFloat(el.dataset.target ?? "0");
-              const suffix = el.dataset.suffix ?? "";
-              const tracker = { val: 0 };
-              gsap.to(tracker, {
-                val: target, duration: 2, ease: "power2.out",
-                onUpdate: () => { el.textContent = Math.round(tracker.val) + suffix; },
-              });
-            });
-          },
-        });
-      });
-      // Reduced-motion: show final values immediately
-      mm.add("(prefers-reduced-motion: reduce)", () => {
-        sec.querySelectorAll<HTMLElement>(".why-stat-num").forEach(el => {
-          const target = parseFloat(el.dataset.target ?? "0");
-          const suffix = el.dataset.suffix ?? "";
-          el.textContent = target + suffix;
+        const leftCol = sec.querySelector<HTMLElement>(".why-left-col");
+        if (!leftCol) return;
+        gsap.from(leftCol, {
+          x: -40, opacity: 0, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
         });
       });
     }, sec);
     return () => ctx.revert();
   }, []);
+
+  /* ── WHY CHOOSE: SplitText reveal on active change ── */
+  useEffect(() => {
+    const sec = whyRef.current;
+    if (!sec) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const desc = sec.querySelector<HTMLElement>(`.why-desc[data-idx="${activeWhy}"]`);
+    if (!desc) return;
+    let split: SplitText | null = null;
+    const raf = requestAnimationFrame(() => {
+      split = SplitText.create(desc, { type: "lines", mask: "lines" });
+      gsap.from(split.lines, { yPercent: 110, duration: 0.55, ease: "power3.out", stagger: 0.07 });
+    });
+    return () => { cancelAnimationFrame(raf); split?.revert(); };
+  }, [activeWhy]);
 
   /* ── TESTIMONIALS: card stagger ── */
   useEffect(() => {
@@ -832,72 +821,164 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 6. WHY CHOOSE — Count-up cards ══════════ */}
+      {/* ══════════ 6. WHY CHOOSE — Accordion + Image ══════════ */}
       <section
         ref={whyRef}
         data-testid="section-why-mecpl"
-        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px" }}
+        style={{ background: "#ffffff", position: "relative" }}
       >
-        <div className="max-w-5xl mx-auto">
-          <div style={{ marginBottom: "64px" }}>
-            <span style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
-              display: "block", marginBottom: "10px",
-            }}>
-              OUR ADVANTAGE
-            </span>
-            <h3 style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "1.875rem", color: "#111827",
-              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
-            }}>
-              Why Choose MECPL
-            </h3>
+        <div style={{ display: "grid", gridTemplateColumns: "55% 45%", minHeight: "90vh" }}>
+
+          {/* LEFT: header + buttons + accordion */}
+          <div className="why-left-col" style={{
+            padding: "100px 60px 100px 80px",
+            display: "flex", flexDirection: "column", justifyContent: "center",
+          }}>
+            {/* Label + heading + intro */}
+            <div style={{ marginBottom: "36px" }}>
+              <span style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+                letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                display: "block", marginBottom: "10px",
+              }}>
+                OUR ADVANTAGE
+              </span>
+              <h3 style={{
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+                fontSize: "1.875rem", color: "#111827",
+                textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 16px",
+              }}>
+                Why Choose MECPL
+              </h3>
+              <p style={{
+                fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
+                lineHeight: 1.75, color: "#6b7280", margin: 0, maxWidth: "400px",
+              }}>
+                Two decades of structural excellence — on time, on spec, and built to outlast generations.
+              </p>
+            </div>
+
+            {/* Two buttons */}
+            <div style={{ display: "flex", gap: "14px", marginBottom: "56px" }}>
+              <Link href="/completed-projects" data-testid="button-why-projects">
+                <span
+                  className="inline-flex items-center gap-2 cursor-pointer"
+                  style={{
+                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+                >
+                  View Projects <ArrowRight size={11} />
+                </span>
+              </Link>
+              <Link href="/careers" data-testid="button-why-careers">
+                <span
+                  className="inline-flex items-center gap-2 cursor-pointer"
+                  style={{
+                    background: "transparent", color: "#111827", padding: "12px 28px",
+                    border: "1.5px solid rgba(17,24,39,0.2)",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#111827"; el.style.background = "rgba(17,24,39,0.04)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(17,24,39,0.2)"; el.style.background = "transparent"; }}
+                >
+                  Explore Careers <ArrowRight size={11} />
+                </span>
+              </Link>
+            </div>
+
+            {/* Accordion items */}
+            <div>
+              {whyChoose.map((item, i) => (
+                <div
+                  key={i}
+                  style={{ borderTop: "1px solid rgba(17,24,39,0.1)" }}
+                  onMouseEnter={() => setActiveWhy(i)}
+                >
+                  {/* Title row */}
+                  <div style={{
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    padding: "22px 0", cursor: "default",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+                      <span style={{
+                        fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
+                        color: activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.3)",
+                        letterSpacing: "0.22em", transition: "color 0.3s",
+                      }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span style={{
+                        fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700,
+                        color: activeWhy === i ? "#111827" : "rgba(17,24,39,0.45)",
+                        textTransform: "uppercase", letterSpacing: "0.08em",
+                        transition: "color 0.3s",
+                      }}>
+                        {item.title}
+                      </span>
+                    </div>
+                    <div style={{
+                      width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                      border: `1.5px solid ${activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.15)"}`,
+                      background: activeWhy === i ? "#C41E3A" : "transparent",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "border-color 0.3s, background 0.3s",
+                    }}>
+                      <span style={{
+                        color: activeWhy === i ? "#fff" : "#9ca3af",
+                        fontSize: "15px", lineHeight: 1, marginTop: "-1px",
+                        fontFamily: "monospace",
+                      }}>
+                        {activeWhy === i ? "−" : "+"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Expandable drawer */}
+                  <div className={`why-drawer${activeWhy === i ? " why-drawer-open" : ""}`}>
+                    <div style={{ paddingBottom: "28px" }}>
+                      <div style={{
+                        fontFamily: "'Montserrat',sans-serif",
+                        fontSize: "2rem", fontWeight: 800, color: "#C41E3A",
+                        marginBottom: "10px", lineHeight: 1.0,
+                      }}>
+                        {item.stat}
+                      </div>
+                      <p
+                        className="why-desc"
+                        data-idx={i}
+                        style={{
+                          fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+                          lineHeight: 1.8, color: "#6b7280", margin: 0,
+                        }}
+                      >
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div style={{ borderTop: "1px solid rgba(17,24,39,0.1)" }} />
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "1px", background: "rgba(0,0,0,0.08)" }}>
+          {/* RIGHT: crossfading image */}
+          <div style={{ position: "relative", overflow: "hidden" }}>
             {whyChoose.map((item, i) => (
-              <div
-                key={i}
-                className="why-card"
-                data-testid={`card-why-${i}`}
-                style={{
-                  background: "#ffffff", padding: "48px 40px",
-                  borderTop: "4px solid #C41E3A",
-                }}
-              >
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
-                  fontWeight: 800, color: "#C41E3A",
-                  marginBottom: "14px", lineHeight: 1.05,
-                }}>
-                  {item.numericTarget != null ? (
-                    <span
-                      className="why-stat-num"
-                      data-target={item.numericTarget}
-                      data-suffix={item.suffix ?? ""}
-                    >
-                      0
-                    </span>
-                  ) : (
-                    item.stat
-                  )}
-                </div>
-                <div style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
-                  fontWeight: 700, color: "#111827",
-                  textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px",
-                }}>
-                  {item.title}
-                </div>
-                <p style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-                  lineHeight: 1.75, color: "#6b7280", margin: 0,
-                }}>
-                  {item.desc}
-                </p>
+              <div key={i} style={{
+                position: "absolute", inset: 0,
+                opacity: activeWhy === i ? 1 : 0,
+                transition: "opacity 0.7s ease",
+                pointerEvents: "none",
+              }}>
+                <img
+                  src={item.image} alt={item.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
               </div>
             ))}
           </div>
