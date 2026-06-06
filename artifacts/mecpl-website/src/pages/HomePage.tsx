@@ -18,9 +18,7 @@ interface WhyCard {
 
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
-  "assets/video/hero-new.mp4",
-  "assets/video/hero.mp4",
-  "assets/video/istockphoto-891492418-640_adpp_is.mp4",
+  "assets/hero-banner.mp4",
 ];
 
 const stats = [
@@ -405,94 +403,6 @@ export default function HomePage() {
           background: "linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.62) 100%)",
         }} />
 
-        {/* TOP RIGHT: video counter + progress */}
-        <div style={{
-          position: "absolute", top: "100px", right: "40px", zIndex: 10,
-          display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px",
-        }}>
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-            fontWeight: 300, color: "rgba(255,255,255,0.45)", letterSpacing: "0.24em",
-          }}>
-            {String(videoIdx + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
-          </div>
-          <div style={{ width: "60px", height: "1px", background: "rgba(255,255,255,0.15)", position: "relative", overflow: "hidden" }}>
-            <div key={videoIdx} className="hero-progress-bar" style={{
-              position: "absolute", left: 0, top: 0, height: "100%", background: "#ffffff",
-            }} />
-          </div>
-        </div>
-
-        {/* CENTER: heading + description + buttons */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 10,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <div style={{ textAlign: "center", maxWidth: "720px", padding: "0 40px" }}>
-            <h1 ref={heroHeadlineRef} style={{ margin: 0 }}>
-              <div className="hero-line" style={{
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                fontSize: "clamp(1.5rem, 5vw, 4rem)",
-                lineHeight: 1.05, textTransform: "uppercase", letterSpacing: "-0.02em",
-                whiteSpace: "nowrap", overflow: "hidden",
-                color: "#ffffff",
-              }}>
-                WE BUILD
-              </div>
-              <div className="hero-line" style={{
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-                fontSize: "clamp(1.5rem, 5vw, 4rem)",
-                lineHeight: 1.15, textTransform: "uppercase", letterSpacing: "-0.02em",
-                whiteSpace: "nowrap", overflow: "hidden",
-                color: "#C41E3A",
-              }}>
-                INDIA'S SKYLINE
-              </div>
-            </h1>
-
-            <p ref={heroTagRef} className="hero-sub-item" style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-              fontWeight: 300, color: "rgba(255,255,255,0.65)",
-              lineHeight: 1.75, margin: "28px 0 0",
-            }}>
-              From Trump Towers to Panchshil's skyline-defining highrises — MECPL delivers ISO-certified structural engineering excellence across India's landmark developments since 1998.
-            </p>
-
-            <div ref={heroSubRef} style={{ display: "flex", gap: "14px", marginTop: "36px", flexWrap: "wrap", justifyContent: "center" }}>
-              <Link href="/completed-projects" data-testid="button-hero-projects">
-                <span
-                  className="hero-sub-item"
-                  style={{
-                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
-                >
-                  View Projects <ArrowRight size={11} />
-                </span>
-              </Link>
-              <Link href="/careers" data-testid="button-hero-careers">
-                <span
-                  className="hero-sub-item"
-                  style={{
-                    background: "transparent", color: "#ffffff", padding: "12px 28px",
-                    border: "1.5px solid rgba(255,255,255,0.45)",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                    display: "inline-flex", alignItems: "center", gap: "8px", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.08)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.45)"; el.style.background = "transparent"; }}
-                >
-                  Explore Careers <ArrowRight size={11} />
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
 
         {/* BOTTOM: scroll indicator */}
         <div style={{
