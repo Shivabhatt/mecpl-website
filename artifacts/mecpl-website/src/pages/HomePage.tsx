@@ -858,39 +858,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Two buttons */}
-            <div style={{ display: "flex", gap: "14px", marginBottom: "56px" }}>
-              <Link href="/completed-projects" data-testid="button-why-projects">
-                <span
-                  className="inline-flex items-center gap-2 cursor-pointer"
-                  style={{
-                    background: "#C41E3A", color: "#ffffff", padding: "12px 28px",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
-                >
-                  View Projects <ArrowRight size={11} />
-                </span>
-              </Link>
-              <Link href="/careers" data-testid="button-why-careers">
-                <span
-                  className="inline-flex items-center gap-2 cursor-pointer"
-                  style={{
-                    background: "transparent", color: "#111827", padding: "12px 28px",
-                    border: "1.5px solid rgba(17,24,39,0.2)",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                  }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#111827"; el.style.background = "rgba(17,24,39,0.04)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(17,24,39,0.2)"; el.style.background = "transparent"; }}
-                >
-                  Explore Careers <ArrowRight size={11} />
-                </span>
-              </Link>
-            </div>
-
             {/* Accordion items */}
             <div>
               {whyChoose.map((item, i) => (
