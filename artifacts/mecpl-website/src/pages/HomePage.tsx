@@ -1059,7 +1059,7 @@ export default function HomePage() {
             textTransform: "uppercase", lineHeight: 1.0,
             marginBottom: "52px", letterSpacing: "-0.02em",
           }}>
-            LET'S BUILD<br />TOGETHER
+            LET'S BUILD TOGETHER
           </div>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/contact" data-testid="button-cta-contact">
