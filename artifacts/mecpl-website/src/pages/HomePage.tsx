@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
-import { ArrowRight, Star, ChevronDown } from "lucide-react";
+import { ArrowRight, Star, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -114,7 +114,24 @@ export default function HomePage() {
   const statsRef        = useRef<HTMLElement>(null);
   const aboutRef        = useRef<HTMLElement>(null);
   const servicesRef     = useRef<HTMLElement>(null);
-  const panelRefs       = useRef<(HTMLDivElement | null)[]>([]);
+  /* carousel */
+  const [carouselIdx, setCarouselIdx]   = useState(0);
+  const carouselTrackRef                = useRef<HTMLDivElement>(null);
+  const carouselPausedRef               = useRef(false);
+  const PROJ_CARD_W = 400;
+  const PROJ_CARD_GAP = 20;
+
+  const goPrev = useCallback(() => {
+    setCarouselIdx(p => (p - 1 + projects.length) % projects.length);
+    carouselPausedRef.current = true;
+    setTimeout(() => { carouselPausedRef.current = false; }, 5000);
+  }, []);
+
+  const goNext = useCallback(() => {
+    setCarouselIdx(p => (p + 1) % projects.length);
+    carouselPausedRef.current = true;
+    setTimeout(() => { carouselPausedRef.current = false; }, 5000);
+  }, []);
   const whyRef          = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
   const clientsRef      = useRef<HTMLElement>(null);
@@ -270,37 +287,28 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── PROJECTS: sticky stacking + scrub clip-path reveal ── */
+  /* ── PROJECTS: GSAP animate carousel track ── */
   useEffect(() => {
-    const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (panels.length < 2) return;
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // First panel always visible
-        gsap.set(panels[0], { clipPath: "inset(0% 0 0 0)" });
-        // Each subsequent panel wipes in from top as it scrolls into position
-        panels.slice(1).forEach(panel => {
-          gsap.fromTo(panel,
-            { clipPath: "inset(100% 0 0 0)" },
-            {
-              clipPath: "inset(0% 0 0 0)",
-              ease: "none",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top bottom",
-                end: "top top",
-                scrub: true,
-              },
-            }
-          );
-        });
-      });
-      mm.add("(prefers-reduced-motion: reduce)", () => {
-        panels.forEach(p => gsap.set(p, { clipPath: "inset(0% 0 0 0)" }));
-      });
+    const track = carouselTrackRef.current;
+    if (!track) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    gsap.to(track, {
+      x: -(carouselIdx * (PROJ_CARD_W + PROJ_CARD_GAP)),
+      duration: prefersReduced ? 0 : 0.75,
+      ease: "power3.out",
     });
-    return () => ctx.revert();
+  }, [carouselIdx]);
+
+  /* ── PROJECTS: auto-scroll ── */
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    const id = setInterval(() => {
+      if (!carouselPausedRef.current) {
+        setCarouselIdx(p => (p + 1) % projects.length);
+      }
+    }, 3500);
+    return () => clearInterval(id);
   }, []);
 
   /* ── WHY CHOOSE: count-up + stagger ── */
@@ -741,77 +749,142 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 5. PROJECTS — ScrollTrigger pinned panels ══════════ */}
-      <section data-testid="section-projects" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-        <div style={{ position: "relative" }}>
-          {projects.map((proj, i) => (
-            <div
-              key={i}
-              ref={el => { panelRefs.current[i] = el; }}
-              style={{ height: "100vh", zIndex: i + 1, overflow: "hidden", position: "sticky", top: 0 }}
-            >
-              <img
-                src={proj.image} alt={proj.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.1) 55%)",
-              }} />
-              <div style={{
-                position: "absolute", bottom: "48px", left: "48px", right: "48px",
-                display: "flex", justifyContent: "space-between", alignItems: "flex-end",
-              }}>
-                <div>
+      {/* ══════════ 5. PROJECTS — Horizontal carousel ══════════ */}
+      <section
+        data-testid="section-projects"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
+      >
+        {/* Header row */}
+        <div style={{
+          padding: "0 48px", marginBottom: "48px",
+          display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+        }}>
+          <div>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+              display: "block", marginBottom: "10px",
+            }}>
+              OUR PROJECTS
+            </span>
+            <h3 style={{
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+              fontSize: "1.875rem", color: "#111827",
+              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+            }}>
+              Landmark Works
+            </h3>
+          </div>
+
+          {/* Progress indicator + arrows */}
+          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+              letterSpacing: "0.2em", color: "rgba(17,24,39,0.35)", textTransform: "uppercase",
+            }}>
+              {String(carouselIdx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+            </span>
+            <div style={{ display: "flex", gap: "8px" }}>
+              {/* Prev */}
+              <button
+                onClick={goPrev}
+                aria-label="Previous project"
+                style={{
+                  width: "44px", height: "44px", borderRadius: "50%",
+                  border: "1px solid rgba(17,24,39,0.15)", background: "transparent",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
+                  color: "#111827",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111827"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = "#111827"; }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+              {/* Next */}
+              <button
+                onClick={goNext}
+                aria-label="Next project"
+                style={{
+                  width: "44px", height: "44px", borderRadius: "50%",
+                  border: "1px solid rgba(17,24,39,0.15)", background: "transparent",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
+                  color: "#111827",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111827"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = "#111827"; }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel track — overflow hidden, left-padded so partial right card peeks */}
+        <div style={{ overflow: "hidden", paddingLeft: "48px" }}>
+          <div
+            ref={carouselTrackRef}
+            style={{
+              display: "flex",
+              gap: `${PROJ_CARD_GAP}px`,
+              willChange: "transform",
+            }}
+          >
+            {projects.map((proj, i) => (
+              <div
+                key={i}
+                style={{ width: `${PROJ_CARD_W}px`, flexShrink: 0, cursor: "pointer" }}
+                onClick={() => { setCarouselIdx(i); carouselPausedRef.current = true; setTimeout(() => { carouselPausedRef.current = false; }, 5000); }}
+              >
+                {/* Text above image */}
+                <div style={{ paddingBottom: "20px", paddingRight: "16px" }}>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    letterSpacing: "0.26em", color: "rgba(255,255,255,0.38)",
-                    textTransform: "uppercase", marginBottom: "12px",
+                    letterSpacing: "0.24em", color: "rgba(17,24,39,0.3)",
+                    textTransform: "uppercase", marginBottom: "10px",
                   }}>
                     {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                   </div>
-                  <h2 style={{
+                  <div style={{
                     fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "clamp(2rem, 4.5vw, 4rem)",
-                    fontWeight: 800, color: "#ffffff",
-                    lineHeight: 0.95, margin: 0,
-                    textTransform: "uppercase", letterSpacing: "-0.01em",
+                    fontSize: "1.25rem", fontWeight: 800,
+                    color: carouselIdx === i ? "#C41E3A" : "#111827",
+                    lineHeight: 1.15, textTransform: "uppercase",
+                    letterSpacing: "-0.01em", marginBottom: "10px",
+                    transition: "color 0.3s",
                   }}>
                     {proj.name}
-                  </h2>
-                </div>
-                <div style={{ textAlign: "right", flexShrink: 0, paddingLeft: "24px" }}>
-                  <div style={{
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    fontWeight: 500, color: "rgba(255,255,255,0.58)",
-                    letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "4px",
-                  }}>
-                    {proj.location}
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    color: "rgba(255,255,255,0.32)", letterSpacing: "0.14em", textTransform: "uppercase",
+                    color: "rgba(17,24,39,0.4)", letterSpacing: "0.16em",
+                    textTransform: "uppercase",
                   }}>
-                    {proj.type}
+                    {proj.location}&nbsp;·&nbsp;{proj.type}
                   </div>
                 </div>
+
+                {/* Image */}
+                <div style={{ height: "500px", overflow: "hidden", position: "relative" }}>
+                  <img
+                    src={proj.image}
+                    alt={proj.name}
+                    style={{
+                      width: "100%", height: "100%", objectFit: "cover", display: "block",
+                      transition: "transform 0.6s ease",
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* After-panels CTA */}
-        <div style={{
-          background: "#ffffff", padding: "80px 48px",
-          borderTop: "1px solid rgba(0,0,0,0.07)", textAlign: "center",
-        }}>
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-            color: "rgba(17,24,39,0.3)", letterSpacing: "0.14em",
-            textTransform: "uppercase", marginBottom: "20px",
-          }}>
-            150+ landmark projects across India
-          </div>
+        {/* View all CTA */}
+        <div style={{ padding: "48px 48px 64px", textAlign: "center" }}>
           <Link href="/completed-projects" data-testid="button-all-projects">
             <span
               className="inline-flex items-center gap-2 cursor-pointer"
@@ -822,7 +895,7 @@ export default function HomePage() {
                 borderBottom: "1px solid rgba(196,30,58,0.3)", paddingBottom: "5px",
               }}
             >
-              View All Projects <ArrowRight size={12} />
+              View All 150+ Projects <ArrowRight size={12} />
             </span>
           </Link>
         </div>
