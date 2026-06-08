@@ -1,9 +1,45 @@
+import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import SectionHeader from "@/components/SectionHeader";
-import EquipmentPage from "@/pages/EquipmentPage";
-import InvestorsPage from "@/pages/InvestorsPage";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 const assetBase = import.meta.env.BASE_URL;
+
+const stats = [
+  { val: "40+", label: "Year Of Legacy" },
+  { val: "100+", label: "Completed Projects" },
+  { val: "100%", label: "Quality Consistency" },
+  { val: "100+", label: "Satisfied Clients" },
+];
+
+const leaders = [
+  {
+    name: "Mr. M B Nambiar",
+    role: "Chairman",
+    desc: "The founding architect of MECPL's ethos — Mr. Nambiar's 40+ year vision has forged the company's culture of quality-first execution, regulatory discipline, and client trust. Under his stewardship, MECPL has grown from a regional contractor to one of Pune's most decorated engineering firms.",
+    image: `${assetBase}assets/leaders/leader-01.jpg`,
+  },
+  {
+    name: "Mr. Jeevan K",
+    role: "Managing Director",
+    desc: "The operational engine of MECPL. Mr. Jeevan K drives cross-functional strategy, large-scale delivery leadership, and technology adoption — ensuring every project runs with the precision that has earned MECPL its CRISIL SME 1 rating and national recognition.",
+    image: `${assetBase}assets/leaders/leader-03.jpg`,
+  },
+  {
+    name: "Mr. Manojkumar M R",
+    role: "Director Finance",
+    desc: "Commanding fiscal governance and compliance infrastructure across all MECPL operations. Mr. Manojkumar's financial stewardship has secured MECPL's long-term capital stability, investor trust, and sustained credit excellence.",
+    image: `${assetBase}assets/leaders/leader-02.jpg`,
+  },
+  {
+    name: "Mr. Jitin Nambiar",
+    role: "Executive Director",
+    desc: "The next-generation force at MECPL. Mr. Jitin Nambiar oversees active project portfolios, on-site engineering execution, and the integration of modern construction methodologies — driving MECPL's ambitions into Pune's evolving skyline.",
+    image: `${assetBase}assets/leaders/jitin.png`,
+  },
+];
 
 const clientLogos = [
   { name: "Panchshil Realty", src: `${assetBase}assets/clients/client-09-1.webp` },
@@ -14,266 +50,637 @@ const clientLogos = [
   { name: "Kalpataru", src: `${assetBase}assets/clients/client-14.webp` },
   { name: "Lotus", src: `${assetBase}assets/clients/client-13.webp` },
   { name: "VTP Realty", src: `${assetBase}assets/clients/vtp-realty.webp` },
-  { name: "Tata Consultancy Services", src: `${assetBase}assets/clients/client-06.webp` },
+  { name: "TCS", src: `${assetBase}assets/clients/client-06.webp` },
   { name: "Pride Purple Group", src: `${assetBase}assets/clients/client-15-1.webp` },
 ];
+const loopingLogos = [...clientLogos, ...clientLogos];
 
-const loopingClientLogos = [...clientLogos, ...clientLogos];
+function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: IntersectionObserverInit) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        obs.disconnect();
+      }
+    }, { threshold: 0.15, ...options });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+}
 
-const services = [
+// ─── ALTERNATING IMAGE / TEXT ROWS ───────────────────────────────────────────
+const altRows = [
   {
-    title: "Civil Construction",
-    subtitle: "Structural Excellence at Every Scale",
-    desc: "From foundations to finishes, MECPL delivers comprehensive civil construction services — RCC framing, slabs, columns, shear walls, and more — with ISO-certified quality benchmarks and zero-compromise safety protocols.",
-    highlights: ["RCC Structural Works", "Foundation Engineering", "Shear Wall Construction", "Post-Tensioning Works"],
+    label: "Our Vision",
+    heading: "India's Most Preferred\nCivil Contractor",
+    text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: true,
+    bg: "#ffffff",
   },
   {
-    title: "Turnkey Projects",
-    subtitle: "End-to-End Delivery, Zero Gaps",
-    desc: "MECPL takes full ownership from design coordination through structural handover. Our turnkey model eliminates fragmentation — one partner, one accountability chain, complete execution.",
-    highlights: ["Design Coordination", "Material Procurement", "Complete Site Execution", "Quality Commissioning"],
+    label: "Our Mission",
+    heading: "Quality. Delivery.\nContinuous Improvement.",
+    text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
+    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: false,
+    bg: "#f8f8f8",
   },
   {
-    title: "Industrial Projects",
-    subtitle: "Heavy Infrastructure, Precision Engineered",
-    desc: "Industrial facilities demand tolerance levels that most contractors cannot sustain. MECPL's industrial division specializes in warehouses, logistics hubs, manufacturing plants, and large-format industrial complexes.",
-    highlights: ["Manufacturing Facilities", "Warehouse Structures", "Logistics Hubs", "Industrial Sheds"],
-  },
-  {
-    title: "Residential Projects",
-    subtitle: "Premium Housing, Delivered on Time",
-    desc: "From mid-rise to ultra-high-rise residential towers, MECPL has built some of Pune's most recognized addresses — Trump Towers, Godrej Boulevard, VTP Bel Air — with meticulous detailing and systematic milestone delivery.",
-    highlights: ["High-Rise Towers", "Gated Communities", "Luxury Residences", "Mixed-Use Complexes"],
-  },
-  {
-    title: "Interior Fitouts",
-    subtitle: "Premium Interiors with Engineering Precision",
-    desc: "MECPL extends its quality ethos into premium interior fitouts — commercial office spaces, hospitality fit-outs, and institutional interiors — blending structural reliability with aesthetic refinement.",
-    highlights: ["Commercial Offices", "Hospitality Interiors", "Institutional Spaces", "Retail Environments"],
-  },
-  {
-    title: "Project Management",
-    subtitle: "Strategic Oversight, Measurable Outcomes",
-    desc: "For clients who demand professional site governance, MECPL provides expert project management — scheduling, cost control, safety auditing, and milestone management — as a standalone service.",
-    highlights: ["Scheduling & Planning", "Cost Management", "Safety Auditing", "Quality Assurance"],
+    label: "Our Values",
+    heading: "Safety. Integrity.\nExcellence.",
+    text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: true,
+    bg: "#ece8df",
   },
 ];
 
-const leaders = [
-  { name: "Mr. M B Nambiar", role: "Chairman", desc: "Visionary leadership steering MECPL's growth and legacy protection over 25+ years of landmark engineering.", image: `${assetBase}assets/leaders/leader-01.jpg` },
-  { name: "Mr. Jeevan K", role: "Managing Director", desc: "Operational strategy and cross-industry technology deployment driving MECPL's competitive advantage.", image: `${assetBase}assets/leaders/leader-03.jpg` },
-  { name: "Mr. Manojkumar M R", role: "Director Finance", desc: "Fiscal governance, financial compliance, and credit rating maintenance ensuring MECPL's financial integrity.", image: `${assetBase}assets/leaders/leader-02.jpg` },
-  { name: "Mr. Jitin Nambiar", role: "Executive Director", desc: "Infrastructure delivery monitoring and on-site engineering execution across all active projects.", image: `${assetBase}assets/leaders/jitin.png` },
-];
+function AlternatingSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-const milestones = [
-  { year: "1998", event: "MECPL founded in Pune, Maharashtra, India" },
-  { year: "2002", event: "First CONSTRO Safety Medal — early industry recognition" },
-  { year: "2007", event: "Achieved CRISIL SME 1 Rating — highest financial credibility" },
-  { year: "2013", event: "ICI Best Structural Execution Award program commenced" },
-  { year: "2017", event: "Selected into India's Small Giants Elite Index" },
-  { year: "2018", event: "PCERF CONSTRO Industry Excellence Gold Trophy" },
-  { year: "2021", event: "PCERF Constro Gold Trophy — Godrej Nurture Project" },
-  { year: "2023", event: "BAI Well-Built Structure Special Jury's Recommendation" },
-];
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".alt-card");
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        if (i === 0) return;
+        gsap.fromTo(
+          card,
+          { yPercent: 6, scale: 0.97 },
+          {
+            yPercent: 0,
+            scale: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              end: "top top+=80",
+              scrub: 0.8,
+            },
+          }
+        );
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
+  const textBlock = (row: typeof altRows[0]) => (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      padding: "72px 72px",
+      height: "100%",
+      boxSizing: "border-box",
+    }}>
+      <span style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.65rem",
+        fontWeight: 700,
+        letterSpacing: "0.28em",
+        color: "#C41E3A",
+        textTransform: "uppercase",
+        display: "block",
+        marginBottom: 20,
+      }}>
+        {row.label}
+      </span>
+      <h2 style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontWeight: 900,
+        fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
+        color: "#111",
+        textTransform: "uppercase",
+        letterSpacing: "-0.03em",
+        lineHeight: 1.15,
+        margin: "0 0 24px",
+        whiteSpace: "pre-line",
+      }}>
+        {row.heading}
+      </h2>
+      <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 24 }} />
+      <p style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.95rem",
+        color: "#555",
+        lineHeight: 1.9,
+        margin: 0,
+        maxWidth: 480,
+      }}>
+        {row.text}
+      </p>
+    </div>
+  );
+
+  const imgBlock = (row: typeof altRows[0]) => (
+    <div style={{ overflow: "hidden", height: "100%" }}>
+      <img
+        src={row.img}
+        alt={row.label}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+    </div>
+  );
+
+  return (
+    <div ref={containerRef} style={{ position: "relative" }}>
+      {altRows.map((row, i) => (
+        <div
+          key={i}
+          className="alt-card"
+          style={{
+            position: "sticky",
+            top: 80,
+            zIndex: i + 1,
+            background: row.bg,
+            height: "70vh",
+            borderBottom: "1px solid rgba(0,0,0,0.07)",
+            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+          }}
+        >
+          {row.imageLeft ? (
+            <>{imgBlock(row)}{textBlock(row)}</>
+          ) : (
+            <>{textBlock(row)}{imgBlock(row)}</>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ─── WORD SCATTER (giats.me) ─────────────────────────────────────────────────
+const SCATTER_TEXT =
+  "Architecting Pune's landmarks, built by one team that never compromised on quality, safety, and delivering excellence for 40 years without exception.";
+
+function seededRand(seed: number) {
+  const s = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+  return s - Math.floor(s);
+}
+
+function WordScatterSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const rafRef = useRef<number>(0);
+
+  const words = SCATTER_TEXT.split(" ");
+
+  const scatter = words.map((_, i) => {
+    const r1 = seededRand(i);
+    const r2 = seededRand(i + 100);
+    const r3 = seededRand(i + 200);
+    const r4 = seededRand(i + 300);
+    return {
+      x: (r1 - 0.5) * 900,
+      y: (r2 - 0.5) * 700,
+      scale: 0.45 + r3 * 2.8,
+      opacity: 0.08 + r4 * 0.32,
+    };
+  });
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const update = () => {
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const raw = Math.min(1, Math.max(0, scrolled / scrollable));
+      // ease: slow start, fast middle, slow end
+      const p = raw < 0.5 ? 2 * raw * raw : 1 - Math.pow(-2 * raw + 2, 2) / 2;
+
+      const els = wordsRef.current;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!el) continue;
+        const s = scatter[i];
+        const tx = s.x * (1 - p);
+        const ty = s.y * (1 - p);
+        const sc = s.scale + (1 - s.scale) * p;
+        const op = s.opacity + (1 - s.opacity) * p;
+        el.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+        el.style.opacity = String(Math.min(1, op));
+      }
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{ height: "420vh", background: "#f0ede8", position: "relative" }}
+    >
+      <div style={{
+        position: "sticky", top: 0, height: "100vh",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        overflow: "hidden",
+      }}>
+        <div style={{ maxWidth: 820, padding: "0 48px", textAlign: "center" }}>
+          <p style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "clamp(1.15rem, 2.2vw, 2rem)",
+            fontWeight: 600,
+            lineHeight: 1.75,
+            color: "#111",
+            margin: 0,
+          }}>
+            {words.map((word, i) => (
+              <span
+                key={i}
+                ref={el => { wordsRef.current[i] = el; }}
+                style={{
+                  display: "inline-block",
+                  marginRight: "0.28em",
+                  willChange: "transform, opacity",
+                  transformOrigin: "center center",
+                }}
+              >
+                {word}
+              </span>
+            ))}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+function RevealBlock({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useScrollReveal(ref);
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: 0,
+        transform: "translateY(48px)",
+        transition: `opacity 0.9s cubic-bezier(.16,1,.3,1) ${delay}ms, transform 0.9s cubic-bezier(.16,1,.3,1) ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
-    <div data-animate-page className="bg-white">
-      {/* Page header */}
-      <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
-          alt="Construction"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
-        <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="Who We Are" title="About MECPL" subtitle="25+ years of building trust, delivering excellence, and shaping Pune's skyline." />
-        
-        </div>
-      </div>
+    <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
 
-      {/* Sticky Navigation */}
-      <div className="sticky top-20 z-30 bg-white/95 backdrop-blur-xl border-b border-black/[0.06]">
-        <div className="max-w-7xl mx-auto px-6 py-4 overflow-x-auto">
-          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.28em] whitespace-nowrap text-[#6b7280]">
-            <a href="#abt1" className="hover:text-[#C41E3A] hover:font-black transition-colors">Vision &amp; Mission</a>
-            <a href="#abt2" className="hover:text-[#C41E3A] hover:font-black transition-colors">Services</a>
-            <a href="#abt3" className="hover:text-[#C41E3A] hover:font-black transition-colors">Leadership</a>
-            <a href="#abt4" className="hover:text-[#C41E3A] hover:font-black transition-colors">Milestones</a>
+      {/* ─── FELIX-NIETO EDITORIAL HERO ─────────────────────── */}
+      <section style={{
+        background: "#ece8df",
+        minHeight: "100vh",
+        padding: "130px 56px 0",
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}>
+        {/* Full-bleed editorial typography */}
+        <div style={{ position: "relative", zIndex: 2 }}>
+          {/* Label */}
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
+            <span style={{ width: 28, height: 1.5, background: "#C41E3A", display: "block" }} />
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase" }}>
+              About MECPL
+            </span>
+          </div>
+
+          {/* Line 1 — heavy black, full-width bleed */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.04em",
+            color: "#111",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}>
+            ENGINEERING
+          </div>
+
+          {/* Line 2 — ultra-thin, indented, contrasting weight */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 200,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.03em",
+            color: "#111",
+            textTransform: "uppercase",
+            paddingLeft: "clamp(2rem, 5vw, 7rem)",
+            whiteSpace: "nowrap",
+          }}>
+            LANDMARKS
+          </div>
+
+          {/* Line 3 — mixed: red accent word + thin rest */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.04em",
+            color: "#111",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}>
+            &amp;{" "}
+            <span style={{ fontWeight: 200, color: "#C41E3A" }}>EXCELLENCE.</span>
           </div>
         </div>
-      </div>
 
-      {/* Vision & Mission */}
-      <section id="abt1" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-vision-mission">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Vision</span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-[#111827]">Becoming India's Most Preferred Contractor</h3>
-              <p className="text-[#4b5563] text-sm leading-relaxed">
-                To become the country's most preferred civil engineering contractor by delivering exceptional client satisfaction while ensuring strict regulatory compliance, health-first worker safety, and eco-friendly practices that sustain our environment for future generations.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Mission</span>
-              <p className="text-[#4b5563] text-sm leading-relaxed">
-                Providing elite structural quality and timely execution through continuous adaptation of modern building technologies and personnel training programs — delivering projects that stand as testaments to engineering excellence and client trust.
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {[{ val: "25+", label: "Years" }, { val: "150+", label: "Projects" }, { val: "100%", label: "Quality" }].map(s => (
-                <div key={s.label} className="p-4 bg-[#f9f9f9] border border-black/[0.07] text-center rounded-sm">
-                  <div className="text-2xl font-black text-[#C41E3A]">{s.val}</div>
-                  <div className="text-[10px] text-[#4b5563] font-bold uppercase tracking-wider mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="h-96 rounded-sm overflow-hidden shadow-sm border border-black/[0.1]">
-            <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
-              className="w-full h-full object-cover transition-all duration-500"
-              alt="MECPL structural integrity"
-            />
+        {/* Right-side image — overlaps typography vertically (felix-nieto collage) */}
+        <div style={{
+          position: "absolute",
+          top: "18%",
+          right: 0,
+          width: "42%",
+          height: "70%",
+          zIndex: 1,
+          overflow: "hidden",
+        }}>
+          <img
+            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop"
+            alt="MECPL engineering landmark"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          />
+          {/* Subtle left-fade so it bleeds into text area */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, #ece8df 0%, transparent 22%)",
+          }} />
+        </div>
+
+        {/* Bottom bar — tagline + scroll (felix-nieto pattern) */}
+        <div style={{
+          position: "relative", zIndex: 2,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          padding: "40px 0 48px",
+          marginTop: 24,
+        }}>
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 600,
+            fontSize: "0.65rem",
+            letterSpacing: "0.18em",
+            color: "#666",
+            textTransform: "uppercase",
+            lineHeight: 1.7,
+            margin: 0,
+          }}>
+            QUALITY-DRIVEN CONSTRUCTION FOR<br />
+            HIGH-IMPACT DEVELOPMENTS · PUNE, INDIA · SINCE 1999
+          </p>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 10,
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 700,
+            fontSize: "0.6rem",
+            letterSpacing: "0.25em",
+            color: "#888",
+            textTransform: "uppercase",
+          }}>
+            SCROLL
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1v12M1 7l6 6 6-6" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="abt2" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-about-services">
-        <SectionHeader label="Services" title="What MECPL Delivers" center useH1={false} />
-        <p className="max-w-3xl mx-auto text-center text-[#4b5563] text-sm leading-relaxed mt-4">
-          Our service portfolio covers the full construction lifecycle, from civil execution to project management, with the same precision and accountability across every delivery.
-        </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {services.map((service) => (
-            <div key={service.title} className="group bg-white border border-black/[0.07] rounded-[24px] p-6 hover:border-[#C41E3A]/30 transition-all duration-300 shadow-sm" data-testid={`card-about-service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
-              <div className="flex items-center justify-between gap-4 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-[#C41E3A]/10 border border-[#C41E3A]/20 flex items-center justify-center">
-                  <span className="w-2 h-2 rounded-full bg-[#C41E3A]" />
-                </div>
-                <div className="h-px flex-1 bg-black/[0.07] group-hover:bg-[#C41E3A]/40 transition-colors" />
-              </div>
-              <div>
-                <span className="text-[#C41E3A] text-[9px] font-black tracking-widest uppercase">{service.subtitle}</span>
-                <h3 className="text-[#111827] font-black text-base uppercase tracking-tight mt-1">{service.title}</h3>
-              </div>
-              <p className="text-[#4b5563] text-sm leading-relaxed mt-3">{service.desc}</p>
-              <ul className="space-y-1.5 pt-4 mt-4 border-t border-black/[0.06]">
-                {service.highlights.map((highlight) => (
-                  <li key={highlight} className="flex items-center gap-2 text-[11px] text-[#4b5563] font-bold uppercase tracking-wide">
-                    <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full flex-shrink-0" />
-                    {highlight}
-                  </li>
+      {/* ─── COMPANY STORY + STATS ───────────────────────────── */}
+      <section id="abt1" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+            <RevealBlock>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+                Our Story
+              </span>
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 28px" }}>
+                25+ Years of Building<br />Pune's Skyline
+              </h2>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: "0 0 20px" }}>
+                Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
+              </p>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: 0 }}>
+                With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
+              </p>
+            </RevealBlock>
+
+            <RevealBlock delay={150}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+                {stats.map((s, i) => (
+                  <div key={s.label} style={{
+                    padding: "48px 32px",
+                    background: i % 2 === 0 ? "#f8f8f8" : "#ffffff",
+                    border: "1px solid rgba(0,0,0,0.07)",
+                    textAlign: "center",
+                  }}>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "2.8rem", color: "#C41E3A", lineHeight: 1 }}>{s.val}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase", marginTop: 12 }}>{s.label}</div>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          ))}
+              </div>
+            </RevealBlock>
+          </div>
         </div>
       </section>
 
-      {/* Leadership */}
-      <section id="abt3" className="max-w-7xl mx-auto px-6 py-20 border-b border-black/[0.06] scroll-mt-28" data-testid="section-leadership">
-        <SectionHeader label="Our Team" title="Executive Leadership" center useH1={false} />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-          {leaders.map((leader, i) => (
-            <div key={i} className="bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all shadow-sm" data-testid={`card-leader-${i}`}>
-              <div className="h-40 flex items-center justify-center relative overflow-hidden bg-[#f9f9f9]">
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  className="max-h-full w-auto object-contain"
-                />
-              </div>
-              <div className="p-5 space-y-2">
-                <h3 className="text-[#111827] font-black text-sm uppercase tracking-tight leading-snug">{leader.name}</h3>
-                <div className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">{leader.role}</div>
-                <div className="w-6 h-0.5 bg-[#C41E3A]"></div>
-                <p className="text-[#6b7280] text-xs leading-relaxed">{leader.desc}</p>
-              </div>
+      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
+      <AlternatingSection />
+
+      {/* ─── VIDEO SECTION ───────────────────────────────────── */}
+      <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(196,30,58,0.1) 0%, transparent 70%)" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <RevealBlock>
+            <div style={{ textAlign: "center", marginBottom: 60 }}>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
+                Our Story In Motion
+              </span>
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
+                The MECPL Journey
+              </h2>
             </div>
-          ))}
+          </RevealBlock>
+          <RevealBlock delay={150}>
+            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", background: "#111", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <iframe
+                src="https://www.youtube.com/embed/2b1u5KUSUkk?rel=0&modestbranding=1"
+                title="MECPL Journey"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+              />
+            </div>
+          </RevealBlock>
         </div>
       </section>
 
-    
-      {/* Milestones */}
-      <section id="abt4" className="max-w-5xl mx-auto px-6 py-20 scroll-mt-28" data-testid="section-milestones">
-        <SectionHeader label="Journey" title="Our Milestone Timeline" useH1={false} />
-          <div className="relative mt-10">
-          <div className="absolute left-16 top-0 bottom-0 w-px bg-black/[0.08]"></div>
-          <div className="space-y-5">
-            {milestones.slice().reverse().map((item) => (
-              <div key={item.year} className="flex gap-8 items-start" data-testid={`milestone-${item.year}`}>
-                <div className="w-12 flex-shrink-0 text-right">
-                  <span className="text-[#C41E3A] font-black text-sm">{item.year}</span>
-                </div>
-                <div className="flex-shrink-0 mt-1.5 relative z-10">
-                  <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-white shadow"></div>
-                </div>
-                <div className="flex-1 pb-1">
-                  <div className="bg-white border border-black/[0.07] rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors shadow-sm">
-                    <p className="text-[#374151] text-sm">{item.event}</p>
+      {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
+      <WordScatterSection />
+
+      {/* ─── LEADERSHIP (joffreyspitzer style) ──────────────── */}
+      <section id="abt3" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <RevealBlock>
+            <div style={{ marginBottom: 72, textAlign: "center" }}>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
+                OUR LEADERS
+              </span>
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: "0 0 16px" }}>
+                The Founders
+              </h2>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.9rem", color: "#888", maxWidth: 560, margin: "0 auto", lineHeight: 1.8 }}>
+                Four visionaries, one mission. The leadership of MECPL brings together decades of engineering excellence, financial acumen, and operational mastery.
+              </p>
+            </div>
+          </RevealBlock>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
+            {leaders.map((leader, i) => (
+              <RevealBlock key={i} delay={i * 80}>
+                <div style={{ position: "relative", overflow: "hidden", background: "#f8f8f8", cursor: "default" }}
+                  className="leader-card"
+                >
+                  {/* Photo */}
+                  <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "#e8e8e8" }}>
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block", transition: "transform 0.7s cubic-bezier(.16,1,.3,1)" }}
+                      className="leader-photo"
+                    />
+                  </div>
+                  {/* Name bar */}
+                  <div style={{ padding: "24px 20px 20px", borderTop: "2px solid #C41E3A" }}>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.85rem", color: "#111", textTransform: "uppercase", letterSpacing: "0.02em", lineHeight: 1.3, marginBottom: 6 }}>{leader.name}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase" }}>{leader.role}</div>
+                  </div>
+                  {/* Hover overlay */}
+                  <div className="leader-overlay" style={{
+                    position: "absolute", inset: 0,
+                    background: "linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.6) 60%, transparent 100%)",
+                    opacity: 0,
+                    transition: "opacity 0.4s ease",
+                    display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                    padding: 28,
+                  }}>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.85rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 4 }}>{leader.name}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: 14 }}>{leader.role}</div>
+                    <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 14 }} />
+                    <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, margin: 0 }}>{leader.desc}</p>
                   </div>
                 </div>
-              </div>
+              </RevealBlock>
             ))}
           </div>
         </div>
       </section>
 
-      <EquipmentPage />
-      <InvestorsPage />
+      {/* Hover styles for leader cards */}
+      <style>{`
+        .leader-card:hover .leader-overlay { opacity: 1 !important; }
+        .leader-card:hover .leader-photo { transform: scale(1.06); }
+      `}</style>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden border-t border-black/10 bg-white py-8 md:py-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,30,58,0.08),transparent_38%),radial-gradient(circle_at_bottom,rgba(0,0,0,0.04),transparent_44%)]" />
-        <div className="relative max-w-7xl mx-auto px-6 mb-5 text-center">
-          <h3 className="text-3xl font-black tracking-tight uppercase text-black">
-            Trusted by leading brands
-          </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-black/65">
-            A continuous showcase of the developers, institutions, and enterprises that trust MECPL across landmark projects.
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 md:w-28 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 md:w-28 bg-gradient-to-l from-white to-transparent z-10" />
-
-          <div className="animate-ticker gap-4 md:gap-6 px-6 py-2 select-none">
-            {loopingClientLogos.map((client, index) => (
+      {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
+      <section style={{ background: "#f8f8f8", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+        <RevealBlock>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+              Trusted By
+            </span>
+            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
+              Leading Brands &amp; Developers
+            </h2>
+          </div>
+        </RevealBlock>
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <div style={{ pointerEvents: "none", position: "absolute", inset: "0 0 0 auto", width: 120, background: "linear-gradient(to right, transparent, #f8f8f8)", zIndex: 10, left: 0 }} />
+          <div style={{ pointerEvents: "none", position: "absolute", inset: "0 0 0 auto", width: 120, background: "linear-gradient(to left, transparent, #f8f8f8)", zIndex: 10 }} />
+          <div className="animate-ticker" style={{ gap: 16 }}>
+            {loopingLogos.map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
-                className="flex-shrink-0 w-[188px] md:w-[236px] h-[112px] md:h-[128px] rounded-[1.5rem] bg-[#fbfbfb] shadow-[0_16px_34px_rgba(0,0,0,0.08)] border border-black/5 flex items-center justify-center px-5"
+                style={{
+                  flexShrink: 0,
+                  width: 180,
+                  height: 100,
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.07)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0 20px",
+                }}
               >
-                <img
-                  src={client.src}
-                  alt={client.name}
-                  className="max-h-12 md:max-h-14 w-auto max-w-full object-contain"
-                />
+                <img src={client.src} alt={client.name} style={{ maxHeight: 48, width: "auto", maxWidth: "100%", objectFit: "contain" }} />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#C41E3A] py-16" data-testid="section-about-cta">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-              <h3 className="text-2xl font-black uppercase tracking-tight text-white">Work With MECPL</h3>
-            <p className="text-white/70 text-sm mt-1">Join 50+ enterprise clients who trust us with their most ambitious projects.</p>
-          </div>
-          <Link href="/contact" data-testid="button-about-contact">
-            <span className="inline-flex items-center gap-2 bg-white text-[#C41E3A] px-8 py-4 font-black text-xs tracking-widest uppercase rounded-sm hover:bg-gray-200 transition-colors cursor-pointer">
-              Get in Touch <ArrowRight size={14} />
+      {/* ─── CTA ─────────────────────────────────────────────── */}
+      <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(196,30,58,0.12) 0%, transparent 70%)" }} />
+        <RevealBlock>
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+              Work With MECPL
             </span>
-          </Link>
-        </div>
+            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 3.6rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.03em", lineHeight: 1.05, margin: "0 0 28px" }}>
+              Trusted By 100+<br />Enterprise Clients
+            </h2>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, margin: "0 0 44px" }}>
+              Join the developers, institutions, and enterprises who rely on MECPL to deliver their most ambitious structures.
+            </p>
+            <Link href="/contact">
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 10,
+                background: "#C41E3A", color: "#fff",
+                padding: "18px 40px",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase",
+                cursor: "pointer",
+                transition: "background 0.2s",
+              }}>
+                Get In Touch <ArrowRight size={14} />
+              </span>
+            </Link>
+          </div>
+        </RevealBlock>
       </section>
+
     </div>
   );
 }
