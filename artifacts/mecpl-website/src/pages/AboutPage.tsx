@@ -74,27 +74,30 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
 // ─── VISION STACK (rainearchitects stacking cards) ───────────────────────────
 const vmCards = [
   {
-    label: "Our\nStory",
-    heading: "25+ Years Building\nPune's Skyline",
-    text: "Millennium Engineers & Contractors Pvt. Ltd. is renowned for its client-focused, quality-driven approach to construction. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.",
-    badge: "ISO 9001 · ISO 14001 · ISO 45001 · CRISIL SME 1",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000&auto=format&fit=crop",
-    bg: "#ffffff",
-  },
-  {
     label: "Our\nVision",
     heading: "India's Most Preferred\nCivil Contractor",
     text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
     badge: null,
-    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1000&auto=format&fit=crop",
-    bg: "#f4f4f2",
+    thumbImg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000&auto=format&fit=crop",
+    bg: "#ffffff",
   },
   {
     label: "Our\nMission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
     badge: null,
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop",
+    thumbImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1000&auto=format&fit=crop",
+    bg: "#f4f4f2",
+  },
+  {
+    label: "Our\nValues",
+    heading: "Safety. Integrity.\nExcellence.",
+    text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
+    badge: null,
+    thumbImg: "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?q=80&w=600&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop",
     bg: "#ece8df",
   },
 ];
@@ -142,45 +145,46 @@ function VisionStackSection() {
             top: 80,
             zIndex: i + 1,
             background: card.bg,
-            height: "calc(100vh - 80px)",
+            height: "70vh",
             display: "grid",
             gridTemplateColumns: "1fr 1fr 2fr",
             borderBottom: "1px solid rgba(0,0,0,0.07)",
             overflow: "hidden",
           }}
         >
-          {/* Col 1 — image + label */}
+          {/* Col 1 — square thumb + h3 label */}
           <div style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
             borderRight: "1px solid rgba(0,0,0,0.08)",
             overflow: "hidden",
+            padding: "32px 36px",
+            gap: 24,
           }}>
             {/* Square image */}
-            <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
+            <div style={{ aspectRatio: "1/1", width: "100%", overflow: "hidden", flexShrink: 0 }}>
               <img
-                src={card.img}
+                src={card.thumbImg}
                 alt={card.label.replace("\n", " ")}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             </div>
             {/* h3 label */}
-            <div style={{ padding: "32px 36px", background: card.bg, borderTop: "1px solid rgba(0,0,0,0.07)", flexShrink: 0 }}>
-              <h3 style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 900,
-                fontSize: "clamp(1.6rem, 3vw, 3rem)",
-                lineHeight: 1.0,
-                color: "#C41E3A",
-                textTransform: "uppercase",
-                letterSpacing: "-0.03em",
-                whiteSpace: "pre-line",
-                margin: 0,
-              }}>
-                {card.label}
-              </h3>
-            </div>
+            <h3 style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(1.4rem, 2.4vw, 2.6rem)",
+              lineHeight: 1.0,
+              color: "#C41E3A",
+              textTransform: "uppercase",
+              letterSpacing: "-0.03em",
+              whiteSpace: "pre-line",
+              margin: 0,
+              flexShrink: 0,
+            }}>
+              {card.label}
+            </h3>
           </div>
 
           {/* Col 2 — photo */}
