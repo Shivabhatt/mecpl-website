@@ -90,34 +90,130 @@ export default function AboutPage() {
   return (
     <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
 
-      {/* ─── HERO STATEMENT ─────────────────────────────────── */}
-      <section style={{ background: "#0a0a0a", padding: "160px 40px 120px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196,30,58,0.13) 0%, transparent 70%)" }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 32 }}>
-            <span style={{ width: 32, height: 2, background: "#C41E3A", display: "block" }} />
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase" }}>
+      {/* ─── FELIX-NIETO EDITORIAL HERO ─────────────────────── */}
+      <section style={{
+        background: "#ece8df",
+        minHeight: "100vh",
+        padding: "130px 56px 0",
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}>
+        {/* Full-bleed editorial typography */}
+        <div style={{ position: "relative", zIndex: 2 }}>
+          {/* Label */}
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
+            <span style={{ width: 28, height: 1.5, background: "#C41E3A", display: "block" }} />
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase" }}>
               About MECPL
             </span>
           </div>
-          <h1 style={{
+
+          {/* Line 1 — heavy black, full-width bleed */}
+          <div style={{
             fontFamily: "'Montserrat',sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(2.6rem, 7vw, 6rem)",
-            lineHeight: 1.0,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.04em",
+            color: "#111",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}>
+            ENGINEERING
+          </div>
+
+          {/* Line 2 — ultra-thin, indented, contrasting weight */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 200,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
             letterSpacing: "-0.03em",
-            color: "#ffffff",
-            margin: "0 0 32px",
+            color: "#111",
+            textTransform: "uppercase",
+            paddingLeft: "clamp(2rem, 5vw, 7rem)",
+            whiteSpace: "nowrap",
+          }}>
+            LANDMARKS
+          </div>
+
+          {/* Line 3 — mixed: red accent word + thin rest */}
+          <div style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.04em",
+            color: "#111",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}>
+            &amp;{" "}
+            <span style={{ fontWeight: 200, color: "#C41E3A" }}>EXCELLENCE.</span>
+          </div>
+        </div>
+
+        {/* Right-side image — overlaps typography vertically (felix-nieto collage) */}
+        <div style={{
+          position: "absolute",
+          top: "18%",
+          right: 0,
+          width: "42%",
+          height: "70%",
+          zIndex: 1,
+          overflow: "hidden",
+        }}>
+          <img
+            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop"
+            alt="MECPL engineering landmark"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          />
+          {/* Subtle left-fade so it bleeds into text area */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, #ece8df 0%, transparent 22%)",
+          }} />
+        </div>
+
+        {/* Bottom bar — tagline + scroll (felix-nieto pattern) */}
+        <div style={{
+          position: "relative", zIndex: 2,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          padding: "40px 0 48px",
+          marginTop: 24,
+        }}>
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 600,
+            fontSize: "0.65rem",
+            letterSpacing: "0.18em",
+            color: "#666",
+            textTransform: "uppercase",
+            lineHeight: 1.7,
+            margin: 0,
+          }}>
+            QUALITY-DRIVEN CONSTRUCTION FOR<br />
+            HIGH-IMPACT DEVELOPMENTS · PUNE, INDIA · SINCE 1999
+          </p>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 10,
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 700,
+            fontSize: "0.6rem",
+            letterSpacing: "0.25em",
+            color: "#888",
             textTransform: "uppercase",
           }}>
-            DRIVEN BY<br />
-            <span style={{ color: "#C41E3A" }}>QUALITY</span><br />
-            &amp; EXCELLENCE<br />
-            <span style={{ fontWeight: 300, color: "rgba(255,255,255,0.45)", fontSize: "0.65em" }}>SINCE 1999</span>
-          </h1>
-          <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", fontWeight: 400, color: "rgba(255,255,255,0.55)", maxWidth: 560, lineHeight: 1.8, margin: 0 }}>
-            Headquartered in Pune, Millennium Engineers &amp; Contractors Pvt. Ltd. is one of India's most decorated civil engineering contractors — built on an uncompromising foundation of precision, compliance, and trust.
-          </p>
+            SCROLL
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1v12M1 7l6 6 6-6" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
       </section>
 
