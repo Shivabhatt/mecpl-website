@@ -149,25 +149,38 @@ function VisionStackSection() {
             overflow: "hidden",
           }}
         >
-          {/* Col 1 — large label */}
+          {/* Col 1 — image + label */}
           <div style={{
             display: "flex",
-            alignItems: "flex-end",
-            padding: "56px 44px",
+            flexDirection: "column",
+            justifyContent: "flex-end",
             borderRight: "1px solid rgba(0,0,0,0.08)",
+            overflow: "hidden",
           }}>
-            <span style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(2rem, 4.2vw, 4.4rem)",
-              lineHeight: 1.0,
-              color: "#C41E3A",
-              textTransform: "uppercase",
-              letterSpacing: "-0.03em",
-              whiteSpace: "pre-line",
-            }}>
-              {card.label}
-            </span>
+            {/* Square image */}
+            <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
+              <img
+                src={card.img}
+                alt={card.label.replace("\n", " ")}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+            {/* h3 label */}
+            <div style={{ padding: "32px 36px", background: card.bg, borderTop: "1px solid rgba(0,0,0,0.07)", flexShrink: 0 }}>
+              <h3 style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(1.6rem, 3vw, 3rem)",
+                lineHeight: 1.0,
+                color: "#C41E3A",
+                textTransform: "uppercase",
+                letterSpacing: "-0.03em",
+                whiteSpace: "pre-line",
+                margin: 0,
+              }}>
+                {card.label}
+              </h3>
+            </div>
           </div>
 
           {/* Col 2 — photo */}
