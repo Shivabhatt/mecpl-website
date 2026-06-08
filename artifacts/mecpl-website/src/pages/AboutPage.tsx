@@ -161,7 +161,7 @@ function VisionStackSection() {
               fontWeight: 900,
               fontSize: "clamp(2rem, 4.2vw, 4.4rem)",
               lineHeight: 1.0,
-              color: "#111",
+              color: "#C41E3A",
               textTransform: "uppercase",
               letterSpacing: "-0.03em",
               whiteSpace: "pre-line",
@@ -193,18 +193,6 @@ function VisionStackSection() {
             justifyContent: "center",
             padding: "56px 72px",
           }}>
-            <span style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "0.65rem",
-              fontWeight: 700,
-              letterSpacing: "0.28em",
-              color: "#C41E3A",
-              textTransform: "uppercase",
-              display: "block",
-              marginBottom: 20,
-            }}>
-              {card.label.replace("\n", " ")}
-            </span>
             <h3 style={{
               fontFamily: "'Montserrat',sans-serif",
               fontWeight: 900,
