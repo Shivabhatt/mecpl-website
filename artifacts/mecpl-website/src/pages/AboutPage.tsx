@@ -68,6 +68,116 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
   }, []);
 }
 
+// ─── WORD SCATTER (giats.me) ─────────────────────────────────────────────────
+const SCATTER_TEXT =
+  "Architecting Pune's landmarks, built by one team that never compromised on quality, safety, and delivering excellence for 40 years without exception.";
+
+function seededRand(seed: number) {
+  const s = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+  return s - Math.floor(s);
+}
+
+function WordScatterSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const rafRef = useRef<number>(0);
+
+  const words = SCATTER_TEXT.split(" ");
+
+  const scatter = words.map((_, i) => {
+    const r1 = seededRand(i);
+    const r2 = seededRand(i + 100);
+    const r3 = seededRand(i + 200);
+    const r4 = seededRand(i + 300);
+    return {
+      x: (r1 - 0.5) * 900,
+      y: (r2 - 0.5) * 700,
+      scale: 0.45 + r3 * 2.8,
+      opacity: 0.08 + r4 * 0.32,
+    };
+  });
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const update = () => {
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const raw = Math.min(1, Math.max(0, scrolled / scrollable));
+      // ease: slow start, fast middle, slow end
+      const p = raw < 0.5 ? 2 * raw * raw : 1 - Math.pow(-2 * raw + 2, 2) / 2;
+
+      const els = wordsRef.current;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!el) continue;
+        const s = scatter[i];
+        const tx = s.x * (1 - p);
+        const ty = s.y * (1 - p);
+        const sc = s.scale + (1 - s.scale) * p;
+        const op = s.opacity + (1 - s.opacity) * p;
+        el.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+        el.style.opacity = String(Math.min(1, op));
+      }
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      style={{ height: "420vh", background: "#f0ede8", position: "relative" }}
+    >
+      <div style={{
+        position: "sticky", top: 0, height: "100vh",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        overflow: "hidden",
+      }}>
+        <div style={{ maxWidth: 820, padding: "0 48px", textAlign: "center" }}>
+          <p style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "clamp(1.15rem, 2.2vw, 2rem)",
+            fontWeight: 600,
+            lineHeight: 1.75,
+            color: "#111",
+            margin: 0,
+          }}>
+            {words.map((word, i) => (
+              <span
+                key={i}
+                ref={el => { wordsRef.current[i] = el; }}
+                style={{
+                  display: "inline-block",
+                  marginRight: "0.28em",
+                  willChange: "transform, opacity",
+                  transformOrigin: "center center",
+                }}
+              >
+                {word}
+              </span>
+            ))}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 function RevealBlock({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useScrollReveal(ref);
@@ -343,6 +453,9 @@ export default function AboutPage() {
           </RevealBlock>
         </div>
       </section>
+
+      {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
+      <WordScatterSection />
 
       {/* ─── LEADERSHIP (joffreyspitzer style) ──────────────── */}
       <section id="abt3" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
