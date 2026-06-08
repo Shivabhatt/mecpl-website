@@ -1,9 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 const assetBase = import.meta.env.BASE_URL;
 
@@ -71,157 +68,115 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
   }, []);
 }
 
-// ─── VISION STACK (rainearchitects stacking cards) ───────────────────────────
-const vmCards = [
+// ─── ALTERNATING IMAGE / TEXT ROWS ───────────────────────────────────────────
+const altRows = [
   {
-    label: "Our\nVision",
+    label: "Our Vision",
     heading: "India's Most Preferred\nCivil Contractor",
     text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
-    badge: null,
-    thumbImg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: true,
     bg: "#ffffff",
   },
   {
-    label: "Our\nMission",
+    label: "Our Mission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
-    badge: null,
-    thumbImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
-    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1000&auto=format&fit=crop",
-    bg: "#f4f4f2",
+    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: false,
+    bg: "#f8f8f8",
   },
   {
-    label: "Our\nValues",
+    label: "Our Values",
     heading: "Safety. Integrity.\nExcellence.",
     text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
-    badge: null,
-    thumbImg: "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?q=80&w=600&auto=format&fit=crop",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
+    imageLeft: true,
     bg: "#ece8df",
   },
 ];
 
-function VisionStackSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const cards = container.querySelectorAll<HTMLElement>(".vm-stack-card");
-
-    const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        if (i === 0) return;
-        gsap.fromTo(
-          card,
-          { yPercent: 6, scale: 0.97 },
-          {
-            yPercent: 0,
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              end: "top top+=80",
-              scrub: 0.8,
-            },
-          }
-        );
-      });
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
-
+function AlternatingSection() {
   return (
-    <div ref={containerRef} style={{ position: "relative" }}>
-      {vmCards.map((card, i) => (
-        <div
+    <div>
+      {altRows.map((row, i) => (
+        <section
           key={i}
-          className="vm-stack-card"
           style={{
-            position: "sticky",
-            top: 80,
-            zIndex: i + 1,
-            background: card.bg,
-            height: "70vh",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 2fr",
+            background: row.bg,
             borderBottom: "1px solid rgba(0,0,0,0.07)",
             overflow: "hidden",
           }}
         >
-          {/* Col 1 — h3 label */}
           <div style={{
-            display: "flex",
-            alignItems: "flex-end",
-            borderRight: "1px solid rgba(0,0,0,0.08)",
-            padding: "32px 36px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            minHeight: "60vh",
           }}>
-            <h3 style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(2rem, 4vw, 4rem)",
-              lineHeight: 1.0,
-              color: "#C41E3A",
-              textTransform: "uppercase",
-              letterSpacing: "-0.03em",
-              whiteSpace: "pre-line",
-              margin: 0,
+            {/* Image block */}
+            <div style={{
+              order: row.imageLeft ? 1 : 2,
+              overflow: "hidden",
+              minHeight: 460,
             }}>
-              {card.label}
-            </h3>
-          </div>
+              <img
+                src={row.img}
+                alt={row.label}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
 
-          {/* Col 2 — photo */}
-          <div style={{ position: "relative", overflow: "hidden", borderRight: "1px solid rgba(0,0,0,0.08)" }}>
-            <img
-              src={card.img}
-              alt={card.heading}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-            {card.badge && (
-              <div style={{ position: "absolute", bottom: 20, left: 20, background: "#C41E3A", color: "#fff", padding: "10px 16px" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                  {card.badge}
+            {/* Text block */}
+            <RevealBlock>
+              <div style={{
+                order: row.imageLeft ? 2 : 1,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                padding: "80px 72px",
+                height: "100%",
+                boxSizing: "border-box",
+              }}>
+                <span style={{
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontSize: "0.65rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.28em",
+                  color: "#C41E3A",
+                  textTransform: "uppercase",
+                  display: "block",
+                  marginBottom: 20,
+                }}>
+                  {row.label}
                 </span>
+                <h2 style={{
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontWeight: 900,
+                  fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
+                  color: "#111",
+                  textTransform: "uppercase",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.15,
+                  margin: "0 0 28px",
+                  whiteSpace: "pre-line",
+                }}>
+                  {row.heading}
+                </h2>
+                <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 28 }} />
+                <p style={{
+                  fontFamily: "'Montserrat',sans-serif",
+                  fontSize: "0.95rem",
+                  color: "#555",
+                  lineHeight: 1.9,
+                  margin: 0,
+                  maxWidth: 480,
+                }}>
+                  {row.text}
+                </p>
               </div>
-            )}
+            </RevealBlock>
           </div>
-
-          {/* Col 3 — content */}
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "56px 72px",
-          }}>
-            <h3 style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(1.3rem, 2vw, 1.9rem)",
-              color: "#111",
-              textTransform: "uppercase",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.2,
-              margin: "0 0 28px",
-              whiteSpace: "pre-line",
-            }}>
-              {card.heading}
-            </h3>
-            <p style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "0.93rem",
-              color: "#555",
-              lineHeight: 1.9,
-              margin: 0,
-              maxWidth: 500,
-            }}>
-              {card.text}
-            </p>
-          </div>
-        </div>
+        </section>
       ))}
     </div>
   );
@@ -524,8 +479,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── VISION STACK ────────────────────────────────────── */}
-      <VisionStackSection />
+      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
+      <AlternatingSection />
 
       {/* ─── VIDEO SECTION ───────────────────────────────────── */}
       <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
