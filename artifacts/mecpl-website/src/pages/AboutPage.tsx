@@ -327,25 +327,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── LARGE STATEMENT (giats.me style) ────────────────── */}
-      <section style={{ background: "#f4f4f2", padding: "120px 40px" }}>
-        <RevealBlock>
-          <p style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 700,
-            fontSize: "clamp(1.4rem, 3.5vw, 2.8rem)",
-            lineHeight: 1.5,
-            color: "#111",
-            maxWidth: 900,
-            margin: "0 auto",
-            textAlign: "center",
-            letterSpacing: "-0.01em",
-          }}>
-            "Millennium Engineers &amp; Contractors Pvt. Ltd. was built on one principle — that every structure we erect is a promise kept to the people who will inhabit it, work in it, and depend on it for generations."
-          </p>
-        </RevealBlock>
-      </section>
-
       {/* ─── COMPANY STORY + STATS ───────────────────────────── */}
       <section id="abt1" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
