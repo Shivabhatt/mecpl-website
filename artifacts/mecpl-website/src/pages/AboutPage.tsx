@@ -152,36 +152,23 @@ function VisionStackSection() {
             overflow: "hidden",
           }}
         >
-          {/* Col 1 — square thumb + h3 label */}
+          {/* Col 1 — h3 label */}
           <div style={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
+            alignItems: "flex-end",
             borderRight: "1px solid rgba(0,0,0,0.08)",
-            overflow: "hidden",
             padding: "32px 36px",
-            gap: 24,
           }}>
-            {/* Square image */}
-            <div style={{ aspectRatio: "1/1", width: "100%", overflow: "hidden", flexShrink: 0 }}>
-              <img
-                src={card.thumbImg}
-                alt={card.label.replace("\n", " ")}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
-            {/* h3 label */}
             <h3 style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
-              fontSize: "clamp(1.4rem, 2.4vw, 2.6rem)",
+              fontSize: "clamp(2rem, 4vw, 4rem)",
               lineHeight: 1.0,
               color: "#C41E3A",
               textTransform: "uppercase",
               letterSpacing: "-0.03em",
               whiteSpace: "pre-line",
               margin: 0,
-              flexShrink: 0,
             }}>
               {card.label}
             </h3>
