@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const assetBase = import.meta.env.BASE_URL;
 
@@ -97,86 +100,119 @@ const altRows = [
 ];
 
 function AlternatingSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".alt-card");
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        if (i === 0) return;
+        gsap.fromTo(
+          card,
+          { yPercent: 6, scale: 0.97 },
+          {
+            yPercent: 0,
+            scale: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              end: "top top+=80",
+              scrub: 0.8,
+            },
+          }
+        );
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
+  const textBlock = (row: typeof altRows[0]) => (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      padding: "72px 72px",
+      height: "100%",
+      boxSizing: "border-box",
+    }}>
+      <span style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.65rem",
+        fontWeight: 700,
+        letterSpacing: "0.28em",
+        color: "#C41E3A",
+        textTransform: "uppercase",
+        display: "block",
+        marginBottom: 20,
+      }}>
+        {row.label}
+      </span>
+      <h2 style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontWeight: 900,
+        fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
+        color: "#111",
+        textTransform: "uppercase",
+        letterSpacing: "-0.03em",
+        lineHeight: 1.15,
+        margin: "0 0 24px",
+        whiteSpace: "pre-line",
+      }}>
+        {row.heading}
+      </h2>
+      <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 24 }} />
+      <p style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.95rem",
+        color: "#555",
+        lineHeight: 1.9,
+        margin: 0,
+        maxWidth: 480,
+      }}>
+        {row.text}
+      </p>
+    </div>
+  );
+
+  const imgBlock = (row: typeof altRows[0]) => (
+    <div style={{ overflow: "hidden", height: "100%" }}>
+      <img
+        src={row.img}
+        alt={row.label}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+    </div>
+  );
+
   return (
-    <div>
+    <div ref={containerRef} style={{ position: "relative" }}>
       {altRows.map((row, i) => (
-        <section
+        <div
           key={i}
+          className="alt-card"
           style={{
+            position: "sticky",
+            top: 80,
+            zIndex: i + 1,
             background: row.bg,
+            height: "70vh",
             borderBottom: "1px solid rgba(0,0,0,0.07)",
             overflow: "hidden",
-          }}
-        >
-          <div style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            minHeight: "60vh",
-          }}>
-            {/* Image block */}
-            <div style={{
-              order: row.imageLeft ? 1 : 2,
-              overflow: "hidden",
-              minHeight: 460,
-            }}>
-              <img
-                src={row.img}
-                alt={row.label}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
-
-            {/* Text block */}
-            <RevealBlock>
-              <div style={{
-                order: row.imageLeft ? 2 : 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "80px 72px",
-                height: "100%",
-                boxSizing: "border-box",
-              }}>
-                <span style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.28em",
-                  color: "#C41E3A",
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 20,
-                }}>
-                  {row.label}
-                </span>
-                <h2 style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontWeight: 900,
-                  fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
-                  color: "#111",
-                  textTransform: "uppercase",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.15,
-                  margin: "0 0 28px",
-                  whiteSpace: "pre-line",
-                }}>
-                  {row.heading}
-                </h2>
-                <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 28 }} />
-                <p style={{
-                  fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "0.95rem",
-                  color: "#555",
-                  lineHeight: 1.9,
-                  margin: 0,
-                  maxWidth: 480,
-                }}>
-                  {row.text}
-                </p>
-              </div>
-            </RevealBlock>
-          </div>
-        </section>
+          }}
+        >
+          {row.imageLeft ? (
+            <>{imgBlock(row)}{textBlock(row)}</>
+          ) : (
+            <>{textBlock(row)}{imgBlock(row)}</>
+          )}
+        </div>
       ))}
     </div>
   );
