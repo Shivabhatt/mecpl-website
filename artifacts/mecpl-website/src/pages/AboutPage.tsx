@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const assetBase = import.meta.env.BASE_URL;
 
@@ -66,6 +69,170 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+}
+
+// ─── VISION STACK (rainearchitects stacking cards) ───────────────────────────
+const vmCards = [
+  {
+    label: "Our\nStory",
+    heading: "25+ Years Building\nPune's Skyline",
+    text: "Millennium Engineers & Contractors Pvt. Ltd. is renowned for its client-focused, quality-driven approach to construction. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.",
+    badge: "ISO 9001 · ISO 14001 · ISO 45001 · CRISIL SME 1",
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000&auto=format&fit=crop",
+    bg: "#ffffff",
+  },
+  {
+    label: "Our\nVision",
+    heading: "India's Most Preferred\nCivil Contractor",
+    text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
+    badge: null,
+    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1000&auto=format&fit=crop",
+    bg: "#f4f4f2",
+  },
+  {
+    label: "Our\nMission",
+    heading: "Quality. Delivery.\nContinuous Improvement.",
+    text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
+    badge: null,
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop",
+    bg: "#ece8df",
+  },
+];
+
+function VisionStackSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".vm-stack-card");
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        if (i === 0) return;
+        gsap.fromTo(
+          card,
+          { yPercent: 6, scale: 0.97 },
+          {
+            yPercent: 0,
+            scale: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              end: "top top+=80",
+              scrub: 0.8,
+            },
+          }
+        );
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={containerRef} style={{ position: "relative" }}>
+      {vmCards.map((card, i) => (
+        <div
+          key={i}
+          className="vm-stack-card"
+          style={{
+            position: "sticky",
+            top: 80,
+            zIndex: i + 1,
+            background: card.bg,
+            height: "calc(100vh - 80px)",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 2fr",
+            borderBottom: "1px solid rgba(0,0,0,0.07)",
+            overflow: "hidden",
+          }}
+        >
+          {/* Col 1 — large label */}
+          <div style={{
+            display: "flex",
+            alignItems: "flex-end",
+            padding: "56px 44px",
+            borderRight: "1px solid rgba(0,0,0,0.08)",
+          }}>
+            <span style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(2rem, 4.2vw, 4.4rem)",
+              lineHeight: 1.0,
+              color: "#111",
+              textTransform: "uppercase",
+              letterSpacing: "-0.03em",
+              whiteSpace: "pre-line",
+            }}>
+              {card.label}
+            </span>
+          </div>
+
+          {/* Col 2 — photo */}
+          <div style={{ position: "relative", overflow: "hidden", borderRight: "1px solid rgba(0,0,0,0.08)" }}>
+            <img
+              src={card.img}
+              alt={card.heading}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+            {card.badge && (
+              <div style={{ position: "absolute", bottom: 20, left: 20, background: "#C41E3A", color: "#fff", padding: "10px 16px" }}>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                  {card.badge}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Col 3 — content */}
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "56px 72px",
+          }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "0.65rem",
+              fontWeight: 700,
+              letterSpacing: "0.28em",
+              color: "#C41E3A",
+              textTransform: "uppercase",
+              display: "block",
+              marginBottom: 20,
+            }}>
+              {card.label.replace("\n", " ")}
+            </span>
+            <h3 style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(1.3rem, 2vw, 1.9rem)",
+              color: "#111",
+              textTransform: "uppercase",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.2,
+              margin: "0 0 28px",
+              whiteSpace: "pre-line",
+            }}>
+              {card.heading}
+            </h3>
+            <p style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "0.93rem",
+              color: "#555",
+              lineHeight: 1.9,
+              margin: 0,
+              maxWidth: 500,
+            }}>
+              {card.text}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 // ─── WORD SCATTER (giats.me) ─────────────────────────────────────────────────
@@ -365,47 +532,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── VISION ──────────────────────────────────────────── */}
-      <section style={{ background: "#f8f8f8", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
-          <RevealBlock>
-            <div style={{ position: "relative", overflow: "hidden" }}>
-              <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
-                alt="MECPL Vision"
-                style={{ width: "100%", aspectRatio: "4/5", objectFit: "cover", display: "block" }}
-              />
-              <div style={{ position: "absolute", bottom: 28, left: 28, background: "#C41E3A", color: "#fff", padding: "14px 22px" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>ISO 9001 · ISO 14001 · ISO 45001 · CRISIL SME 1</span>
-              </div>
-            </div>
-          </RevealBlock>
-          <div>
-            <RevealBlock delay={100}>
-              <div style={{ marginBottom: 64 }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>Our Vision</span>
-                <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 2.5vw, 2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 1.2, margin: "0 0 20px" }}>
-                  India's Most Preferred<br />Civil Contractor
-                </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: 0 }}>
-                  Millennium Engineers &amp; Contractors Pvt. Ltd. aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting our compliance obligations in an extremely safe and eco-friendly manner.
-                </p>
-              </div>
-            </RevealBlock>
-            <RevealBlock delay={220}>
-              <div style={{ paddingTop: 40, borderTop: "1px solid rgba(0,0,0,0.08)" }}>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>Our Mission</span>
-                <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 2.5vw, 2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 1.2, margin: "0 0 20px" }}>
-                  Quality. Delivery.<br />Continuous Improvement.
-                </h3>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: 0 }}>
-                  Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritizing safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.
-                </p>
-              </div>
-            </RevealBlock>
-          </div>
-        </div>
-      </section>
+      {/* ─── VISION STACK ────────────────────────────────────── */}
+      <VisionStackSection />
 
       {/* ─── VIDEO SECTION ───────────────────────────────────── */}
       <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
