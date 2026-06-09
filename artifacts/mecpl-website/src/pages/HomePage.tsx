@@ -20,11 +20,13 @@ interface WhyCard {
 const heroVideos = [
   "assets/video/banner-video-1.mp4",
   "assets/video/banner-video-2.mp4",
+  "assets/video/banner-video-3.mp4",
 ];
 
 const heroSlides = [
   { heading: ["Architecting Landmarks,", "Engineering Excellence."] },
   { heading: ["GIANT BEHIND THE GIANT"] },
+  { heading: ["Building India's", "Future Infrastructure."] },
 ];
 
 const stats = [
