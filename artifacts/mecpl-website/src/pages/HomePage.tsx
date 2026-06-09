@@ -110,6 +110,7 @@ const masonryCols = [
 /* ─── COMPONENT ──────────────────────────────────────────────────── */
 export default function HomePage() {
   const [videoIdx, setVideoIdx] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const assetBase = import.meta.env.BASE_URL;
 
   const heroSectionRef  = useRef<HTMLElement>(null);
@@ -189,6 +190,19 @@ export default function HomePage() {
     const id = setInterval(() => setVideoIdx(v => (v + 1) % heroVideos.length), 8000);
     return () => clearInterval(id);
   }, []);
+
+  /* ── HERO: play/pause based on active index ── */
+  useEffect(() => {
+    videoRefs.current.forEach((vid, i) => {
+      if (!vid) return;
+      if (i === videoIdx) {
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+      }
+    });
+  }, [videoIdx]);
 
   /* ── STATS: count-up ── */
   useEffect(() => {
@@ -388,17 +402,21 @@ export default function HomePage() {
         className="relative h-screen overflow-hidden"
         data-testid="section-hero"
       >
-        {/* 3 cycling videos */}
+        {/* 3 cycling videos — only active one plays */}
         {heroVideos.map((src, i) => (
           <video
             key={i}
-            autoPlay muted loop playsInline
+            ref={el => { videoRefs.current[i] = el; }}
+            muted
+            loop
+            playsInline
+            preload={i === 0 ? "auto" : "none"}
             style={{
               position: "absolute", inset: 0,
               width: "100%", height: "100%", objectFit: "cover",
               opacity: videoIdx === i ? 1 : 0,
               transition: "opacity 1.4s ease",
-              zIndex: 0,
+              zIndex: videoIdx === i ? 1 : 0,
             }}
           >
             <source src={`${assetBase}${src}`} type="video/mp4" />
