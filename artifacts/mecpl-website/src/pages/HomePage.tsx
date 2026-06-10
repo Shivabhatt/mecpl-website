@@ -19,14 +19,28 @@ interface WhyCard {
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
   "assets/video/banner-video-1.mp4",
-  "assets/video/banner-video-2.mp4",
-  "assets/video/banner-video-3.mp4",
+  "assets/video/banner-video-title3a.mp4",
+  "assets/video/banner-video-title3b.mp4",
+  "assets/video/banner-video-4.mp4",
 ];
 
 const heroSlides = [
-  { heading: ["Architecting Landmarks,", "Engineering Excellence."] },
-  { heading: ["GIANT BEHIND THE GIANT"] },
-  { heading: ["Building India's", "Future Infrastructure."] },
+  {
+    heading: ["GIANT BEHIND THE GIANT"],
+    subtitle: "The structural backbone behind India\'s most iconic skylines — built with precision, powered by 25 years of on-site expertise.",
+  },
+  {
+    heading: ["Projects We Have", "Proudly Delivered"],
+    subtitle: "Every project represents a commitment to quality, safety, and execution excellence — explore the milestones that have shaped our journey.",
+  },
+  {
+    heading: ["The People Behind", "the Projects"],
+    subtitle: "The expertise, dedication, and teamwork that power every milestone.",
+  },
+  {
+    heading: ["Architecting Landmarks,", "Engineering Excellence."],
+    subtitle: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
+  },
 ];
 
 const stats = [
@@ -477,13 +491,14 @@ export default function HomePage() {
               ))}
             </h1>
 
-            {/* Constant mission */}
-            <p style={{
+            {/* Per-slide subtitle */}
+            <p key={`sub-${videoIdx}`} style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
               fontWeight: 300, color: "rgba(255,255,255,0.65)",
               lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
+              animation: "heroSlideIn 0.7s ease forwards",
             }}>
-              Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.
+              {(heroSlides[videoIdx] ?? heroSlides[0]).subtitle}
             </p>
 
             {/* Constant button */}
@@ -523,76 +538,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 2. CERTIFICATIONS ══════════ */}
+      {/* ══════════ 2. STATS STRIP ══════════ */}
       <section
-        ref={certSectionRef}
-        data-testid="section-certifications"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 0" }}
+        ref={statsRef}
+        data-testid="section-stats"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "72px 40px" }}
       >
-        <div style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
-          <span style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
-            display: "block", marginBottom: "10px",
-          }}>
-            RECOGNITION
-          </span>
-          <h3 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
-            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
-          }}>
-            Certifications &amp; Awards
-          </h3>
-        </div>
-
-        {/* 4 certificate cards — static grid */}
-        <div className="max-w-5xl mx-auto" style={{ padding: "0 40px" }}>
-          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: "24px" }}>
-            {[
-              { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "ISO 9001:2015" },
-              { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "ISO 14001:2015" },
-              { src: "assets/awards/mpl_2020_04.jpg",                label: "ISO 45001:2018" },
-              { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "CRISIL SME 1" },
-            ].map((cert, i) => (
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "1px", background: "rgba(0,0,0,0.06)" }}>
+            {stats.map((s, i) => (
               <div
                 key={i}
-                style={{
-                  background: "#ffffff",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                  display: "flex", flexDirection: "column",
-                  transition: "box-shadow 0.25s, transform 0.25s",
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.boxShadow = "0 8px 40px rgba(196,30,58,0.12)";
-                  el.style.transform = "translateY(-4px)";
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)";
-                  el.style.transform = "translateY(0)";
-                }}
+                style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
               >
-                <div style={{ background: "#f8fafc", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
-                  <img
-                    src={`${assetBase}${cert.src}`}
-                    alt={cert.label}
-                    style={{ width: "100%", maxHeight: "160px", objectFit: "contain", display: "block" }}
-                  />
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
+                  <span
+                    className="stat-num"
+                    data-target={s.target}
+                    data-suffix={s.suffix}
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif",
+                      fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+                      fontWeight: 800, color: "#C41E3A", lineHeight: 1,
+                    }}
+                  >
+                    0
+                  </span>
                 </div>
                 <div style={{
-                  padding: "14px 16px",
-                  borderTop: "2px solid #C41E3A",
                   fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                  fontWeight: 700, letterSpacing: "0.16em",
-                  textTransform: "uppercase", color: "#111827",
-                  textAlign: "center",
+                  fontWeight: 600, letterSpacing: "0.18em",
+                  textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
                 }}>
-                  {cert.label}
+                  {s.label}
                 </div>
               </div>
             ))}
@@ -704,39 +682,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ 3. STATS STRIP ══════════ */}
+      {/* ══════════ 4. CERTIFICATIONS ══════════ */}
       <section
-        ref={statsRef}
-        data-testid="section-stats"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "72px 40px" }}
+        ref={certSectionRef}
+        data-testid="section-certifications"
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 0" }}
       >
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "1px", background: "rgba(0,0,0,0.06)" }}>
-            {stats.map((s, i) => (
+        <div style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
+          <span style={{
+            fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+            display: "block", marginBottom: "10px",
+          }}>
+            RECOGNITION
+          </span>
+          <h3 style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
+            fontSize: "1.875rem", color: "#111827",
+            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+          }}>
+            Certifications &amp; Awards
+          </h3>
+        </div>
+
+        {/* 4 certificate cards — static grid */}
+        <div className="max-w-5xl mx-auto" style={{ padding: "0 40px" }}>
+          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: "24px" }}>
+            {[
+              { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "ISO 9001:2015" },
+              { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "ISO 14001:2015" },
+              { src: "assets/awards/mpl_2020_04.jpg",                label: "ISO 45001:2018" },
+              { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "CRISIL SME 1" },
+            ].map((cert, i) => (
               <div
                 key={i}
-                style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                  display: "flex", flexDirection: "column",
+                  transition: "box-shadow 0.25s, transform 0.25s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = "0 8px 40px rgba(196,30,58,0.12)";
+                  el.style.transform = "translateY(-4px)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)";
+                  el.style.transform = "translateY(0)";
+                }}
               >
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
-                  <span
-                    className="stat-num"
-                    data-target={s.target}
-                    data-suffix={s.suffix}
-                    style={{
-                      fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
-                      fontWeight: 800, color: "#C41E3A", lineHeight: 1,
-                    }}
-                  >
-                    0
-                  </span>
+                <div style={{ background: "#f8fafc", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
+                  <img
+                    src={`${assetBase}${cert.src}`}
+                    alt={cert.label}
+                    style={{ width: "100%", maxHeight: "160px", objectFit: "contain", display: "block" }}
+                  />
                 </div>
                 <div style={{
+                  padding: "14px 16px",
+                  borderTop: "2px solid #C41E3A",
                   fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                  fontWeight: 600, letterSpacing: "0.18em",
-                  textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
+                  fontWeight: 700, letterSpacing: "0.16em",
+                  textTransform: "uppercase", color: "#111827",
+                  textAlign: "center",
                 }}>
-                  {s.label}
+                  {cert.label}
                 </div>
               </div>
             ))}
