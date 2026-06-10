@@ -27,11 +27,11 @@ const heroVideos = [
 const heroSlides = [
   {
     heading: ["GIANT BEHIND THE GIANT"],
-    subtitle: "The structural backbone behind India\'s most iconic skylines — built with precision, powered by 25 years of on-site expertise.",
+    subtitle: "The structural backbone behind India\'s most iconic skylines, built with precision, powered by 25 years of on-site expertise.",
   },
   {
     heading: ["Projects We Have", "Proudly Delivered"],
-    subtitle: "Every project represents a commitment to quality, safety, and execution excellence — explore the milestones that have shaped our journey.",
+    subtitle: "Every project represents a commitment to quality, safety, and execution excellence, explore the milestones that have shaped our journey.",
   },
   {
     heading: ["The People Behind", "the Projects"],
