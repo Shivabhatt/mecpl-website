@@ -19,9 +19,9 @@ interface WhyCard {
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
   "assets/video/banner-video-1.mp4",
-  "assets/video/banner-video-title3a.mp4",
-  "assets/video/banner-video-4.mp4",
+  "assets/video/banner-video-title2.mp4",
   "assets/video/banner-video-title3b.mp4",
+  "assets/video/banner-video-4.mp4",
 ];
 
 const heroSlides = [
@@ -34,12 +34,12 @@ const heroSlides = [
     subtitle: "Every project represents a commitment to quality, safety, and execution excellence — explore the milestones that have shaped our journey.",
   },
   {
-    heading: ["Architecting Landmarks,", "Engineering Excellence."],
-    subtitle: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
-  },
-  {
     heading: ["The People Behind", "the Projects"],
     subtitle: "The expertise, dedication, and teamwork that power every milestone.",
+  },
+  {
+    heading: ["Architecting Landmarks,", "Engineering Excellence."],
+    subtitle: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
   },
 ];
 
