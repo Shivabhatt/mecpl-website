@@ -44,10 +44,10 @@ const heroSlides = [
 ];
 
 const stats = [
-  { target: 25,  suffix: "+",  label: "Years of Excellence"  },
-  { target: 150, suffix: "+",  label: "Landmark Projects"    },
-  { target: 4,   suffix: "",   label: "ISO Certifications"   },
-  { target: 95,  suffix: "%+", label: "On-Time Delivery"     },
+  { target: 40,  suffix: "+",  label: "Year Of Legacy"       },
+  { target: 100, suffix: "+",  label: "Completed Projects"   },
+  { target: 100, suffix: "%",  label: "Quality Consistency"  },
+  { target: 100, suffix: "+",  label: "Satisfied Client"     },
 ];
 
 const services = [
