@@ -550,20 +550,20 @@ export default function AboutPage() {
       <WordScatterSection />
 
       {/* ─── LEADERSHIP (Studio VØR / Partners-in-Property style) ── */}
-      <section id="abt3" style={{ background: "#0c0c0c", scrollMarginTop: 80, overflow: "hidden" }}>
+      <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, overflow: "hidden" }}>
 
         {/* ── Top header bar ── */}
-        <div style={{ padding: "100px 60px 72px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <div style={{ padding: "100px 60px 72px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", maxWidth: 1400, margin: "0 auto", flexWrap: "wrap", gap: 24 }}>
             <div>
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
                 OUR LEADERS
               </span>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.8rem, 6vw, 5.5rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.8rem, 6vw, 5.5rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
                 The<br />Founders
               </h2>
             </div>
-            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.4)", maxWidth: 380, lineHeight: 1.9, margin: 0 }}>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "rgba(0,0,0,0.45)", maxWidth: 380, lineHeight: 1.9, margin: 0 }}>
               Four visionaries, one mission. The leadership of MECPL brings together decades of engineering excellence, financial acumen, and operational mastery.
             </p>
           </div>
@@ -573,18 +573,18 @@ export default function AboutPage() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", maxWidth: 1400, margin: "0 auto" }}>
 
           {/* Left sticky column */}
-          <div style={{ padding: "64px 60px 64px 60px", borderRight: "1px solid rgba(255,255,255,0.07)", position: "sticky", top: 80, alignSelf: "start", height: "fit-content" }}>
+          <div style={{ padding: "64px 60px 64px 60px", borderRight: "1px solid rgba(0,0,0,0.07)", position: "sticky", top: 80, alignSelf: "start", height: "fit-content" }}>
             <div style={{ marginBottom: 48 }}>
-              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase", marginBottom: 32 }}>
+              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(0,0,0,0.3)", textTransform: "uppercase", marginBottom: 32 }}>
                 Leadership Team
               </div>
               {leaders.map((l, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, padding: "14px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em", minWidth: 24 }}>
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, padding: "14px 0", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", color: "rgba(0,0,0,0.25)", letterSpacing: "0.1em", minWidth: 24 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.72rem", color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em", textTransform: "uppercase" }}>{l.name}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.72rem", color: "rgba(0,0,0,0.8)", letterSpacing: "0.06em", textTransform: "uppercase" }}>{l.name}</div>
                     <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 500, fontSize: "0.58rem", color: "#C41E3A", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 3 }}>{l.role}</div>
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function AboutPage() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ width: 28, height: 1, background: "#C41E3A" }} />
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", color: "rgba(0,0,0,0.3)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
                 {String(leaders.length).padStart(2, "0")} Members
               </span>
             </div>
@@ -604,13 +604,13 @@ export default function AboutPage() {
               <div
                 key={i}
                 className="pvip-card"
-                style={{ position: "relative", overflow: "hidden", height: "68vh", cursor: "default", background: "#1a1a1a" }}
+                style={{ position: "relative", overflow: "hidden", height: "68vh", cursor: "default", background: "#e8e8e8" }}
               >
                 {/* Number tag */}
                 <div style={{
                   position: "absolute", top: 24, left: 24, zIndex: 10,
                   fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", fontWeight: 700,
-                  letterSpacing: "0.25em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase",
+                  letterSpacing: "0.25em", color: "rgba(255,255,255,0.7)", textTransform: "uppercase",
                 }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
