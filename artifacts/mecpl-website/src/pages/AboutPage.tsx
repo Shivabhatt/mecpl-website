@@ -481,62 +481,75 @@ export default function AboutPage() {
       </section>
 
       {/* ─── STORY INTRO + PHOTO COLLAGE ─────────────────────── */}
-      <section id="abt1" style={{ background: "#ffffff", padding: "100px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
-        <div style={{ maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 80, alignItems: "start" }}>
+      <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
+        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
-          {/* Left: text + stats */}
-          <RevealBlock>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-              Our Story
-            </span>
-            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 28px", textTransform: "uppercase" }}>
-              25+ Years of Building<br />Pune's Skyline
-            </h2>
-            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#555", lineHeight: 1.9, margin: "0 0 18px" }}>
-              Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
-            </p>
-            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#555", lineHeight: 1.9, margin: "0 0 48px" }}>
-              With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
-            </p>
-            {/* Stats 2×2 grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
-              {stats.map((s) => (
-                <div key={s.label} style={{ padding: "32px 24px", border: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "2.4rem", color: "#C41E3A", lineHeight: 1 }}>{s.val}</div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.18em", color: "#999", textTransform: "uppercase", marginTop: 10 }}>{s.label}</div>
+          {/* Top row: text left + image mosaic right */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 72, alignItems: "start", marginBottom: 0 }}>
+
+            {/* Left: story paragraph only */}
+            <RevealBlock>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 22 }}>
+                Our Story
+              </span>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "#2a2a2a", lineHeight: 1.85, margin: "0 0 22px", fontWeight: 500 }}>
+                Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
+              </p>
+              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
+                With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
+              </p>
+            </RevealBlock>
+
+            {/* Right: staggered 5-image mosaic exactly like reference */}
+            <RevealBlock delay={120}>
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                gridTemplateRows: "200px 200px",
+                gap: 8,
+              }}>
+                {/* Col 1 — tall, rows 1-2 */}
+                <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden" }}>
+                  <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=600&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 </div>
-              ))}
-            </div>
-          </RevealBlock>
+                {/* Col 2 top */}
+                <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden" }}>
+                  <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop" alt="Construction" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* Col 3 — tall, rows 1-2 */}
+                <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden" }}>
+                  <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* Col 4 — tall, rows 1-2 */}
+                <div style={{ gridColumn: "4", gridRow: "1 / 3", overflow: "hidden" }}>
+                  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* Col 2 bottom */}
+                <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden" }}>
+                  <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" alt="Team" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+              </div>
+            </RevealBlock>
+          </div>
 
-          {/* Right: staggered 5-image mosaic (like reference) */}
-          <RevealBlock delay={120}>
+          {/* Stats row — full width below both columns */}
+          <RevealBlock delay={200}>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr",
-              gridTemplateRows: "210px 210px",
-              gap: 10,
+              gridTemplateColumns: "repeat(4, 1fr)",
+              borderTop: "1px solid rgba(0,0,0,0.08)",
+              marginTop: 72,
             }}>
-              {/* Col 1 — tall portrait, rows 1-2 */}
-              <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
-                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=600&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
-              </div>
-              {/* Col 2 — top landscape */}
-              <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden", background: "#ddd" }}>
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop" alt="Construction site" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
-              </div>
-              {/* Col 3 — tall portrait, rows 1-2 */}
-              <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
-              </div>
-              {/* Col 4 — tall portrait, rows 1-2 */}
-              <div style={{ gridColumn: "4", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
-                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
-              </div>
-              {/* Col 2 — bottom landscape */}
-              <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden", background: "#ddd" }}>
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" alt="Team meeting" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
-              </div>
+              {stats.map((s, i) => (
+                <div key={s.label} style={{
+                  padding: "44px 32px",
+                  borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                  textAlign: "center",
+                }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#C41E3A", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase" }}>{s.label}</div>
+                </div>
+              ))}
             </div>
           </RevealBlock>
         </div>
