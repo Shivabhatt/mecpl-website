@@ -554,33 +554,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── VIDEO SECTION ───────────────────────────────────── */}
-      <section style={{ background: "#0a0a0a", padding: "100px 40px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(196,30,58,0.1) 0%, transparent 70%)" }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <RevealBlock>
-            <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
-                Our Story In Motion
-              </span>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
-                The MECPL Journey
-              </h2>
-            </div>
-          </RevealBlock>
-          <RevealBlock delay={150}>
-            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", background: "#111", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <iframe
-                src="https://www.youtube.com/embed/2b1u5KUSUkk?rel=0&modestbranding=1"
-                title="MECPL Journey"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-              />
-            </div>
-          </RevealBlock>
-        </div>
-      </section>
 
       {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
       <AlternatingSection />
