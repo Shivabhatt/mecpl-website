@@ -512,180 +512,88 @@ export default function AboutPage() {
   return (
     <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
 
-      {/* ─── FELIX-NIETO EDITORIAL HERO ─────────────────────── */}
-      <section style={{
-        background: "#ffffff",
-        minHeight: "100vh",
-        padding: "130px 56px 0",
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}>
-        {/* Full-bleed editorial typography */}
-        <div style={{ position: "relative", zIndex: 2 }}>
-          {/* Label */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
-            <span style={{ width: 28, height: 1.5, background: "#C41E3A", display: "block" }} />
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase" }}>
-              About MECPL
+      {/* ─── OUR STORY — Image Hero ──────────────────────────── */}
+      <section style={{ position: "relative", height: "68vh", overflow: "hidden", background: "#111" }}>
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
+          alt="MECPL — Our Story"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%", display: "block" }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 100%)" }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          textAlign: "center",
+        }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+            About MECPL
+          </span>
+          <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(3rem, 8vw, 7rem)", color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
+            Our Story
+          </h1>
+        </div>
+        {/* Scroll cue */}
+        <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.5rem", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Scroll</span>
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><rect x="1" y="1" width="10" height="18" rx="5" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"/><rect x="5" y="4" width="2" height="5" rx="1" fill="rgba(255,255,255,0.45)"/></svg>
+        </div>
+      </section>
+
+      {/* ─── STORY INTRO + PHOTO COLLAGE ─────────────────────── */}
+      <section id="abt1" style={{ background: "#ffffff", padding: "100px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
+        <div style={{ maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 80, alignItems: "start" }}>
+
+          {/* Left: text + stats */}
+          <RevealBlock>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+              Our Story
             </span>
-          </div>
+            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 28px", textTransform: "uppercase" }}>
+              25+ Years of Building<br />Pune's Skyline
+            </h2>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#555", lineHeight: 1.9, margin: "0 0 18px" }}>
+              Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
+            </p>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#555", lineHeight: 1.9, margin: "0 0 48px" }}>
+              With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
+            </p>
+            {/* Stats 2×2 grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+              {stats.map((s) => (
+                <div key={s.label} style={{ padding: "32px 24px", border: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "2.4rem", color: "#C41E3A", lineHeight: 1 }}>{s.val}</div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.18em", color: "#999", textTransform: "uppercase", marginTop: 10 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </RevealBlock>
 
-          {/* Line 1 — heavy black, full-width bleed */}
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.04em",
-            color: "#111",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-          }}>
-            ENGINEERING
-          </div>
-
-          {/* Line 2 — ultra-thin, indented, contrasting weight */}
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 200,
-            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.03em",
-            color: "#111",
-            textTransform: "uppercase",
-            paddingLeft: "clamp(2rem, 5vw, 7rem)",
-            whiteSpace: "nowrap",
-          }}>
-            LANDMARKS
-          </div>
-
-          {/* Line 3 — mixed: red accent word + thin rest */}
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(3.8rem, 10.5vw, 11rem)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.04em",
-            color: "#111",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-          }}>
-            &amp;{" "}
-            <span style={{ fontWeight: 200, color: "#C41E3A" }}>EXCELLENCE.</span>
-          </div>
-        </div>
-
-        {/* Right-side image — overlaps typography vertically (felix-nieto collage) */}
-        <div style={{
-          position: "absolute",
-          top: "18%",
-          right: 0,
-          width: "42%",
-          height: "70%",
-          zIndex: 1,
-          overflow: "hidden",
-        }}>
-          <img
-            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop"
-            alt="MECPL engineering landmark"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-          />
-          {/* Subtle left-fade so it bleeds into text area */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to right, #ffffff 0%, transparent 22%)",
-          }} />
-        </div>
-
-        {/* Bottom bar — tagline + scroll (felix-nieto pattern) */}
-        <div style={{
-          position: "relative", zIndex: 2,
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          padding: "40px 0 48px",
-          marginTop: 24,
-        }}>
-          <p style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 600,
-            fontSize: "0.65rem",
-            letterSpacing: "0.18em",
-            color: "#666",
-            textTransform: "uppercase",
-            lineHeight: 1.7,
-            margin: 0,
-          }}>
-            QUALITY-DRIVEN CONSTRUCTION FOR<br />
-            HIGH-IMPACT DEVELOPMENTS · PUNE, INDIA · SINCE 1999
-          </p>
-          <div style={{
-            display: "flex", alignItems: "center", gap: 10,
-            fontFamily: "'Montserrat',sans-serif",
-            fontWeight: 700,
-            fontSize: "0.6rem",
-            letterSpacing: "0.25em",
-            color: "#888",
-            textTransform: "uppercase",
-          }}>
-            SCROLL
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 1v12M1 7l6 6 6-6" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── COMPANY STORY + STATS ───────────────────────────── */}
-      <section id="abt1" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
-            <RevealBlock>
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-                Our Story
-              </span>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 28px" }}>
-                25+ Years of Building<br />Pune's Skyline
-              </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: "0 0 20px" }}>
-                Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
-              </p>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.9, margin: 0 }}>
-                With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
-              </p>
-            </RevealBlock>
-
-            <RevealBlock delay={150}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
-                {stats.map((s, i) => (
-                  <div key={s.label} style={{
-                    padding: "48px 32px",
-                    background: "#ffffff",
-                    border: "1px solid rgba(0,0,0,0.07)",
-                    textAlign: "center",
-                  }}>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "2.8rem", color: "#C41E3A", lineHeight: 1 }}>{s.val}</div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase", marginTop: 12 }}>{s.label}</div>
-                  </div>
-                ))}
+          {/* Right: photo collage grid */}
+          <RevealBlock delay={120}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "260px 260px", gap: 10 }}>
+              {/* Tall image spanning 2 rows */}
+              <div style={{ gridRow: "1 / 3", overflow: "hidden", background: "#eee" }}>
+                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=800&auto=format&fit=crop" alt="MECPL team" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-            </RevealBlock>
-          </div>
+              {/* Top-right */}
+              <div style={{ overflow: "hidden", background: "#eee" }}>
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop" alt="Construction site" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              {/* Bottom-right */}
+              <div style={{ overflow: "hidden", background: "#eee" }}>
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </div>
+          </RevealBlock>
         </div>
       </section>
-
-      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
-      <AlternatingSection />
 
       {/* ─── VIDEO SECTION ───────────────────────────────────── */}
-      <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: "#0a0a0a", padding: "100px 40px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(196,30,58,0.1) 0%, transparent 70%)" }} />
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <RevealBlock>
-            <div style={{ textAlign: "center", marginBottom: 60 }}>
+            <div style={{ textAlign: "center", marginBottom: 56 }}>
               <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
                 Our Story In Motion
               </span>
@@ -707,6 +615,9 @@ export default function AboutPage() {
           </RevealBlock>
         </div>
       </section>
+
+      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
+      <AlternatingSection />
 
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
@@ -752,34 +663,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── CTA ─────────────────────────────────────────────── */}
-      <section style={{ background: "#0a0a0a", padding: "120px 40px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(196,30,58,0.12) 0%, transparent 70%)" }} />
-        <RevealBlock>
-          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-              Work With MECPL
-            </span>
-            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 3.6rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.03em", lineHeight: 1.05, margin: "0 0 28px" }}>
-              Trusted By 100+<br />Enterprise Clients
-            </h2>
-            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, margin: "0 0 44px" }}>
-              Join the developers, institutions, and enterprises who rely on MECPL to deliver their most ambitious structures.
-            </p>
+      {/* ─── CTA — "LET'S BUILD TOGETHER" red banner ─────────── */}
+      <section style={{
+        background: "linear-gradient(135deg, #8B1020 0%, #C41E3A 60%, #a01828 100%)",
+        padding: "72px 40px",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        {/* Subtle texture overlay */}
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
+            color: "#ffffff",
+            textTransform: "uppercase",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            margin: "0 0 36px",
+          }}>
+            Trusted By 100+<br />Enterprise Clients
+          </h2>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link href="/contact">
               <span style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                background: "#C41E3A", color: "#fff",
-                padding: "18px 40px",
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase",
-                cursor: "pointer",
-                transition: "background 0.2s",
+                border: "1.5px solid rgba(255,255,255,0.7)", color: "#fff",
+                padding: "15px 36px",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
+                background: "transparent",
               }}>
-                Get In Touch <ArrowRight size={14} />
+                Contact MECPL <ArrowRight size={12} />
+              </span>
+            </Link>
+            <Link href="/projects">
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 10,
+                border: "1.5px solid rgba(255,255,255,0.7)", color: "#fff",
+                padding: "15px 36px",
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
+                background: "transparent",
+              }}>
+                View Projects <ArrowRight size={12} />
               </span>
             </Link>
           </div>
-        </RevealBlock>
+        </div>
       </section>
 
     </div>
