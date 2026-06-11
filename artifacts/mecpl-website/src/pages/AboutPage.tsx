@@ -349,13 +349,12 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
 function LeadershipDoorSlider() {
   const [active, setActive] = useState<number | null>(null);
   const MF = "'Montserrat',sans-serif";
-  const DUR = "0.72s cubic-bezier(.16,1,.3,1)";
 
   return (
-    <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, padding: "72px 0 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+    <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, padding: "80px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
 
       {/* Section header */}
-      <div style={{ padding: "0 56px 52px", maxWidth: 1360, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1360, margin: "0 auto 52px" }}>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
           <div>
             <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
@@ -365,16 +364,16 @@ function LeadershipDoorSlider() {
               Meet The Founders of MECPL
             </h2>
           </div>
-          <p style={{ fontFamily: MF, fontSize: "0.85rem", color: "rgba(0,0,0,0.42)", maxWidth: 400, lineHeight: 1.9, margin: 0 }}>
-            Hover over any portrait to open the door and meet the person behind MECPL's success.
+          <p style={{ fontFamily: MF, fontSize: "0.85rem", color: "rgba(0,0,0,0.42)", maxWidth: 380, lineHeight: 1.9, margin: 0 }}>
+            Hover over any portrait to meet the person behind MECPL's success.
           </p>
         </div>
       </div>
 
-      {/* 4-card grid — each card has a barn-door image split */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
+      {/* 4-card grid — image always visible, bio slides up on hover */}
+      <div style={{ maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
         {leaders.map((leader, i) => {
-          const isOpen = active === i;
+          const isHovered = active === i;
           return (
             <div
               key={i}
@@ -385,111 +384,69 @@ function LeadershipDoorSlider() {
                 aspectRatio: "3/4",
                 overflow: "hidden",
                 cursor: "default",
-                borderRight: i < leaders.length - 1 ? "2px solid #ffffff" : "none",
                 background: "#111",
+                borderRadius: 2,
               }}
             >
-              {/* ── BIO revealed behind the doors ── */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(160deg, #0f0f0f 0%, #1a0a0e 100%)",
-                display: "flex", flexDirection: "column", justifyContent: "flex-end",
-                padding: "32px 28px",
-              }}>
-                <span style={{ fontFamily: MF, fontSize: "0.52rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase", marginBottom: 20 }}>
-                  {String(i + 1).padStart(2, "0")} / {String(leaders.length).padStart(2, "0")}
-                </span>
-                <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 16 }} />
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "1rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 8 }}>
-                  {leader.name}
-                </div>
-                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.55rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 18 }}>
-                  {leader.role}
-                </div>
-                <p style={{ fontFamily: MF, fontSize: "0.73rem", color: "rgba(255,255,255,0.58)", lineHeight: 1.85, margin: 0 }}>
-                  {leader.desc}
-                </p>
-                {/* Close hint */}
-                <div style={{ marginTop: 24, display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 16, height: 1, background: "rgba(255,255,255,0.2)" }} />
-                  <span style={{ fontFamily: MF, fontSize: "0.5rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>click to close</span>
-                </div>
-              </div>
+              {/* ── Portrait photo — always visible ── */}
+              <img
+                src={leader.image}
+                alt={leader.name}
+                style={{
+                  position: "absolute", inset: 0,
+                  width: "100%", height: "100%",
+                  objectFit: "cover", objectPosition: "top center",
+                  display: "block",
+                  transform: isHovered ? "scale(1.06)" : "scale(1)",
+                  transition: "transform 0.65s cubic-bezier(.16,1,.3,1)",
+                }}
+              />
 
-              {/* ── LEFT DOOR HALF ── */}
-              <div style={{
-                position: "absolute", top: 0, left: 0, bottom: 0, width: "50%",
-                overflow: "hidden",
-                transform: isOpen ? "translateX(-100%)" : "translateX(0)",
-                transition: `transform ${DUR}`,
-              }}>
-                {/* Inner wrapper = full card width so image renders identically on both halves */}
-                <div style={{ position: "absolute", top: 0, left: 0, width: "200%", height: "100%" }}>
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
-                  />
-                </div>
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "55%", background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)", pointerEvents: "none" }} />
-              </div>
-
-              {/* ── RIGHT DOOR HALF ── */}
-              <div style={{
-                position: "absolute", top: 0, right: 0, bottom: 0, width: "50%",
-                overflow: "hidden",
-                transform: isOpen ? "translateX(100%)" : "translateX(0)",
-                transition: `transform ${DUR}`,
-              }}>
-                {/* Inner wrapper = full card width, anchored to right so right half of image shows */}
-                <div style={{ position: "absolute", top: 0, right: 0, width: "200%", height: "100%" }}>
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
-                  />
-                </div>
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "55%", background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)", pointerEvents: "none" }} />
-              </div>
-
-              {/* ── NAME / ROLE bar (visible when closed) ── */}
+              {/* ── Always-on bottom gradient + name bar ── */}
               <div style={{
                 position: "absolute", bottom: 0, left: 0, right: 0,
-                padding: "56px 24px 24px",
+                padding: "64px 22px 22px",
+                background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
+                zIndex: 2,
+                opacity: isHovered ? 0 : 1,
+                transition: "opacity 0.3s ease",
                 pointerEvents: "none",
-                opacity: isOpen ? 0 : 1,
-                transition: `opacity 0.3s ease`,
-                zIndex: 10,
               }}>
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.85rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.05em", lineHeight: 1.3, marginBottom: 4 }}>
                   {leader.name}
                 </div>
-                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.55rem", color: "#C41E3A", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.54rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase" }}>
                   {leader.role}
                 </div>
               </div>
 
-              {/* ── Number tag ── */}
+              {/* ── Bio overlay — slides up from bottom on hover ── */}
               <div style={{
-                position: "absolute", top: 18, left: 18, zIndex: 20,
-                fontFamily: MF, fontSize: "0.52rem", fontWeight: 700,
-                letterSpacing: "0.26em", color: "rgba(255,255,255,0.6)", textTransform: "uppercase",
-                opacity: isOpen ? 0 : 1,
-                transition: `opacity 0.25s ease`,
+                position: "absolute", inset: 0,
+                background: "linear-gradient(165deg, rgba(8,8,8,0.93) 0%, rgba(18,4,8,0.96) 100%)",
+                display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                padding: "28px 24px",
+                zIndex: 3,
+                transform: isHovered ? "translateY(0)" : "translateY(100%)",
+                transition: "transform 0.6s cubic-bezier(.16,1,.3,1)",
               }}>
-                {String(i + 1).padStart(2, "0")}
+                <span style={{ fontFamily: MF, fontSize: "0.5rem", fontWeight: 700, letterSpacing: "0.28em", color: "rgba(255,255,255,0.22)", textTransform: "uppercase", marginBottom: 18 }}>
+                  {String(i + 1).padStart(2, "0")} / {String(leaders.length).padStart(2, "0")}
+                </span>
+                <div style={{ width: 24, height: 2, background: "#C41E3A", marginBottom: 14 }} />
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.95rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 6 }}>
+                  {leader.name}
+                </div>
+                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
+                  {leader.role}
+                </div>
+                <p style={{ fontFamily: MF, fontSize: "0.72rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.85, margin: 0 }}>
+                  {leader.desc}
+                </p>
               </div>
             </div>
           );
         })}
-      </div>
-
-      {/* Hint bar */}
-      <div style={{ padding: "20px 56px", display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 20, height: 1, background: "#C41E3A" }} />
-        <span style={{ fontFamily: MF, fontSize: "0.55rem", letterSpacing: "0.22em", color: "rgba(0,0,0,0.3)", textTransform: "uppercase" }}>
-          Click any portrait to open
-        </span>
       </div>
     </section>
   );
@@ -555,20 +512,33 @@ export default function AboutPage() {
             </div>
           </RevealBlock>
 
-          {/* Right: photo collage grid */}
+          {/* Right: staggered 5-image mosaic (like reference) */}
           <RevealBlock delay={120}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "260px 260px", gap: 10 }}>
-              {/* Tall image spanning 2 rows */}
-              <div style={{ gridRow: "1 / 3", overflow: "hidden", background: "#eee" }}>
-                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=800&auto=format&fit=crop" alt="MECPL team" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr 1fr",
+              gridTemplateRows: "210px 210px",
+              gap: 10,
+            }}>
+              {/* Col 1 — tall portrait, rows 1-2 */}
+              <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
+                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=600&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </div>
-              {/* Top-right */}
-              <div style={{ overflow: "hidden", background: "#eee" }}>
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop" alt="Construction site" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              {/* Col 2 — top landscape */}
+              <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden", background: "#ddd" }}>
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop" alt="Construction site" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </div>
-              {/* Bottom-right */}
-              <div style={{ overflow: "hidden", background: "#eee" }}>
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              {/* Col 3 — tall portrait, rows 1-2 */}
+              <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+              </div>
+              {/* Col 4 — tall portrait, rows 1-2 */}
+              <div style={{ gridColumn: "4", gridRow: "1 / 3", overflow: "hidden", background: "#ddd" }}>
+                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+              </div>
+              {/* Col 2 — bottom landscape */}
+              <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden", background: "#ddd" }}>
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" alt="Team meeting" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
               </div>
             </div>
           </RevealBlock>
