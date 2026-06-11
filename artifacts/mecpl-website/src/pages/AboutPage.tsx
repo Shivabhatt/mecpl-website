@@ -358,7 +358,7 @@ function LeadershipDoorSlider() {
         <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
           Our Team
         </span>
-        <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>
+        <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
           Meet The Founders of MECPL
         </h2>
       </div>
@@ -480,56 +480,53 @@ export default function AboutPage() {
       <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
-          {/* ① Text left + Image mosaic right — side by side */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 64, alignItems: "start", paddingBottom: 0 }}>
-
-            {/* Left: heading + paragraphs */}
-            <RevealBlock>
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-                Our Story
-              </span>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.2, margin: "0 0 28px", textTransform: "uppercase" }}>
-                Driven By<br />Quality And<br />Excellence<br />Since 1999
-              </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 20px", fontWeight: 500 }}>
-                Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
-              </p>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.9rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
-                With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1. Our core values of Quality, Consistency, Compliance, Safety, and Environmental Protection remain unchanged.
-              </p>
-            </RevealBlock>
-
-            {/* Right: staggered 5-image mosaic */}
-            <RevealBlock delay={120}>
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                gridTemplateRows: "200px 200px",
-                gap: 8,
-              }}>
-                {/* Col 1 — tall portrait, rows 1-2 */}
-                <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden" }}>
-                  <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=700&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* Col 2 top */}
-                <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden" }}>
-                  <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=700&auto=format&fit=crop" alt="Construction" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* Col 3 — tall portrait, rows 1-2 */}
-                <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden" }}>
-                  <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=700&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* Col 4 — tall portrait, rows 1-2 */}
-                <div style={{ gridColumn: "4", gridRow: "1 / 3", overflow: "hidden" }}>
-                  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=700&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* Col 2 bottom */}
-                <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden" }}>
-                  <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=700&auto=format&fit=crop" alt="Team" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
+          {/* ① Our Story text — heading left, body right */}
+          <RevealBlock>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 72, alignItems: "start", paddingBottom: 72 }}>
+              <div>
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+                  Our Story
+                </span>
+                <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
+                  Driven By<br />Quality And<br />Excellence<br />Since 1999
+                </h2>
               </div>
-            </RevealBlock>
-          </div>
+              <div>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 20px", fontWeight: 500 }}>
+                  Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
+                </p>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.9rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
+                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1. Our core values of Quality, Consistency, Compliance, Safety, and Environmental Protection remain unchanged.
+                </p>
+              </div>
+            </div>
+          </RevealBlock>
+
+          {/* ② Image mosaic — full width below text */}
+          <RevealBlock delay={100}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr 1fr",
+              gridTemplateRows: "220px 220px",
+              gap: 8,
+            }}>
+              <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden" }}>
+                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=700&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden" }}>
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=700&auto=format&fit=crop" alt="Construction" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden" }}>
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=700&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ gridColumn: "4", gridRow: "1 / 3", overflow: "hidden" }}>
+                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=700&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden" }}>
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=700&auto=format&fit=crop" alt="Team" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </div>
+          </RevealBlock>
 
           {/* ③ Stats row — full width at bottom */}
           <RevealBlock delay={180}>
