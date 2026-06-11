@@ -364,9 +364,6 @@ function LeadershipDoorSlider() {
               Meet The Founders of MECPL
             </h2>
           </div>
-          <p style={{ fontFamily: MF, fontSize: "0.85rem", color: "rgba(0,0,0,0.42)", maxWidth: 380, lineHeight: 1.9, margin: 0 }}>
-            Hover over any portrait to meet the person behind MECPL's success.
-          </p>
         </div>
       </div>
 
