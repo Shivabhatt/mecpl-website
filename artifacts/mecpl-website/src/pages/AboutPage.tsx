@@ -520,8 +520,8 @@ export default function AboutPage() {
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
                   Our Story
                 </span>
-                <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.2, margin: 0 }}>
-                  Building Pune's Skyline Since 2001
+                <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", color: "#111", letterSpacing: "-0.03em", lineHeight: 1.2, margin: 0, textTransform: "uppercase" }}>
+                  Driven By<br />Quality And<br />Excellence<br />Since 1999
                 </h2>
               </div>
               {/* Right: both paragraphs */}
@@ -530,7 +530,7 @@ export default function AboutPage() {
                   Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
                 </p>
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.93rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
-                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, MECPL has maintained a CRISIL rating of SME 1.
+                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1. Our core values of Quality, Consistency, Compliance, Safety, and Environmental Protection remain unchanged.
                 </p>
               </div>
             </div>
