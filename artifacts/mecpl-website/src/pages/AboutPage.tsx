@@ -361,7 +361,7 @@ function LeadershipDoorSlider() {
             <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
               Our Team
             </span>
-            <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0, fontStyle: "italic" }}>
+            <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>
               Meet The Founders of MECPL
             </h2>
           </div>
@@ -422,22 +422,15 @@ function LeadershipDoorSlider() {
                 transform: isOpen ? "translateX(-100%)" : "translateX(0)",
                 transition: `transform ${DUR}`,
               }}>
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  style={{
-                    position: "absolute", top: 0, left: 0,
-                    width: "200%", height: "100%",
-                    objectFit: "cover", objectPosition: "top left",
-                    display: "block",
-                  }}
-                />
-                {/* Bottom gradient on left door */}
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
-                  background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
-                  pointerEvents: "none",
-                }} />
+                {/* Inner wrapper = full card width so image renders identically on both halves */}
+                <div style={{ position: "absolute", top: 0, left: 0, width: "200%", height: "100%" }}>
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
+                  />
+                </div>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "55%", background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)", pointerEvents: "none" }} />
               </div>
 
               {/* ── RIGHT DOOR HALF ── */}
@@ -447,22 +440,15 @@ function LeadershipDoorSlider() {
                 transform: isOpen ? "translateX(100%)" : "translateX(0)",
                 transition: `transform ${DUR}`,
               }}>
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  style={{
-                    position: "absolute", top: 0, right: 0,
-                    width: "200%", height: "100%",
-                    objectFit: "cover", objectPosition: "top right",
-                    display: "block",
-                  }}
-                />
-                {/* Bottom gradient on right door */}
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
-                  background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
-                  pointerEvents: "none",
-                }} />
+                {/* Inner wrapper = full card width, anchored to right so right half of image shows */}
+                <div style={{ position: "absolute", top: 0, right: 0, width: "200%", height: "100%" }}>
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
+                  />
+                </div>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "55%", background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)", pointerEvents: "none" }} />
               </div>
 
               {/* ── NAME / ROLE bar (visible when closed) ── */}
