@@ -417,27 +417,27 @@ function LeadershipDoorSlider() {
                 </div>
               </div>
 
-              {/* ── Bio overlay — slides up from bottom on hover ── */}
+              {/* ── Bio overlay — semi-transparent so image shows through ── */}
               <div style={{
                 position: "absolute", inset: 0,
-                background: "linear-gradient(165deg, rgba(8,8,8,0.93) 0%, rgba(18,4,8,0.96) 100%)",
+                background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.70) 55%, rgba(0,0,0,0.38) 100%)",
                 display: "flex", flexDirection: "column", justifyContent: "flex-end",
                 padding: "28px 24px",
                 zIndex: 3,
-                transform: isHovered ? "translateY(0)" : "translateY(100%)",
-                transition: "transform 0.6s cubic-bezier(.16,1,.3,1)",
+                opacity: isHovered ? 1 : 0,
+                transition: "opacity 0.45s ease",
               }}>
-                <span style={{ fontFamily: MF, fontSize: "0.5rem", fontWeight: 700, letterSpacing: "0.28em", color: "rgba(255,255,255,0.22)", textTransform: "uppercase", marginBottom: 18 }}>
+                <span style={{ fontFamily: MF, fontSize: "0.5rem", fontWeight: 700, letterSpacing: "0.28em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", marginBottom: 14 }}>
                   {String(i + 1).padStart(2, "0")} / {String(leaders.length).padStart(2, "0")}
                 </span>
-                <div style={{ width: 24, height: 2, background: "#C41E3A", marginBottom: 14 }} />
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.95rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 6 }}>
+                <div style={{ width: 24, height: 2, background: "#C41E3A", marginBottom: 12 }} />
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.95rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
                   {leader.name}
                 </div>
-                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
+                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 14 }}>
                   {leader.role}
                 </div>
-                <p style={{ fontFamily: MF, fontSize: "0.72rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.85, margin: 0 }}>
+                <p style={{ fontFamily: MF, fontSize: "0.71rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, margin: 0 }}>
                   {leader.desc}
                 </p>
               </div>
