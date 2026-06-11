@@ -347,14 +347,15 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
 }
 
 function LeadershipDoorSlider() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<number | null>(null);
   const MF = "'Montserrat',sans-serif";
+  const DUR = "0.72s cubic-bezier(.16,1,.3,1)";
 
   return (
-    <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+    <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, padding: "72px 0 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
 
       {/* Section header */}
-      <div style={{ padding: "72px 56px 48px", maxWidth: 1360, margin: "0 auto" }}>
+      <div style={{ padding: "0 56px 52px", maxWidth: 1360, margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
           <div>
             <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
@@ -365,116 +366,143 @@ function LeadershipDoorSlider() {
             </h2>
           </div>
           <p style={{ fontFamily: MF, fontSize: "0.85rem", color: "rgba(0,0,0,0.42)", maxWidth: 400, lineHeight: 1.9, margin: 0 }}>
-            Four visionaries, one mission. The leadership of MECPL brings together decades of engineering excellence and operational mastery.
+            Click any portrait to open the door and meet the person behind MECPL's success.
           </p>
         </div>
       </div>
 
-      {/* Door slider */}
-      <div style={{ display: "flex", height: "72vh", overflow: "hidden", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+      {/* 4-card grid — each card has a barn-door image split */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
         {leaders.map((leader, i) => {
-          const isActive = i === active;
+          const isOpen = active === i;
           return (
             <div
               key={i}
-              onClick={() => setActive(i)}
+              onClick={() => setActive(isOpen ? null : i)}
               style={{
-                flex: isActive ? "4 1 0" : "1 1 0",
-                transition: "flex 0.75s cubic-bezier(.16,1,.3,1)",
                 position: "relative",
+                aspectRatio: "3/4",
                 overflow: "hidden",
-                cursor: isActive ? "default" : "pointer",
-                borderRight: i < leaders.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                cursor: "pointer",
+                borderRight: i < leaders.length - 1 ? "2px solid #ffffff" : "none",
+                background: "#111",
               }}
             >
-              {/* Full-bleed photo */}
-              <img
-                src={leader.image}
-                alt={leader.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "top center",
-                  display: "block",
-                  transform: isActive ? "scale(1.03)" : "scale(1.08)",
-                  transition: "transform 0.75s cubic-bezier(.16,1,.3,1)",
-                }}
-              />
-
-              {/* Dark gradient — always present */}
+              {/* ── BIO revealed behind the doors ── */}
               <div style={{
                 position: "absolute", inset: 0,
-                background: isActive
-                  ? "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.1) 100%)"
-                  : "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-                transition: "background 0.6s ease",
-              }} />
+                background: "linear-gradient(160deg, #0f0f0f 0%, #1a0a0e 100%)",
+                display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                padding: "32px 28px",
+              }}>
+                <span style={{ fontFamily: MF, fontSize: "0.52rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase", marginBottom: 20 }}>
+                  {String(i + 1).padStart(2, "0")} / {String(leaders.length).padStart(2, "0")}
+                </span>
+                <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 16 }} />
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "1rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 8 }}>
+                  {leader.name}
+                </div>
+                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.55rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 18 }}>
+                  {leader.role}
+                </div>
+                <p style={{ fontFamily: MF, fontSize: "0.73rem", color: "rgba(255,255,255,0.58)", lineHeight: 1.85, margin: 0 }}>
+                  {leader.desc}
+                </p>
+                {/* Close hint */}
+                <div style={{ marginTop: 24, display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 16, height: 1, background: "rgba(255,255,255,0.2)" }} />
+                  <span style={{ fontFamily: MF, fontSize: "0.5rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>click to close</span>
+                </div>
+              </div>
 
-              {/* Number tag */}
+              {/* ── LEFT DOOR HALF ── */}
               <div style={{
-                position: "absolute", top: 22, left: 22,
-                fontFamily: MF, fontSize: "0.55rem", fontWeight: 700,
-                letterSpacing: "0.28em", color: "rgba(255,255,255,0.55)", textTransform: "uppercase",
+                position: "absolute", top: 0, left: 0, bottom: 0, width: "50%",
+                overflow: "hidden",
+                transform: isOpen ? "translateX(-100%)" : "translateX(0)",
+                transition: `transform ${DUR}`,
+              }}>
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  style={{
+                    position: "absolute", top: 0, left: 0,
+                    width: "200%", height: "100%",
+                    objectFit: "cover", objectPosition: "top left",
+                    display: "block",
+                  }}
+                />
+                {/* Bottom gradient on left door */}
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
+                  pointerEvents: "none",
+                }} />
+              </div>
+
+              {/* ── RIGHT DOOR HALF ── */}
+              <div style={{
+                position: "absolute", top: 0, right: 0, bottom: 0, width: "50%",
+                overflow: "hidden",
+                transform: isOpen ? "translateX(100%)" : "translateX(0)",
+                transition: `transform ${DUR}`,
+              }}>
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  style={{
+                    position: "absolute", top: 0, right: 0,
+                    width: "200%", height: "100%",
+                    objectFit: "cover", objectPosition: "top right",
+                    display: "block",
+                  }}
+                />
+                {/* Bottom gradient on right door */}
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: "50%",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
+                  pointerEvents: "none",
+                }} />
+              </div>
+
+              {/* ── NAME / ROLE bar (visible when closed) ── */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0,
+                padding: "56px 24px 24px",
+                pointerEvents: "none",
+                opacity: isOpen ? 0 : 1,
+                transition: `opacity 0.3s ease`,
+                zIndex: 10,
+              }}>
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.85rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
+                  {leader.name}
+                </div>
+                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.55rem", color: "#C41E3A", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  {leader.role}
+                </div>
+              </div>
+
+              {/* ── Number tag ── */}
+              <div style={{
+                position: "absolute", top: 18, left: 18, zIndex: 20,
+                fontFamily: MF, fontSize: "0.52rem", fontWeight: 700,
+                letterSpacing: "0.26em", color: "rgba(255,255,255,0.6)", textTransform: "uppercase",
+                opacity: isOpen ? 0 : 1,
+                transition: `opacity 0.25s ease`,
               }}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-
-              {/* Active: full bio content at bottom */}
-              {isActive ? (
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  padding: "0 36px 40px",
-                }}>
-                  {/* Red accent line */}
-                  <div style={{ width: 32, height: 2, background: "#C41E3A", marginBottom: 18 }} />
-                  <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "1.1rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.25, marginBottom: 8 }}>
-                    {leader.name}
-                  </div>
-                  <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.6rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>
-                    {leader.role}
-                  </div>
-                  <p style={{ fontFamily: MF, fontSize: "0.78rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85, margin: 0, maxWidth: 340 }}>
-                    {leader.desc}
-                  </p>
-                </div>
-              ) : (
-                /* Inactive: vertical name label */
-                <div style={{
-                  position: "absolute", bottom: 36, left: 0, right: 0,
-                  display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
-                }}>
-                  <div style={{
-                    fontFamily: MF, fontWeight: 700, fontSize: "0.62rem", color: "rgba(255,255,255,0.9)",
-                    textTransform: "uppercase", letterSpacing: "0.1em",
-                    writingMode: "vertical-rl", transform: "rotate(180deg)",
-                    whiteSpace: "nowrap",
-                  }}>
-                    {leader.name}
-                  </div>
-                  <div style={{ width: 1, height: 24, background: "#C41E3A" }} />
-                </div>
-              )}
             </div>
           );
         })}
       </div>
 
-      {/* Dot navigator */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 10, padding: "28px 0" }}>
-        {leaders.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            style={{
-              width: i === active ? 28 : 8, height: 8,
-              borderRadius: 4,
-              background: i === active ? "#C41E3A" : "rgba(0,0,0,0.18)",
-              border: "none", cursor: "pointer", padding: 0,
-              transition: "all 0.35s cubic-bezier(.16,1,.3,1)",
-            }}
-          />
-        ))}
+      {/* Hint bar */}
+      <div style={{ padding: "20px 56px", display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ width: 20, height: 1, background: "#C41E3A" }} />
+        <span style={{ fontFamily: MF, fontSize: "0.55rem", letterSpacing: "0.22em", color: "rgba(0,0,0,0.3)", textTransform: "uppercase" }}>
+          Click any portrait to open
+        </span>
       </div>
     </section>
   );
