@@ -555,14 +555,79 @@ export default function AboutPage() {
       </section>
 
 
+      {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
+      <LeadershipDoorSlider />
+
       {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
       <AlternatingSection />
 
-      {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
-      <WordScatterSection />
-
-      {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
-      <LeadershipDoorSlider />
+      {/* ─── OUR VISION / MISSION / VALUES ──────────────────────── */}
+      <section style={{ background: "#ffffff", padding: "100px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
+          <RevealBlock>
+            <div style={{ textAlign: "center", marginBottom: 64 }}>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
+                What Drives Us
+              </span>
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>
+                Our Vision, Mission &amp; Values
+              </h2>
+            </div>
+          </RevealBlock>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}>
+            {/* Vision */}
+            <RevealBlock delay={0}>
+              <div style={{ padding: "52px 44px", background: "#f8f8f8", height: "100%" }}>
+                <div style={{ width: 36, height: 2, background: "#C41E3A", marginBottom: 28 }} />
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 18 }}>
+                  Our Vision
+                </span>
+                <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.25, margin: "0 0 20px" }}>
+                  Building a Better Tomorrow
+                </h3>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.88rem", color: "#555", lineHeight: 1.9, margin: 0 }}>
+                  To be the most trusted and innovative construction company in India — delivering landmark projects that stand as a testament to engineering excellence, sustainable practices, and long-term client partnerships.
+                </p>
+              </div>
+            </RevealBlock>
+            {/* Mission */}
+            <RevealBlock delay={100}>
+              <div style={{ padding: "52px 44px", background: "#C41E3A", height: "100%" }}>
+                <div style={{ width: 36, height: 2, background: "rgba(255,255,255,0.5)", marginBottom: 28 }} />
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.28em", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", display: "block", marginBottom: 18 }}>
+                  Our Mission
+                </span>
+                <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: "0 0 20px" }}>
+                  Delivering Quality Without Compromise
+                </h3>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.88rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.9, margin: 0 }}>
+                  To execute every project with the highest standards of quality, safety, and efficiency — leveraging cutting-edge technology and a skilled workforce to meet client expectations on time, every time.
+                </p>
+              </div>
+            </RevealBlock>
+            {/* Values */}
+            <RevealBlock delay={200}>
+              <div style={{ padding: "52px 44px", background: "#111", height: "100%" }}>
+                <div style={{ width: 36, height: 2, background: "#C41E3A", marginBottom: 28 }} />
+                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 18 }}>
+                  Our Values
+                </span>
+                <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: "0 0 20px" }}>
+                  Principles That Never Waver
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {["Quality", "Consistency", "Compliance", "Safety", "Environmental Protection"].map((v) => (
+                    <div key={v} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#C41E3A", flexShrink: 0 }} />
+                      <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.8)", fontWeight: 600, letterSpacing: "0.04em" }}>{v}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </RevealBlock>
+          </div>
+        </div>
+      </section>
 
       {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
