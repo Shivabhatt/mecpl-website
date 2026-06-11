@@ -366,7 +366,7 @@ function LeadershipDoorSlider() {
             </h2>
           </div>
           <p style={{ fontFamily: MF, fontSize: "0.85rem", color: "rgba(0,0,0,0.42)", maxWidth: 400, lineHeight: 1.9, margin: 0 }}>
-            Click any portrait to open the door and meet the person behind MECPL's success.
+            Hover over any portrait to open the door and meet the person behind MECPL's success.
           </p>
         </div>
       </div>
@@ -378,12 +378,13 @@ function LeadershipDoorSlider() {
           return (
             <div
               key={i}
-              onClick={() => setActive(isOpen ? null : i)}
+              onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
               style={{
                 position: "relative",
                 aspectRatio: "3/4",
                 overflow: "hidden",
-                cursor: "pointer",
+                cursor: "default",
                 borderRight: i < leaders.length - 1 ? "2px solid #ffffff" : "none",
                 background: "#111",
               }}
