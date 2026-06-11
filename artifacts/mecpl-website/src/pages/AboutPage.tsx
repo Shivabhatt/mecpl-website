@@ -354,17 +354,13 @@ function LeadershipDoorSlider() {
     <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, padding: "80px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
 
       {/* Section header */}
-      <div style={{ maxWidth: 1360, margin: "0 auto 52px" }}>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
-          <div>
-            <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
-              Our Team
-            </span>
-            <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>
-              Meet The Founders of MECPL
-            </h2>
-          </div>
-        </div>
+      <div style={{ maxWidth: 1360, margin: "0 auto 52px", textAlign: "center" }}>
+        <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
+          Our Team
+        </span>
+        <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>
+          Meet The Founders of MECPL
+        </h2>
       </div>
 
       {/* 4-card grid — image always visible, bio slides up on hover */}
