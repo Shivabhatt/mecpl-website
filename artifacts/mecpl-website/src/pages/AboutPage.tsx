@@ -558,11 +558,11 @@ export default function AboutPage() {
       {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
       <LeadershipDoorSlider />
 
-      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
-      <AlternatingSection />
-
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
+
+      {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
+      <AlternatingSection />
 
       {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
