@@ -549,68 +549,124 @@ export default function AboutPage() {
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
 
-      {/* ─── LEADERSHIP (joffreyspitzer style) ──────────────── */}
-      <section id="abt3" style={{ background: "#ffffff", padding: "120px 40px", borderBottom: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 80 }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <RevealBlock>
-            <div style={{ marginBottom: 72, textAlign: "center" }}>
-              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
+      {/* ─── LEADERSHIP (Studio VØR / Partners-in-Property style) ── */}
+      <section id="abt3" style={{ background: "#0c0c0c", scrollMarginTop: 80, overflow: "hidden" }}>
+
+        {/* ── Top header bar ── */}
+        <div style={{ padding: "100px 60px 72px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", maxWidth: 1400, margin: "0 auto", flexWrap: "wrap", gap: 24 }}>
+            <div>
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
                 OUR LEADERS
               </span>
-              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: "0 0 16px" }}>
-                The Founders
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.8rem, 6vw, 5.5rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.04em", lineHeight: 0.95, margin: 0 }}>
+                The<br />Founders
               </h2>
-              <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.9rem", color: "#888", maxWidth: 560, margin: "0 auto", lineHeight: 1.8 }}>
-                Four visionaries, one mission. The leadership of MECPL brings together decades of engineering excellence, financial acumen, and operational mastery.
-              </p>
             </div>
-          </RevealBlock>
+            <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.4)", maxWidth: 380, lineHeight: 1.9, margin: 0 }}>
+              Four visionaries, one mission. The leadership of MECPL brings together decades of engineering excellence, financial acumen, and operational mastery.
+            </p>
+          </div>
+        </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
-            {leaders.map((leader, i) => (
-              <RevealBlock key={i} delay={i * 80}>
-                <div style={{ position: "relative", overflow: "hidden", background: "#f8f8f8", cursor: "default" }}
-                  className="leader-card"
-                >
-                  {/* Photo */}
-                  <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "#e8e8e8" }}>
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block", transition: "transform 0.7s cubic-bezier(.16,1,.3,1)" }}
-                      className="leader-photo"
-                    />
-                  </div>
-                  {/* Name bar */}
-                  <div style={{ padding: "24px 20px 20px", borderTop: "2px solid #C41E3A" }}>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.85rem", color: "#111", textTransform: "uppercase", letterSpacing: "0.02em", lineHeight: 1.3, marginBottom: 6 }}>{leader.name}</div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase" }}>{leader.role}</div>
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="leader-overlay" style={{
-                    position: "absolute", inset: 0,
-                    background: "linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.6) 60%, transparent 100%)",
-                    opacity: 0,
-                    transition: "opacity 0.4s ease",
-                    display: "flex", flexDirection: "column", justifyContent: "flex-end",
-                    padding: 28,
-                  }}>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.85rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 4 }}>{leader.name}</div>
-                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase", marginBottom: 14 }}>{leader.role}</div>
-                    <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 14 }} />
-                    <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, margin: 0 }}>{leader.desc}</p>
+        {/* ── Two-column: sticky left text + scrolling right cards ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr", maxWidth: 1400, margin: "0 auto" }}>
+
+          {/* Left sticky column */}
+          <div style={{ padding: "64px 60px 64px 60px", borderRight: "1px solid rgba(255,255,255,0.07)", position: "sticky", top: 80, alignSelf: "start", height: "fit-content" }}>
+            <div style={{ marginBottom: 48 }}>
+              <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase", marginBottom: 32 }}>
+                Leadership Team
+              </div>
+              {leaders.map((l, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, padding: "14px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                  <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em", minWidth: 24 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.72rem", color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em", textTransform: "uppercase" }}>{l.name}</div>
+                    <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 500, fontSize: "0.58rem", color: "#C41E3A", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 3 }}>{l.role}</div>
                   </div>
                 </div>
-              </RevealBlock>
+              ))}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 28, height: 1, background: "#C41E3A" }} />
+              <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
+                {String(leaders.length).padStart(2, "0")} Members
+              </span>
+            </div>
+          </div>
+
+          {/* Right: 2×2 portrait grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, padding: 2 }}>
+            {leaders.map((leader, i) => (
+              <div
+                key={i}
+                className="pvip-card"
+                style={{ position: "relative", overflow: "hidden", height: "68vh", cursor: "default", background: "#1a1a1a" }}
+              >
+                {/* Number tag */}
+                <div style={{
+                  position: "absolute", top: 24, left: 24, zIndex: 10,
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "0.58rem", fontWeight: 700,
+                  letterSpacing: "0.25em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase",
+                }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+
+                {/* Photo */}
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  className="pvip-photo"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", transition: "transform 0.9s cubic-bezier(.16,1,.3,1)" }}
+                />
+
+                {/* Permanent dark gradient bottom */}
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)",
+                  padding: "80px 32px 32px",
+                }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.95rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 6 }}>
+                    {leader.name}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase" }}>
+                    {leader.role}
+                  </div>
+                </div>
+
+                {/* Hover overlay — description slides up */}
+                <div className="pvip-overlay" style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.65) 55%, rgba(0,0,0,0.15) 100%)",
+                  display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                  padding: "40px 32px 32px",
+                  opacity: 0,
+                  transition: "opacity 0.45s ease",
+                }}>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "0.95rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 6 }}>
+                    {leader.name}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 18 }}>
+                    {leader.role}
+                  </div>
+                  <div style={{ width: 24, height: 1, background: "#C41E3A", marginBottom: 18 }} />
+                  <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.85, margin: 0 }}>
+                    {leader.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Hover styles for leader cards */}
+      {/* Hover styles for leadership cards */}
       <style>{`
-        .leader-card:hover .leader-overlay { opacity: 1 !important; }
-        .leader-card:hover .leader-photo { transform: scale(1.06); }
+        .pvip-card:hover .pvip-overlay { opacity: 1 !important; }
+        .pvip-card:hover .pvip-photo { transform: scale(1.05); }
       `}</style>
 
       {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
