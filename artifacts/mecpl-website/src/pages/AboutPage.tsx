@@ -502,29 +502,22 @@ export default function AboutPage() {
             </div>
           </RevealBlock>
 
-          {/* ② Image collage — magazine style, 3-col asymmetric */}
+          {/* ② Video collage — 3-col, all full-height, looping */}
           <RevealBlock delay={100}>
             <div style={{
               display: "grid",
               gridTemplateColumns: "1fr 1.5fr 1fr",
-              gridTemplateRows: "260px 220px",
+              gridTemplateRows: "480px",
               gap: 10,
             }}>
-              {/* Col 1 — tall portrait spanning both rows */}
-              <div style={{ gridColumn: "1", gridRow: "1 / 3", overflow: "hidden" }}>
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=700&auto=format&fit=crop" alt="Construction site" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-1.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              {/* Col 2 top — wide landscape */}
-              <div style={{ gridColumn: "2", gridRow: "1", overflow: "hidden" }}>
-                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=900&auto=format&fit=crop" alt="MECPL engineers" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-2.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              {/* Col 3 — tall portrait spanning both rows */}
-              <div style={{ gridColumn: "3", gridRow: "1 / 3", overflow: "hidden" }}>
-                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=700&auto=format&fit=crop" alt="Architecture" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
-              {/* Col 2 bottom — wide landscape */}
-              <div style={{ gridColumn: "2", gridRow: "2", overflow: "hidden" }}>
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=900&auto=format&fit=crop" alt="Engineering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-3.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             </div>
           </RevealBlock>
