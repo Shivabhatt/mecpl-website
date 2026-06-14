@@ -71,28 +71,28 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
   }, []);
 }
 
-// ─── FULL-BLEED STACKING CARDS (Our Video / Mission / Values) ────────────────
+// ─── IMAGE-MASK-ON-SCROLL ROWS (Our Vision / Mission / Values) ───────────────
 const altRows = [
   {
-    label: "Our Video",
-    heading: "Building Pune's\nLandmarks",
-    text: "A glimpse into our work — from foundation to finishing, every project reflects our commitment to quality craftsmanship and engineering excellence spanning over four decades.",
-    video: true,
+    label: "Our Vision",
+    heading: "India's Most Preferred\nCivil Contractor",
+    text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
     img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
+    imageLeft: true,
   },
   {
     label: "Our Mission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
-    video: false,
     img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1800&auto=format&fit=crop",
+    imageLeft: false,
   },
   {
     label: "Our Values",
     heading: "Safety. Integrity.\nExcellence.",
     text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
-    video: false,
     img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1800&auto=format&fit=crop",
+    imageLeft: true,
   },
 ];
 
@@ -102,23 +102,40 @@ function AlternatingSection() {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    const cards = container.querySelectorAll<HTMLElement>(".alt-card");
 
     const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        if (i === 0) return;
+      container.querySelectorAll<HTMLElement>(".mask-wrap").forEach((maskEl) => {
+        const imgEl = maskEl.querySelector<HTMLElement>(".mask-img");
+        if (!imgEl) return;
+
+        // Clip-path opens from centre inset → full reveal as card scrolls in
         gsap.fromTo(
-          card,
-          { yPercent: 6, scale: 0.97 },
+          maskEl,
+          { clipPath: "inset(18% 6% 18% 6%)" },
           {
-            yPercent: 0,
-            scale: 1,
-            ease: "power2.out",
+            clipPath: "inset(0% 0% 0% 0%)",
+            ease: "none",
             scrollTrigger: {
-              trigger: card,
+              trigger: maskEl,
               start: "top 90%",
-              end: "top top+=80",
-              scrub: 0.8,
+              end: "top 15%",
+              scrub: true,
+            },
+          }
+        );
+
+        // Image counter-scrolls (parallax) relative to its container
+        gsap.fromTo(
+          imgEl,
+          { yPercent: 20 },
+          {
+            yPercent: -20,
+            ease: "none",
+            scrollTrigger: {
+              trigger: maskEl,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
             },
           }
         );
@@ -128,82 +145,91 @@ function AlternatingSection() {
     return () => ctx.revert();
   }, []);
 
+  const textBlock = (row: typeof altRows[0]) => (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      padding: "80px 72px",
+      height: "100%",
+      boxSizing: "border-box",
+    }}>
+      <span style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.62rem", fontWeight: 700,
+        letterSpacing: "0.3em", color: "#C41E3A",
+        textTransform: "uppercase", display: "block", marginBottom: 20,
+      }}>
+        {row.label}
+      </span>
+      <h2 style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontWeight: 900,
+        fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+        color: "rgb(17,24,39)",
+        textTransform: "uppercase",
+        letterSpacing: "-0.03em",
+        lineHeight: 1.12,
+        margin: "0 0 24px",
+        whiteSpace: "pre-line",
+      }}>
+        {row.heading}
+      </h2>
+      <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 24 }} />
+      <p style={{
+        fontFamily: "'Montserrat',sans-serif",
+        fontSize: "0.95rem",
+        color: "#555",
+        lineHeight: 1.9,
+        margin: 0,
+        maxWidth: 480,
+      }}>
+        {row.text}
+      </p>
+    </div>
+  );
+
   return (
-    <div ref={containerRef} style={{ position: "relative" }}>
+    <div ref={containerRef} style={{ background: "#ffffff" }}>
       {altRows.map((row, i) => (
         <div
           key={i}
-          className="alt-card"
           style={{
-            position: "sticky",
-            top: 80,
-            zIndex: i + 1,
-            height: "70vh",
-            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            minHeight: "80vh",
+            borderBottom: "1px solid rgba(0,0,0,0.07)",
           }}
         >
-          {/* Full-bleed background — video for first card, image for rest */}
-          {row.video ? (
-            <video
-              src={`${assetBase}assets/story-video-3.mov`}
-              autoPlay muted loop playsInline
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-          ) : (
-            <img
-              src={row.img}
-              alt={row.label}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-          )}
+          {/* Text on left or right based on imageLeft */}
+          {!row.imageLeft && textBlock(row)}
 
-          {/* Dark gradient overlay — heavier at bottom for text legibility */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.12) 100%)",
-            zIndex: 1,
-          }} />
-
-          {/* Text — bottom-left, on top of overlay */}
-          <div style={{
-            position: "absolute", bottom: 0, left: 0,
-            padding: "56px 72px",
-            zIndex: 2,
-            maxWidth: 720,
-          }}>
-            <span style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "0.62rem", fontWeight: 700,
-              letterSpacing: "0.3em", color: "#C41E3A",
-              textTransform: "uppercase", display: "block", marginBottom: 16,
-            }}>
-              {row.label}
-            </span>
-            <h2 style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
-              color: "#ffffff",
-              textTransform: "uppercase",
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-              margin: "0 0 20px",
-              whiteSpace: "pre-line",
-            }}>
-              {row.heading}
-            </h2>
-            <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 20 }} />
-            <p style={{
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "0.9rem",
-              color: "rgba(255,255,255,0.78)",
-              lineHeight: 1.85,
-              margin: 0,
-              maxWidth: 560,
-            }}>
-              {row.text}
-            </p>
+          {/* Image side — mask-wrap clips, mask-img parallaxes inside */}
+          <div
+            className="mask-wrap"
+            style={{
+              overflow: "hidden",
+              position: "relative",
+              minHeight: "80vh",
+            }}
+          >
+            <div
+              className="mask-img"
+              style={{
+                position: "absolute",
+                top: "-20%", left: 0,
+                width: "100%", height: "140%",
+              }}
+            >
+              <img
+                src={row.img}
+                alt={row.label}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
           </div>
+
+          {row.imageLeft && textBlock(row)}
         </div>
       ))}
     </div>
