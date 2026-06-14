@@ -78,6 +78,7 @@ html[data-theme="light"] {
 @layer base {
   * { @apply border-border box-border; }
   html { scroll-behavior: smooth; }
+  @media (max-width: 768px) { html { scroll-behavior: auto; } }
   body {
     background-color: #ffffff;
     background-image: none;
@@ -442,6 +443,12 @@ html[data-theme="light"] select {
   .abt-video-grid > div:nth-child(3) { grid-row: auto !important; }
   .abt-alt-text           { padding: 40px 48px !important; }
   .abt-cta-section        { padding: 60px 28px !important; }
+}
+
+/* ── Scatter + alt-card scroll-distance reduction on mobile ── */
+@media (max-width: 768px) {
+  .abt-scatter-section { height: 220vh !important; }
+  .abt-alt-card        { height: 60vh !important; }
 }
 
 /* ── Mobile (≤768px) ── */
