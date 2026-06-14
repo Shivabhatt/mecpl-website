@@ -366,13 +366,8 @@ function LeadershipDoorSlider() {
       id="abt3"
       style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden" }}
     >
-      {/* ── Full-bleed background image + dark overlay ── */}
-      <img
-        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
-        alt=""
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-      />
-      <div style={{ position: "absolute", inset: 0, background: "rgba(8,18,36,0.86)" }} />
+      {/* ── Pure white background ── */}
+      <div style={{ position: "absolute", inset: 0, background: "#ffffff" }} />
 
       {/* ── Content ── */}
       <div style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
@@ -390,13 +385,13 @@ function LeadershipDoorSlider() {
               <path d="M0 18V11.25C0 7.5 1.25 4.5 3.75 2.25C6.25 0 9.25 -0.25 12.75 1L11.25 4.25C9.5 3.5 7.875 3.625 6.375 4.625C4.875 5.625 4.125 7.125 4.125 9.125H8.25V18H0ZM13.75 18V11.25C13.75 7.5 15 4.5 17.5 2.25C20 0 23 -0.25 26.5 1L25 4.25C23.25 3.5 21.625 3.625 20.125 4.625C18.625 5.625 17.875 7.125 17.875 9.125H22V18H13.75Z" fill="white"/>
             </svg>
           </div>
-          <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
+          <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             Our Team
           </span>
-          <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
+          <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             Meet The Founders of MECPL
           </h2>
-          <p style={{ fontFamily: MF, fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.85, margin: "0 0 28px" }}>
+          <p style={{ fontFamily: MF, fontSize: "0.8rem", color: "#666", lineHeight: 1.85, margin: "0 0 28px" }}>
             The visionaries who built Pune's skyline — four decades of engineering excellence, guided by an uncompromising commitment to quality.
           </p>
           <div style={{ width: 36, height: 2, background: "#C41E3A" }} />
@@ -408,10 +403,10 @@ function LeadershipDoorSlider() {
             <div
               key={i}
               style={{
-                background: "#ffffff",
+                background: "#f5f5f5",
                 borderRadius: 6,
                 overflow: "hidden",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
                 display: "flex", flexDirection: "column",
               }}
             >
