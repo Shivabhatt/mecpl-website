@@ -118,15 +118,15 @@ function AlternatingSection() {
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
 
-          {/* Dark gradient overlay */}
+          {/* Dark overlay — strong centre for readable centred text */}
           <div style={{
             position: "absolute", inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.10) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.70) 50%, rgba(0,0,0,0.65) 100%)",
             zIndex: 1,
           }} />
 
           {/* Text — centered */}
-          <div style={{
+          <div className="abt-alt-text" style={{
             position: "absolute", inset: 0,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
             textAlign: "center",
@@ -365,13 +365,14 @@ function LeadershipDoorSlider() {
   return (
     <section
       id="abt3"
+      className="abt-leadership-section"
       style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden" }}
     >
       {/* ── Dark-to-red radial gradient background ── */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 110%, #C41E3A 0%, #6b0010 35%, #1a0004 65%, #070000 100%)" }} />
 
       {/* ── Content ── */}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
+      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
 
         {/* Left: text block */}
         <div>
@@ -399,7 +400,7 @@ function LeadershipDoorSlider() {
         </div>
 
         {/* Right: 4 white floating cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+        <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
           {leaders.map((leader, i) => (
             <div
               key={i}
@@ -486,7 +487,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─── STORY INTRO + PHOTO COLLAGE ─────────────────────── */}
-      <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
+      <section id="abt1" className="abt-story-section" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
           {/* ① Centered heading + body with SplitText line-mask reveal */}
@@ -508,7 +509,7 @@ export default function AboutPage() {
             >
               Driven By Quality And Excellence Since 1999
             </SplitReveal>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, textAlign: "left", maxWidth: 960, margin: "0 auto" }}>
+            <div className="abt-story-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, textAlign: "left", maxWidth: 960, margin: "0 auto" }}>
               <SplitReveal
                 as="p"
                 stagger={0.045}
@@ -530,7 +531,7 @@ export default function AboutPage() {
 
           {/* ② Video collage — full width, above stats */}
           <RevealBlock delay={80}>
-            <div style={{
+            <div className="abt-video-grid" style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1fr",
               gridTemplateRows: "200px 210px",
@@ -557,7 +558,7 @@ export default function AboutPage() {
 
           {/* ③ Stats row — full width at bottom */}
           <RevealBlock delay={180}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+            <div className="abt-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
               {stats.map((s, i) => (
                 <div key={s.label} style={{
                   padding: "44px 32px",
@@ -622,7 +623,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─── CTA — "LET'S BUILD TOGETHER" red banner ─────────── */}
-      <section style={{
+      <section className="abt-cta-section" style={{
         background: "linear-gradient(135deg, #8B1020 0%, #C41E3A 60%, #a01828 100%)",
         padding: "72px 40px",
         position: "relative",
