@@ -362,83 +362,94 @@ function LeadershipDoorSlider() {
   const MF = "'Montserrat',sans-serif";
 
   return (
-    <section id="abt3" style={{ background: "#ffffff", scrollMarginTop: 80, padding: "80px 56px", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+    <section
+      id="abt3"
+      style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden" }}
+    >
+      {/* ── Full-bleed background image + dark overlay ── */}
+      <img
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
+        alt=""
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+      <div style={{ position: "absolute", inset: 0, background: "rgba(8,18,36,0.86)" }} />
 
-      {/* Section header */}
-      <div style={{ maxWidth: 1360, margin: "0 auto 52px", textAlign: "center" }}>
-        <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
-          Our Team
-        </span>
-        <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>
-          Meet The Founders of MECPL
-        </h2>
-      </div>
+      {/* ── Content ── */}
+      <div style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
 
-      <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-        {/* ── Portrait cards ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 40 }}>
+        {/* Left: text block */}
+        <div>
+          {/* Large quote mark */}
+          <div style={{
+            width: 56, height: 56, borderRadius: "50%",
+            background: "#C41E3A",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            marginBottom: 32,
+          }}>
+            <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+              <path d="M0 18V11.25C0 7.5 1.25 4.5 3.75 2.25C6.25 0 9.25 -0.25 12.75 1L11.25 4.25C9.5 3.5 7.875 3.625 6.375 4.625C4.875 5.625 4.125 7.125 4.125 9.125H8.25V18H0ZM13.75 18V11.25C13.75 7.5 15 4.5 17.5 2.25C20 0 23 -0.25 26.5 1L25 4.25C23.25 3.5 21.625 3.625 20.125 4.625C18.625 5.625 17.875 7.125 17.875 9.125H22V18H13.75Z" fill="white"/>
+            </svg>
+          </div>
+          <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
+            Our Team
+          </span>
+          <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
+            Meet The Founders of MECPL
+          </h2>
+          <p style={{ fontFamily: MF, fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.85, margin: "0 0 28px" }}>
+            The visionaries who built Pune's skyline — four decades of engineering excellence, guided by an uncompromising commitment to quality.
+          </p>
+          <div style={{ width: 36, height: 2, background: "#C41E3A" }} />
+        </div>
+
+        {/* Right: 4 white floating cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
           {leaders.map((leader, i) => (
             <div
               key={i}
               style={{
-                position: "relative",
-                aspectRatio: "3/4",
+                background: "#ffffff",
+                borderRadius: 6,
                 overflow: "hidden",
-                background: "#111",
-                borderRadius: 2,
+                boxShadow: "0 8px 40px rgba(0,0,0,0.35)",
+                display: "flex", flexDirection: "column",
               }}
             >
-              <img
-                src={leader.image}
-                alt={leader.name}
-                style={{
-                  position: "absolute", inset: 0,
-                  width: "100%", height: "100%",
-                  objectFit: "cover", objectPosition: "top center",
-                  display: "block",
-                }}
-              />
-              {/* Bottom gradient + name/role — always visible */}
-              <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0,
-                padding: "64px 22px 24px",
-                background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)",
-                zIndex: 2,
-              }}>
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.05em", lineHeight: 1.3, marginBottom: 5 }}>
-                  {leader.name}
-                </div>
-                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.54rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase" }}>
-                  {leader.role}
+              {/* Portrait photo */}
+              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", background: "#111" }}>
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
+                />
+                {/* Red accent badge */}
+                <div style={{
+                  position: "absolute", bottom: -12, left: 16, zIndex: 2,
+                  width: 28, height: 28, borderRadius: "50%",
+                  background: "#C41E3A",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 2px 8px rgba(196,30,58,0.5)",
+                }}>
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                    <path d="M0 8V5C0 3.33 0.56 2 1.67 1C2.78 0 4.11 -0.11 5.67 0.44L5 1.89C4.22 1.56 3.5 1.61 2.83 2.06C2.17 2.5 1.83 3.17 1.83 4.06H3.67V8H0ZM6.11 8V5C6.11 3.33 6.67 2 7.78 1C8.89 0 10.22 -0.11 11.78 0.44L11.11 1.89C10.33 1.56 9.61 1.61 8.94 2.06C8.28 2.5 7.94 3.17 7.94 4.06H9.78V8H6.11Z" fill="white"/>
+                  </svg>
                 </div>
               </div>
-              {/* Index badge top-right */}
-              <div style={{
-                position: "absolute", top: 16, right: 16, zIndex: 3,
-                fontFamily: MF, fontSize: "0.5rem", fontWeight: 700,
-                letterSpacing: "0.2em", color: "rgba(255,255,255,0.45)",
-                textTransform: "uppercase",
-              }}>
-                {String(i + 1).padStart(2, "0")}
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* ── Bio details below cards ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 36 }}>
-          {leaders.map((leader, i) => (
-            <div key={i} style={{ paddingRight: 24 }}>
-              <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 18 }} />
-              <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
-                {leader.name}
+              {/* Card body */}
+              <div style={{ padding: "24px 18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
+                <p style={{ fontFamily: MF, fontSize: "0.7rem", color: "#555", lineHeight: 1.8, margin: "0 0 16px", flex: 1 }}>
+                  {leader.desc.length > 110 ? leader.desc.substring(0, 110) + "…" : leader.desc}
+                </p>
+                <div>
+                  <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.78rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 3 }}>
+                    {leader.name}
+                  </div>
+                  <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.5rem", color: "#C41E3A", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                    {leader.role}
+                  </div>
+                </div>
               </div>
-              <div style={{ fontFamily: MF, fontWeight: 700, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
-                {leader.role}
-              </div>
-              <p style={{ fontFamily: MF, fontSize: "0.75rem", color: "#555", lineHeight: 1.85, margin: 0 }}>
-                {leader.desc}
-              </p>
             </div>
           ))}
         </div>
