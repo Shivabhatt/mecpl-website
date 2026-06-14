@@ -103,6 +103,7 @@ function AlternatingSection() {
       {altRows.map((row, i) => (
         <div
           key={i}
+          className="abt-alt-card"
           style={{
             position: "sticky",
             top: 80,
@@ -243,6 +244,7 @@ function WordScatterSection() {
   return (
     <section
       ref={sectionRef}
+      className="abt-scatter-section"
       style={{ height: "420vh", background: "#ffffff", position: "relative" }}
     >
       <div style={{
