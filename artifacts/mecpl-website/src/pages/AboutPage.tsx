@@ -78,22 +78,22 @@ const altRows = [
     label: "Our Vision",
     heading: "India's Most Preferred\nCivil Contractor",
     text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
-    beforeImg: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1800&auto=format&fit=crop",
     afterImg:  "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1800&auto=format&fit=crop",
   },
   {
     label: "Our Mission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
-    beforeImg: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1800&auto=format&fit=crop",
-    afterImg:  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
+    afterImg:  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
   },
   {
     label: "Our Values",
     heading: "Safety. Integrity.\nExcellence.",
     text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
-    beforeImg: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1800&auto=format&fit=crop",
-    afterImg:  "https://images.unsplash.com/photo-1581094271901-8022df4466f9?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1800&auto=format&fit=crop",
+    afterImg:  "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1800&auto=format&fit=crop",
   },
 ];
 
@@ -125,12 +125,13 @@ function AlternatingSection() {
             zIndex: 1,
           }} />
 
-          {/* Text — bottom-left */}
+          {/* Text — centered */}
           <div style={{
-            position: "absolute", bottom: 0, left: 0,
-            padding: "52px 72px",
+            position: "absolute", inset: 0,
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+            textAlign: "center",
+            padding: "48px 80px",
             zIndex: 2,
-            maxWidth: 680,
           }}>
             <span style={{
               fontFamily: "'Montserrat',sans-serif",
@@ -160,7 +161,7 @@ function AlternatingSection() {
               color: "rgba(255,255,255,0.82)",
               lineHeight: 1.85,
               margin: 0,
-              maxWidth: 520,
+              maxWidth: 560,
             }}>
               {row.text}
             </p>
