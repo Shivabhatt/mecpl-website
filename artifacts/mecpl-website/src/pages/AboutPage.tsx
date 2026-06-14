@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const assetBase = import.meta.env.BASE_URL;
 
@@ -280,6 +281,65 @@ function WordScatterSection() {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─── SPLIT-TEXT LINE-MASK REVEAL (GggpRoB pattern) ───────────────────────────
+function SplitReveal({
+  children,
+  as: Tag = "p",
+  style = {},
+  className = "",
+  stagger = 0.07,
+  start = "top 88%",
+}: {
+  children: React.ReactNode;
+  as?: keyof JSX.IntrinsicElements;
+  style?: React.CSSProperties;
+  className?: string;
+  stagger?: number;
+  start?: string;
+}) {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let split: any = null;
+    let cancelled = false;
+
+    document.fonts.ready.then(() => {
+      if (cancelled) return;
+      split = (SplitText as any).create(el, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+        onSplit(instance: any) {
+          return gsap.from(instance.lines, {
+            yPercent: 110,
+            duration: 1,
+            stagger,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start,
+            },
+          });
+        },
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      split?.revert();
+    };
+  }, []);
+
+  const El = Tag as any;
+  return (
+    <El ref={ref} style={style} className={className}>
+      {children}
+    </El>
+  );
+}
+
 function RevealBlock({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useScrollReveal(ref);
@@ -422,27 +482,47 @@ export default function AboutPage() {
       <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
-          {/* ① Text row — label + heading left, body right */}
-          <RevealBlock>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 64, alignItems: "start", paddingBottom: 56 }}>
-              <div>
-                <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-                  Our Story
-                </span>
-                <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
-                  Driven By<br />Quality And<br />Excellence<br />Since 1999
-                </h2>
-              </div>
-              <div>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 16px", fontWeight: 500 }}>
-                  Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
-                </p>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
-                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1.
-                </p>
-              </div>
+          {/* ① Centered heading + body with SplitText line-mask reveal */}
+          <div style={{ textAlign: "center", paddingBottom: 64 }}>
+            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+              Our Story
+            </span>
+            <SplitReveal
+              as="h2"
+              stagger={0.06}
+              start="top 85%"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                fontWeight: 800,
+                fontSize: "1.875rem",
+                color: "rgb(17,24,39)",
+                textTransform: "uppercase",
+                letterSpacing: "-0.01em",
+                margin: "0 0 40px",
+                lineHeight: 1.3,
+              }}
+            >
+              Driven By Quality And Excellence Since 1999
+            </SplitReveal>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, textAlign: "left", maxWidth: 960, margin: "0 auto" }}>
+              <SplitReveal
+                as="p"
+                stagger={0.045}
+                start="top 88%"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: 0, fontWeight: 500 }}
+              >
+                Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
+              </SplitReveal>
+              <SplitReveal
+                as="p"
+                stagger={0.045}
+                start="top 88%"
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#666", lineHeight: 1.9, margin: 0 }}
+              >
+                With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1.
+              </SplitReveal>
             </div>
-          </RevealBlock>
+          </div>
 
           {/* ② Video collage — full width, above stats */}
           <RevealBlock delay={80}>
