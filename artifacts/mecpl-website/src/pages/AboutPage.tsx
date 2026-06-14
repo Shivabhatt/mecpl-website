@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
@@ -299,7 +299,6 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
 }
 
 function LeadershipDoorSlider() {
-  const [active, setActive] = useState<number | null>(null);
   const MF = "'Montserrat',sans-serif";
 
   return (
@@ -310,30 +309,25 @@ function LeadershipDoorSlider() {
         <span style={{ fontFamily: MF, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 16 }}>
           Our Team
         </span>
-        <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
+        <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>
           Meet The Founders of MECPL
         </h2>
       </div>
 
-      {/* 4-card grid — image always visible, bio slides up on hover */}
-      <div style={{ maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
-        {leaders.map((leader, i) => {
-          const isHovered = active === i;
-          return (
+      <div style={{ maxWidth: 1360, margin: "0 auto" }}>
+        {/* ── Portrait cards ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 40 }}>
+          {leaders.map((leader, i) => (
             <div
               key={i}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
               style={{
                 position: "relative",
                 aspectRatio: "3/4",
                 overflow: "hidden",
-                cursor: "default",
                 background: "#111",
                 borderRadius: 2,
               }}
             >
-              {/* ── Portrait photo — always visible ── */}
               <img
                 src={leader.image}
                 alt={leader.name}
@@ -342,56 +336,52 @@ function LeadershipDoorSlider() {
                   width: "100%", height: "100%",
                   objectFit: "cover", objectPosition: "top center",
                   display: "block",
-                  transform: isHovered ? "scale(1.06)" : "scale(1)",
-                  transition: "transform 0.65s cubic-bezier(.16,1,.3,1)",
                 }}
               />
-
-              {/* ── Always-on bottom gradient + name bar ── */}
+              {/* Bottom gradient + name/role — always visible */}
               <div style={{
                 position: "absolute", bottom: 0, left: 0, right: 0,
-                padding: "64px 22px 22px",
-                background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
+                padding: "64px 22px 24px",
+                background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)",
                 zIndex: 2,
-                opacity: isHovered ? 0 : 1,
-                transition: "opacity 0.3s ease",
-                pointerEvents: "none",
               }}>
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.05em", lineHeight: 1.3, marginBottom: 4 }}>
+                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.05em", lineHeight: 1.3, marginBottom: 5 }}>
                   {leader.name}
                 </div>
                 <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.54rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase" }}>
                   {leader.role}
                 </div>
               </div>
-
-              {/* ── Bio overlay — semi-transparent so image shows through ── */}
+              {/* Index badge top-right */}
               <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.70) 55%, rgba(0,0,0,0.38) 100%)",
-                display: "flex", flexDirection: "column", justifyContent: "flex-end",
-                padding: "28px 24px",
-                zIndex: 3,
-                opacity: isHovered ? 1 : 0,
-                transition: "opacity 0.45s ease",
+                position: "absolute", top: 16, right: 16, zIndex: 3,
+                fontFamily: MF, fontSize: "0.5rem", fontWeight: 700,
+                letterSpacing: "0.2em", color: "rgba(255,255,255,0.45)",
+                textTransform: "uppercase",
               }}>
-                <span style={{ fontFamily: MF, fontSize: "0.5rem", fontWeight: 700, letterSpacing: "0.28em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", marginBottom: 14 }}>
-                  {String(i + 1).padStart(2, "0")} / {String(leaders.length).padStart(2, "0")}
-                </span>
-                <div style={{ width: 24, height: 2, background: "#C41E3A", marginBottom: 12 }} />
-                <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.95rem", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
-                  {leader.name}
-                </div>
-                <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 14 }}>
-                  {leader.role}
-                </div>
-                <p style={{ fontFamily: MF, fontSize: "0.71rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.8, margin: 0 }}>
-                  {leader.desc}
-                </p>
+                {String(i + 1).padStart(2, "0")}
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
+
+        {/* ── Bio details below cards ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 36 }}>
+          {leaders.map((leader, i) => (
+            <div key={i} style={{ paddingRight: 24 }}>
+              <div style={{ width: 28, height: 2, background: "#C41E3A", marginBottom: 18 }} />
+              <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.82rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.3, marginBottom: 5 }}>
+                {leader.name}
+              </div>
+              <div style={{ fontFamily: MF, fontWeight: 700, fontSize: "0.52rem", color: "#C41E3A", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
+                {leader.role}
+              </div>
+              <p style={{ fontFamily: MF, fontSize: "0.75rem", color: "#555", lineHeight: 1.85, margin: 0 }}>
+                {leader.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
