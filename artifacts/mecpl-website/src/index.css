@@ -30,12 +30,6 @@
   --radius-lg: var(--radius);
 }
 
-/* Temporarily hide the About page Services section until source is removed */
-#abt2,
-[data-testid="section-about-services"] {
-  display: none !important;
-}
-
 @theme {
   --color-mecpl-dark: var(--mecpl-dark);
   --color-mecpl-card: var(--mecpl-card);
@@ -431,4 +425,38 @@ html[data-theme="light"] select {
 
   /* ── Navbar — tighter on mobile ── */
   nav { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
+/* ══════════ ABOUT PAGE RESPONSIVE ══════════ */
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .abt-leadership-section { padding: 72px 32px !important; }
+  .abt-leadership-grid    { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .abt-leadership-cards   { grid-template-columns: 1fr 1fr !important; }
+  .abt-story-section      { padding: 72px 32px 0 !important; }
+  .abt-story-cols         { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .abt-stats-grid         { grid-template-columns: 1fr 1fr !important; }
+  .abt-stats-grid > div   { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .abt-video-grid         { grid-template-columns: 1fr 1fr !important; grid-template-rows: 180px 180px 180px !important; }
+  .abt-video-grid > div:nth-child(3) { grid-row: auto !important; }
+  .abt-alt-text           { padding: 40px 48px !important; }
+  .abt-cta-section        { padding: 60px 28px !important; }
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .abt-leadership-section { padding: 56px 20px !important; }
+  .abt-leadership-grid    { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .abt-leadership-cards   { grid-template-columns: 1fr !important; }
+  .abt-story-section      { padding: 56px 20px 0 !important; }
+  .abt-story-cols         { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .abt-stats-grid         { grid-template-columns: 1fr 1fr !important; }
+  .abt-video-grid         { grid-template-columns: 1fr !important; grid-template-rows: 200px 200px 200px 200px 200px !important; }
+  .abt-video-grid > div:nth-child(3) { grid-row: auto !important; }
+  .abt-alt-text           { padding: 32px 24px !important; }
+  .abt-cta-section        { padding: 48px 20px !important; }
+  /* AlternatingSection cards — reduce height on mobile */
+  #abt3 ~ div > div,
+  [id^="abt"] ~ div > div { height: auto !important; min-height: 70vh; }
 }
