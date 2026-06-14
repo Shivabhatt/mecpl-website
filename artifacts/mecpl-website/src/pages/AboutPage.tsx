@@ -480,11 +480,9 @@ export default function AboutPage() {
       <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
-          {/* ① Text left + Video mosaic right — side by side like reference */}
+          {/* ① Text row — label + heading left, body right */}
           <RevealBlock>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 64, alignItems: "start", paddingBottom: 72 }}>
-
-              {/* Left: label + heading + body */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 64, alignItems: "start", paddingBottom: 56 }}>
               <div>
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
                   Our Story
@@ -492,6 +490,8 @@ export default function AboutPage() {
                 <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
                   Driven By<br />Quality And<br />Excellence<br />Since 1999
                 </h2>
+              </div>
+              <div>
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 16px", fontWeight: 500 }}>
                   Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
                 </p>
@@ -499,36 +499,33 @@ export default function AboutPage() {
                   With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1.
                 </p>
               </div>
+            </div>
+          </RevealBlock>
 
-              {/* Right: 5-cell mosaic — 3 cols, 2 rows, col3 tall */}
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gridTemplateRows: "200px 210px",
-                gap: 8,
-              }}>
-                {/* row1 col1 */}
-                <div style={{ overflow: "hidden" }}>
-                  <video src={`${assetBase}assets/story-video-1.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* row1 col2 */}
-                <div style={{ overflow: "hidden" }}>
-                  <video src={`${assetBase}assets/story-video-4.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* col3 — tall, spans both rows */}
-                <div style={{ gridRow: "1 / 3", overflow: "hidden" }}>
-                  <video src={`${assetBase}assets/story-video-2.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* row2 col1 */}
-                <div style={{ overflow: "hidden" }}>
-                  <video src={`${assetBase}assets/story-video-5.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                {/* row2 col2 */}
-                <div style={{ overflow: "hidden" }}>
-                  <video src={`${assetBase}assets/story-video-3.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
+          {/* ② Video collage — full width, above stats */}
+          <RevealBlock delay={80}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gridTemplateRows: "200px 210px",
+              gap: 8,
+              marginBottom: 0,
+            }}>
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-1.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-4.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ gridRow: "1 / 3", overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-2.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-5.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ overflow: "hidden" }}>
+                <video src={`${assetBase}assets/story-video-3.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
             </div>
           </RevealBlock>
 
