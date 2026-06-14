@@ -366,8 +366,8 @@ function LeadershipDoorSlider() {
       id="abt3"
       style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden" }}
     >
-      {/* ── Red gradient background ── */}
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #8B1020 0%, #C41E3A 55%, #a01828 100%)" }} />
+      {/* ── Dark-to-red radial gradient background ── */}
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 110%, #C41E3A 0%, #6b0010 35%, #1a0004 65%, #070000 100%)" }} />
 
       {/* ── Content ── */}
       <div style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
