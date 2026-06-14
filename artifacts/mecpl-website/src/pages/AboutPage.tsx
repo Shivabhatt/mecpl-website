@@ -411,15 +411,15 @@ function LeadershipDoorSlider() {
               }}
             >
               {/* Portrait photo */}
-              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", background: "#111" }}>
+              <div style={{ position: "relative", aspectRatio: "4/3", background: "#111" }}>
                 <img
                   src={leader.image}
                   alt={leader.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
                 />
-                {/* Red accent badge */}
+                {/* Red accent badge — outside overflow:hidden so it's visible */}
                 <div style={{
-                  position: "absolute", bottom: -12, left: 16, zIndex: 2,
+                  position: "absolute", bottom: -14, left: 16, zIndex: 4,
                   width: 28, height: 28, borderRadius: "50%",
                   background: "#C41E3A",
                   display: "flex", alignItems: "center", justifyContent: "center",
