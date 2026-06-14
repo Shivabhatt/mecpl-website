@@ -71,31 +71,28 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
   }, []);
 }
 
-// ─── ALTERNATING IMAGE / TEXT ROWS ───────────────────────────────────────────
+// ─── FULL-BLEED STACKING CARDS (Our Video / Mission / Values) ────────────────
 const altRows = [
   {
-    label: "Our Vision",
-    heading: "India's Most Preferred\nCivil Contractor",
-    text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
-    imageLeft: true,
-    bg: "#ffffff",
+    label: "Our Video",
+    heading: "Building Pune's\nLandmarks",
+    text: "A glimpse into our work — from foundation to finishing, every project reflects our commitment to quality craftsmanship and engineering excellence spanning over four decades.",
+    video: true,
+    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
   },
   {
     label: "Our Mission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
-    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200&auto=format&fit=crop",
-    imageLeft: false,
-    bg: "#ffffff",
+    video: false,
+    img: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1800&auto=format&fit=crop",
   },
   {
     label: "Our Values",
     heading: "Safety. Integrity.\nExcellence.",
     text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
-    imageLeft: true,
-    bg: "#ffffff",
+    video: false,
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1800&auto=format&fit=crop",
   },
 ];
 
@@ -131,64 +128,6 @@ function AlternatingSection() {
     return () => ctx.revert();
   }, []);
 
-  const textBlock = (row: typeof altRows[0]) => (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      padding: "72px 72px",
-      height: "100%",
-      boxSizing: "border-box",
-    }}>
-      <span style={{
-        fontFamily: "'Montserrat',sans-serif",
-        fontSize: "0.65rem",
-        fontWeight: 700,
-        letterSpacing: "0.28em",
-        color: "#C41E3A",
-        textTransform: "uppercase",
-        display: "block",
-        marginBottom: 20,
-      }}>
-        {row.label}
-      </span>
-      <h2 style={{
-        fontFamily: "'Montserrat',sans-serif",
-        fontWeight: 900,
-        fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
-        color: "#111",
-        textTransform: "uppercase",
-        letterSpacing: "-0.03em",
-        lineHeight: 1.15,
-        margin: "0 0 24px",
-        whiteSpace: "pre-line",
-      }}>
-        {row.heading}
-      </h2>
-      <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 24 }} />
-      <p style={{
-        fontFamily: "'Montserrat',sans-serif",
-        fontSize: "0.95rem",
-        color: "#555",
-        lineHeight: 1.9,
-        margin: 0,
-        maxWidth: 480,
-      }}>
-        {row.text}
-      </p>
-    </div>
-  );
-
-  const imgBlock = (row: typeof altRows[0]) => (
-    <div style={{ overflow: "hidden", height: "100%" }}>
-      <img
-        src={row.img}
-        alt={row.label}
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-      />
-    </div>
-  );
-
   return (
     <div ref={containerRef} style={{ position: "relative" }}>
       {altRows.map((row, i) => (
@@ -199,19 +138,72 @@ function AlternatingSection() {
             position: "sticky",
             top: 80,
             zIndex: i + 1,
-            background: row.bg,
             height: "70vh",
-            borderBottom: "1px solid rgba(0,0,0,0.07)",
             overflow: "hidden",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
           }}
         >
-          {row.imageLeft ? (
-            <>{imgBlock(row)}{textBlock(row)}</>
+          {/* Full-bleed background — video for first card, image for rest */}
+          {row.video ? (
+            <video
+              src={`${assetBase}assets/story-video-3.mov`}
+              autoPlay muted loop playsInline
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
           ) : (
-            <>{textBlock(row)}{imgBlock(row)}</>
+            <img
+              src={row.img}
+              alt={row.label}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
           )}
+
+          {/* Dark gradient overlay — heavier at bottom for text legibility */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.12) 100%)",
+            zIndex: 1,
+          }} />
+
+          {/* Text — bottom-left, on top of overlay */}
+          <div style={{
+            position: "absolute", bottom: 0, left: 0,
+            padding: "56px 72px",
+            zIndex: 2,
+            maxWidth: 720,
+          }}>
+            <span style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "0.62rem", fontWeight: 700,
+              letterSpacing: "0.3em", color: "#C41E3A",
+              textTransform: "uppercase", display: "block", marginBottom: 16,
+            }}>
+              {row.label}
+            </span>
+            <h2 style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
+              color: "#ffffff",
+              textTransform: "uppercase",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              margin: "0 0 20px",
+              whiteSpace: "pre-line",
+            }}>
+              {row.heading}
+            </h2>
+            <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 20 }} />
+            <p style={{
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "0.9rem",
+              color: "rgba(255,255,255,0.78)",
+              lineHeight: 1.85,
+              margin: 0,
+              maxWidth: 560,
+            }}>
+              {row.text}
+            </p>
+          </div>
         </div>
       ))}
     </div>
