@@ -484,9 +484,6 @@ export default function AboutPage() {
 
           {/* ① Centered heading + body with SplitText line-mask reveal */}
           <div style={{ textAlign: "center", paddingBottom: 64 }}>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-              Our Story
-            </span>
             <SplitReveal
               as="h2"
               stagger={0.06}
