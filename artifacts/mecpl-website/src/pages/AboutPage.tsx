@@ -102,29 +102,26 @@ function AlternatingSection() {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".alt-card");
 
     const ctx = gsap.context(() => {
-      container.querySelectorAll<HTMLElement>(".comparison-section").forEach((section) => {
-        const afterEl  = section.querySelector<HTMLElement>(".after-image");
-        const afterImg = section.querySelector<HTMLElement>(".after-image img");
-        if (!afterEl || !afterImg) return;
-
-        // Exact pattern from https://demos.gsap.com/demo/image-mask-on-scroll/
-        // Container slides from right → left; inner image counter-translates so it appears stationary
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "center center",
-            end: () => "+=" + section.offsetWidth,
-            scrub: true,
-            pin: true,
-            anticipatePin: 1,
-          },
-          defaults: { ease: "none" },
-        });
-
-        tl.fromTo(afterEl,  { xPercent: 100, x: 0 }, { xPercent: 0 })
-          .fromTo(afterImg, { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
+      cards.forEach((card, i) => {
+        if (i === 0) return; // Card 0 is always visible — cards 1,2 slide up over it
+        gsap.fromTo(
+          card,
+          { yPercent: 8, scale: 0.96, transformOrigin: "center bottom" },
+          {
+            yPercent: 0,
+            scale: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 92%",
+              end: "top top+=80",
+              scrub: 0.7,
+            },
+          }
+        );
       });
     }, container);
 
@@ -132,52 +129,38 @@ function AlternatingSection() {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ position: "relative" }}>
       {altRows.map((row, i) => (
         <div
           key={i}
-          className="comparison-section"
-          style={{ position: "relative", height: "85vh", overflow: "hidden" }}
+          className="alt-card"
+          style={{
+            position: "sticky",
+            top: 80,
+            zIndex: i + 1,
+            height: "85vh",
+            overflow: "hidden",
+          }}
         >
-          {/* ── BEFORE image — always visible underneath ── */}
-          <div className="before-image" style={{ position: "absolute", inset: 0 }}>
-            <img
-              src={row.beforeImg}
-              alt={`${row.label} before`}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-          </div>
+          {/* Full-bleed background image */}
+          <img
+            src={row.beforeImg}
+            alt={row.label}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
 
-          {/* ── AFTER image — slides in from the right ── */}
-          <div
-            className="after-image"
-            style={{
-              position: "absolute", inset: 0,
-              overflow: "hidden",
-              transform: "translateX(100%)",
-            }}
-          >
-            <img
-              src={row.afterImg}
-              alt={`${row.label} after`}
-              style={{
-                width: "100%", height: "100%", objectFit: "cover", display: "block",
-                transform: "translateX(-100%)",
-              }}
-            />
-            {/* Dark gradient overlay so text is legible on the after image */}
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 45%, transparent 100%)",
-              pointerEvents: "none",
-            }} />
-          </div>
+          {/* Dark gradient — heavier at bottom for text legibility */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.10) 100%)",
+            zIndex: 1,
+          }} />
 
-          {/* ── Text — always on top of both images, bottom-left ── */}
+          {/* Text — bottom-left, on top of overlay */}
           <div style={{
             position: "absolute", bottom: 0, left: 0,
             padding: "52px 72px",
-            zIndex: 10,
+            zIndex: 2,
             maxWidth: 680,
           }}>
             <span style={{
