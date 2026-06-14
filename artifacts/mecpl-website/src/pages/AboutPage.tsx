@@ -97,84 +97,38 @@ const altRows = [
 ];
 
 function AlternatingSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const ctx = gsap.context(() => {
-      container.querySelectorAll<HTMLElement>(".comparison-section").forEach((section) => {
-        const afterEl  = section.querySelector<HTMLElement>(".after-image");
-        const afterImg = section.querySelector<HTMLElement>(".after-image img");
-        if (!afterEl || !afterImg) return;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "center center",
-            end: () => "+=" + section.offsetWidth,
-            scrub: true,
-            pin: true,
-            anticipatePin: 1,
-          },
-          defaults: { ease: "none" },
-        });
-
-        tl.fromTo(afterEl,  { xPercent: 100, x: 0 }, { xPercent: 0 })
-          .fromTo(afterImg, { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
-      });
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={containerRef}>
+    <div>
       {altRows.map((row, i) => (
         <div
           key={i}
-          className="comparison-section"
-          style={{ position: "relative", height: "85vh", overflow: "hidden" }}
+          style={{
+            position: "sticky",
+            top: 80,
+            zIndex: i + 1,
+            height: "85vh",
+            overflow: "hidden",
+          }}
         >
-          {/* ── BEFORE image — always visible underneath ── */}
-          <div className="before-image" style={{ position: "absolute", inset: 0 }}>
-            <img
-              src={row.beforeImg}
-              alt={`${row.label} before`}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-          </div>
+          {/* Full-bleed background image */}
+          <img
+            src={row.beforeImg}
+            alt={row.label}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
 
-          {/* ── AFTER image — slides in from the right ── */}
-          <div
-            className="after-image"
-            style={{
-              position: "absolute", inset: 0,
-              overflow: "hidden",
-              transform: "translateX(100%)",
-            }}
-          >
-            <img
-              src={row.afterImg}
-              alt={`${row.label} after`}
-              style={{
-                width: "100%", height: "100%", objectFit: "cover", display: "block",
-                transform: "translateX(-100%)",
-              }}
-            />
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 45%, transparent 100%)",
-              pointerEvents: "none",
-            }} />
-          </div>
+          {/* Dark gradient overlay */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.10) 100%)",
+            zIndex: 1,
+          }} />
 
-          {/* ── Text — always on top of both images, bottom-left ── */}
+          {/* Text — bottom-left */}
           <div style={{
             position: "absolute", bottom: 0, left: 0,
             padding: "52px 72px",
-            zIndex: 10,
+            zIndex: 2,
             maxWidth: 680,
           }}>
             <span style={{
