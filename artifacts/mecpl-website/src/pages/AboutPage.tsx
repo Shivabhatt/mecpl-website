@@ -480,45 +480,55 @@ export default function AboutPage() {
       <section id="abt1" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
-          {/* ① Our Story text — heading left, body right */}
+          {/* ① Text left + Video mosaic right — side by side like reference */}
           <RevealBlock>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 72, alignItems: "start", paddingBottom: 72 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 64, alignItems: "start", paddingBottom: 72 }}>
+
+              {/* Left: label + heading + body */}
               <div>
                 <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
                   Our Story
                 </span>
-                <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "clamp(3rem, 7vw, 6rem)", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.03em", lineHeight: 0.95, margin: "0 0 24px" }}>
+                <h2 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px" }}>
                   Driven By<br />Quality And<br />Excellence<br />Since 1999
                 </h2>
-              </div>
-              <div>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "1rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 20px", fontWeight: 500 }}>
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: "0 0 16px", fontWeight: 500 }}>
                   Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
                 </p>
-                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.9rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
-                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1. Our core values of Quality, Consistency, Compliance, Safety, and Environmental Protection remain unchanged.
+                <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#666", lineHeight: 1.9, margin: 0 }}>
+                  With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1.
                 </p>
               </div>
-            </div>
-          </RevealBlock>
 
-          {/* ② Video collage — 3-col, all full-height, looping */}
-          <RevealBlock delay={100}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1.5fr 1fr",
-              gridTemplateRows: "480px",
-              gap: 10,
-            }}>
-              <div style={{ overflow: "hidden" }}>
-                <video src={`${assetBase}assets/story-video-1.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              {/* Right: 5-cell mosaic — 3 cols, 2 rows, col3 tall */}
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                gridTemplateRows: "200px 210px",
+                gap: 8,
+              }}>
+                {/* row1 col1 */}
+                <div style={{ overflow: "hidden" }}>
+                  <video src={`${assetBase}assets/story-video-1.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* row1 col2 */}
+                <div style={{ overflow: "hidden" }}>
+                  <video src={`${assetBase}assets/story-video-4.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* col3 — tall, spans both rows */}
+                <div style={{ gridRow: "1 / 3", overflow: "hidden" }}>
+                  <video src={`${assetBase}assets/story-video-2.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* row2 col1 */}
+                <div style={{ overflow: "hidden" }}>
+                  <video src={`${assetBase}assets/story-video-5.mp4`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                {/* row2 col2 */}
+                <div style={{ overflow: "hidden" }}>
+                  <video src={`${assetBase}assets/story-video-3.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
               </div>
-              <div style={{ overflow: "hidden" }}>
-                <video src={`${assetBase}assets/story-video-2.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
-              <div style={{ overflow: "hidden" }}>
-                <video src={`${assetBase}assets/story-video-3.mov`} autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
+
             </div>
           </RevealBlock>
 
