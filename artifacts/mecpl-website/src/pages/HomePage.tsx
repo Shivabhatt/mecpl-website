@@ -759,6 +759,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ══════════ 4b. FULL-SCREEN IMAGE BANNER ══════════ */}
+      <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#111" }}>
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
+          alt="MECPL — Building India's Skyline"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%", display: "block" }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.60) 100%)" }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          textAlign: "center", padding: "0 24px",
+        }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+            Since 1999
+          </span>
+          <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 4.5rem)", color: "#ffffff", letterSpacing: "-0.02em", lineHeight: 1, margin: "0 0 24px", textTransform: "uppercase" }}>
+            Building India's<br />Skyline
+          </h2>
+          <div style={{ width: 48, height: 3, background: "#C41E3A", margin: "0 auto 28px" }} />
+          <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "clamp(0.8rem, 1.4vw, 1rem)", color: "rgba(255,255,255,0.75)", maxWidth: 560, lineHeight: 1.75, margin: "0 0 40px", fontWeight: 400 }}>
+            25+ years of structural engineering mastery behind India's most iconic residential, commercial, and industrial landmarks.
+          </p>
+          <Link href="/about">
+            <span style={{
+              display: "inline-flex", alignItems: "center", gap: 10,
+              border: "1.5px solid rgba(255,255,255,0.65)", color: "#fff",
+              padding: "14px 36px",
+              fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase",
+              cursor: "pointer",
+            }}>
+              Our Story <ArrowRight size={11} />
+            </span>
+          </Link>
+        </div>
+        {/* Scroll cue */}
+        <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.5rem", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Scroll</span>
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><rect x="1" y="1" width="10" height="18" rx="5" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"/><rect x="5" y="4" width="2" height="5" rx="1" fill="rgba(255,255,255,0.45)"/></svg>
+        </div>
+      </section>
+
       {/* ══════════ 4. SERVICES — Light bg hover-card grid ══════════ */}
       <section
         ref={servicesRef}
