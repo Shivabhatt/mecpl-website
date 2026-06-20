@@ -462,7 +462,7 @@ export default function AboutPage() {
     <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
 
       {/* ─── OUR STORY — Image Hero ──────────────────────────── */}
-      <section style={{ position: "relative", height: "68vh", overflow: "hidden", background: "#111" }}>
+      <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#111" }}>
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
           alt="MECPL — Our Story"
