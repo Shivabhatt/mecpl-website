@@ -648,11 +648,11 @@ export default function AboutPage() {
             <Link href="/contact">
               <span style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                border: "1.5px solid rgba(255,255,255,0.7)", color: "#fff",
+                border: "1.5px solid #ffffff", color: "#C41E3A",
                 padding: "15px 36px",
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
                 cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
-                background: "transparent",
+                background: "#ffffff",
               }}>
                 Contact MECPL <ArrowRight size={12} />
               </span>
