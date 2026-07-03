@@ -404,11 +404,10 @@ function LeadershipDoorSlider() {
             <div
               key={i}
               style={{
-                background: "#f5f5f5",
+                background: "#C41E3A",
                 borderRadius: 6,
                 overflow: "hidden",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
-                border: "1px solid rgba(0,0,0,0.06)",
+                boxShadow: "0 4px 24px rgba(196,30,58,0.25)",
                 display: "flex", flexDirection: "column",
               }}
             >
@@ -419,30 +418,30 @@ function LeadershipDoorSlider() {
                   alt={leader.name}
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
                 />
-                {/* Red accent badge — outside overflow:hidden so it's visible */}
+                {/* White accent badge — outside overflow:hidden so it's visible */}
                 <div style={{
                   position: "absolute", bottom: -14, left: 16, zIndex: 4,
                   width: 28, height: 28, borderRadius: "50%",
-                  background: "#C41E3A",
+                  background: "#ffffff",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: "0 2px 8px rgba(196,30,58,0.5)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.25)",
                 }}>
                   <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                    <path d="M0 8V5C0 3.33 0.56 2 1.67 1C2.78 0 4.11 -0.11 5.67 0.44L5 1.89C4.22 1.56 3.5 1.61 2.83 2.06C2.17 2.5 1.83 3.17 1.83 4.06H3.67V8H0ZM6.11 8V5C6.11 3.33 6.67 2 7.78 1C8.89 0 10.22 -0.11 11.78 0.44L11.11 1.89C10.33 1.56 9.61 1.61 8.94 2.06C8.28 2.5 7.94 3.17 7.94 4.06H9.78V8H6.11Z" fill="white"/>
+                    <path d="M0 8V5C0 3.33 0.56 2 1.67 1C2.78 0 4.11 -0.11 5.67 0.44L5 1.89C4.22 1.56 3.5 1.61 2.83 2.06C2.17 2.5 1.83 3.17 1.83 4.06H3.67V8H0ZM6.11 8V5C6.11 3.33 6.67 2 7.78 1C8.89 0 10.22 -0.11 11.78 0.44L11.11 1.89C10.33 1.56 9.61 1.61 8.94 2.06C8.28 2.5 7.94 3.17 7.94 4.06H9.78V8H6.11Z" fill="#C41E3A"/>
                   </svg>
                 </div>
               </div>
 
               {/* Card body */}
               <div style={{ padding: "24px 18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
-                <p style={{ fontFamily: MF, fontSize: "0.7rem", color: "#555", lineHeight: 1.8, margin: "0 0 16px", flex: 1 }}>
+                <p style={{ fontFamily: MF, fontSize: "0.7rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.8, margin: "0 0 16px", flex: 1 }}>
                   {leader.desc.length > 110 ? leader.desc.substring(0, 110) + "…" : leader.desc}
                 </p>
                 <div>
-                  <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.78rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 3 }}>
+                  <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.78rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 3 }}>
                     {leader.name}
                   </div>
-                  <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.5rem", color: "#C41E3A", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.5rem", color: "rgba(255,255,255,0.75)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
                     {leader.role}
                   </div>
                 </div>
