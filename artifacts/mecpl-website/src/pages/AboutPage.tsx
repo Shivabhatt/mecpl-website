@@ -491,13 +491,19 @@ function VideoBanner() {
           boxShadow: "0 24px 64px rgba(0,0,0,0.18)",
         }}
       >
-        {inView && (
+        {inView ? (
           <iframe
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${muted ? 1 : 0}&loop=1&playlist=${videoId}&controls=0&rel=0&modestbranding=1&playsinline=1`}
             title="MECPL — Building Excellence"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+          />
+        ) : (
+          <img
+            src={`${import.meta.env.BASE_URL}assets/video-thumbnail.png`}
+            alt="MECPL — Building Excellence"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
         )}
         <button
