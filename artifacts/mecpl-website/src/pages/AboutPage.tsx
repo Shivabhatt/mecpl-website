@@ -568,6 +568,9 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ─── VIDEO BANNER ─────────────────────────────────────── */}
+      <VideoBanner />
+
       {/* ─── STORY INTRO + PHOTO COLLAGE ─────────────────────── */}
       <section id="abt1" className="abt-story-section" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
@@ -659,9 +662,6 @@ export default function AboutPage() {
 
       {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
       <LeadershipDoorSlider />
-
-      {/* ─── VIDEO BANNER ─────────────────────────────────────── */}
-      <VideoBanner />
 
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
