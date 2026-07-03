@@ -626,13 +626,11 @@ export default function AboutPage() {
 
       {/* ─── CTA — "LET'S BUILD TOGETHER" red banner ─────────── */}
       <section className="abt-cta-section" style={{
-        background: "linear-gradient(135deg, #8B1020 0%, #C41E3A 60%, #a01828 100%)",
+        background: "#C41E3A",
         padding: "72px 40px",
         position: "relative",
         overflow: "hidden",
       }}>
-        {/* Subtle texture overlay */}
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <h2 style={{
             fontFamily: "'Montserrat',sans-serif",
