@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
@@ -457,6 +457,76 @@ function LeadershipDoorSlider() {
   );
 }
 
+function VideoBanner() {
+  const [playing, setPlaying] = useState(false);
+  const videoId = "2b1u5KUSUkk";
+  const MF = "'Montserrat',sans-serif";
+
+  return (
+    <section style={{ background: "#ffffff", padding: "0 56px 96px" }}>
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          position: "relative",
+          borderRadius: 20,
+          overflow: "hidden",
+          aspectRatio: "16 / 9",
+          background: "#000",
+          boxShadow: "0 24px 64px rgba(0,0,0,0.18)",
+        }}
+      >
+        {playing ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+            title="MECPL — Building Excellence"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+          />
+        ) : (
+          <div
+            onClick={() => setPlaying(true)}
+            style={{ position: "relative", width: "100%", height: "100%", cursor: "pointer" }}
+          >
+            <img
+              src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+              alt="MECPL — Building Excellence"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%)" }} />
+            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div
+                style={{
+                  width: 84, height: 84, borderRadius: "50%",
+                  background: "#C41E3A",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 8px 32px rgba(196,30,58,0.55)",
+                  transition: "transform 0.2s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.08)")}
+                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+              >
+                <svg width="26" height="30" viewBox="0 0 26 30" fill="none">
+                  <path d="M2 2L24 15L2 28V2Z" fill="white" />
+                </svg>
+              </div>
+            </div>
+            <div style={{ position: "absolute", left: 40, bottom: 36, right: 40 }}>
+              <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", display: "block", marginBottom: 10 }}>
+                Watch Our Story
+              </span>
+              <h3 style={{ fontFamily: MF, fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.4rem)", color: "#ffffff", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.1, margin: 0 }}>
+                Building Excellence,<br />Engineering Legacy
+              </h3>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default function AboutPage() {
   return (
     <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
@@ -579,6 +649,9 @@ export default function AboutPage() {
 
       {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
       <LeadershipDoorSlider />
+
+      {/* ─── VIDEO BANNER ─────────────────────────────────────── */}
+      <VideoBanner />
 
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
