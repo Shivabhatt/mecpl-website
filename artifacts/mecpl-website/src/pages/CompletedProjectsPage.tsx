@@ -1,8 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import SectionHeader from "@/components/SectionHeader";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowUpRight } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
+
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return { ref, inView };
+}
 
 const allProjects = [
   // Residential
@@ -94,32 +115,70 @@ export default function CompletedProjectsPage() {
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
-            <div key={i} className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 hover:shadow-lg transition-all duration-300 shadow-sm" data-testid={`card-project-${i}`}>
-              <div className="h-44 overflow-hidden relative">
-                <img
-                  src={project.image}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                  alt={project.name}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute top-3 right-3">
-                  <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-sm ${typeBadge[project.type]}`}>
-                    {project.type}
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="text-[#111827] font-bold text-sm uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors leading-snug">{project.name}</h3>
-                <div className="flex items-center gap-1.5 mt-2">
-                  <MapPin size={11} className="text-[#C41E3A] flex-shrink-0" />
-                  <span className="text-[#6b7280] text-xs">{project.location}</span>
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={`${active}-${i}`} project={project} index={i} />
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: (typeof allProjects)[number]; index: number }) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const delay = (index % 3) * 90;
+
+  return (
+    <div
+      ref={ref}
+      className="group relative bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/25 hover:shadow-xl transition-all duration-500"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms, box-shadow 0.4s ease, border-color 0.4s ease`,
+      }}
+      data-testid={`card-project-${index}`}
+    >
+      <div className="h-52 overflow-hidden relative">
+        <img
+          src={project.image}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[900ms] ease-out"
+          alt={project.name}
+          loading="lazy"
+        />
+        {/* Base gradient — always visible, subtle */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent transition-opacity duration-500 group-hover:opacity-40"></div>
+
+        <div className="absolute top-3 right-3 z-10">
+          <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-sm ${typeBadge[project.type]}`}>
+            {project.type}
+          </span>
+        </div>
+
+        {/* Glassy white reveal panel — slides up on hover */}
+        <div
+          className="absolute inset-x-0 bottom-0 px-5 py-4 bg-white/85 backdrop-blur-md border-t border-white/60 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+        >
+          <h3 className="text-[#111827] font-bold text-sm uppercase tracking-tight leading-snug mb-1.5">{project.name}</h3>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <MapPin size={11} className="text-[#C41E3A] flex-shrink-0" />
+              <span className="text-[#6b7280] text-xs truncate">{project.location}</span>
+            </div>
+            <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#C41E3A] flex-shrink-0 transition-transform duration-300 group-hover:rotate-45">
+              <ArrowUpRight size={13} className="text-white" />
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Static body — fades out as the glass panel rises on hover */}
+      <div className="p-5 transition-opacity duration-300 group-hover:opacity-0">
+        <h3 className="text-[#111827] font-bold text-sm uppercase tracking-tight leading-snug">{project.name}</h3>
+        <div className="flex items-center gap-1.5 mt-2">
+          <MapPin size={11} className="text-[#C41E3A] flex-shrink-0" />
+          <span className="text-[#6b7280] text-xs">{project.location}</span>
+        </div>
+      </div>
     </div>
   );
 }
