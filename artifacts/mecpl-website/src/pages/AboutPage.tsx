@@ -463,7 +463,7 @@ function VideoBanner() {
   const MF = "'Montserrat',sans-serif";
 
   return (
-    <section style={{ background: "#ffffff", padding: "0 56px 96px" }}>
+    <section style={{ background: "#ffffff", padding: "96px 56px" }}>
       <div
         style={{
           maxWidth: 1200,
@@ -493,6 +493,16 @@ function VideoBanner() {
               src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
               alt="MECPL — Building Excellence"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              onError={e => {
+                const img = e.currentTarget;
+                if (img.dataset.fallback !== "1") {
+                  img.dataset.fallback = "1";
+                  img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                } else if (img.dataset.fallback === "1") {
+                  img.dataset.fallback = "2";
+                  img.src = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1600&auto=format&fit=crop";
+                }
+              }}
             />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%)" }} />
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
