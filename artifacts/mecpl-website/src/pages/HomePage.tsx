@@ -891,7 +891,7 @@ export default function HomePage() {
         <div style={{ padding: "48px 48px 64px", textAlign: "center" }}>
           <Link href="/completed-projects" data-testid="button-all-projects">
             <span
-              className="inline-flex items-center gap-2 cursor-pointer"
+              className="homepage-reference-font inline-flex items-center gap-2 cursor-pointer"
               style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                 letterSpacing: "0.2em", color: "#C41E3A",
