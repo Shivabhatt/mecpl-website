@@ -1,76 +1,146 @@
 import { Link } from "wouter";
-import { ArrowRight, FileText, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { blogPosts } from "./blogData";
 
+function parseDate(dateStr: string) {
+  if (!dateStr) return { month: '', day: '', year: '' };
+  const parts = dateStr.replace(',', '').split(' ');
+  return {
+    month: parts[0] ? parts[0].substring(0, 3).toUpperCase() : '',
+    day: parts[1] ? parts[1].padStart(2, '0') : '',
+    year: parts[2] || ''
+  };
+}
+
 export default function BlogPage() {
+  const featuredPost = blogPosts[0];
+  const archivePosts = blogPosts;
+
   return (
-    <div data-animate-page className="bg-white pt-20">
-      <section className="max-w-7xl mx-auto px-6 py-16 space-y-8">
-        <div className="space-y-3 text-center max-w-3xl mx-auto px-6 pt-6 pb-0">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block">Articles</span>
-          <h1 className="text-5xl font-black tracking-tight uppercase leading-tight text-[#111827]">Latest MECPL Posts</h1>
-          <p className="text-[#4b5563] text-sm leading-relaxed">Select a story below to open the full long-form article.</p>
+    <div data-animate-page className="bg-white min-h-screen font-sans text-[#111827]">
+      {/* Empty State */}
+      {blogPosts.length === 0 ? (
+        <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-center min-h-[60vh] flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-black uppercase tracking-tight mb-4">MECPL Field Journal</h1>
+          <p className="text-[#4b5563]">No articles published yet. Check back soon.</p>
         </div>
-
-        {/* Featured first post */}
-        {blogPosts.length > 0 && (
-          <article className="group relative overflow-hidden rounded-[24px] border border-black/[0.07] bg-white shadow-sm transition-all hover:border-[#C41E3A]/30 hover:shadow-md">
-            <div className="grid md:grid-cols-2">
-              <div className="h-72 md:h-auto w-full overflow-hidden">
-                <img src={blogPosts[0].heroImage} alt={blogPosts[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="p-8 md:p-12 flex flex-col justify-center">
-                <div className="flex items-center gap-4 mb-3 text-[9px] uppercase tracking-[0.28em] text-[#6b7280]">
-                  <span>{blogPosts[0].publishedDate}</span>
-                  <span>{blogPosts[0].category}</span>
-                </div>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-[#111827] mb-3">{blogPosts[0].title}</h3>
-                <p className="text-[#374151] text-base leading-relaxed max-w-3xl">{blogPosts[0].deck}</p>
-                <div className="mt-6 flex justify-end">
-                  <Link href={`/blog/${blogPosts[0].slug}`} className="inline-flex items-center gap-3 text-[#C41E3A] text-[12px] font-black tracking-[0.25em] uppercase">
-                    <span>Read More</span>
-                    <FileText size={14} />
-                  </Link>
-                </div>
-              </div>
+      ) : (
+        <>
+          {/* Restrained Cinematic Hero */}
+          <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#111827] overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src={featuredPost.heroImage} 
+                alt={featuredPost.title} 
+                className="w-full h-full object-cover opacity-40 scale-105 animate-[heroSlideIn_1.5s_ease-out_forwards]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#111827]/60 via-[#111827]/40 to-[#111827]/90" />
             </div>
-          </article>
-        )}
 
-        {/* Remaining posts */}
-        <div className="mt-10 space-y-6">
-          {blogPosts.slice(1).map((post) => (
-            <div key={post.slug} className="flex gap-6 items-start bg-white border border-black/[0.07] rounded-lg p-4 md:p-6 hover:shadow-md hover:border-[#C41E3A]/20 transition-all">
-              <img src={post.heroImage} alt={post.title} className="w-36 h-24 object-cover rounded-sm flex-shrink-0" />
-              <div className="flex-1">
-                <div className="text-[10px] uppercase text-[#6b7280] tracking-widest mb-1">{post.publishedDate} | {post.category}</div>
-                <h3 className="text-lg font-black text-[#111827] tracking-tight">{post.title}</h3>
-                <p className="text-[#374151] text-sm mt-2">{post.deck}</p>
-                <div className="mt-3">
-                  <Link href={`/blog/${post.slug}`} className="text-[#C41E3A] text-[12px] font-black uppercase tracking-widest inline-flex items-center gap-2">Read More <FileText size={12} /></Link>
-                </div>
+            <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center mt-16 md:mt-20">
+              <div className="text-white text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] mb-6 animate-[heroSlideIn_1s_ease-out_0.2s_both]">
+                Latest MECPL Posts
               </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white uppercase tracking-[-0.04em] leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
+                MECPL Journal
+              </h1>
+              <p className="text-sm md:text-base text-white max-w-2xl leading-relaxed font-medium animate-[heroSlideIn_1s_ease-out_0.6s_both]">
+                Industry insight, project thinking, and practical knowledge from MECPL.
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      <section className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="rounded-[28px] border border-black/[0.07] bg-[#f9f9f9] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-[#C41E3A] text-[10px] font-black tracking-[0.25em] uppercase">
-              <Sparkles size={12} /> More to explore
+          {/* List Section */}
+          <section className="bg-white py-20 md:py-32">
+            <div className="max-w-[1000px] mx-auto px-6 md:px-12">
+              {/* Editorial List */}
+              {archivePosts.length > 0 ? (
+                <div className="flex flex-col">
+                  {archivePosts.map((post) => {
+                    const date = parseDate(post.publishedDate);
+                    return (
+                      <div key={post.slug} className="group border-b border-black/10 last:border-b-0 pb-12 mb-12 last:pb-0 last:mb-0">
+                        <Link href={`/blog/${post.slug}`} className="block">
+                          <article className="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start">
+                            
+                            {/* Date Marker */}
+                            <div className="hidden md:flex flex-col md:w-16 shrink-0 mt-1">
+                              <span className="text-[11px] font-bold text-[#6b7280] tracking-[0.2em] uppercase mb-1">
+                                {date.month}
+                              </span>
+                              <span className="text-4xl md:text-5xl font-black text-[#111827] tracking-tighter leading-none">
+                                {date.day}
+                              </span>
+                              <span className="text-[10px] font-bold text-[#9ca3af] tracking-[0.1em] mt-2">
+                                {date.year}
+                              </span>
+                            </div>
+
+                            {/* Thumbnail */}
+                            <div className="w-full md:w-[300px] lg:w-[380px] shrink-0 overflow-hidden bg-[#f9f9f9] aspect-[16/10] relative">
+                              {/* Mobile Date Overlay */}
+                              <div className="md:hidden absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-2 z-10 flex flex-col items-center shadow-sm">
+                                <span className="text-[9px] font-bold text-[#6b7280] tracking-[0.15em] uppercase leading-none mb-1">
+                                  {date.month}
+                                </span>
+                                <span className="text-xl font-black text-[#111827] tracking-tighter leading-none">
+                                  {date.day}
+                                </span>
+                              </div>
+                              <img 
+                                src={post.heroImage} 
+                                alt={post.title} 
+                                className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                              />
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 flex flex-col pt-1">
+                              <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-[#111827] mb-2 group-hover:text-[#C41E3A] transition-colors duration-300 leading-[1.15]">
+                                {post.title}
+                              </h3>
+                              <div className="text-[10px] md:text-[11px] font-bold text-[#9ca3af] tracking-[0.15em] uppercase mb-5">
+                                {post.category}
+                              </div>
+                              <p className="text-[#6b7280] text-sm leading-relaxed mb-6 line-clamp-3">
+                                {post.deck}
+                              </p>
+                              <div className="self-end inline-flex items-center gap-3 text-[#111827] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] group-hover:text-[#C41E3A] transition-colors duration-300 mt-auto">
+                                Read Article <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                              </div>
+                            </div>
+
+                          </article>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-[#4b5563] italic text-sm">More project notes and company updates are on the way.</p>
+              )}
+
             </div>
-            <h3 className="text-3xl font-black uppercase tracking-tight text-[#111827]">More project notes and company updates are on the way</h3>
-            <p className="text-[#4b5563] text-sm leading-relaxed">Use the article pages for the full content, or jump to About Us to see how MECPL structures its delivery and service line.</p>
-          </div>
-          <Link href="/about">
-            <span className="inline-flex items-center gap-2 bg-transparent border border-black/[0.15] text-[#111827] px-8 py-4 text-xs font-black tracking-widest uppercase rounded-full transition-colors hover:bg-black/[0.04] cursor-pointer whitespace-nowrap">
-              About Us <ArrowRight size={14} />
-            </span>
-          </Link>
-        </div>
-      </section>
+          </section>
+
+          {/* Enterprise Trust CTA */}
+          <section className="bg-[#C41E3A] min-h-[267px] md:h-[267px] py-14 md:py-0 relative overflow-hidden flex items-center">
+            <div className="max-w-[900px] w-full mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+              <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-[-0.06em] text-white mb-8 leading-[0.95]">
+                Beyond the Journal
+              </h2>
+              <Link
+                href="/about"
+                className="group inline-flex items-center justify-center gap-3 min-w-[174px] bg-white border border-white text-[#C41E3A] px-7 py-4 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#111827] hover:border-[#111827] hover:text-white"
+              >
+                <span>About Us</span>
+                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

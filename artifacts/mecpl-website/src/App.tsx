@@ -11,7 +11,6 @@ import EnquiryModal from "@/components/EnquiryModal";
 import HomePage from "@/pages/HomePage";
 import useGsapPageAnimations from "./hooks/useGsapPageAnimations";
 import useLenis from "./hooks/useLenis";
-import Preloader from "@/components/Preloader";
 import AboutPage from "@/pages/AboutPage";
 import ProjectsPage from "@/pages/ProjectsPage";
 import ServicesPage from "@/pages/ServicesPage";
@@ -78,7 +77,6 @@ function App() {
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <Router />
             </WouterRouter>
-            <Preloader />
             <Toaster />
           </ModalProvider>
         </ThemeProvider>

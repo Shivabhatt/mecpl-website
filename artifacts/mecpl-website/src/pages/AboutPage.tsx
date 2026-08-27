@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
@@ -293,9 +293,9 @@ function SplitReveal({
   stagger = 0.07,
   start = "top 88%",
 }: {
-  children: React.ReactNode;
-  as?: keyof JSX.IntrinsicElements;
-  style?: React.CSSProperties;
+  children: ReactNode;
+  as?: keyof HTMLElementTagNameMap;
+  style?: CSSProperties;
   className?: string;
   stagger?: number;
   start?: string;
@@ -454,82 +454,6 @@ function LeadershipDoorSlider() {
   );
 }
 
-function VideoBanner() {
-  const [muted, setMuted] = useState(true);
-  const [inView, setInView] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const videoId = "2b1u5KUSUkk";
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.4 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section style={{ background: "#ffffff", padding: "96px 56px" }}>
-      <div
-        ref={containerRef}
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          position: "relative",
-          borderRadius: 20,
-          overflow: "hidden",
-          aspectRatio: "16 / 9",
-          background: "#000",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.18)",
-        }}
-      >
-        {inView ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${muted ? 1 : 0}&loop=1&playlist=${videoId}&controls=0&rel=0&modestbranding=1&playsinline=1`}
-            title="MECPL — Building Excellence"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
-          />
-        ) : (
-          <img
-            src={`${import.meta.env.BASE_URL}assets/video-thumbnail.png`}
-            alt="MECPL — Building Excellence"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
-        )}
-        <button
-          onClick={() => setMuted(m => !m)}
-          style={{
-            position: "absolute", top: 24, right: 24, zIndex: 2,
-            width: 48, height: 48, borderRadius: "50%",
-            background: "rgba(0,0,0,0.45)", border: "1.5px solid rgba(255,255,255,0.6)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            cursor: "pointer", transition: "transform 0.2s, background 0.2s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.08)"; e.currentTarget.style.background = "#C41E3A"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.background = "rgba(0,0,0,0.45)"; }}
-          aria-label={muted ? "Unmute video" : "Mute video"}
-        >
-          {muted ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/><line x1="23" y1="9" x2="17" y2="15" stroke="white" strokeWidth="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="white" strokeWidth="2"/></svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/><path d="M15.5 8.5C16.5 9.5 17 10.7 17 12C17 13.3 16.5 14.5 15.5 15.5" stroke="white" strokeWidth="2" strokeLinecap="round"/><path d="M18.5 5.5C20.5 7.5 21.5 9.7 21.5 12C21.5 14.3 20.5 16.5 18.5 18.5" stroke="white" strokeWidth="2" strokeLinecap="round"/></svg>
-          )}
-        </button>
-      </div>
-    </section>
-  );
-}
-
 export default function AboutPage() {
   return (
     <div data-animate-page style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
@@ -649,9 +573,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-
-      {/* ─── VIDEO BANNER ─────────────────────────────────────── */}
-      <VideoBanner />
 
       {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
       <LeadershipDoorSlider />

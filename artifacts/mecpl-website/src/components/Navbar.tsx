@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
 
 const logoAsset = "/assets/logo/mecpl-logo.webp";
@@ -67,7 +67,7 @@ export default function Navbar() {
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <span
-                  className={`relative inline-block px-4 py-2 text-[13px] font-bold tracking-[0.18em] uppercase cursor-pointer transition-colors duration-300 group ${
+                  className={`navbar-nav-label font-raleway relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
                     transparent
                       ? active ? "text-white" : "text-white/70 hover:text-white"
                       : active ? "text-[#111827]" : "text-[#6b7280] hover:text-[#111827]"
@@ -87,17 +87,9 @@ export default function Navbar() {
 
         {/* ── Desktop right ── */}
         <div className="hidden md:flex items-center gap-4 flex-shrink-0">
-          <a
-            href="tel:02066865858"
-            className={`flex items-center gap-1.5 text-[11px] font-medium tracking-[0.15em] uppercase transition-colors whitespace-nowrap ${
-              transparent ? "text-white/65 hover:text-white" : "text-[#6b7280] hover:text-[#111827]"
-            }`}
-          >
-            <Phone size={12} /> 020&nbsp;6686&nbsp;5858
-          </a>
           <button
             onClick={openModal}
-            className="bg-[#C41E3A] hover:bg-[#ab1831] text-white text-[11px] font-bold tracking-[0.22em] uppercase px-5 py-3 transition-colors cursor-pointer whitespace-nowrap"
+            className="font-raleway bg-[#C41E3A] hover:bg-[#ab1831] text-white text-[11px] font-bold tracking-[0.22em] uppercase px-5 py-3 transition-colors cursor-pointer whitespace-nowrap"
             data-testid="button-contact-nav"
           >
             Enquire Now
@@ -131,7 +123,7 @@ export default function Navbar() {
                 data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div
-                  className={`py-3 text-[13px] font-semibold uppercase tracking-wider border-b border-black/[0.05] cursor-pointer transition-colors ${
+                    className={`navbar-nav-label font-raleway py-3 text-sm font-medium normal-case tracking-normal border-b border-black/[0.05] cursor-pointer transition-colors ${
                     location === link.path ? "text-[#C41E3A]" : "text-[#111827] hover:text-[#C41E3A]"
                   }`}
                 >
@@ -139,16 +131,10 @@ export default function Navbar() {
                 </div>
               </Link>
             ))}
-            <div className="pt-4 space-y-3">
-              <a
-                href="tel:02066865858"
-                className="flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-[#6b7280]"
-              >
-                <Phone size={12} /> 020 6686 5858
-              </a>
+            <div className="pt-4">
               <button
                 onClick={() => { setMenuOpen(false); openModal(); }}
-                className="w-full text-center bg-[#C41E3A] hover:bg-[#ab1831] text-white py-3 text-[11px] font-bold tracking-[0.22em] uppercase cursor-pointer transition-colors"
+                 className="font-raleway w-full text-center bg-[#C41E3A] hover:bg-[#ab1831] text-white py-3 text-[11px] font-bold tracking-[0.22em] uppercase cursor-pointer transition-colors"
                 data-testid="button-mobile-enquire"
               >
                 Enquire Now

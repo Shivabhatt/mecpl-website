@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, Phone, Mail, ExternalLink, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -21,9 +21,6 @@ export default function Footer() {
             {/* Brand */}
             <div className="space-y-5">
               <img src="/assets/logo/mecpl-logo.webp" alt="MECPL logo" className="h-12 w-auto object-contain" />
-              <p style={{ fontSize: "12px", lineHeight: 1.85, color: "rgba(17,24,39,0.45)" }}>
-                Engineering India's skyline, one landmark at a time.<br />ISO certified, CRISIL SME 1 rated — since 1998.
-              </p>
               <div className="space-y-2 text-xs">
                 <div className="flex items-start gap-2">
                   <MapPin size={12} className="flex-shrink-0 mt-0.5" style={{ color: "#C41E3A" }} />

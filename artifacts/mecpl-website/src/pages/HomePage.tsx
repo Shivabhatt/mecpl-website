@@ -180,12 +180,7 @@ export default function HomePage() {
           }
         };
 
-        if ((window as any)._preloaderDone) {
-          gsap.set(section, { y: 0, scale: 1 });
-          runAnims();
-        } else {
-          window.addEventListener("preloader-exit", () => runAnims(), { once: true });
-        }
+        runAnims();
 
         return () => splits.forEach(s => s.revert());
       });
@@ -408,7 +403,7 @@ export default function HomePage() {
 
   /* ─── JSX ────────────────────────────────────────────────────── */
   return (
-    <div style={{ background: "#ffffff", color: "#111827" }}>
+    <div className="home-page-typography" style={{ background: "#ffffff", color: "#111827" }}>
 
       {/* ══════════ 1. HERO — Cinematic centered ══════════ */}
       <section
@@ -478,12 +473,11 @@ export default function HomePage() {
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
-            <h1 key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+            <h1 className="hp-banner-title" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
-                <div key={i} style={{
-                  fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                <div key={i} className="hp-banner-line" style={{
                   fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
-                  lineHeight: 1.15, color: "#ffffff", letterSpacing: "-0.01em",
+                  lineHeight: 1.15, color: "#ffffff",
                   whiteSpace: "nowrap",
                 }}>
                   {line}
@@ -559,7 +553,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "'Montserrat',sans-serif",
                       fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
-                      fontWeight: 800, color: "#C41E3A", lineHeight: 1,
+                      fontWeight: 500, color: "#C41E3A", letterSpacing: "-0.025em", lineHeight: 1,
                     }}
                   >
                     0
@@ -597,10 +591,8 @@ export default function HomePage() {
                 }}>
                   ABOUT MECPL
                 </span>
-                <h3 style={{
-                  fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                  fontSize: "1.875rem", color: "#111827",
-                  textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 20px",
+                <h3 className="hp-section-title" style={{
+                  margin: "0 0 20px",
                 }}>
                   Building India's Tomorrow
                 </h3>
@@ -696,10 +688,8 @@ export default function HomePage() {
           }}>
             RECOGNITION
           </span>
-          <h3 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
-            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+          <h3 className="hp-section-title" style={{
+            margin: 0,
           }}>
             Certifications &amp; Awards
           </h3>
@@ -774,10 +764,8 @@ export default function HomePage() {
             }}>
               WHAT WE BUILD
             </span>
-            <h3 style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-              fontSize: "1.875rem", color: "#111827",
-              textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+            <h3 className="hp-section-title" style={{
+              margin: 0,
             }}>
               Our Services
             </h3>
@@ -836,10 +824,8 @@ export default function HomePage() {
           }}>
             OUR PROJECTS
           </span>
-          <h3 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
-            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0,
+          <h3 className="hp-section-title" style={{
+            margin: 0,
           }}>
             Landmark Works
           </h3>
@@ -941,10 +927,8 @@ export default function HomePage() {
               }}>
                 OUR ADVANTAGE
               </span>
-              <h3 style={{
-                fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-                fontSize: "1.875rem", color: "#111827",
-                textTransform: "uppercase", letterSpacing: "-0.01em", margin: "0 0 16px",
+              <h3 className="hp-section-title" style={{
+                margin: "0 0 16px",
               }}>
                 Why Choose MECPL
               </h3>
@@ -1065,10 +1049,8 @@ export default function HomePage() {
           }}>
             CLIENT VOICES
           </span>
-          <h3 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
-            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0, lineHeight: 1.15,
+          <h3 className="hp-section-title" style={{
+            margin: 0,
           }}>
             What Our Clients Say
           </h3>
@@ -1151,24 +1133,40 @@ export default function HomePage() {
       <section
         ref={clientsRef}
         data-testid="section-clients"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "80px 0" }}
+        style={{
+          background: "#C41E3A",
+          borderTop: "1px solid rgba(0,0,0,0.07)",
+          borderRadius: "8px",
+          margin: "0 8px",
+          overflow: "hidden",
+          padding: "48px 0",
+        }}
       >
         {/* Heading */}
-        <div style={{ padding: "0 40px", marginBottom: "56px", textAlign: "center" }}>
+         <div style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
           <span style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+             letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "uppercase",
             display: "block", marginBottom: "10px",
           }}>
             OUR CLIENTS
           </span>
-          <h3 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 800,
-            fontSize: "1.875rem", color: "#111827",
-            textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0, lineHeight: 1.15,
-          }}>
+           <h3 className="hp-section-title" style={{
+             margin: 0,
+             color: "#ffffff",
+           }}>
             Trusted Partners
           </h3>
+          <p style={{
+            maxWidth: "620px",
+            margin: "14px auto 0",
+             color: "rgba(255,255,255,0.82)",
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "13px",
+            lineHeight: 1.7,
+          }}>
+            Built on trusted relationships with the teams shaping India&apos;s future.
+          </p>
         </div>
 
         {/* Single GSAP ticker */}
@@ -1189,56 +1187,6 @@ export default function HomePage() {
                   style={{ maxWidth: "100%", maxHeight: "52px", objectFit: "contain" }} />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════ 9. CTA ══════════ */}
-      <section
-        data-testid="section-dual-cta"
-        style={{ background: "linear-gradient(135deg, #C41E3A 0%, #8b0f20 100%)", padding: "56px 40px", position: "relative" }}
-      >
-        <div style={{ textAlign: "center", maxWidth: "900px", margin: "0 auto" }}>
-          <div style={{
-            fontFamily: "'Montserrat',sans-serif",
-            fontSize: "clamp(2rem, 4vw, 3rem)",
-            fontWeight: 800, color: "#ffffff",
-            textTransform: "uppercase", lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            marginBottom: "28px",
-          }}>
-            LET'S BUILD TOGETHER
-          </div>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <Link href="/contact" data-testid="button-cta-contact">
-              <span
-                className="inline-flex items-center gap-2 cursor-pointer"
-                style={{
-                  background: "#ffffff", color: "#C41E3A", padding: "14px 36px",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.9)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#ffffff")}
-              >
-                Contact MECPL <ArrowRight size={11} />
-              </span>
-            </Link>
-            <Link href="/careers" data-testid="button-cta-careers">
-              <span
-                className="inline-flex items-center gap-2 cursor-pointer"
-                style={{
-                  background: "transparent", color: "#ffffff",
-                  padding: "14px 36px", border: "1.5px solid rgba(255,255,255,0.5)",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#ffffff"; el.style.background = "rgba(255,255,255,0.12)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.5)"; el.style.background = "transparent"; }}
-              >
-                View Careers <ArrowRight size={11} />
-              </span>
-            </Link>
           </div>
         </div>
       </section>
