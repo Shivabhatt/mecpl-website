@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "luc
 
 export default function Footer() {
   return (
-    <footer data-testid="footer">
+    <footer data-testid="footer" className="home-page-typography">
       <div
         style={{
           background: "#f8fafc", color: "#111827",
@@ -90,7 +90,7 @@ export default function Footer() {
                       {cert.code}
                     </div>
                     {cert.label && (
-                      <div style={{ fontSize: "10px", color: "rgba(17,24,39,0.4)", marginTop: "2px" }}>
+                      <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", color: "rgba(17,24,39,0.4)", marginTop: "2px" }}>
                         {cert.label}
                       </div>
                     )}
