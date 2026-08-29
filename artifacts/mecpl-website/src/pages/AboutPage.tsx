@@ -134,7 +134,7 @@ function AlternatingSection() {
             padding: "48px 80px",
             zIndex: 2,
           }}>
-            <span style={{
+            <span className="about-label-font font-montserrat font-medium" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontSize: "0.62rem", fontWeight: 700,
               letterSpacing: "0.3em", color: "#C41E3A",
@@ -142,7 +142,7 @@ function AlternatingSection() {
             }}>
               {row.label}
             </span>
-            <h2 className="page-title-font" style={{
+            <h2 className="page-title-font font-montserrat font-medium" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontWeight: 900,
               fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
@@ -386,10 +386,10 @@ function LeadershipDoorSlider() {
               <path d="M0 18V11.25C0 7.5 1.25 4.5 3.75 2.25C6.25 0 9.25 -0.25 12.75 1L11.25 4.25C9.5 3.5 7.875 3.625 6.375 4.625C4.875 5.625 4.125 7.125 4.125 9.125H8.25V18H0ZM13.75 18V11.25C13.75 7.5 15 4.5 17.5 2.25C20 0 23 -0.25 26.5 1L25 4.25C23.25 3.5 21.625 3.625 20.125 4.625C18.625 5.625 17.875 7.125 17.875 9.125H22V18H13.75Z" fill="white"/>
             </svg>
           </div>
-          <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
+          <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             Our Team
           </span>
-          <h2 className="page-title-font" style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
+          <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             Meet The Founders of MECPL
           </h2>
           <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.8rem", color: "#555", lineHeight: 1.85, margin: "0 0 28px" }}>
@@ -471,10 +471,10 @@ export default function AboutPage() {
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
           textAlign: "center",
         }}>
-          <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
+          <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
             About MECPL
           </span>
-          <h1 className="page-title-font" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
+          <h1 className="page-title-font font-montserrat font-medium" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
             Our Story
           </h1>
         </div>
@@ -493,7 +493,7 @@ export default function AboutPage() {
           <div className="about-story-copy font-montserrat" style={{ textAlign: "center", paddingBottom: 64 }}>
             <SplitReveal
               as="h2"
-              className="page-title-font"
+              className="page-title-font font-montserrat font-medium"
               stagger={0.06}
               start="top 85%"
               style={{
@@ -590,10 +590,10 @@ export default function AboutPage() {
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <RevealBlock>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+            <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
               Trusted By
             </span>
-            <h2 className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
+            <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               Leading Brands &amp; Developers
             </h2>
           </div>
@@ -632,7 +632,7 @@ export default function AboutPage() {
         overflow: "hidden",
       }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <h2 className="page-title-font" style={{
+          <h2 className="page-title-font font-montserrat font-medium" style={{
             fontFamily: "'Montserrat',sans-serif",
             fontWeight: 900,
             fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
