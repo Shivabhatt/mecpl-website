@@ -38,7 +38,7 @@ export default function BlogPage() {
               <div className="absolute inset-0 bg-gradient-to-b from-[#111827]/60 via-[#111827]/40 to-[#111827]/90" />
             </div>
 
-            <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center mt-16 md:mt-20">
+            <div className="font-montserrat font-medium relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center mt-16 md:mt-20">
               <div className="font-montserrat font-medium text-white text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-6 animate-[heroSlideIn_1s_ease-out_0.2s_both]">
                 Latest MECPL Posts
               </div>
