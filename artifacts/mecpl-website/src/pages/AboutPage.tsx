@@ -387,10 +387,10 @@ function LeadershipDoorSlider() {
             </svg>
           </div>
           <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
-            Our Team
+            OUR TEAM
           </span>
           <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
-            Meet The Founders of MECPL
+            MEET THE FOUNDERS OF MECPL
           </h2>
           <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.8rem", color: "#555", lineHeight: 1.85, margin: "0 0 28px" }}>
             The visionaries who built Pune's skyline — four decades of engineering excellence, guided by an uncompromising commitment to quality.
@@ -472,10 +472,10 @@ export default function AboutPage() {
           textAlign: "center",
         }}>
           <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
-            About MECPL
+            ABOUT MECPL
           </span>
           <h1 className="page-title-font font-montserrat about-hero-title" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 300, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
-            Our Story
+            OUR STORY
           </h1>
         </div>
         {/* Scroll cue */}
@@ -507,7 +507,7 @@ export default function AboutPage() {
                 lineHeight: 1.3,
               }}
             >
-              Driven By Quality And Excellence Since 1999
+              DRIVEN BY QUALITY AND EXCELLENCE SINCE 1999
             </SplitReveal>
             <div className="abt-story-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, textAlign: "left", maxWidth: 960, margin: "0 auto" }}>
               <SplitReveal
@@ -591,10 +591,10 @@ export default function AboutPage() {
         <RevealBlock>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
-              Trusted By
+              TRUSTED BY
             </span>
             <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
-              Leading Brands &amp; Developers
+              LEADING BRANDS &amp; DEVELOPERS
             </h2>
           </div>
         </RevealBlock>
@@ -642,7 +642,7 @@ export default function AboutPage() {
             lineHeight: 1.1,
             margin: "0 0 36px",
           }}>
-            Trusted By 100+ Enterprise Clients
+            TRUSTED BY 100+ ENTERPRISE CLIENTS
           </h2>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link href="/contact">
