@@ -131,7 +131,7 @@ export default function BlogPage() {
           </section>
 
           {/* Enterprise Trust CTA */}
-          <section className="bg-[#C41E3A] min-h-[267px] md:h-[267px] py-14 md:py-0 relative overflow-hidden flex items-center">
+          <section className="bg-[#C41E3A] min-h-[126px] h-[126px] py-0 relative overflow-hidden flex items-center">
             <div className="max-w-[900px] w-full mx-auto px-6 relative z-10 flex flex-col items-center text-center">
               <h2 className="page-title-font font-montserrat font-medium text-4xl sm:text-5xl text-white mb-8 leading-[0.95]">
                 Beyond the Journal
