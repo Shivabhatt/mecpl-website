@@ -21,7 +21,8 @@ export default function Navbar() {
   const { openModal }           = useModal();
 
   const isHome      = location === "/";
-  const transparent = isHome && !scrolled && !menuOpen;
+  const isImageHero = isHome || location === "/about";
+  const transparent = isImageHero && !scrolled && !menuOpen;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
