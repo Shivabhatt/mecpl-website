@@ -121,19 +121,22 @@ export default function CompletedProjectsPage() {
       </div>
       {/* Filters */}
       <div className="sticky top-20 z-30 bg-white border-b border-black/[0.06] py-4 md:py-5" data-testid="section-project-filters">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-2 justify-center">
-          {filters.map(f => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-6 py-2.5 text-xs font-black uppercase tracking-widest rounded-sm transition-all ${
-                active === f ? "bg-[#C41E3A] text-white" : "bg-white text-[#6b7280] hover:text-[#111827] border border-black/[0.1] hover:border-black/[0.2]"
-              }`}
-              data-testid={`button-filter-${f.toLowerCase()}`}
-            >
-              {f} {f !== "All" && <span className="opacity-50 ml-1">({allProjects.filter(p => p.type === f).length})</span>}
-            </button>
-          ))}
+        <div className="mx-auto flex max-w-7xl justify-center overflow-x-auto px-6">
+          <div className="flex min-w-max items-center gap-8 md:gap-12 lg:gap-16">
+            {filters.map(f => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                aria-pressed={active === f}
+                className={`font-montserrat whitespace-nowrap py-2 text-[9px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                  active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
+                }`}
+                data-testid={`button-filter-${f.toLowerCase()}`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       {/* Projects Grid */}
