@@ -135,27 +135,23 @@ export default function BlogPage() {
             <div className="max-w-[900px] w-full mx-auto relative z-10 flex flex-col items-center text-center">
               <h2 className="page-title-font font-montserrat font-medium" style={{
                 fontWeight: 900,
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                fontSize: "clamp(1.35rem, 2.5vw, 2rem)",
                 color: "#ffffff",
                 textTransform: "uppercase",
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,
-                margin: "0 0 18px",
+                margin: "0 0 5px",
               }}>
-                TRUSTED BY 100+ ENTERPRISE CLIENTS
+                Beyond the Journal
               </h2>
-              <div className="flex items-center justify-center gap-4 flex-wrap">
-                <Link href="/contact">
-                  <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white text-[#C41E3A] bg-white px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-[#111827] hover:border-[#111827] hover:text-white">
-                    Contact MECPL <ArrowRight size={12} />
-                  </span>
-                </Link>
-                <Link href="/projects">
-                  <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white/70 text-white bg-transparent px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-white hover:border-white hover:text-[#C41E3A]">
-                    View Projects <ArrowRight size={12} />
-                  </span>
-                </Link>
-              </div>
+              <p className="font-montserrat font-medium text-white/80 text-xs leading-tight mb-2.5">
+                Discover the people and projects behind MECPL.
+              </p>
+              <Link href="/about">
+                <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white text-[#C41E3A] bg-white px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-[#111827] hover:border-[#111827] hover:text-white">
+                  About Us <ArrowRight size={12} />
+                </span>
+              </Link>
             </div>
           </section>
         </>
