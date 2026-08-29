@@ -121,14 +121,14 @@ export default function CompletedProjectsPage() {
       </div>
       {/* Filters */}
       <div className="sticky top-20 z-30 bg-white border-b border-black/[0.06] py-4 md:py-5" data-testid="section-project-filters">
-        <div className="mx-auto flex max-w-7xl justify-center overflow-x-auto px-6">
-          <div className="flex min-w-max items-center gap-8 md:gap-12 lg:gap-16">
+        <div className="mx-auto flex w-full max-w-7xl justify-center overflow-x-auto px-6 font-montserrat">
+          <div className="flex w-full min-w-[42rem] items-center justify-between gap-8 font-montserrat">
             {filters.map(f => (
               <button
                 key={f}
                 onClick={() => setActive(f)}
                 aria-pressed={active === f}
-                className={`font-montserrat whitespace-nowrap py-2 text-[9px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                className={`font-montserrat whitespace-nowrap py-2 text-[14px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
                   active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
                 }`}
                 data-testid={`button-filter-${f.toLowerCase()}`}
