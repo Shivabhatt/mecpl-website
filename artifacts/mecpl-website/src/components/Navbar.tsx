@@ -21,7 +21,7 @@ export default function Navbar() {
   const { openModal }           = useModal();
 
   const isHome      = location === "/";
-  const isImageHero = isHome || location === "/about";
+  const isImageHero = isHome || location === "/about" || location === "/blog";
   const transparent = isImageHero && !scrolled && !menuOpen;
 
   useEffect(() => {
