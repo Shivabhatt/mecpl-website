@@ -559,7 +559,7 @@ export default function HomePage() {
                     0
                   </span>
                 </div>
-                <div style={{
+                <div className="home-stat-label font-montserrat font-medium" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
                   fontWeight: 600, letterSpacing: "0.18em",
                   textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
