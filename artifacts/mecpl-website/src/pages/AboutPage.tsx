@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const assetBase = import.meta.env.BASE_URL;
 
 const stats = [
-  { val: "40+", label: "Year Of Legacy" },
-  { val: "100+", label: "Completed Projects" },
-  { val: "100%", label: "Quality Consistency" },
-  { val: "100+", label: "Satisfied Clients" },
+  { val: "40+", label: "YEAR OF LEGACY" },
+  { val: "100+", label: "COMPLETED PROJECTS" },
+  { val: "100%", label: "QUALITY CONSISTENCY" },
+  { val: "100+", label: "SATISFIED CLIENTS" },
 ];
 
 const leaders = [
@@ -456,7 +456,6 @@ function LeadershipDoorSlider() {
 export default function AboutPage() {
   return (
     <div data-animate-page className="about-page font-montserrat font-medium" style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
-
       {/* ─── OUR STORY — Image Hero ──────────────────────────── */}
       <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#111" }}>
         <img
@@ -483,7 +482,6 @@ export default function AboutPage() {
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><rect x="1" y="1" width="10" height="18" rx="5" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"/><rect x="5" y="4" width="2" height="5" rx="1" fill="rgba(255,255,255,0.45)"/></svg>
         </div>
       </section>
-
       {/* ─── STORY INTRO + PHOTO COLLAGE ─────────────────────── */}
       <section id="abt1" className="abt-story-section" style={{ background: "#ffffff", padding: "90px 56px 0", scrollMarginTop: 80 }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
@@ -567,24 +565,19 @@ export default function AboutPage() {
                   textAlign: "center",
                 }}>
                   <div className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#C41E3A", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
-                  <div className="page-subtitle-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase" }}>{s.label}</div>
+                  <div className="font-montserrat font-medium text-[12px] uppercase" style={{ letterSpacing: "0.2em", color: "#888" }}>{s.label}</div>
                 </div>
               ))}
             </div>
           </RevealBlock>
         </div>
       </section>
-
-
       {/* ─── LEADERSHIP — Door Slider ──────────────────────────── */}
       <LeadershipDoorSlider />
-
       {/* ─── WORD SCATTER (giats.me) ─────────────────────────── */}
       <WordScatterSection />
-
       {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
       <AlternatingSection />
-
       {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <RevealBlock>
@@ -622,7 +615,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       {/* ─── CTA — "LET'S BUILD TOGETHER" red banner ─────────── */}
       <section className="abt-cta-section" style={{
         background: "#C41E3A",
@@ -671,7 +663,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
