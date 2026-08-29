@@ -72,7 +72,7 @@ export default function CompletedProjectsPage() {
   return (
     <div data-animate-page className="bg-white">
       {/* Project Hero */}
-      <div className="relative min-h-[500px] overflow-hidden bg-[#111827] flex items-center">
+      <div className="relative min-h-screen overflow-hidden bg-[#111827] flex items-center">
         <img
           src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop"
           className="absolute inset-0 h-full w-full object-cover"
@@ -112,15 +112,6 @@ export default function CompletedProjectsPage() {
             Explore Projects
             <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
-        </div>
-      </div>
-
-      {/* Stats strip */}
-      <div className="bg-[#C41E3A] py-3">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-5 gap-y-1 text-center">
-          {[ ["16", "Residential"], ["8", "Commercial"], ["4", "Industrial"], ["1", "Special"], ["150+", "Total Delivered"] ].map(([n, l]) => (
-            <span key={l} className="text-white text-[10px] md:text-xs font-black uppercase tracking-wider">{n} {l}</span>
-          ))}
         </div>
       </div>
 
