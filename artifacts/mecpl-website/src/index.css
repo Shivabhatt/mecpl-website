@@ -127,6 +127,11 @@ html[data-theme="light"] {
   font-family: 'Montserrat', sans-serif !important;
 }
 
+.about-page,
+.about-page * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 .page-title-font,
 [data-animate-page] h1,
 [data-animate-page] h2,

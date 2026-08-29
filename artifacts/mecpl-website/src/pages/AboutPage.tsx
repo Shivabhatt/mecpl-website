@@ -456,7 +456,7 @@ function LeadershipDoorSlider() {
 
 export default function AboutPage() {
   return (
-    <div data-animate-page className="font-montserrat font-medium" style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
+    <div data-animate-page className="about-page font-montserrat font-medium" style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
 
       {/* ─── OUR STORY — Image Hero ──────────────────────────── */}
       <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#111" }}>
