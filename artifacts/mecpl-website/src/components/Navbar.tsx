@@ -67,7 +67,7 @@ export default function Navbar() {
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <span
-                  className={`navbar-nav-label font-raleway relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
+                   className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
                     transparent
                       ? active ? "text-white" : "text-white/70 hover:text-white"
                       : active ? "text-[#111827]" : "text-[#6b7280] hover:text-[#111827]"
@@ -89,7 +89,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4 flex-shrink-0">
           <button
             onClick={openModal}
-            className="font-raleway bg-[#C41E3A] hover:bg-[#ab1831] text-white text-[11px] font-bold tracking-[0.22em] uppercase px-5 py-3 transition-colors cursor-pointer whitespace-nowrap"
+            className="font-montserrat bg-[#C41E3A] hover:bg-[#ab1831] text-white text-[11px] font-bold tracking-[0.22em] uppercase px-5 py-3 transition-colors cursor-pointer whitespace-nowrap"
             data-testid="button-contact-nav"
           >
             Enquire Now
@@ -123,7 +123,7 @@ export default function Navbar() {
                 data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div
-                    className={`navbar-nav-label font-raleway py-3 text-sm font-medium normal-case tracking-normal border-b border-black/[0.05] cursor-pointer transition-colors ${
+                     className={`navbar-nav-label font-montserrat py-3 text-sm font-medium normal-case tracking-normal border-b border-black/[0.05] cursor-pointer transition-colors ${
                     location === link.path ? "text-[#C41E3A]" : "text-[#111827] hover:text-[#C41E3A]"
                   }`}
                 >
@@ -134,7 +134,7 @@ export default function Navbar() {
             <div className="pt-4">
               <button
                 onClick={() => { setMenuOpen(false); openModal(); }}
-                 className="font-raleway w-full text-center bg-[#C41E3A] hover:bg-[#ab1831] text-white py-3 text-[11px] font-bold tracking-[0.22em] uppercase cursor-pointer transition-colors"
+                  className="font-montserrat w-full text-center bg-[#C41E3A] hover:bg-[#ab1831] text-white py-3 text-[11px] font-bold tracking-[0.22em] uppercase cursor-pointer transition-colors"
                 data-testid="button-mobile-enquire"
               >
                 Enquire Now

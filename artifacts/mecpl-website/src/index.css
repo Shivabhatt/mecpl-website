@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -64,8 +64,8 @@
   --mecpl-text: #111827;
   --mecpl-text-muted: #4b5563;
 
-  --font-raleway: 'Raleway', sans-serif;
   --font-inter: 'Inter', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 
 html[data-theme="light"] {
@@ -123,8 +123,8 @@ html[data-theme="light"] {
   font-weight: 500 !important;
 }
 
-.homepage-reference-font {
-  font-family: 'Raleway', sans-serif !important;
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 @media (min-width: 768px) {

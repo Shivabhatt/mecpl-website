@@ -39,7 +39,7 @@ function Router() {
   }, [location]);
 
   return (
-    <div ref={containerRef} className="flex flex-col min-h-screen">
+    <div ref={containerRef} className="font-montserrat font-medium flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1">
         <Switch>
