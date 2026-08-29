@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import SectionHeader from "@/components/SectionHeader";
 import { MapPin, ArrowUpRight } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
 
@@ -72,12 +71,47 @@ export default function CompletedProjectsPage() {
 
   return (
     <div data-animate-page className="bg-white">
-      {/* Header */}
-      <div className="relative py-14 md:py-20 border-b border-black/[0.06] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Construction" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
-        <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="Our Portfolio" title="Completed Projects" subtitle="150+ landmark structures delivered across residential, commercial, and industrial sectors." center />
+      {/* Project Hero */}
+      <div className="relative min-h-[500px] overflow-hidden bg-[#111827] flex items-center">
+        <img
+          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop"
+          className="absolute inset-0 h-full w-full object-cover"
+          alt="MECPL construction projects"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
+        <div className="absolute inset-0 bg-black/15" />
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center">
+          <span className="mb-4 text-[10px] font-black uppercase tracking-[0.28em] text-[#d5a51b]">
+            Our Projects
+          </span>
+          <div className="mb-5 h-px w-8 bg-[#d5a51b]" />
+          <h1 className="page-title-font max-w-4xl text-4xl font-medium leading-[0.98] tracking-[-0.035em] text-white sm:text-5xl md:text-6xl">
+            Building Landmarks.
+            <br />
+            Transforming Tomorrow<span className="text-[#d5a51b]">.</span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
+            From visionary designs to enduring structures, explore 150+ successful projects across Pune.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-left">
+            {[
+              ["150+", "Projects Delivered"],
+              ["50M+", "Sq. Ft. Delivered"],
+              ["25+", "Locations in Pune"],
+            ].map(([value, label]) => (
+              <div key={label} className="flex items-center gap-2.5">
+                <span className="text-2xl font-medium tracking-tight text-white md:text-3xl">{value}</span>
+                <span className="max-w-[76px] text-[9px] font-bold uppercase leading-tight tracking-[0.12em] text-white/60">{label}</span>
+              </div>
+            ))}
+          </div>
+          <Link
+            href="#project-grid"
+            className="group mt-9 inline-flex items-center gap-3 border border-[#d5a51b] px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-[#d5a51b] hover:text-[#111827]"
+          >
+            Explore Projects
+            <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
       </div>
 
@@ -109,7 +143,7 @@ export default function CompletedProjectsPage() {
       </div>
 
       {/* Projects Grid */}
-      <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-projects-grid">
+      <section id="project-grid" className="max-w-7xl mx-auto px-6 py-14" data-testid="section-projects-grid">
         <p className="text-[#6b7280] text-xs uppercase tracking-widest font-bold mb-6">
           Showing {filtered.length} projects{active !== "All" ? ` · ${active}` : ""}
         </p>
