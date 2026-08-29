@@ -119,6 +119,12 @@ export default function CompletedProjectsPage() {
           </div>
         </div>
       </div>
+      <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
+        <p className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
+          Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
+          Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
+        </p>
+      </section>
       {/* Filters */}
       <div className="sticky top-20 z-30 bg-white border-b border-black/[0.06] py-4 md:py-5" data-testid="section-project-filters">
         <div className="mx-auto flex w-full max-w-7xl justify-center overflow-x-auto px-6 font-montserrat">
