@@ -144,6 +144,11 @@ html[data-theme="light"] {
   font-size: clamp(2rem, 5vw, 4rem) !important;
 }
 
+.about-cta-button-font {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500 !important;
+}
+
 .page-title-font,
 [data-animate-page] h1,
 [data-animate-page] h2,

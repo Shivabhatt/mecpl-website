@@ -646,7 +646,7 @@ export default function AboutPage() {
           </h2>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link href="/contact">
-              <span style={{
+              <span className="about-cta-button-font font-montserrat font-medium" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 border: "1.5px solid #ffffff", color: "#C41E3A",
                 padding: "15px 36px",
@@ -658,7 +658,7 @@ export default function AboutPage() {
               </span>
             </Link>
             <Link href="/projects">
-              <span style={{
+              <span className="about-cta-button-font font-montserrat font-medium" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 border: "1.5px solid rgba(255,255,255,0.7)", color: "#fff",
                 padding: "15px 36px",
