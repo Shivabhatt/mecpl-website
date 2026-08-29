@@ -253,16 +253,15 @@ function WordScatterSection() {
         overflow: "hidden",
       }}>
         <div style={{ maxWidth: 820, padding: "0 48px", textAlign: "center" }}>
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+          <p className="font-montserrat font-medium" style={{
             fontSize: "clamp(1.15rem, 2.2vw, 2rem)",
-            fontWeight: 600,
             lineHeight: 1.75,
             color: "#111",
             margin: 0,
           }}>
             {words.map((word, i) => (
               <span
+                className="font-montserrat font-medium"
                 key={i}
                 ref={el => { wordsRef.current[i] = el; }}
                 style={{
