@@ -588,7 +588,7 @@ export default function HomePage() {
                 }}>
                   ABOUT MECPL
                 </span>
-                <h3 className="hp-section-title" style={{
+                <h3 className="hp-section-title font-montserrat" style={{
                   margin: "0 0 20px",
                 }}>
                   Building India's Tomorrow
@@ -638,7 +638,7 @@ export default function HomePage() {
 
                 <Link href="/about" data-testid="button-about-more">
                   <span
-                    className="inline-flex items-center gap-2 cursor-pointer"
+                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                       letterSpacing: "0.2em", color: "#C41E3A",
@@ -684,7 +684,7 @@ export default function HomePage() {
           }}>
             RECOGNITION
           </span>
-          <h3 className="hp-section-title" style={{
+          <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
           }}>
             Certifications &amp; Awards
@@ -759,7 +759,7 @@ export default function HomePage() {
             }}>
               WHAT WE BUILD
             </span>
-            <h3 className="hp-section-title" style={{
+            <h3 className="hp-section-title font-montserrat" style={{
               margin: 0,
             }}>
               Our Services
@@ -818,7 +818,7 @@ export default function HomePage() {
           }}>
             OUR PROJECTS
           </span>
-          <h3 className="hp-section-title" style={{
+          <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
           }}>
             Landmark Works
@@ -923,7 +923,7 @@ export default function HomePage() {
               }}>
                 OUR ADVANTAGE
               </span>
-              <h3 className="hp-section-title" style={{
+              <h3 className="hp-section-title font-montserrat" style={{
                 margin: "0 0 16px",
               }}>
                 Why Choose MECPL
@@ -1044,7 +1044,7 @@ export default function HomePage() {
           }}>
             CLIENT VOICES
           </span>
-          <h3 className="hp-section-title" style={{
+          <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
           }}>
             What Our Clients Say
@@ -1145,7 +1145,7 @@ export default function HomePage() {
           }}>
             OUR CLIENTS
           </span>
-           <h3 className="hp-section-title" style={{
+           <h3 className="hp-section-title font-montserrat" style={{
              margin: 0,
              color: "#ffffff",
            }}>
