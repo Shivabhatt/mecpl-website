@@ -813,10 +813,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                 letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                 letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            OUR PROJECTS
+            Our Projects
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
