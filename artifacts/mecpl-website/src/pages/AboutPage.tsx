@@ -490,7 +490,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
           {/* ① Centered heading + body with SplitText line-mask reveal */}
-          <div style={{ textAlign: "center", paddingBottom: 64 }}>
+          <div className="about-story-copy font-montserrat" style={{ textAlign: "center", paddingBottom: 64 }}>
             <SplitReveal
               as="h2"
               className="page-title-font"
@@ -512,6 +512,7 @@ export default function AboutPage() {
             <div className="abt-story-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, textAlign: "left", maxWidth: 960, margin: "0 auto" }}>
               <SplitReveal
                 as="p"
+                className="page-subtitle-font"
                 stagger={0.045}
                 start="top 88%"
                 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: 0, fontWeight: 500 }}
@@ -520,6 +521,7 @@ export default function AboutPage() {
               </SplitReveal>
               <SplitReveal
                 as="p"
+                className="page-subtitle-font"
                 stagger={0.045}
                 start="top 88%"
                 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#666", lineHeight: 1.9, margin: 0 }}
