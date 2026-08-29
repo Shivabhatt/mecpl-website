@@ -55,7 +55,7 @@ const allProjects = [
   { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: `${assetBase}assets/projects/Ramkrishna-Math.jpg` },
 ];
 
-const filters = ["All", "Residential", "Commercial", "Industrial", "Special"];
+const filters = ["All", "Residential", "Commercial", "Industrial"];
 
 const typeBadge: Record<string, string> = {
   Residential: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
@@ -122,7 +122,7 @@ export default function CompletedProjectsPage() {
       {/* Filters */}
       <div className="sticky top-20 z-30 bg-white border-b border-black/[0.06] py-4 md:py-5" data-testid="section-project-filters">
         <div className="mx-auto flex w-full max-w-7xl justify-center overflow-x-auto px-6 font-montserrat">
-          <div className="flex w-full min-w-[42rem] items-center justify-between gap-8 font-montserrat">
+          <div className="flex w-full min-w-[42rem] items-center justify-between gap-8 font-montserrat ml-[33px] mr-[33px]">
             {filters.map(f => (
               <button
                 key={f}
