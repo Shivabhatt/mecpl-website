@@ -434,14 +434,14 @@ function LeadershipDoorSlider() {
 
               {/* Card body */}
               <div style={{ padding: "24px 18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
-                <p style={{ fontFamily: MF, fontSize: "0.7rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.8, margin: "0 0 16px", flex: 1 }}>
+                <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.7rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.8, margin: "0 0 16px", flex: 1 }}>
                   {leader.desc.length > 110 ? leader.desc.substring(0, 110) + "…" : leader.desc}
                 </p>
                 <div>
-                  <div style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.78rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 3 }}>
+                  <div className="page-title-font" style={{ fontFamily: MF, fontWeight: 900, fontSize: "0.78rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 3 }}>
                     {leader.name}
                   </div>
-                  <div style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.5rem", color: "rgba(255,255,255,0.75)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  <div className="page-subtitle-font" style={{ fontFamily: MF, fontWeight: 600, fontSize: "0.5rem", color: "rgba(255,255,255,0.75)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
                     {leader.role}
                   </div>
                 </div>
