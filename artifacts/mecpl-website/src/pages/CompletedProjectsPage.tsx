@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "wouter";
 import { MapPin, ArrowUpRight } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
 
@@ -105,13 +104,6 @@ export default function CompletedProjectsPage() {
               </div>
             ))}
           </div>
-          <Link
-            href="#project-grid"
-            className="group mt-9 inline-flex items-center gap-3 border border-[#d5a51b] px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-[#d5a51b] hover:text-[#111827]"
-          >
-            Explore Projects
-            <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
         </div>
       </div>
 
@@ -134,7 +126,7 @@ export default function CompletedProjectsPage() {
       </div>
 
       {/* Projects Grid */}
-      <section id="project-grid" className="max-w-7xl mx-auto px-6 py-14" data-testid="section-projects-grid">
+      <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-projects-grid">
         <p className="text-[#6b7280] text-xs uppercase tracking-widest font-bold mb-6">
           Showing {filtered.length} projects{active !== "All" ? ` · ${active}` : ""}
         </p>
