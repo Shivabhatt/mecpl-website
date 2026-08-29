@@ -17,7 +17,7 @@ export default function BlogPage() {
   const archivePosts = blogPosts;
 
   return (
-    <div data-animate-page className="bg-white min-h-screen font-montserrat font-medium text-[#111827]">
+    <div data-animate-page className="blog-page bg-white min-h-screen font-montserrat font-medium text-[#111827]">
       {/* Empty State */}
       {blogPosts.length === 0 ? (
         <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-center min-h-[60vh] flex flex-col items-center justify-center">
@@ -42,7 +42,7 @@ export default function BlogPage() {
               <div className="font-montserrat font-medium text-white text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-6 animate-[heroSlideIn_1s_ease-out_0.2s_both]">
                 Latest MECPL Posts
               </div>
-              <h1 className="page-title-font font-montserrat font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
+              <h1 className="blog-hero-title page-title-font font-montserrat font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
                 MECPL Journal
               </h1>
               <p className="page-subtitle-font font-montserrat font-medium text-sm md:text-base text-white max-w-2xl leading-relaxed animate-[heroSlideIn_1s_ease-out_0.6s_both]">
