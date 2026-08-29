@@ -21,8 +21,8 @@ export default function BlogPage() {
       {/* Empty State */}
       {blogPosts.length === 0 ? (
         <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-center min-h-[60vh] flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-black uppercase tracking-tight mb-4">MECPL Field Journal</h1>
-          <p className="text-[#4b5563]">No articles published yet. Check back soon.</p>
+          <h1 className="page-title-font text-4xl mb-4">MECPL Field Journal</h1>
+          <p className="page-subtitle-font text-[#4b5563]">No articles published yet. Check back soon.</p>
         </div>
       ) : (
         <>
@@ -42,10 +42,10 @@ export default function BlogPage() {
               <div className="text-white text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] mb-6 animate-[heroSlideIn_1s_ease-out_0.2s_both]">
                 Latest MECPL Posts
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white uppercase tracking-[-0.04em] leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
+              <h1 className="page-title-font text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
                 MECPL Journal
               </h1>
-              <p className="text-sm md:text-base text-white max-w-2xl leading-relaxed font-medium animate-[heroSlideIn_1s_ease-out_0.6s_both]">
+              <p className="page-subtitle-font text-sm md:text-base text-white max-w-2xl leading-relaxed animate-[heroSlideIn_1s_ease-out_0.6s_both]">
                 Industry insight, project thinking, and practical knowledge from MECPL.
               </p>
             </div>
@@ -97,13 +97,13 @@ export default function BlogPage() {
 
                             {/* Content */}
                             <div className="flex-1 flex flex-col pt-1">
-                              <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-[#111827] mb-2 group-hover:text-[#C41E3A] transition-colors duration-300 leading-[1.15]">
+                              <h3 className="page-title-font text-xl md:text-2xl text-[#111827] mb-2 group-hover:text-[#C41E3A] transition-colors duration-300 leading-[1.15]">
                                 {post.title}
                               </h3>
                               <div className="text-[10px] md:text-[11px] font-bold text-[#9ca3af] tracking-[0.15em] uppercase mb-5">
                                 {post.category}
                               </div>
-                              <p className="text-[#6b7280] text-sm leading-relaxed mb-6 line-clamp-3">
+                              <p className="page-subtitle-font text-[#6b7280] text-sm leading-relaxed mb-6 line-clamp-3">
                                 {post.deck}
                               </p>
                               <div className="self-end inline-flex items-center gap-3 text-[#111827] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] group-hover:text-[#C41E3A] transition-colors duration-300 mt-auto">
@@ -127,7 +127,7 @@ export default function BlogPage() {
           {/* Enterprise Trust CTA */}
           <section className="bg-[#C41E3A] min-h-[267px] md:h-[267px] py-14 md:py-0 relative overflow-hidden flex items-center">
             <div className="max-w-[900px] w-full mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-              <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-[-0.06em] text-white mb-8 leading-[0.95]">
+              <h2 className="page-title-font text-4xl sm:text-5xl text-white mb-8 leading-[0.95]">
                 Beyond the Journal
               </h2>
               <Link

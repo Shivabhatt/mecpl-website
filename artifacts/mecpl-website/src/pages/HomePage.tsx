@@ -473,7 +473,7 @@ export default function HomePage() {
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
-            <h1 className="hp-banner-title" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+            <h1 className="hp-banner-title page-title-font" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
                 <div key={i} className="hp-banner-line" style={{
                   fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
@@ -486,7 +486,7 @@ export default function HomePage() {
             </h1>
 
             {/* Per-slide subtitle */}
-            <p key={`sub-${videoIdx}`} style={{
+            <p className="page-subtitle-font" key={`sub-${videoIdx}`} style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
               fontWeight: 300, color: "rgba(255,255,255,0.65)",
               lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
@@ -932,7 +932,7 @@ export default function HomePage() {
               }}>
                 Why Choose MECPL
               </h3>
-              <p style={{
+              <p className="page-subtitle-font" style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
                 lineHeight: 1.75, color: "#6b7280", margin: 0, maxWidth: "400px",
               }}>
@@ -1157,7 +1157,7 @@ export default function HomePage() {
            }}>
             Trusted Partners
           </h3>
-          <p style={{
+          <p className="page-subtitle-font" style={{
             maxWidth: "620px",
             margin: "14px auto 0",
              color: "rgba(255,255,255,0.82)",

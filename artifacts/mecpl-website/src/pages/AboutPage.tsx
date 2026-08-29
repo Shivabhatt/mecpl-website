@@ -142,7 +142,7 @@ function AlternatingSection() {
             }}>
               {row.label}
             </span>
-            <h2 style={{
+            <h2 className="page-title-font" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontWeight: 900,
               fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
@@ -156,7 +156,7 @@ function AlternatingSection() {
               {row.heading}
             </h2>
             <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 20 }} />
-            <p style={{
+            <p className="page-subtitle-font" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontSize: "0.9rem",
               color: "rgba(255,255,255,0.82)",
@@ -389,10 +389,10 @@ function LeadershipDoorSlider() {
           <span style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             Our Team
           </span>
-          <h2 style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
+          <h2 className="page-title-font" style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             Meet The Founders of MECPL
           </h2>
-          <p style={{ fontFamily: MF, fontSize: "0.8rem", color: "#555", lineHeight: 1.85, margin: "0 0 28px" }}>
+          <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.8rem", color: "#555", lineHeight: 1.85, margin: "0 0 28px" }}>
             The visionaries who built Pune's skyline — four decades of engineering excellence, guided by an uncompromising commitment to quality.
           </p>
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
@@ -474,7 +474,7 @@ export default function AboutPage() {
           <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
             About MECPL
           </span>
-          <h1 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
+          <h1 className="page-title-font" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
             Our Story
           </h1>
         </div>
@@ -493,6 +493,7 @@ export default function AboutPage() {
           <div style={{ textAlign: "center", paddingBottom: 64 }}>
             <SplitReveal
               as="h2"
+              className="page-title-font"
               stagger={0.06}
               start="top 85%"
               style={{
@@ -590,7 +591,7 @@ export default function AboutPage() {
             <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
               Trusted By
             </span>
-            <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
+            <h2 className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               Leading Brands &amp; Developers
             </h2>
           </div>
@@ -629,7 +630,7 @@ export default function AboutPage() {
         overflow: "hidden",
       }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <h2 style={{
+          <h2 className="page-title-font" style={{
             fontFamily: "'Montserrat',sans-serif",
             fontWeight: 900,
             fontSize: "clamp(2rem, 4.5vw, 3.2rem)",

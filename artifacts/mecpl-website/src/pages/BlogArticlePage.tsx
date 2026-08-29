@@ -11,7 +11,7 @@ export default function BlogArticlePage() {
     return (
       <div className="bg-white pt-28 px-6 min-h-screen text-[#111827]">
         <div className="max-w-4xl mx-auto">
-          <h3 className="text-4xl font-black uppercase">Article not found</h3>
+          <h3 className="page-title-font text-4xl">Article not found</h3>
           <Link href="/blog" className="inline-flex mt-6 text-[#C41E3A] font-black uppercase tracking-widest text-xs">
             Back to blog
           </Link>
@@ -29,8 +29,8 @@ export default function BlogArticlePage() {
           </Link>
 
           <div className="blog-article-heading">
-            <h1 className="text-[38px]">{post.title}</h1>
-            <p>{post.deck}</p>
+            <h1 className="page-title-font text-[38px]">{post.title}</h1>
+            <p className="page-subtitle-font">{post.deck}</p>
           </div>
         </div>
       </header>
@@ -48,7 +48,7 @@ export default function BlogArticlePage() {
             <section id={`article-section-${index}`} key={section.heading} className="blog-article-section">
               <div className="blog-article-section-number">{String(index + 1).padStart(2, "0")}</div>
               <div>
-                <h2>{section.heading}</h2>
+                <h2 className="page-title-font">{section.heading}</h2>
                 <div className="blog-article-copy">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>

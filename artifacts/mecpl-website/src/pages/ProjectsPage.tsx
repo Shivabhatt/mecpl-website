@@ -29,7 +29,7 @@ export default function ProjectsPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-black/5" />
             <div className="absolute inset-x-8 bottom-10 md:inset-x-14 md:bottom-14">
-              <h2 className="max-w-[480px] text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white sm:text-5xl md:text-6xl">
+              <h2 className="page-title-font max-w-[480px] text-4xl leading-[0.92] text-white sm:text-5xl md:text-6xl">
                 Let&apos;s Build
                 <br />
                 Together
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
             <span className="mb-4 text-[9px] font-semibold uppercase tracking-[0.24em] text-[#6b7280]">
               Let&apos;s Talk
             </span>
-            <h3 className="text-2xl font-black uppercase leading-[1.05] tracking-[-0.04em] text-[#111827] sm:text-3xl">
+            <h3 className="page-title-font text-2xl leading-[1.05] text-[#111827] sm:text-3xl">
               Need to Reach Us?
             </h3>
             <Link
