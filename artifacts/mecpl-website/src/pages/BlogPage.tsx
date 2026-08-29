@@ -131,18 +131,31 @@ export default function BlogPage() {
           </section>
 
           {/* Enterprise Trust CTA */}
-          <section className="bg-[#C41E3A] min-h-[126px] h-[126px] py-0 relative overflow-hidden flex items-center">
-            <div className="max-w-[900px] w-full mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-              <h2 className="page-title-font font-montserrat font-medium text-4xl sm:text-5xl text-white mb-8 leading-[0.95]">
-                Beyond the Journal
+          <section className="cta-section bg-[#C41E3A] relative overflow-hidden flex items-center" style={{ padding: "36px 40px", minHeight: "167.2px" }}>
+            <div className="max-w-[900px] w-full mx-auto relative z-10 flex flex-col items-center text-center">
+              <h2 className="page-title-font font-montserrat font-medium" style={{
+                fontWeight: 900,
+                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                color: "#ffffff",
+                textTransform: "uppercase",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                margin: "0 0 18px",
+              }}>
+                TRUSTED BY 100+ ENTERPRISE CLIENTS
               </h2>
-              <Link
-                href="/about"
-                className="group font-montserrat font-medium inline-flex items-center justify-center gap-3 min-w-[174px] bg-white border border-white text-[#C41E3A] px-7 py-4 text-[10px] tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#111827] hover:border-[#111827] hover:text-white"
-              >
-                <span className="font-montserrat font-medium">About Us</span>
-                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <div className="flex items-center justify-center gap-4 flex-wrap">
+                <Link href="/contact">
+                  <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white text-[#C41E3A] bg-white px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-[#111827] hover:border-[#111827] hover:text-white">
+                    Contact MECPL <ArrowRight size={12} />
+                  </span>
+                </Link>
+                <Link href="/projects">
+                  <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white/70 text-white bg-transparent px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-white hover:border-white hover:text-[#C41E3A]">
+                    View Projects <ArrowRight size={12} />
+                  </span>
+                </Link>
+              </div>
             </div>
           </section>
         </>
