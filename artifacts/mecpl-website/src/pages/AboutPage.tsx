@@ -560,13 +560,13 @@ export default function AboutPage() {
           <RevealBlock delay={180}>
             <div className="abt-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
               {stats.map((s, i) => (
-                <div key={s.label} style={{
+                <div key={s.label} className="abt-stat-item font-montserrat" style={{
                   padding: "44px 32px",
                   borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
                   textAlign: "center",
                 }}>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#C41E3A", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase" }}>{s.label}</div>
+                  <div className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#C41E3A", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
+                  <div className="page-subtitle-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: "0.6rem", letterSpacing: "0.2em", color: "#888", textTransform: "uppercase" }}>{s.label}</div>
                 </div>
               ))}
             </div>
