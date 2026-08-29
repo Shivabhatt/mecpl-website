@@ -584,7 +584,7 @@ export default function HomePage() {
             {/* Left: editorial */}
             <div>
               <div className="about-fade" style={{ marginBottom: "36px" }}>
-                <span style={{
+                <span className="home-section-label font-montserrat" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
                   letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
                   display: "block", marginBottom: "10px",
@@ -681,7 +681,7 @@ export default function HomePage() {
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 0" }}
       >
         <div style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
-          <span style={{
+          <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
             display: "block", marginBottom: "10px",
@@ -757,7 +757,7 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-10">
           <div style={{ marginBottom: "56px", textAlign: "center" }}>
-            <span style={{
+            <span className="home-section-label font-montserrat" style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
               letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
               display: "block", marginBottom: "10px",
@@ -817,7 +817,7 @@ export default function HomePage() {
       >
         {/* Header row */}
         <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
-          <span style={{
+          <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
             display: "block", marginBottom: "10px",
@@ -891,7 +891,7 @@ export default function HomePage() {
         <div style={{ padding: "48px 48px 64px", textAlign: "center" }}>
           <Link href="/completed-projects" data-testid="button-all-projects">
             <span
-              className="font-montserrat inline-flex items-center gap-2 cursor-pointer"
+              className="home-section-cta font-montserrat inline-flex items-center gap-2 cursor-pointer"
               style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                 letterSpacing: "0.2em", color: "#C41E3A",
@@ -920,7 +920,7 @@ export default function HomePage() {
           }}>
             {/* Label + heading + intro */}
             <div style={{ marginBottom: "36px" }}>
-              <span style={{
+              <span className="home-section-label font-montserrat" style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
                 letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
                 display: "block", marginBottom: "10px",
@@ -980,7 +980,7 @@ export default function HomePage() {
                       <span style={{
                         color: activeWhy === i ? "#fff" : "#9ca3af",
                         fontSize: "15px", lineHeight: 1, marginTop: "-1px",
-                        fontFamily: "monospace",
+                        fontFamily: "'Montserrat',sans-serif",
                       }}>
                         {activeWhy === i ? "−" : "+"}
                       </span>
@@ -1042,7 +1042,7 @@ export default function HomePage() {
       >
         {/* Heading */}
         <div style={{ padding: "0 40px", marginBottom: "60px", textAlign: "center" }}>
-          <span style={{
+          <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
             display: "block", marginBottom: "10px",
@@ -1144,7 +1144,7 @@ export default function HomePage() {
       >
         {/* Heading */}
          <div style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
-          <span style={{
+          <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
              letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "uppercase",
             display: "block", marginBottom: "10px",

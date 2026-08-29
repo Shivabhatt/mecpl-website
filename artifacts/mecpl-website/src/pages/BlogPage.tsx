@@ -17,7 +17,7 @@ export default function BlogPage() {
   const archivePosts = blogPosts;
 
   return (
-    <div data-animate-page className="bg-white min-h-screen font-sans text-[#111827]">
+    <div data-animate-page className="bg-white min-h-screen font-montserrat text-[#111827]">
       {/* Empty State */}
       {blogPosts.length === 0 ? (
         <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-center min-h-[60vh] flex flex-col items-center justify-center">
