@@ -42,8 +42,14 @@ export default function BlogPage() {
               <div className="font-montserrat font-medium text-white text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-6 animate-[heroSlideIn_1s_ease-out_0.2s_both]">
                 Latest MECPL Posts
               </div>
-              <h1 className="blog-hero-title page-title-font font-montserrat font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] mb-6 max-w-4xl animate-[heroSlideIn_1s_ease-out_0.4s_both]">
-                MECPL Journal
+              <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+                <div className="hp-banner-line" style={{
+                  fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
+                  lineHeight: 1.15, color: "#ffffff",
+                  whiteSpace: "nowrap",
+                }}>
+                  MECPL JOURNAL
+                </div>
               </h1>
               <p className="page-subtitle-font font-montserrat font-medium text-sm md:text-base text-white max-w-2xl leading-relaxed animate-[heroSlideIn_1s_ease-out_0.6s_both]">
                 Industry insight, project thinking, and practical knowledge from MECPL.
