@@ -713,6 +713,19 @@ html[data-theme="light"] select {
 
 /* ══════════ ABOUT PAGE RESPONSIVE ══════════ */
 
+.abt-cta-section {
+  padding: 36px 40px !important;
+}
+
+.abt-cta-section h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem) !important;
+  margin-bottom: 18px !important;
+}
+
+.abt-cta-section a > span {
+  padding: 10px 24px !important;
+}
+
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
   .abt-leadership-section { padding: 72px 32px !important; }
@@ -725,7 +738,7 @@ html[data-theme="light"] select {
   .abt-video-grid         { grid-template-columns: 1fr 1fr !important; grid-template-rows: 180px 180px 180px !important; }
   .abt-video-grid > div:nth-child(3) { grid-row: auto !important; }
   .abt-alt-text           { padding: 40px 48px !important; }
-  .abt-cta-section        { padding: 60px 28px !important; }
+  .abt-cta-section        { padding: 30px 28px !important; }
 }
 
 /* ── Scatter + alt-card scroll-distance reduction on mobile ── */
@@ -745,7 +758,7 @@ html[data-theme="light"] select {
   .abt-video-grid         { grid-template-columns: 1fr !important; grid-template-rows: 200px 200px 200px 200px 200px !important; }
   .abt-video-grid > div:nth-child(3) { grid-row: auto !important; }
   .abt-alt-text           { padding: 32px 24px !important; }
-  .abt-cta-section        { padding: 48px 20px !important; }
+  .abt-cta-section        { padding: 24px 20px !important; }
   /* AlternatingSection cards — reduce height on mobile */
   #abt3 ~ div > div,
   [id^="abt"] ~ div > div { height: auto !important; min-height: 70vh; }
