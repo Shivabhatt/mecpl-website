@@ -472,8 +472,14 @@ export default function AboutPage() {
           <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.35em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", display: "block", marginBottom: 20 }}>
             ABOUT MECPL
           </span>
-          <h1 className="page-title-font font-montserrat about-hero-title" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 300, fontSize: "clamp(1.6rem, 4vw, 3.2rem)", color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 0.95, margin: 0, textTransform: "uppercase" }}>
-            OUR STORY
+          <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+            <div className="hp-banner-line" style={{
+              fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
+              lineHeight: 1.15, color: "#ffffff",
+              whiteSpace: "nowrap",
+            }}>
+              OUR STORY
+            </div>
           </h1>
         </div>
         {/* Scroll cue */}
