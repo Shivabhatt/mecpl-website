@@ -583,10 +583,10 @@ export default function HomePage() {
               <div className="about-fade" style={{ marginBottom: "36px" }}>
                 <span className="home-section-label font-montserrat" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                  letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                  letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
-                  ABOUT MECPL
+                  About MECPL
                 </span>
                 <h3 className="hp-section-title font-montserrat" style={{
                   margin: "0 0 20px",
@@ -642,7 +642,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                       letterSpacing: "0.2em", color: "#C41E3A",
-                      textTransform: "uppercase", fontWeight: 600,
+                      textTransform: "none", fontWeight: 600,
                     }}
                   >
                     Our Full Story <ArrowRight size={12} />
@@ -679,10 +679,10 @@ export default function HomePage() {
         <div style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            RECOGNITION
+            Recognition
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
@@ -754,10 +754,10 @@ export default function HomePage() {
           <div style={{ marginBottom: "56px", textAlign: "center" }}>
             <span className="home-section-label font-montserrat" style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
               display: "block", marginBottom: "10px",
             }}>
-              WHAT WE BUILD
+              What We Build
             </span>
             <h3 className="hp-section-title font-montserrat" style={{
               margin: 0,
@@ -813,7 +813,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                 letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
             display: "block", marginBottom: "10px",
           }}>
             OUR PROJECTS
@@ -892,7 +892,7 @@ export default function HomePage() {
               style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                 letterSpacing: "0.2em", color: "#C41E3A",
-                textTransform: "uppercase", fontWeight: 600,
+                textTransform: "none", fontWeight: 600,
                 borderBottom: "1px solid rgba(196,30,58,0.3)", paddingBottom: "5px",
               }}
             >
@@ -918,10 +918,10 @@ export default function HomePage() {
             <div style={{ marginBottom: "36px" }}>
               <span className="home-section-label font-montserrat" style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+                letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
                 display: "block", marginBottom: "10px",
               }}>
-                OUR ADVANTAGE
+                Our Advantage
               </span>
               <h3 className="hp-section-title font-montserrat" style={{
                 margin: "0 0 16px",
@@ -1039,10 +1039,10 @@ export default function HomePage() {
         <div style={{ padding: "0 40px", marginBottom: "60px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "uppercase",
+            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            CLIENT VOICES
+            Client Voices
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
@@ -1140,10 +1140,10 @@ export default function HomePage() {
          <div style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-             letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "uppercase",
+              letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            OUR CLIENTS
+            Our Clients
           </span>
            <h3 className="hp-section-title font-montserrat" style={{
              margin: 0,
