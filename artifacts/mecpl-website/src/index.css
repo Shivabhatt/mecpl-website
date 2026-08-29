@@ -738,6 +738,12 @@ html[data-theme="light"] select {
   padding: 10px 24px !important;
 }
 
+@media (min-width: 1025px) {
+  .abt-cta-section h2 {
+    white-space: nowrap !important;
+  }
+}
+
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
   .abt-leadership-section { padding: 72px 32px !important; }

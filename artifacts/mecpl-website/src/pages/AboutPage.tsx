@@ -642,7 +642,7 @@ export default function AboutPage() {
             lineHeight: 1.1,
             margin: "0 0 36px",
           }}>
-            Trusted By 100+<br />Enterprise Clients
+            Trusted By 100+ Enterprise Clients
           </h2>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link href="/contact">
