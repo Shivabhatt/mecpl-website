@@ -8,8 +8,8 @@ const logoAsset = "/assets/logo/mecpl-logo.webp";
 const navLinks = [
   { label: "Home",     path: "/" },
   { label: "About Us", path: "/about" },
-  { label: "Blog",     path: "/blog" },
   { label: "Projects", path: "/projects" },
+  { label: "Blog",     path: "/blog" },
   { label: "Awards",   path: "/awards" },
   { label: "Careers",  path: "/careers" },
 ];
