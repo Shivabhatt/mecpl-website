@@ -80,12 +80,12 @@ export default function CompletedProjectsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
         <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
-          <span className="about-label-font font-montserrat font-medium text-[#ffff]" style={{
+          <span className="about-label-font font-montserrat font-medium" style={{
             fontFamily: "'Montserrat', sans-serif",
             fontSize: "0.62rem",
             fontWeight: 700,
             letterSpacing: "0.35em",
-            color: "#d5a51b",
+            color: "#ffffff",
             textTransform: "uppercase",
             display: "block",
             marginBottom: 20,
@@ -99,15 +99,7 @@ export default function CompletedProjectsPage() {
               color: "#ffffff",
               whiteSpace: "nowrap",
             }}>
-              BUILDING LANDMARKS.
-            </div>
-            <div className="hp-banner-line" style={{
-              fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
-              lineHeight: 1.15,
-              color: "#ffffff",
-              whiteSpace: "nowrap",
-            }}>
-              TRANSFORMING TOMORROW<span className="text-[#d5a51b]">.</span>
+              BUILT FOR TOMORROW.
             </div>
           </h1>
           <p className="mt-0 max-w-2xl font-montserrat font-medium text-sm leading-relaxed text-white/75 md:text-base">
