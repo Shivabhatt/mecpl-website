@@ -404,7 +404,6 @@ export default function HomePage() {
   /* ─── JSX ────────────────────────────────────────────────────── */
   return (
     <div className="home-page-typography" style={{ background: "#ffffff", color: "#111827" }}>
-
       {/* ══════════ 1. HERO — Cinematic centered ══════════ */}
       <section
         ref={heroSectionRef}
@@ -531,7 +530,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 2. STATS STRIP ══════════ */}
       <section
         ref={statsRef}
@@ -559,7 +557,7 @@ export default function HomePage() {
                     0
                   </span>
                 </div>
-                <div className="home-stat-label font-montserrat font-medium" style={{
+                <div className="home-stat-label font-montserrat font-medium text-[13px]" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
                   fontWeight: 600, letterSpacing: "0.18em",
                   textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
@@ -571,7 +569,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 3. ABOUT — Storytelling ══════════ */}
       <section
         ref={aboutRef}
@@ -673,7 +670,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 4. CERTIFICATIONS ══════════ */}
       <section
         ref={certSectionRef}
@@ -748,7 +744,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 4. SERVICES — Light bg hover-card grid ══════════ */}
       <section
         ref={servicesRef}
@@ -809,7 +804,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 5. PROJECTS — Horizontal carousel ══════════ */}
       <section
         data-testid="section-projects"
@@ -851,13 +845,16 @@ export default function HomePage() {
                   }}>
                     {String((i % projects.length) + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                   </div>
-                  <div style={{
-                    fontFamily: "'Montserrat',sans-serif",
-                    fontSize: "1.25rem", fontWeight: 800,
-                    color: "#111827",
-                    lineHeight: 1.15, textTransform: "uppercase",
-                    letterSpacing: "-0.01em", marginBottom: "10px",
-                  }}>
+                  <div
+                    className="project-card-title font-montserrat font-semibold"
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif",
+                      fontSize: "1.25rem", fontWeight: 600,
+                      color: "#111827",
+                      lineHeight: 1.15, textTransform: "uppercase",
+                      letterSpacing: "-0.01em", marginBottom: "10px",
+                    }}
+                  >
                     {proj.name}
                   </div>
                   <div style={{
@@ -904,7 +901,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
       {/* ══════════ 6. WHY CHOOSE — Accordion + Image ══════════ */}
       <section
         ref={whyRef}
@@ -1033,7 +1029,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ══════════ 7. TESTIMONIALS ══════════ */}
       <section
         ref={testimonialsRef}
@@ -1128,7 +1123,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
       {/* ══════════ 8. CLIENTS ══════════ */}
       <section
         ref={clientsRef}
@@ -1190,7 +1184,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );
