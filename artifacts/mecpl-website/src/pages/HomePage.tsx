@@ -957,10 +957,10 @@ export default function HomePage() {
                       }}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="font-montserrat" style={{
+                      <span className="home-accordion-title font-montserrat" style={{
                         fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700,
                         color: activeWhy === i ? "#111827" : "rgba(17,24,39,0.45)",
-                        textTransform: "none", letterSpacing: "0.08em",
+                        textTransform: "uppercase", letterSpacing: "0.08em",
                         transition: "color 0.3s",
                       }}>
                         {item.title}
