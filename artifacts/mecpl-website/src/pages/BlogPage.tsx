@@ -63,7 +63,7 @@ export default function BlogPage() {
               {/* Editorial List */}
               {archivePosts.length > 0 ? (
                 <div className="flex flex-col">
-                  {archivePosts.map((post) => {
+                  {archivePosts.map((post, index) => {
                     const date = parseDate(post.publishedDate);
                     return (
                       <div key={post.slug} className="group border-b border-black/10 last:border-b-0 pb-12 mb-12 last:pb-0 last:mb-0">
@@ -84,7 +84,11 @@ export default function BlogPage() {
                             </div>
 
                             {/* Thumbnail */}
-                            <div className="w-full md:w-[300px] lg:w-[380px] shrink-0 overflow-hidden bg-[#f9f9f9] aspect-[16/10] relative">
+                            <div
+                              className="w-full md:w-[300px] lg:w-[380px] shrink-0 overflow-hidden bg-[#f9f9f9] aspect-[16/10] relative"
+                              data-scroll-reveal="image"
+                              data-scroll-reveal-delay={String((index % 4) * 70)}
+                            >
                               {/* Mobile Date Overlay */}
                               <div className="md:hidden absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-2 z-10 flex flex-col items-center shadow-sm">
                                 <span className="font-montserrat font-medium text-[9px] text-[#6b7280] tracking-[0.15em] uppercase leading-none mb-1">
@@ -102,7 +106,11 @@ export default function BlogPage() {
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1 flex flex-col pt-1">
+                            <div
+                              className="flex-1 flex flex-col pt-1"
+                              data-scroll-reveal="text"
+                              data-scroll-reveal-delay={String(80 + (index % 4) * 70)}
+                            >
                               <h3 className="page-title-font font-montserrat font-medium text-xl md:text-2xl text-[#111827] mb-2 group-hover:text-[#C41E3A] transition-colors duration-300 leading-[1.15]">
                                 {post.title}
                               </h3>
@@ -132,7 +140,7 @@ export default function BlogPage() {
 
           {/* Enterprise Trust CTA */}
           <section className="cta-section bg-[#C41E3A] relative overflow-hidden flex items-center" style={{ padding: "36px 40px", minHeight: "167.2px" }}>
-            <div className="max-w-[900px] w-full mx-auto relative z-10 flex flex-col items-center text-center">
+            <div className="max-w-[900px] w-full mx-auto relative z-10 flex flex-col items-center text-center" data-scroll-reveal="text">
               <h2 className="page-title-font font-montserrat font-medium" style={{
                 fontWeight: 900,
                 fontSize: "clamp(1.35rem, 2.5vw, 2rem)",

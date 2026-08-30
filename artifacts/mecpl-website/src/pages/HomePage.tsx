@@ -541,6 +541,8 @@ export default function HomePage() {
             {stats.map((s, i) => (
               <div
                 key={i}
+                data-scroll-reveal="text"
+                data-scroll-reveal-delay={String(i * 70)}
                 style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
               >
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
@@ -676,7 +678,7 @@ export default function HomePage() {
         data-testid="section-certifications"
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 0" }}
       >
-        <div style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
+        <div data-scroll-reveal="text" style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
             letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
@@ -702,6 +704,8 @@ export default function HomePage() {
             ].map((cert, i) => (
               <div
                 key={i}
+                data-scroll-reveal="image"
+                data-scroll-reveal-delay={String(i * 90)}
                 style={{
                   background: "#ffffff",
                   border: "1px solid rgba(0,0,0,0.08)",
@@ -810,7 +814,7 @@ export default function HomePage() {
         style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
-        <div className="max-w-7xl mx-auto" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
+        <div className="max-w-7xl mx-auto" data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
                  letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
@@ -885,7 +889,7 @@ export default function HomePage() {
         </div>
 
         {/* View all CTA */}
-        <div style={{ padding: "48px 48px 64px", textAlign: "center" }}>
+        <div data-scroll-reveal="text" style={{ padding: "48px 48px 64px", textAlign: "center" }}>
           <Link href="/completed-projects" data-testid="button-all-projects">
             <span
               className="home-section-cta font-montserrat inline-flex items-center gap-2 cursor-pointer"
@@ -1012,7 +1016,7 @@ export default function HomePage() {
           </div>
 
           {/* RIGHT: crossfading image */}
-          <div style={{ position: "relative", overflow: "hidden" }}>
+          <div data-scroll-reveal="image" style={{ position: "relative", overflow: "hidden" }}>
             {whyChoose.map((item, i) => (
               <div key={i} style={{
                 position: "absolute", inset: 0,
@@ -1052,7 +1056,7 @@ export default function HomePage() {
         </div>
 
         {/* Masonry collage */}
-        <div style={{ overflow: "hidden", marginBottom: "64px", padding: "0 32px" }}>
+        <div data-scroll-reveal="image" style={{ overflow: "hidden", marginBottom: "64px", padding: "0 32px" }}>
           <div style={{ display: "flex", gap: "10px" }}>
             {masonryCols.map((col, ci) => (
               <div key={ci} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -1137,7 +1141,7 @@ export default function HomePage() {
         }}
       >
         {/* Heading */}
-         <div style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
+         <div data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
               letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "none",

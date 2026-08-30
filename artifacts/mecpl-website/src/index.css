@@ -295,6 +295,31 @@ html[data-theme="light"] {
 .hp-word { overflow: hidden; display: inline-block; vertical-align: bottom; }
 .hp-char { display: inline-block; }
 
+/* ── Shared editorial scroll reveals ── */
+[data-scroll-reveal] {
+  will-change: transform, opacity;
+}
+[data-scroll-reveal="image"] {
+  will-change: transform, opacity, clip-path;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .reveal-block,
+  [style*="heroSlideIn"],
+  [class*="heroSlideIn"] {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ── Service Rows ── */
 .svc-img-wrap { overflow: hidden; }
 .svc-img { transition: none; }

@@ -60,6 +60,11 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>, options?: Int
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+      return;
+    }
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         el.style.opacity = "1";
@@ -116,6 +121,8 @@ function AlternatingSection() {
           <img
             src={row.beforeImg}
             alt={row.label}
+            data-scroll-reveal="image"
+            data-scroll-reveal-delay={String(i * 80)}
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
 
@@ -127,7 +134,7 @@ function AlternatingSection() {
           }} />
 
           {/* Text — centered */}
-          <div className="abt-alt-text" style={{
+          <div className="abt-alt-text" data-scroll-reveal="text" data-scroll-reveal-delay={String(i * 80)} style={{
             position: "absolute", inset: 0,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
             textAlign: "center",
@@ -205,6 +212,14 @@ function WordScatterSection() {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      wordsRef.current.forEach((el) => {
+        if (!el) return;
+        el.style.transform = "translate(0px,0px) scale(1)";
+        el.style.opacity = "1";
+      });
+      return;
+    }
 
     const update = () => {
       const rect = section.getBoundingClientRect();
@@ -304,6 +319,7 @@ function SplitReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let split: any = null;
     let cancelled = false;
 
@@ -348,7 +364,7 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
   return (
     <div
       ref={ref}
-      className={className}
+      className={`reveal-block ${className}`.trim()}
       style={{
         opacity: 0,
         transform: "translateY(48px)",
@@ -373,7 +389,7 @@ function LeadershipDoorSlider() {
       <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px 1fr", gap: 72, alignItems: "center" }}>
 
         {/* Left: text block */}
-        <div>
+        <div data-scroll-reveal="text">
           {/* Large quote mark */}
           <div style={{
             width: 56, height: 56, borderRadius: "50%",
@@ -402,6 +418,8 @@ function LeadershipDoorSlider() {
           {leaders.map((leader, i) => (
             <div
               key={i}
+              data-scroll-reveal="image"
+              data-scroll-reveal-delay={String(i * 90)}
               style={{
                 background: "#C41E3A",
                 borderRadius: 6,
@@ -628,7 +646,7 @@ export default function AboutPage() {
         position: "relative",
         overflow: "hidden",
       }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+         <div data-scroll-reveal="text" style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <h2 className="page-title-font font-montserrat font-medium" style={{
             fontFamily: "'Montserrat',sans-serif",
             fontWeight: 900,

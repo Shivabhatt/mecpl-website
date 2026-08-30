@@ -106,9 +106,10 @@ export default function CompletedProjectsPage() {
   const filtered = active === "All" ? allProjects : allProjects.filter(p => p.type === active);
 
   useEffect(() => {
-    if (window.location.hash !== "#projects-grid") return;
+    const targetId = window.location.hash.slice(1);
+    if (!["projects-grid", "architecture-approach"].includes(targetId)) return;
     const frame = window.requestAnimationFrame(() => {
-      document.getElementById("projects-grid")?.scrollIntoView({ block: "start" });
+      document.getElementById(targetId)?.scrollIntoView({ block: "start" });
     });
     return () => window.cancelAnimationFrame(frame);
   }, []);
@@ -164,12 +165,13 @@ export default function CompletedProjectsPage() {
           </div>
         </div>
       </div>
-      <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
-        <p className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
-          Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
-          Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
-        </p>
-      </section>
+       <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
+         <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
+           Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
+           Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
+         </p>
+       </section>
+      <ArchitectureApproach />
       <ProjectExplorer />
       {/* Projects Grid */}
       <section id="projects-grid" className="scroll-mt-20 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
@@ -200,6 +202,42 @@ export default function CompletedProjectsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+function ArchitectureApproach() {
+  return (
+    <section id="architecture-approach" className="scroll-mt-20 bg-white px-6 py-16 md:px-10 md:py-24" data-testid="section-architecture-approach">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:gap-20">
+         <div className="font-montserrat lg:pl-10" data-scroll-reveal="text">
+          <h2 className="max-w-lg text-[30px] font-medium tracking-[-0.045em] text-[#C41E3A]">
+            Architecture
+          </h2>
+          <div className="mt-8 max-w-md space-y-4 text-sm leading-[1.8] text-[#6f6f69]">
+            <p>
+              We believe architecture should feel considered from the first line on paper to the final detail on site.
+            </p>
+            <p>
+              Our approach brings together clear structure, honest materials, and the everyday experience of the people
+              who inhabit each space.
+            </p>
+          </div>
+          <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a948b]">
+            Form, function, and enduring value
+          </p>
+        </div>
+
+         <div className="relative mx-auto w-full max-w-[20rem] overflow-hidden bg-[#e6e3dd] lg:mx-0 lg:justify-self-center" data-scroll-reveal="image">
+          <img
+            src={`${assetBase}assets/projects/Godrej-Emerald-Waters.jpg`}
+            className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+            alt="Contemporary residential architecture with landscaped surroundings"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -289,7 +327,7 @@ function ProjectExplorer() {
           </div>
 
           <div className="grid min-h-[42vh] bg-white lg:min-h-screen xl:grid-cols-[minmax(0,0.95fr)_minmax(280px,1.05fr)] xl:grid-rows-[auto_minmax(0,1fr)]">
-            <div className="px-6 pb-7 pt-10 font-montserrat sm:px-10 xl:col-span-2 xl:px-12 xl:pb-8 xl:pt-12">
+           <div className="px-6 pb-7 pt-10 font-montserrat sm:px-10 xl:col-span-2 xl:px-12 xl:pb-8 xl:pt-12" data-scroll-reveal="text">
               <h2 className="mt-3 max-w-2xl text-2xl font-medium uppercase leading-tight tracking-[-0.025em] text-primary sm:text-3xl">
                 Building with purpose.
               </h2>
@@ -299,7 +337,7 @@ function ProjectExplorer() {
               </p>
             </div>
 
-            <div className="relative min-h-[540px] cursor-pointer overflow-hidden bg-white xl:min-h-0">
+           <div className="relative min-h-[540px] cursor-pointer overflow-hidden bg-white xl:min-h-0" data-scroll-reveal="image">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_48%_57%,rgba(196,30,58,0.06),transparent_24%),linear-gradient(135deg,#ffffff_0%,#fffdf9_100%)]" />
             <svg
               viewBox="0 0 720 620"
@@ -380,7 +418,7 @@ function ProjectExplorer() {
               aria-live="polite"
               data-testid="project-map-detail-card"
             >
-              <div className="relative mb-5 h-96 shrink-0 overflow-hidden bg-[#eee8dd] sm:h-[28rem] xl:h-[56vh]">
+               <div className="relative mb-5 h-96 shrink-0 overflow-hidden bg-[#eee8dd] sm:h-[28rem] xl:h-[56vh]" data-scroll-reveal="image">
                 <img
                   src={selectedProject.image}
                   alt={`${selectedProject.name} project`}
@@ -457,10 +495,15 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
-          <div className="flex h-full flex-col justify-center bg-white px-3 py-5 sm:px-5">
-            <p className="mt-3 font-montserrat text-[#6f6f69] text-[15px]">
-              A {project.type.toLowerCase()} landmark in {project.location}, shaped with care.
-            </p>
+          <div className="relative overflow-hidden border-b-2 border-[#c9c9c3] bg-[#deded9]">
+            <img
+              src={project.image}
+              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+              style={{ objectPosition: "72% center" }}
+              alt={`${project.name} detail view`}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
         </div>
       </div>
