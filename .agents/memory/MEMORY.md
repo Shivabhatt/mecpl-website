@@ -4,3 +4,4 @@
 - [MECPL testimonials AutoSplit](mecpl-testimonials-autosplit.md) — GggpRoB pattern: SplitText.create with mask:"lines" + autoSplit:true; wait document.fonts.ready; cancelled flag for async cleanup.
 - [MECPL Projects wheel carousel](mecpl-projects-wheel.md) — orbital sin/cos wheel replaces h-scroll; wheel origin 80px below section bottom so only top arc shows through overflow:hidden.
 - [MECPL GitHub sync fallback](mecpl-github-sync.md) — if HTTPS credentials fail, publish an exact verified tree through the authorized GitHub connector without forcing main.
+- [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
