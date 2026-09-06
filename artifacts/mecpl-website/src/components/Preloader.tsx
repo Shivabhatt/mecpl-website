@@ -47,13 +47,13 @@ export default function Preloader() {
         style={{ height: "56px", width: "auto", objectFit: "contain", marginBottom: "44px" }}
       />
 
-      <div style={{ width: "160px", height: "1px", background: "rgba(17,24,39,0.09)", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "160px", height: "1px", background: "rgba(35,37,41,0.1)", position: "relative", overflow: "hidden" }}>
         <div
           ref={barRef}
           style={{
             position: "absolute", top: 0, left: 0,
             height: "100%", width: "100%",
-            background: "#C41E3A",
+            background: "#EC3338",
             transformOrigin: "left center",
             transform: "scaleX(0)",
           }}

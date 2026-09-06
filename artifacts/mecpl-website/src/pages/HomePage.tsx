@@ -51,21 +51,21 @@ const stats = [
 ];
 
 const services = [
-  { num: "01", title: "Civil Construction",   desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop" },
-  { num: "02", title: "Turnkey Projects",     desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",          image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" },
-  { num: "03", title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                       image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=800&auto=format&fit=crop" },
-  { num: "04", title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                  image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" },
-  { num: "05", title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" },
-  { num: "06", title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",               image: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=800&auto=format&fit=crop" },
+  { num: "01", title: "Civil Construction",   desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.", image: "assets/projects/GODREJ-INFINITY.jpg" },
+  { num: "02", title: "Turnkey Projects",     desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",          image: "assets/projects/Solitaire-Business-Hub-II.jpeg" },
+  { num: "03", title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                       image: "assets/projects/PRAJ-INDUSTRIES.png" },
+  { num: "04", title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                  image: "assets/projects/Trump-Tower.jpg" },
+  { num: "05", title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                     image: "assets/projects/Rejuve.jpg" },
+  { num: "06", title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",               image: "assets/projects/43PD-1-scaled.jpg" },
 ];
 
 const projects = [
-  { name: "Panchshil Highrise Towers", location: "Kharadi, Pune",       type: "Civil Structural Framework",       image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1920&auto=format&fit=crop" },
-  { name: "Trump Towers Pune",         location: "Kalyani Nagar, Pune", type: "Luxury Highrise · Civil Handover",  image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1920&auto=format&fit=crop" },
-  { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",             image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop" },
-  { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" },
-  { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",    image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=1920&auto=format&fit=crop" },
-  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",       image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1920&auto=format&fit=crop" },
+  { name: "Panchshil Highrise Towers", location: "Kharadi, Pune",       type: "Civil Structural Framework",       image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { name: "Trump Towers Pune",         location: "Kalyani Nagar, Pune", type: "Luxury Highrise · Civil Handover",  image: "assets/projects/Trump-Tower.jpg" },
+  { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",             image: "assets/projects/Godrej-Forest-grove.jpg" },
+  { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",                image: "assets/projects/VTP-scaled.jpg" },
+  { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",    image: "assets/projects/gera-songs-of-joy-01-large.png" },
+  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",       image: "assets/projects/PRAJ-INDUSTRIES.png" },
 ];
 
 const whyChoose: WhyCard[] = [
@@ -96,28 +96,28 @@ const clients = [
 
 const masonryCols = [
   [
-    { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=400&auto=format&fit=crop", h: 280 },
-    { src: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?q=80&w=400&auto=format&fit=crop", h: 200 },
+    { src: "assets/projects/GODREJ-INFINITY.jpg", h: 280 },
+    { src: "assets/projects/Emirus-scaled.jpg", h: 200 },
   ],
   [
-    { src: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=400&auto=format&fit=crop", h: 190 },
-    { src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop", h: 280 },
+    { src: "assets/projects/43PD-1-scaled.jpg", h: 190 },
+    { src: "assets/projects/HIGH-RISE-1-scaled.jpg", h: 280 },
   ],
   [
-    { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400&auto=format&fit=crop", h: 340 },
-    { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=400&auto=format&fit=crop", h: 150 },
+    { src: "assets/projects/TechPark.jpg", h: 340 },
+    { src: "assets/projects/Godrej-Emerald-Waters.jpg", h: 150 },
   ],
   [
-    { src: "https://images.unsplash.com/photo-1564182842519-8a3b2af3e228?q=80&w=400&auto=format&fit=crop", h: 220 },
-    { src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=400&auto=format&fit=crop", h: 265 },
+    { src: "assets/projects/Eonwest.jpg", h: 220 },
+    { src: "assets/projects/Trump-Tower.jpg", h: 265 },
   ],
   [
-    { src: "https://images.unsplash.com/photo-1481253127861-534498168948?q=80&w=400&auto=format&fit=crop", h: 305 },
-    { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400&auto=format&fit=crop", h: 175 },
+    { src: "assets/projects/KRC-scaled-e1700730314593.jpg", h: 305 },
+    { src: "assets/projects/VTP-scaled.jpg", h: 175 },
   ],
   [
-    { src: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=400&auto=format&fit=crop", h: 210 },
-    { src: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=400&auto=format&fit=crop", h: 275 },
+    { src: "assets/projects/PRAJ-INDUSTRIES.png", h: 210 },
+    { src: "assets/projects/Solitaire-Business-Hub-II.jpeg", h: 275 },
   ],
 ];
 
@@ -403,7 +403,7 @@ export default function HomePage() {
 
   /* ─── JSX ────────────────────────────────────────────────────── */
   return (
-    <div className="home-page-typography" style={{ background: "#ffffff", color: "#111827" }}>
+    <div className="home-page-typography" style={{ background: "#ffffff", color: "#232529" }}>
       {/* ══════════ 1. HERO — Cinematic centered ══════════ */}
       <section
         ref={heroSectionRef}
@@ -499,13 +499,13 @@ export default function HomePage() {
               <span
                 style={{
                   display: "inline-flex", alignItems: "center", gap: "8px",
-                  background: "#C41E3A", color: "#ffffff",
+                  background: "#EC3338", color: "#ffffff",
                   fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                   letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
                   padding: "14px 32px", cursor: "pointer",
                 }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#a51830")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#C41E3A")}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
               >
                 EXPLORE OUR WORK <ArrowRight size={11} />
               </span>
@@ -553,7 +553,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "'Montserrat',sans-serif",
                       fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
-                      fontWeight: 500, color: "#C41E3A", letterSpacing: "-0.025em", lineHeight: 1,
+                      fontWeight: 500, color: "#EC3338", letterSpacing: "-0.025em", lineHeight: 1,
                     }}
                   >
                     0
@@ -585,7 +585,7 @@ export default function HomePage() {
               <div className="about-fade" style={{ marginBottom: "36px" }}>
                 <span className="home-section-label font-montserrat" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                  letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+                  letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
                   About MECPL
@@ -595,7 +595,7 @@ export default function HomePage() {
                 }}>
                   Building India's Tomorrow
                 </h3>
-                <div style={{ width: "40px", height: "3px", background: "#C41E3A" }} />
+                <div style={{ width: "40px", height: "3px", background: "#EC3338" }} />
               </div>
 
               {/* Clip-path wipe pull-quote */}
@@ -620,7 +620,7 @@ export default function HomePage() {
               <div className="about-fade">
                 <p style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
-                  lineHeight: 1.85, color: "#6b7280", marginBottom: "28px",
+                  lineHeight: 1.85, color: "#949599", marginBottom: "28px",
                 }}>
                   From Trump Towers to Panchshil's skyline-defining highrises, MECPL brings ISO-certified precision and 25 years of on-site engineering wisdom to every project.
                 </p>
@@ -630,7 +630,7 @@ export default function HomePage() {
                     <span key={cert} style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
                       letterSpacing: "0.12em", textTransform: "uppercase",
-                      color: "#374151", border: "1px solid rgba(17,24,39,0.12)",
+                      color: "#232529", border: "1px solid rgba(35,37,41,0.12)",
                       padding: "5px 12px", borderRadius: "2px",
                     }}>
                       {cert}
@@ -643,7 +643,7 @@ export default function HomePage() {
                     className="font-montserrat inline-flex items-center gap-2 cursor-pointer"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                      letterSpacing: "0.2em", color: "#C41E3A",
+                      letterSpacing: "0.2em", color: "#EC3338",
                       textTransform: "none", fontWeight: 600,
                     }}
                   >
@@ -656,10 +656,10 @@ export default function HomePage() {
             {/* Right: 2×2 image grid */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
               {[
-                { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop", h: 260 },
-                { src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=600&auto=format&fit=crop", h: 180 },
-                { src: "https://images.unsplash.com/photo-1581094651181-35942459ef62?q=80&w=600&auto=format&fit=crop", h: 180 },
-                { src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=600&auto=format&fit=crop", h: 260 },
+                { src: "assets/projects/GODREJ-INFINITY.jpg", h: 260 },
+                { src: "assets/projects/HIGH-RISE-1-scaled.jpg", h: 180 },
+                { src: "assets/projects/43PD-1-scaled.jpg", h: 180 },
+                { src: "assets/projects/Trump-Tower.jpg", h: 260 },
               ].map((img, i) => (
                 <div key={i} className="about-img" style={{ height: `${img.h}px`, borderRadius: "4px" }}>
                   <img
@@ -681,7 +681,7 @@ export default function HomePage() {
         <div data-scroll-reveal="text" style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+            letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
             Recognition
@@ -726,7 +726,7 @@ export default function HomePage() {
                   el.style.transform = "translateY(0)";
                 }}
               >
-                <div style={{ background: "#f8fafc", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
+                <div style={{ background: "#ffffff", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
                   <img
                     src={`${assetBase}${cert.src}`}
                     alt={cert.label}
@@ -738,7 +738,7 @@ export default function HomePage() {
                   borderTop: "2px solid #C41E3A",
                   fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
                   fontWeight: 700, letterSpacing: "0.16em",
-                  textTransform: "uppercase", color: "#111827",
+                  textTransform: "uppercase", color: "#232529",
                   textAlign: "center",
                 }}>
                   {cert.label}
@@ -758,7 +758,7 @@ export default function HomePage() {
           <div style={{ marginBottom: "56px", textAlign: "center" }}>
             <span className="home-section-label font-montserrat" style={{
               fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+              letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
               display: "block", marginBottom: "10px",
             }}>
               What We Build
@@ -811,13 +811,13 @@ export default function HomePage() {
       {/* ══════════ 5. PROJECTS — Horizontal carousel ══════════ */}
       <section
         data-testid="section-projects"
-        style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "80px" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(35,37,41,0.07)", paddingTop: "80px" }}
       >
         {/* Header row */}
         <div className="max-w-7xl mx-auto" data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                 letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+                 letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
             Our Projects
@@ -854,7 +854,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "'Montserrat',sans-serif",
                       fontSize: "1.25rem", fontWeight: 600,
-                      color: "#111827",
+                      color: "#232529",
                       lineHeight: 1.15, textTransform: "uppercase",
                       letterSpacing: "-0.01em", marginBottom: "10px",
                     }}
@@ -863,7 +863,7 @@ export default function HomePage() {
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    color: "#6b7280", letterSpacing: "0.16em",
+                    color: "#949599", letterSpacing: "0.16em",
                     textTransform: "uppercase",
                   }}>
                     {proj.location}&nbsp;·&nbsp;{proj.type}
@@ -895,7 +895,7 @@ export default function HomePage() {
               className="home-section-cta font-montserrat inline-flex items-center gap-2 cursor-pointer"
               style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                letterSpacing: "0.2em", color: "#C41E3A",
+                letterSpacing: "0.2em", color: "#EC3338",
                 textTransform: "none", fontWeight: 600,
                 borderBottom: "1px solid rgba(196,30,58,0.3)", paddingBottom: "5px",
               }}
@@ -922,7 +922,7 @@ export default function HomePage() {
             <div style={{ marginBottom: "36px" }}>
               <span className="home-section-label font-montserrat" style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+                letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
                 display: "block", marginBottom: "10px",
               }}>
                 Our Advantage
@@ -934,7 +934,7 @@ export default function HomePage() {
               </h3>
               <p className="page-subtitle-font" style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
-                lineHeight: 1.75, color: "#6b7280", margin: 0, maxWidth: "400px",
+                lineHeight: 1.75, color: "#949599", margin: 0, maxWidth: "400px",
               }}>
                 Two decades of structural excellence — on time, on spec, and built to outlast generations.
               </p>
@@ -992,7 +992,7 @@ export default function HomePage() {
                     <div style={{ paddingBottom: "28px" }}>
                       <div style={{
                         fontFamily: "'Montserrat',sans-serif",
-                        fontSize: "2rem", fontWeight: 800, color: "#C41E3A",
+                        fontSize: "2rem", fontWeight: 800, color: "#EC3338",
                         marginBottom: "10px", lineHeight: 1.0,
                       }}>
                         {item.stat}
@@ -1002,7 +1002,7 @@ export default function HomePage() {
                         data-idx={i}
                         style={{
                           fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-                          lineHeight: 1.8, color: "#6b7280", margin: 0,
+                          lineHeight: 1.8, color: "#949599", margin: 0,
                         }}
                       >
                         {item.desc}
@@ -1037,13 +1037,13 @@ export default function HomePage() {
       <section
         ref={testimonialsRef}
         data-testid="section-testimonials"
-        style={{ background: "#f8fafc", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 0" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(35,37,41,0.07)", padding: "100px 0" }}
       >
         {/* Heading */}
         <div style={{ padding: "0 40px", marginBottom: "60px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#C41E3A", textTransform: "none",
+            letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
             Client Voices
@@ -1091,12 +1091,12 @@ export default function HomePage() {
             }}>
               <div style={{ display: "flex", gap: "3px", marginBottom: "20px" }}>
                 {[...Array(5)].map((_, s) => (
-                  <Star key={s} size={13} fill="#f59e0b" color="#f59e0b" />
+                  <Star key={s} size={13} fill="#EC3338" color="#EC3338" />
                 ))}
               </div>
               <p style={{
                 fontFamily: "'Montserrat',sans-serif", fontSize: "12.5px",
-                lineHeight: 1.85, color: "#374151", marginBottom: "24px", flex: 1,
+                lineHeight: 1.85, color: "#232529", marginBottom: "24px", flex: 1,
               }}>
                 "{t.quote}"
               </p>
@@ -1111,13 +1111,13 @@ export default function HomePage() {
                 <div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
-                    fontWeight: 700, color: "#111827", letterSpacing: "0.06em",
+                    fontWeight: 700, color: "#232529", letterSpacing: "0.06em",
                   }}>
                     {t.name}
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                    color: "#6b7280", marginTop: "2px",
+                    color: "#949599", marginTop: "2px",
                   }}>
                     {t.role}
                   </div>
@@ -1132,7 +1132,7 @@ export default function HomePage() {
         ref={clientsRef}
         data-testid="section-clients"
         style={{
-          background: "#C41E3A",
+          background: "#EC3338",
           borderTop: "1px solid rgba(0,0,0,0.07)",
           borderRadius: "8px",
           margin: "0 8px",

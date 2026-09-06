@@ -21,7 +21,7 @@ export default function OngoingProjectsPage() {
     <div data-animate-page className="bg-white pt-20">
       {/* Header */}
       <div className="relative py-14 md:py-20 border-b border-black/[0.06] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Construction" />
+        <img src="/assets/projects/WhatsApp-Image-2025-05-06-at-17.24.37_0a4a5d3c-scaled.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="MECPL project under construction" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">

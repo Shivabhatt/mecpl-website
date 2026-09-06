@@ -43,7 +43,7 @@ export default function ClientsPage() {
     <div data-animate-page className="bg-white">
       {/* Header */}
       <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Corporate" />
+        <img src="/assets/projects/Solitaire-Business-Hub-II.jpeg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="MECPL commercial project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <SectionHeader label="Our Network" title="Clients & Partners" subtitle="India's most respected real estate developers, industrialists, and corporates trust MECPL for their landmark projects." />
@@ -77,7 +77,7 @@ export default function ClientsPage() {
         </div>
 
         <div className="w-full h-52 rounded-sm overflow-hidden relative shadow-inner border border-black/[0.07] mb-14">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover opacity-60" alt="Corporate architecture" />
+          <img src="/assets/projects/TechPark.jpg" className="w-full h-full object-cover opacity-60" alt="MECPL commercial architecture project" />
         </div>
       </section>
 

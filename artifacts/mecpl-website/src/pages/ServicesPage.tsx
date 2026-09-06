@@ -9,7 +9,7 @@ const services = [
     subtitle: "Structural Excellence at Every Scale",
     desc: "From foundations to finishes, MECPL delivers comprehensive civil construction services — RCC framing, slabs, columns, shear walls, and more — with ISO-certified quality benchmarks and zero-compromise safety protocols.",
     highlights: ["RCC Structural Works", "Foundation Engineering", "Shear Wall Construction", "Post-Tensioning Works"],
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/GODREJ-INFINITY.jpg",
   },
   {
     icon: ClipboardList,
@@ -17,7 +17,7 @@ const services = [
     subtitle: "End-to-End Delivery, Zero Gaps",
     desc: "MECPL takes full ownership from design coordination through structural handover. Our turnkey model eliminates fragmentation — one partner, one accountability chain, complete execution.",
     highlights: ["Design Coordination", "Material Procurement", "Complete Site Execution", "Quality Commissioning"],
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/Solitaire-Business-Hub-II.jpeg",
   },
   {
     icon: Factory,
@@ -25,7 +25,7 @@ const services = [
     subtitle: "Heavy Infrastructure, Precision Engineered",
     desc: "Industrial facilities demand tolerance levels that most contractors cannot sustain. MECPL's industrial division specializes in warehouses, logistics hubs, manufacturing plants, and large-format industrial complexes.",
     highlights: ["Manufacturing Facilities", "Warehouse Structures", "Logistics Hubs", "Industrial Sheds"],
-    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/PRAJ-INDUSTRIES.png",
   },
   {
     icon: Home,
@@ -33,7 +33,7 @@ const services = [
     subtitle: "Premium Housing, Delivered on Time",
     desc: "From mid-rise to ultra-high-rise residential towers, MECPL has built some of Pune's most recognized addresses — Trump Towers, Godrej Boulevard, VTP Bel Air — with meticulous detailing and systematic milestone delivery.",
     highlights: ["High-Rise Towers", "Gated Communities", "Luxury Residences", "Mixed-Use Complexes"],
-    image: "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/Trump-Tower.jpg",
   },
   {
     icon: Layers,
@@ -41,7 +41,7 @@ const services = [
     subtitle: "Premium Interiors with Engineering Precision",
     desc: "MECPL extends its quality ethos into premium interior fitouts — commercial office spaces, hospitality fit-outs, and institutional interiors — blending structural reliability with aesthetic refinement.",
     highlights: ["Commercial Offices", "Hospitality Interiors", "Institutional Spaces", "Retail Environments"],
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/Rejuve.jpg",
   },
   {
     icon: HardHat,
@@ -49,7 +49,7 @@ const services = [
     subtitle: "Strategic Oversight, Measurable Outcomes",
     desc: "For clients who demand professional site governance, MECPL provides expert project management — scheduling, cost control, safety auditing, and milestone management — as a standalone service.",
     highlights: ["Scheduling & Planning", "Cost Management", "Safety Auditing", "Quality Assurance"],
-    image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=800&auto=format&fit=crop",
+    image: "/assets/projects/43PD-1-scaled.jpg",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function ServicesPage() {
       {/* Header */}
       <div className="relative py-24 border-b border-black/[0.06] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1920&auto=format&fit=crop"
+          src="/assets/projects/HIGH-RISE-1-scaled.jpg"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.1]"
           alt="Services"
         />

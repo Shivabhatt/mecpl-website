@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MapPin, Pause, Play } from "lucide-react";
+import { ArrowRight, MapPin, Pause, Play } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
 
 function useInView<T extends HTMLElement>() {
@@ -119,7 +119,7 @@ export default function CompletedProjectsPage() {
       {/* Project Hero */}
       <div className="relative min-h-screen overflow-hidden bg-[#111827] flex items-center">
         <img
-          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop"
+          src="/assets/projects/HIGH-RISE-1-scaled.jpg"
           className="absolute inset-0 h-full w-full object-cover"
           alt="MECPL construction projects"
         />
@@ -207,13 +207,16 @@ export default function CompletedProjectsPage() {
 
 function ArchitectureApproach() {
   return (
-    <section id="architecture-approach" className="scroll-mt-20 bg-white px-6 py-16 md:px-10 md:py-24" data-testid="section-architecture-approach">
-      <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:gap-20">
-         <div className="font-montserrat lg:pl-10" data-scroll-reveal="text">
-          <h2 className="max-w-lg text-[30px] font-medium tracking-[-0.045em] text-[#C41E3A]">
-            Architecture
+    <section id="architecture-approach" className="scroll-mt-20 overflow-visible bg-white px-6 py-20 md:px-10 md:py-28" data-testid="section-architecture-approach">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-0">
+        <div className="relative z-10 max-w-xl lg:py-10 lg:pr-16" data-scroll-reveal="text">
+          <span className="mb-5 block font-montserrat text-[10px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
+            Architectural Approach
+          </span>
+          <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-[#232529]">
+            Architecture that feels considered.
           </h2>
-          <div className="mt-8 max-w-md space-y-4 text-sm leading-[1.8] text-[#6f6f69]">
+          <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-[#232529]">
             <p>
               We believe architecture should feel considered from the first line on paper to the final detail on site.
             </p>
@@ -222,19 +225,37 @@ function ArchitectureApproach() {
               who inhabit each space.
             </p>
           </div>
-          <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a948b]">
+          <p className="mt-8 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#949599]">
             Form, function, and enduring value
           </p>
+          <a
+            href="#project-explorer"
+            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#232529] transition-colors hover:text-[#EC3338]"
+          >
+            Explore our projects <ArrowRight size={14} />
+          </a>
         </div>
 
-         <div className="relative mx-auto w-full max-w-[20rem] overflow-hidden bg-[#e6e3dd] lg:mx-0 lg:justify-self-center" data-scroll-reveal="image">
-          <img
-            src={`${assetBase}assets/projects/Godrej-Emerald-Waters.jpg`}
-            className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-            alt="Contemporary residential architecture with landscaped surroundings"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        <div className="relative mx-auto w-full max-w-[34rem] lg:ml-0 lg:pt-2" data-scroll-reveal="image">
+          <div className="relative aspect-square overflow-visible">
+            <img
+              src={`${assetBase}assets/projects/Godrej-Emerald-Waters.jpg`}
+              className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              alt="Contemporary residential architecture with landscaped surroundings"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+          </div>
+          <div className="absolute -bottom-8 left-4 w-[min(86%,17rem)] bg-white px-6 py-5 shadow-[0_18px_40px_rgba(35,37,41,0.16)] sm:left-8 sm:px-7 sm:py-6">
+            <span className="block font-montserrat text-[9px] font-bold uppercase tracking-[0.18em] text-[#EC3338]">
+              Our Design Principle
+            </span>
+            <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-[#232529]">
+              Build with purpose.
+              <br />
+              <strong className="font-bold">Last with meaning.</strong>
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -289,7 +310,7 @@ function ProjectExplorer() {
       data-testid="section-project-explorer"
       aria-label="MECPL project explorer"
     >
-      <div className="grid min-h-screen w-full overflow-hidden bg-[#f7f4ee] lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
+      <div className="grid min-h-screen w-full overflow-hidden bg-white lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
           <div className="relative min-h-[58vh] overflow-hidden bg-[#111827] lg:min-h-screen">
             {videoFailed || prefersReducedMotion ? (
               <img
@@ -338,7 +359,7 @@ function ProjectExplorer() {
             </div>
 
            <div className="relative min-h-[540px] cursor-pointer overflow-hidden bg-white xl:min-h-0" data-scroll-reveal="image">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_48%_57%,rgba(196,30,58,0.06),transparent_24%),linear-gradient(135deg,#ffffff_0%,#fffdf9_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_48%_57%,rgba(236,51,56,0.06),transparent_24%),linear-gradient(135deg,#ffffff_0%,#ffffff_100%)]" />
             <svg
               viewBox="0 0 720 620"
               className="absolute inset-0 h-full w-full scale-[1.6] transform"
@@ -347,25 +368,25 @@ function ProjectExplorer() {
             >
               <defs>
                 <linearGradient id="india-map-fill" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#fbf7f0" />
-                  <stop offset="100%" stopColor="#efe5d8" />
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="100%" stopColor="#949599" stopOpacity="0.18" />
                 </linearGradient>
                 <filter id="projects-map-glow" x="-100%" y="-100%" width="300%" height="300%">
                   <feGaussianBlur stdDeviation="12" />
                 </filter>
               </defs>
               <rect width="720" height="620" fill="#ffffff" />
-              <circle cx="346" cy="354" r="178" fill="none" stroke="#eadfd4" strokeWidth="1.4" strokeDasharray="3 6" />
-              <circle cx="346" cy="354" r="125" fill="none" stroke="#e3d5c7" strokeWidth="1.4" strokeDasharray="3 6" />
-              <circle cx="346" cy="354" r="76" fill="none" stroke="#dac8b8" strokeWidth="1.4" strokeDasharray="3 6" />
+              <circle cx="346" cy="354" r="178" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
+              <circle cx="346" cy="354" r="125" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
+              <circle cx="346" cy="354" r="76" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
               <path
                 d="M347 60 C367 72 388 73 409 89 L430 82 L449 101 L472 111 L494 132 L517 144 L503 165 L475 174 L468 194 L490 219 L515 237 L539 262 L520 279 L492 287 L482 310 L470 331 L458 353 L446 377 L436 403 L422 427 L414 455 L397 492 L380 531 L363 499 L351 469 L332 447 L312 421 L286 408 L259 389 L236 364 L250 343 L273 329 L262 307 L243 289 L256 267 L283 253 L300 227 L320 207 L337 184 L350 161 L344 139 L327 122 L334 101 L322 82 Z"
                 fill="url(#india-map-fill)"
-                stroke="#c9b8a4"
+                stroke="#949599"
                 strokeWidth="2.2"
                 strokeLinejoin="round"
               />
-              <g fill="none" stroke="#d8c9b8" strokeWidth="1" opacity="0.85">
+              <g fill="none" stroke="#949599" strokeWidth="1" opacity="0.35">
                 <path d="M332 121 C374 148 428 169 475 174" />
                 <path d="M300 227 C346 235 422 232 490 219" />
                 <path d="M262 307 C326 303 407 315 470 331" />
@@ -414,11 +435,11 @@ function ProjectExplorer() {
             </div>
 
             <article
-              className="flex h-full flex-col justify-start bg-white p-5 text-[#1f2933] sm:p-6"
+              className="flex h-full flex-col justify-start bg-white p-5 text-[#232529] sm:p-6"
               aria-live="polite"
               data-testid="project-map-detail-card"
             >
-               <div className="relative mb-5 h-96 shrink-0 overflow-hidden bg-[#eee8dd] sm:h-[28rem] xl:h-[56vh]" data-scroll-reveal="image">
+               <div className="relative mb-5 h-96 shrink-0 overflow-hidden bg-white sm:h-[28rem] xl:h-[56vh]" data-scroll-reveal="image">
                 <img
                   src={selectedProject.image}
                   alt={`${selectedProject.name} project`}
@@ -428,7 +449,7 @@ function ProjectExplorer() {
               </div>
 
               <div className="mt-auto">
-                <h3 className="mt-2 text-xl font-medium leading-tight tracking-[-0.02em] text-[#1f2933]">
+                <h3 className="mt-2 text-xl font-medium leading-tight tracking-[-0.02em] text-[#232529]">
                   {selectedProject.name}
                 </h3>
                 <p className="mt-2 flex items-center gap-2 text-[11px] text-[#7b746b]">
@@ -436,11 +457,11 @@ function ProjectExplorer() {
                   {selectedProject.location}
                 </p>
 
-                <dl className="mt-5 grid grid-cols-[78px_1fr] gap-x-4 gap-y-2 border-t border-[#e9e2d8] pt-4 text-[10px]">
-                  <dt className="uppercase tracking-[0.12em] text-[#a49a8c]">Location</dt>
-                  <dd className="text-[#5d5a55]">{selectedProject.location}</dd>
-                  <dt className="uppercase tracking-[0.12em] text-[#a49a8c]">Portfolio</dt>
-                  <dd className="text-[#5d5a55]">MECPL Projects</dd>
+                <dl className="mt-5 grid grid-cols-[78px_1fr] gap-x-4 gap-y-2 border-t border-[#949599]/30 pt-4 text-[10px]">
+                  <dt className="uppercase tracking-[0.12em] text-[#949599]">Location</dt>
+                  <dd className="text-[#232529]">{selectedProject.location}</dd>
+                  <dt className="uppercase tracking-[0.12em] text-[#949599]">Portfolio</dt>
+                  <dd className="text-[#232529]">MECPL Projects</dd>
                 </dl>
               </div>
             </article>
@@ -469,7 +490,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-10">
         <div className="flex min-h-[180px] flex-col justify-between font-montserrat lg:min-h-[220px]">
           <div>
-            <div className="mb-5 flex items-center gap-4 text-[9px] font-bold normal-case tracking-[0.2em] text-[#8d8d87]">
+            <div className="mb-5 flex items-center gap-4 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
               <span className="text-[#111111]">{projectNumber}</span>
               <span className="h-px w-8 bg-[#c7c7c1]" />
               <span>{project.type}</span>
@@ -477,7 +498,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             <h3 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}
             </h3>
-            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#777772]">
+            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#949599]">
               <MapPin size={12} className="text-[#C41E3A]" />
               <span>{project.location}</span>
             </div>
@@ -486,7 +507,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
         </div>
 
         <div className="grid h-52 grid-cols-[minmax(0,1.55fr)_minmax(110px,0.85fr)] gap-2 overflow-hidden sm:h-60 md:h-64">
-          <div className="relative overflow-hidden border-b-2 border-[#c9c9c3] bg-[#deded9]">
+          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
@@ -495,7 +516,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
-          <div className="relative overflow-hidden border-b-2 border-[#c9c9c3] bg-[#deded9]">
+          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"

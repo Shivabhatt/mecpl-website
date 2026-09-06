@@ -33,9 +33,10 @@ export default function BlogPage() {
               <img 
                 src={featuredPost.heroImage} 
                 alt={featuredPost.title} 
-                className="w-full h-full object-cover opacity-40 scale-105 animate-[heroSlideIn_1.5s_ease-out_forwards]"
+                className="w-full h-full object-cover animate-[heroSlideIn_1.5s_ease-out_forwards]"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#111827]/60 via-[#111827]/40 to-[#111827]/90" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
+              <div className="absolute inset-0 bg-black/15" />
             </div>
 
             <div className="font-montserrat font-medium relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center mt-16 md:mt-20">
@@ -51,7 +52,7 @@ export default function BlogPage() {
                   MECPL JOURNAL
                 </div>
               </h1>
-              <p className="page-subtitle-font font-montserrat font-medium text-sm md:text-base text-white max-w-2xl leading-relaxed animate-[heroSlideIn_1s_ease-out_0.6s_both]">
+              <p className="mt-0 max-w-2xl font-montserrat font-medium text-sm leading-relaxed text-white md:text-base">
                 Industry insight, project thinking, and practical knowledge from MECPL.
               </p>
             </div>

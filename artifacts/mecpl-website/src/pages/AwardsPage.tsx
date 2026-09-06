@@ -24,7 +24,7 @@ export default function AwardsPage() {
     <div data-animate-page className="bg-white">
       {/* Header */}
       <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Construction" />
+        <img src="/assets/projects/GODREJ-INFINITY.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Award-winning MECPL construction project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
           <SectionHeader label="Recognition" title="Awards & Honors" subtitle="Over two decades of consecutive industry recognition for structural excellence, safety leadership, and construction quality." center />

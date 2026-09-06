@@ -83,22 +83,22 @@ const altRows = [
     label: "Our Vision",
     heading: "India's Most Preferred\nCivil Contractor",
     text: "MECPL aspires to become the most preferred civil engineering contractor. We commit ourselves to delight our clients by surpassing their expectations while consistently meeting compliance obligations in an extremely safe and eco-friendly manner.",
-    beforeImg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1800&auto=format&fit=crop",
-    afterImg:  "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "/assets/projects/HIGH-RISE-1-scaled.jpg",
+    afterImg:  "/assets/projects/HIGH-RISE-1-scaled.jpg",
   },
   {
     label: "Our Mission",
     heading: "Quality. Delivery.\nContinuous Improvement.",
     text: "Our commitment is to provide quality construction, ensure timely completion, and deliver exceptional post-project services, all while prioritising safety, health, and environmental considerations through continuous improvement in our people, processes, and technology.",
-    beforeImg: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
-    afterImg:  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "/assets/projects/GODREJ-INFINITY.jpg",
+    afterImg:  "/assets/projects/GODREJ-INFINITY.jpg",
   },
   {
     label: "Our Values",
     heading: "Safety. Integrity.\nExcellence.",
     text: "Every project we undertake is guided by an uncompromising commitment to safety, ethical practices, and the highest standards of workmanship. We believe that lasting relationships are built on trust, transparency, and the consistent delivery of promises made.",
-    beforeImg: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1800&auto=format&fit=crop",
-    afterImg:  "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1800&auto=format&fit=crop",
+    beforeImg: "/assets/projects/Trump-Tower.jpg",
+    afterImg:  "/assets/projects/Trump-Tower.jpg",
   },
 ];
 
@@ -144,7 +144,7 @@ function AlternatingSection() {
             <span className="about-label-font font-montserrat font-medium" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontSize: "0.62rem", fontWeight: 700,
-              letterSpacing: "0.3em", color: "#C41E3A",
+              letterSpacing: "0.3em", color: "#EC3338",
               textTransform: "uppercase", display: "block", marginBottom: 16,
             }}>
               {row.label}
@@ -162,7 +162,7 @@ function AlternatingSection() {
             }}>
               {row.heading}
             </h2>
-            <div style={{ width: 40, height: 3, background: "#C41E3A", marginBottom: 20 }} />
+            <div style={{ width: 40, height: 3, background: "#EC3338", marginBottom: 20 }} />
             <p className="page-subtitle-font" style={{
               fontFamily: "'Montserrat',sans-serif",
               fontSize: "0.9rem",
@@ -271,7 +271,7 @@ function WordScatterSection() {
           <p className="font-montserrat font-medium" style={{
             fontSize: "clamp(1.15rem, 2.2vw, 2rem)",
             lineHeight: 1.75,
-            color: "#111",
+            color: "#232529",
             margin: 0,
           }}>
             {words.map((word, i) => (
@@ -393,7 +393,7 @@ function LeadershipDoorSlider() {
           {/* Large quote mark */}
           <div style={{
             width: 56, height: 56, borderRadius: "50%",
-            background: "#C41E3A",
+            background: "#EC3338",
             display: "flex", alignItems: "center", justifyContent: "center",
             marginBottom: 32,
           }}>
@@ -401,13 +401,13 @@ function LeadershipDoorSlider() {
               <path d="M0 18V11.25C0 7.5 1.25 4.5 3.75 2.25C6.25 0 9.25 -0.25 12.75 1L11.25 4.25C9.5 3.5 7.875 3.625 6.375 4.625C4.875 5.625 4.125 7.125 4.125 9.125H8.25V18H0ZM13.75 18V11.25C13.75 7.5 15 4.5 17.5 2.25C20 0 23 -0.25 26.5 1L25 4.25C23.25 3.5 21.625 3.625 20.125 4.625C18.625 5.625 17.875 7.125 17.875 9.125H22V18H13.75Z" fill="white"/>
             </svg>
           </div>
-          <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
+          <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: MF, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             OUR TEAM
           </span>
           <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: MF, fontWeight: 800, fontSize: "1.875rem", color: "rgb(17,24,39)", textTransform: "uppercase", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             MEET THE FOUNDERS OF MECPL
           </h2>
-          <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.8rem", color: "#555", lineHeight: 1.85, margin: "0 0 28px" }}>
+          <p className="page-subtitle-font" style={{ fontFamily: MF, fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
             The visionaries who built Pune's skyline — four decades of engineering excellence, guided by an uncompromising commitment to quality.
           </p>
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
@@ -421,7 +421,7 @@ function LeadershipDoorSlider() {
               data-scroll-reveal="image"
               data-scroll-reveal-delay={String(i * 90)}
               style={{
-                background: "#C41E3A",
+                background: "#EC3338",
                 borderRadius: 6,
                 overflow: "hidden",
                 boxShadow: "0 4px 24px rgba(196,30,58,0.25)",
@@ -429,7 +429,7 @@ function LeadershipDoorSlider() {
               }}
             >
               {/* Portrait photo */}
-              <div style={{ position: "relative", aspectRatio: "4/3", background: "#111" }}>
+              <div style={{ position: "relative", aspectRatio: "4/3", background: "#232529" }}>
                 <img
                   src={leader.image}
                   alt={leader.name}
@@ -475,13 +475,15 @@ export default function AboutPage() {
   return (
     <div data-animate-page className="about-page font-montserrat font-medium" style={{ background: "#ffffff", fontFamily: "'Montserrat', sans-serif" }}>
       {/* ─── OUR STORY — Image Hero ──────────────────────────── */}
-      <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#111" }}>
+      <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#232529" }}>
         <img
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1800&auto=format&fit=crop"
+          src="/assets/projects/HIGH-RISE-1-scaled.jpg"
           alt="MECPL — Our Story"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%", display: "block" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 100%)" }} />
+        {/* Projects-style overlays keep the centered banner copy clearly readable */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
+        <div className="absolute inset-0 bg-black/15" />
         <div style={{
           position: "absolute", inset: 0,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
@@ -536,7 +538,7 @@ export default function AboutPage() {
                 className="page-subtitle-font"
                 stagger={0.045}
                 start="top 88%"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#1a1a1a", lineHeight: 1.85, margin: 0, fontWeight: 500 }}
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", color: "#232529", lineHeight: 1.85, margin: 0, fontWeight: 500 }}
               >
                 Millennium Engineers &amp; Contractors Pvt. Ltd. headquartered in Pune, is renowned for its client-focused, quality-driven approach to construction. By embracing the latest technology and innovation, the company has earned a strong reputation in Pune's construction industry.
               </SplitReveal>
@@ -545,7 +547,7 @@ export default function AboutPage() {
                 className="page-subtitle-font"
                 stagger={0.045}
                 start="top 88%"
-                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#666", lineHeight: 1.9, margin: 0 }}
+                style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#949599", lineHeight: 1.9, margin: 0 }}
               >
                 With a team of civil engineering experts, they have successfully completed large-scale projects. The company holds ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications, ensuring quality, safety, and eco-friendliness. Since 2007, Millennium Engineers &amp; Contractors Pvt. Ltd. has maintained a CRISIL rating of SME 1.
               </SplitReveal>
@@ -588,8 +590,8 @@ export default function AboutPage() {
                   borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
                   textAlign: "center",
                 }}>
-                  <div className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#C41E3A", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
-                  <div className="font-montserrat font-medium text-[12px] uppercase" style={{ letterSpacing: "0.2em", color: "#888" }}>{s.label}</div>
+                  <div className="page-title-font" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#EC3338", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
+                  <div className="font-montserrat font-medium text-[12px] uppercase" style={{ letterSpacing: "0.2em", color: "#949599" }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -606,10 +608,10 @@ export default function AboutPage() {
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <RevealBlock>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#C41E3A", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+            <span className="about-label-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.25em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
               TRUSTED BY
             </span>
-            <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
+            <h2 className="page-title-font font-montserrat font-medium" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#232529", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>
               LEADING BRANDS &amp; DEVELOPERS
             </h2>
           </div>
@@ -641,7 +643,7 @@ export default function AboutPage() {
       </section>
       {/* ─── CTA — "LET'S BUILD TOGETHER" red banner ─────────── */}
       <section className="abt-cta-section" style={{
-        background: "#C41E3A",
+        background: "#EC3338",
         padding: "72px 40px",
         position: "relative",
         overflow: "hidden",
@@ -663,7 +665,7 @@ export default function AboutPage() {
             <Link href="/contact">
               <span className="about-cta-button-font font-montserrat font-medium" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                border: "1.5px solid #ffffff", color: "#C41E3A",
+                border: "1.5px solid #ffffff", color: "#EC3338",
                 padding: "15px 36px",
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
                 cursor: "pointer", transition: "background 0.2s, border-color 0.2s",

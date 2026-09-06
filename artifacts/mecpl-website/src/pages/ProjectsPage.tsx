@@ -18,12 +18,12 @@ export default function ProjectsPage() {
 
       {/* Project Contact CTA */}
       <section
-        className="relative overflow-hidden bg-[#C41E3A] px-6 py-8 font-montserrat md:py-9"
+        id="project-contact"
+        className="relative z-10 isolate flex min-h-[240px] scroll-mt-20 items-center overflow-hidden bg-[#C41E3A] px-6 py-8 font-montserrat md:py-9"
         data-testid="section-projects-cta"
       >
         <div
-          className="relative z-10 mx-auto flex max-w-[900px] flex-col items-center text-center"
-          data-scroll-reveal="text"
+          className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center text-center"
         >
           <h2 className="page-title-font max-w-3xl text-2xl font-medium uppercase leading-[1.1] tracking-[-0.02em] text-white sm:text-3xl md:text-4xl">
             Ready to shape what&apos;s next?

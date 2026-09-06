@@ -12,21 +12,21 @@ export default function SectionHeader({ label, title, subtitle, center = true, l
   return (
     <div className={`space-y-3 ${center ? "text-center max-w-3xl mx-auto px-6 pt-6 pb-0" : ""}`}>
       {label && (
-        <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block">
+        <span className="mecpl-section-label">
           {label}
         </span>
       )}
       {useH1 ? (
-        <h1 className="page-title-font text-5xl leading-tight text-[#111827]">
+        <h1 className="page-title-font text-5xl leading-tight text-[#232529]">
           {title}
         </h1>
       ) : (
-        <h3 className="page-title-font text-3xl leading-tight text-[#111827]">
+        <h3 className="page-title-font text-3xl leading-tight text-[#232529]">
           {title}
         </h3>
       )}
       {subtitle && (
-        <p className="page-subtitle-font text-[#4b5563] text-sm leading-relaxed">
+        <p className="page-subtitle-font text-[#232529] text-sm leading-relaxed">
           {subtitle}
         </p>
       )}

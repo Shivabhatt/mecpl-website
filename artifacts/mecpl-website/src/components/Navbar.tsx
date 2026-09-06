@@ -21,7 +21,7 @@ export default function Navbar() {
   const { openModal }           = useModal();
 
   const isHome      = location === "/";
-  const isImageHero = isHome || location === "/about" || location === "/projects" || location === "/blog";
+  const isImageHero = isHome || location === "/about" || location === "/projects" || location === "/blog" || location === "/careers";
   const transparent = isImageHero && !scrolled && !menuOpen;
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         transparent
           ? "bg-transparent"
-          : "bg-white/[0.98] backdrop-blur-sm shadow-[0_1px_0_rgba(0,0,0,0.07)]"
+          : "bg-white/[0.98] backdrop-blur-sm shadow-[0_1px_0_rgba(35,37,41,0.08)]"
       }`}
       data-testid="navbar"
       data-navbar-root="true"
@@ -71,12 +71,12 @@ export default function Navbar() {
                    className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
                     transparent
                       ? active ? "text-white" : "text-white/70 hover:text-white"
-                      : active ? "text-[#111827]" : "text-[#6b7280] hover:text-[#111827]"
+                      : active ? "text-[#232529]" : "text-[#949599] hover:text-[#232529]"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute bottom-0 left-4 right-4 h-[1.5px] bg-[#C41E3A] transition-transform duration-300 origin-left ${
+                    className={`absolute bottom-0 left-4 right-4 h-[1.5px] bg-[#EC3338] transition-transform duration-300 origin-left ${
                       active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     }`}
                   />
@@ -90,7 +90,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4 flex-shrink-0">
           <button
             onClick={openModal}
-            className="font-montserrat bg-[#C41E3A] hover:bg-[#ab1831] text-white text-[11px] font-bold tracking-[0.22em] uppercase px-5 py-3 transition-colors cursor-pointer whitespace-nowrap"
+            className="mecpl-button mecpl-button--primary whitespace-nowrap px-5 py-3"
             data-testid="button-contact-nav"
           >
             Enquire Now
@@ -125,7 +125,7 @@ export default function Navbar() {
               >
                 <div
                      className={`navbar-nav-label font-montserrat py-3 text-sm font-medium normal-case tracking-normal border-b border-black/[0.05] cursor-pointer transition-colors ${
-                    location === link.path ? "text-[#C41E3A]" : "text-[#111827] hover:text-[#C41E3A]"
+                    location === link.path ? "text-[#EC3338]" : "text-[#232529] hover:text-[#EC3338]"
                   }`}
                 >
                   {link.label}
@@ -135,7 +135,7 @@ export default function Navbar() {
             <div className="pt-4">
               <button
                 onClick={() => { setMenuOpen(false); openModal(); }}
-                  className="font-montserrat w-full text-center bg-[#C41E3A] hover:bg-[#ab1831] text-white py-3 text-[11px] font-bold tracking-[0.22em] uppercase cursor-pointer transition-colors"
+                  className="mecpl-button mecpl-button--primary w-full"
                 data-testid="button-mobile-enquire"
               >
                 Enquire Now

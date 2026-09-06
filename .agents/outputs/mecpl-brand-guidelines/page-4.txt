@@ -1,0 +1,19 @@
+Typography System
+The rendered website did not expose a verifiable font family in the accessible text layer; this guide therefore specifies a
+recommended system.
+MONTSERRAT
+Modern • geometric architectural corporate
+USE FOR: HEADLINES/SECTION LABELS / NUMBERS /
+KEY CALLS-TO-ACTION
+H1
+H2
+H3
+Body
+Caption
+Inter Medium
+Inter Regular
+Montserrat Medium
+Montserrat SemiBold
+Montserrat SemiBold
+INTER
+Body / CAPTION
