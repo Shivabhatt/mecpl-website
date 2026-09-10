@@ -1,6 +1,7 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import WhyChooseSection from "../components/WhyChooseSection";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -604,6 +605,8 @@ export default function AboutPage() {
       <WordScatterSection />
       {/* ─── ALTERNATING IMAGE / TEXT ────────────────────────── */}
       <AlternatingSection />
+      {/* ─── WHY CHOOSE — Accordion + Image ───────────────────── */}
+      <WhyChooseSection />
       {/* ─── CLIENT LOGOS TICKER ─────────────────────────────── */}
       <section style={{ background: "#ffffff", padding: "80px 0", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
         <RevealBlock>

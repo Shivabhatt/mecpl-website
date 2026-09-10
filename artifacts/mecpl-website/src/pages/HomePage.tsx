@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
+import PeopleSafetySection from "../components/PeopleSafetySection";
 import { ArrowRight, Star, ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,13 +10,6 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ─── TYPES ──────────────────────────────────────────────────────── */
-interface WhyCard {
-  stat: string;
-  title: string;
-  desc: string;
-  image: string;
-}
-
 /* ─── DATA ───────────────────────────────────────────────────────── */
 const heroVideos = [
   "assets/video/banner-video-1.mp4",
@@ -26,72 +20,67 @@ const heroVideos = [
 
 const heroSlides = [
   {
-    heading: ["GIANT BEHIND THE GIANT"],
-    subtitle: "The structural backbone behind India\'s most iconic skylines, built with precision, powered by 25 years of on-site expertise.",
+    heading: ["TO BUILD IS A", "FORCE WITHIN US"],
+    subtitle: "We're Millennium Engineers & Contractors — a Pune-based construction company that turns ambitious ideas into buildings people trust. For 45 years, that's simply what we do.",
   },
   {
-    heading: ["Projects We Have", "Proudly Delivered"],
-    subtitle: "Every project represents a commitment to quality, safety, and execution excellence, explore the milestones that have shaped our journey.",
+    heading: ["QUALITY YOU CAN SEE.", "SAFETY YOU CAN RELY ON."],
+    subtitle: "A 3,000-strong team that treats every site like it's their own.",
   },
   {
-    heading: ["The People Behind", "the Projects"],
-    subtitle: "The expertise, dedication, and teamwork that power every milestone.",
+    heading: ["45 YEARS OF", "BUILDING TRUST"],
+    subtitle: "ISO 9001:2015 · ISO 14001:2015 · ISO 45001:2018 · CRISIL BBB / POSITIVE",
   },
   {
-    heading: ["Architecting Landmarks,", "Engineering Excellence."],
-    subtitle: "Our Mission: To define skylines through engineering innovation, delivering projects that stand as monuments of quality and trust.",
+    heading: ["RECOGNISED FOR", "BUILDING BETTER"],
+    subtitle: "Recognised as one of India's Small Giants, SME 100, and Iconic Brand of the Year.",
   },
 ];
 
 const stats = [
-  { target: 40,  suffix: "+",  label: "Year Of Legacy"       },
-  { target: 100, suffix: "+",  label: "Completed Projects"   },
-  { target: 100, suffix: "%",  label: "Quality Consistency"  },
-  { target: 100, suffix: "+",  label: "Satisfied Client"     },
+  { target: 45,  suffix: "+",    label: "Years of Legacy"             },
+  { target: 150, suffix: "+",    label: "Projects Delivered"           },
+  { target: 780, suffix: " Cr+", label: "Turnover, FY 2023–24"         },
+  { target: 25,  suffix: "+",    label: "Ongoing Prestigious Projects" },
 ];
 
 const services = [
-  { num: "01", title: "Civil Construction",   desc: "High-performance foundational engineering for complex architectural blueprints across residential, commercial, and industrial sectors.", image: "assets/projects/GODREJ-INFINITY.jpg" },
-  { num: "02", title: "Turnkey Projects",     desc: "Complete end-to-end project delivery — from design coordination through structural handover — under one accountable partner.",          image: "assets/projects/Solitaire-Business-Hub-II.jpeg" },
-  { num: "03", title: "Industrial Projects",  desc: "Warehouses, logistics hubs, and manufacturing plants built to the tightest tolerance levels in the industry.",                       image: "assets/projects/PRAJ-INDUSTRIES.png" },
-  { num: "04", title: "Residential Projects", desc: "Mid-rise to ultra-high-rise towers including Trump Towers, Godrej Boulevard, and VTP Bel Air — delivered on time.",                  image: "assets/projects/Trump-Tower.jpg" },
-  { num: "05", title: "Interior Fitouts",     desc: "Premium commercial and institutional interior fitouts combining structural reliability with aesthetic refinement.",                     image: "assets/projects/Rejuve.jpg" },
-  { num: "06", title: "Project Management",   desc: "Expert site governance — scheduling, cost control, safety auditing, and milestone management as a standalone service.",               image: "assets/projects/43PD-1-scaled.jpg" },
+  { num: "01", title: "Civil & Structural Construction", desc: "Foundation to superstructure — RCC framework, core & shell, structural finishing.", image: "assets/projects/GODREJ-INFINITY.jpg" },
+  { num: "02", title: "Turnkey Projects",               desc: "Single point of accountability from design coordination through handover.",          image: "assets/projects/Solitaire-Business-Hub-II.jpeg" },
+  { num: "03", title: "Industrial Projects",            desc: "Factories, R&D centres and process plants engineered for heavy operational load.", image: "assets/projects/PRAJ-INDUSTRIES.png" },
+  { num: "04", title: "Residential Projects",            desc: "Highrise and township construction built for scale, safety and speed.",            image: "assets/projects/Trump-Tower.jpg" },
+  { num: "05", title: "Institutional Projects",          desc: "Schools, colleges and research campuses delivered to exacting specification.",      image: "assets/projects/Rejuve.jpg" },
+  { num: "06", title: "Project Management",              desc: "Schedule, cost and quality control across every stakeholder and site.",             image: "assets/projects/43PD-1-scaled.jpg" },
 ];
 
 const projects = [
-  { name: "Panchshil Highrise Towers", location: "Kharadi, Pune",       type: "Civil Structural Framework",       image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
-  { name: "Trump Towers Pune",         location: "Kalyani Nagar, Pune", type: "Luxury Highrise · Civil Handover",  image: "assets/projects/Trump-Tower.jpg" },
-  { name: "Godrej Boulevard",          location: "Mamurdi, Pune",       type: "Residential Framework",             image: "assets/projects/Godrej-Forest-grove.jpg" },
-  { name: "VTP Bel Air",               location: "Mahalunge, Pune",     type: "Complex Core Works",                image: "assets/projects/VTP-scaled.jpg" },
-  { name: "Gera Commerzone",           location: "Kharadi, Pune",       type: "Commercial Core Infrastructure",    image: "assets/projects/gera-songs-of-joy-01-large.png" },
-  { name: "Industrial Megaplex",       location: "Chakan, Pune",        type: "Industrial Structural Works",       image: "assets/projects/PRAJ-INDUSTRIES.png" },
-];
-
-const whyChoose: WhyCard[] = [
-  { stat: "95%+",      title: "Timely Delivery",        desc: "Over 95% of projects handed over on or ahead of schedule — backed by rigorous scheduling and proactive site governance.", image: "assets/projects/Trump-Tower.jpg" },
-  { stat: "ISO 45001", title: "Safety First",           desc: "ISO 45001:2018 certified. Zero-compromise safety protocols on every site, protecting our teams on India's most complex builds.", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
-  { stat: "25+ Years", title: "Engineering Excellence", desc: "25+ years of structural engineering expertise on India's most ambitious and technically demanding projects.", image: "assets/projects/Godrej-Forest-grove.jpg" },
-  { stat: "ISO 9001",  title: "Quality Assurance",      desc: "ISO 9001:2015 certified quality management applied across every project phase — from structural planning to final handover.", image: "assets/projects/Emirus-scaled.jpg" },
+  { name: "Trump Tower",                 location: "Kalyani Nagar, Pune", type: "Panchshil Group",    image: "assets/projects/Trump-Tower.jpg" },
+  { name: "Panchshil Highrise Towers",   location: "Wagholi, Pune",       type: "Panchshil Group",    image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { name: "Godrej Nurture",              location: "Mamurdi, Pune",       type: "Godrej Properties", image: "assets/projects/Godrej-Forest-grove.jpg" },
+  { name: "EON Phase II",                location: "Kharadi, Pune",       type: "Panchshil Group",    image: "assets/projects/Eonwest.jpg" },
+  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        type: "Industrial",        image: "assets/projects/PRAJ-INDUSTRIES.png" },
+  { name: "Kalpataru Jade Residences",  location: "Baner, Pune",         type: "Kalpataru",          image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
 ];
 
 const testimonials = [
-  { quote: "MECPL delivered our 42-storey tower ahead of schedule with exceptional structural quality. Their site management and safety protocols set a new benchmark in the industry.",               name: "Mr. Atul Chordia",    role: "Chairman, Panchshil Realty", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
-  { quote: "Working with MECPL on Trump Towers Pune was a seamless experience. Their technical precision, proactive communication, and zero-compromise quality made them an invaluable partner.",      name: "Project Director",    role: "Trump Towers Pune",          image: "assets/projects/Trump-Tower.jpg"          },
-  { quote: "MECPL's team demonstrated remarkable engineering capability throughout the Godrej Boulevard project. Their ability to manage complexity at scale is truly impressive.",                    name: "Senior Project Head", role: "Godrej Properties",          image: "assets/projects/GODREJ-INFINITY.jpg"      },
+  { quote: "MECPL is equipped with better infrastructure and well-qualified, experienced staff — capable of handling any type of project.", name: "Pride Properties", role: "Certificate of Testimony", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { quote: "We were particularly impressed by MECPL's professional expertise and interaction with our project managers — despite the site's unyielding terrain.", name: "Mahindra United World College", role: "Project Correspondence", image: "assets/projects/Trump-Tower.jpg" },
+  { quote: "Millennium Engineers & Contractors completed our Universal Temple project on time, with real professionalism and skilled staff.", name: "Swami Bhaumananda", role: "President, Ramakrishna Math", image: "assets/projects/GODREJ-INFINITY.jpg" },
 ];
 
 const clients = [
-  { name: "Panchshil Realty",  logo: "assets/clients/client-09-1.webp" },
-  { name: "VTP Realty",        logo: "assets/clients/vtp-realty.webp"  },
-  { name: "Godrej Properties", logo: "assets/clients/client-12-1.webp" },
-  { name: "TCS",               logo: "assets/clients/client-06.webp"   },
-  { name: "Kalpataru",         logo: "assets/clients/client-14.webp"   },
-  { name: "K Raheja Corp",     logo: "assets/clients/client-17.webp"   },
-  { name: "Malpani Group",     logo: "assets/clients/client-13.webp"   },
-  { name: "Gera Developments", logo: "assets/clients/client-05.webp"   },
-  { name: "Pride Purple",      logo: "assets/clients/client-15-1.webp" },
-  { name: "OmniActive",        logo: "assets/clients/omniactive.webp"  },
+  { name: "Panchshil Group",      logo: "assets/clients/client-09-1.webp" },
+  { name: "Godrej Properties",    logo: "assets/clients/client-12-1.webp" },
+  { name: "K Raheja Corp",        logo: "assets/clients/client-17.webp"   },
+  { name: "Kalpataru",            logo: "assets/clients/client-14.webp"   },
+  { name: "Tata Consultancy",     logo: "assets/clients/client-06.webp"   },
+  { name: "Gera Developers",      logo: "assets/clients/client-05.webp"   },
+  { name: "Pride Builders",       logo: "assets/clients/client-15-1.webp" },
+  { name: "Syntel International", logo: "assets/clients/omniactive.webp"  },
+  { name: "Praj Industries",      logo: "assets/clients/client-13.webp"   },
+  { name: "Mahindra",             logo: "assets/clients/vtp-realty.webp"  },
+  { name: "Sahara India",         logo: "assets/clients/client-09-1.webp" },
+  { name: "Cadbury India",        logo: "assets/clients/client-12-1.webp" },
 ];
 
 const masonryCols = [
@@ -130,13 +119,11 @@ export default function HomePage() {
   const heroSectionRef  = useRef<HTMLElement>(null);
   const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
   const heroTagRef      = useRef<HTMLElement>(null);
-  const [activeWhy, setActiveWhy] = useState<number>(0);
   const heroSubRef      = useRef<HTMLDivElement>(null);
   const statsRef        = useRef<HTMLElement>(null);
   const aboutRef        = useRef<HTMLElement>(null);
   const servicesRef     = useRef<HTMLElement>(null);
   const projTrackRef = useRef<HTMLDivElement>(null);
-  const whyRef          = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
   const clientsRef      = useRef<HTMLElement>(null);
   const certSectionRef  = useRef<HTMLElement>(null);
@@ -325,39 +312,6 @@ export default function HomePage() {
     return () => mm.revert();
   }, []);
 
-  /* ── WHY CHOOSE: section entrance ── */
-  useEffect(() => {
-    const sec = whyRef.current;
-    if (!sec) return;
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const leftCol = sec.querySelector<HTMLElement>(".why-left-col");
-        if (!leftCol) return;
-        gsap.from(leftCol, {
-          x: -40, opacity: 0, duration: 0.9, ease: "power3.out",
-          scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
-        });
-      });
-    }, sec);
-    return () => ctx.revert();
-  }, []);
-
-  /* ── WHY CHOOSE: SplitText reveal on active change ── */
-  useEffect(() => {
-    const sec = whyRef.current;
-    if (!sec) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const desc = sec.querySelector<HTMLElement>(`.why-desc[data-idx="${activeWhy}"]`);
-    if (!desc) return;
-    let split: SplitText | null = null;
-    const raf = requestAnimationFrame(() => {
-      split = SplitText.create(desc, { type: "lines", mask: "lines" });
-      gsap.from(split.lines, { yPercent: 110, duration: 0.55, ease: "power3.out", stagger: 0.07 });
-    });
-    return () => { cancelAnimationFrame(raf); split?.revert(); };
-  }, [activeWhy]);
-
   /* ── TESTIMONIALS: card stagger ── */
   useEffect(() => {
     const sec = testimonialsRef.current;
@@ -468,7 +422,7 @@ export default function HomePage() {
               letterSpacing: "0.18em", textTransform: "uppercase",
               marginBottom: "14px",
             }}>
-              Millennium Engineers &amp; Contractors
+              Millennium Engineers &amp; Contractors Pvt. Ltd.
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
@@ -494,22 +448,48 @@ export default function HomePage() {
               {(heroSlides[videoIdx] ?? heroSlides[0]).subtitle}
             </p>
 
-            {/* Constant button */}
-            <Link href="/completed-projects" data-testid="button-hero-projects">
-              <span
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "8px",
-                  background: "#EC3338", color: "#ffffff",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
-                  letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
-                  padding: "14px 32px", cursor: "pointer",
-                }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
-              >
-                EXPLORE OUR WORK <ArrowRight size={11} />
-              </span>
-            </Link>
+            {/* Constant buttons */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+              <Link href="/completed-projects" data-testid="button-hero-projects">
+                <span
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "8px",
+                    background: "#EC3338", color: "#ffffff",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    padding: "14px 32px", cursor: "pointer",
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
+                >
+                  EXPLORE OUR WORK <ArrowRight size={11} />
+                </span>
+              </Link>
+              <Link href="/about">
+                <span
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "8px",
+                    border: "1px solid rgba(255,255,255,0.55)", color: "#ffffff",
+                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700,
+                    padding: "13px 28px", cursor: "pointer",
+                  }}
+                >
+                  WATCH OUR STORY <ArrowRight size={11} />
+                </span>
+              </Link>
+            </div>
+            <div style={{
+              marginTop: "22px",
+              color: "rgba(255,255,255,0.5)",
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "8px",
+              letterSpacing: "0.16em",
+              lineHeight: 1.6,
+              textTransform: "uppercase",
+            }}>
+              Recognised as one of India&apos;s Small Giants · SME 100 · Iconic Brand of the Year
+            </div>
           </div>
         </div>
 
@@ -582,20 +562,20 @@ export default function HomePage() {
 
             {/* Left: editorial */}
             <div>
-              <div className="about-fade" style={{ marginBottom: "36px" }}>
+              <div className="about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
                 <span className="home-section-label font-montserrat" style={{
                   fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
                   letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
-                  About MECPL
+                  Who We Are
                 </span>
                 <h3 className="hp-section-title font-montserrat" style={{
                   margin: "0 0 20px",
                 }}>
-                  Building India's Tomorrow
+                  From A ₹2 Lakh Beginning To ₹780 Cr
                 </h3>
-                <div style={{ width: "40px", height: "3px", background: "#EC3338" }} />
+                <div style={{ width: "40px", height: "3px", background: "#EC3338", margin: "0 auto" }} />
               </div>
 
               {/* Clip-path wipe pull-quote */}
@@ -613,7 +593,7 @@ export default function HomePage() {
                   fontWeight: 300, color: "rgba(17,24,39,0.8)",
                   lineHeight: 1.6, margin: 0, letterSpacing: "-0.01em",
                 }}>
-                  "Structural partner of choice for India's most ambitious developers — delivering landmark projects, built to outlast generations, since 1998."
+                  “Bringing positive changes in the lives of the people around me is the biggest achievement I've had in my life.”
                 </p>
               </div>
 
@@ -622,11 +602,11 @@ export default function HomePage() {
                   fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
                   lineHeight: 1.85, color: "#949599", marginBottom: "28px",
                 }}>
-                  From Trump Towers to Panchshil's skyline-defining highrises, MECPL brings ISO-certified precision and 25 years of on-site engineering wisdom to every project.
+                  Millennium Engineers &amp; Contractors began in 1973 as a small partnership, taken on by an engineer who wasn't content working for someone else. Four and a half decades on, that same commitment to quality and timely delivery has grown MECPL into one of Pune's most trusted structural engineering and construction names — ISO-certified, CRISIL-rated, and built on 3,000+ skilled hands.
                 </p>
 
                 <div className="flex flex-wrap gap-2" style={{ marginBottom: "32px" }}>
-                  {["ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "CRISIL SME 1"].map(cert => (
+                  {["ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018", "CRISIL BBB / POSITIVE"].map(cert => (
                     <span key={cert} style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
                       letterSpacing: "0.12em", textTransform: "uppercase",
@@ -647,7 +627,7 @@ export default function HomePage() {
                       textTransform: "none", fontWeight: 600,
                     }}
                   >
-                    Our Full Story <ArrowRight size={12} />
+                    Read Our Full Story <ArrowRight size={12} />
                   </span>
                 </Link>
               </div>
@@ -684,23 +664,33 @@ export default function HomePage() {
             letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            Recognition
+             Recognition
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
           }}>
-            Certifications &amp; Awards
+             Awards &amp; Accolades
           </h3>
+          <p className="page-subtitle-font" style={{
+            maxWidth: "640px",
+            margin: "16px auto 0",
+            color: "#949599",
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "13px",
+            lineHeight: 1.7,
+          }}>
+            Our commitment to safety, quality and engineering excellence — recognised nationally.
+          </p>
         </div>
 
         {/* 4 certificate cards — static grid */}
         <div className="max-w-5xl mx-auto" style={{ padding: "0 40px" }}>
           <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: "24px" }}>
-            {[
-              { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "ISO 9001:2015" },
-              { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "ISO 14001:2015" },
-              { src: "assets/awards/mpl_2020_04.jpg",                label: "ISO 45001:2018" },
-              { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "CRISIL SME 1" },
+              {[
+               { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "2025 · 16th CIDC Vishwakarma Award" },
+               { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "2025 · NSCI Safety Award — Group A" },
+               { src: "assets/awards/mpl_2020_04.jpg",                label: "2023 · ICI (Pune) – UltraTech Award" },
+               { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "2018 · Iconic Brand of the Year" },
             ].map((cert, i) => (
               <div
                 key={i}
@@ -761,7 +751,7 @@ export default function HomePage() {
               letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
               display: "block", marginBottom: "10px",
             }}>
-              What We Build
+              What We Do
             </span>
             <h3 className="hp-section-title font-montserrat" style={{
               margin: 0,
@@ -827,6 +817,16 @@ export default function HomePage() {
           }}>
             Landmark Works
           </h3>
+          <p className="page-subtitle-font" style={{
+            maxWidth: "620px",
+            margin: "16px auto 0",
+            color: "#949599",
+            fontFamily: "'Montserrat',sans-serif",
+            fontSize: "13px",
+            lineHeight: 1.7,
+          }}>
+            A selection of the structures MECPL has delivered across Pune.
+          </p>
         </div>
 
         {/* Infinite ticker — hover to pause */}
@@ -905,134 +905,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-      {/* ══════════ 6. WHY CHOOSE — Accordion + Image ══════════ */}
-      <section
-        ref={whyRef}
-        data-testid="section-why-mecpl"
-        style={{ background: "#ffffff", position: "relative" }}
-      >
-        <div className="why-grid" style={{ display: "grid", gridTemplateColumns: "55% 45%", minHeight: "90vh" }}>
-
-          {/* LEFT: header + buttons + accordion */}
-          <div className="why-left-col" style={{
-            padding: "100px 60px 100px 80px",
-            display: "flex", flexDirection: "column", justifyContent: "center",
-          }}>
-            {/* Label + heading + intro */}
-            <div style={{ marginBottom: "36px" }}>
-              <span className="home-section-label font-montserrat" style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-                letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
-                display: "block", marginBottom: "10px",
-              }}>
-                Our Advantage
-              </span>
-              <h3 className="hp-section-title font-montserrat" style={{
-                margin: "0 0 16px",
-              }}>
-                Why Choose MECPL
-              </h3>
-              <p className="page-subtitle-font" style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
-                lineHeight: 1.75, color: "#949599", margin: 0, maxWidth: "400px",
-              }}>
-                Two decades of structural excellence — on time, on spec, and built to outlast generations.
-              </p>
-            </div>
-
-            {/* Accordion items */}
-            <div>
-              {whyChoose.map((item, i) => (
-                <div
-                  key={i}
-                  style={{ borderTop: "1px solid rgba(17,24,39,0.1)" }}
-                  onMouseEnter={() => setActiveWhy(i)}
-                >
-                  {/* Title row */}
-                  <div style={{
-                    display: "flex", justifyContent: "space-between", alignItems: "center",
-                    padding: "22px 0", cursor: "default",
-                  }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                      <span style={{
-                        fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
-                        color: activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.3)",
-                        letterSpacing: "0.22em", transition: "color 0.3s",
-                      }}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="home-accordion-title font-montserrat" style={{
-                        fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700,
-                        color: activeWhy === i ? "#111827" : "rgba(17,24,39,0.45)",
-                        textTransform: "uppercase", letterSpacing: "0.08em",
-                        transition: "color 0.3s",
-                      }}>
-                        {item.title}
-                      </span>
-                    </div>
-                    <div style={{
-                      width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                      border: `1.5px solid ${activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.15)"}`,
-                      background: activeWhy === i ? "#C41E3A" : "transparent",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      transition: "border-color 0.3s, background 0.3s",
-                    }}>
-                      <span style={{
-                        color: activeWhy === i ? "#fff" : "#9ca3af",
-                        fontSize: "15px", lineHeight: 1, marginTop: "-1px",
-                        fontFamily: "'Montserrat',sans-serif",
-                      }}>
-                        {activeWhy === i ? "−" : "+"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Expandable drawer */}
-                  <div className={`why-drawer${activeWhy === i ? " why-drawer-open" : ""}`}>
-                    <div style={{ paddingBottom: "28px" }}>
-                      <div style={{
-                        fontFamily: "'Montserrat',sans-serif",
-                        fontSize: "2rem", fontWeight: 800, color: "#EC3338",
-                        marginBottom: "10px", lineHeight: 1.0,
-                      }}>
-                        {item.stat}
-                      </div>
-                      <p
-                        className="why-desc"
-                        data-idx={i}
-                        style={{
-                          fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
-                          lineHeight: 1.8, color: "#949599", margin: 0,
-                        }}
-                      >
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              <div style={{ borderTop: "1px solid rgba(17,24,39,0.1)" }} />
-            </div>
-          </div>
-
-          {/* RIGHT: crossfading image */}
-          <div data-scroll-reveal="image" style={{ position: "relative", overflow: "hidden" }}>
-            {whyChoose.map((item, i) => (
-              <div key={i} style={{
-                position: "absolute", inset: 0,
-                opacity: activeWhy === i ? 1 : 0,
-                transition: "opacity 0.7s ease",
-                pointerEvents: "none",
-              }}>
-                <img
-                  src={`${assetBase}${item.image}`} alt={item.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ══════════ 6. PEOPLE & SAFETY ══════════ */}
+      <PeopleSafetySection />
       {/* ══════════ 7. TESTIMONIALS ══════════ */}
       <section
         ref={testimonialsRef}
@@ -1046,12 +920,12 @@ export default function HomePage() {
             letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            Client Voices
+             Client Voices
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
           }}>
-            What Our Clients Say
+             What Our Clients Say
           </h3>
         </div>
 
@@ -1132,7 +1006,7 @@ export default function HomePage() {
         ref={clientsRef}
         data-testid="section-clients"
         style={{
-          background: "#EC3338",
+           background: "#232529",
           borderTop: "1px solid rgba(0,0,0,0.07)",
           borderRadius: "8px",
           margin: "0 8px",
@@ -1147,7 +1021,7 @@ export default function HomePage() {
               letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            Our Clients
+             Our Clients
           </span>
            <h3 className="hp-section-title font-montserrat" style={{
              margin: 0,
@@ -1163,7 +1037,7 @@ export default function HomePage() {
             fontSize: "13px",
             lineHeight: 1.7,
           }}>
-            Built on trusted relationships with the teams shaping India&apos;s future.
+             Built on trusted relationships with the teams shaping India&apos;s future.
           </p>
         </div>
 

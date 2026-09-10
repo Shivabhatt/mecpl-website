@@ -925,6 +925,11 @@ html[data-theme="light"] select {
   font-family: var(--app-font-body) !important;
 }
 
+/* Keep the final page section visually connected to the shared footer. */
+.site-typography > main > [data-animate-page] > :last-child {
+  background-color: var(--mecpl-dark) !important;
+}
+
 .site-typography h1,
 .site-typography h2,
 .site-typography h3,
