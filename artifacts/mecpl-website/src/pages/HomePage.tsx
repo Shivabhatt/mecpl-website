@@ -950,8 +950,8 @@ export default function HomePage() {
       {/* ══════════ 6. ONGOING PROJECTS ══════════ */}
       <section
         data-testid="section-home-ongoing-projects"
-        style={{ background: "#f5f4f1", padding: "96px 40px 104px" }}
-        className="bg-[#ffff]">
+        style={{ background: "#ffffff", padding: "96px 40px 104px" }}
+      >
         <div className="max-w-7xl mx-auto">
           <div data-scroll-reveal="text" style={{ textAlign: "center", marginBottom: "22px" }}>
             <span className="home-section-label font-montserrat" style={{
