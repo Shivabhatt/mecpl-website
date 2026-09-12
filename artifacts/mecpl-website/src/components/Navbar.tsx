@@ -15,17 +15,13 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const [location]              = useLocation();
   const { openModal }           = useModal();
 
-  const isHome      = location === "/";
-  const isImageHero = isHome || location === "/about" || location === "/projects" || location === "/blog" || location === "/careers";
-  const transparent = isImageHero && !scrolled && !menuOpen;
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setIsAtTop(window.scrollY < 24);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,10 +31,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        transparent
-          ? "bg-transparent"
-          : "bg-white/[0.98] backdrop-blur-sm shadow-[0_1px_0_rgba(35,37,41,0.08)]"
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#232529] shadow-[0_1px_0_rgba(255,255,255,0.08)] transition-transform duration-500 ${
+        isAtTop || menuOpen ? "translate-y-0" : "-translate-y-full"
       }`}
       data-testid="navbar"
       data-navbar-root="true"
@@ -68,10 +62,8 @@ export default function Navbar() {
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <span
-                   className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
-                    transparent
-                      ? active ? "text-white" : "text-white/70 hover:text-white"
-                      : active ? "text-[#232529]" : "text-[#949599] hover:text-[#232529]"
+                  className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
+                    active ? "text-white" : "text-white/65 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -100,9 +92,7 @@ export default function Navbar() {
         {/* ── Mobile hamburger ── */}
         <button
           onClick={() => setMenuOpen((v) => !v)}
-          className={`md:hidden w-10 h-10 flex items-center justify-center transition-colors cursor-pointer ${
-            transparent ? "text-white" : "text-[#111827]"
-          }`}
+          className="md:hidden w-10 h-10 flex items-center justify-center text-white transition-colors cursor-pointer"
           data-testid="button-hamburger"
         >
           {menuOpen ? <X size={20} /> : <Menu size={20} />}

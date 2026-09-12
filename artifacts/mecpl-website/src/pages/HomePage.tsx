@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
 import PeopleSafetySection from "../components/PeopleSafetySection";
-import { ArrowRight, Star, ChevronDown } from "lucide-react";
+import { ArrowRight, Star, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -20,12 +20,12 @@ const heroVideos = [
 
 const heroSlides = [
   {
-    heading: ["TO BUILD IS A", "FORCE WITHIN US"],
-    subtitle: "We're Millennium Engineers & Contractors — a Pune-based construction company that turns ambitious ideas into buildings people trust. For 45 years, that's simply what we do.",
-  },
-  {
     heading: ["QUALITY YOU CAN SEE.", "SAFETY YOU CAN RELY ON."],
     subtitle: "A 3,000-strong team that treats every site like it's their own.",
+  },
+  {
+    heading: ["TO BUILD IS A", "FORCE WITHIN US"],
+    subtitle: "We're Millennium Engineers & Contractors — a Pune-based construction company that turns ambitious ideas into buildings people trust. For 45 years, that's simply what we do.",
   },
   {
     heading: ["45 YEARS OF", "BUILDING TRUST"],
@@ -38,10 +38,19 @@ const heroSlides = [
 ];
 
 const stats = [
-  { target: 45,  suffix: "+",    label: "Years of Legacy"             },
-  { target: 150, suffix: "+",    label: "Projects Delivered"           },
-  { target: 780, suffix: " Cr+", label: "Turnover, FY 2023–24"         },
-  { target: 25,  suffix: "+",    label: "Ongoing Prestigious Projects" },
+  { target: 45,  suffix: "+",   label: "Years of Legacy"             },
+  { target: 150, suffix: "+",   label: "Projects Delivered"           },
+  { target: 920, suffix: "+Cr", label: "Turnover"                     },
+  { target: 25,  suffix: "+",   label: "Ongoing Prestigious Projects" },
+];
+
+const recognitionData = [
+  { year: "2018", title: "India's Small Giants", desc: "Recognised nationally for our contribution to the MSME sector.", image: "assets/projects/GODREJ-INFINITY.jpg" },
+  { year: "2019", title: "SME 100 Award", desc: "Ranked among the top 100 SMEs in India for growth and excellence.", image: "assets/projects/Solitaire-Business-Hub-II.jpeg" },
+  { year: "2021", title: "Iconic Brand", desc: "Awarded for industry leadership and sustained trust over decades.", image: "assets/projects/Trump-Tower.jpg" },
+  { year: "2022", title: "ISO 9001:2015", desc: "Certified for Quality Management Systems across all our project sites.", image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { year: "2023", title: "ISO 45001:2018", desc: "Certified for Occupational Health and Safety Management.", image: "assets/projects/PRAJ-INDUSTRIES.png" },
+  { year: "2024", title: "CRISIL Rated", desc: "CRISIL BBB / POSITIVE rating reflecting our strong financial stability.", image: "assets/projects/Eonwest.jpg" },
 ];
 
 const services = [
@@ -60,6 +69,14 @@ const projects = [
   { name: "EON Phase II",                location: "Kharadi, Pune",       type: "Panchshil Group",    image: "assets/projects/Eonwest.jpg" },
   { name: "Mahindra Electric Facility", location: "Chakan, Pune",        type: "Industrial",        image: "assets/projects/PRAJ-INDUSTRIES.png" },
   { name: "Kalpataru Jade Residences",  location: "Baner, Pune",         type: "Kalpataru",          image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
+];
+
+const ongoingProjects = [
+  { name: "Panchshil SRA Dhanori", location: "Vishrantwadi, Pune", type: "Residential Development", floors: "Multi-Tower Project", desc: "Structural rehabilitation and high-density residential construction delivered with controlled concrete execution.", image: "assets/projects/SRA-DHANORI-scaled.jpg" },
+  { name: "VTP Township Framework", location: "Baner Highrise Sector, Pune", type: "Township Development", floors: "Phased Highrise Works", desc: "Large-scale township infrastructure with multi-tower structural work across phased development zones.", image: "assets/projects/VTP-scaled.jpg" },
+  { name: "Solitaire World Kothrud", location: "Kothrud, Pune", type: "Premium Residential", floors: "Highrise Towers", desc: "Premium residential towers combining high-specification concrete work with exacting quality standards.", image: "assets/projects/2.Solitaire-World-Kothrud.jpg" },
+  { name: "Wellington Sector", location: "Charholi, Pune", type: "Mega Township", floors: "Structural Framework", desc: "Mass township infrastructure supported by coordinated civil engineering and high-volume site execution.", image: "assets/projects/WhatsApp-Image-2025-05-06-at-17.24.37_0a4a5d3c-scaled.jpg" },
+  { name: "Malpani Soul String", location: "Baner, Pune", type: "Premium Residential", floors: "Multi-Tower Development", desc: "Precision structural construction for a contemporary residential development in Pune's western corridor.", image: "assets/projects/Malpani-Soul-String-scaled.jpg" },
 ];
 
 const testimonials = [
@@ -113,8 +130,20 @@ const masonryCols = [
 /* ─── COMPONENT ──────────────────────────────────────────────────── */
 export default function HomePage() {
   const [videoIdx, setVideoIdx] = useState(0);
+  const [ongoingProjectIndex, setOngoingProjectIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const assetBase = import.meta.env.BASE_URL;
+  const carouselProjects = ongoingProjects.map(
+    (_, offset) => ongoingProjects[(ongoingProjectIndex + offset) % ongoingProjects.length],
+  );
+
+  const showPreviousOngoingProject = () => {
+    setOngoingProjectIndex((current) => (current - 1 + ongoingProjects.length) % ongoingProjects.length);
+  };
+
+  const showNextOngoingProject = () => {
+    setOngoingProjectIndex((current) => (current + 1) % ongoingProjects.length);
+  };
 
   const heroSectionRef  = useRef<HTMLElement>(null);
   const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
@@ -126,7 +155,7 @@ export default function HomePage() {
   const projTrackRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
   const clientsRef      = useRef<HTMLElement>(null);
-  const certSectionRef  = useRef<HTMLElement>(null);
+  const recognitionRef  = useRef<HTMLElement>(null);
 
   /* ── HERO: entrance (SplitText chars + section slide-up) ── */
   useEffect(() => {
@@ -216,11 +245,10 @@ export default function HomePage() {
             triggered = true;
             numEls.forEach(el => {
               const target = parseFloat(el.dataset.target ?? "0");
-              const suffix = el.dataset.suffix ?? "";
               const tracker = { val: 0 };
               gsap.to(tracker, {
                 val: target, duration: 2.4, ease: "power2.out",
-                onUpdate: () => { el.textContent = Math.round(tracker.val) + suffix; },
+                onUpdate: () => { el.textContent = Math.round(tracker.val).toString(); },
               });
             });
           },
@@ -230,8 +258,24 @@ export default function HomePage() {
       mm.add("(prefers-reduced-motion: reduce)", () => {
         sec.querySelectorAll<HTMLElement>(".stat-num").forEach(el => {
           const target = parseFloat(el.dataset.target ?? "0");
-          const suffix = el.dataset.suffix ?? "";
-          el.textContent = target + suffix;
+          el.textContent = target.toString();
+        });
+      });
+    }, sec);
+    return () => ctx.revert();
+  }, []);
+
+  /* ── RECOGNITION: card stagger ── */
+  useEffect(() => {
+    const sec = recognitionRef.current;
+    if (!sec) return;
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const cards = sec.querySelectorAll<HTMLElement>(".rec-card");
+        gsap.from(Array.from(cards), {
+          y: 40, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: sec, start: "top 70%", toggleActions: "play none none none" },
         });
       });
     }, sec);
@@ -514,37 +558,121 @@ export default function HomePage() {
       <section
         ref={statsRef}
         data-testid="section-stats"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.06)", padding: "72px 40px" }}
+        style={{ background: "#232529", padding: "64px 40px" }}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: "1px", background: "rgba(0,0,0,0.06)" }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0 divide-x-0 lg:divide-x divide-white/10">
             {stats.map((s, i) => (
               <div
                 key={i}
                 data-scroll-reveal="text"
                 data-scroll-reveal-delay={String(i * 70)}
-                style={{ background: "#ffffff", padding: "36px 28px", textAlign: "center" }}
+                style={{ padding: "16px 28px", textAlign: "center" }}
               >
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", marginBottom: "10px" }}>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "2px", marginBottom: "8px" }}>
                   <span
                     className="stat-num"
                     data-target={s.target}
-                    data-suffix={s.suffix}
                     style={{
                       fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
-                      fontWeight: 500, color: "#EC3338", letterSpacing: "-0.025em", lineHeight: 1,
+                      fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
+                      fontWeight: 400, color: "#ffffff", letterSpacing: "-0.025em", lineHeight: 1,
                     }}
                   >
                     0
                   </span>
+                  <span style={{
+                    fontFamily: "'Montserrat',sans-serif",
+                    fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
+                    fontWeight: 400, color: "#EC3338", lineHeight: 1,
+                  }}>
+                    {s.suffix}
+                  </span>
                 </div>
-                <div className="home-stat-label font-montserrat font-medium text-[12px]" style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
-                  fontWeight: 600, letterSpacing: "0.18em",
-                  textTransform: "uppercase", color: "rgba(17,24,39,0.45)",
+                <div className="home-stat-label" style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                  fontWeight: 600, letterSpacing: "0.15em",
+                  textTransform: "uppercase", color: "rgba(255,255,255,0.5)",
                 }}>
                   {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* ══════════ 2.5 RECOGNITION ══════════ */}
+      <section id="recognition" ref={recognitionRef} style={{ padding: "100px 40px", background: "#ffffff" }}>
+        <div className="max-w-6xl mx-auto">
+          <div style={{ textAlign: "center", marginBottom: "72px" }}>
+            <span style={{
+              display: "inline-block",
+              color: "#EC3338",
+              fontFamily: "'Montserrat',sans-serif",
+              fontSize: "12px",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              marginBottom: "16px"
+            }}>
+              Recognition
+            </span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "24px", marginBottom: "16px" }}>
+              <div style={{ height: "1px", width: "80px", background: "rgba(0,0,0,0.1)" }} className="hidden sm:block" />
+              <h2 style={{
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
+                fontWeight: 500,
+                color: "#232529"
+              }}>
+                Awards &amp; Accolades
+              </h2>
+              <div style={{ height: "1px", width: "80px", background: "rgba(0,0,0,0.1)" }} className="hidden sm:block" />
+            </div>
+            <p style={{
+              color: "#949599",
+              fontSize: "15px",
+              fontFamily: "'Montserrat',sans-serif",
+              maxWidth: "600px",
+              margin: "0 auto"
+            }}>
+              Our commitment to safety, quality and engineering excellence—recognised nationally.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            {recognitionData.map((item, i) => (
+              <div key={i} className="rec-card" style={{
+                background: "#f7f7f6",
+                position: "relative",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "40px 32px 70px",
+                clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 30px), 50% 100%, 0 calc(100% - 30px))"
+              }}>
+                <div style={{
+                  width: "40px", height: "4px", background: "#EC3338", borderRadius: "2px", marginBottom: "24px"
+                }} />
+                <h3 style={{
+                  color: "#EC3338", fontFamily: "'Montserrat',sans-serif", fontSize: "16px", fontWeight: 600, marginBottom: "12px"
+                }}>
+                  {item.title}
+                </h3>
+                <p style={{
+                  color: "#62656b", fontSize: "12px", lineHeight: 1.6, marginBottom: "24px", minHeight: "40px"
+                }}>
+                  {item.desc}
+                </p>
+                <div style={{ width: "100%", height: "140px", overflow: "hidden", marginBottom: "0", background: "#fff" }}>
+                  <img src={import.meta.env.BASE_URL + item.image} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+                <div style={{
+                  fontSize: "20px", fontWeight: 600, fontFamily: "'Montserrat',sans-serif", color: "#232529",
+                  position: "absolute", bottom: "16px"
+                }}>
+                  {item.year}
                 </div>
               </div>
             ))}
@@ -568,7 +696,7 @@ export default function HomePage() {
                   letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
-                  Who We Are
+                  WHO WE ARE
                 </span>
                 <h3 className="hp-section-title font-montserrat" style={{
                   margin: "0 0 20px",
@@ -652,92 +780,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* ══════════ 4. CERTIFICATIONS ══════════ */}
-      <section
-        ref={certSectionRef}
-        data-testid="section-certifications"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "64px 0" }}
-      >
-        <div data-scroll-reveal="text" style={{ textAlign: "center", marginBottom: "48px", padding: "0 40px" }}>
-          <span className="home-section-label font-montserrat" style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-            letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
-            display: "block", marginBottom: "10px",
-          }}>
-             Recognition
-          </span>
-          <h3 className="hp-section-title font-montserrat" style={{
-            margin: 0,
-          }}>
-             Awards &amp; Accolades
-          </h3>
-          <p className="page-subtitle-font" style={{
-            maxWidth: "640px",
-            margin: "16px auto 0",
-            color: "#949599",
-            fontFamily: "'Montserrat',sans-serif",
-            fontSize: "13px",
-            lineHeight: 1.7,
-          }}>
-            Our commitment to safety, quality and engineering excellence — recognised nationally.
-          </p>
-        </div>
-
-        {/* 4 certificate cards — static grid */}
-        <div className="max-w-5xl mx-auto" style={{ padding: "0 40px" }}>
-          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: "24px" }}>
-              {[
-               { src: "assets/awards/mpl_2018_01-scaled.jpg",        label: "2025 · 16th CIDC Vishwakarma Award" },
-               { src: "assets/awards/rss_2019_01-scaled.jpg",         label: "2025 · NSCI Safety Award — Group A" },
-               { src: "assets/awards/mpl_2020_04.jpg",                label: "2023 · ICI (Pune) – UltraTech Award" },
-               { src: "assets/awards/WhatsApp-Image-2023-12-27.jpg",  label: "2018 · Iconic Brand of the Year" },
-            ].map((cert, i) => (
-              <div
-                key={i}
-                data-scroll-reveal="image"
-                data-scroll-reveal-delay={String(i * 90)}
-                style={{
-                  background: "#ffffff",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                  display: "flex", flexDirection: "column",
-                  transition: "box-shadow 0.25s, transform 0.25s",
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.boxShadow = "0 8px 40px rgba(196,30,58,0.12)";
-                  el.style.transform = "translateY(-4px)";
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.boxShadow = "0 4px 24px rgba(0,0,0,0.06)";
-                  el.style.transform = "translateY(0)";
-                }}
-              >
-                <div style={{ background: "#ffffff", padding: "28px 20px", flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "180px" }}>
-                  <img
-                    src={`${assetBase}${cert.src}`}
-                    alt={cert.label}
-                    style={{ width: "100%", maxHeight: "160px", objectFit: "contain", display: "block" }}
-                  />
-                </div>
-                <div style={{
-                  padding: "14px 16px",
-                  borderTop: "2px solid #C41E3A",
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                  fontWeight: 700, letterSpacing: "0.16em",
-                  textTransform: "uppercase", color: "#232529",
-                  textAlign: "center",
-                }}>
-                  {cert.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
       {/* ══════════ 4. SERVICES — Light bg hover-card grid ══════════ */}
       <section
         ref={servicesRef}
@@ -751,7 +793,7 @@ export default function HomePage() {
               letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
               display: "block", marginBottom: "10px",
             }}>
-              What We Do
+              WHAT WE DO
             </span>
             <h3 className="hp-section-title font-montserrat" style={{
               margin: 0,
@@ -801,7 +843,7 @@ export default function HomePage() {
       {/* ══════════ 5. PROJECTS — Horizontal carousel ══════════ */}
       <section
         data-testid="section-projects"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(35,37,41,0.07)", paddingTop: "80px" }}
+        style={{ background: "#232529", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "80px" }}
       >
         {/* Header row */}
         <div className="max-w-7xl mx-auto" data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "48px", textAlign: "center" }}>
@@ -810,17 +852,17 @@ export default function HomePage() {
                  letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-            Our Projects
+            OUR PROJECTS
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
-            margin: 0,
+            margin: 0, color: "#ffffff",
           }}>
             Landmark Works
           </h3>
           <p className="page-subtitle-font" style={{
             maxWidth: "620px",
             margin: "16px auto 0",
-            color: "#949599",
+            color: "rgba(255,255,255,0.58)",
             fontFamily: "'Montserrat',sans-serif",
             fontSize: "13px",
             lineHeight: 1.7,
@@ -844,7 +886,7 @@ export default function HomePage() {
                 <div style={{ paddingBottom: "20px", paddingRight: "16px" }}>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    letterSpacing: "0.24em", color: "rgba(17,24,39,0.25)",
+                    letterSpacing: "0.24em", color: "rgba(255,255,255,0.3)",
                     textTransform: "uppercase", marginBottom: "10px",
                   }}>
                     {String((i % projects.length) + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
@@ -854,7 +896,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "'Montserrat',sans-serif",
                       fontSize: "1.25rem", fontWeight: 600,
-                      color: "#232529",
+                      color: "#ffffff",
                       lineHeight: 1.15, textTransform: "uppercase",
                       letterSpacing: "-0.01em", marginBottom: "10px",
                     }}
@@ -863,7 +905,7 @@ export default function HomePage() {
                   </div>
                   <div style={{
                     fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
-                    color: "#949599", letterSpacing: "0.16em",
+                    color: "rgba(255,255,255,0.5)", letterSpacing: "0.16em",
                     textTransform: "uppercase",
                   }}>
                     {proj.location}&nbsp;·&nbsp;{proj.type}
@@ -897,12 +939,173 @@ export default function HomePage() {
                 fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
                 letterSpacing: "0.2em", color: "#EC3338",
                 textTransform: "none", fontWeight: 600,
-                borderBottom: "1px solid rgba(196,30,58,0.3)", paddingBottom: "5px",
+                borderBottom: "1px solid rgba(236,51,56,0.55)", paddingBottom: "5px",
               }}
             >
               View All 150+ Projects <ArrowRight size={12} />
             </span>
           </Link>
+        </div>
+      </section>
+      {/* ══════════ 6. ONGOING PROJECTS ══════════ */}
+      <section
+        data-testid="section-home-ongoing-projects"
+        style={{ background: "#f5f4f1", padding: "96px 40px 104px" }}
+        className="bg-[#ffff]">
+        <div className="max-w-7xl mx-auto">
+          <div data-scroll-reveal="text" style={{ textAlign: "center", marginBottom: "22px" }}>
+            <span className="home-section-label font-montserrat" style={{
+              display: "block",
+              marginBottom: "10px",
+              color: "#EC3338",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            }}>
+              WHAT WE DO
+            </span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "24px" }}>
+              <div className="hidden sm:block" style={{ width: "180px", height: "1px", background: "rgba(35,37,41,0.28)" }} />
+              <h3 className="hp-section-title font-montserrat" style={{ margin: 0, color: "#232529", textTransform: "uppercase" }}>
+                Our Ongoing Projects
+              </h3>
+              <div className="hidden sm:block" style={{ width: "180px", height: "1px", background: "rgba(35,37,41,0.28)" }} />
+            </div>
+          </div>
+
+          {/* Architectural gallery */}
+          <div style={{
+            position: "relative",
+            marginBottom: 0,
+            padding: "14px",
+            background: "#deddd9",
+          }}>
+            <button
+                type="button"
+                aria-label="Show previous ongoing project"
+                onClick={showPreviousOngoingProject}
+                className="flex"
+                style={{
+                  position: "absolute", left: "-18px", top: "50%", zIndex: 4,
+                  width: "38px", height: "38px", borderRadius: "50%",
+                  transform: "translateY(-50%)", alignItems: "center", justifyContent: "center",
+                  border: 0, background: "#232529", color: "#ffffff", cursor: "pointer",
+                }}
+              >
+                <ChevronLeft size={18} />
+            </button>
+
+            <div
+              data-scroll-reveal="image"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 md:h-[480px] items-stretch md:items-end"
+              style={{ gap: "10px", overflow: "hidden" }}
+            >
+              {carouselProjects.map((project, i) => (
+                <Link
+                  key={project.name}
+                  href="/ongoing-projects"
+                  className={`h-[320px] md:min-h-0 ${
+                    i % 2 === 0 ? "md:h-full" : "md:h-[78%]"
+                  } ${i === 4 ? "hidden md:block" : ""}`}
+                >
+                  <div
+                    className="group h-full cursor-pointer"
+                    style={{
+                      position: "relative",
+                      overflow: "hidden",
+                      background: "#deddd9",
+                    }}
+                  >
+                    <img
+                      src={`${assetBase}${project.image}`}
+                      alt={project.name}
+                      loading="lazy"
+                      className="group-hover:scale-105"
+                      style={{
+                        width: "100%", height: "100%", objectFit: "cover", display: "block",
+                        transition: "transform 700ms ease",
+                      }}
+                    />
+                    <div style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(180deg, rgba(20,22,25,0.02) 38%, rgba(20,22,25,0.92) 100%)",
+                      pointerEvents: "none",
+                    }} />
+                    <div style={{
+                      position: "absolute",
+                      left: "18px",
+                      right: "18px",
+                      bottom: "18px",
+                      color: "#ffffff",
+                    }}>
+                      <h4 style={{
+                        margin: "0 0 7px",
+                        fontSize: "clamp(0.8rem, 1.25vw, 1.05rem)",
+                        fontWeight: 700,
+                        lineHeight: 1.2,
+                        textTransform: "uppercase",
+                      }}>
+                        {project.name}
+                      </h4>
+                      <p style={{
+                        margin: "0 0 4px",
+                        color: "rgba(255,255,255,0.78)",
+                        fontSize: "8px",
+                        fontWeight: 600,
+                        lineHeight: 1.4,
+                        letterSpacing: "0.07em",
+                        textTransform: "uppercase",
+                      }}>
+                        {project.floors}
+                      </p>
+                      <p style={{
+                        margin: 0,
+                        color: "rgba(255,255,255,0.62)",
+                        fontSize: "8px",
+                        lineHeight: 1.4,
+                        textTransform: "uppercase",
+                      }}>
+                        {project.location}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <button
+                type="button"
+                aria-label="Show next ongoing project"
+                onClick={showNextOngoingProject}
+                className="flex"
+                style={{
+                  position: "absolute", right: "-18px", top: "50%", zIndex: 4,
+                  width: "38px", height: "38px", borderRadius: "50%",
+                  transform: "translateY(-50%)", alignItems: "center", justifyContent: "center",
+                  border: 0, background: "#232529", color: "#ffffff", cursor: "pointer",
+                }}
+              >
+                <ChevronRight size={18} />
+            </button>
+          </div>
+
+          <div data-scroll-reveal="text" style={{ paddingTop: "24px", textAlign: "center" }}>
+            <Link href="/ongoing-projects" data-testid="button-all-ongoing-projects">
+              <span className="home-section-cta font-montserrat inline-flex items-center gap-2 cursor-pointer" style={{
+                color: "#EC3338",
+                fontSize: "10px",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                borderBottom: "1px solid rgba(236,51,56,0.35)",
+                paddingBottom: "6px",
+              }}>
+                View All Ongoing Projects <ArrowRight size={12} />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
       {/* ══════════ 6. PEOPLE & SAFETY ══════════ */}
@@ -920,7 +1123,7 @@ export default function HomePage() {
             letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-             Client Voices
+             CLIENTS VOICES
           </span>
           <h3 className="hp-section-title font-montserrat" style={{
             margin: 0,
@@ -930,7 +1133,30 @@ export default function HomePage() {
         </div>
 
         {/* Masonry collage */}
-        <div data-scroll-reveal="image" style={{ overflow: "hidden", marginBottom: "64px", padding: "0 32px" }}>
+        <div
+          data-scroll-reveal="image"
+          className="grid grid-cols-2 gap-2 px-4 mb-10 md:hidden"
+        >
+          {masonryCols.flat().slice(0, 2).map((photo, index) => (
+            <div
+              key={`${photo.src}-${index}`}
+              className="h-40 overflow-hidden rounded-lg"
+            >
+              <img
+                src={photo.src}
+                alt=""
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div
+          data-scroll-reveal="image"
+          className="hidden md:block"
+          style={{ overflow: "hidden", marginBottom: "64px", padding: "0 32px" }}
+        >
           <div style={{ display: "flex", gap: "10px" }}>
             {masonryCols.map((col, ci) => (
               <div key={ci} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -1006,33 +1232,30 @@ export default function HomePage() {
         ref={clientsRef}
         data-testid="section-clients"
         style={{
-           background: "#232529",
-          borderTop: "1px solid rgba(0,0,0,0.07)",
-          borderRadius: "8px",
-          margin: "0 8px",
-          overflow: "hidden",
-          padding: "48px 0",
+           background: "#f5f4f1",
+           borderTop: "1px solid rgba(0,0,0,0.07)",
+           padding: "64px 0 0",
         }}
       >
         {/* Heading */}
-         <div data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
+          <div data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "32px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat" style={{
             fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.2em", color: "rgba(255,255,255,0.82)", textTransform: "none",
+              letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
-             Our Clients
+             OUR CLIENTS
           </span>
            <h3 className="hp-section-title font-montserrat" style={{
              margin: 0,
-             color: "#ffffff",
+              color: "#232529",
            }}>
             Trusted Partners
           </h3>
           <p className="page-subtitle-font" style={{
             maxWidth: "620px",
             margin: "14px auto 0",
-             color: "rgba(255,255,255,0.82)",
+              color: "#62656b",
             fontFamily: "'Montserrat',sans-serif",
             fontSize: "13px",
             lineHeight: 1.7,
@@ -1042,7 +1265,13 @@ export default function HomePage() {
         </div>
 
         {/* Single GSAP ticker */}
-        <div style={{ overflow: "hidden" }}>
+         <div style={{
+           overflow: "hidden",
+           margin: "0 8px",
+           padding: "28px 0",
+           background: "#232529",
+           borderRadius: "8px",
+         }}>
           <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "24px", width: "max-content" }}>
             {[...clients, ...clients].map((c, i) => (
               <div
