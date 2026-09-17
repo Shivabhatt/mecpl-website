@@ -949,6 +949,10 @@ html[data-theme="light"] select {
   font-weight: 600 !important;
 }
 
+.site-typography h2.people-safety-heading {
+  font-weight: 500 !important;
+}
+
 .site-typography h3,
 .site-typography h4,
 .site-typography h5,

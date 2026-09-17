@@ -2,11 +2,12 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 const safetyStats = [
-  { value: "3000+", label: "Skilled Workforce" },
-  { value: "Daily", label: "Safety Induction" },
+  { value: "8000+", label: "Skilled Workers" },
+  { value: "Distinction 2026", label: "International Safety Award · British Safety Council" },
   { value: "On-Site", label: "Medical Professional" },
   { value: "100%", label: "PPE Compliance" },
-  { value: "On-Site", label: "Crèche & Daycare" },
+  { value: "Labour Camp", label: "School Facility" },
+  { value: "Industry Experts", label: "Highly Qualified Professionals" },
   { value: "Segregated", label: "Waste & Recycling" },
 ];
 
@@ -44,17 +45,18 @@ export default function PeopleSafetySection() {
               People &amp; Safety
             </span>
             <h2
-              className="font-montserrat"
+              className="people-safety-heading font-montserrat lg:whitespace-nowrap font-medium"
               style={{
                 margin: "0 0 24px",
                 color: "#232529",
-                fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
-                fontWeight: 600,
+                fontSize: "36px",
+                fontWeight: 500,
                 lineHeight: 1.1,
               }}
             >
               Our Team Is
-              <br />
+              <br className="lg:hidden" />
+              <span className="hidden lg:inline"> </span>
               Our Substance
             </h2>
             <p
@@ -67,7 +69,7 @@ export default function PeopleSafetySection() {
                 maxWidth: "500px"
               }}
             >
-              Over 3,000 skilled workers, supported by daily safety induction,
+              Over 8,000 skilled workers, supported by daily safety induction,
               protective equipment allocation, vertigo tests and routine health
               check-ups — with a medical professional assigned to every site.
             </p>
@@ -88,7 +90,7 @@ export default function PeopleSafetySection() {
               “Our infrastructure is our strength. Our team is our substance.”
             </blockquote>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-              <Link href="/contact">
+              <Link href="/careers">
                 <span
                   className="font-montserrat transition-colors"
                   style={{
@@ -107,7 +109,7 @@ export default function PeopleSafetySection() {
                   onMouseEnter={e => (e.currentTarget.style.background = "#232529")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#EC3338")}
                 >
-                  View Our HSE Policy <ArrowRight size={13} />
+                  Join Our Team <ArrowRight size={13} />
                 </span>
               </Link>
               <Link href="/about">
@@ -137,7 +139,7 @@ export default function PeopleSafetySection() {
                     e.currentTarget.style.borderColor = "rgba(35,37,41,0.22)";
                   }}
                 >
-                  Safety Highlights <ArrowRight size={13} />
+                  View Our HSE Policy <ArrowRight size={13} />
                 </span>
               </Link>
             </div>
@@ -165,16 +167,19 @@ export default function PeopleSafetySection() {
           borderTop: "1px solid rgba(35,37,41,0.1)",
           padding: "48px 0",
         }}>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-10 lg:gap-y-0 divide-y-0 lg:divide-x divide-black/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 lg:gap-y-0 divide-y-0 lg:divide-x divide-black/10">
             {safetyStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center justify-center text-center px-4">
+              <div key={i} className="flex min-h-[112px] flex-col items-center justify-start px-4 text-center">
                 <div style={{
                   color: "#EC3338",
                   fontFamily: "'Montserrat',sans-serif",
-                  fontSize: "1.75rem",
+                  fontSize: "1.15rem",
                   fontWeight: 600,
-                  marginBottom: "8px",
-                  lineHeight: 1
+                  lineHeight: 1.25,
+                  minHeight: "50px",
+                  display: "flex",
+                   alignItems: "flex-start",
+                  justifyContent: "center",
                 }}>
                   {stat.value}
                 </div>
@@ -184,7 +189,12 @@ export default function PeopleSafetySection() {
                   fontSize: "9px",
                   fontWeight: 600,
                   letterSpacing: "0.15em",
-                  textTransform: "uppercase"
+                  lineHeight: 1.55,
+                  minHeight: "42px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "center",
+                  textTransform: "uppercase",
                 }}>
                   {stat.label}
                 </div>

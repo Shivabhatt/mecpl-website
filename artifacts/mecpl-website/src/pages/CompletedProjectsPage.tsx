@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, MapPin, Pause, Play } from "lucide-react";
+import { ArrowRight, Building2, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
 
 function useInView<T extends HTMLElement>() {
@@ -64,50 +64,64 @@ const typeBadge: Record<string, string> = {
   Special: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
 };
 
-const markerRings = [
-  { count: 1, radius: 0 },
-  { count: 5, radius: 7 },
-  { count: 6, radius: 13 },
-  { count: 6, radius: 19 },
-  { count: 7, radius: 25 },
-];
-
-const getMarkerPosition = (index: number) => {
-  let ringOffset = index;
-
-  for (let ringIndex = 0; ringIndex < markerRings.length; ringIndex += 1) {
-    const ring = markerRings[ringIndex];
-    if (ringOffset < ring.count) {
-      const angle = ring.count === 1
-        ? 0
-        : (ringOffset / ring.count) * Math.PI * 2 - Math.PI / 2 + (ringIndex % 2 ? Math.PI / ring.count : 0);
-      return {
-        mapX: 48 + Math.cos(angle) * ring.radius,
-        mapY: 57 + Math.sin(angle) * ring.radius * 0.82,
-      };
-    }
-    ringOffset -= ring.count;
-  }
-
-  return { mapX: 48, mapY: 57 };
+const areaCoordinates: Record<string, { mapX: number; mapY: number }> = {
+  "Charoli, Pune": { mapX: 63, mapY: 46 },
+  "Kharadi, Pune": { mapX: 68, mapY: 57 },
+  "Keshav Nagar, Pune": { mapX: 64, mapY: 61 },
+  "Baner, Pune": { mapX: 51, mapY: 57 },
+  "Wagholi, Pune": { mapX: 72, mapY: 54 },
+  "Kalyani Nagar, Pune": { mapX: 65, mapY: 55 },
+  "Mamurdi, Pune": { mapX: 50, mapY: 47 },
+  "Charholi, Pune": { mapX: 64, mapY: 46 },
+  "Balewadi, Pune": { mapX: 53, mapY: 54 },
+  "Wakad, Pune": { mapX: 54, mapY: 49 },
+  "Viman Nagar, Pune": { mapX: 67, mapY: 53 },
+  "Talawade IT Park": { mapX: 51, mapY: 44 },
+  "Tathawade, Pune": { mapX: 51, mapY: 50 },
+  "Mundhwa, Pune": { mapX: 65, mapY: 63 },
+  "Baudhan, Pune": { mapX: 49, mapY: 63 },
+  "Chakan, Pune": { mapX: 59, mapY: 39 },
+  "Pirangut, Pune": { mapX: 45, mapY: 66 },
+  "Sanaswadi, Pune": { mapX: 75, mapY: 61 },
+  "Ranjangaon, Pune": { mapX: 81, mapY: 65 },
+  "Pune City Hub": { mapX: 59, mapY: 60 },
 };
 
 const explorerProjects = allProjects.map((project, index) => {
-  const markerPosition = getMarkerPosition(index);
+  const markerPosition = areaCoordinates[project.location] ?? { mapX: 52, mapY: 58 };
+  const duplicateOffset = (index % 3) - 1;
 
   return {
     ...project,
-    ...markerPosition,
+    mapX: markerPosition.mapX + duplicateOffset * 1.25,
+    mapY: markerPosition.mapY + duplicateOffset * 0.8,
   };
 });
 
 export default function CompletedProjectsPage() {
   const [active, setActive] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 4;
   const filtered = active === "All" ? allProjects : allProjects.filter(p => p.type === active);
+  const totalPages = Math.ceil(filtered.length / projectsPerPage);
+  const visibleProjects = filtered.slice(
+    (currentPage - 1) * projectsPerPage,
+    currentPage * projectsPerPage,
+  );
+
+  const selectFilter = (filter: string) => {
+    setActive(filter);
+    setCurrentPage(1);
+  };
+
+  const selectPage = (page: number) => {
+    setCurrentPage(page);
+    document.getElementById("projects-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     const targetId = window.location.hash.slice(1);
-    if (!["projects-grid", "architecture-approach"].includes(targetId)) return;
+    if (!["project-metrics", "projects-grid", "architecture-approach"].includes(targetId)) return;
     const frame = window.requestAnimationFrame(() => {
       document.getElementById(targetId)?.scrollIntoView({ block: "start" });
     });
@@ -151,20 +165,44 @@ export default function CompletedProjectsPage() {
           <p className="mt-0 max-w-2xl font-montserrat font-medium text-sm leading-relaxed text-white/75 md:text-base">
             From visionary designs to enduring structures, explore 150+ successful projects across Pune.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-left">
-            {[
-              ["150+", "Projects Delivered"],
-              ["50M+", "Sq. Ft. Delivered"],
-              ["25+", "Locations in Pune"],
-            ].map(([value, label]) => (
-              <div key={label} className="flex items-center gap-2.5">
-                <span className="font-montserrat text-2xl font-medium tracking-tight text-white md:text-3xl">{value}</span>
-                <span className="max-w-[76px] font-montserrat text-[9px] font-bold uppercase leading-tight tracking-[0.12em] text-white/60">{label}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
+
+      {/* Project metrics */}
+      <section
+        id="project-metrics"
+        className="bg-[#232529] px-6 py-11 font-montserrat md:py-14"
+        data-testid="section-project-metrics"
+        aria-label="Project delivery metrics"
+      >
+        <div className="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-3">
+          {[
+            { value: "150", suffix: "+", label: "Projects Delivered" },
+            { value: "50M", suffix: "+", label: "Sq. Ft. Delivered" },
+            { value: "25", suffix: "+", label: "Locations in Pune" },
+          ].map((metric, index) => (
+            <div
+              key={metric.label}
+              className={`flex min-h-[112px] flex-col items-center justify-center px-6 py-5 text-center ${
+                index > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""
+              }`}
+            >
+              <div className="flex items-baseline justify-center">
+                <span className="text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
+                  {metric.value}
+                </span>
+                <span className="ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
+                  {metric.suffix}
+                </span>
+              </div>
+              <span className="mt-3 text-[8px] font-semibold uppercase leading-tight tracking-[0.2em] text-white/45 md:text-[9px]">
+                {metric.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
        <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
          <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
            Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
@@ -173,33 +211,69 @@ export default function CompletedProjectsPage() {
        </section>
       <ArchitectureApproach />
       <ProjectExplorer />
-      {/* Projects Grid */}
-      <section id="projects-grid" className="scroll-mt-20 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
-        {/* Filters */}
-        <div className="sticky top-20 z-30 -mx-6 mb-10 border-b border-black/[0.12] bg-white py-3 md:py-4" data-testid="section-project-filters">
-          <div className="mx-auto flex w-full max-w-7xl justify-start overflow-x-auto px-6 font-montserrat sm:justify-center">
-            <div className="flex w-full min-w-max items-center justify-between gap-5 font-montserrat sm:min-w-[42rem] sm:gap-8">
-              {filters.map(f => (
-                <button
-                  key={f}
-                  onClick={() => setActive(f)}
-                  aria-pressed={active === f}
-                  className={`cursor-pointer whitespace-nowrap py-2 font-montserrat text-[10px] font-bold normal-case tracking-[0.16em] transition-colors duration-300 sm:text-xs lg:text-[14px] ${
-                    active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
-                  }`}
-                  data-testid={`button-filter-${f.toLowerCase()}`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
+      {/* Sticky project filters */}
+      <div className="sticky top-0 z-40 border-b border-black/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
+        <div className="mx-auto flex w-full max-w-7xl justify-start overflow-x-auto px-6 font-montserrat sm:justify-center">
+          <div className="flex w-full min-w-max items-center justify-between gap-5 font-montserrat sm:min-w-[42rem] sm:gap-8">
+            {filters.map(f => (
+              <button
+                key={f}
+                onClick={() => selectFilter(f)}
+                aria-pressed={active === f}
+                className={`cursor-pointer whitespace-nowrap py-2 font-montserrat text-[10px] font-bold normal-case tracking-[0.16em] transition-colors duration-300 sm:text-xs lg:text-[14px] ${
+                  active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
+                }`}
+                data-testid={`button-filter-${f.toLowerCase()}`}
+              >
+                {f}
+              </button>
+            ))}
           </div>
         </div>
+      </div>
+
+      {/* Projects Grid */}
+      <section id="projects-grid" className="scroll-mt-16 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
         <div>
-          {filtered.map((project, i) => (
-            <ProjectCard key={`${active}-${i}`} project={project} index={i} />
+          {visibleProjects.map((project, i) => (
+            <ProjectCard key={project.name} project={project} index={(currentPage - 1) * projectsPerPage + i} />
           ))}
         </div>
+        {totalPages > 1 && (
+          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-black/[0.08] pt-8 font-montserrat" aria-label="Project pages">
+            <button
+              type="button"
+              onClick={() => selectPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(page => (
+              <button
+                key={page}
+                type="button"
+                onClick={() => selectPage(page)}
+                aria-current={currentPage === page ? "page" : undefined}
+                className={`h-10 min-w-10 border px-3 text-xs font-bold transition-colors ${
+                  currentPage === page
+                    ? "border-[#C41E3A] bg-[#C41E3A] text-white"
+                    : "border-black/[0.12] text-[#6b7280] hover:border-[#C41E3A] hover:text-[#C41E3A]"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => selectPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              Next
+            </button>
+          </nav>
+        )}
       </section>
     </div>
   );
@@ -263,13 +337,7 @@ function ArchitectureApproach() {
 }
 
 function ProjectExplorer() {
-  const [selectedIndex, setSelectedIndex] = useState(1);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [videoPaused, setVideoPaused] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(explorerProjects.length - 1);
   const selectedProject = explorerProjects[selectedIndex] ?? explorerProjects[0];
 
   useEffect(() => {
@@ -280,193 +348,208 @@ function ProjectExplorer() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches);
-    updateMotionPreference();
-    mediaQuery.addEventListener("change", updateMotionPreference);
-    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
-  }, []);
+  const showPreviousProject = () => {
+    setSelectedIndex(current => (current - 1 + explorerProjects.length) % explorerProjects.length);
+  };
 
-  useEffect(() => {
-    if (prefersReducedMotion || videoFailed || !videoRef.current) return;
-    videoRef.current.muted = true;
-  }, [prefersReducedMotion, videoFailed]);
-
-  const toggleVideoPlayback = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      void video.play();
-    } else {
-      video.pause();
-    }
+  const showNextProject = () => {
+    setSelectedIndex(current => (current + 1) % explorerProjects.length);
   };
 
   return (
     <section
       id="project-explorer"
-      className="scroll-mt-20 min-h-screen overflow-hidden bg-white font-montserrat"
+      className="scroll-mt-20 overflow-hidden bg-[#f5f4f0] font-montserrat"
       data-testid="section-project-explorer"
       aria-label="MECPL project explorer"
     >
-      <div className="grid min-h-screen w-full overflow-hidden bg-white lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-          <div className="relative min-h-[58vh] overflow-hidden bg-[#111827] lg:min-h-screen">
-            {videoFailed || prefersReducedMotion ? (
-              <img
-                src={selectedProject.image}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : (
-              <video
-                ref={videoRef}
-                className="absolute inset-0 h-full w-full object-cover"
-                src={`${assetBase}assets/video/projects-explorer.mp4`}
-                poster={selectedProject.image}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                onError={() => setVideoFailed(true)}
-                onPause={() => setVideoPaused(true)}
-                onPlay={() => setVideoPaused(false)}
-                aria-hidden="true"
-              />
-            )}
-            {!videoFailed && !prefersReducedMotion && (
-              <button
-                type="button"
-                onClick={toggleVideoPlayback}
-                className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/45 text-white backdrop-blur-sm transition-colors hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                aria-label={videoPaused ? "Play project video" : "Pause project video"}
+      <div className="mx-auto grid min-h-[720px] max-w-[1500px] bg-[#f5f4f0] lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative min-h-[520px] overflow-hidden bg-[#eef1ed] lg:min-h-full" data-scroll-reveal="image">
+              <svg
+                viewBox="0 0 720 720"
+                className="absolute inset-0 h-full w-full"
+                role="img"
+                aria-label="Map of Maharashtra highlighting Mumbai, Pune, and major project areas"
+                preserveAspectRatio="xMidYMid meet"
               >
-                {videoPaused ? <Play size={15} fill="currentColor" /> : <Pause size={15} fill="currentColor" />}
-              </button>
-            )}
-          </div>
+                <rect width="720" height="720" fill="#f6f5f0" />
+                <path
+                  d="M0 0 H176 C163 70 177 126 159 183 C146 230 166 280 149 328 C131 379 148 429 166 475 C184 521 202 583 230 720 H0 Z"
+                  fill="#dceff5"
+                />
+                <path
+                  d="M176 0 C255 22 326 8 407 38 C485 66 576 43 720 93 V638 C627 655 552 630 472 660 C379 695 301 653 230 720 C202 583 184 521 166 475 C148 429 131 379 149 328 C166 280 146 230 159 183 C177 126 163 70 176 0 Z"
+                  fill="#f1f0eb"
+                  stroke="#d8d6cf"
+                  strokeWidth="2"
+                />
+                <g fill="#dbe5d2" opacity="0.95">
+                  <path d="M165 68 C233 34 291 68 317 137 C264 170 207 165 166 129 Z" />
+                  <path d="M155 346 C218 298 288 326 314 394 C261 436 201 441 157 403 Z" />
+                  <path d="M278 502 C345 466 416 494 438 561 C381 596 321 581 274 545 Z" />
+                  <path d="M566 70 C626 45 678 65 720 91 V200 C655 209 603 165 566 70 Z" />
+                </g>
+                <g fill="none" stroke="#d6d5d0" strokeWidth="1.5">
+                  <path d="M173 98 C278 75 370 116 469 92 S628 86 720 118" />
+                  <path d="M159 229 C279 205 382 243 492 218 S635 214 720 244" />
+                  <path d="M149 381 C255 349 378 374 496 346 S642 351 720 380" />
+                  <path d="M178 535 C282 500 381 530 486 505 S630 512 720 542" />
+                  <path d="M230 0 C237 128 269 232 251 357 S248 551 286 701" />
+                  <path d="M448 0 C421 132 453 243 435 380 S425 553 470 661" />
+                </g>
+                <g fill="none" stroke="#ffffff" strokeWidth="9">
+                  <path d="M145 278 C239 307 329 335 426 376 S591 431 720 458" />
+                  <path d="M208 132 C272 211 330 277 397 344 S490 430 564 524" />
+                </g>
+                <g fill="none" stroke="#bfc1bd" strokeWidth="2">
+                  <path d="M145 278 C239 307 329 335 426 376 S591 431 720 458" />
+                  <path d="M208 132 C272 211 330 277 397 344 S490 430 564 524" />
+                </g>
+                <path d="M370 395 C432 407 466 391 523 410 C580 429 623 416 680 398" fill="none" stroke="#9bc9dc" strokeWidth="4" opacity="0.8" />
 
-          <div className="grid min-h-[42vh] bg-white lg:min-h-screen xl:grid-cols-[minmax(0,0.95fr)_minmax(280px,1.05fr)] xl:grid-rows-[auto_minmax(0,1fr)]">
-           <div className="px-6 pb-7 pt-10 font-montserrat sm:px-10 xl:col-span-2 xl:px-12 xl:pb-8 xl:pt-12" data-scroll-reveal="text">
-              <h2 className="mt-3 max-w-2xl text-2xl font-medium uppercase leading-tight tracking-[-0.025em] text-primary sm:text-3xl">
-                Building with purpose.
-              </h2>
-              <p className="mt-3 max-w-2xl text-xs leading-relaxed text-black sm:text-sm">
-                From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,
-                responsibility, and a long-term view of Pune.
-              </p>
-            </div>
+                <g fontFamily="Montserrat, sans-serif">
+                  <text x="329" y="246" fill="#858987" fontSize="18" letterSpacing="6">MAHARASHTRA</text>
+                  <text x="29" y="510" fill="#8bb5c4" fontSize="11" letterSpacing="5">ARABIAN</text>
+                  <text x="48" y="529" fill="#8bb5c4" fontSize="11" letterSpacing="5">SEA</text>
+                  <text x="217" y="306" fill="#777b79" fontSize="9">NH 48</text>
+                  <text x="396" y="565" fill="#777b79" fontSize="9">NH 65</text>
 
-           <div className="relative min-h-[540px] cursor-pointer overflow-hidden bg-white xl:min-h-0" data-scroll-reveal="image">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_48%_57%,rgba(236,51,56,0.06),transparent_24%),linear-gradient(135deg,#ffffff_0%,#ffffff_100%)]" />
-            <svg
-              viewBox="0 0 720 620"
-              className="absolute inset-0 h-full w-full scale-[1.6] transform"
-              aria-hidden="true"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <linearGradient id="india-map-fill" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="100%" stopColor="#949599" stopOpacity="0.18" />
-                </linearGradient>
-                <filter id="projects-map-glow" x="-100%" y="-100%" width="300%" height="300%">
-                  <feGaussianBlur stdDeviation="12" />
-                </filter>
-              </defs>
-              <rect width="720" height="620" fill="#ffffff" />
-              <circle cx="346" cy="354" r="178" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
-              <circle cx="346" cy="354" r="125" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
-              <circle cx="346" cy="354" r="76" fill="none" stroke="#949599" strokeOpacity="0.28" strokeWidth="1.4" strokeDasharray="3 6" />
-              <path
-                d="M347 60 C367 72 388 73 409 89 L430 82 L449 101 L472 111 L494 132 L517 144 L503 165 L475 174 L468 194 L490 219 L515 237 L539 262 L520 279 L492 287 L482 310 L470 331 L458 353 L446 377 L436 403 L422 427 L414 455 L397 492 L380 531 L363 499 L351 469 L332 447 L312 421 L286 408 L259 389 L236 364 L250 343 L273 329 L262 307 L243 289 L256 267 L283 253 L300 227 L320 207 L337 184 L350 161 L344 139 L327 122 L334 101 L322 82 Z"
-                fill="url(#india-map-fill)"
-                stroke="#949599"
-                strokeWidth="2.2"
-                strokeLinejoin="round"
-              />
-              <g fill="none" stroke="#949599" strokeWidth="1" opacity="0.35">
-                <path d="M332 121 C374 148 428 169 475 174" />
-                <path d="M300 227 C346 235 422 232 490 219" />
-                <path d="M262 307 C326 303 407 315 470 331" />
-                <path d="M286 408 C337 382 398 373 446 377" />
-                <path d="M350 161 C366 235 365 340 351 469" />
-              </g>
-              <circle cx="346" cy="354" r="48" fill="#C41E3A" opacity="0.08" filter="url(#projects-map-glow)" />
-              <circle cx="346" cy="354" r="18" fill="none" stroke="#C41E3A" strokeWidth="1.5" opacity="0.42" />
-              <circle cx="346" cy="354" r="6" fill="#C41E3A" />
-            </svg>
+                  {[
+                    ["Thane", 150, 173],
+                    ["Andheri", 137, 219],
+                    ["Bandra", 139, 263],
+                    ["Navi Mumbai", 146, 307],
+                    ["Hinjawadi", 333, 365],
+                    ["Wakad", 438, 369],
+                    ["Baner", 359, 423],
+                    ["Kharadi", 514, 424],
+                    ["Bavdhan", 344, 471],
+                    ["Hadapsar", 509, 474],
+                    ["Kothrud", 362, 520],
+                    ["Pashan", 461, 520],
+                  ].map(([label, x, y]) => (
+                    <g key={String(label)}>
+                      <path d={`M${Number(x) - 12} ${Number(y) - 4}a7 7 0 1 1 14 0c0 6-7 12-7 12s-7-6-7-12Z`} fill="#df2832" stroke="#ffffff" strokeWidth="2" />
+                      <circle cx={Number(x) - 5} cy={Number(y) - 4} r="2.2" fill="#ffffff" />
+                      <text x={Number(x) + 4} y={Number(y)} fill="#3f4442" fontSize="10" fontWeight="600">{label}</text>
+                    </g>
+                  ))}
 
-            <div className="pointer-events-none absolute inset-0">
-              <span className="absolute left-[48%] top-[28%] -translate-x-1/2 font-montserrat text-[9px] font-bold tracking-[0.2em] text-[#C41E3A]">
-                Pune
-              </span>
-            </div>
+                  <g transform="translate(72 236)">
+                    <path d="M0 0 H76 V28 H0 Z" fill="#333837" />
+                    <text x="38" y="19" textAnchor="middle" fill="#ffffff" fontSize="12" fontWeight="700">MUMBAI</text>
+                  </g>
+                  <g transform="translate(405 405)">
+                    <path d="M0 0 H55 V27 H0 Z" fill="#333837" />
+                    <text x="27.5" y="18" textAnchor="middle" fill="#ffffff" fontSize="12" fontWeight="700">PUNE</text>
+                  </g>
 
-            <div className="absolute inset-0">
-              {explorerProjects.map((project, index) => {
-                const selected = index === selectedIndex;
-                return (
-                  <button
-                    key={`${project.name}-${project.location}`}
-                    type="button"
-                    aria-label={`View ${project.name}, ${project.location}`}
-                    aria-pressed={selected}
-                    onMouseEnter={() => setSelectedIndex(index)}
-                    onFocus={() => setSelectedIndex(index)}
-                    onClick={() => setSelectedIndex(index)}
-                    className="group absolute z-20 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C41E3A] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                    style={{ left: `${project.mapX}%`, top: `${project.mapY}%` }}
-                  >
-                    <span
-                      className={`relative flex h-4 w-4 items-center justify-center rounded-full border transition-all duration-300 ${
-                        selected
-                          ? "scale-150 border-[#C41E3A] bg-[#C41E3A] shadow-[0_0_0_8px_rgba(196,30,58,0.13),0_0_24px_rgba(196,30,58,0.3)]"
-                          : "border-[#C41E3A] bg-[#C41E3A] shadow-[0_0_0_4px_rgba(196,30,58,0.08)] group-hover:scale-125"
-                      }`}
+                  <text x="205" y="39" fill="#858987" fontSize="9">↑ Towards Nashik</text>
+                  <text x="600" y="298" fill="#858987" fontSize="9">Towards Ahmednagar →</text>
+                  <text x="449" y="691" fill="#858987" fontSize="9">Towards Bengaluru ↓</text>
+                  <g transform="translate(662 612)" fill="#4c5250">
+                    <path d="M10 0 L20 27 L10 21 L0 27 Z" />
+                    <text x="10" y="43" textAnchor="middle" fontSize="11" fontWeight="700">N</text>
+                  </g>
+                </g>
+              </svg>
+              <div className="absolute inset-0">
+                {explorerProjects.map((project, index) => {
+                  const selected = selectedIndex === index;
+                  return (
+                    <button
+                      key={`${project.name}-${project.location}`}
+                      type="button"
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      onFocus={() => setSelectedIndex(index)}
+                      onClick={() => setSelectedIndex(index)}
+                      aria-label={`Show ${project.name} in ${project.location}`}
+                      aria-pressed={selected}
+                      className="group absolute z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC3338] focus-visible:ring-offset-2"
+                      style={{ left: `${project.mapX}%`, top: `${project.mapY}%` }}
                     >
-                      <span className="h-1 w-1 rounded-full bg-white" />
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                      <span
+                        className={`block rounded-full border-2 border-white bg-[#EC3338] shadow-[0_2px_7px_rgba(80,0,0,0.35)] transition-all ${
+                          selected
+                            ? "h-4 w-4 scale-125 ring-[7px] ring-[#EC3338]/20"
+                            : "h-3 w-3 group-hover:h-4 group-hover:w-4"
+                        }`}
+                      />
+                      <span className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 hidden min-w-max -translate-x-1/2 bg-[#232529] px-3 py-2 text-left text-white shadow-lg group-hover:block group-focus:block">
+                        <strong className="block text-[10px] font-semibold leading-tight">{project.name}</strong>
+                        <span className="mt-1 block text-[8px] text-white/65">{project.location}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <article
-              className="flex h-full flex-col justify-start bg-white p-5 text-[#232529] sm:p-6"
+              className="flex h-full flex-col bg-[#f8f7f3] px-6 py-10 text-[#232529] sm:px-10 lg:px-12 lg:py-12"
               aria-live="polite"
               data-testid="project-map-detail-card"
             >
-               <div className="relative mb-5 h-96 shrink-0 overflow-hidden bg-white sm:h-[28rem] xl:h-[56vh]" data-scroll-reveal="image">
+              <div className="mb-5 flex items-start justify-between gap-6">
+                <div>
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
+                    Featured Project
+                  </span>
+                  <h2 className="mt-2 text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.035em] text-[#1f2428]">
+                    {selectedProject.name}
+                  </h2>
+                </div>
+                <div className="shrink-0 text-right">
+                  <span className="text-[9px] font-semibold tracking-[0.14em] text-[#8b8d8c]">
+                    {String(selectedIndex + 1).padStart(2, "0")} / {String(explorerProjects.length).padStart(2, "0")}
+                  </span>
+                  <div className="mt-2 flex justify-end gap-1">
+                    <button type="button" onClick={showPreviousProject} className="flex h-8 w-8 items-center justify-center text-[#454a4d] transition-colors hover:text-[#EC3338]" aria-label="Previous featured project">
+                      <ChevronLeft size={17} />
+                    </button>
+                    <button type="button" onClick={showNextProject} className="flex h-8 w-8 items-center justify-center text-[#454a4d] transition-colors hover:text-[#EC3338]" aria-label="Next featured project">
+                      <ChevronRight size={17} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-white" data-scroll-reveal="image">
                 <img
                   src={selectedProject.image}
                   alt={`${selectedProject.name} project`}
-                  className="h-full w-full object-cover transition-transform duration-700"
+                   className="h-full w-full object-cover transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                 <span className="absolute bottom-0 left-0 bg-[#EC3338] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-white">
+                   {selectedProject.location.split(",")[0]}
+                 </span>
               </div>
 
-              <div className="mt-auto">
-                <h3 className="mt-2 text-xl font-medium leading-tight tracking-[-0.02em] text-[#232529]">
-                  {selectedProject.name}
-                </h3>
-                <p className="mt-2 flex items-center gap-2 text-[11px] text-[#7b746b]">
-                  <MapPin size={12} className="shrink-0 text-[#C41E3A]" />
-                  {selectedProject.location}
-                </p>
+              <div className="grid grid-cols-3 border-b border-[#deddd8] bg-white">
+                <div className="flex items-center gap-2 border-r border-[#deddd8] px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
+                  <MapPin size={15} className="shrink-0 text-[#EC3338]" />
+                  <span>{selectedProject.location}</span>
+                </div>
+                <div className="flex items-center gap-2 border-r border-[#deddd8] px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
+                  <Building2 size={15} className="shrink-0 text-[#9C7A32]" />
+                  <span>{selectedProject.type}</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
+                  <Building2 size={15} className="shrink-0 text-[#9C7A32]" />
+                  <span>MECPL Projects</span>
+                </div>
+              </div>
 
-                <dl className="mt-5 grid grid-cols-[78px_1fr] gap-x-4 gap-y-2 border-t border-[#949599]/30 pt-4 text-[10px]">
-                  <dt className="uppercase tracking-[0.12em] text-[#949599]">Location</dt>
-                  <dd className="text-[#232529]">{selectedProject.location}</dd>
-                  <dt className="uppercase tracking-[0.12em] text-[#949599]">Portfolio</dt>
-                  <dd className="text-[#232529]">MECPL Projects</dd>
-                </dl>
+              <div className="bg-white px-4 py-5">
+                <p className="text-[11px] leading-relaxed text-[#626667]">
+                  A landmark project delivered with precision and care, contributing to Pune&apos;s evolving urban landscape.
+                </p>
+                <a href="#projects-grid" className="mt-5 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#EC3338] transition-colors hover:text-[#232529]">
+                  View project details <ArrowRight size={13} />
+                </a>
               </div>
             </article>
-          </div>
-        </div>
+      </div>
     </section>
   );
 }
