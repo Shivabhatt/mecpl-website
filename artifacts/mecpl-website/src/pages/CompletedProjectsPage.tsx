@@ -361,6 +361,7 @@ function ProjectExplorerMap() {
         map = leaflet.map(container, {
           center: [18.8, 73.36],
           zoom: 7,
+          attributionControl: false,
           zoomControl: true,
           scrollWheelZoom: true,
           doubleClickZoom: true,
@@ -372,6 +373,10 @@ function ProjectExplorerMap() {
       }
 
       const activeMap = map;
+      leaflet.control.attribution({
+        position: "bottomright",
+        prefix: false,
+      }).addTo(activeMap);
       const tileLayer = leaflet.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "© OpenStreetMap contributors",

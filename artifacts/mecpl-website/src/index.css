@@ -58,7 +58,7 @@
 }
 
 .mecpl-leaflet-map .leaflet-tile-pane {
-  filter: grayscale(0.78) saturate(0.48) brightness(1.06) contrast(0.92);
+  filter: saturate(1.28) brightness(1.03) contrast(1.04);
 }
 
 .mecpl-leaflet-map .leaflet-control-zoom {
@@ -72,6 +72,20 @@
   width: 34px !important;
   height: 34px !important;
   line-height: 34px !important;
+}
+
+.mecpl-leaflet-map .leaflet-control-attribution {
+  margin: 0 4px 4px 0 !important;
+  padding: 2px 5px !important;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.78) !important;
+  color: #59615d;
+  font: 500 8px/1.25 "Montserrat", sans-serif;
+}
+
+.mecpl-leaflet-map .leaflet-control-attribution a {
+  color: #3e5147;
+  text-decoration: none;
 }
 
 @keyframes mecpl-map-pulse {
