@@ -374,6 +374,8 @@ function ProjectExplorerMap() {
     if (!container) return;
     let cancelled = false;
     let map: import("maplibre-gl").Map | undefined;
+    const resizeObserver = new ResizeObserver(() => map?.resize());
+    resizeObserver.observe(container);
 
     void import("maplibre-gl").then((maplibregl) => {
       if (cancelled) return;
@@ -418,12 +420,14 @@ function ProjectExplorerMap() {
             .setLngLat(location.coordinates)
             .addTo(activeMap);
         });
-        setMapReady(true);
+        window.requestAnimationFrame(() => activeMap.resize());
+        activeMap.once("idle", () => setMapReady(true));
       });
     }).catch((error) => setMapError(error instanceof Error ? error.message : "Map could not be loaded."));
 
     return () => {
       cancelled = true;
+      resizeObserver.disconnect();
       map?.remove();
     };
   }, []);
