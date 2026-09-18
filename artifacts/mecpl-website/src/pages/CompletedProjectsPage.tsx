@@ -377,9 +377,9 @@ function ProjectExplorerMap() {
         position: "bottomright",
         prefix: false,
       }).addTo(activeMap);
-      const tileLayer = leaflet.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      const tileLayer = leaflet.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
         maxZoom: 19,
-        attribution: "© OpenStreetMap contributors",
+        attribution: "Tiles © Esri",
         crossOrigin: true,
       });
       tileLayer.once("load", () => {

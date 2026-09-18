@@ -58,7 +58,7 @@
 }
 
 .mecpl-leaflet-map .leaflet-tile-pane {
-  filter: saturate(1.28) brightness(1.03) contrast(1.04);
+  filter: saturate(1.04) contrast(1.03);
 }
 
 .mecpl-leaflet-map .leaflet-control-zoom {
