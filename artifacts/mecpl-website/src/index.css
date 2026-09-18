@@ -57,15 +57,21 @@
   letter-spacing: 0.14em;
 }
 
-.maplibregl-ctrl-group {
+.mecpl-leaflet-map .leaflet-tile-pane {
+  filter: grayscale(0.78) saturate(0.48) brightness(1.06) contrast(0.92);
+}
+
+.mecpl-leaflet-map .leaflet-control-zoom {
   overflow: hidden;
+  border: 0 !important;
   border-radius: 2px !important;
   box-shadow: 0 3px 14px rgba(35, 37, 41, 0.16) !important;
 }
 
-.maplibregl-ctrl-group button {
+.mecpl-leaflet-map .leaflet-control-zoom a {
   width: 34px !important;
   height: 34px !important;
+  line-height: 34px !important;
 }
 
 @keyframes mecpl-map-pulse {

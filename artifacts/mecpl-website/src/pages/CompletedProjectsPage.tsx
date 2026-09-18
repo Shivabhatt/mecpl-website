@@ -1,34 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Building2, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import type { StyleSpecification } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+import "leaflet/dist/leaflet.css";
 const assetBase = import.meta.env.BASE_URL;
-
-const minimalMapStyle: StyleSpecification = {
-  version: 8,
-  sources: {
-    osm: {
-      type: "raster",
-      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-      tileSize: 256,
-      maxzoom: 19,
-      attribution: "© OpenStreetMap contributors",
-    },
-  },
-  layers: [
-    {
-      id: "osm-neutral",
-      type: "raster",
-      source: "osm",
-      paint: {
-        "raster-saturation": -0.82,
-        "raster-contrast": -0.08,
-        "raster-brightness-min": 0.18,
-        "raster-brightness-max": 0.94,
-      },
-    },
-  ],
-};
 
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -373,56 +346,60 @@ function ProjectExplorerMap() {
     const container = mapContainerRef.current;
     if (!container) return;
     let cancelled = false;
-    let map: import("maplibre-gl").Map | undefined;
-    const resizeObserver = new ResizeObserver(() => map?.resize());
+    let map: import("leaflet").Map | undefined;
+    const resizeObserver = new ResizeObserver(() => map?.invalidateSize(false));
     resizeObserver.observe(container);
 
-    void import("maplibre-gl").then((maplibregl) => {
+    void import("leaflet").then((leaflet) => {
       if (cancelled) return;
       const locations = [
-        { name: "Mumbai", coordinates: [72.8777, 19.0760] as [number, number] },
-        { name: "Pune", coordinates: [73.8567, 18.5204] as [number, number] },
+        { name: "Mumbai", coordinates: [19.076, 72.8777] as [number, number] },
+        { name: "Pune", coordinates: [18.5204, 73.8567] as [number, number] },
       ];
 
       try {
-        map = new maplibregl.Map({
-          container,
-          style: minimalMapStyle,
-          center: [73.36, 18.8],
+        map = leaflet.map(container, {
+          center: [18.8, 73.36],
           zoom: 7,
-          cooperativeGestures: true,
+          zoomControl: true,
+          scrollWheelZoom: true,
+          doubleClickZoom: true,
+          touchZoom: true,
         });
       } catch (error) {
         setMapError(error instanceof Error ? error.message : "Map could not be initialized.");
         return;
       }
 
-      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
-      map.addControl(new maplibregl.FullscreenControl(), "top-right");
-
-      map.once("load", () => {
-        if (!map) return;
-        const activeMap = map;
-        const bounds = new maplibregl.LngLatBounds();
-        locations.forEach((location) => bounds.extend(location.coordinates));
-        activeMap.fitBounds(bounds, { padding: 92, maxZoom: 8, duration: 0 });
-
-        locations.forEach((location) => {
-          const marker = document.createElement("button");
-          marker.type = "button";
-          marker.className = "mecpl-map-marker";
-          marker.setAttribute("aria-label", `Zoom to ${location.name}`);
-          marker.innerHTML = `<span class="mecpl-map-marker__pulse"></span><span class="mecpl-map-marker__dot"></span><span class="mecpl-map-marker__label">${location.name}<small>Projects</small></span>`;
-          marker.addEventListener("click", () => {
-            activeMap.flyTo({ center: location.coordinates, zoom: 11, speed: 1.15, essential: true });
-          });
-          new maplibregl.Marker({ element: marker, anchor: "bottom" })
-            .setLngLat(location.coordinates)
-            .addTo(activeMap);
-        });
-        window.requestAnimationFrame(() => activeMap.resize());
-        activeMap.once("idle", () => setMapReady(true));
+      const activeMap = map;
+      const tileLayer = leaflet.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+        crossOrigin: true,
       });
+      tileLayer.once("load", () => {
+        if (!cancelled) setMapReady(true);
+      });
+      tileLayer.addTo(activeMap);
+
+      activeMap.fitBounds(
+        locations.map((location) => location.coordinates),
+        { padding: [70, 70], maxZoom: 8, animate: false },
+      );
+
+      locations.forEach((location) => {
+        const icon = leaflet.divIcon({
+          className: "mecpl-leaflet-marker",
+          html: `<button type="button" class="mecpl-map-marker" aria-label="Zoom to ${location.name}"><span class="mecpl-map-marker__pulse"></span><span class="mecpl-map-marker__dot"></span><span class="mecpl-map-marker__label">${location.name}<small>Projects</small></span></button>`,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
+        });
+        leaflet.marker(location.coordinates, { icon })
+          .on("click", () => activeMap.flyTo(location.coordinates, 11, { duration: 0.8 }))
+          .addTo(activeMap);
+      });
+
+      window.requestAnimationFrame(() => activeMap.invalidateSize(false));
     }).catch((error) => setMapError(error instanceof Error ? error.message : "Map could not be loaded."));
 
     return () => {
@@ -438,7 +415,7 @@ function ProjectExplorerMap() {
 
   return (
     <div className="absolute inset-0 z-20" aria-label="Interactive map showing Mumbai and Pune">
-      <div ref={mapContainerRef} className="absolute inset-0" />
+      <div ref={mapContainerRef} className="mecpl-leaflet-map absolute inset-0" />
       {!mapReady && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center bg-[#eef1ed] text-center">
           <div>
