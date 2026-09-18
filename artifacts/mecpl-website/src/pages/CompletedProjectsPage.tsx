@@ -377,7 +377,7 @@ function ProjectExplorerMap() {
         position: "bottomright",
         prefix: false,
       }).addTo(activeMap);
-      const tileLayer = leaflet.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+      const tileLayer = leaflet.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
         maxZoom: 19,
         attribution: "Tiles © Esri",
         crossOrigin: true,
@@ -393,11 +393,14 @@ function ProjectExplorerMap() {
       );
 
       locations.forEach((location) => {
+        const architectureIcon = location.name === "Mumbai"
+          ? `<svg viewBox="0 0 72 48" aria-hidden="true"><path d="M9 42h54M15 42V20h42v22M20 20V12h32v8M25 12V7h22v5M31 42V25h10v17M20 42V28h7v14M45 42V28h7v14M12 20h48M27 7 36 2l9 5"/></svg>`
+          : `<svg viewBox="0 0 72 48" aria-hidden="true"><path d="M7 42h58M12 42V24h48v18M18 24V17h36v7M25 17V10h22v7M31 10V6h10v4M28 42V29h16v13M17 42V30h7v12M48 42V30h7v12M9 24h54M36 6V2"/></svg>`;
         const icon = leaflet.divIcon({
-          className: "mecpl-leaflet-marker",
-          html: `<button type="button" class="mecpl-map-marker" aria-label="Zoom to ${location.name}"><span class="mecpl-map-marker__pulse"></span><span class="mecpl-map-marker__dot"></span><span class="mecpl-map-marker__label">${location.name}<small>Projects</small></span></button>`,
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
+          className: "mecpl-city-marker-shell",
+          html: `<button type="button" class="mecpl-city-marker" aria-label="Zoom to ${location.name}">${architectureIcon}<strong>${location.name}</strong><span>Project region</span></button>`,
+          iconSize: [112, 96],
+          iconAnchor: [56, 72],
         });
         leaflet.marker(location.coordinates, { icon })
           .on("click", () => activeMap.flyTo(location.coordinates, 11, { duration: 0.8 }))

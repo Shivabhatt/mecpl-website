@@ -2,63 +2,57 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-.mecpl-map-marker {
-  position: relative;
-  display: grid;
-  height: 24px;
-  width: 24px;
-  place-items: center;
+.mecpl-city-marker-shell {
   border: 0;
   background: transparent;
+}
+
+.mecpl-city-marker {
+  display: flex;
+  width: 112px;
+  align-items: center;
+  flex-direction: column;
+  border: 0;
+  background: transparent;
+  color: #ec3338;
   cursor: pointer;
+  filter: drop-shadow(0 3px 8px rgba(35, 37, 41, 0.15));
 }
 
-.mecpl-map-marker__dot {
-  position: relative;
-  z-index: 2;
-  height: 12px;
-  width: 12px;
-  border: 2px solid #fff;
-  border-radius: 999px;
-  background: #ec3338;
-  box-shadow: 0 2px 8px rgba(89, 20, 22, 0.35);
+.mecpl-city-marker svg {
+  width: 64px;
+  height: 43px;
+  fill: rgba(255, 255, 255, 0.82);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.mecpl-map-marker__pulse {
-  position: absolute;
-  z-index: 1;
-  height: 12px;
-  width: 12px;
-  border-radius: 999px;
-  background: rgba(236, 51, 56, 0.32);
-  animation: mecpl-map-pulse 2.2s ease-out infinite;
-}
-
-.mecpl-map-marker__label {
-  position: absolute;
-  bottom: 22px;
-  left: 50%;
-  min-width: max-content;
-  transform: translateX(-50%);
-  padding: 7px 10px 6px;
-  color: #fff;
-  background: #232529;
-  font: 700 10px/1.1 "Montserrat", sans-serif;
-  letter-spacing: 0.16em;
+.mecpl-city-marker strong {
+  margin-top: 2px;
+  color: #232529;
+  font: 800 18px/1 "Montserrat", sans-serif;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  box-shadow: 0 5px 16px rgba(35, 37, 41, 0.2);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
-.mecpl-map-marker__label small {
-  display: block;
-  margin-top: 4px;
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 7px;
-  letter-spacing: 0.14em;
+.mecpl-city-marker span {
+  margin-top: 5px;
+  color: #ec3338;
+  font: 700 7px/1 "Montserrat", sans-serif;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.mecpl-city-marker:focus-visible {
+  outline: 2px solid #ec3338;
+  outline-offset: 4px;
 }
 
 .mecpl-leaflet-map .leaflet-tile-pane {
-  filter: saturate(1.04) contrast(1.03);
+  filter: grayscale(1) contrast(0.9) brightness(1.05);
 }
 
 .mecpl-leaflet-map .leaflet-control-zoom {
@@ -86,11 +80,6 @@
 .mecpl-leaflet-map .leaflet-control-attribution a {
   color: #3e5147;
   text-decoration: none;
-}
-
-@keyframes mecpl-map-pulse {
-  0% { transform: scale(1); opacity: 0.85; }
-  100% { transform: scale(3.8); opacity: 0; }
 }
 
 @custom-variant dark (&:is(.dark *));
