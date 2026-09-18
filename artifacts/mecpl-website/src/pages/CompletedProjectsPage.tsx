@@ -1,6 +1,34 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Building2, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import type { StyleSpecification } from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 const assetBase = import.meta.env.BASE_URL;
+
+const minimalMapStyle: StyleSpecification = {
+  version: 8,
+  sources: {
+    osm: {
+      type: "raster",
+      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution: "© OpenStreetMap contributors",
+    },
+  },
+  layers: [
+    {
+      id: "osm-neutral",
+      type: "raster",
+      source: "osm",
+      paint: {
+        "raster-saturation": -0.82,
+        "raster-contrast": -0.08,
+        "raster-brightness-min": 0.18,
+        "raster-brightness-max": 0.94,
+      },
+    },
+  ],
+};
 
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -336,6 +364,89 @@ function ArchitectureApproach() {
   );
 }
 
+function ProjectExplorerMap() {
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [mapError, setMapError] = useState<string | null>(null);
+  const [mapReady, setMapReady] = useState(false);
+
+  useEffect(() => {
+    const container = mapContainerRef.current;
+    if (!container) return;
+    let cancelled = false;
+    let map: import("maplibre-gl").Map | undefined;
+
+    void import("maplibre-gl").then((maplibregl) => {
+      if (cancelled) return;
+      const locations = [
+        { name: "Mumbai", coordinates: [72.8777, 19.0760] as [number, number] },
+        { name: "Pune", coordinates: [73.8567, 18.5204] as [number, number] },
+      ];
+
+      try {
+        map = new maplibregl.Map({
+          container,
+          style: minimalMapStyle,
+          center: [73.36, 18.8],
+          zoom: 7,
+          cooperativeGestures: true,
+        });
+      } catch (error) {
+        setMapError(error instanceof Error ? error.message : "Map could not be initialized.");
+        return;
+      }
+
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+      map.addControl(new maplibregl.FullscreenControl(), "top-right");
+
+      map.once("load", () => {
+        if (!map) return;
+        const activeMap = map;
+        const bounds = new maplibregl.LngLatBounds();
+        locations.forEach((location) => bounds.extend(location.coordinates));
+        activeMap.fitBounds(bounds, { padding: 92, maxZoom: 8, duration: 0 });
+
+        locations.forEach((location) => {
+          const marker = document.createElement("button");
+          marker.type = "button";
+          marker.className = "mecpl-map-marker";
+          marker.setAttribute("aria-label", `Zoom to ${location.name}`);
+          marker.innerHTML = `<span class="mecpl-map-marker__pulse"></span><span class="mecpl-map-marker__dot"></span><span class="mecpl-map-marker__label">${location.name}<small>Projects</small></span>`;
+          marker.addEventListener("click", () => {
+            activeMap.flyTo({ center: location.coordinates, zoom: 11, speed: 1.15, essential: true });
+          });
+          new maplibregl.Marker({ element: marker, anchor: "bottom" })
+            .setLngLat(location.coordinates)
+            .addTo(activeMap);
+        });
+        setMapReady(true);
+      });
+    }).catch((error) => setMapError(error instanceof Error ? error.message : "Map could not be loaded."));
+
+    return () => {
+      cancelled = true;
+      map?.remove();
+    };
+  }, []);
+
+  if (mapError) {
+    return <div className="absolute inset-0 z-20 grid place-items-center bg-[#eef1ed] p-8 text-center text-sm text-[#626667]">Map preview error: {mapError}</div>;
+  }
+
+  return (
+    <div className="absolute inset-0 z-20" aria-label="Interactive map showing Mumbai and Pune">
+      <div ref={mapContainerRef} className="absolute inset-0" />
+      {!mapReady && (
+        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-[#eef1ed] text-center">
+          <div>
+            <span className="mx-auto block h-7 w-7 animate-spin rounded-full border-2 border-[#EC3338]/20 border-t-[#EC3338]" />
+            <p className="mt-3 font-montserrat text-[9px] font-bold uppercase tracking-[0.2em] text-[#626667]">Loading interactive map</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProjectExplorer() {
   const [selectedIndex, setSelectedIndex] = useState(explorerProjects.length - 1);
   const selectedProject = explorerProjects[selectedIndex] ?? explorerProjects[0];
@@ -365,9 +476,10 @@ function ProjectExplorer() {
     >
       <div className="mx-auto grid min-h-[720px] max-w-[1500px] bg-[#f5f4f0] lg:grid-cols-[1.05fr_0.95fr]">
             <div className="relative min-h-[520px] overflow-hidden bg-[#eef1ed] lg:min-h-full" data-scroll-reveal="image">
+              <ProjectExplorerMap />
               <svg
                 viewBox="0 0 720 720"
-                className="absolute inset-0 h-full w-full"
+                className="invisible absolute inset-0 h-full w-full"
                 role="img"
                 aria-label="Map of Maharashtra highlighting Mumbai, Pune, and major project areas"
                 preserveAspectRatio="xMidYMid meet"
@@ -453,7 +565,7 @@ function ProjectExplorer() {
                   </g>
                 </g>
               </svg>
-              <div className="absolute inset-0">
+              <div className="invisible absolute inset-0">
                 {explorerProjects.map((project, index) => {
                   const selected = selectedIndex === index;
                   return (

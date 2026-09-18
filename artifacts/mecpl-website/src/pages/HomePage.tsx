@@ -159,6 +159,14 @@ export default function HomePage() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  useEffect(() => {
+    const testimonialTimer = window.setInterval(() => {
+      setActiveTestimonial((current) => (current + 1) % testimonials.length);
+    }, 4000);
+
+    return () => window.clearInterval(testimonialTimer);
+  }, []);
+
   /* ── HERO: entrance (SplitText chars + section slide-up) ── */
   useEffect(() => {
     const headline = heroHeadlineRef.current;

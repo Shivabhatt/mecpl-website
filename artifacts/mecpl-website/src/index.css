@@ -2,6 +2,77 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+.mecpl-map-marker {
+  position: relative;
+  display: grid;
+  height: 24px;
+  width: 24px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mecpl-map-marker__dot {
+  position: relative;
+  z-index: 2;
+  height: 12px;
+  width: 12px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #ec3338;
+  box-shadow: 0 2px 8px rgba(89, 20, 22, 0.35);
+}
+
+.mecpl-map-marker__pulse {
+  position: absolute;
+  z-index: 1;
+  height: 12px;
+  width: 12px;
+  border-radius: 999px;
+  background: rgba(236, 51, 56, 0.32);
+  animation: mecpl-map-pulse 2.2s ease-out infinite;
+}
+
+.mecpl-map-marker__label {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  min-width: max-content;
+  transform: translateX(-50%);
+  padding: 7px 10px 6px;
+  color: #fff;
+  background: #232529;
+  font: 700 10px/1.1 "Montserrat", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 16px rgba(35, 37, 41, 0.2);
+}
+
+.mecpl-map-marker__label small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+}
+
+.maplibregl-ctrl-group {
+  overflow: hidden;
+  border-radius: 2px !important;
+  box-shadow: 0 3px 14px rgba(35, 37, 41, 0.16) !important;
+}
+
+.maplibregl-ctrl-group button {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+@keyframes mecpl-map-pulse {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(3.8); opacity: 0; }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
