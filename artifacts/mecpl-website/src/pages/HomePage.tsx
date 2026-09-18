@@ -91,18 +91,21 @@ const risingProjectVideos = [
     location: "Pune",
     video: "assets/video/b94.mp4",
     poster: "assets/projects/43PD-1-scaled.jpg",
+    description: "A thoughtfully designed residential space crafted for modern living, taking shape in the heart of Pune.",
   },
   {
     name: "K57 Raheja",
     location: "Pune",
     video: "assets/video/k57-raheja.mp4",
     poster: "assets/projects/Raheja-Vistas-scaled.jpg",
+    description: "A landmark development progressing with disciplined engineering, quality execution and close attention to every detail.",
   },
   {
     name: "Riverdale Project",
     location: "Pune",
     video: "assets/video/riverdale-project.mp4",
     poster: "assets/projects/Atlantic.png",
+    description: "Contemporary urban construction delivered through careful planning, strong site coordination and proven technical expertise.",
   },
 ];
 
@@ -131,6 +134,7 @@ const clients = [
 export default function HomePage() {
   const [videoIdx, setVideoIdx] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeRisingProject, setActiveRisingProject] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const assetBase = import.meta.env.BASE_URL;
 
@@ -603,33 +607,23 @@ export default function HomePage() {
       {/* ══════════ 2.5 RECOGNITION ══════════ */}
       <section id="recognition" ref={recognitionRef} style={{ padding: "48px 40px", background: "#f5f4f1" }}>
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:gap-0">
-            <div className="flex flex-col justify-center lg:pr-9">
-              <span className="flex items-center gap-3 font-montserrat text-[9px] font-bold uppercase tracking-[0.2em] text-[#4d4f54]">
-                <span className="h-px w-7 bg-[#EC3338]" />
-                Awards &amp; Recognitions
-              </span>
-              <h2 className="mt-3 font-montserrat text-[clamp(1.8rem,2.6vw,2.35rem)] font-medium leading-[1.08] text-[#232529]">
-                Honored for<br />Our Journey
-              </h2>
-            </div>
-
+          <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-4 sm:gap-y-0">
             {recognitionData.map((item) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="rec-card flex min-h-[112px] items-center gap-5 border-t border-black/10 py-6 lg:border-l lg:border-t-0 lg:px-8 lg:py-0"
+                  className="rec-card flex min-h-[148px] flex-col items-center justify-start px-4 text-center sm:border-l sm:border-black/10 sm:first:border-l-0"
                 >
-                  <Icon aria-hidden="true" size={38} strokeWidth={1.45} className="shrink-0 text-[#9C7A32]" />
-                  <div>
-                    <h3 className="font-montserrat text-[12px] font-semibold leading-[1.4] text-[#232529]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 font-montserrat text-[8px] font-semibold uppercase tracking-[0.12em] text-[#7e8085]">
-                      {item.detail}
-                    </p>
+                  <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-black/10 bg-white shadow-[0_3px_14px_rgba(35,37,41,0.06)]">
+                    <Icon aria-hidden="true" size={34} strokeWidth={1.45} className="text-[#9C7A32]" />
                   </div>
+                  <h3 className="mt-5 max-w-[150px] font-montserrat text-[11px] font-medium leading-[1.45] text-[#62656a]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 max-w-[150px] font-montserrat text-[8px] font-semibold uppercase tracking-[0.1em] text-[#9a9ca0]">
+                    {item.detail}
+                  </p>
                 </div>
               );
             })}
@@ -935,60 +929,89 @@ export default function HomePage() {
       <section
         id="rising-projects"
         data-testid="section-home-ongoing-projects"
-        style={{ background: "#f5f4f1", padding: "96px 40px 104px" }}
+        className="relative overflow-hidden"
+        style={{ background: "#f8f7f4", padding: "88px 40px 104px" }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-[38%] opacity-[0.055]" aria-hidden="true">
+          <svg viewBox="0 0 540 260" className="h-full w-full" fill="none" stroke="#232529">
+            <path d="M14 260V160l76-50v150M90 260V78l98 60v122M188 260V118l80-44 72 57v129M340 260V95l84-59 102 72v152" />
+            <path d="M28 260v-86l47-30v116M110 260V116l56 34v110M210 260V139l54-31 52 40v112M365 260V112l57-40 79 56v132" />
+          </svg>
+        </div>
+
+        <div className="relative mx-auto max-w-7xl">
           <div data-scroll-reveal="text" className="mb-10 text-center md:mb-12">
-            <span className="home-section-label font-montserrat" style={{
-              display: "block",
-              marginBottom: "12px",
-              color: "#EC3338",
-              fontSize: "0.68rem",
-              fontWeight: 700,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-            }}>
+            <span className="home-section-label inline-flex items-center gap-4 font-montserrat text-[0.68rem] font-bold uppercase tracking-[0.3em] text-[#EC3338] before:h-px before:w-12 before:bg-black/10 after:h-px after:w-12 after:bg-black/10">
               RIGHT NOW
             </span>
-            <h3 className="hp-section-title font-montserrat" style={{ margin: 0, color: "#232529" }}>
+            <h3 className="hp-section-title mt-3 font-montserrat text-[#232529]">
               Rising As We Speak
             </h3>
-            <p className="mx-auto mt-3 max-w-xl font-montserrat text-[13px] leading-6 text-[#73767c]">
+            <p className="mx-auto mt-2 max-w-xl font-montserrat text-[12px] leading-6 text-[#73767c]">
               Three of the projects currently under construction across Pune.
             </p>
           </div>
 
-          <div data-scroll-reveal="image" className="grid gap-5 md:grid-cols-3">
-            {risingProjectVideos.map((project, index) => (
-              <article key={project.name} className="overflow-hidden border border-black/[0.07] bg-white">
-                <div className="group relative aspect-video overflow-hidden bg-[#d8d7d3]">
-                  <video
-                    controls
-                    playsInline
-                    preload="none"
-                    poster={`${assetBase}${project.poster}`}
-                    className="h-full w-full object-cover"
-                    aria-label={`${project.name} construction progress video`}
+          <div data-scroll-reveal="image" className="grid items-center gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:gap-14">
+            <div className="group relative aspect-video overflow-hidden rounded-[5px] bg-[#d8d7d3] shadow-[0_15px_45px_rgba(35,37,41,0.08)]">
+              <video
+                key={risingProjectVideos[activeRisingProject].video}
+                controls
+                playsInline
+                preload="metadata"
+                poster={`${assetBase}${risingProjectVideos[activeRisingProject].poster}`}
+                className="h-full w-full object-cover"
+                aria-label={`${risingProjectVideos[activeRisingProject].name} construction progress video`}
+              >
+                <source src={`${assetBase}${risingProjectVideos[activeRisingProject].video}`} type="video/mp4" />
+              </video>
+              <div className="pointer-events-none absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#EC3338] text-white shadow-xl transition-transform group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:scale-105">
+                <Play size={23} fill="currentColor" className="ml-1" />
+              </div>
+            </div>
+
+            <article className="relative">
+              <div className="mb-7 flex items-center justify-between">
+                <span className="font-montserrat text-[11px] font-bold tracking-[0.16em] text-[#EC3338]">
+                  {String(activeRisingProject + 1).padStart(2, "0")}
+                  <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
+                </span>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    aria-label="Previous project"
+                    onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#232529] shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-[#EC3338] hover:text-white"
                   >
-                    <source src={`${assetBase}${project.video}`} type="video/mp4" />
-                  </video>
-                  <div className="pointer-events-none absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#EC3338] text-white shadow-lg transition-transform group-hover:scale-105">
-                    <Play size={15} fill="currentColor" />
-                  </div>
+                    <ChevronLeft size={17} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next project"
+                    onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#232529] shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-[#EC3338] hover:text-white"
+                  >
+                    <ChevronRight size={17} />
+                  </button>
                 </div>
-                <div className="px-6 py-6">
-                  <span className="font-montserrat text-[9px] font-semibold tracking-[0.18em] text-[#EC3338]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h4 className="mt-3 font-montserrat text-[1.05rem] font-semibold text-[#232529]">
-                    {project.name}
-                  </h4>
-                  <p className="mt-2 font-montserrat text-[10px] uppercase tracking-[0.12em] text-[#949599]">
-                    Live construction progress · {project.location}
-                  </p>
-                </div>
-              </article>
-            ))}
+              </div>
+              <h4 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-none text-[#232529]">
+                {risingProjectVideos[activeRisingProject].name}
+              </h4>
+              <p className="mt-4 font-montserrat text-[9px] font-semibold uppercase tracking-[0.16em] text-[#8c8e92]">
+                Live construction progress · {risingProjectVideos[activeRisingProject].location}
+              </p>
+              <span className="mt-5 block h-0.5 w-10 bg-[#EC3338]" />
+              <p className="mt-6 max-w-sm font-montserrat text-[12px] leading-6 text-[#696c71]">
+                {risingProjectVideos[activeRisingProject].description}
+              </p>
+              <Link
+                href="/completed-projects"
+                className="mt-7 inline-flex items-center gap-4 border border-[#393b3f] px-5 py-3 font-montserrat text-[9px] font-bold uppercase tracking-[0.14em] text-[#232529] transition-colors hover:bg-[#232529] hover:text-white"
+              >
+                View Details <ArrowRight size={14} />
+              </Link>
+            </article>
           </div>
         </div>
       </section>
