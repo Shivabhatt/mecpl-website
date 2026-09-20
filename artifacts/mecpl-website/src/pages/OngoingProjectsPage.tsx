@@ -3,7 +3,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { MapPin, Activity } from "lucide-react";
 const assetBase = import.meta.env.BASE_URL;
 
-const ongoingProjects = [
+export const ongoingProjects = [
   { name: "Panchshil SRA Dhanori", location: "Vishrantwadi, Pune", desc: "Structural rehabilitation development for SRA housing. Advanced concrete execution on high-density residential blocks.", image: `${assetBase}assets/projects/SRA-DHANORI-scaled.jpg` },
   { name: "VTP Township Framework", location: "Baner Highrise Sector, Pune", desc: "Large-scale township infrastructure framework. Multi-tower concrete structure execution across phased development zones.", image: `${assetBase}assets/projects/VTP-scaled.jpg` },
   { name: "Solitaire World Kothrud", location: "Kothrud, Pune", desc: "Premium residential towers development. High-specification concrete work for luxury residential project.", image: `${assetBase}assets/projects/2.Solitaire-World-Kothrud.jpg` },
@@ -20,29 +20,29 @@ export default function OngoingProjectsPage() {
   return (
     <div data-animate-page className="bg-white pt-20">
       {/* Header */}
-      <div className="relative py-14 md:py-20 border-b border-black/[0.06] overflow-hidden">
+      <div className="relative py-14 md:py-20 border-b border-mecpl-dark/[0.06] overflow-hidden">
         <img src="/assets/projects/WhatsApp-Image-2025-05-06-at-17.24.37_0a4a5d3c-scaled.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="MECPL project under construction" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
-            <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Active Construction</span>
+            <span className="w-2 h-2 bg-mecpl-red rounded-full animate-pulse"></span>
+            <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Active Construction</span>
           </div>
           <SectionHeader title="Ongoing Projects" subtitle="10 active engineering pipelines currently under construction across Pune's premier development zones." center />
-          <div className="flex items-center gap-2 mt-3 text-[#9ca3af] text-[10px] md:text-xs tracking-widest uppercase font-bold">
-            <Link href="/"><span className="hover:text-[#C41E3A] cursor-pointer">Home</span></Link>
+          <div className="flex items-center gap-2 mt-3 text-mecpl-steel text-[10px] md:text-xs tracking-widest uppercase font-semibold">
+            <Link href="/"><span className="hover:text-mecpl-red cursor-pointer">Home</span></Link>
             <span>/</span>
-            <span className="text-[#6b7280]">Ongoing Projects</span>
+            <span className="text-mecpl-steel">Ongoing Projects</span>
           </div>
         </div>
       </div>
 
       {/* Live indicator bar */}
-      <div className="bg-white border-b border-black/[0.06] py-3">
+      <div className="bg-white border-b border-mecpl-dark/[0.06] py-3">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-3 text-center">
-          <Activity size={14} className="text-[#C41E3A]" />
-          <span className="text-[#111827] text-[10px] md:text-xs font-black uppercase tracking-widest">10 Projects Currently Active</span>
-          <span className="w-2 h-2 bg-[#C41E3A] rounded-full animate-pulse"></span>
+          <Activity size={14} className="text-mecpl-red" />
+          <span className="text-mecpl-text text-[10px] md:text-xs font-semibold uppercase tracking-widest">10 Projects Currently Active</span>
+          <span className="w-2 h-2 bg-mecpl-red rounded-full animate-pulse"></span>
         </div>
       </div>
 
@@ -52,7 +52,7 @@ export default function OngoingProjectsPage() {
           {ongoingProjects.map((project, i) => (
             <div
               key={i}
-              className="group bg-white border border-black/[0.07] rounded-sm overflow-hidden hover:border-[#C41E3A]/30 transition-all duration-300 shadow-sm flex flex-col"
+              className="group bg-white border border-mecpl-dark/[0.07] rounded-sm overflow-hidden hover:border-mecpl-red/30 transition-all duration-300 shadow-sm flex flex-col"
               data-testid={`card-ongoing-project-${i}`}
             >
               <div className="h-48 overflow-hidden relative">
@@ -64,22 +64,22 @@ export default function OngoingProjectsPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-sm">
-                  <span className="w-1.5 h-1.5 bg-[#C41E3A] rounded-full animate-pulse"></span>
-                  <span className="text-[#C41E3A] text-[9px] font-black uppercase tracking-widest">Active Build</span>
+                  <span className="w-1.5 h-1.5 bg-mecpl-red rounded-full animate-pulse"></span>
+                  <span className="text-mecpl-red text-[9px] font-semibold uppercase tracking-widest">Active Build</span>
                 </div>
                 <div className="absolute bottom-4 left-4">
-                  <span className="text-white/60 text-xs font-black">0{i + 1}</span>
+                  <span className="text-white/60 text-xs font-semibold">0{i + 1}</span>
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between gap-4">
                 <div className="space-y-3">
-                  <h3 className="text-[#111827] font-black text-lg uppercase tracking-tight group-hover:text-[#C41E3A] transition-colors">{project.name}</h3>
+                  <h3 className="text-mecpl-text font-semibold text-lg uppercase tracking-tight group-hover:text-mecpl-red transition-colors">{project.name}</h3>
                   <div className="flex items-center gap-1.5">
-                    <MapPin size={12} className="text-[#C41E3A]" />
-                    <span className="text-[#6b7280] text-xs">{project.location}</span>
+                    <MapPin size={12} className="text-mecpl-red" />
+                    <span className="text-mecpl-steel text-xs">{project.location}</span>
                   </div>
-                  <div className="w-8 h-0.5 bg-[#C41E3A]"></div>
-                  <p className="text-[#4b5563] text-sm leading-relaxed">{project.desc}</p>
+                  <div className="w-8 h-0.5 bg-mecpl-red"></div>
+                  <p className="text-mecpl-text text-sm leading-relaxed">{project.desc}</p>
                 </div>
               </div>
             </div>
@@ -88,12 +88,12 @@ export default function OngoingProjectsPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-black/[0.06] bg-[#f9f9f9] py-20" data-testid="section-ongoing-cta">
+      <section className="border-t border-mecpl-dark/[0.06] bg-[#f9f9f9] py-20" data-testid="section-ongoing-cta">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-          <h3 className="text-3xl font-black uppercase tracking-tighter text-[#111827]">Partner on Your Next Project</h3>
-          <p className="text-[#4b5563] text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>
+          <h3 className="text-3xl font-semibold uppercase tracking-tighter text-mecpl-text">Partner on Your Next Project</h3>
+          <p className="text-mecpl-text text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>
           <Link href="/contact" data-testid="button-ongoing-contact">
-            <span className="inline-block bg-[#C41E3A] hover:bg-red-700 text-white px-10 py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg cursor-pointer">
+            <span className="inline-block bg-mecpl-red hover:bg-mecpl-dark text-white px-10 py-4 text-xs font-semibold tracking-widest uppercase rounded-sm transition-all shadow-lg cursor-pointer">
               Contact Our Team
             </span>
           </Link>

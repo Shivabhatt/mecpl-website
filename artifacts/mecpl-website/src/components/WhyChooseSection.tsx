@@ -98,14 +98,14 @@ export default function WhyChooseSection() {
                   <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                     <span style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
-                      color: activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.3)",
+                      color: activeWhy === i ? "#EC3338" : "rgba(17,24,39,0.3)",
                       letterSpacing: "0.22em", transition: "color 0.3s",
                     }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="home-accordion-title font-montserrat" style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 700,
-                      color: activeWhy === i ? "#111827" : "rgba(17,24,39,0.45)",
+                      fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 600,
+                      color: activeWhy === i ? "#232529" : "rgba(17,24,39,0.45)",
                       textTransform: "uppercase", letterSpacing: "0.08em",
                       transition: "color 0.3s",
                     }}>
@@ -114,13 +114,13 @@ export default function WhyChooseSection() {
                   </div>
                   <div style={{
                     width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                    border: `1.5px solid ${activeWhy === i ? "#C41E3A" : "rgba(17,24,39,0.15)"}`,
-                    background: activeWhy === i ? "#C41E3A" : "transparent",
+                    border: `1.5px solid ${activeWhy === i ? "#EC3338" : "rgba(17,24,39,0.15)"}`,
+                    background: activeWhy === i ? "#EC3338" : "transparent",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     transition: "border-color 0.3s, background 0.3s",
                   }}>
                     <span style={{
-                      color: activeWhy === i ? "#fff" : "#9ca3af",
+                      color: activeWhy === i ? "#fff" : "#949599",
                       fontSize: "15px", lineHeight: 1, marginTop: "-1px",
                       fontFamily: "'Montserrat',sans-serif",
                     }}>
@@ -133,7 +133,7 @@ export default function WhyChooseSection() {
                   <div style={{ paddingBottom: "28px" }}>
                     <div style={{
                       fontFamily: "'Montserrat',sans-serif",
-                      fontSize: "2rem", fontWeight: 800, color: "#EC3338",
+                      fontSize: "2rem", fontWeight: 600, color: "#EC3338",
                       marginBottom: "10px", lineHeight: 1.0,
                     }}>
                       {item.stat}

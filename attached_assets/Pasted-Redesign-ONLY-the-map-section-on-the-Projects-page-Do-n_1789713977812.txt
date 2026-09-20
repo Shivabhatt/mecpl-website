@@ -1,0 +1,111 @@
+Redesign ONLY the map section on the Projects page. Do not modify any other section, content, project data, routing, or existing functionality.
+
+TECHNICAL REQUIREMENT:
+Use the Google Maps JavaScript API to create a REAL interactive Google Map. I do NOT want a static map image or a custom-drawn map.
+
+The map must behave like Google Maps:
+- Users can zoom in and out using the + / - controls.
+- Mouse-wheel zoom should work on desktop.
+- Users can drag/pan the map.
+- Double-click zoom should work.
+- Pinch-to-zoom and touch gestures should work on mobile/tablet.
+- Keep Google's native map interaction and navigation behavior.
+- Do not create custom zoom/pan functionality.
+- Use the existing Google Maps API configuration/key in the project if already available. Do not expose or hard-code a new API key.
+- If Google Maps API is already integrated, reuse the existing implementation instead of installing a different map library.
+
+INITIAL MAP VIEW:
+The initial view must show BOTH Mumbai and Pune clearly.
+
+Use Google Maps LatLngBounds + fitBounds() to automatically calculate the initial viewport based on Mumbai and Pune coordinates instead of using a fixed center/zoom.
+
+Mumbai:
+Latitude: 19.0760
+Longitude: 72.8777
+
+Pune:
+Latitude: 18.5204
+Longitude: 73.8567
+
+Example approach:
+const bounds = new google.maps.LatLngBounds();
+bounds.extend({ lat: 19.0760, lng: 72.8777 });
+bounds.extend({ lat: 18.5204, lng: 73.8567 });
+map.fitBounds(bounds, 80);
+
+After the initial fitBounds(), the user must be completely free to zoom in, zoom out and pan anywhere on the map.
+
+MAP DESIGN:
+Keep the actual Google Maps geography, roads, coastline and map behavior, but apply a clean, premium and minimal map style suitable for a luxury construction/real-estate website.
+
+Reduce visual clutter:
+- Hide unnecessary POIs such as restaurants, shops and businesses.
+- Hide unnecessary transit information.
+- Reduce minor road labels.
+- Keep major roads subtle.
+- Keep important geographic/city labels.
+- Use a sophisticated neutral/light appearance.
+- Do not make the map look like a generic default Google Maps embed.
+
+MUMBAI & PUNE HIGHLIGHT:
+For now, ONLY highlight Mumbai and Pune. Do NOT show individual project markers yet.
+
+Create custom Google Maps AdvancedMarkerElement markers for Mumbai and Pune instead of the default Google red pins.
+
+The markers should look premium and match the existing MECPL website design.
+
+Example concept:
+
+MUMBAI
+●
+PROJECTS
+
+and
+
+PUNE
+●
+PROJECTS
+
+Use a subtle animated/ripple/glow effect around the location marker if it fits the existing design. Keep the animation elegant and minimal, not flashy.
+
+The Mumbai and Pune labels should remain clearly identifiable when the map is at the initial zoom level.
+
+INTERACTION:
+- Clicking Mumbai should smoothly zoom toward Mumbai.
+- Clicking Pune should smoothly zoom toward Pune.
+- The user should still be able to freely zoom out again and see both cities.
+- Do not lock the map to Mumbai or Pune.
+- Do not disable normal Google Maps controls.
+- Keep zoomControl enabled.
+- Keep fullscreenControl enabled if it fits the existing design.
+- Disable streetViewControl and mapTypeControl unless they are already required elsewhere.
+- Use clickableIcons: false to avoid unnecessary POI interactions.
+
+RESPONSIVE:
+Make the map work properly on:
+- Desktop
+- Tablet
+- Mobile
+
+On mobile, ensure the map does not prevent normal page scrolling unnecessarily. Use an appropriate Google Maps gestureHandling configuration.
+
+IMPORTANT:
+Do not replace Google Maps with Mapbox, Leaflet, SVG, an image, or another mapping library.
+
+Do not redesign the entire Projects page.
+
+Only modify the existing map section and the code required to make the Google Maps implementation work.
+
+Before making changes, inspect the existing Angular project and identify:
+1. Current map component
+2. Existing Google Maps integration
+3. Existing API configuration
+4. Existing project/location data
+5. Existing styles/theme
+
+Reuse the existing architecture wherever possible.
+
+The final result should feel like:
+REAL GOOGLE MAP + GOOGLE ZOOM/PAN/TOUCH BEHAVIOR + PREMIUM MECPL VISUAL DESIGN
+
+For now, the main objective is simply to beautifully show and highlight MUMBAI and PUNE on the real interactive Google Map.

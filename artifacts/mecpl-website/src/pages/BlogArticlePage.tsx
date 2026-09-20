@@ -9,10 +9,10 @@ export default function BlogArticlePage() {
 
   if (!post) {
     return (
-      <div className="bg-white pt-28 px-6 min-h-screen text-[#111827]">
+      <div className="bg-white pt-28 px-6 min-h-screen text-mecpl-text">
         <div className="max-w-4xl mx-auto">
           <h3 className="page-title-font text-4xl">Article not found</h3>
-          <Link href="/blog" className="inline-flex mt-6 text-[#C41E3A] font-black uppercase tracking-widest text-xs">
+          <Link href="/blog" className="inline-flex mt-6 text-mecpl-red font-semibold uppercase tracking-widest text-xs">
             Back to blog
           </Link>
         </div>

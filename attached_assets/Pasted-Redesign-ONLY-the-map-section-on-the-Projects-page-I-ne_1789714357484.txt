@@ -1,0 +1,79 @@
+Redesign ONLY the map section on the Projects page.
+
+I need a completely FREE interactive map solution. Do NOT use Google Maps API, Google Maps JavaScript API, Mapbox paid services, or anything that requires a billing account.
+
+Use:
+- MapLibre GL JS
+- OpenStreetMap-based map data/tiles
+- A suitable free tile provider that allows website usage
+
+The map must behave like a real interactive map:
+- Zoom in/out
+- Mouse-wheel zoom
+- Drag/pan
+- Double-click zoom
+- Mobile pinch-to-zoom
+- Touch gestures
+- Smooth zoom and pan animations
+
+INITIAL VIEW:
+Show BOTH Mumbai and Pune in the initial viewport.
+
+Mumbai:
+Latitude: 19.0760
+Longitude: 72.8777
+
+Pune:
+Latitude: 18.5204
+Longitude: 73.8567
+
+Use the map's bounds/fitBounds functionality so both cities are automatically visible rather than using a fixed zoom level.
+
+DESIGN:
+Create a premium, minimal map suitable for a luxury construction/real-estate website.
+
+- Use a clean light/neutral map style.
+- Reduce unnecessary POIs, shops, restaurants and other clutter.
+- Keep major roads and geographic boundaries subtle.
+- Avoid the typical colorful/default map appearance.
+- Make Mumbai and Pune the visual focus.
+
+LOCATION HIGHLIGHTS:
+For now, show ONLY Mumbai and Pune.
+
+Create custom HTML/SVG markers for both locations instead of standard map pins.
+
+Example:
+
+MUMBAI
+●
+PROJECTS
+
+PUNE
+●
+PROJECTS
+
+Use the existing MECPL website typography and design language.
+
+Add a subtle animated pulse/ripple around the Mumbai and Pune markers.
+
+INTERACTION:
+- Clicking Mumbai smoothly zooms into Mumbai.
+- Clicking Pune smoothly zooms into Pune.
+- Users can zoom back out and see both cities again.
+- Users can freely drag/pan around the map.
+- Do not lock the map to either location.
+
+IMPORTANT:
+Do not use a static image.
+Do not create a fake/custom SVG map of Maharashtra.
+Use an actual interactive MapLibre map with real geographic map data.
+
+Do not modify any other Projects page sections or existing project functionality.
+
+Before coding, inspect the existing Angular/Replit project and reuse the current component structure and styling where possible.
+
+The final result should look like:
+REAL INTERACTIVE MAP + SMOOTH ZOOM/PAN + PREMIUM MECPL DESIGN + MUMBAI/PUNE HIGHLIGHTS
+
+Keep the implementation free and avoid any service requiring a credit card or billing account.

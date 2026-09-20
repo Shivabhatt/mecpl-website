@@ -7,4 +7,4 @@ When a component intentionally uses a font weight outside the shared title treat
 
 **Why:** Declaring a light weight is not enough if the font import omits it or a shared `!important` rule wins the cascade. Important declarations reverse CSS layer priority, so an earlier layered rule can beat a more specific unlayered exception.
 
-**How to apply:** Verify the weight exists in the font source, inspect competing shared rules and their cascade layers, and place the exception in the winning layer when needed. Confirm the rendered result visually rather than relying only on declarations.
+**How to apply:** Verify the weight exists in the font source, inspect competing shared rules and their cascade layers, and place the exception in the winning layer when needed. For visual-editor headings, combine an explicit inline numeric weight with a higher-specificity component `!important` exception and disable `font-synthesis`; confirm the rendered result visually rather than relying only on declarations.

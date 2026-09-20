@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Home",     path: "/" },
   { label: "About Us", path: "/about" },
   { label: "Projects", path: "/projects" },
-  { label: "Blog",     path: "/blog" },
+  { label: "Certifications", path: "/about#certifications" },
   { label: "Awards",   path: "/awards" },
   { label: "Careers",  path: "/careers" },
 ];
@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#232529] shadow-[0_1px_0_rgba(255,255,255,0.08)] transition-transform duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-mecpl-dark shadow-[0_1px_0_rgba(255,255,255,0.08)] transition-transform duration-500 ${
         isAtTop || menuOpen ? "translate-y-0" : "-translate-y-full"
       }`}
       data-testid="navbar"
@@ -68,7 +68,7 @@ export default function Navbar() {
                 >
                   {link.label}
                   <span
-                    className={`absolute bottom-0 left-4 right-4 h-[1.5px] bg-[#EC3338] transition-transform duration-300 origin-left ${
+                    className={`absolute bottom-0 left-4 right-4 h-[1.5px] bg-mecpl-red transition-transform duration-300 origin-left ${
                       active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     }`}
                   />
@@ -103,10 +103,10 @@ export default function Navbar() {
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 top-20 z-40 bg-black/20 md:hidden"
+            className="fixed inset-0 top-20 z-40 bg-mecpl-dark/20 md:hidden"
             onClick={() => setMenuOpen(false)}
           />
-          <div className="md:hidden bg-white border-t border-black/[0.06] px-6 py-5 space-y-1 relative z-50">
+          <div className="md:hidden bg-white border-t border-mecpl-dark/[0.06] px-6 py-5 space-y-1 relative z-50">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -114,8 +114,8 @@ export default function Navbar() {
                 data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div
-                     className={`navbar-nav-label font-montserrat py-3 text-sm font-medium normal-case tracking-normal border-b border-black/[0.05] cursor-pointer transition-colors ${
-                    location === link.path ? "text-[#EC3338]" : "text-[#232529] hover:text-[#EC3338]"
+                     className={`navbar-nav-label font-montserrat py-3 text-sm font-medium normal-case tracking-normal border-b border-mecpl-dark/[0.05] cursor-pointer transition-colors ${
+                    location === link.path ? "text-mecpl-red" : "text-mecpl-text hover:text-mecpl-red"
                   }`}
                 >
                   {link.label}

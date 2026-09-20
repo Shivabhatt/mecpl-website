@@ -1,0 +1,27 @@
+Color Palette
+MECPL RED
+Used for accents, highlighting structural elements, and
+grawing attention.
+STEEL GREY
+CHARCOAL
+HEX: #232529
+RGB: (35, 37, 41)
+CMYK: C: 15%, M: 10%, Y: 0%, K: 84%
+WHITE
+The MECPL color palette is derived directly from the primary logo, utilizing high-contrast industrial colors. HEX/RGB
+values are recommended brand-system values based on visual analysis of the mark.
+Primary brand color representing concrete, steel, and solid
+foundations.
+Primary text color. Provides higher legibility and a
+more premium feel than pure black.
+HEX: #EC3338
+RGB: (236, 51, 56)
+CMYK: C: 0%, M: 78%, Y: 76%, K: 7%
+HEX: #949599
+RGB: (148, 149, 153)
+CMYK: C: 3%, M: 3%, Y: 0%, K: 40%
+HEX: #FFFFFF
+RGB: (255, 255, 255)
+CMYK: C: 0%, M: 0%, Y: 0%, K: 0%
+Pure white acts as a neutral canvas that forces the viewer's
+eye toward your brand's key visual assets.

@@ -23,7 +23,7 @@ export default function AwardsPage() {
   return (
     <div data-animate-page className="bg-white">
       {/* Header */}
-      <div className="relative py-20 border-b border-black/[0.06] overflow-hidden">
+      <div className="relative py-20 border-b border-mecpl-dark/[0.06] overflow-hidden">
         <img src="/assets/projects/GODREJ-INFINITY.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Award-winning MECPL construction project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
@@ -32,9 +32,9 @@ export default function AwardsPage() {
       </div>
 
       {/* Marquee */}
-      <div className="bg-[#C41E3A] py-3">
+      <div className="bg-mecpl-red py-3">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-white font-black text-sm uppercase tracking-widest">20+ Years of Consecutive Industry Awards — MECPL's Legacy of Excellence</p>
+          <p className="text-white font-semibold text-sm uppercase tracking-widest">20+ Years of Consecutive Industry Awards — MECPL's Legacy of Excellence</p>
         </div>
       </div>
 
@@ -42,40 +42,40 @@ export default function AwardsPage() {
       <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-awards-highlights">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
           {awards.slice(0, 6).map((a, i) => (
-            <div key={i} className="bg-white border border-black/[0.07] rounded-sm p-5 text-center hover:border-[#C41E3A]/30 transition-all shadow-sm" data-testid={`card-award-highlight-${i}`}>
-              <div className="w-16 h-16 mx-auto mb-3 rounded-sm overflow-hidden border border-black/[0.1]">
+            <div key={i} className="bg-white border border-mecpl-dark/[0.07] rounded-sm p-5 text-center hover:border-mecpl-red/30 transition-all shadow-sm" data-testid={`card-award-highlight-${i}`}>
+              <div className="w-16 h-16 mx-auto mb-3 rounded-sm overflow-hidden border border-mecpl-dark/[0.1]">
                 <img src={a.icon} alt={a.award} className="w-full h-full object-cover" />
               </div>
-              <div className="text-[#C41E3A] font-black text-xl">{a.year}</div>
-              <div className="text-[#6b7280] text-[9px] uppercase tracking-widest mt-1 font-bold leading-snug">{a.award.split(" ").slice(0, 3).join(" ")}</div>
+              <div className="text-mecpl-red font-semibold text-xl">{a.year}</div>
+              <div className="text-mecpl-steel text-[9px] uppercase tracking-widest mt-1 font-semibold leading-snug">{a.award.split(" ").slice(0, 3).join(" ")}</div>
             </div>
           ))}
         </div>
 
         {/* Timeline */}
         <div>
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase block mb-8">Full Timeline</span>
+          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase block mb-8">Full Timeline</span>
           <div className="relative">
-            <div className="absolute left-[4.5rem] top-0 bottom-0 w-px bg-black/[0.08]"></div>
+            <div className="absolute left-[4.5rem] top-0 bottom-0 w-px bg-mecpl-dark/[0.08]"></div>
             <div className="space-y-5">
               {awards.map((award, i) => (
                 <div key={i} className="flex gap-8 items-start" data-testid={`award-${award.year}-${i}`}>
                   <div className="w-14 flex-shrink-0 text-right">
-                    <span className="text-[#C41E3A] font-black text-sm">{award.year}</span>
+                    <span className="text-mecpl-red font-semibold text-sm">{award.year}</span>
                   </div>
                   <div className="flex-shrink-0 mt-1.5 relative z-10">
-                    <div className="w-4 h-4 bg-[#C41E3A] rounded-sm border-4 border-white shadow"></div>
+                    <div className="w-4 h-4 bg-mecpl-red rounded-sm border-4 border-white shadow"></div>
                   </div>
                   <div className="flex-1">
-                    <div className="bg-white border border-black/[0.07] rounded-sm p-4 hover:border-[#C41E3A]/20 transition-colors group shadow-sm">
+                    <div className="bg-white border border-mecpl-dark/[0.07] rounded-sm p-4 hover:border-mecpl-red/20 transition-colors group shadow-sm">
                       <div className="flex items-start gap-3">
-                        <span className="w-12 h-12 rounded-sm overflow-hidden border border-black/[0.1] flex-shrink-0">
+                        <span className="w-12 h-12 rounded-sm overflow-hidden border border-mecpl-dark/[0.1] flex-shrink-0">
                           <img src={award.icon} alt={award.award} className="w-full h-full object-cover" />
                         </span>
                         <div>
-                          <h3 className="text-[#111827] font-bold text-sm group-hover:text-[#C41E3A] transition-colors">{award.award}</h3>
-                          <p className="text-[#6b7280] text-xs mt-1">{award.subtitle}</p>
-                          <span className="inline-block mt-2 text-[9px] font-black uppercase tracking-widest text-[#C41E3A] bg-[#C41E3A]/10 px-2 py-0.5 rounded-sm">{award.org}</span>
+                          <h3 className="text-mecpl-text font-semibold text-sm group-hover:text-mecpl-red transition-colors">{award.award}</h3>
+                          <p className="text-mecpl-steel text-xs mt-1">{award.subtitle}</p>
+                          <span className="inline-block mt-2 text-[9px] font-semibold uppercase tracking-widest text-mecpl-red bg-mecpl-red/10 px-2 py-0.5 rounded-sm">{award.org}</span>
                         </div>
                       </div>
                     </div>

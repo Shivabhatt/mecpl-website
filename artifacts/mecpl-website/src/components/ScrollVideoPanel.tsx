@@ -60,9 +60,9 @@ export default function ScrollVideoPanel() {
     <section className="max-w-7xl mx-auto px-6 py-14" data-testid="scroll-video-panel">
       <div className="grid lg:grid-cols-2 gap-8 items-center">
         <div className="lg:pr-8">
-          <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">About</span>
-          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mt-3">MECPL — Visual Storytelling</h3>
-          <p className="text-gray-400 mt-4 leading-relaxed">
+          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">About</span>
+          <h3 className="text-3xl md:text-4xl font-semibold uppercase tracking-tight text-white mt-3">MECPL — Visual Storytelling</h3>
+          <p className="text-mecpl-steel mt-4 leading-relaxed">
             A short narrative or company line that pairs with the featured video on the right. The media will
             lazy-load and autoplay (muted) when it becomes the focus on scroll. Clicking the play button opens the full
             video in a lightbox.
@@ -74,12 +74,12 @@ export default function ScrollVideoPanel() {
             <button
               aria-label="Open video"
               onClick={openLightbox}
-              className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/20 transition-colors"
+              className="absolute inset-0 flex items-center justify-center bg-mecpl-dark/10 hover:bg-mecpl-dark/20 transition-colors"
             >
               <img src={POSTER} alt="video poster" className="w-full h-full object-cover" />
               <span className="absolute w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 5v14l11-7L8 5z" fill="#111827" />
+                  <path d="M8 5v14l11-7L8 5z" fill="#232529" />
                 </svg>
               </span>
             </button>
@@ -102,7 +102,7 @@ export default function ScrollVideoPanel() {
                 className="absolute right-4 bottom-4 bg-white/90 rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 5v14l11-7L8 5z" fill="#111827" />
+                  <path d="M8 5v14l11-7L8 5z" fill="#232529" />
                 </svg>
               </button>
             </div>

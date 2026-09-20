@@ -23,7 +23,7 @@ export default function InvestorsPage() {
   return (
     <div data-animate-page className="bg-white">
       {/* Header */}
-      <div className="relative border-b border-black/[0.06] overflow-hidden">
+      <div className="relative border-b border-mecpl-dark/[0.06] overflow-hidden">
         <img src="/assets/projects/Solitaire-Business-Hub-II.jpeg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="MECPL commercial construction project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/60 to-white/30"></div>
       </div>

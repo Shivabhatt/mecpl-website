@@ -2,7 +2,7 @@
 - [MECPL Preloader fix](mecpl-preloader-fix.md) — global `html[data-theme="light"] .bg-black` turns preloader white; fix with `.preloader-force-text` CSS override + guard empty NodeList in Preloader GSAP.
 - [MECPL GSAP ScrollTrigger patterns](mecpl-gsap-scrolltrigger.md) — containerAnimation must be the gsap tween, NOT ScrollTrigger.getById(); correct ctx+mm nesting for React Strict Mode.
 - [MECPL testimonials AutoSplit](mecpl-testimonials-autosplit.md) — GggpRoB pattern: SplitText.create with mask:"lines" + autoSplit:true; wait document.fonts.ready; cancelled flag for async cleanup.
-- [MECPL Projects wheel carousel](mecpl-projects-wheel.md) — orbital sin/cos wheel replaces h-scroll; wheel origin 80px below section bottom so only top arc shows through overflow:hidden.
 - [MECPL GitHub sync fallback](mecpl-github-sync.md) — if HTTPS credentials fail, publish an exact verified tree through the authorized GitHub connector without forcing main.
 - [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
 - [MECPL dependency install](mecpl-dependency-install.md) — frontend-only filtered pnpm installs avoid unrelated Orval firewall failures when the goal is a website preview.
+- [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — use the static editorial Pune silhouette with red project dots, not a Leaflet or MapLibre street map.

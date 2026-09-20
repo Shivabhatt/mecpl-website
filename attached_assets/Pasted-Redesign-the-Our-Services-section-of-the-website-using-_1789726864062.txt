@@ -1,0 +1,58 @@
+Redesign the “Our Services” section of the website using the FINAL 6 services below. Do not use the old 7-service list.
+
+FINAL SERVICES:
+1. Residential Construction
+High-rise, township and residential developments built for scale, safety and lasting performance.
+
+2. Institutional & Industrial Construction
+From educational and institutional spaces to factories, R&D centres and process plants, we build high-performance structures engineered for demanding operations.
+
+3. Commercial Construction
+Office, retail and mixed-use developments delivered with precision, efficiency and quality.
+
+4. Infrastructure Construction
+Large-scale infrastructure and civil works built for durability, functionality and long-term performance.
+
+5. Interiors Projects
+B2B interior solutions extending our construction expertise into doors, modular furniture and complete interior environments.
+
+6. Turnkey Projects
+End-to-end project execution bringing together planning, construction, interiors and finishing under one roof.
+
+DESIGN DIRECTION:
+- Create a premium, modern construction/engineering aesthetic.
+- Use a deep charcoal/dark background (#171B1F approximately), white typography and a strong construction red accent (#E3262E approximately).
+- Keep the overall design clean, sophisticated and spacious.
+- Use a 3-column × 2-row grid on desktop.
+- Each service should be presented as a large dark card with a subtle border/separator.
+- Use minimal thin-line red icons that clearly represent each service.
+- Add very subtle architectural/technical line-art illustrations in the background of each card. Keep them low contrast so they do not compete with the text.
+- Service title should be bold white.
+- Description should be smaller and muted light grey.
+- Add a small “LEARN MORE →” interaction at the bottom of each card.
+- On hover, introduce a refined red accent animation, such as a red border/line, icon movement or subtle background transition.
+- Do not use gradients, excessive shadows, rounded bubbly cards or overly decorative elements.
+- Maintain a premium corporate construction-brand feel.
+
+SECTION HEADER:
+Small red uppercase eyebrow:
+“WHAT WE DO”
+
+Main heading:
+“OUR SERVICES”
+
+Supporting text:
+“End-to-end construction and execution across residential, commercial, institutional, industrial and infrastructure projects.”
+
+Add a small red horizontal line/accent beneath the introductory text.
+
+RESPONSIVE:
+- Desktop: 3 × 2 cards.
+- Tablet: 2 columns.
+- Mobile: 1 column.
+- Maintain comfortable spacing and readable typography on all screen sizes.
+
+IMPORTANT:
+Use ONLY these 6 final services.
+Do not add Civil & Structural Construction, Project Management, or any other service.
+Keep the visual language consistent with the existing dark charcoal, white and red construction-brand design shown in the reference.

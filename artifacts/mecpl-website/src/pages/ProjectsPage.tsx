@@ -1,25 +1,16 @@
-import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import CompletedProjectsPage from "@/pages/CompletedProjectsPage";
-import OngoingProjectsPage from "@/pages/OngoingProjectsPage";
-
-const tabs = [
-  { id: "completed", label: "Completed Projects" },
-  { id: "ongoing", label: "Ongoing Projects" },
-];
 
 export default function ProjectsPage() {
-  const [activeTab, setActiveTab] = useState("completed");
-
   return (
     <div data-animate-page className="bg-white">
-      {activeTab === "completed" ? <CompletedProjectsPage /> : <OngoingProjectsPage />}
+      <CompletedProjectsPage />
 
       {/* Project Contact CTA */}
       <section
         id="project-contact"
-        className="relative z-10 isolate flex min-h-[240px] scroll-mt-20 items-center overflow-hidden bg-[#C41E3A] px-6 py-8 font-montserrat md:py-9"
+        className="relative z-10 isolate flex min-h-[512px] scroll-mt-20 items-center overflow-hidden bg-mecpl-red px-6 pb-[120px] pt-24 font-montserrat"
         data-testid="section-projects-cta"
       >
         <div
@@ -34,14 +25,14 @@ export default function ProjectsPage() {
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 border-[1.5px] border-white bg-white px-5 py-2.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#C41E3A] transition-colors duration-300 hover:border-[#111827] hover:bg-[#111827] hover:text-white"
+              className="group inline-flex items-center gap-2.5 border-[1.5px] border-mecpl-red bg-mecpl-red px-5 py-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:border-mecpl-dark hover:bg-mecpl-dark hover:text-white"
             >
               <span>Contact Us</span>
               <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/careers"
-              className="group inline-flex items-center gap-2.5 border-[1.5px] border-white/75 bg-transparent px-5 py-2.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-[#C41E3A]"
+              className="group inline-flex items-center gap-2.5 border-[1.5px] border-white/75 bg-transparent px-5 py-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-mecpl-red"
             >
               <span>View Careers</span>
               <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />

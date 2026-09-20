@@ -17,17 +17,17 @@ export default function BlogPage() {
   const archivePosts = blogPosts;
 
   return (
-    <div data-animate-page className="blog-page bg-white min-h-screen font-montserrat font-medium text-[#111827]">
+    <div data-animate-page className="blog-page bg-white min-h-screen font-montserrat font-medium text-mecpl-text">
       {/* Empty State */}
       {blogPosts.length === 0 ? (
         <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-center min-h-[60vh] flex flex-col items-center justify-center">
           <h1 className="page-title-font font-montserrat font-medium text-4xl mb-4">MECPL Field Journal</h1>
-          <p className="page-subtitle-font font-montserrat font-medium text-[#4b5563]">No articles published yet. Check back soon.</p>
+          <p className="page-subtitle-font font-montserrat font-medium text-mecpl-text">No articles published yet. Check back soon.</p>
         </div>
       ) : (
         <>
           {/* Restrained Cinematic Hero */}
-          <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-[#111827] overflow-hidden">
+          <section className="relative w-full h-screen min-h-screen flex items-center justify-center bg-mecpl-dark overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <img 
@@ -36,7 +36,7 @@ export default function BlogPage() {
                 className="w-full h-full object-cover animate-[heroSlideIn_1.5s_ease-out_forwards]"
               />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
-              <div className="absolute inset-0 bg-black/15" />
+              <div className="absolute inset-0 bg-mecpl-dark/15" />
             </div>
 
             <div className="font-montserrat font-medium relative z-10 w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center mt-16 md:mt-20">
@@ -67,19 +67,19 @@ export default function BlogPage() {
                   {archivePosts.map((post, index) => {
                     const date = parseDate(post.publishedDate);
                     return (
-                      <div key={post.slug} className="group border-b border-black/10 last:border-b-0 pb-12 mb-12 last:pb-0 last:mb-0">
+                      <div key={post.slug} className="group border-b border-mecpl-dark/10 last:border-b-0 pb-12 mb-12 last:pb-0 last:mb-0">
                         <Link href={`/blog/${post.slug}`} className="block">
                           <article className="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start">
                             
                             {/* Date Marker */}
                             <div className="hidden md:flex flex-col md:w-16 shrink-0 mt-1">
-                              <span className="font-montserrat font-medium text-[11px] text-[#6b7280] tracking-[0.2em] uppercase mb-1">
+                              <span className="font-montserrat font-medium text-[11px] text-mecpl-steel tracking-[0.2em] uppercase mb-1">
                                 {date.month}
                               </span>
-                              <span className="font-montserrat font-medium text-4xl md:text-5xl text-[#111827] tracking-tighter leading-none">
+                              <span className="font-montserrat font-medium text-4xl md:text-5xl text-mecpl-text tracking-tighter leading-none">
                                 {date.day}
                               </span>
-                              <span className="font-montserrat font-medium text-[10px] text-[#9ca3af] tracking-[0.1em] mt-2">
+                              <span className="font-montserrat font-medium text-[10px] text-mecpl-steel tracking-[0.1em] mt-2">
                                 {date.year}
                               </span>
                             </div>
@@ -92,10 +92,10 @@ export default function BlogPage() {
                             >
                               {/* Mobile Date Overlay */}
                               <div className="md:hidden absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-2 z-10 flex flex-col items-center shadow-sm">
-                                <span className="font-montserrat font-medium text-[9px] text-[#6b7280] tracking-[0.15em] uppercase leading-none mb-1">
+                                <span className="font-montserrat font-medium text-[9px] text-mecpl-steel tracking-[0.15em] uppercase leading-none mb-1">
                                   {date.month}
                                 </span>
-                                <span className="font-montserrat font-medium text-xl text-[#111827] tracking-tighter leading-none">
+                                <span className="font-montserrat font-medium text-xl text-mecpl-text tracking-tighter leading-none">
                                   {date.day}
                                 </span>
                               </div>
@@ -112,16 +112,16 @@ export default function BlogPage() {
                               data-scroll-reveal="text"
                               data-scroll-reveal-delay={String(80 + (index % 4) * 70)}
                             >
-                              <h3 className="page-title-font font-montserrat font-medium text-xl md:text-2xl text-[#111827] mb-2 group-hover:text-[#C41E3A] transition-colors duration-300 leading-[1.15]">
+                              <h3 className="page-title-font font-montserrat font-medium text-xl md:text-2xl text-mecpl-text mb-2 group-hover:text-mecpl-red transition-colors duration-300 leading-[1.15]">
                                 {post.title}
                               </h3>
-                              <div className="font-montserrat font-medium text-[10px] md:text-[11px] text-[#9ca3af] tracking-[0.15em] uppercase mb-5">
+                              <div className="font-montserrat font-medium text-[10px] md:text-[11px] text-mecpl-steel tracking-[0.15em] uppercase mb-5">
                                 {post.category}
                               </div>
-                              <p className="page-subtitle-font font-montserrat font-medium text-[#6b7280] text-sm leading-relaxed mb-6 line-clamp-3">
+                              <p className="page-subtitle-font font-montserrat font-medium text-mecpl-steel text-sm leading-relaxed mb-6 line-clamp-3">
                                 {post.deck}
                               </p>
-                              <div className="font-montserrat font-medium self-end inline-flex items-center gap-3 text-[#111827] text-[10px] md:text-[11px] uppercase tracking-[0.2em] group-hover:text-[#C41E3A] transition-colors duration-300 mt-auto">
+                              <div className="font-montserrat font-medium self-end inline-flex items-center gap-3 text-mecpl-text text-[10px] md:text-[11px] uppercase tracking-[0.2em] group-hover:text-mecpl-red transition-colors duration-300 mt-auto">
                                 Read Article <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                               </div>
                             </div>
@@ -133,17 +133,17 @@ export default function BlogPage() {
                   })}
                 </div>
               ) : (
-                <p className="font-montserrat font-medium text-[#4b5563] italic text-sm">More project notes and company updates are on the way.</p>
+                <p className="font-montserrat font-medium text-mecpl-text italic text-sm">More project notes and company updates are on the way.</p>
               )}
 
             </div>
           </section>
 
           {/* Enterprise Trust CTA */}
-          <section className="cta-section bg-[#C41E3A] relative overflow-hidden flex items-center" style={{ padding: "36px 40px", minHeight: "167.2px" }}>
+          <section className="cta-section bg-mecpl-red relative overflow-hidden flex items-center" style={{ padding: "36px 40px", minHeight: "167.2px" }}>
             <div className="max-w-[900px] w-full mx-auto relative z-10 flex flex-col items-center text-center" data-scroll-reveal="text">
               <h2 className="page-title-font font-montserrat font-medium" style={{
-                fontWeight: 900,
+                fontWeight: 600,
                 fontSize: "clamp(1.35rem, 2.5vw, 2rem)",
                 color: "#ffffff",
                 textTransform: "uppercase",
@@ -157,7 +157,7 @@ export default function BlogPage() {
                 Discover the people and projects behind MECPL.
               </p>
               <Link href="/about">
-                <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white text-[#C41E3A] bg-white px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-[#111827] hover:border-[#111827] hover:text-white">
+                <span className="group about-cta-button-font font-montserrat font-medium inline-flex items-center gap-2.5 border-[1.5px] border-white text-mecpl-red bg-white px-6 py-2.5 text-[10px] tracking-[0.22em] uppercase transition-colors hover:bg-mecpl-dark hover:border-mecpl-dark hover:text-white">
                   About Us <ArrowRight size={12} />
                 </span>
               </Link>

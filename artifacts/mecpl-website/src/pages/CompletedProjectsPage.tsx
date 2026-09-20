@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Building2, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import "leaflet/dist/leaflet.css";
+import { ArrowRight, MapPin } from "lucide-react";
+import { ongoingProjects } from "@/pages/OngoingProjectsPage";
 const assetBase = import.meta.env.BASE_URL;
 
 function useInView<T extends HTMLElement>() {
@@ -24,7 +24,7 @@ function useInView<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-const allProjects = [
+const completedProjects = [
   // Residential
   { name: "Kingsbury Pride Purple Group", type: "Residential", location: "Charoli, Pune", image: `${assetBase}assets/projects/Kingsbury.jpg` },
   { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: `${assetBase}assets/projects/gera-songs-of-joy-01-large.png` },
@@ -56,13 +56,24 @@ const allProjects = [
   { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: `${assetBase}assets/projects/Ramkrishna-Math.jpg` },
 ];
 
-const filters = ["All", "Residential", "Commercial", "Industrial"];
+const allProjects = [
+  ...completedProjects,
+  ...ongoingProjects.map((project) => ({
+    name: project.name,
+    type: "Ongoing Projects",
+    location: project.location,
+    image: project.image,
+  })),
+];
+
+const filters = ["All", "Residential", "Commercial", "Industrial", "Ongoing Projects"];
 
 const typeBadge: Record<string, string> = {
-  Residential: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
-  Commercial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
-  Industrial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
-  Special: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
+  Residential: "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
+  Commercial: "bg-[#f9f9f9] text-mecpl-steel border border-mecpl-dark/[0.1]",
+  Industrial: "bg-[#f9f9f9] text-mecpl-steel border border-mecpl-dark/[0.1]",
+  "Ongoing Projects": "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
+  Special: "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
 };
 
 const areaCoordinates: Record<string, { mapX: number; mapY: number }> = {
@@ -130,21 +141,22 @@ export default function CompletedProjectsPage() {
   }, []);
 
   return (
-    <div data-animate-page className="bg-white">
+    <div data-animate-page className="completed-projects-page bg-white">
       {/* Project Hero */}
-      <div className="relative min-h-screen overflow-hidden bg-[#111827] flex items-center">
-        <img
-          src="/assets/projects/HIGH-RISE-1-scaled.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
-          alt="MECPL construction projects"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
-        <div className="absolute inset-0 bg-black/15" />
+      <div
+        className="relative min-h-screen overflow-hidden bg-mecpl-dark flex items-center"
+        style={{
+          backgroundImage: `url(${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg)`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.78)_0%,rgba(6,10,16,0.58)_48%,rgba(6,10,16,0.34)_100%)]" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
           <span className="about-label-font font-montserrat font-medium" style={{
             fontFamily: "'Montserrat', sans-serif",
             fontSize: "0.62rem",
-            fontWeight: 700,
+            fontWeight: 600,
             letterSpacing: "0.35em",
             color: "#ffffff",
             textTransform: "uppercase",
@@ -154,8 +166,8 @@ export default function CompletedProjectsPage() {
             OUR PROJECTS
           </span>
           <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
-            <div className="hp-banner-line" style={{
-              fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
+            <div className="hp-banner-line text-[36px]" style={{
+              fontSize: "36px",
               lineHeight: 1.15,
               color: "#ffffff",
               whiteSpace: "nowrap",
@@ -168,11 +180,67 @@ export default function CompletedProjectsPage() {
           </p>
         </div>
       </div>
-
+      {/* Awards and industry recognition */}
+      <section
+        id="project-awards"
+        className="bg-white px-6 py-8 font-montserrat md:py-10"
+        data-testid="section-project-awards"
+        aria-label="Awards and industry recognition"
+      >
+        <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
+          {[
+            {
+              src: "/assets/awards/nsci-safety-award-2025.png",
+              alt: "National Safety Council of India Green Triangle for Safety",
+              label: "NSCI Safety Award 2025",
+              imageClass: "max-h-[58px] max-w-[200px] md:max-h-[64px] md:max-w-[220px]",
+            },
+            {
+              src: "/assets/awards/bai-well-built-structure-award.png",
+              alt: "Builders' Association of India",
+              label: "BAI Well Built Structure Award",
+              imageClass: "max-h-[70px] max-w-[90px] md:max-h-[76px]",
+            },
+            {
+              src: "/assets/awards/cidc-vishwakarma-award-2026.png",
+              alt: "Construction Industry Development Council",
+              label: "CIDC Vishwakarma Award 2026",
+              imageClass: "max-h-[70px] max-w-[90px] md:max-h-[76px]",
+            },
+            {
+              src: "/assets/awards/british-safety-council-award-2026.jpeg",
+              alt: "British Safety Council International Safety Awards 2026 Distinction",
+              label: "International Safety Award 2026",
+              imageClass: "max-h-[70px] max-w-[160px] md:max-h-[76px] md:max-w-[180px]",
+            },
+          ].map((award, index) => (
+            <div
+              key={award.label}
+              className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-6 text-center ${
+                index % 2 === 1 ? "border-l border-mecpl-dark/[0.08]" : ""
+              } ${index < 2 ? "border-b border-mecpl-dark/[0.08]" : ""} ${
+                index > 0 ? "md:border-l md:border-mecpl-dark/[0.08]" : "md:border-l-0"
+              } md:border-b-0`}
+            >
+              <div className="flex h-[78px] items-center justify-center">
+                <img
+                  src={award.src}
+                  alt={award.alt}
+                  className={`h-auto w-auto object-contain ${award.imageClass}`}
+                  loading="lazy"
+                />
+              </div>
+              <span className="mt-4 max-w-[190px] text-[9px] font-semibold leading-[1.45] tracking-[0.05em] text-[#73777d] md:text-[10px]">
+                {award.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
       {/* Project metrics */}
       <section
         id="project-metrics"
-        className="bg-[#232529] px-6 py-11 font-montserrat md:py-14"
+        className="bg-mecpl-dark px-6 py-11 font-montserrat md:py-14"
         data-testid="section-project-metrics"
         aria-label="Project delivery metrics"
       >
@@ -192,7 +260,7 @@ export default function CompletedProjectsPage() {
                 <span className="text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
                   {metric.value}
                 </span>
-                <span className="ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
+                <span className="ml-1 text-[1.8rem] font-medium leading-none text-mecpl-red md:text-[2.15rem]">
                   {metric.suffix}
                 </span>
               </div>
@@ -203,26 +271,25 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
       </section>
-
-       <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
-         <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
-           Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
-           Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
-         </p>
-       </section>
+      <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
+        <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-mecpl-steel md:text-base">
+          Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
+          Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
+        </p>
+      </section>
       <ArchitectureApproach />
       <ProjectExplorer />
       {/* Sticky project filters */}
-      <div className="sticky top-0 z-40 border-b border-black/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
+      <div className="sticky top-0 z-40 border-b border-mecpl-dark/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
         <div className="mx-auto flex w-full max-w-7xl justify-start overflow-x-auto px-6 font-montserrat sm:justify-center">
-          <div className="flex w-full min-w-max items-center justify-between gap-5 font-montserrat sm:min-w-[42rem] sm:gap-8">
+          <div className="grid w-full grid-cols-5 items-center gap-1 font-montserrat sm:min-w-[42rem] sm:gap-8">
             {filters.map(f => (
               <button
                 key={f}
                 onClick={() => selectFilter(f)}
                 aria-pressed={active === f}
-                className={`cursor-pointer whitespace-nowrap py-2 font-montserrat text-[10px] font-bold normal-case tracking-[0.16em] transition-colors duration-300 sm:text-xs lg:text-[14px] ${
-                  active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
+                className={`cursor-pointer whitespace-normal px-1 py-2 text-center font-montserrat text-[8px] font-semibold normal-case leading-tight tracking-[0.1em] transition-colors duration-300 sm:text-xs sm:tracking-[0.16em] lg:text-[14px] ${
+                  active === f ? "text-mecpl-red" : "text-mecpl-steel hover:text-mecpl-red"
                 }`}
                 data-testid={`button-filter-${f.toLowerCase()}`}
               >
@@ -232,7 +299,6 @@ export default function CompletedProjectsPage() {
           </div>
         </div>
       </div>
-
       {/* Projects Grid */}
       <section id="projects-grid" className="scroll-mt-16 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
         <div>
@@ -241,12 +307,12 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
         {totalPages > 1 && (
-          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-black/[0.08] pt-8 font-montserrat" aria-label="Project pages">
+          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-mecpl-dark/[0.08] pt-8 font-montserrat" aria-label="Project pages">
             <button
               type="button"
               onClick={() => selectPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
+              className="h-10 border border-mecpl-dark/[0.12] px-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-mecpl-red hover:text-mecpl-red disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
@@ -256,10 +322,10 @@ export default function CompletedProjectsPage() {
                 type="button"
                 onClick={() => selectPage(page)}
                 aria-current={currentPage === page ? "page" : undefined}
-                className={`h-10 min-w-10 border px-3 text-xs font-bold transition-colors ${
+                className={`h-10 min-w-10 border px-3 text-xs font-semibold transition-colors ${
                   currentPage === page
-                    ? "border-[#C41E3A] bg-[#C41E3A] text-white"
-                    : "border-black/[0.12] text-[#6b7280] hover:border-[#C41E3A] hover:text-[#C41E3A]"
+                    ? "border-mecpl-red bg-mecpl-red text-white"
+                    : "border-mecpl-dark/[0.12] text-mecpl-steel hover:border-mecpl-red hover:text-mecpl-red"
                 }`}
               >
                 {page}
@@ -269,7 +335,7 @@ export default function CompletedProjectsPage() {
               type="button"
               onClick={() => selectPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
+              className="h-10 border border-mecpl-dark/[0.12] px-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-mecpl-red hover:text-mecpl-red disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>
@@ -285,13 +351,13 @@ function ArchitectureApproach() {
     <section id="architecture-approach" className="scroll-mt-20 overflow-visible bg-white px-6 py-20 md:px-10 md:py-28" data-testid="section-architecture-approach">
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-0">
         <div className="relative z-10 max-w-xl lg:py-10 lg:pr-16" data-scroll-reveal="text">
-          <span className="mb-5 block font-montserrat text-[10px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
+          <span className="mb-5 block font-montserrat text-[10px] font-semibold uppercase tracking-[0.22em] text-mecpl-red">
             Architectural Approach
           </span>
-          <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-[#232529]">
-            Architecture that feels considered.
+          <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-mecpl-text">
+            Architecture That Feels Considered.
           </h2>
-          <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-[#232529]">
+          <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-mecpl-text">
             <p>
               We believe architecture should feel considered from the first line on paper to the final detail on site.
             </p>
@@ -300,12 +366,12 @@ function ArchitectureApproach() {
               who inhabit each space.
             </p>
           </div>
-          <p className="mt-8 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#949599]">
+          <p className="mt-8 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-mecpl-steel">
             Form, function, and enduring value
           </p>
           <a
             href="#project-explorer"
-            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#232529] transition-colors hover:text-[#EC3338]"
+            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-mecpl-text transition-colors hover:text-mecpl-red"
           >
             Explore our projects <ArrowRight size={14} />
           </a>
@@ -322,117 +388,18 @@ function ArchitectureApproach() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-8 left-4 w-[min(86%,17rem)] bg-white px-6 py-5 shadow-[0_18px_40px_rgba(35,37,41,0.16)] sm:left-8 sm:px-7 sm:py-6">
-            <span className="block font-montserrat text-[9px] font-bold uppercase tracking-[0.18em] text-[#EC3338]">
+            <span className="block font-montserrat text-[9px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
               Our Design Principle
             </span>
-            <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-[#232529]">
+            <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-mecpl-text">
               Build with purpose.
               <br />
-              <strong className="font-bold">Last with meaning.</strong>
+              <strong className="font-semibold">Last with meaning.</strong>
             </p>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function ProjectExplorerMap() {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [mapError, setMapError] = useState<string | null>(null);
-  const [mapReady, setMapReady] = useState(false);
-
-  useEffect(() => {
-    const container = mapContainerRef.current;
-    if (!container) return;
-    let cancelled = false;
-    let map: import("leaflet").Map | undefined;
-    const resizeObserver = new ResizeObserver(() => map?.invalidateSize(false));
-    resizeObserver.observe(container);
-
-    void import("leaflet").then((leaflet) => {
-      if (cancelled) return;
-      const locations = [
-        { name: "Mumbai", coordinates: [19.076, 72.8777] as [number, number] },
-        { name: "Pune", coordinates: [18.5204, 73.8567] as [number, number] },
-      ];
-
-      try {
-        map = leaflet.map(container, {
-          center: [18.8, 73.36],
-          zoom: 7,
-          attributionControl: false,
-          zoomControl: true,
-          scrollWheelZoom: true,
-          doubleClickZoom: true,
-          touchZoom: true,
-        });
-      } catch (error) {
-        setMapError(error instanceof Error ? error.message : "Map could not be initialized.");
-        return;
-      }
-
-      const activeMap = map;
-      leaflet.control.attribution({
-        position: "bottomright",
-        prefix: false,
-      }).addTo(activeMap);
-      const tileLayer = leaflet.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
-        maxZoom: 19,
-        attribution: "Tiles © Esri",
-        crossOrigin: true,
-      });
-      tileLayer.once("load", () => {
-        if (!cancelled) setMapReady(true);
-      });
-      tileLayer.addTo(activeMap);
-
-      activeMap.fitBounds(
-        locations.map((location) => location.coordinates),
-        { padding: [70, 70], maxZoom: 8, animate: false },
-      );
-
-      locations.forEach((location) => {
-        const architectureIcon = location.name === "Mumbai"
-          ? `<svg viewBox="0 0 72 48" aria-hidden="true"><path d="M9 42h54M15 42V20h42v22M20 20V12h32v8M25 12V7h22v5M31 42V25h10v17M20 42V28h7v14M45 42V28h7v14M12 20h48M27 7 36 2l9 5"/></svg>`
-          : `<svg viewBox="0 0 72 48" aria-hidden="true"><path d="M7 42h58M12 42V24h48v18M18 24V17h36v7M25 17V10h22v7M31 10V6h10v4M28 42V29h16v13M17 42V30h7v12M48 42V30h7v12M9 24h54M36 6V2"/></svg>`;
-        const icon = leaflet.divIcon({
-          className: "mecpl-city-marker-shell",
-          html: `<button type="button" class="mecpl-city-marker" aria-label="Zoom to ${location.name}">${architectureIcon}<strong>${location.name}</strong><span>Project region</span></button>`,
-          iconSize: [112, 96],
-          iconAnchor: [56, 72],
-        });
-        leaflet.marker(location.coordinates, { icon })
-          .on("click", () => activeMap.flyTo(location.coordinates, 11, { duration: 0.8 }))
-          .addTo(activeMap);
-      });
-
-      window.requestAnimationFrame(() => activeMap.invalidateSize(false));
-    }).catch((error) => setMapError(error instanceof Error ? error.message : "Map could not be loaded."));
-
-    return () => {
-      cancelled = true;
-      resizeObserver.disconnect();
-      map?.remove();
-    };
-  }, []);
-
-  if (mapError) {
-    return <div className="absolute inset-0 z-20 grid place-items-center bg-[#eef1ed] p-8 text-center text-sm text-[#626667]">Map preview error: {mapError}</div>;
-  }
-
-  return (
-    <div className="absolute inset-0 z-20" aria-label="Interactive map showing Mumbai and Pune">
-      <div ref={mapContainerRef} className="mecpl-leaflet-map absolute inset-0" />
-      {!mapReady && (
-        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-[#eef1ed] text-center">
-          <div>
-            <span className="mx-auto block h-7 w-7 animate-spin rounded-full border-2 border-[#EC3338]/20 border-t-[#EC3338]" />
-            <p className="mt-3 font-montserrat text-[9px] font-bold uppercase tracking-[0.2em] text-[#626667]">Loading interactive map</p>
-          </div>
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -448,208 +415,119 @@ function ProjectExplorer() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
-  const showPreviousProject = () => {
-    setSelectedIndex(current => (current - 1 + explorerProjects.length) % explorerProjects.length);
-  };
-
-  const showNextProject = () => {
-    setSelectedIndex(current => (current + 1) % explorerProjects.length);
-  };
-
   return (
     <section
       id="project-explorer"
-      className="scroll-mt-20 overflow-hidden bg-[#f5f4f0] font-montserrat"
+      className="scroll-mt-20 overflow-hidden bg-white font-montserrat"
       data-testid="section-project-explorer"
       aria-label="MECPL project explorer"
     >
-      <div className="mx-auto grid min-h-[720px] max-w-[1500px] bg-[#f5f4f0] lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="relative min-h-[520px] overflow-hidden bg-[#eef1ed] lg:min-h-full" data-scroll-reveal="image">
-              <ProjectExplorerMap />
+      <div className="mx-auto grid min-h-[680px] max-w-[1500px] border-y border-mecpl-dark/[0.08] bg-white lg:grid-cols-[0.42fr_0.58fr]">
+        <div className="relative min-h-[500px] overflow-hidden bg-[#e8e7e2]" data-scroll-reveal="image">
+          <video
+            src={`${assetBase}assets/video/projects-explorer.mp4`}
+            poster={`${assetBase}assets/projects/Trump-Tower.jpg`}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Portrait video of Trump Towers"
+          />
+        </div>
+
+        <div className="grid bg-white xl:grid-cols-[0.92fr_1.08fr] xl:grid-rows-[auto_minmax(0,1fr)]">
+          <header className="border-b border-mecpl-dark/[0.08] px-6 py-8 xl:col-span-2 xl:px-10">
+            <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-mecpl-red">
+              Building With Purpose.
+            </h2>
+            <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[#626667]">
+              From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,
+              responsibility, and a long-term view of Pune.
+            </p>
+          </header>
+
+          <div className="relative min-h-[500px] overflow-hidden bg-white px-6 py-8 xl:min-h-0 xl:border-r xl:border-mecpl-dark/[0.08]">
+            <div className="relative mx-auto h-full min-h-[430px] max-w-[390px]">
               <svg
-                viewBox="0 0 720 720"
-                className="invisible absolute inset-0 h-full w-full"
+                viewBox="0 0 360 470"
+                className="absolute inset-0 h-full w-full"
                 role="img"
-                aria-label="Map of Maharashtra highlighting Mumbai, Pune, and major project areas"
-                preserveAspectRatio="xMidYMid meet"
+                aria-label="Pune project region with selectable MECPL locations"
               >
-                <rect width="720" height="720" fill="#f6f5f0" />
+                <g fill="none" stroke="#d8d8d4" strokeWidth="1" strokeDasharray="3 5">
+                  <circle cx="184" cy="258" r="72" />
+                  <circle cx="184" cy="258" r="112" />
+                  <circle cx="184" cy="258" r="154" />
+                </g>
                 <path
-                  d="M0 0 H176 C163 70 177 126 159 183 C146 230 166 280 149 328 C131 379 148 429 166 475 C184 521 202 583 230 720 H0 Z"
-                  fill="#dceff5"
-                />
-                <path
-                  d="M176 0 C255 22 326 8 407 38 C485 66 576 43 720 93 V638 C627 655 552 630 472 660 C379 695 301 653 230 720 C202 583 184 521 166 475 C148 429 131 379 149 328 C166 280 146 230 159 183 C177 126 163 70 176 0 Z"
-                  fill="#f1f0eb"
-                  stroke="#d8d6cf"
+                  d="M153 24 188 43l31-3 22 31 37 11 16 42-25 34 17 35-31 24 11 37-29 23 6 44-28 28-16 61-28-45-19-35-34-23 8-39-35-30 21-36-13-40 33-28-5-43 31-18Z"
+                  fill="#ededeb"
+                  stroke="#9fa09d"
                   strokeWidth="2"
+                  strokeLinejoin="round"
                 />
-                <g fill="#dbe5d2" opacity="0.95">
-                  <path d="M165 68 C233 34 291 68 317 137 C264 170 207 165 166 129 Z" />
-                  <path d="M155 346 C218 298 288 326 314 394 C261 436 201 441 157 403 Z" />
-                  <path d="M278 502 C345 466 416 494 438 561 C381 596 321 581 274 545 Z" />
-                  <path d="M566 70 C626 45 678 65 720 91 V200 C655 209 603 165 566 70 Z" />
-                </g>
-                <g fill="none" stroke="#d6d5d0" strokeWidth="1.5">
-                  <path d="M173 98 C278 75 370 116 469 92 S628 86 720 118" />
-                  <path d="M159 229 C279 205 382 243 492 218 S635 214 720 244" />
-                  <path d="M149 381 C255 349 378 374 496 346 S642 351 720 380" />
-                  <path d="M178 535 C282 500 381 530 486 505 S630 512 720 542" />
-                  <path d="M230 0 C237 128 269 232 251 357 S248 551 286 701" />
-                  <path d="M448 0 C421 132 453 243 435 380 S425 553 470 661" />
-                </g>
-                <g fill="none" stroke="#ffffff" strokeWidth="9">
-                  <path d="M145 278 C239 307 329 335 426 376 S591 431 720 458" />
-                  <path d="M208 132 C272 211 330 277 397 344 S490 430 564 524" />
-                </g>
-                <g fill="none" stroke="#bfc1bd" strokeWidth="2">
-                  <path d="M145 278 C239 307 329 335 426 376 S591 431 720 458" />
-                  <path d="M208 132 C272 211 330 277 397 344 S490 430 564 524" />
-                </g>
-                <path d="M370 395 C432 407 466 391 523 410 C580 429 623 416 680 398" fill="none" stroke="#9bc9dc" strokeWidth="4" opacity="0.8" />
-
-                <g fontFamily="Montserrat, sans-serif">
-                  <text x="329" y="246" fill="#858987" fontSize="18" letterSpacing="6">MAHARASHTRA</text>
-                  <text x="29" y="510" fill="#8bb5c4" fontSize="11" letterSpacing="5">ARABIAN</text>
-                  <text x="48" y="529" fill="#8bb5c4" fontSize="11" letterSpacing="5">SEA</text>
-                  <text x="217" y="306" fill="#777b79" fontSize="9">NH 48</text>
-                  <text x="396" y="565" fill="#777b79" fontSize="9">NH 65</text>
-
-                  {[
-                    ["Thane", 150, 173],
-                    ["Andheri", 137, 219],
-                    ["Bandra", 139, 263],
-                    ["Navi Mumbai", 146, 307],
-                    ["Hinjawadi", 333, 365],
-                    ["Wakad", 438, 369],
-                    ["Baner", 359, 423],
-                    ["Kharadi", 514, 424],
-                    ["Bavdhan", 344, 471],
-                    ["Hadapsar", 509, 474],
-                    ["Kothrud", 362, 520],
-                    ["Pashan", 461, 520],
-                  ].map(([label, x, y]) => (
-                    <g key={String(label)}>
-                      <path d={`M${Number(x) - 12} ${Number(y) - 4}a7 7 0 1 1 14 0c0 6-7 12-7 12s-7-6-7-12Z`} fill="#df2832" stroke="#ffffff" strokeWidth="2" />
-                      <circle cx={Number(x) - 5} cy={Number(y) - 4} r="2.2" fill="#ffffff" />
-                      <text x={Number(x) + 4} y={Number(y)} fill="#3f4442" fontSize="10" fontWeight="600">{label}</text>
-                    </g>
-                  ))}
-
-                  <g transform="translate(72 236)">
-                    <path d="M0 0 H76 V28 H0 Z" fill="#333837" />
-                    <text x="38" y="19" textAnchor="middle" fill="#ffffff" fontSize="12" fontWeight="700">MUMBAI</text>
-                  </g>
-                  <g transform="translate(405 405)">
-                    <path d="M0 0 H55 V27 H0 Z" fill="#333837" />
-                    <text x="27.5" y="18" textAnchor="middle" fill="#ffffff" fontSize="12" fontWeight="700">PUNE</text>
-                  </g>
-
-                  <text x="205" y="39" fill="#858987" fontSize="9">↑ Towards Nashik</text>
-                  <text x="600" y="298" fill="#858987" fontSize="9">Towards Ahmednagar →</text>
-                  <text x="449" y="691" fill="#858987" fontSize="9">Towards Bengaluru ↓</text>
-                  <g transform="translate(662 612)" fill="#4c5250">
-                    <path d="M10 0 L20 27 L10 21 L0 27 Z" />
-                    <text x="10" y="43" textAnchor="middle" fontSize="11" fontWeight="700">N</text>
-                  </g>
+                <g fill="none" stroke="#d2d2cf" strokeWidth="1">
+                  <path d="m126 111 83 245M96 211l164 66M132 323l117-167M151 64l86 285" />
                 </g>
               </svg>
-              <div className="invisible absolute inset-0">
-                {explorerProjects.map((project, index) => {
-                  const selected = selectedIndex === index;
-                  return (
-                    <button
-                      key={`${project.name}-${project.location}`}
-                      type="button"
-                      onMouseEnter={() => setSelectedIndex(index)}
-                      onFocus={() => setSelectedIndex(index)}
-                      onClick={() => setSelectedIndex(index)}
-                      aria-label={`Show ${project.name} in ${project.location}`}
-                      aria-pressed={selected}
-                      className="group absolute z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC3338] focus-visible:ring-offset-2"
-                      style={{ left: `${project.mapX}%`, top: `${project.mapY}%` }}
-                    >
-                      <span
-                        className={`block rounded-full border-2 border-white bg-[#EC3338] shadow-[0_2px_7px_rgba(80,0,0,0.35)] transition-all ${
-                          selected
-                            ? "h-4 w-4 scale-125 ring-[7px] ring-[#EC3338]/20"
-                            : "h-3 w-3 group-hover:h-4 group-hover:w-4"
-                        }`}
-                      />
-                      <span className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 hidden min-w-max -translate-x-1/2 bg-[#232529] px-3 py-2 text-left text-white shadow-lg group-hover:block group-focus:block">
-                        <strong className="block text-[10px] font-semibold leading-tight">{project.name}</strong>
-                        <span className="mt-1 block text-[8px] text-white/65">{project.location}</span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+
+              {explorerProjects.map((project, index) => {
+                const selected = selectedIndex === index;
+                const left = Math.max(12, Math.min(88, (project.mapX - 40) * 2));
+                const top = Math.max(14, Math.min(84, (project.mapY - 30) * 1.65));
+                return (
+                  <button
+                    key={`${project.name}-${project.location}`}
+                    type="button"
+                    onMouseEnter={() => setSelectedIndex(index)}
+                    onFocus={() => setSelectedIndex(index)}
+                    onClick={() => setSelectedIndex(index)}
+                    aria-label={`Show ${project.name} in ${project.location}`}
+                    aria-pressed={selected}
+                    data-testid={`button-project-map-${index}`}
+                    className="group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-mecpl-red focus-visible:ring-offset-2"
+                    style={{ left: `${left}%`, top: `${top}%` }}
+                  >
+                    <span
+                      className={`block rounded-full border-2 border-white bg-mecpl-red shadow-[0_2px_7px_rgba(80,0,0,0.24)] transition-all ${
+                        selected ? "h-4 w-4 ring-[7px] ring-mecpl-red/20" : "h-3 w-3 group-hover:scale-125"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
             </div>
+          </div>
 
-            <article
-              className="flex h-full flex-col bg-[#f8f7f3] px-6 py-10 text-[#232529] sm:px-10 lg:px-12 lg:py-12"
-              aria-live="polite"
-              data-testid="project-map-detail-card"
-            >
-              <div className="mb-5 flex items-start justify-between gap-6">
-                <div>
-                  <span className="block text-[9px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
-                    Featured Project
-                  </span>
-                  <h2 className="mt-2 text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.035em] text-[#1f2428]">
-                    {selectedProject.name}
-                  </h2>
-                </div>
-                <div className="shrink-0 text-right">
-                  <span className="text-[9px] font-semibold tracking-[0.14em] text-[#8b8d8c]">
-                    {String(selectedIndex + 1).padStart(2, "0")} / {String(explorerProjects.length).padStart(2, "0")}
-                  </span>
-                  <div className="mt-2 flex justify-end gap-1">
-                    <button type="button" onClick={showPreviousProject} className="flex h-8 w-8 items-center justify-center text-[#454a4d] transition-colors hover:text-[#EC3338]" aria-label="Previous featured project">
-                      <ChevronLeft size={17} />
-                    </button>
-                    <button type="button" onClick={showNextProject} className="flex h-8 w-8 items-center justify-center text-[#454a4d] transition-colors hover:text-[#EC3338]" aria-label="Next featured project">
-                      <ChevronRight size={17} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-white" data-scroll-reveal="image">
-                <img
-                  src={selectedProject.image}
-                  alt={`${selectedProject.name} project`}
-                   className="h-full w-full object-cover transition-transform duration-700"
-                />
-                 <span className="absolute bottom-0 left-0 bg-[#EC3338] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-white">
-                   {selectedProject.location.split(",")[0]}
-                 </span>
-              </div>
-
-              <div className="grid grid-cols-3 border-b border-[#deddd8] bg-white">
-                <div className="flex items-center gap-2 border-r border-[#deddd8] px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
-                  <MapPin size={15} className="shrink-0 text-[#EC3338]" />
-                  <span>{selectedProject.location}</span>
-                </div>
-                <div className="flex items-center gap-2 border-r border-[#deddd8] px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
-                  <Building2 size={15} className="shrink-0 text-[#9C7A32]" />
-                  <span>{selectedProject.type}</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-4 text-[9px] text-[#4f5456] sm:px-4">
-                  <Building2 size={15} className="shrink-0 text-[#9C7A32]" />
-                  <span>MECPL Projects</span>
-                </div>
-              </div>
-
-              <div className="bg-white px-4 py-5">
-                <p className="text-[11px] leading-relaxed text-[#626667]">
-                  A landmark project delivered with precision and care, contributing to Pune&apos;s evolving urban landscape.
-                </p>
-                <a href="#projects-grid" className="mt-5 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#EC3338] transition-colors hover:text-[#232529]">
-                  View project details <ArrowRight size={13} />
-                </a>
-              </div>
-            </article>
+          <article
+            className="flex min-h-[500px] flex-col bg-white px-6 py-8 text-mecpl-text xl:min-h-0 xl:px-8"
+            aria-live="polite"
+            data-testid="project-map-detail-card"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden bg-[#ecece9]">
+              <img
+                src={selectedProject.image}
+                alt={`${selectedProject.name} project`}
+                className="h-full w-full object-cover transition-opacity duration-500"
+              />
+            </div>
+            <div className="mt-auto pt-7">
+              <h2 className="text-lg font-semibold leading-tight text-mecpl-text">{selectedProject.name}</h2>
+              <p className="mt-3 flex items-center gap-2 text-[10px] text-[#777a79]">
+                <MapPin size={12} className="shrink-0 text-mecpl-red" />
+                {selectedProject.location}
+              </p>
+              <dl className="mt-5 grid grid-cols-[74px_1fr] gap-x-4 gap-y-2 border-t border-mecpl-dark/[0.1] pt-4 text-[9px]">
+                <dt className="uppercase tracking-[0.12em] text-mecpl-steel">Category</dt>
+                <dd>{selectedProject.type}</dd>
+                <dt className="uppercase tracking-[0.12em] text-mecpl-steel">Portfolio</dt>
+                <dd>MECPL Projects</dd>
+              </dl>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   );
@@ -663,7 +541,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
   return (
     <div
       ref={ref}
-      className="group relative border-b border-black/[0.12] py-6 transition-colors duration-500 hover:bg-white/60 md:py-8"
+      className="group relative border-b border-mecpl-dark/[0.12] py-6 transition-colors duration-500 hover:bg-white/60 md:py-8"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(28px)",
@@ -674,16 +552,16 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-10">
         <div className="flex min-h-[180px] flex-col justify-between font-montserrat lg:min-h-[220px]">
           <div>
-            <div className="mb-5 flex items-center gap-4 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
+            <div className="mb-5 flex items-center gap-4 text-[9px] font-semibold normal-case tracking-[0.2em] text-mecpl-steel">
               <span className="text-[#111111]">{projectNumber}</span>
               <span className="h-px w-8 bg-[#c7c7c1]" />
               <span>{project.type}</span>
             </div>
-            <h3 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
+            <h2 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}
-            </h3>
-            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#949599]">
-              <MapPin size={12} className="text-[#C41E3A]" />
+            </h2>
+            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-mecpl-steel">
+              <MapPin size={12} className="text-mecpl-red" />
               <span>{project.location}</span>
             </div>
           </div>
@@ -691,7 +569,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
         </div>
 
         <div className="grid h-52 grid-cols-[minmax(0,1.55fr)_minmax(110px,0.85fr)] gap-2 overflow-hidden sm:h-60 md:h-64">
-          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
+          <div className="relative overflow-hidden border-b-2 border-mecpl-steel bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
@@ -700,7 +578,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
-          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
+          <div className="relative overflow-hidden border-b-2 border-mecpl-steel bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"

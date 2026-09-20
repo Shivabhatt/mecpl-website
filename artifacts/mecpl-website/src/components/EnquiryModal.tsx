@@ -70,7 +70,7 @@ export default function EnquiryModal() {
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-mecpl-dark/80 backdrop-blur-sm"
         onClick={closeModal}
       />
 
@@ -79,7 +79,7 @@ export default function EnquiryModal() {
         {/* Close button */}
         <button
           onClick={closeModal}
-          className="absolute top-4 right-4 z-10 w-9 h-9 bg-white/5 hover:bg-[#C41E3A] border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-all rounded-sm"
+          className="absolute top-4 right-4 z-10 w-9 h-9 bg-white/5 hover:bg-mecpl-red border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-all rounded-sm"
           data-testid="button-modal-close"
         >
           <X size={16} />
@@ -89,13 +89,13 @@ export default function EnquiryModal() {
         <div className="flex flex-col lg:flex-row flex-1">
 
         {/* Left panel */}
-        <div className="lg:w-2/5 bg-[#C41E3A] p-10 flex flex-col justify-between space-y-8">
+        <div className="lg:w-2/5 bg-mecpl-red p-10 flex flex-col justify-between space-y-8">
           <div className="space-y-4">
             <div className="w-10 h-10 bg-white/20 flex items-center justify-between p-2 rounded-sm flex-shrink-0">
               <div className="w-1.5 h-full bg-white rounded-full"></div>
               <div className="w-1.5 h-full bg-white rounded-full"></div>
             </div>
-            <h2 className="text-3xl font-black tracking-tighter uppercase text-white leading-tight">
+            <h2 className="text-3xl font-semibold tracking-tighter uppercase text-white leading-tight">
               Request a<br />Quote
             </h2>
             <p className="text-white/70 text-xs leading-relaxed">
@@ -104,7 +104,7 @@ export default function EnquiryModal() {
           </div>
 
           <div className="space-y-4">
-            <div className="text-white/40 text-[10px] font-black tracking-widest uppercase mb-3">Why partner with MECPL</div>
+            <div className="text-white/40 text-[10px] font-semibold tracking-widest uppercase mb-3">Why partner with MECPL</div>
             {[
               "25+ years of execution expertise",
               "ISO 9001 · 14001 · 45001 certified",
@@ -141,14 +141,14 @@ export default function EnquiryModal() {
                 <CheckCircle size={28} className="text-green-400" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-2xl font-black uppercase tracking-tight text-white">Enquiry Received</h3>
-                <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
+                <h3 className="text-2xl font-semibold uppercase tracking-tight text-white">Enquiry Received</h3>
+                <p className="text-mecpl-steel text-sm leading-relaxed max-w-sm">
                   Thank you! Our team will review your project details and reach out within 24 hours.
                 </p>
               </div>
               <button
                 onClick={closeModal}
-                className="bg-[#C41E3A] hover:bg-red-700 text-white px-8 py-3 text-xs font-black tracking-widest uppercase rounded-sm transition-all"
+                className="bg-mecpl-red hover:bg-mecpl-dark text-white px-8 py-3 text-xs font-semibold tracking-widest uppercase rounded-sm transition-all"
               >
                 Close
               </button>
@@ -156,13 +156,13 @@ export default function EnquiryModal() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5" data-testid="form-enquiry">
               <div>
-                <span className="text-[#C41E3A] text-[10px] font-black tracking-widest uppercase">Project Intake</span>
-                <h3 className="text-xl font-black uppercase tracking-tight text-white mt-1">Tell Us About Your Project</h3>
+                <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Project Intake</span>
+                <h3 className="text-xl font-semibold uppercase tracking-tight text-white mt-1">Tell Us About Your Project</h3>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Full Name *</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Full Name *</label>
                   <input
                     type="text"
                     name="name"
@@ -170,25 +170,25 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="E.g., Rahul Sharma"
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Company / Organization</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Company / Organization</label>
                   <input
                     type="text"
                     name="company"
                     value={form.company}
                     onChange={handleChange}
                     placeholder="E.g., Panchshil Realty"
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Email Address *</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Email Address *</label>
                   <input
                     type="email"
                     name="email"
@@ -196,11 +196,11 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="you@company.com"
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Phone Number *</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Phone Number *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -208,20 +208,20 @@ export default function EnquiryModal() {
                     onChange={handleChange}
                     required
                     placeholder="+91 98765 43210"
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Project Type *</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Project Type *</label>
                   <select
                     name="projectType"
                     value={form.projectType}
                     onChange={handleChange}
                     required
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors"
                   >
                     <option value="" className="bg-mecpl-card">Select type...</option>
                     {projectTypes.map((t) => (
@@ -230,25 +230,25 @@ export default function EnquiryModal() {
                   </select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Project Location</label>
+                  <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Project Location</label>
                   <input
                     type="text"
                     name="location"
                     value={form.location}
                     onChange={handleChange}
                     placeholder="E.g., Kharadi, Pune"
-                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20"
+                    className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Approximate Budget</label>
+                <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Approximate Budget</label>
                 <select
                   name="budget"
                   value={form.budget}
                   onChange={handleChange}
-                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
+                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors"
                 >
                   <option value="" className="bg-mecpl-card">Select range...</option>
                   {budgetRanges.map((b) => (
@@ -258,7 +258,7 @@ export default function EnquiryModal() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black tracking-widest uppercase text-gray-400">Project Brief *</label>
+                <label className="text-[10px] font-semibold tracking-widest uppercase text-mecpl-steel">Project Brief *</label>
                 <textarea
                   name="message"
                   value={form.message}
@@ -266,13 +266,13 @@ export default function EnquiryModal() {
                   required
                   rows={3}
                   placeholder="Briefly describe your project requirements, scale, timeline, and any specific challenges..."
-                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-[#C41E3A] transition-colors placeholder:text-white/20 resize-none"
+                  className="w-full bg-mecpl-card border border-white/10 text-white text-xs px-4 py-3 rounded-sm focus:outline-none focus:border-mecpl-red transition-colors placeholder:text-white/20 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#C41E3A] hover:bg-red-700 text-white py-4 text-xs font-black tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#C41E3A]/20 flex items-center justify-center gap-2"
+                className="w-full bg-mecpl-red hover:bg-mecpl-dark text-white py-4 text-xs font-semibold tracking-widest uppercase rounded-sm transition-all shadow-lg shadow-[#EC3338]/20 flex items-center justify-center gap-2"
                 data-testid="button-modal-submit"
               >
                 <Send size={13} /> Submit Project Enquiry
@@ -287,19 +287,19 @@ export default function EnquiryModal() {
         </div>
         <div className="border-t border-white/10 bg-mecpl-card px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 bg-[#C41E3A] flex items-center justify-between p-1 rounded-sm flex-shrink-0">
+            <div className="w-6 h-6 bg-mecpl-red flex items-center justify-between p-1 rounded-sm flex-shrink-0">
               <div className="w-0.5 h-full bg-white rounded-full"></div>
               <div className="w-0.5 h-full bg-white rounded-full"></div>
             </div>
             <div>
-              <span className="text-white text-[11px] font-black tracking-widest uppercase">MECPL</span>
+              <span className="text-white text-[11px] font-semibold tracking-widest uppercase">MECPL</span>
               <span className="text-white/40 text-[10px] ml-2">Millennium Engineers &amp; Contractors Pvt. Ltd.</span>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-white/30 text-[10px] font-black tracking-wider uppercase">
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />ISO 9001</span>
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />ISO 14001</span>
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#C41E3A] inline-block" />CRISIL SME 1</span>
+          <div className="flex items-center gap-4 text-white/30 text-[10px] font-semibold tracking-wider uppercase">
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-mecpl-red inline-block" />ISO 9001</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-mecpl-red inline-block" />ISO 14001</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-mecpl-red inline-block" />CRISIL SME 1</span>
           </div>
           <p className="text-white/20 text-[10px] tracking-wide hidden sm:block">&#169; 2026 MECPL. All rights reserved.</p>
         </div>

@@ -49,7 +49,7 @@ export default function Footer() {
 
               {/* Social */}
               <div className="space-y-3 pt-1">
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff" }}>
+                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff" }}>
                   Follow Us
                 </div>
                 <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export default function Footer() {
                   color: "#ffffff",
                   fontFamily: "'Montserrat',sans-serif",
                   fontSize: "9px",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                 }}>
@@ -111,7 +111,7 @@ export default function Footer() {
                         color: "#ffffff",
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: "10px",
-                        fontWeight: 700,
+                        fontWeight: 600,
                         letterSpacing: "0.02em",
                         lineHeight: 1.35,
                       }}
@@ -138,8 +138,8 @@ export default function Footer() {
               </p>
               <div className="flex gap-5"
                  style={{ fontSize: "9px", letterSpacing: "0.12em", color: footerMuted, textTransform: "uppercase" }}>
-                <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">PRIVACY POLICY</span>
-                <span className="hover:text-[#C41E3A] cursor-pointer transition-colors">CSR POLICY</span>
+                <span className="hover:text-mecpl-red cursor-pointer transition-colors">PRIVACY POLICY</span>
+                <span className="hover:text-mecpl-red cursor-pointer transition-colors">CSR POLICY</span>
               </div>
             </div>
           </div>

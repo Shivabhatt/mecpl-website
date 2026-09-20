@@ -17,16 +17,16 @@ export default function SectionHeader({ label, title, subtitle, center = true, l
         </span>
       )}
       {useH1 ? (
-        <h1 className="page-title-font text-5xl leading-tight text-[#232529]">
+        <h1 className="page-title-font text-5xl leading-tight text-mecpl-text">
           {title}
         </h1>
       ) : (
-        <h3 className="page-title-font text-3xl leading-tight text-[#232529]">
+        <h3 className="page-title-font text-3xl leading-tight text-mecpl-text">
           {title}
         </h3>
       )}
       {subtitle && (
-        <p className="page-subtitle-font text-[#232529] text-sm leading-relaxed">
+        <p className="page-subtitle-font text-mecpl-text text-sm leading-relaxed">
           {subtitle}
         </p>
       )}
