@@ -491,10 +491,10 @@ export default function AboutPage() {
                       <img src={award.img} alt={award.title} style={{ maxHeight: "100%", maxWidth: 140, objectFit: "contain" }} />
                     </div>
                   )}
-                  <h2 className="font-montserrat" style={{ fontSize: "10px", fontWeight: 500, color: "#45484d", lineHeight: 1.4, margin: 0 }}>
+                  <h2 className="abt-award-title font-montserrat" style={{ fontSize: "15px", fontWeight: 500, color: "#45484d", lineHeight: 1.4, margin: 0 }}>
                     {award.title}
                   </h2>
-                  <p className="font-montserrat" style={{ fontSize: "8px", fontWeight: 400, color: "#8a8d91", lineHeight: 1.45, margin: "4px 0 0" }}>
+                  <p className="font-montserrat text-[12px]" style={{ fontSize: "7px", fontWeight: 400, color: "#8a8d91", lineHeight: 1.45, margin: "4px 0 0" }}>
                     {award.desc}
                   </p>
                 </div>

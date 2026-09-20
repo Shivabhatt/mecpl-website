@@ -388,6 +388,10 @@ html[data-theme="light"] {
   text-transform: capitalize !important;
 }
 
+.site-typography .about-page .abt-awards-grid h2.abt-award-title {
+  font-size: 15px !important;
+}
+
 .page-subtitle-font,
 [data-animate-page] h1 + p,
 [data-animate-page] h2 + p,
