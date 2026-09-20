@@ -8,13 +8,15 @@ export default function Footer() {
     <footer data-testid="footer" className="home-page-typography">
       <div
         style={{
-          background: "#EC3338", color: "#ffffff",
+          background: "#CFE2E2", color: "#ffffff",
           borderRadius: "12px 12px 0 0",
           borderTop: "1px solid rgba(255,255,255,0.42)",
           display: "flex", flexDirection: "column",
         }}
       >
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div
+          style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+          className="bg-[#CF2E2E] border-t-[#CF2E2E] border-r-[#CF2E2E] border-b-[#CF2E2E] border-l-[#CF2E2E]">
 
           {/* Main grid */}
           <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-2 gap-12"
@@ -49,7 +51,7 @@ export default function Footer() {
 
               {/* Social */}
               <div className="space-y-3 pt-1">
-                <div style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff" }}>
+                <div className="font-montserrat" style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff" }}>
                   Follow Us
                 </div>
                 <div className="flex items-center gap-3">
@@ -77,10 +79,9 @@ export default function Footer() {
             {/* Certifications */}
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-end", paddingTop: "2px" }}>
               <div style={{ maxWidth: "470px", width: "100%", textAlign: "left" }}>
-                <div style={{
+                <div className="font-montserrat" style={{
                   marginBottom: "10px",
                   color: "#ffffff",
-                  fontFamily: "'Montserrat',sans-serif",
                   fontSize: "9px",
                   fontWeight: 600,
                   letterSpacing: "0.2em",
@@ -103,13 +104,13 @@ export default function Footer() {
                   ].map(([certification, description]) => (
                     <div
                       key={certification}
+                      className="font-montserrat"
                       style={{
                         minHeight: "58px",
                         padding: "11px 12px",
                         border: `1px solid ${footerBorder}`,
                         background: "rgba(255,255,255,0.1)",
                         color: "#ffffff",
-                        fontFamily: "'Montserrat', sans-serif",
                         fontSize: "10px",
                         fontWeight: 600,
                         letterSpacing: "0.02em",

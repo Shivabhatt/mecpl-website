@@ -6,3 +6,4 @@
 - [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
 - [MECPL dependency install](mecpl-dependency-install.md) — frontend-only filtered pnpm installs avoid unrelated Orval firewall failures when the goal is a website preview.
 - [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — use the static editorial Pune silhouette with red project dots, not a Leaflet or MapLibre street map.
+- [GitHub Pages direct routes](github-pages-direct-routes.md) — public SPA routes need generated route app shells; 404.html alone preserves rendering but still returns HTTP 404.

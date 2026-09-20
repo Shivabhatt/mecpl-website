@@ -69,11 +69,11 @@ const allProjects = [
 const filters = ["All", "Residential", "Commercial", "Industrial", "Ongoing Projects"];
 
 const typeBadge: Record<string, string> = {
-  Residential: "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
-  Commercial: "bg-[#f9f9f9] text-mecpl-steel border border-mecpl-dark/[0.1]",
-  Industrial: "bg-[#f9f9f9] text-mecpl-steel border border-mecpl-dark/[0.1]",
-  "Ongoing Projects": "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
-  Special: "bg-mecpl-red/15 text-mecpl-red border border-mecpl-red/20",
+  Residential: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
+  Commercial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
+  Industrial: "bg-[#f9f9f9] text-[#6b7280] border border-black/[0.1]",
+  "Ongoing Projects": "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
+  Special: "bg-[#C41E3A]/15 text-[#C41E3A] border border-[#C41E3A]/20",
 };
 
 const areaCoordinates: Record<string, { mapX: number; mapY: number }> = {
@@ -143,20 +143,18 @@ export default function CompletedProjectsPage() {
   return (
     <div data-animate-page className="completed-projects-page bg-white">
       {/* Project Hero */}
-      <div
-        className="relative min-h-screen overflow-hidden bg-mecpl-dark flex items-center"
-        style={{
-          backgroundImage: `url(${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg)`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.78)_0%,rgba(6,10,16,0.58)_48%,rgba(6,10,16,0.34)_100%)]" />
+      <div className="relative min-h-screen overflow-hidden bg-[#111827] flex items-center">
+        <img
+          src="/assets/projects/HIGH-RISE-1-scaled.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+          alt="MECPL construction projects"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
+        <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
           <span className="about-label-font font-montserrat font-medium" style={{
-            fontFamily: "'Montserrat', sans-serif",
             fontSize: "0.62rem",
-            fontWeight: 600,
+            fontWeight: 700,
             letterSpacing: "0.35em",
             color: "#ffffff",
             textTransform: "uppercase",
@@ -166,8 +164,8 @@ export default function CompletedProjectsPage() {
             OUR PROJECTS
           </span>
           <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
-            <div className="hp-banner-line text-[36px]" style={{
-              fontSize: "36px",
+            <div className="hp-banner-line" style={{
+              fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
               lineHeight: 1.15,
               color: "#ffffff",
               whiteSpace: "nowrap",
@@ -180,6 +178,7 @@ export default function CompletedProjectsPage() {
           </p>
         </div>
       </div>
+
       {/* Awards and industry recognition */}
       <section
         id="project-awards"
@@ -217,9 +216,9 @@ export default function CompletedProjectsPage() {
             <div
               key={award.label}
               className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-6 text-center ${
-                index % 2 === 1 ? "border-l border-mecpl-dark/[0.08]" : ""
-              } ${index < 2 ? "border-b border-mecpl-dark/[0.08]" : ""} ${
-                index > 0 ? "md:border-l md:border-mecpl-dark/[0.08]" : "md:border-l-0"
+                index % 2 === 1 ? "border-l border-black/[0.08]" : ""
+              } ${index < 2 ? "border-b border-black/[0.08]" : ""} ${
+                index > 0 ? "md:border-l md:border-black/[0.08]" : "md:border-l-0"
               } md:border-b-0`}
             >
               <div className="flex h-[78px] items-center justify-center">
@@ -237,10 +236,11 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
       </section>
+
       {/* Project metrics */}
       <section
         id="project-metrics"
-        className="bg-mecpl-dark px-6 py-11 font-montserrat md:py-14"
+        className="bg-[#232529] px-6 py-11 font-montserrat md:py-14"
         data-testid="section-project-metrics"
         aria-label="Project delivery metrics"
       >
@@ -260,7 +260,7 @@ export default function CompletedProjectsPage() {
                 <span className="text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
                   {metric.value}
                 </span>
-                <span className="ml-1 text-[1.8rem] font-medium leading-none text-mecpl-red md:text-[2.15rem]">
+                <span className="ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
                   {metric.suffix}
                 </span>
               </div>
@@ -271,16 +271,17 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
       </section>
-      <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
-        <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-mecpl-steel md:text-base">
-          Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
-          Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
-        </p>
-      </section>
+
+       <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
+         <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
+           Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
+           Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
+         </p>
+       </section>
       <ArchitectureApproach />
       <ProjectExplorer />
       {/* Sticky project filters */}
-      <div className="sticky top-0 z-40 border-b border-mecpl-dark/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
+      <div className="sticky top-0 z-40 border-b border-black/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
         <div className="mx-auto flex w-full max-w-7xl justify-start overflow-x-auto px-6 font-montserrat sm:justify-center">
           <div className="grid w-full grid-cols-5 items-center gap-1 font-montserrat sm:min-w-[42rem] sm:gap-8">
             {filters.map(f => (
@@ -288,8 +289,8 @@ export default function CompletedProjectsPage() {
                 key={f}
                 onClick={() => selectFilter(f)}
                 aria-pressed={active === f}
-                className={`cursor-pointer whitespace-normal px-1 py-2 text-center font-montserrat text-[8px] font-semibold normal-case leading-tight tracking-[0.1em] transition-colors duration-300 sm:text-xs sm:tracking-[0.16em] lg:text-[14px] ${
-                  active === f ? "text-mecpl-red" : "text-mecpl-steel hover:text-mecpl-red"
+                className={`cursor-pointer whitespace-normal px-1 py-2 text-center font-montserrat text-[8px] font-bold normal-case leading-tight tracking-[0.1em] transition-colors duration-300 sm:text-xs sm:tracking-[0.16em] lg:text-[14px] ${
+                  active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
                 }`}
                 data-testid={`button-filter-${f.toLowerCase()}`}
               >
@@ -299,6 +300,7 @@ export default function CompletedProjectsPage() {
           </div>
         </div>
       </div>
+
       {/* Projects Grid */}
       <section id="projects-grid" className="scroll-mt-16 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
         <div>
@@ -307,12 +309,12 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
         {totalPages > 1 && (
-          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-mecpl-dark/[0.08] pt-8 font-montserrat" aria-label="Project pages">
+          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2 border-t border-black/[0.08] pt-8 font-montserrat" aria-label="Project pages">
             <button
               type="button"
               onClick={() => selectPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-10 border border-mecpl-dark/[0.12] px-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-mecpl-red hover:text-mecpl-red disabled:cursor-not-allowed disabled:opacity-30"
+              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
@@ -322,10 +324,10 @@ export default function CompletedProjectsPage() {
                 type="button"
                 onClick={() => selectPage(page)}
                 aria-current={currentPage === page ? "page" : undefined}
-                className={`h-10 min-w-10 border px-3 text-xs font-semibold transition-colors ${
+                className={`h-10 min-w-10 border px-3 text-xs font-bold transition-colors ${
                   currentPage === page
-                    ? "border-mecpl-red bg-mecpl-red text-white"
-                    : "border-mecpl-dark/[0.12] text-mecpl-steel hover:border-mecpl-red hover:text-mecpl-red"
+                    ? "border-[#C41E3A] bg-[#C41E3A] text-white"
+                    : "border-black/[0.12] text-[#6b7280] hover:border-[#C41E3A] hover:text-[#C41E3A]"
                 }`}
               >
                 {page}
@@ -335,7 +337,7 @@ export default function CompletedProjectsPage() {
               type="button"
               onClick={() => selectPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-10 border border-mecpl-dark/[0.12] px-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-mecpl-red hover:text-mecpl-red disabled:cursor-not-allowed disabled:opacity-30"
+              className="h-10 border border-black/[0.12] px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4d4f54] transition-colors hover:border-[#C41E3A] hover:text-[#C41E3A] disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>
@@ -351,13 +353,13 @@ function ArchitectureApproach() {
     <section id="architecture-approach" className="scroll-mt-20 overflow-visible bg-white px-6 py-20 md:px-10 md:py-28" data-testid="section-architecture-approach">
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-0">
         <div className="relative z-10 max-w-xl lg:py-10 lg:pr-16" data-scroll-reveal="text">
-          <span className="mb-5 block font-montserrat text-[10px] font-semibold uppercase tracking-[0.22em] text-mecpl-red">
+          <span className="mb-5 block font-montserrat text-[10px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
             Architectural Approach
           </span>
-          <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-mecpl-text">
-            Architecture That Feels Considered.
+          <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-[#232529]">
+            Architecture that feels considered.
           </h2>
-          <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-mecpl-text">
+          <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-[#232529]">
             <p>
               We believe architecture should feel considered from the first line on paper to the final detail on site.
             </p>
@@ -366,12 +368,12 @@ function ArchitectureApproach() {
               who inhabit each space.
             </p>
           </div>
-          <p className="mt-8 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-mecpl-steel">
+          <p className="mt-8 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#949599]">
             Form, function, and enduring value
           </p>
           <a
             href="#project-explorer"
-            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-mecpl-text transition-colors hover:text-mecpl-red"
+            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#232529] transition-colors hover:text-[#EC3338]"
           >
             Explore our projects <ArrowRight size={14} />
           </a>
@@ -388,13 +390,13 @@ function ArchitectureApproach() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-8 left-4 w-[min(86%,17rem)] bg-white px-6 py-5 shadow-[0_18px_40px_rgba(35,37,41,0.16)] sm:left-8 sm:px-7 sm:py-6">
-            <span className="block font-montserrat text-[9px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
+            <span className="block font-montserrat text-[9px] font-bold uppercase tracking-[0.18em] text-[#EC3338]">
               Our Design Principle
             </span>
-            <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-mecpl-text">
+            <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-[#232529]">
               Build with purpose.
               <br />
-              <strong className="font-semibold">Last with meaning.</strong>
+              <strong className="font-bold">Last with meaning.</strong>
             </p>
           </div>
         </div>
@@ -422,7 +424,7 @@ function ProjectExplorer() {
       data-testid="section-project-explorer"
       aria-label="MECPL project explorer"
     >
-      <div className="mx-auto grid min-h-[680px] max-w-[1500px] border-y border-mecpl-dark/[0.08] bg-white lg:grid-cols-[0.42fr_0.58fr]">
+      <div className="mx-auto grid min-h-[680px] max-w-[1500px] border-y border-black/[0.08] bg-white lg:grid-cols-[0.42fr_0.58fr]">
         <div className="relative min-h-[500px] overflow-hidden bg-[#e8e7e2]" data-scroll-reveal="image">
           <video
             src={`${assetBase}assets/video/projects-explorer.mp4`}
@@ -438,9 +440,9 @@ function ProjectExplorer() {
         </div>
 
         <div className="grid bg-white xl:grid-cols-[0.92fr_1.08fr] xl:grid-rows-[auto_minmax(0,1fr)]">
-          <header className="border-b border-mecpl-dark/[0.08] px-6 py-8 xl:col-span-2 xl:px-10">
-            <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-mecpl-red">
-              Building With Purpose.
+          <header className="border-b border-black/[0.08] px-6 py-8 xl:col-span-2 xl:px-10">
+            <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-[#CF2E2E]">
+              Building with purpose.
             </h2>
             <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[#626667]">
               From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,
@@ -448,7 +450,7 @@ function ProjectExplorer() {
             </p>
           </header>
 
-          <div className="relative min-h-[500px] overflow-hidden bg-white px-6 py-8 xl:min-h-0 xl:border-r xl:border-mecpl-dark/[0.08]">
+          <div className="relative min-h-[500px] overflow-hidden bg-white px-6 py-8 xl:min-h-0 xl:border-r xl:border-black/[0.08]">
             <div className="relative mx-auto h-full min-h-[430px] max-w-[390px]">
               <svg
                 viewBox="0 0 360 470"
@@ -487,12 +489,12 @@ function ProjectExplorer() {
                     aria-label={`Show ${project.name} in ${project.location}`}
                     aria-pressed={selected}
                     data-testid={`button-project-map-${index}`}
-                    className="group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-mecpl-red focus-visible:ring-offset-2"
+                    className="group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CF2E2E] focus-visible:ring-offset-2"
                     style={{ left: `${left}%`, top: `${top}%` }}
                   >
                     <span
-                      className={`block rounded-full border-2 border-white bg-mecpl-red shadow-[0_2px_7px_rgba(80,0,0,0.24)] transition-all ${
-                        selected ? "h-4 w-4 ring-[7px] ring-mecpl-red/20" : "h-3 w-3 group-hover:scale-125"
+                      className={`block rounded-full border-2 border-white bg-[#CF2E2E] shadow-[0_2px_7px_rgba(80,0,0,0.24)] transition-all ${
+                        selected ? "h-4 w-4 ring-[7px] ring-[#CF2E2E]/20" : "h-3 w-3 group-hover:scale-125"
                       }`}
                     />
                   </button>
@@ -502,7 +504,7 @@ function ProjectExplorer() {
           </div>
 
           <article
-            className="flex min-h-[500px] flex-col bg-white px-6 py-8 text-mecpl-text xl:min-h-0 xl:px-8"
+            className="flex min-h-[500px] flex-col bg-white px-6 py-8 text-[#232529] xl:min-h-0 xl:px-8"
             aria-live="polite"
             data-testid="project-map-detail-card"
           >
@@ -514,15 +516,15 @@ function ProjectExplorer() {
               />
             </div>
             <div className="mt-auto pt-7">
-              <h2 className="text-lg font-semibold leading-tight text-mecpl-text">{selectedProject.name}</h2>
+              <h2 className="text-lg font-semibold leading-tight text-[#232529]">{selectedProject.name}</h2>
               <p className="mt-3 flex items-center gap-2 text-[10px] text-[#777a79]">
-                <MapPin size={12} className="shrink-0 text-mecpl-red" />
+                <MapPin size={12} className="shrink-0 text-[#CF2E2E]" />
                 {selectedProject.location}
               </p>
-              <dl className="mt-5 grid grid-cols-[74px_1fr] gap-x-4 gap-y-2 border-t border-mecpl-dark/[0.1] pt-4 text-[9px]">
-                <dt className="uppercase tracking-[0.12em] text-mecpl-steel">Category</dt>
+              <dl className="mt-5 grid grid-cols-[74px_1fr] gap-x-4 gap-y-2 border-t border-black/[0.1] pt-4 text-[9px]">
+                <dt className="uppercase tracking-[0.12em] text-[#949599]">Category</dt>
                 <dd>{selectedProject.type}</dd>
-                <dt className="uppercase tracking-[0.12em] text-mecpl-steel">Portfolio</dt>
+                <dt className="uppercase tracking-[0.12em] text-[#949599]">Portfolio</dt>
                 <dd>MECPL Projects</dd>
               </dl>
             </div>
@@ -541,7 +543,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
   return (
     <div
       ref={ref}
-      className="group relative border-b border-mecpl-dark/[0.12] py-6 transition-colors duration-500 hover:bg-white/60 md:py-8"
+      className="group relative border-b border-black/[0.12] py-6 transition-colors duration-500 hover:bg-white/60 md:py-8"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(28px)",
@@ -552,7 +554,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-10">
         <div className="flex min-h-[180px] flex-col justify-between font-montserrat lg:min-h-[220px]">
           <div>
-            <div className="mb-5 flex items-center gap-4 text-[9px] font-semibold normal-case tracking-[0.2em] text-mecpl-steel">
+            <div className="mb-5 flex items-center gap-4 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
               <span className="text-[#111111]">{projectNumber}</span>
               <span className="h-px w-8 bg-[#c7c7c1]" />
               <span>{project.type}</span>
@@ -560,8 +562,8 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             <h2 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}
             </h2>
-            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-mecpl-steel">
-              <MapPin size={12} className="text-mecpl-red" />
+            <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#949599]">
+              <MapPin size={12} className="text-[#C41E3A]" />
               <span>{project.location}</span>
             </div>
           </div>
@@ -569,7 +571,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
         </div>
 
         <div className="grid h-52 grid-cols-[minmax(0,1.55fr)_minmax(110px,0.85fr)] gap-2 overflow-hidden sm:h-60 md:h-64">
-          <div className="relative overflow-hidden border-b-2 border-mecpl-steel bg-white">
+          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
@@ -578,7 +580,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
-          <div className="relative overflow-hidden border-b-2 border-mecpl-steel bg-white">
+          <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
             <img
               src={project.image}
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"

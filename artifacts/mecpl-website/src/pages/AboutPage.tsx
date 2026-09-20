@@ -295,8 +295,6 @@ function JourneyTimeline() {
 
 // ─── 07 — OUR LEADERSHIP (Door Slider) ──────────────────────
 function LeadershipDoorSlider() {
-  const MF = "'Montserrat',sans-serif";
-
   return (
     <section
       id="abt3"
@@ -309,10 +307,10 @@ function LeadershipDoorSlider() {
           <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#EC3338", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 32 }}>
             <FaQuoteLeft size={23} color="#ffffff" aria-hidden="true" />
           </div>
-          <span className="about-label-font font-montserrat text-[15px]" style={{ fontFamily: MF, fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
+          <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             OUR LEADERSHIP
           </span>
-          <h2 className="page-title-font font-montserrat" style={{ fontFamily: MF, fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
+          <h2 className="page-title-font font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             The People Building What's Next.
           </h2>
           <p className="font-inter" style={{ fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>

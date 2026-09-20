@@ -122,8 +122,8 @@ export default function PeopleSafetySection() {
     <section id="people-safety" data-testid="section-people-safety" className="ps-section">
       <div className="ps-shell">
         <article className="ps-panel ps-panel-team">
-          <div className="ps-copy bg-[color:var(--mecpl-dark)]">
-            <span className="ps-eyebrow text-[15px]">People &amp; Safety</span>
+          <div className="ps-copy">
+            <span className="ps-eyebrow">People &amp; Safety</span>
             <h2 className="people-safety-heading">Our Team Is Our Substance</h2>
             <p>
               Our strength lies in the people who build, engineer and lead every project. From over
@@ -144,7 +144,7 @@ export default function PeopleSafetySection() {
         <article className="ps-panel ps-panel-hse">
           <ImageCarousel images={hseImages} assetBase={assetBase} reversed />
           <div className="ps-copy">
-            <span className="ps-eyebrow text-[15px]">People &amp; Safety</span>
+            <span className="ps-eyebrow">People &amp; Safety</span>
             <h2 className="people-safety-heading">Building Safer Lives. Not Just Structures.</h2>
             <p>
               We put health, safety and wellbeing at the heart of every site, from safety inductions,
@@ -154,7 +154,7 @@ export default function PeopleSafetySection() {
             </p>
             <StatsRow stats={hseStats} />
             <Link href="/about">
-              <span className="ps-button text-[15px]">
+              <span className="ps-button">
                 Our Safety Practices <ArrowRight size={15} />
               </span>
             </Link>
@@ -203,9 +203,9 @@ export default function PeopleSafetySection() {
           padding-bottom: 9px;
           color: #ec3338;
           border-bottom: 2px solid #ec3338;
-          font-family: "Montserrat", sans-serif;
-          font-size: 15px;
-          font-weight: 600;
+          font-family: var(--font-montserrat);
+          font-size: 0.7rem;
+          font-weight: 700;
           letter-spacing: 0.18em;
           text-transform: uppercase;
         }
@@ -213,9 +213,9 @@ export default function PeopleSafetySection() {
           max-width: 610px;
           margin: 0 0 15px;
           color: #ffffff;
-          font-family: "Montserrat", sans-serif;
-          font-size: 26px;
-          font-weight: 600 !important;
+          font-family: var(--font-montserrat);
+          font-size: clamp(1.65rem, 2.3vw, 2.45rem);
+          font-weight: 400 !important;
           line-height: 1.08;
           letter-spacing: -0.035em;
           text-transform: none;
@@ -229,7 +229,7 @@ export default function PeopleSafetySection() {
           max-width: 630px;
           margin: 0 0 22px;
           color: rgba(255, 255, 255, 0.7);
-          font-family: "Montserrat", sans-serif;
+          font-family: var(--font-montserrat);
           font-size: 14px;
           line-height: 1.65;
         }
@@ -243,9 +243,9 @@ export default function PeopleSafetySection() {
           padding: 12px 16px;
           background: #ec3338;
           color: #fff;
-          font-family: "Montserrat", sans-serif;
+          font-family: var(--font-montserrat);
           font-size: 10px;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
           cursor: pointer;
@@ -290,7 +290,7 @@ export default function PeopleSafetySection() {
         .ps-stat strong,
         .ps-stat span {
           display: block;
-          font-family: "Montserrat", sans-serif;
+          font-family: var(--font-montserrat);
         }
         .ps-stat-icon {
           display: block;
@@ -300,7 +300,7 @@ export default function PeopleSafetySection() {
         .ps-stat strong {
           min-height: 34px;
           font-size: clamp(0.68rem, 0.85vw, 0.86rem);
-          font-weight: 600;
+          font-weight: 700;
           line-height: 1.22;
         }
         .ps-stat span {
@@ -320,7 +320,7 @@ export default function PeopleSafetySection() {
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           opacity: 0;
           transform: scale(1.025);
           transition: opacity 700ms ease, transform 4.8s ease;
@@ -383,7 +383,7 @@ export default function PeopleSafetySection() {
             padding: 32px 22px;
           }
           .ps-copy h2.people-safety-heading {
-            font-size: 26px;
+            font-size: 1.75rem;
           }
           .ps-copy p {
             font-size: 13px;

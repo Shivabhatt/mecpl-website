@@ -43,7 +43,7 @@
   padding: 7px 10px 6px;
   color: #fff;
   background: #232529;
-  font: 700 10px/1.1 "Montserrat", sans-serif;
+  font: 700 10px/1.1 var(--font-montserrat);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   box-shadow: 0 5px 16px rgba(35, 37, 41, 0.2);
@@ -80,7 +80,7 @@
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.78) !important;
   color: #59615d;
-  font: 500 8px/1.25 "Montserrat", sans-serif;
+  font: 500 8px/1.25 var(--font-montserrat);
 }
 
 .mecpl-leaflet-map .leaflet-control-attribution a {
@@ -153,9 +153,9 @@
   --destructive-foreground: 0 0% 100%;
   --input: 220 13% 91%;
   --ring: 358 83% 56%;
-  --app-font-body: 'Montserrat', sans-serif;
-  --app-font-display: 'Montserrat', sans-serif;
-  --app-font-sans: 'Montserrat', sans-serif;
+  --app-font-body: var(--font-montserrat);
+  --app-font-display: var(--font-montserrat);
+  --app-font-sans: var(--font-montserrat);
   --radius: 0.125rem;
   --mecpl-dark: #232529;
   --mecpl-card: #ffffff;
@@ -165,7 +165,7 @@
   --mecpl-text-muted: #949599;
 
   --font-montserrat: 'Montserrat', sans-serif;
-  --font-inter: 'Montserrat', sans-serif;
+  --font-inter: var(--font-montserrat);
 }
 
 html[data-theme="light"] {
@@ -198,7 +198,7 @@ html[data-theme="light"] {
     font-family: var(--app-font-body) !important;
   }
   .home-page-typography .ps-section h3.people-safety-heading {
-    font-family: "Montserrat", sans-serif !important;
+    font-family: var(--font-montserrat) !important;
     font-weight: 500 !important;
     font-synthesis: none;
   }
@@ -211,7 +211,7 @@ html[data-theme="light"] {
   display: block;
   margin-bottom: 14px;
   color: var(--mecpl-red) !important;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: clamp(0.75rem, 0.85vw, 0.9rem) !important;
   font-weight: 500 !important;
   letter-spacing: -0.025em !important;
@@ -220,7 +220,7 @@ html[data-theme="light"] {
 }
 
 .careers-page .careers-hero-cta {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: 0.6rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.3em !important;
@@ -233,7 +233,7 @@ html[data-theme="light"] {
   gap: 10px;
   padding: 15px 36px;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: 0.65rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.22em !important;
@@ -264,7 +264,7 @@ html[data-theme="light"] {
 }
 
 .hp-section-title {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: 1.875rem !important;
   font-weight: 500 !important;
   letter-spacing: -0.025em !important;
@@ -273,13 +273,13 @@ html[data-theme="light"] {
 }
 
 .hp-banner-title {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 500 !important;
   letter-spacing: -0.025em !important;
 }
 
 .hp-banner-line {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 500 !important;
   letter-spacing: -0.025em !important;
 }
@@ -297,11 +297,11 @@ html[data-theme="light"] {
 
 .home-section-label,
 .home-section-cta {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
 }
 
 .home-stat-label {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
 }
@@ -321,7 +321,7 @@ html[data-theme="light"] {
 }
 
 .font-montserrat {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
 }
 
 .about-page {
@@ -331,7 +331,7 @@ html[data-theme="light"] {
 .about-page .font-montserrat,
 .about-page .page-title-font,
 .about-page .about-label-font {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
 }
 
 .about-page .about-label-font {
@@ -342,7 +342,7 @@ html[data-theme="light"] {
 }
 
 .about-label-font {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 500 !important;
   font-size: clamp(0.75rem, 0.85vw, 0.9rem) !important;
   letter-spacing: -0.025em !important;
@@ -357,14 +357,14 @@ html[data-theme="light"] {
 }
 
 .about-cta-button-font {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 500 !important;
 }
 
 .page-title-font,
 [data-animate-page] h3,
 [data-animate-page] h4 {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 500 !important;
   letter-spacing: -0.025em !important;
   text-transform: none !important;
@@ -372,7 +372,7 @@ html[data-theme="light"] {
 
 [data-animate-page] h1,
 [data-animate-page] h2 {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-weight: 600 !important;
   letter-spacing: -0.025em !important;
   text-transform: none !important;
@@ -381,7 +381,7 @@ html[data-theme="light"] {
 .home-page-typography h2,
 .about-page h2,
 .completed-projects-page h2 {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
   font-size: 26px !important;
   font-weight: 600 !important;
   line-height: 1.2;
@@ -412,7 +412,7 @@ html[data-theme="light"] {
 .site-typography .home-section-label,
 .site-typography .home-section-cta,
 .site-typography .home-accordion-title {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: var(--font-montserrat) !important;
 }
 
 @media (min-width: 768px) {

@@ -442,7 +442,7 @@ export default function HomePage() {
           display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px",
         }}>
           <div style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "9px",
+            fontSize: "9px",
             fontWeight: 300, color: "rgba(255,255,255,0.45)", letterSpacing: "0.24em",
           }}>
             {String(videoIdx + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
@@ -463,7 +463,7 @@ export default function HomePage() {
             {/* Constant label */}
             <div
               style={{
-                fontFamily: "'Montserrat',sans-serif", fontSize: "11px",
+                fontSize: "11px",
                 fontWeight: 500, color: "rgba(255,255,255,0.7)",
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 marginBottom: "14px",
@@ -487,7 +487,7 @@ export default function HomePage() {
 
             {/* Per-slide subtitle */}
             <p className="page-subtitle-font text-[14px]" key={`sub-${videoIdx}`} style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "12px",
+              fontSize: "12px",
               fontWeight: 300, color: "rgba(255,255,255,0.65)",
               lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
               animation: "heroSlideIn 0.7s ease forwards",
@@ -502,7 +502,7 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     background: "#EC3338", color: "#ffffff",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    fontSize: "10px",
                     letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600,
                     padding: "14px 32px", cursor: "pointer",
                   }}
@@ -517,7 +517,7 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     border: "1px solid rgba(255,255,255,0.55)", color: "#ffffff",
-                    fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                    fontSize: "10px",
                     letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600,
                     padding: "13px 28px", cursor: "pointer",
                   }}
@@ -530,7 +530,6 @@ export default function HomePage() {
               style={{
                 marginTop: "22px",
                 color: "rgba(255,255,255,0.5)",
-                fontFamily: "'Montserrat',sans-serif",
                 fontSize: "8px",
                 letterSpacing: "0.16em",
                 lineHeight: 1.6,
@@ -549,7 +548,7 @@ export default function HomePage() {
           display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
         }}>
           <span style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "7px",
+            fontSize: "7px",
             letterSpacing: "0.34em", color: "rgba(255,255,255,0.32)", textTransform: "uppercase",
           }}>
             SCROLL
@@ -612,7 +611,6 @@ export default function HomePage() {
                     className="stat-num"
                     data-target={s.target}
                     style={{
-                      fontFamily: "'Montserrat',sans-serif",
                       fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
                       fontWeight: 400, color: "#ffffff", letterSpacing: "-0.025em", lineHeight: 1,
                     }}
@@ -620,7 +618,6 @@ export default function HomePage() {
                     0
                   </span>
                   <span style={{
-                    fontFamily: "'Montserrat',sans-serif",
                     fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
                     fontWeight: 400, color: "#EC3338", lineHeight: 1,
                   }}>
@@ -628,7 +625,7 @@ export default function HomePage() {
                   </span>
                 </div>
                 <div className="home-stat-label" style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                  fontSize: "10px",
                   fontWeight: 600, letterSpacing: "0.15em",
                   textTransform: "uppercase", color: "rgba(255,255,255,0.5)",
                 }}>
@@ -686,7 +683,7 @@ export default function HomePage() {
             <div>
               <div className="about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
                 <span className="home-section-label font-montserrat text-[15px]" style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "15px", fontWeight: 600,
+                  fontSize: "15px", fontWeight: 600,
                   letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
@@ -711,7 +708,6 @@ export default function HomePage() {
                 }}
               >
                 <p style={{
-                  fontFamily: "'Montserrat',sans-serif",
                   fontSize: "clamp(1.05rem, 1.8vw, 1.35rem)",
                   fontWeight: 300, color: "rgba(17,24,39,0.8)",
                   lineHeight: 1.6, margin: "0 0 18px", letterSpacing: "-0.01em",
@@ -742,7 +738,7 @@ export default function HomePage() {
 
               <div className="about-fade">
                 <p style={{
-                  fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
+                  fontSize: "13.5px",
                   lineHeight: 1.85, color: "#949599", marginBottom: "28px",
                 }}>
                   Millennium Engineers &amp; Contractors began in the 1980s as a small partnership, taken on by an engineer who wasn't content working for someone else. Four and a half decades on, that same commitment to quality and timely delivery has grown MECPL into one of Pune's most trusted structural engineering and construction names — ISO-certified, CRISIL-rated, and built on 8,000+ skilled hands.
@@ -752,7 +748,7 @@ export default function HomePage() {
                   <span
                     className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[12px]"
                     style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "10px",
+                      fontSize: "10px",
                       letterSpacing: "0.2em", color: "#EC3338",
                       textTransform: "none", fontWeight: 600,
                     }}
@@ -812,7 +808,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-10">
           <div style={{ marginBottom: "56px", textAlign: "center" }}>
             <span className="home-section-label font-montserrat text-[15px]" style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "15px", fontWeight: 600,
+              fontSize: "15px", fontWeight: 600,
               letterSpacing: "0.2em", color: "#EC3338", textTransform: "uppercase",
               display: "block", marginBottom: "10px",
             }}>
@@ -829,7 +825,6 @@ export default function HomePage() {
                 maxWidth: "720px",
                 margin: "18px auto 24px",
                 color: "rgba(255,255,255,0.76)",
-                fontFamily: "'Montserrat',sans-serif",
                 fontSize: "13.5px",
                 lineHeight: 1.7,
               }}
@@ -1286,7 +1281,7 @@ export default function HomePage() {
         {/* Heading */}
         <div data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "36px", textAlign: "center" }}>
           <span className="home-section-label font-montserrat text-[15px] text-[color:var(--mecpl-red)]" style={{
-            fontFamily: "'Montserrat',sans-serif", fontSize: "15px", fontWeight: 600,
+            fontSize: "15px", fontWeight: 600,
               letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
             display: "block", marginBottom: "10px",
           }}>
@@ -1302,7 +1297,6 @@ export default function HomePage() {
             maxWidth: "620px",
             margin: "14px auto 0",
               color: "rgba(255,255,255,0.5)",
-            fontFamily: "'Montserrat',sans-serif",
             fontSize: "13px",
             lineHeight: 1.7,
           }}>

@@ -96,7 +96,6 @@ const employeeStories = [
 const careerSectionLabelStyle = {
   color: "rgb(196, 30, 58)",
   display: "block",
-  fontFamily: "'Montserrat', sans-serif",
   fontSize: "clamp(0.75rem, 0.85vw, 0.9rem)",
   fontWeight: 500,
   letterSpacing: "-0.025em",

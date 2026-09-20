@@ -56,6 +56,7 @@ export default function WhyChooseSection() {
     <section
       ref={whyRef}
       data-testid="section-why-mecpl"
+      className="font-montserrat"
       style={{ background: "#ffffff", position: "relative", marginTop: "64px" }}
     >
       <div className="why-grid" style={{ display: "grid", gridTemplateColumns: "55% 45%", minHeight: "90vh" }}>
@@ -65,7 +66,7 @@ export default function WhyChooseSection() {
         }}>
           <div style={{ marginBottom: "36px" }}>
             <span className="home-section-label font-montserrat" style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "0.75rem", fontWeight: 600,
+              fontSize: "0.75rem", fontWeight: 600,
               letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
               display: "block", marginBottom: "10px",
             }}>
@@ -77,7 +78,7 @@ export default function WhyChooseSection() {
               Why Choose MECPL
             </h3>
             <p className="page-subtitle-font" style={{
-              fontFamily: "'Montserrat',sans-serif", fontSize: "13.5px",
+              fontSize: "13.5px",
               lineHeight: 1.75, color: "#949599", margin: 0, maxWidth: "400px",
             }}>
               Two decades of structural excellence — on time, on spec, and built to outlast generations.
@@ -97,14 +98,14 @@ export default function WhyChooseSection() {
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                     <span style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "9px", fontWeight: 600,
+                      fontSize: "9px", fontWeight: 600,
                       color: activeWhy === i ? "#EC3338" : "rgba(17,24,39,0.3)",
                       letterSpacing: "0.22em", transition: "color 0.3s",
                     }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="home-accordion-title font-montserrat" style={{
-                      fontFamily: "'Montserrat',sans-serif", fontSize: "13px", fontWeight: 600,
+                      fontSize: "13px", fontWeight: 600,
                       color: activeWhy === i ? "#232529" : "rgba(17,24,39,0.45)",
                       textTransform: "uppercase", letterSpacing: "0.08em",
                       transition: "color 0.3s",
@@ -122,7 +123,6 @@ export default function WhyChooseSection() {
                     <span style={{
                       color: activeWhy === i ? "#fff" : "#949599",
                       fontSize: "15px", lineHeight: 1, marginTop: "-1px",
-                      fontFamily: "'Montserrat',sans-serif",
                     }}>
                       {activeWhy === i ? "−" : "+"}
                     </span>
@@ -132,7 +132,6 @@ export default function WhyChooseSection() {
                 <div className={`why-drawer${activeWhy === i ? " why-drawer-open" : ""}`}>
                   <div style={{ paddingBottom: "28px" }}>
                     <div style={{
-                      fontFamily: "'Montserrat',sans-serif",
                       fontSize: "2rem", fontWeight: 600, color: "#EC3338",
                       marginBottom: "10px", lineHeight: 1.0,
                     }}>
@@ -142,7 +141,7 @@ export default function WhyChooseSection() {
                       className="why-desc"
                       data-idx={i}
                       style={{
-                        fontFamily: "'Montserrat',sans-serif", fontSize: "13px",
+                        fontSize: "13px",
                         lineHeight: 1.8, color: "#949599", margin: 0,
                       }}
                     >

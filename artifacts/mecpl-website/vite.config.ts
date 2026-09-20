@@ -16,18 +16,45 @@ if (Number.isNaN(port) || port <= 0) {
 
 const basePath = process.env.BASE_PATH ?? "/";
 
+const publicRoutes = [
+  "/about",
+  "/projects",
+  "/services",
+  "/completed-projects",
+  "/ongoing-projects",
+  "/clients",
+  "/equipment",
+  "/awards",
+  "/blog",
+  "/blog/construction-industry-trends",
+  "/blog/construction-site-material-storage",
+  "/blog/cement-setting-time",
+  "/investors",
+  "/careers",
+  "/contact",
+];
+
 export default defineConfig({
   base: basePath,
   plugins: [
     react(),
     tailwindcss(),
     {
-      name: "copy-index-to-404",
+      name: "generate-static-route-app-shells",
       writeBundle() {
         const outDir = path.resolve(import.meta.dirname, "dist/public");
         const index = path.join(outDir, "index.html");
-        const fallback = path.join(outDir, "404.html");
-        fs.copyFileSync(index, fallback);
+
+        for (const route of publicRoutes) {
+          const routePath = route.replace(/^\/+|\/+$/g, "");
+          const routeDir = path.join(outDir, routePath);
+
+          fs.mkdirSync(routeDir, { recursive: true });
+          fs.copyFileSync(index, path.join(routeDir, "index.html"));
+          fs.copyFileSync(index, path.join(outDir, `${routePath}.html`));
+        }
+
+        fs.copyFileSync(index, path.join(outDir, "404.html"));
       },
     },
     ...(process.env.NODE_ENV !== "production" &&
