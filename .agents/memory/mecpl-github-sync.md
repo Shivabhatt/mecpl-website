@@ -7,4 +7,6 @@ If normal Git HTTPS authentication fails, use the authorized GitHub connector’
 
 **Why:** The connector can have valid repository write access even when every stored HTTPS token is rejected. When local-only parent commits are no longer present in GitHub’s object database, the remote commit ID cannot match the local merge commit, but their complete tree contents can still match exactly.
 
-**How to apply:** Pull and resolve first, validate the app, recheck that the remote head has not moved, compare the created tree hash with local HEAD, and refuse the ref update on any mismatch. Confirm the published branch by fetching it back and comparing tree hashes.
+GitHub's REST blob endpoint can reject large blobs even below GitHub's normal per-file Git limit. Upload connector blobs sequentially with rate-limit backoff and a resumable SHA journal. If the rejected file is an unused source archive outside the product, untrack only that archive and keep it locally; never drop a required live asset to make publication succeed.
+
+**How to apply:** Pull and resolve first, validate the app, recheck that the remote head has not moved, compare the created tree hash with local HEAD, and refuse the ref update on any mismatch. Confirm the published branch by fetching it back and comparing tree hashes. After the deployment workflow succeeds, verify the custom domain serves the new hashed bundle and expected release strings.
