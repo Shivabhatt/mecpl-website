@@ -19,31 +19,32 @@ gsap.registerPlugin(ScrollTrigger);
 const assetBase = import.meta.env.BASE_URL;
 
 const stats = [
-  { val: "50+", label: "YEARS OF LEGACY" },
-  { val: "30+", label: "COMPLETED PROJECTS" },
+  { val: "45+", label: "YEARS OF LEGACY" },
+  { val: "150+", label: "COMPLETED PROJECTS" },
   { val: "MAHARASHTRA", label: "REGIONAL PRESENCE" },
 ];
 
 const leaders = [
   {
-    name: "M. B. Nambiar",
-    role: "Founder & Chairman",
-    image: `${assetBase}assets/leaders/leader-01.jpg`,
+    name: "Jitin Nambiar",
+    role: "Director – Human Resources | Founder – Hofundur",
+    image: `${assetBase}assets/leaders/jitin.png`,
+    bio: "Jitin Nambiar brings together business strategy, brand building and people leadership across MECPL. As the Founder of Hofundur, he heads the interiors division, extending MECPL's construction expertise into BIS-certified B2B doors and modular furniture solutions. As Director – Human Resources, he is driving a more people- and performance-focused organisation through stronger recognition systems, digitalisation and technology-led employee initiatives.",
+    statement: "Building businesses. Enabling people. Driving transformation.",
   },
   {
-    name: "Jeevan K",
+    name: "Jeevan K.",
     role: "Managing Director",
     image: `${assetBase}assets/leaders/leader-03.jpg`,
+    bio: "A civil engineer who joined the Shreyas group in 1987, Jeevan K. has been part of MECPL's leadership since its formation in 1999 and has served as Managing Director for more than two decades. His leadership continues to strengthen the company's focus on quality, safety and environmental sustainability.",
+    statement: "Building scale. Strengthening standards. Driving performance.",
   },
   {
-    name: "Manojkumar M R",
-    role: "Director - Finance",
+    name: "Manojkumar M. R.",
+    role: "Director – Finance",
     image: `${assetBase}assets/leaders/leader-02.jpg`,
-  },
-  {
-    name: "Jitin Nambiar",
-    role: "Executive Director",
-    image: `${assetBase}assets/leaders/jitin.png`,
+    bio: "Manojkumar M. R. has been part of the MECPL journey since 1993, when he joined Shreyas Constructions as a Purchase Officer. Since joining the Board in 1999, he has played an integral role in finance, commercial management and business operations, strengthening financial planning, commercial discipline and management systems.",
+    statement: "Financial discipline. Commercial insight. Long-term stability.",
   },
 ];
 
@@ -67,7 +68,7 @@ const sectors = [
 const awards = [
   { title: "India SME 100 Awards", desc: "Recognised SME Excellence", img: `${assetBase}assets/recognition/india-sme-100-awards.jpeg` },
   { title: "India's Small Giants", desc: "Emerging Enterprises of India", img: `${assetBase}assets/recognition/indias-small-giants.png` },
-  { title: "Iconic Brand of The Year 2016", desc: "Brand Recognition", img: `${assetBase}assets/recognition/iconic-brand-2026.png` },
+  { title: "Iconic Brand of The Year 2018", desc: "Brand Recognition", img: `${assetBase}assets/recognition/iconic-brand-2026.png` },
   { title: "ISO Certified Company", desc: "Quality, Environmental & Safety", img: `${assetBase}assets/recognition/iso-mark.png` },
   { title: "CRISIL BBB / Positive", desc: "Financial Rating", img: `${assetBase}assets/recognition/crisil-rating.jpg` },
   { title: "NSCI Safety Awards", desc: "7 Award-Winning Projects", img: `${assetBase}assets/awards/nsci-safety-award-2025.png` },
@@ -78,15 +79,14 @@ const awards = [
 
 const journey = [
   { year: "1975", title: "WHERE IT ALL BEGAN", text: "Shreyas began operations, serving leading industrial clients in Pune and Mumbai. (Cadbury, Venkateshwara Hatcheries and more)" },
-  { year: "2000", title: "MECPL TAKES SHAPE", text: "Expanded into residential, commercial, institutional and infrastructure projects. (Aamby Valley, Sahara Lake City)" },
-  { year: "2002", title: "BUILDING RELATIONSHIPS THAT LAST", text: "A new wave of projects and repeat clients. (Lavasa, Amtek Auto, Bekaert, Shri Chanakya Education Society)" },
-  { year: "2011", title: "TECHNOLOGY THAT MOVED US FORWARD", text: "High-capacity pump, placer booms and tower cranes." },
-  { year: "2012", title: "TRUMP TOWERS. PANCHSHIL. A NEW ERA.", text: "Partnerships with leading developers mark a stronger regional presence. (Panchshil, K Raheja Corp., Pride, Malpani, Godrej, Lodha)" },
+  { year: "2000", title: "MECPL TAKES SHAPE", text: "With greater machinery and capital, MECPL was born. Expanded into residential, commercial, institutional and infrastructure projects. (Aamby Valley, Sahara Lake City)" },
+  { year: "2002", title: "BUILDING RELATIONSHIPS THAT LAST", text: "A new wave of projects and repeat clients. (Lavasa, Amtek Auto, Bekaert Industries, Shri Chanakya Education Society)" },
+  { year: "2011", title: "TECHNOLOGY THAT MOVED US FORWARD", text: "High-capacity pumps, placer booms and tower cranes strengthened our ability to execute complex projects." },
+  { year: "2012", title: "TRUMP TOWERS. PANCHSHIL.", text: "Partnerships with leading developers marked a stronger regional presence. (Panchshil, K Raheja Corp., Pride, Malpani, Godrej, Lodha)" },
   { year: "2013", title: "QUALITY GETS RECOGNISED", text: "Birla Super Award for Outstanding Concrete Structures from the Indian Concrete Institute." },
-  { year: "2014", title: "PIONEERING ALUFORM. BUILDING FASTER.", text: "First to adopt Aluform technology in residential construction. 32 STOREYS | 11 MONTHS (Panchshil high-rise in Wagholi)." },
-  { year: "2017", title: "FROM CONSTRUCTION TO INTERIORS", text: "Launched, expanding into doors and modular furniture solutions." },
-  { year: "2018", title: "DOORS: FROM CONSTRUCTION TO INTERIORS", text: "Launched, expanding into doors and modular furniture solutions. (Hofundur — DOORS | MODULAR SOLUTIONS)" },
-  { year: "2018", title: "RECOGNITION THAT CONTINUES", text: "Iconic Brand of the Year and continued safety and quality awards." },
+  { year: "2014", title: "PIONEERING ALUFORM. BUILDING FASTER.", text: "First to adopt Aluform technology in residential construction. Delivered a 32-storey Panchshil high-rise in Wagholi in just 11 months." },
+  { year: "2017", title: "FROM CONSTRUCTION TO INTERIORS", text: "Launched Hofundur, expanding into doors and modular furniture solutions. (Hofundur — DOORS | MODULAR SOLUTIONS)" },
+  { year: "2018", title: "RECOGNITION GROWS", text: "Honoured as “Iconic Brand of the Year” by ICRP and continued to receive safety and quality awards every year." },
   { year: "2026", title: "GLOBAL SAFETY RECOGNITION", text: "British Safety Council International Safety Award – Distinction (2026)." }
 ];
 
@@ -136,7 +136,7 @@ const purposeRows = [
   },
   {
     label: "Our Mission",
-    text: "To deliver quality construction, on time and with care — continuously improving our people, processes and technology while putting safety, health and the environment first.",
+    text: "To deliver quality construction, on time and with care — continually improving our people, processes and technology while putting safety, health and the environment first.",
   },
 ];
 
@@ -263,7 +263,7 @@ function JourneyTimeline() {
           OUR JOURNEY
         </span>
         <h2 className="page-title-font font-montserrat text-[36px]" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: 0, lineHeight: 1.2 }}>
-          50+ Years.<br />One Continuing Journey.
+          45+ Years.<br />One Continuing Journey.
         </h2>
         <p className="font-inter" style={{ color: "rgba(255,255,255,0.62)", fontSize: "0.85rem", letterSpacing: "0.08em", margin: "18px 0 0", textTransform: "uppercase" }}>
           Milestones that build a stronger tomorrow
@@ -302,7 +302,7 @@ function LeadershipDoorSlider() {
       className="abt-leadership-section"
       style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden", background: "#f8f9fa" }}
     >
-      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: 72, alignItems: "center" }}>
+      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "280px minmax(0, 1fr)", gap: 64, alignItems: "start" }}>
         <div data-scroll-reveal="text">
           <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#EC3338", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 32 }}>
             <FaQuoteLeft size={23} color="#ffffff" aria-hidden="true" />
@@ -311,10 +311,10 @@ function LeadershipDoorSlider() {
             OUR LEADERSHIP
           </span>
           <h2 className="page-title-font font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
-            The People Building What's Next.
+            Built on Experience.<br />Driven by the Future.
           </h2>
           <p className="font-inter" style={{ fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
-            Guided by experience. Driven by purpose.
+            For over five decades, MECPL has been shaped by leaders who combine deep industry experience with a forward-looking approach to construction, people and business.
           </p>
           <p className="font-montserrat" style={{ fontSize: "0.62rem", color: "#949599", lineHeight: 1.9, letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 28px" }}>
             Experience · Leadership · Continuity · A Stronger Tomorrow
@@ -322,7 +322,7 @@ function LeadershipDoorSlider() {
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
         </div>
 
-        <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+        <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18, alignItems: "stretch" }}>
           {leaders.map((leader, i) => (
             <div
               key={i}
@@ -334,6 +334,7 @@ function LeadershipDoorSlider() {
                 overflow: "hidden",
                 boxShadow: "0 4px 24px rgba(196,30,58,0.25)",
                 display: "flex", flexDirection: "column",
+                minHeight: "100%",
               }}
             >
               <div style={{ position: "relative", aspectRatio: "4/3", background: "#232529" }}>
@@ -345,13 +346,19 @@ function LeadershipDoorSlider() {
                 </div>
               </div>
 
-              <div style={{ padding: "24px 18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.78rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 6 }}>
+              <div style={{ padding: "28px 22px 24px", flex: 1, display: "flex", flexDirection: "column" }}>
+                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "1rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 8 }}>
                   {leader.name}
                 </div>
-                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.5rem", color: "rgba(255,255,255,0.75)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                <div className="font-montserrat" style={{ minHeight: 34, fontWeight: 600, fontSize: "0.58rem", color: "rgba(255,255,255,0.78)", letterSpacing: "0.12em", lineHeight: 1.5, textTransform: "uppercase", marginBottom: 18 }}>
                   {leader.role}
                 </div>
+                <p className="font-inter" style={{ color: "rgba(255,255,255,0.82)", fontSize: "0.76rem", lineHeight: 1.72, margin: "0 0 22px" }}>
+                  {leader.bio}
+                </p>
+                <p className="font-montserrat" style={{ borderTop: "1px solid rgba(255,255,255,0.24)", paddingTop: 16, color: "#ffffff", fontSize: "0.68rem", fontWeight: 600, lineHeight: 1.55, margin: "auto 0 0" }}>
+                  {leader.statement}
+                </p>
               </div>
             </div>
           ))}
@@ -392,7 +399,7 @@ export default function AboutPage() {
               fontWeight: 500,
               lineHeight: 1.15, color: "#ffffff",
             }}>
-              50+ YEARS OF<br/>BUILDING WHAT LASTS.
+              45+ YEARS OF<br/>BUILDING WHAT LASTS.
             </div>
           </h1>
           <h2 className="font-montserrat" style={{
@@ -414,7 +421,7 @@ export default function AboutPage() {
             maxWidth: 600,
             padding: "0 24px",
           }}>
-            From industrial foundations in Pune to landmark developments across Maharashtra, MECPL has grown through capability, technology and an unwavering commitment to quality.
+            From residential &amp; commercial structures in Pune to landmark developments across Maharashtra, MECPL has grown through capability, technology and an unwavering commitment to quality.
           </p>
           <a
             href="#our-journey"
@@ -524,11 +531,19 @@ export default function AboutPage() {
                 M. B. Nambiar
               </div>
               <div className="font-montserrat" style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>
-                Founder & Chairman
+                Founder &amp; Promoter
               </div>
-              <p className="font-inter" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: 40 }}>
-                What began with a belief in disciplined execution grew into a construction enterprise built on relationships, technology and trust. His vision continues to inspire everything we build.
-              </p>
+              <div className="font-inter" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.8, marginBottom: 34 }}>
+                <p style={{ margin: "0 0 16px" }}>
+                  A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
+                </p>
+                <p style={{ margin: "0 0 16px" }}>
+                  Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company&apos;s growth, reputation and enduring commitment to quality, safety and professional excellence.
+                </p>
+                <p style={{ margin: 0 }}>
+                  His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AESA Lifetime Achievement Award in 2022.
+                </p>
+              </div>
               <div style={{ borderTop: "2px solid #EC3338", paddingTop: 24, maxWidth: 420, margin: "0 auto" }}>
                 <p className="font-montserrat" style={{ fontSize: "1.1rem", fontWeight: 500, fontStyle: "italic", lineHeight: 1.6, color: "#ffffff", margin: 0 }}>
                   "Build with integrity.<br/>Create lasting value.<br/>Leave a better tomorrow."
