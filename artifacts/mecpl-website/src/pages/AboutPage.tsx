@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
@@ -8,43 +8,65 @@ import {
   DoorOpen,
   Factory,
   Landmark,
+  Pause,
+  Play,
   Quote,
+  X,
 } from "lucide-react";
-import { FaQuoteLeft } from "react-icons/fa";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const assetBase = import.meta.env.BASE_URL;
 
 const stats = [
-  { val: "45+", label: "YEARS OF LEGACY" },
-  { val: "150+", label: "COMPLETED PROJECTS" },
+  { val: "50+", label: "YEARS OF LEGACY" },
+  { val: "30+", label: "COMPLETED PROJECTS" },
   { val: "MAHARASHTRA", label: "REGIONAL PRESENCE" },
 ];
 
-const leaders = [
+type LeadershipMember = {
+  name: string;
+  role: string;
+  image: string;
+  summary: string;
+  details: string[];
+  quote: string;
+};
+
+const leaders: LeadershipMember[] = [
   {
     name: "Jitin Nambiar",
     role: "Director – Human Resources | Founder – Hofundur",
     image: `${assetBase}assets/leaders/jitin.png`,
-    bio: "Jitin Nambiar brings together business strategy, brand building and people leadership across MECPL. As the Founder of Hofundur, he heads the interiors division, extending MECPL's construction expertise into BIS-certified B2B doors and modular furniture solutions. As Director – Human Resources, he is driving a more people- and performance-focused organisation through stronger recognition systems, digitalisation and technology-led employee initiatives.",
-    statement: "Building businesses. Enabling people. Driving transformation.",
+    summary: "Building businesses. Enabling people. Driving transformation.",
+    details: [
+      "Jitin Nambiar brings together business strategy, brand building and people leadership across MECPL.",
+      "As the Founder of Hofundur, he heads the interiors division, extending MECPL's construction expertise into BIS-certified B2B doors and modular furniture solutions. His role also spans business growth, brand development and customer-focused initiatives.",
+      "As Director – Human Resources, Jitin is driving a more people- and performance-focused organisation through stronger recognition systems, digitalisation and technology-led employee initiatives, including ERP and Zoho adoption.",
+    ],
+    quote: "Building businesses. Enabling people. Driving transformation.",
   },
   {
-    name: "Jeevan K.",
+    name: "Jeevan K",
     role: "Managing Director",
     image: `${assetBase}assets/leaders/leader-03.jpg`,
-    bio: "A civil engineer who joined the Shreyas group in 1987, Jeevan K. has been part of MECPL's leadership since its formation in 1999 and has served as Managing Director for more than two decades. His leadership continues to strengthen the company's focus on quality, safety and environmental sustainability.",
-    statement: "Building scale. Strengthening standards. Driving performance.",
+    summary: "Building scale. Strengthening standards. Driving performance.",
+    details: [
+      "A civil engineer who joined the Shreyas group in 1987, Jeevan K. has been part of MECPL's leadership since its formation in 1999 and has served as Managing Director for more than two decades.",
+      "Under his leadership, MECPL has grown into a reputed construction company with annual turnover exceeding ₹400 crore and a workforce of approximately 1,000 permanent employees and over 8,000 workers across various categories.",
+      "His leadership continues to strengthen the company's focus on quality, safety and environmental sustainability, reflected in its ISO Certifications.",
+    ],
+    quote: "Building scale. Strengthening standards. Driving performance.",
   },
   {
     name: "Manojkumar M. R.",
     role: "Director – Finance",
     image: `${assetBase}assets/leaders/leader-02.jpg`,
-    bio: "Manojkumar M. R. has been part of the MECPL journey since 1993, when he joined Shreyas Constructions as a Purchase Officer. Since joining the Board in 1999, he has played an integral role in finance, commercial management and business operations, strengthening financial planning, commercial discipline and management systems.",
-    statement: "Financial discipline. Commercial insight. Long-term stability.",
+    summary: "Financial discipline. Commercial insight. Long-term stability.",
+    details: [
+      "Manojkumar M. R. has been part of the MECPL journey since 1993, when he joined Shreyas Constructions as a Purchase Officer. With the establishment of MECPL in 1999, he joined the Board and has since played an integral role in finance, commercial management and business operations.",
+      "As Director – Finance, he has been instrumental in strengthening the company's financial planning, commercial discipline and management systems, supporting its growth while maintaining a strong financial foundation.",
+      "His contribution has also played an important role in MECPL's financial credibility, including its CRISIL BBB–Stable rating, as the company continues to undertake large-scale projects for reputed corporate clients.",
+    ],
+    quote: "Financial discipline. Commercial insight. Long-term stability.",
   },
 ];
 
@@ -68,7 +90,7 @@ const sectors = [
 const awards = [
   { title: "India SME 100 Awards", desc: "Recognised SME Excellence", img: `${assetBase}assets/recognition/india-sme-100-awards.jpeg` },
   { title: "India's Small Giants", desc: "Emerging Enterprises of India", img: `${assetBase}assets/recognition/indias-small-giants.png` },
-  { title: "Iconic Brand of The Year 2018", desc: "Brand Recognition", img: `${assetBase}assets/recognition/iconic-brand-2026.png` },
+  { title: "Iconic Brand of The Year 2016", desc: "Brand Recognition", img: `${assetBase}assets/recognition/iconic-brand-2026.png` },
   { title: "ISO Certified Company", desc: "Quality, Environmental & Safety", img: `${assetBase}assets/recognition/iso-mark.png` },
   { title: "CRISIL BBB / Positive", desc: "Financial Rating", img: `${assetBase}assets/recognition/crisil-rating.jpg` },
   { title: "NSCI Safety Awards", desc: "7 Award-Winning Projects", img: `${assetBase}assets/awards/nsci-safety-award-2025.png` },
@@ -79,14 +101,15 @@ const awards = [
 
 const journey = [
   { year: "1975", title: "WHERE IT ALL BEGAN", text: "Shreyas began operations, serving leading industrial clients in Pune and Mumbai. (Cadbury, Venkateshwara Hatcheries and more)" },
-  { year: "2000", title: "MECPL TAKES SHAPE", text: "With greater machinery and capital, MECPL was born. Expanded into residential, commercial, institutional and infrastructure projects. (Aamby Valley, Sahara Lake City)" },
-  { year: "2002", title: "BUILDING RELATIONSHIPS THAT LAST", text: "A new wave of projects and repeat clients. (Lavasa, Amtek Auto, Bekaert Industries, Shri Chanakya Education Society)" },
-  { year: "2011", title: "TECHNOLOGY THAT MOVED US FORWARD", text: "High-capacity pumps, placer booms and tower cranes strengthened our ability to execute complex projects." },
-  { year: "2012", title: "TRUMP TOWERS. PANCHSHIL.", text: "Partnerships with leading developers marked a stronger regional presence. (Panchshil, K Raheja Corp., Pride, Malpani, Godrej, Lodha)" },
+  { year: "2000", title: "MECPL TAKES SHAPE", text: "Expanded into residential, commercial, institutional and infrastructure projects. (Aamby Valley, Sahara Lake City)" },
+  { year: "2002", title: "BUILDING RELATIONSHIPS THAT LAST", text: "A new wave of projects and repeat clients. (Lavasa, Amtek Auto, Bekaert, Shri Chanakya Education Society)" },
+  { year: "2011", title: "TECHNOLOGY THAT MOVED US FORWARD", text: "High-capacity pump, placer booms and tower cranes." },
+  { year: "2012", title: "TRUMP TOWERS. PANCHSHIL. A NEW ERA.", text: "Partnerships with leading developers mark a stronger regional presence. (Panchshil, K Raheja Corp., Pride, Malpani, Godrej, Lodha)" },
   { year: "2013", title: "QUALITY GETS RECOGNISED", text: "Birla Super Award for Outstanding Concrete Structures from the Indian Concrete Institute." },
-  { year: "2014", title: "PIONEERING ALUFORM. BUILDING FASTER.", text: "First to adopt Aluform technology in residential construction. Delivered a 32-storey Panchshil high-rise in Wagholi in just 11 months." },
-  { year: "2017", title: "FROM CONSTRUCTION TO INTERIORS", text: "Launched Hofundur, expanding into doors and modular furniture solutions. (Hofundur — DOORS | MODULAR SOLUTIONS)" },
-  { year: "2018", title: "RECOGNITION GROWS", text: "Honoured as “Iconic Brand of the Year” by ICRP and continued to receive safety and quality awards every year." },
+  { year: "2014", title: "PIONEERING ALUFORM. BUILDING FASTER.", text: "First to adopt Aluform technology in residential construction. 32 STOREYS | 11 MONTHS (Panchshil high-rise in Wagholi)." },
+  { year: "2017", title: "FROM CONSTRUCTION TO INTERIORS", text: "Launched, expanding into doors and modular furniture solutions." },
+  { year: "2018", title: "DOORS: FROM CONSTRUCTION TO INTERIORS", text: "Launched, expanding into doors and modular furniture solutions. (Hofundur — DOORS | MODULAR SOLUTIONS)" },
+  { year: "2018", title: "RECOGNITION THAT CONTINUES", text: "Iconic Brand of the Year and continued safety and quality awards." },
   { year: "2026", title: "GLOBAL SAFETY RECOGNITION", text: "British Safety Council International Safety Award – Distinction (2026)." }
 ];
 
@@ -136,7 +159,7 @@ const purposeRows = [
   },
   {
     label: "Our Mission",
-    text: "To deliver quality construction, on time and with care — continually improving our people, processes and technology while putting safety, health and the environment first.",
+    text: "To deliver quality construction, on time and with care — continuously improving our people, processes and technology while putting safety, health and the environment first.",
   },
 ];
 
@@ -217,62 +240,106 @@ function PurposeSection() {
   );
 }
 
-// ─── 04 — OUR JOURNEY (Horizontal Scroll Timeline) ────────
+// ─── 04 — OUR JOURNEY (Timeline Carousel) ─────────────────
 function JourneyTimeline() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const scrollFrameRef = useRef<number | null>(null);
+  const programmaticScrollRef = useRef(false);
+  const programmaticScrollTimerRef = useRef<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const sec = sectionRef.current;
+    const scroller = scrollRef.current;
     const track = trackRef.current;
-    if (!sec || !track) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const slide = track?.children.item(activeIndex) as HTMLElement | null;
+    if (!scroller || !slide) return;
 
-    const ctx = gsap.context(() => {
-      const getScrollWidth = () => Math.max(0, track.scrollWidth - window.innerWidth);
-
-      gsap.to(track, {
-        x: () => -getScrollWidth(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sec,
-          pin: true,
-          scrub: 1,
-          start: "top 80px",
-          end: () => `+=${getScrollWidth()}`,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, sec);
-
-    let cancelled = false;
-    document.fonts.ready.then(() => {
-      if (!cancelled) ScrollTrigger.refresh();
+    programmaticScrollRef.current = true;
+    if (programmaticScrollTimerRef.current !== null) {
+      window.clearTimeout(programmaticScrollTimerRef.current);
+    }
+    scroller.scrollTo({
+      left: slide.offsetLeft,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
+    programmaticScrollTimerRef.current = window.setTimeout(() => {
+      programmaticScrollRef.current = false;
+      programmaticScrollTimerRef.current = null;
+    }, 700);
 
     return () => {
-      cancelled = true;
-      ctx.revert();
+      if (programmaticScrollTimerRef.current !== null) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+        programmaticScrollTimerRef.current = null;
+      }
+    };
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % journey.length);
+    }, 3500);
+    return () => window.clearInterval(timer);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const scroller = scrollRef.current;
+    const track = trackRef.current;
+    if (!scroller || !track) return;
+
+    const updateActiveSlide = () => {
+      if (programmaticScrollRef.current) return;
+      if (scrollFrameRef.current !== null) return;
+      scrollFrameRef.current = window.requestAnimationFrame(() => {
+        scrollFrameRef.current = null;
+        const target = scroller.scrollLeft + scroller.clientWidth * 0.35;
+        const slides = Array.from(track.children) as HTMLElement[];
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        slides.forEach((slide, index) => {
+          const distance = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - target);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        setActiveIndex((current) => current === closestIndex ? current : closestIndex);
+      });
+    };
+
+    scroller.addEventListener("scroll", updateActiveSlide, { passive: true });
+    return () => {
+      scroller.removeEventListener("scroll", updateActiveSlide);
+      if (scrollFrameRef.current !== null) window.cancelAnimationFrame(scrollFrameRef.current);
     };
   }, []);
 
   return (
-    <section id="our-journey" ref={sectionRef} data-testid="section-about-journey" style={{ background: "#232529", color: "#ffffff", overflow: "hidden", position: "relative", scrollMarginTop: 80 }}>
+    <section id="our-journey" data-testid="section-about-journey" style={{ background: "#232529", color: "#ffffff", overflow: "hidden", position: "relative", scrollMarginTop: 80, paddingBottom: 108 }}>
       <div style={{ padding: "80px 56px 40px", maxWidth: 1360, margin: "0 auto", textAlign: "center" }}>
         <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
           OUR JOURNEY
         </span>
         <h2 className="page-title-font font-montserrat text-[36px]" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: 0, lineHeight: 1.2 }}>
-          45+ Years.<br />One Continuing Journey.
+          50+ Years.<br />One Continuing Journey.
         </h2>
         <p className="font-inter" style={{ color: "rgba(255,255,255,0.62)", fontSize: "0.85rem", letterSpacing: "0.08em", margin: "18px 0 0", textTransform: "uppercase" }}>
           Milestones that build a stronger tomorrow
         </p>
       </div>
-      <div style={{ display: "flex", alignItems: "center", minHeight: "50vh", padding: "0 56px", overflowX: "auto" }} className="no-scrollbar abt-journey-scroll">
+      <div
+        ref={scrollRef}
+        style={{ display: "flex", alignItems: "center", minHeight: "50vh", padding: "0 56px", overflowX: "auto", scrollSnapType: "x mandatory", overscrollBehaviorX: "contain" }}
+        className="no-scrollbar abt-journey-scroll"
+      >
         <div ref={trackRef} className="abt-journey-track" style={{ display: "flex", gap: 64, paddingRight: "50vw", paddingBottom: 80 }}>
           {journey.map((item, i) => (
-            <div key={i} style={{ width: 340, flexShrink: 0, position: "relative", paddingTop: 32 }}>
+            <div key={i} style={{ width: 340, flexShrink: 0, position: "relative", paddingTop: 32, scrollSnapAlign: "start" }}>
               <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 2, background: "rgba(255,255,255,0.15)" }}>
                 <div style={{ position: "absolute", top: -5, left: 0, width: 12, height: 12, borderRadius: "50%", background: "#EC3338" }} />
               </div>
@@ -289,29 +356,112 @@ function JourneyTimeline() {
           ))}
         </div>
       </div>
+      <div
+        aria-label="Journey carousel controls"
+        style={{ position: "absolute", left: 0, right: 0, bottom: 28, display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "0 24px" }}
+      >
+        <div
+          style={{
+            minHeight: 58,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 13,
+            padding: "0 24px",
+            borderRadius: 999,
+            background: "rgba(255,255,255,0.06)",
+          }}
+        >
+          {journey.map((item, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <button
+                key={`${item.year}-${item.title}`}
+                type="button"
+                aria-label={`Show ${item.year}: ${item.title}`}
+                aria-current={isActive ? "true" : undefined}
+                onClick={() => setActiveIndex(index)}
+                style={{
+                  width: isActive ? 48 : 8,
+                  height: 8,
+                  padding: 0,
+                  border: 0,
+                  borderRadius: 999,
+                  background: isActive ? "#a9a9ad" : "#77777d",
+                  cursor: "pointer",
+                  transition: "width 220ms ease, background 220ms ease",
+                }}
+              />
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          aria-label={isPlaying ? "Pause journey carousel" : "Play journey carousel"}
+          aria-pressed={isPlaying}
+          onClick={() => setIsPlaying((playing) => !playing)}
+          style={{
+            width: 58,
+            height: 58,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: 0,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.06)",
+            color: "#ffffff",
+            cursor: "pointer",
+            flexShrink: 0,
+          }}
+        >
+          {isPlaying ? <Pause size={21} strokeWidth={3} /> : <Play size={21} fill="currentColor" />}
+        </button>
+      </div>
     </section>
   );
 }
 
-// ─── 07 — OUR LEADERSHIP (Door Slider) ──────────────────────
+// ─── 07 — OUR LEADERSHIP ─────────────────────────────────────
 function LeadershipDoorSlider() {
+  const [selectedLeader, setSelectedLeader] = useState<LeadershipMember | null>(null);
+
+  useEffect(() => {
+    if (!selectedLeader) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedLeader(null);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedLeader]);
+
   return (
     <section
       id="abt3"
       data-testid="section-about-leadership"
       className="abt-leadership-section"
-      style={{ position: "relative", scrollMarginTop: 80, padding: "96px 56px", overflow: "hidden", background: "#f8f9fa" }}
+      style={{
+        position: "relative",
+        scrollMarginTop: 80,
+        padding: "96px 56px",
+        overflow: "hidden",
+        background: "#f4f5f6",
+        backgroundImage: "radial-gradient(circle at 12% 18%, rgba(236,51,56,0.06), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.72), rgba(244,245,246,0.96))",
+      }}
     >
-      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1360, margin: "0 auto", display: "grid", gridTemplateColumns: "280px minmax(0, 1fr)", gap: 64, alignItems: "start" }}>
+      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1220, margin: "0 auto", display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: 72, alignItems: "center" }}>
         <div data-scroll-reveal="text">
-          <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#EC3338", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 32 }}>
-            <FaQuoteLeft size={23} color="#ffffff" aria-hidden="true" />
-          </div>
           <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             OUR LEADERSHIP
           </span>
           <h2 className="page-title-font font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
-            Built on Experience.<br />Driven by the Future.
+            The People Building What's Next.
           </h2>
           <p className="font-inter" style={{ fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
             For over five decades, MECPL has been shaped by leaders who combine deep industry experience with a forward-looking approach to construction, people and business.
@@ -322,48 +472,145 @@ function LeadershipDoorSlider() {
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
         </div>
 
-        <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18, alignItems: "stretch" }}>
+        <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18 }}>
           {leaders.map((leader, i) => (
             <div
-              key={i}
+              key={leader.name}
               data-scroll-reveal="image"
               data-scroll-reveal-delay={String(i * 90)}
               style={{
-                background: "#EC3338",
-                borderRadius: 6,
+                position: "relative",
+                background: "#ffffff",
+                border: "1px solid rgba(17,24,39,0.08)",
+                borderRadius: 4,
                 overflow: "hidden",
-                boxShadow: "0 4px 24px rgba(196,30,58,0.25)",
+                boxShadow: "0 16px 36px rgba(17,24,39,0.08)",
                 display: "flex", flexDirection: "column",
-                minHeight: "100%",
               }}
             >
-              <div style={{ position: "relative", aspectRatio: "4/3", background: "#232529" }}>
+              <div style={{ position: "relative", aspectRatio: "1.18", background: "#dfe2e5" }}>
                 <img src={leader.image} alt={leader.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
-                <div style={{ position: "absolute", bottom: -14, left: 16, zIndex: 4, width: 28, height: 28, borderRadius: "50%", background: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.25)" }}>
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                    <path d="M0 8V5C0 3.33 0.56 2 1.67 1C2.78 0 4.11 -0.11 5.67 0.44L5 1.89C4.22 1.56 3.5 1.61 2.83 2.06C2.17 2.5 1.83 3.17 1.83 4.06H3.67V8H0ZM6.11 8V5C6.11 3.33 6.67 2 7.78 1C8.89 0 10.22 -0.11 11.78 0.44L11.11 1.89C10.33 1.56 9.61 1.61 8.94 2.06C8.28 2.5 7.94 3.17 7.94 4.06H9.78V8H6.11Z" fill="#EC3338"/>
-                  </svg>
-                </div>
+                <button
+                  type="button"
+                  aria-label={`View profile of ${leader.name}`}
+                  onClick={() => setSelectedLeader(leader)}
+                  style={{
+                    position: "absolute",
+                    left: 16,
+                    bottom: -18,
+                    zIndex: 4,
+                    width: 38,
+                    height: 38,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "3px solid #ffffff",
+                    borderRadius: "50%",
+                    background: "#EC3338",
+                    color: "#ffffff",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 12px rgba(17,24,39,0.2)",
+                  }}
+                >
+                  <span aria-hidden="true" style={{ fontSize: 24, fontWeight: 300, lineHeight: 1, marginTop: -2 }}>+</span>
+                </button>
               </div>
 
-              <div style={{ padding: "28px 22px 24px", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "1rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.3, marginBottom: 8 }}>
+              <div style={{ padding: "30px 18px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.78rem", color: "#111827", textTransform: "none", letterSpacing: "0.01em", lineHeight: 1.3, marginBottom: 8 }}>
                   {leader.name}
                 </div>
-                <div className="font-montserrat" style={{ minHeight: 34, fontWeight: 600, fontSize: "0.58rem", color: "rgba(255,255,255,0.78)", letterSpacing: "0.12em", lineHeight: 1.5, textTransform: "uppercase", marginBottom: 18 }}>
+                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.48rem", color: "#6b7280", letterSpacing: "0.14em", textTransform: "uppercase", lineHeight: 1.5 }}>
                   {leader.role}
                 </div>
-                <p className="font-inter" style={{ color: "rgba(255,255,255,0.82)", fontSize: "0.76rem", lineHeight: 1.72, margin: "0 0 22px" }}>
-                  {leader.bio}
-                </p>
-                <p className="font-montserrat" style={{ borderTop: "1px solid rgba(255,255,255,0.24)", paddingTop: 16, color: "#ffffff", fontSize: "0.68rem", fontWeight: 600, lineHeight: 1.55, margin: "auto 0 0" }}>
-                  {leader.statement}
-                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {selectedLeader && (
+        <div
+          role="presentation"
+          onClick={() => setSelectedLeader(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 100,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "24px",
+            background: "rgba(12,16,22,0.78)",
+            backdropFilter: "blur(6px)",
+          }}
+        >
+          <div
+            className="abt-leadership-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="leadership-modal-title"
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "min(820px, 100%)",
+              display: "grid",
+              gridTemplateColumns: "minmax(230px, 0.78fr) minmax(0, 1.22fr)",
+              background: "#ffffff",
+              boxShadow: "0 28px 80px rgba(0,0,0,0.35)",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ minHeight: 420, background: "#dfe2e5" }}>
+              <img src={selectedLeader.image} alt={selectedLeader.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
+            </div>
+            <div style={{ padding: "42px 42px 36px" }}>
+              <button
+                type="button"
+                aria-label="Close profile"
+                onClick={() => setSelectedLeader(null)}
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  width: 32,
+                  height: 32,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: 0,
+                  background: "transparent",
+                  color: "#6b7280",
+                  cursor: "pointer",
+                }}
+              >
+                <X size={17} aria-hidden="true" />
+              </button>
+              <span className="about-label-font font-montserrat" style={{ fontSize: "0.58rem", color: "#EC3338", letterSpacing: "0.22em", marginBottom: 14, display: "block" }}>
+                OUR LEADERSHIP
+              </span>
+              <h3 id="leadership-modal-title" className="font-montserrat" style={{ margin: "0 0 8px", color: "#111827", fontSize: "1.65rem", fontWeight: 600, lineHeight: 1.2 }}>
+                {selectedLeader.name}
+              </h3>
+              <div className="font-montserrat" style={{ marginBottom: 24, color: "#6b7280", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.14em", lineHeight: 1.5, textTransform: "uppercase" }}>
+                {selectedLeader.role}
+              </div>
+              <div style={{ display: "grid", gap: 14 }}>
+                {selectedLeader.details.map((detail) => (
+                  <p key={detail} className="font-inter" style={{ margin: 0, color: "#4b5563", fontSize: "0.82rem", lineHeight: 1.75 }}>
+                    {detail}
+                  </p>
+                ))}
+              </div>
+              <div style={{ marginTop: 24, paddingLeft: 16, borderLeft: "3px solid #EC3338" }}>
+                <p className="font-montserrat" style={{ margin: 0, color: "#EC3338", fontSize: "0.78rem", fontWeight: 600, lineHeight: 1.6 }}>
+                  {selectedLeader.quote}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -384,7 +631,7 @@ export default function AboutPage() {
           backgroundSize: "cover",
         }}
       >
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.64)_0%,rgba(6,10,16,0.44)_48%,rgba(6,10,16,0.24)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.74)_0%,rgba(6,10,16,0.58)_48%,rgba(6,10,16,0.42)_100%)]" />
         <div style={{
           position: "absolute", inset: 0,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
@@ -399,7 +646,7 @@ export default function AboutPage() {
               fontWeight: 500,
               lineHeight: 1.15, color: "#ffffff",
             }}>
-              45+ YEARS OF<br/>BUILDING WHAT LASTS.
+              50+ YEARS OF<br/>BUILDING WHAT LASTS.
             </div>
           </h1>
           <h2 className="font-montserrat" style={{
@@ -421,7 +668,7 @@ export default function AboutPage() {
             maxWidth: 600,
             padding: "0 24px",
           }}>
-            From residential &amp; commercial structures in Pune to landmark developments across Maharashtra, MECPL has grown through capability, technology and an unwavering commitment to quality.
+            From industrial foundations in Pune to landmark developments across Maharashtra, MECPL has grown through capability, technology and an unwavering commitment to quality.
           </p>
           <a
             href="#our-journey"
@@ -531,22 +778,14 @@ export default function AboutPage() {
                 M. B. Nambiar
               </div>
               <div className="font-montserrat" style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>
-                Founder &amp; Promoter
+                Founder & Promoter
               </div>
-              <div className="font-inter" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.8, marginBottom: 34 }}>
-                <p style={{ margin: "0 0 16px" }}>
-                  A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
-                </p>
-                <p style={{ margin: "0 0 16px" }}>
-                  Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company&apos;s growth, reputation and enduring commitment to quality, safety and professional excellence.
-                </p>
-                <p style={{ margin: 0 }}>
-                  His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AESA Lifetime Achievement Award in 2022.
-                </p>
-              </div>
+              <p className="font-inter" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: 40 }}>
+                A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group. Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company's growth, reputation and enduring commitment to quality, safety and professional excellence.
+              </p>
               <div style={{ borderTop: "2px solid #EC3338", paddingTop: 24, maxWidth: 420, margin: "0 auto" }}>
                 <p className="font-montserrat" style={{ fontSize: "1.1rem", fontWeight: 500, fontStyle: "italic", lineHeight: 1.6, color: "#ffffff", margin: 0 }}>
-                  "Build with integrity.<br/>Create lasting value.<br/>Leave a better tomorrow."
+                  "A legacy built on experience.<br/>A culture built to endure."
                 </p>
                 <span className="font-montserrat" style={{ display: "block", marginTop: 16, color: "rgba(255,255,255,0.55)", fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
                   M. B. Nambiar

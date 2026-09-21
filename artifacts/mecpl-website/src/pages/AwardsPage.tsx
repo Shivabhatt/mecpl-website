@@ -25,7 +25,7 @@ export default function AwardsPage() {
       {/* Header */}
       <div className="relative py-20 border-b border-mecpl-dark/[0.06] overflow-hidden">
         <img src="/assets/projects/GODREJ-INFINITY.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Award-winning MECPL construction project" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
           <SectionHeader label="Recognition" title="Awards & Honors" subtitle="Over two decades of consecutive industry recognition for structural excellence, safety leadership, and construction quality." center />
         </div>

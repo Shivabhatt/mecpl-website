@@ -153,6 +153,7 @@ export default function CompletedProjectsPage() {
         <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
           <span className="about-label-font font-montserrat font-medium" style={{
+            fontFamily: "'Montserrat', sans-serif",
             fontSize: "0.62rem",
             fontWeight: 700,
             letterSpacing: "0.35em",

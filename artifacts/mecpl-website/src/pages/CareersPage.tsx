@@ -170,8 +170,8 @@ export default function CareersPage() {
           className="absolute inset-0 h-full w-full object-cover"
           alt="MECPL engineering team"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.9)_0%,rgba(6,10,16,0.72)_48%,rgba(6,10,16,0.4)_100%)]" />
-        <div className="absolute inset-0 bg-mecpl-dark/15" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.92)_0%,rgba(6,10,16,0.78)_48%,rgba(6,10,16,0.54)_100%)]" />
+        <div className="absolute inset-0 bg-mecpl-dark/20" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center">
           <span className="mb-5 block text-[10px] font-semibold uppercase tracking-[0.35em] text-white">

@@ -433,7 +433,7 @@ export default function HomePage() {
         {/* Cinematic gradient overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "rgba(0,0,0,0.32)",
+          background: "rgba(0,0,0,0.46)",
         }} />
 
         {/* TOP RIGHT: video counter + progress */}
@@ -926,16 +926,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="hidden md:block">
-              <Link href="/projects" data-testid="button-all-projects">
-                <span className="group inline-flex items-center justify-center gap-4 border border-mecpl-red bg-mecpl-red text-white px-8 py-4 cursor-pointer transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark">
-                  <span className="font-montserrat font-semibold tracking-[0.2em] uppercase text-[12px]">
-                    View All 150+ Projects
-                  </span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            </div>
           </div>
 
           {/* The Expanding Matrix */}
