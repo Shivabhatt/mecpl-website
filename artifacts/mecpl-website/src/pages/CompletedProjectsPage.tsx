@@ -27,13 +27,13 @@ function useInView<T extends HTMLElement>() {
 const completedProjects = [
   // Residential
   { name: "Kingsbury Pride Purple Group", type: "Residential", location: "Charoli, Pune", image: `${assetBase}assets/projects/Kingsbury.jpg` },
-  { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: `${assetBase}assets/projects/gera-songs-of-joy-01-large.png` },
+  { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: `${assetBase}assets/projects/gera-songs-of-joy-01-large.webp` },
   { name: "Godrej Rejuve", type: "Residential", location: "Keshav Nagar, Pune", image: `${assetBase}assets/projects/Rejuve.jpg` },
   { name: "Kalpataru Jade Residences", type: "Residential", location: "Baner, Pune", image: `${assetBase}assets/projects/Kalpataru.jpeg` },
-  { name: "Yoo Villas", type: "Residential", location: "Wagholi, Pune", image: `${assetBase}assets/projects/yoovilla-1.png` },
+  { name: "Yoo Villas", type: "Residential", location: "Wagholi, Pune", image: `${assetBase}assets/projects/yoovilla-1.webp` },
   { name: "Trump Tower", type: "Residential", location: "Kalyani Nagar, Pune", image: `${assetBase}assets/projects/Trump-Tower.jpg` },
   { name: "Godrej Nurture", type: "Residential", location: "Mamurdi, Pune", image: `${assetBase}assets/projects/nurture-scaled.jpg` },
-  { name: "Pride Atlantic", type: "Residential", location: "Charholi, Pune", image: `${assetBase}assets/projects/Atlantic.png` },
+  { name: "Pride Atlantic", type: "Residential", location: "Charholi, Pune", image: `${assetBase}assets/projects/Atlantic.webp` },
   { name: "Highrise-Panchshil Tower", type: "Residential", location: "Wagholi, Pune", image: `${assetBase}assets/projects/HIGH-RISE-1-scaled.jpg` },
   { name: "Godrej Forest Grove", type: "Residential", location: "Mamurdi, Pune", image: `${assetBase}assets/projects/Godrej-Forest-grove.jpg` },
   { name: "Godrej Infinity", type: "Residential", location: "Keshav Nagar, Pune", image: `${assetBase}assets/projects/GODREJ-INFINITY.jpg` },
@@ -42,16 +42,16 @@ const completedProjects = [
   { name: "Eon West LP II", type: "Commercial", location: "Wakad, Pune", image: `${assetBase}assets/projects/Eonwest.jpg` },
   { name: "Panchshil Tech Park", type: "Commercial", location: "Viman Nagar, Pune", image: `${assetBase}assets/projects/TechPark.jpg` },
   { name: "Gera Commerzone", type: "Commercial", location: "Kharadi, Pune", image: `${assetBase}assets/projects/KRC-scaled-e1700730314593.jpg` },
-  { name: "Syntel Phase I & II", type: "Commercial", location: "Talawade IT Park", image: `${assetBase}assets/projects/syntel-03-large.png` },
-  { name: "Indira College of Engineering", type: "Commercial", location: "Tathawade, Pune", image: `${assetBase}assets/projects/indira-01-large-1.png` },
+  { name: "Syntel Phase I & II", type: "Commercial", location: "Talawade IT Park", image: `${assetBase}assets/projects/syntel-03-large.webp` },
+  { name: "Indira College of Engineering", type: "Commercial", location: "Tathawade, Pune", image: `${assetBase}assets/projects/indira-01-large-1.webp` },
   { name: "Golden Bell Complex", type: "Commercial", location: "Mundhwa, Pune", image: `${assetBase}assets/projects/Golden-Bell.jpg` },
   { name: "43 Privet Drive", type: "Commercial", location: "Balewadi, Pune", image: `${assetBase}assets/projects/43PD-1-scaled.jpg` },
-  { name: "Connect Project", type: "Commercial", location: "Baudhan, Pune", image: `${assetBase}assets/projects/connect-01.png` },
+  { name: "Connect Project", type: "Commercial", location: "Baudhan, Pune", image: `${assetBase}assets/projects/connect-01.webp` },
   // Industrial
-  { name: "Mahindra Electric", type: "Industrial", location: "Chakan, Pune", image: `${assetBase}assets/projects/MAHINDRA-1.png` },
-  { name: "Praj Industries Ltd.", type: "Industrial", location: "Pirangut, Pune", image: `${assetBase}assets/projects/PRAJ-INDUSTRIES.png` },
-  { name: "Amtek Auto Ltd.", type: "Industrial", location: "Sanaswadi, Pune", image: `${assetBase}assets/projects/AMTEK-AUTO-LTD.png` },
-  { name: "Bekaert Industries", type: "Industrial", location: "Ranjangaon, Pune", image: `${assetBase}assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.png` },
+  { name: "Mahindra Electric", type: "Industrial", location: "Chakan, Pune", image: `${assetBase}assets/projects/MAHINDRA-1.webp` },
+  { name: "Praj Industries Ltd.", type: "Industrial", location: "Pirangut, Pune", image: `${assetBase}assets/projects/PRAJ-INDUSTRIES.webp` },
+  { name: "Amtek Auto Ltd.", type: "Industrial", location: "Sanaswadi, Pune", image: `${assetBase}assets/projects/AMTEK-AUTO-LTD.webp` },
+  { name: "Bekaert Industries", type: "Industrial", location: "Ranjangaon, Pune", image: `${assetBase}assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.webp` },
   // Special
   { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: `${assetBase}assets/projects/Ramkrishna-Math.jpg` },
 ];
@@ -141,7 +141,7 @@ export default function CompletedProjectsPage() {
   }, []);
 
   return (
-    <div data-animate-page className="completed-projects-page bg-white">
+    <div data-animate-page className="completed-projects-page bg-white font-montserrat">
       {/* Project Hero */}
       <div className="relative min-h-screen overflow-hidden bg-[#111827] flex items-center">
         <img
@@ -153,7 +153,7 @@ export default function CompletedProjectsPage() {
         <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
           <span className="about-label-font font-montserrat font-medium" style={{
-            fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "Montserrat",
             fontSize: "0.62rem",
             fontWeight: 700,
             letterSpacing: "0.35em",
@@ -429,7 +429,7 @@ function ProjectExplorer() {
         <div className="relative min-h-[500px] overflow-hidden bg-[#e8e7e2]" data-scroll-reveal="image">
           <video
             src={`${assetBase}assets/video/projects-explorer.mp4`}
-            poster={`${assetBase}assets/projects/Trump-Tower.jpg`}
+            poster={`${assetBase}assets/video/posters/projects-explorer.jpg`}
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay
             muted
@@ -578,6 +578,8 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
               alt={`${project.name} primary view`}
               loading="lazy"
+              decoding="async"
+              fetchPriority={index === 0 ? "high" : "auto"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
@@ -588,6 +590,8 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
               style={{ objectPosition: "72% center" }}
               alt={`${project.name} detail view`}
               loading="lazy"
+              decoding="async"
+              fetchPriority={index === 0 ? "high" : "auto"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>

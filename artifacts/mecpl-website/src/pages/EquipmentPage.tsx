@@ -5,7 +5,7 @@ const equipment = [
     name: "Automated Concrete Batching Plants",
     desc: "Complete high-output automated concrete batching plants equipped with specialized Star Batcher Management Core Systems. Delivers precise concrete mixes at scale for mega-projects.",
     specs: ["Star Batcher Management System", "High-output automated mixing", "Precise batch control", "Quality consistency assurance"],
-    image: "/assets/projects/PRAJ-INDUSTRIES.png",
+    image: "/assets/projects/PRAJ-INDUSTRIES.webp",
   },
   {
     name: "Schwing Stetter Concrete Pumps",
@@ -17,19 +17,19 @@ const equipment = [
     name: "Boomplacer Fleet Systems",
     desc: "High-reach heavy articulate concrete distribution mechanisms providing maximum concrete reach and flexibility on large, complex construction sites.",
     specs: ["High-reach articulation", "360-degree rotation", "Precise placement", "Large-site coverage"],
-    image: "/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.png",
+    image: "/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.webp",
   },
   {
     name: "Mobile Boom Placer Machinery",
     desc: "Rapid deployment vehicular systems for dynamic job-site requirements. Provides flexible concrete distribution across varying site configurations and locations.",
     specs: ["Rapid deployment capability", "Vehicular mobility", "Dynamic site adaptation", "Multi-project deployment"],
-    image: "/assets/projects/AMTEK-AUTO-LTD.png",
+    image: "/assets/projects/AMTEK-AUTO-LTD.webp",
   },
   {
     name: "Tower Boom Placer Infrastructure",
     desc: "Pinned structural steel tower systems for vertical concrete placement at extreme heights. Essential for highrise and multi-tower residential and commercial projects.",
     specs: ["Extreme height placement", "Structural steel frame", "Pinned installation", "Highrise specialized"],
-    image: "/assets/projects/MAHINDRA-1.png",
+    image: "/assets/projects/MAHINDRA-1.webp",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function EquipmentPage() {
     <div data-animate-page className="bg-white pt-20">
       {/* Header */}
       <div className="relative py-20 border-b border-mecpl-dark/[0.06] overflow-hidden">
-        <img src="/assets/projects/PRAJ-INDUSTRIES.png" className="absolute inset-0 w-full h-full object-cover opacity-[0.12]" alt="MECPL industrial project" />
+        <img src="/assets/projects/PRAJ-INDUSTRIES.webp" className="absolute inset-0 w-full h-full object-cover opacity-[0.12]" alt="MECPL industrial project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase block mb-3">Infrastructure Assets</span>
@@ -52,7 +52,7 @@ export default function EquipmentPage() {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center py-14 border-b border-mecpl-dark/[0.06]">
           <div className="h-96 rounded-sm overflow-hidden border border-mecpl-dark/[0.1] shadow-xl">
-            <img src="/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.png" className="w-full h-full object-cover transition-all duration-500" alt="MECPL industrial construction project" />
+            <img src="/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.webp" className="w-full h-full object-cover transition-all duration-500" alt="MECPL industrial construction project" />
           </div>
           <div className="space-y-6">
             <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Self-Owned Fleet</span>

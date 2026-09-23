@@ -77,34 +77,38 @@ const projects = [
   { name: "Panchshil Highrise Towers",   location: "Wagholi, Pune",       type: "Panchshil Group",    image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
   { name: "Godrej Nurture",              location: "Mamurdi, Pune",       type: "Godrej Properties", image: "assets/projects/Godrej-Forest-grove.jpg" },
   { name: "EON Phase II",                location: "Kharadi, Pune",       type: "Panchshil Group",    image: "assets/projects/Eonwest.jpg" },
-  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        type: "Industrial",        image: "assets/projects/PRAJ-INDUSTRIES.png" },
+  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        type: "Industrial",        image: "assets/projects/PRAJ-INDUSTRIES.webp" },
   { name: "Kalpataru Jade Residences",  location: "Baner, Pune",         type: "Kalpataru",          image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
 ];
 
 const risingProjectVideos = [
   {
-    name: "Riverfront Infrastructure",
+    name: "Concrete Pouring Milestone (B94)",
     location: "Pune",
-    video: "assets/video/rising-riverfront-infrastructure.mp4",
-    description: "Aerial progress across a newly delivered river crossing and its surrounding infrastructure works.",
-  },
-  {
-    name: "Concrete Pouring Milestone",
-    location: "Pune",
+    headline: "1,00,000 m³ Concrete Poured",
     video: "assets/video/rising-concrete-pouring.mp4",
-    description: "A major construction milestone documenting one lakh cubic metres of concrete pouring.",
+    description: "A major milestone at our K Raheja Corp B94 site, 1 lakh cubic metres of concrete poured, marking another significant step forward in the journey from foundation to landmark.",
   },
   {
     name: "Vantage Tower B",
     location: "Pune",
+    headline: "British Safety Council International Safety Award 2026",
     video: "assets/video/rising-vantage-tower-b.mp4",
-    description: "Panchshil Realty Vantage Tower B progressing with award-recognized international safety standards.",
+    description: "Panchshil Realty Vantage Tower B continues to rise, backed by a safety-first approach and internationally recognized standards of construction safety.",
   },
   {
-    name: "Well Built Structure 2025",
+    name: "K 57",
     location: "Pune",
+    headline: "BAI Well Built Structure Award 2025",
     video: "assets/video/rising-well-built-structure.mp4",
-    description: "Construction progress recognized in the Well Built Structure Competition 2025 by the Builders Association of India, Pune.",
+    description: "K Raheja Corp K-57 in progress, carrying forward a legacy of excellence with the BAI Well Built Structure Award 2025, our 13th consecutive win.",
+  },
+  {
+    name: "Riverdale Riverfront",
+    location: "Pune",
+    headline: "Riverfront Infrastructure",
+    video: "assets/video/rising-riverfront-infrastructure.mp4",
+    description: "Aerial progress across the Riverdale riverfront infrastructure works in Pune.",
   },
 ];
 
@@ -138,6 +142,8 @@ export default function HomePage() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const risingVideoRef = useRef<HTMLVideoElement | null>(null);
   const assetBase = import.meta.env.BASE_URL;
+  const posterFor = (src: string) =>
+    `${assetBase}assets/video/posters/${src.split("/").pop()?.replace(/\.mp4$/i, ".jpg") ?? ""}`;
 
   const heroSectionRef  = useRef<HTMLElement>(null);
   const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
@@ -418,6 +424,7 @@ export default function HomePage() {
             loop
             playsInline
             preload={i === 0 ? "auto" : "none"}
+            poster={posterFor(src)}
             style={{
               position: "absolute", inset: 0,
               width: "100%", height: "100%", objectFit: "cover",
@@ -463,10 +470,11 @@ export default function HomePage() {
             {/* Constant label */}
             <div
               style={{
-                fontSize: "11px",
-                fontWeight: 500, color: "rgba(255,255,255,0.7)",
+                fontSize: "18px",
+                fontWeight: 600, color: "rgba(255,255,255,0.92)",
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 marginBottom: "14px",
+                textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
               }}
               className="text-[14px]">
               Millennium Engineers &amp; Contractors Pvt. Ltd.
@@ -475,8 +483,8 @@ export default function HomePage() {
             {/* Per-slide heading — re-mounts with key to trigger animation */}
             <h1 className="hp-banner-title page-title-font" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
-                <div key={i} className="hp-banner-line text-[36px]" style={{
-                  fontSize: videoIdx === 0 ? "36px" : "clamp(1.6rem, 4vw, 3.2rem)",
+                <div key={i} className="hp-banner-line text-[51.2px]" style={{
+                  fontSize: videoIdx === 0 ? "51.2px" : "clamp(1.6rem, 4vw, 3.2rem)",
                   lineHeight: 1.15, color: "#ffffff",
                   whiteSpace: "nowrap",
                 }}>
@@ -487,9 +495,10 @@ export default function HomePage() {
 
             {/* Per-slide subtitle */}
             <p className="page-subtitle-font text-[14px]" key={`sub-${videoIdx}`} style={{
-              fontSize: "12px",
-              fontWeight: 300, color: "rgba(255,255,255,0.65)",
+              fontSize: "16px",
+              fontWeight: 400, color: "rgba(255,255,255,0.9)",
               lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
+              textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 2px rgba(0,0,0,0.6)",
               animation: "heroSlideIn 0.7s ease forwards",
             }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).subtitle}
@@ -529,13 +538,14 @@ export default function HomePage() {
             <div
               style={{
                 marginTop: "22px",
-                color: "rgba(255,255,255,0.5)",
-                fontSize: "8px",
+                color: "rgba(255,255,255,0.88)",
+                fontSize: "10px",
                 letterSpacing: "0.16em",
                 lineHeight: 1.6,
                 textTransform: "uppercase",
+                textShadow: "0 2px 8px rgba(0,0,0,0.72), 0 0 2px rgba(0,0,0,0.55)",
               }}
-              className="text-[15px] font-semibold">
+              className="font-semibold text-[12px]">
               Recognised as one of India&apos;s Small Giants · SME 100 · Iconic Brand of the Year
             </div>
           </div>
@@ -566,22 +576,25 @@ export default function HomePage() {
               {recognitionData.map((item, index) => (
                 <div
                   key={item.title}
-                  className={`rec-card flex min-h-[118px] flex-col items-center justify-center px-2 py-3 text-center ${
+                  className={`rec-card flex min-h-[142px] flex-col items-center justify-center px-2 py-3 text-center ${
                     index > 0 ? "border-l border-mecpl-dark/[0.08]" : ""
                   }`}
                 >
-                  <div className="flex h-[50px] w-full items-center justify-center">
+                  <div className="flex h-[76px] w-full items-center justify-center">
                     <img
                       src={`${assetBase}${item.image}`}
                       alt={item.title}
-                      className="max-h-[48px] max-w-[90px] object-contain"
+                      className="max-h-[72px] max-w-[130px] object-contain"
                       loading="lazy"
                     />
                   </div>
                   <h2 className="rec-card-title mt-2 max-w-[150px] font-montserrat font-medium text-[#74777b]">
                     {item.title}
                   </h2>
-                  <p className="mt-1 max-w-[150px] font-montserrat text-[8px] font-normal leading-[1.4] tracking-[0.01em] text-[#74777b]">
+                  <p
+                    className="mt-1 max-w-[150px] font-montserrat font-normal tracking-[0.01em] text-[#74777b] text-[15px]"
+                    style={{ fontSize: "15px" }}
+                  >
                     {item.detail}
                   </p>
                 </div>
@@ -592,41 +605,64 @@ export default function HomePage() {
       </section>
       {/* ══════════ 2.5 STATS STRIP ══════════ */}
       <section
+        id="stats"
         ref={statsRef}
         data-testid="section-stats"
-        style={{ background: "#232529", padding: "64px 40px" }}
+        style={{
+          background: "#232529",
+           minHeight: "clamp(180px, 18vw, 220px)",
+           padding: "clamp(48px, 5vw, 64px) clamp(24px, 6vw, 96px)",
+          display: "flex",
+          alignItems: "center",
+        }}
       >
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="flex flex-wrap items-stretch divide-x-0 divide-white/10 lg:flex-nowrap lg:divide-x">
+        <div className="w-full">
+          <div
+             className="home-stats-grid grid grid-cols-2 md:grid-cols-4"
+            style={{
+              width: "100%",
+              maxWidth: 1240,
+              margin: "0 auto",
+               rowGap: 0,
+               columnGap: 0,
+            }}
+          >
             {stats.map((s, i) => (
               <div
                 key={i}
+                 className="home-stat-item"
                 data-scroll-reveal="text"
                 data-scroll-reveal-delay={String(i * 70)}
-                className="w-1/2 flex-none lg:w-auto lg:flex-1"
-                style={{ padding: "16px 28px", textAlign: "center" }}
+                style={{
+                  minWidth: 0,
+                   padding: "0 clamp(8px, 2vw, 28px)",
+                  textAlign: "center",
+                }}
               >
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "2px", marginBottom: "8px" }}>
+                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "1px", marginBottom: 8 }}>
                   <span
-                    className="stat-num"
+                    className="stat-num page-title-font"
                     data-target={s.target}
                     style={{
-                      fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
-                      fontWeight: 400, color: "#ffffff", letterSpacing: "-0.025em", lineHeight: 1,
+                       fontSize: "clamp(2.1rem, 3.2vw, 3.1rem)",
+                      fontWeight: 300, color: "#ffffff", letterSpacing: "-0.055em", lineHeight: 0.9,
                     }}
                   >
                     0
                   </span>
-                  <span style={{
-                    fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
-                    fontWeight: 400, color: "#EC3338", lineHeight: 1,
+                  <span className="page-title-font" style={{
+                     fontSize: "clamp(2.1rem, 3.2vw, 3.1rem)",
+                    fontWeight: 300, color: "#EC3338", letterSpacing: "-0.055em", lineHeight: 0.9,
                   }}>
                     {s.suffix}
                   </span>
                 </div>
                 <div className="home-stat-label" style={{
-                  fontSize: "10px",
-                  fontWeight: 600, letterSpacing: "0.15em",
+                  maxWidth: 240,
+                  margin: "0 auto",
+                   fontSize: "14px",
+                  fontWeight: 500, letterSpacing: "0.18em",
+                   lineHeight: 1.35,
                   textTransform: "uppercase", color: "rgba(255,255,255,0.5)",
                 }}>
                   {s.label}
@@ -662,7 +698,7 @@ export default function HomePage() {
               >
                 {item.standard}
               </h2>
-              <p className="mt-1 max-w-[170px] font-montserrat text-[6px] font-medium leading-[1.35] text-[#74777b] md:text-[8px]">
+              <p className="mt-1 max-w-[170px] font-montserrat font-medium text-[#74777b] text-[12px]">
                 {item.detail}
               </p>
             </div>
@@ -674,9 +710,9 @@ export default function HomePage() {
         id="about"
         ref={aboutRef}
         data-testid="section-about"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px 56px", paddingLeft: "45px" }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-none mx-auto">
           <div className="grid items-start gap-16 lg:grid-cols-2 lg:items-stretch">
 
             {/* Left: editorial */}
@@ -730,8 +766,10 @@ export default function HomePage() {
                     <span style={{ color: "#EC3338", fontWeight: 600 }}>Founder &amp; Chairman</span>
                   </span>
                   <span style={{ display: "block", marginTop: "4px", color: "#949599", fontSize: "10px", fontWeight: 500 }}>
-                    Honored with the prestigious AESA, Pune (Architects and Engineers Association){" "}
-                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Lifetime Achievement Award</span>
+                    Honoured with the prestigious{" "}
+                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Nirman Ratna Lifetime Achievement Award</span>{" "}
+                    by the BAI and the{" "}
+                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Lifetime Achievement Award</span> by AESA
                   </span>
                 </div>
               </div>
@@ -790,109 +828,75 @@ export default function HomePage() {
       <section
         id="services"
         data-testid="section-services"
-        className="relative overflow-hidden"
+        className="relative overflow-hidden bg-[#101419]"
         style={{
-          backgroundImage: `url(${assetBase}assets/services-crane-background.jpg)`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          padding: "100px 0 120px",
+          minHeight: "clamp(720px, 62vw, 860px)",
+          padding: "clamp(72px, 8vw, 112px) 0 clamp(80px, 8vw, 120px)",
+          boxShadow: "0 18px 48px rgba(35,37,41,0.18)",
         }}
       >
         <div
-          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            background: "linear-gradient(180deg, rgba(12,17,23,0.55) 0%, rgba(12,17,23,0.68) 48%, rgba(12,17,23,0.78) 100%)",
+            backgroundImage: `linear-gradient(180deg, rgba(7, 14, 23, 0.82) 0%, rgba(7, 14, 23, 0.38) 42%, rgba(7, 14, 23, 0.62) 100%), url("${assetBase}assets/services-reference-background.jpg")`,
+            backgroundPosition: "center 52%",
           }}
         />
-        <div className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-10">
-          <div style={{ marginBottom: "56px", textAlign: "center" }}>
-            <span className="home-section-label font-montserrat text-[15px]" style={{
-              fontSize: "15px", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#EC3338", textTransform: "uppercase",
-              display: "block", marginBottom: "10px",
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(236,51,56,0.1),transparent_36%)]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
+          <div className="home-services-intro mx-auto flex w-full max-w-[820px] flex-col items-center justify-center text-center">
+            <span className="home-section-label font-montserrat text-[12px]" style={{
+              fontSize: "13px", fontWeight: 700,
+              letterSpacing: "0.28em", color: "#EC3338", textTransform: "uppercase",
+              display: "block", marginBottom: "18px",
             }}>
               WHAT WE DO
             </span>
-            <h2 className="hp-section-title font-montserrat text-white" style={{
-              margin: 0, fontWeight: 600, fontSize: "clamp(2rem, 3.5vw, 2.5rem)", letterSpacing: "-0.02em"
+            <h2 className="home-services-title font-montserrat text-white" style={{
+              margin: 0, fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 0.98,
+              textShadow: "0 3px 18px rgba(0,0,0,0.65)",
             }}>
-              Our <span style={{ color: "#EC3338" }}>Services</span>
+              Our{" "}
+              <span style={{ color: "#ffffff" }}>Services</span>
             </h2>
             <p
-              className="page-subtitle-font"
+              className="page-subtitle-font mt-6 max-w-[700px] text-[18px]"
               style={{
-                maxWidth: "720px",
-                margin: "18px auto 24px",
-                color: "rgba(255,255,255,0.76)",
-                fontSize: "13.5px",
+                color: "rgba(255,255,255,0.78)",
+                fontSize: "15px",
                 lineHeight: 1.7,
+                marginBottom: 0,
               }}
             >
               End-to-end construction and execution across residential, commercial, institutional, industrial and infrastructure projects.
             </p>
-            <div style={{ width: "40px", height: "2px", background: "#EC3338", margin: "0 auto" }} />
           </div>
 
-          {/* 3×2 architectural service grid */}
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((svc, i) => {
-              return (
-                <div
-                  key={svc.num}
-                  className="svc-grid-card group relative flex min-h-[290px] flex-col justify-between overflow-hidden px-8 py-9 transition-all duration-300"
-                  data-testid={`card-service-${i}`}
-                  style={{
-                    background: "rgba(20, 25, 33, 0.58)",
-                    border: "1px solid rgba(255,255,255,0.24)",
-                    borderRadius: "12px",
-                    boxShadow: "0 18px 45px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(14px)",
-                    WebkitBackdropFilter: "blur(14px)",
-                  }}
-                >
-                  {/* Subtle technical line-art background lower-right */}
-                  <div className="pointer-events-none absolute bottom-0 right-0 opacity-[0.035] transition-opacity duration-500 group-hover:opacity-[0.065]">
-                    {i % 3 === 0 && (
-                      <svg width="220" height="220" viewBox="0 0 100 100" fill="none" stroke="#ffffff" className="translate-x-6 translate-y-6">
-                        <path d="M10,90 L90,90 M20,90 L20,30 L50,10 L80,30 L80,90 M35,90 L35,60 L65,60 L65,90" strokeWidth="0.5" />
-                        <path d="M25,45 L45,45 M25,55 L45,55" strokeWidth="0.5" strokeDasharray="1 1" />
-                        <path d="M55,45 L75,45 M55,55 L75,55" strokeWidth="0.5" strokeDasharray="1 1" />
-                      </svg>
-                    )}
-                    {i % 3 === 1 && (
-                      <svg width="240" height="240" viewBox="0 0 100 100" fill="none" stroke="#ffffff" className="translate-x-8 translate-y-8">
-                        <path d="M10,90 L90,90 M15,90 L15,40 L35,40 L35,90 M40,90 L40,20 L60,20 L60,90 M65,90 L65,50 L85,50 L85,90" strokeWidth="0.5" />
-                        <path d="M45,30 L55,30 M45,40 L55,40 M45,50 L55,50 M45,60 L55,60 M45,70 L55,70" strokeWidth="0.5" />
-                      </svg>
-                    )}
-                    {i % 3 === 2 && (
-                      <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="#ffffff" className="translate-x-2 translate-y-4">
-                        <circle cx="50" cy="50" r="40" strokeWidth="0.5" strokeDasharray="2 2" />
-                        <circle cx="50" cy="50" r="30" strokeWidth="0.5" />
-                        <path d="M50,10 L50,90 M10,50 L90,50" strokeWidth="0.5" />
-                        <path d="M21.7,21.7 L78.3,78.3 M21.7,78.3 L78.3,21.7" strokeWidth="0.5" />
-                      </svg>
-                    )}
-                  </div>
-
-                  {/* Top content */}
-                  <div className="relative z-10 flex flex-col items-start">
-                    <ServiceLineIcon
-                      type={svc.icon}
-                      className="mb-6 h-10 w-10 text-[#EC3338] transition-transform duration-500 group-hover:-translate-y-1"
-                    />
-                    <h2 className="font-montserrat text-[17px] font-semibold text-white tracking-wide">
-                      {svc.title}
-                    </h2>
-                    <p className="mt-4 font-montserrat text-[13px] leading-[1.65] text-[#9a9ca0]">
-                      {svc.desc}
-                    </p>
-                  </div>
-
+          <div className="home-services-grid mt-14 grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-4">
+            {services.map((svc, i) => (
+              <div
+                key={svc.num}
+                className="home-service-row group relative flex min-h-[210px] flex-col items-center justify-start rounded-[2px] border border-white/80 bg-white/95 px-5 py-6 text-center shadow-[0_14px_32px_rgba(0,0,0,0.18)] backdrop-blur-[3px] transition-all duration-300 hover:-translate-y-1 hover:border-[#EC3338] hover:bg-white sm:min-h-[220px] sm:px-6 lg:min-h-[228px] lg:px-7 lg:py-7"
+                data-testid={`card-service-${i}`}
+                style={{
+                  color: "#232529",
+                }}
+              >
+                <div className="home-service-icon flex h-12 w-12 shrink-0 items-center justify-center text-[#EC3338] transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14">
+                  <ServiceLineIcon type={svc.icon} className="h-9 w-9 sm:h-10 sm:w-10" />
                 </div>
-              );
-            })}
+                <div className="mt-3 min-w-0">
+                  <h3 className="home-service-title font-montserrat text-[17px] font-semibold leading-[1.2] tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px]">
+                    {svc.title}
+                  </h3>
+                  <p className="mt-2 font-montserrat text-[11px] leading-[1.55] text-[#4f545b] sm:text-[11px]">
+                    {svc.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -908,12 +912,11 @@ export default function HomePage() {
           backgroundSize: '4rem 4rem'
         }} />
 
-        <div className="max-w-[96rem] mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-none mx-auto px-5 lg:px-0 relative z-10">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 lg:mb-16">
-            <div data-scroll-reveal="text">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-8 h-[1px] bg-mecpl-red"></span>
+          <div className="flex flex-col items-center text-center gap-8 mb-12 lg:mb-16">
+            <div className="w-full text-center" data-scroll-reveal="text">
+              <div className="flex items-center justify-center gap-3 mb-4">
                 <span className="font-montserrat font-semibold tracking-[0.25em] text-mecpl-red uppercase text-[15px]">
                   OUR PROJECTS
                 </span>
@@ -921,7 +924,7 @@ export default function HomePage() {
               <h2 className="font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
                 Landmark Works
               </h2>
-              <p className="font-inter lg:text-[15px] text-[#949599] max-w-md m-0 text-[18px]">
+              <p className="font-inter text-[#949599] max-w-md mx-auto m-0 text-[18px] text-center">
                 A selection of the structures MECPL has delivered across Pune.
               </p>
             </div>
@@ -929,7 +932,7 @@ export default function HomePage() {
           </div>
 
           {/* The Expanding Matrix */}
-          <div className="relative w-full h-[700px] lg:h-[75vh] min-h-[600px] max-h-[850px] bg-mecpl-dark/10 p-[1px] flex flex-col lg:flex-row gap-[1px]">
+           <div className="relative w-full h-[700px] lg:h-[75vh] min-h-[600px] max-h-[850px] bg-mecpl-dark/10 p-[1px] flex flex-col lg:flex-row-reverse gap-[1px]">
             {/* Corner crosshairs */}
             <div className="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-mecpl-dark pointer-events-none z-10" />
             <div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-mecpl-dark pointer-events-none z-10" />
@@ -954,9 +957,20 @@ export default function HomePage() {
                     <img
                       src={`${assetBase}${proj.image}`}
                       alt={proj.name}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
                       className={`w-full h-full object-cover transition-all duration-1000 motion-reduce:transition-none ${isActive ? 'scale-100 opacity-90' : 'scale-110 opacity-0'}`}
+                      style={{
+                        display: "block",
+                        position: "relative",
+                        zIndex: 1,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        opacity: isActive ? 0.9 : 0,
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25" />
                   </div>
 
                   {/* Inactive State Content */}
@@ -964,18 +978,10 @@ export default function HomePage() {
 
                     {/* Mobile: Group Number and Name on left */}
                     <div className="flex items-center gap-4 lg:hidden w-full overflow-hidden pr-4">
-                      <span className="font-montserrat text-[11px] font-semibold tracking-[0.2em] text-mecpl-red flex-shrink-0">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="font-montserrat text-[12px] font-semibold tracking-widest text-mecpl-text uppercase truncate">
+                       <span className="font-montserrat text-[12px] font-semibold tracking-widest text-mecpl-text uppercase truncate transition-colors group-hover:text-mecpl-red">
                         {proj.name}
                       </span>
                     </div>
-
-                    {/* Desktop: Number at top */}
-                    <span className="hidden lg:block font-montserrat text-[11px] font-semibold tracking-[0.2em] text-mecpl-steel group-hover:text-mecpl-red transition-colors">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
 
                     {/* Desktop: Vertical Name */}
                     <div className="hidden lg:flex flex-1 items-center justify-center relative w-full">
@@ -994,22 +1000,22 @@ export default function HomePage() {
                   </div>
 
                   {/* Active State Content */}
-                  <div className={`absolute inset-0 flex flex-col justify-end p-6 lg:p-10 xl:p-12 transition-all duration-700 motion-reduce:transition-none transform ${isActive ? 'translate-y-0 opacity-100 delay-200' : 'translate-y-8 opacity-0 pointer-events-none'}`}>
+                   <div
+                     className={`absolute inset-0 flex flex-col justify-end p-6 lg:p-10 xl:p-12 transition-all duration-700 motion-reduce:transition-none transform ${isActive ? 'translate-y-0 opacity-100 delay-200' : 'translate-y-8 opacity-0 pointer-events-none'}`}
+                     style={{ textShadow: "0 2px 12px rgba(0,0,0,0.9)" }}
+                   >
 
                      {/* Top Engineering Stamp */}
                      <div className="hidden lg:flex absolute top-8 left-10 items-center gap-3">
                        <div className="w-2 h-2 bg-mecpl-red" />
                        <span className="font-montserrat text-[9px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                         MECPL_PROJ_{String(i + 1).padStart(2, "0")}
+                          MECPL PROJECT
                        </span>
                      </div>
 
                      <div className="flex items-center gap-4 mb-4">
-                       <span className="font-montserrat text-[12px] xl:text-[14px] font-semibold tracking-widest text-mecpl-red">
-                         {String(i + 1).padStart(2, "0")}
-                       </span>
                        <div className="w-12 xl:w-16 h-[1px] bg-white/30" />
-                       <span className="font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] text-mecpl-steel uppercase">
+                        <span className="font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] text-white/90 uppercase">
                          {proj.type}
                        </span>
                      </div>
@@ -1018,7 +1024,7 @@ export default function HomePage() {
                        {proj.name}
                      </h2>
 
-                     <p className="font-inter text-[13px] md:text-sm xl:text-base text-mecpl-steel flex items-center gap-3 mb-8 lg:mb-10 max-w-md">
+                      <p className="font-inter text-[13px] md:text-sm xl:text-base text-white/85 flex items-center gap-3 mb-8 lg:mb-10 max-w-md">
                        <span className="w-1 h-1 bg-mecpl-red rounded-full" />
                        {proj.location}
                      </p>
@@ -1037,8 +1043,16 @@ export default function HomePage() {
                      </div>
                   </div>
 
-                  {/* Hover Outline */}
-                  <div className="absolute inset-0 border-[1.5px] border-transparent group-hover:border-mecpl-red/50 transition-colors pointer-events-none z-20" />
+                   {/* MECPL-red active/hover treatment */}
+                   <div
+                     className={`absolute inset-y-0 left-0 z-20 flex w-1.5 items-center justify-center transition-opacity duration-300 pointer-events-none lg:w-[12%] ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                     style={{ backgroundColor: "var(--mecpl-red)" }}
+                   >
+                     <span className="hidden font-montserrat text-[11px] font-semibold uppercase tracking-[0.18em] text-white lg:block" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+                       {proj.name}
+                     </span>
+                   </div>
+                   <div className={`absolute inset-0 border-[1.5px] transition-colors pointer-events-none z-20 ${isActive ? "border-mecpl-red" : "border-transparent group-hover:border-mecpl-red"}`} />
                 </div>
               )
             })}
@@ -1061,7 +1075,7 @@ export default function HomePage() {
       <section
         id="rising-projects"
         data-testid="section-home-ongoing-projects"
-        className="relative overflow-hidden bg-[transparent]"
+        className="relative overflow-hidden bg-white"
         style={{ background: "#ffffff", padding: "88px 0 104px" }}
       >
         <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-[38%] opacity-[0.055]" aria-hidden="true">
@@ -1072,10 +1086,9 @@ export default function HomePage() {
         </div>
 
         <div
-          className="relative mx-auto"
-          style={{ width: "min(1460px, calc(100% - clamp(24px, 4vw, 32px)))" }}
+          className="relative w-full"
         >
-          <div data-scroll-reveal="text" className="mb-10 text-center md:mb-12">
+          <div data-scroll-reveal="text" className="mb-10 px-6 text-center md:mb-12 md:px-10">
             <span className="home-section-label block font-montserrat text-[15px] font-semibold uppercase tracking-[0.3em] text-mecpl-red">
               RIGHT NOW
             </span>
@@ -1100,6 +1113,7 @@ export default function HomePage() {
                 muted
                 playsInline
                 preload="metadata"
+                poster={posterFor(risingProjectVideos[activeRisingProject].video)}
                 className="h-full w-full object-cover"
                 aria-label={`${risingProjectVideos[activeRisingProject].name} construction progress video`}
               >
@@ -1108,7 +1122,7 @@ export default function HomePage() {
             </div>
 
             <article className="relative">
-              <div className="mb-7 flex items-center justify-between">
+              <div className="-translate-y-2 mb-7 flex items-center justify-between">
                 <span className="font-montserrat text-[11px] font-semibold tracking-[0.16em] text-mecpl-red">
                   {String(activeRisingProject + 1).padStart(2, "0")}
                   <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
@@ -1118,7 +1132,7 @@ export default function HomePage() {
                     type="button"
                     aria-label="Previous project"
                     onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
+                     className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
                   >
                     <ChevronLeft size={17} />
                   </button>
@@ -1126,18 +1140,18 @@ export default function HomePage() {
                     type="button"
                     aria-label="Next project"
                     onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
+                     className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
                   >
                     <ChevronRight size={17} />
                   </button>
                 </div>
               </div>
-              <h2 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-none text-mecpl-text">
+              <p className="mb-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
                 {risingProjectVideos[activeRisingProject].name}
-              </h2>
-              <p className="mt-4 font-montserrat text-[9px] font-semibold uppercase tracking-[0.16em] text-[#8c8e92]">
-                Live construction progress · {risingProjectVideos[activeRisingProject].location}
               </p>
+              <h2 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-[1.05] text-mecpl-text">
+                {risingProjectVideos[activeRisingProject].headline}
+              </h2>
               <span className="mt-5 block h-0.5 w-10 bg-mecpl-red" />
               <p className="mt-6 max-w-sm font-montserrat text-[12px] leading-6 text-[#696c71]">
                 {risingProjectVideos[activeRisingProject].description}
@@ -1164,7 +1178,7 @@ export default function HomePage() {
         <div
           className="mx-auto grid gap-12 px-6 md:grid-cols-[0.72fr_1.6fr] md:gap-16 md:px-10"
           style={{
-            width: "min(1460px, calc(100% - clamp(24px, 4vw, 32px)))",
+            width: "100%",
             background: "#e4e4e6",
           }}
         >
@@ -1176,14 +1190,14 @@ export default function HomePage() {
               <h2 className="hp-section-title mt-3 font-montserrat">
                 What Our<br className="hidden md:block" /> Clients Say
               </h2>
-              <p className="mt-5 max-w-sm font-montserrat text-[#73767c] text-[20px]">
+              <p className="mt-5 max-w-sm font-montserrat text-[#73767c] text-[18px]">
                 Long-standing relationships are built on delivery, transparency and trust.
               </p>
             </div>
           </div>
 
-          <div className="testi-card overflow-hidden border border-mecpl-dark/[0.08] bg-transparent">
-            <div className="flex h-[400px] flex-col overflow-hidden bg-transparent px-7 py-9 sm:px-10 sm:py-11 md:px-14 md:py-12">
+          <div className="testi-card overflow-hidden border border-mecpl-dark/[0.08] bg-white">
+            <div className="flex h-[400px] flex-col overflow-hidden bg-white px-7 py-9 sm:px-10 sm:py-11 md:px-14 md:py-12">
               <div className="flex items-start justify-between">
                 <span aria-hidden="true" className="font-serif text-[76px] font-semibold leading-[0.72] text-mecpl-red md:text-[92px]">
                   “
@@ -1308,15 +1322,31 @@ export default function HomePage() {
                 data-testid={i < clients.length ? `card-client-${i}` : undefined}
                 style={{
                    width: "clamp(210px, 21vw, 420px)",
-                   height: "clamp(126px, 10vw, 160px)",
+                   height: "clamp(180px, 15vw, 240px)",
                    flexShrink: 0,
-                  background: "#ffffff", border: "1px solid rgba(255,255,255,0.18)",
-                  borderRadius: "10px", display: "flex",
-                    alignItems: "center", justifyContent: "center", padding: "24px 34px",
+                  background: "#ffffff",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                   padding: "18px 24px",
                 }}
               >
-                <img src={`${assetBase}${c.logo}`} alt={c.name}
-                   style={{ maxWidth: "100%", maxHeight: "72px", objectFit: "contain" }} />
+                <img
+                  src={`${assetBase}${c.logo}`}
+                  alt={c.name}
+                  loading="eager"
+                  decoding="async"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "160px",
+                    objectFit: "contain",
+                  }}
+                />
               </div>
             ))}
           </div>

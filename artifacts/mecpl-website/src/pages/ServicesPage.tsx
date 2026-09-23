@@ -18,7 +18,7 @@ const services = [
     subtitle: "High-Performance Structures",
     desc: "From educational and institutional spaces to factories, R&D centres and process plants, we build high-performance structures engineered for demanding operations.",
     highlights: ["Manufacturing Facilities", "R&D Centres", "Educational Campuses", "Process Plants"],
-    image: "/assets/projects/PRAJ-INDUSTRIES.png",
+    image: "/assets/projects/PRAJ-INDUSTRIES.webp",
   },
   {
     icon: "commercial",
