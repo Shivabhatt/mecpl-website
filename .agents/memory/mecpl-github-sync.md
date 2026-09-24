@@ -16,3 +16,11 @@ In this workspace, `listConnections("github")` returns a raw connection ID witho
 **Why:** Comparing the inventory ID directly to the `listConnections()` ID with its prefix fails to find the already-authorized connection; the typed client also avoids assuming `proxyFetch` is the only API path.
 
 **How to apply:** Match on the raw ID returned by `listConnections()`. Prefer `getClient()` and `client.rest.git` when `hasClient` is true; otherwise use `proxyFetch()`.
+
+## GitHub Actions status polling
+
+In this workspace, `client.rest.actions.listWorkflowRuns()` returned 404 while `conn.proxyFetch("/repos/{owner}/{repo}/actions/runs?per_page=10")` returned the workflow run. Git Data methods on the same client worked.
+
+**Why:** The connection was authorized—the Git Data API succeeded and the proxy returned Actions data—so this 404 was not evidence that reauthorization was needed.
+
+**How to apply:** For GitHub Pages verification, query runs with `proxyFetch` and then confirm that `gh-pages` moved to a new ref.
