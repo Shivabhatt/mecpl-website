@@ -73,12 +73,12 @@ const services = [
 ] satisfies Array<{ num: string; title: string; desc: string; icon: ServiceIconType }>;
 
 const projects = [
-  { name: "Trump Tower",                 location: "Kalyani Nagar, Pune", type: "Panchshil Group",    image: "assets/projects/Trump-Tower.jpg" },
-  { name: "Panchshil Highrise Towers",   location: "Wagholi, Pune",       type: "Panchshil Group",    image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
-  { name: "Godrej Nurture",              location: "Mamurdi, Pune",       type: "Godrej Properties", image: "assets/projects/Godrej-Forest-grove.jpg" },
-  { name: "EON Phase II",                location: "Kharadi, Pune",       type: "Panchshil Group",    image: "assets/projects/Eonwest.jpg" },
-  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        type: "Industrial",        image: "assets/projects/PRAJ-INDUSTRIES.webp" },
-  { name: "Kalpataru Jade Residences",  location: "Baner, Pune",         type: "Kalpataru",          image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
+  { name: "Trump Tower",                 location: "Kalyani Nagar, Pune", image: "assets/projects/Trump-Tower.jpg" },
+  { name: "Panchshil Highrise Towers",   location: "Wagholi, Pune",       image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
+  { name: "Godrej Nurture",              location: "Mamurdi, Pune",      image: "assets/projects/Godrej-Forest-grove.jpg" },
+  { name: "EON Phase II",                location: "Kharadi, Pune",      image: "assets/projects/Eonwest.jpg" },
+  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        image: "assets/projects/PRAJ-INDUSTRIES.webp" },
+  { name: "Kalpataru Jade Residences",   location: "Baner, Pune",         image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
 ];
 
 const risingProjectVideos = [
@@ -941,11 +941,14 @@ export default function HomePage() {
             {projects.map((proj, i) => {
               const isActive = activeProj === i;
               return (
-                <div
-                  key={i}
+                <Link
+                  key={proj.name}
+                  href="/projects"
+                  aria-label={`View ${proj.name} in ${proj.location} on the Projects page`}
+                  data-testid={`button-proj-${i}`}
                   onMouseEnter={() => setActiveProj(i)}
-                  onClick={() => setActiveProj(i)}
-                  className={`group relative overflow-hidden bg-white transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] motion-reduce:transition-none cursor-pointer ${
+                  onFocus={() => setActiveProj(i)}
+                  className={`group relative block overflow-hidden bg-white transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] motion-reduce:transition-none cursor-pointer ${
                     isActive
                       ? 'flex-[1_1_100%] lg:flex-[1_1_60%]'
                       : 'flex-[0_0_72px] lg:flex-[0_0_8%]'
@@ -998,48 +1001,27 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Active State Content */}
-                   <div
-                     className={`absolute inset-0 flex flex-col justify-end p-6 lg:p-10 xl:p-12 transition-all duration-700 motion-reduce:transition-none transform ${isActive ? 'translate-y-0 opacity-100 delay-200' : 'translate-y-8 opacity-0 pointer-events-none'}`}
-                     style={{ textShadow: "0 2px 12px rgba(0,0,0,0.9)" }}
-                   >
-
-                     {/* Top Engineering Stamp */}
-                     <div className="hidden lg:flex absolute top-8 left-10 items-center gap-3">
-                       <div className="w-2 h-2 bg-mecpl-red" />
-                       <span className="font-montserrat text-[9px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                          MECPL PROJECT
-                       </span>
-                     </div>
-
-                     <div className="flex items-center gap-4 mb-4">
-                       <div className="w-12 xl:w-16 h-[1px] bg-white/30" />
-                        <span className="font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] text-white/90 uppercase">
-                         {proj.type}
-                       </span>
-                     </div>
-
-                     <h2 className="font-montserrat text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold uppercase tracking-tight text-white mb-3 lg:mb-4 leading-none">
-                       {proj.name}
-                     </h2>
-
-                      <p className="font-inter text-[13px] md:text-sm xl:text-base text-white/85 flex items-center gap-3 mb-8 lg:mb-10 max-w-md">
-                       <span className="w-1 h-1 bg-mecpl-red rounded-full" />
-                       {proj.location}
-                     </p>
-
-                     <div className="mt-auto">
-                       <Link href="/projects" data-testid={`button-proj-${i}`}>
-                         <span className="inline-flex items-center gap-4 text-white hover:text-mecpl-red transition-colors cursor-pointer group/btn">
-                           <span className="home-section-cta font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] uppercase">
-                             View Project
-                           </span>
-                           <div className="w-8 h-8 xl:w-10 xl:h-10 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:border-mecpl-red transition-colors">
-                             <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                           </div>
-                         </span>
-                       </Link>
-                     </div>
+                  {/* Active project details stay readable over every photo. */}
+                  <div
+                    className={`absolute inset-x-0 bottom-0 z-10 p-4 lg:inset-x-auto lg:left-[14%] lg:right-0 lg:p-6 xl:p-8 transition-all duration-500 motion-reduce:transition-none ${
+                      isActive ? "translate-y-0 opacity-100 delay-150" : "translate-y-6 opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    <div className="max-w-3xl">
+                      <h2
+                        className="font-montserrat text-3xl md:text-4xl font-semibold normal-case leading-[1.08] tracking-[-0.02em] text-white"
+                        style={{ textShadow: "0 2px 16px rgba(0,0,0,0.95), 0 4px 30px rgba(0,0,0,0.8)" }}
+                      >
+                        {proj.name}
+                      </h2>
+                      <p
+                        className="mt-3 flex items-center gap-3 font-inter text-base font-medium leading-relaxed text-white"
+                        style={{ textShadow: "0 2px 12px rgba(0,0,0,0.95)" }}
+                      >
+                        <span className="h-2 w-2 shrink-0 rounded-full bg-mecpl-red" aria-hidden="true" />
+                        {proj.location}
+                      </p>
+                    </div>
                   </div>
 
                    {/* MECPL-red active/hover treatment */}
@@ -1050,9 +1032,9 @@ export default function HomePage() {
                      <span className="hidden font-montserrat text-[11px] font-semibold uppercase tracking-[0.18em] text-white lg:block" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
                        {proj.name}
                      </span>
-                   </div>
+                    </div>
                    <div className={`absolute inset-0 border-[1.5px] transition-colors pointer-events-none z-20 ${isActive ? "border-mecpl-red" : "border-transparent group-hover:border-mecpl-red"}`} />
-                </div>
+                  </Link>
               )
             })}
           </div>

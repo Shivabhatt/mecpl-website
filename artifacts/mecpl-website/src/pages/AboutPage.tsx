@@ -33,18 +33,6 @@ type LeadershipMember = {
 
 const leaders: LeadershipMember[] = [
   {
-    name: "Jitin Nambiar",
-    role: "Director – Human Resources | Founder – Hofundur",
-    image: `${assetBase}assets/leaders/jitin.png`,
-    summary: "Building businesses. Enabling people. Driving transformation.",
-    details: [
-      "Jitin Nambiar brings together business strategy, brand building and people leadership across MECPL.",
-      "As the Founder of Hofundur, he heads the interiors division, extending MECPL's construction expertise into BIS-certified B2B doors and modular furniture solutions. His role also spans business growth, brand development and customer-focused initiatives.",
-      "As Director – Human Resources, Jitin is driving a more people- and performance-focused organisation through stronger recognition systems, digitalisation and technology-led employee initiatives, including ERP and Zoho adoption.",
-    ],
-    quote: "Building businesses. Enabling people. Driving transformation.",
-  },
-  {
     name: "Jeevan K",
     role: "Managing Director",
     image: `${assetBase}assets/leaders/leader-03.jpg`,
@@ -67,6 +55,18 @@ const leaders: LeadershipMember[] = [
       "His contribution has also played an important role in MECPL's financial credibility, including its CRISIL BBB–Stable rating, as the company continues to undertake large-scale projects for reputed corporate clients.",
     ],
     quote: "Financial discipline. Commercial insight. Long-term stability.",
+  },
+  {
+    name: "Jitin Nambiar",
+    role: "Director – Human Resources | Founder – Hofundur",
+    image: `${assetBase}assets/leaders/jitin.png`,
+    summary: "Building businesses. Enabling people. Driving transformation.",
+    details: [
+      "Jitin Nambiar brings together business strategy, brand building and people leadership across MECPL.",
+      "As the Founder of Hofundur, he heads the interiors division, extending MECPL's construction expertise into BIS-certified B2B doors and modular furniture solutions. His role also spans business growth, brand development and customer-focused initiatives.",
+      "As Director – Human Resources, Jitin is driving a more people- and performance-focused organisation through stronger recognition systems, digitalisation and technology-led employee initiatives, including ERP and Zoho adoption.",
+    ],
+    quote: "Building businesses. Enabling people. Driving transformation.",
   },
 ];
 
@@ -554,11 +554,12 @@ function LeadershipDoorSlider() {
             style={{
               position: "relative",
               width: "min(820px, 100%)",
+              maxHeight: "calc(100vh - 48px)",
               display: "grid",
               gridTemplateColumns: "minmax(230px, 0.78fr) minmax(0, 1.22fr)",
-              background: "#ffffff",
+              background: "#17191c",
               boxShadow: "0 28px 80px rgba(0,0,0,0.35)",
-              overflow: "hidden",
+              overflow: "auto",
             }}
           >
             <div style={{ minHeight: 420, background: "#dfe2e5" }}>
@@ -580,7 +581,7 @@ function LeadershipDoorSlider() {
                   justifyContent: "center",
                   border: 0,
                   background: "transparent",
-                  color: "#6b7280",
+                  color: "#c4c7cc",
                   cursor: "pointer",
                 }}
               >
@@ -589,15 +590,15 @@ function LeadershipDoorSlider() {
               <span className="about-label-font font-montserrat" style={{ fontSize: "0.58rem", color: "#EC3338", letterSpacing: "0.22em", marginBottom: 14, display: "block" }}>
                 OUR LEADERSHIP
               </span>
-              <h3 id="leadership-modal-title" className="font-montserrat" style={{ margin: "0 0 8px", color: "#111827", fontSize: "1.65rem", fontWeight: 600, lineHeight: 1.2 }}>
+              <h3 id="leadership-modal-title" className="font-montserrat" style={{ margin: "0 0 8px", color: "#ffffff", fontSize: "1.65rem", fontWeight: 600, lineHeight: 1.2 }}>
                 {selectedLeader.name}
               </h3>
-              <div className="font-montserrat" style={{ marginBottom: 24, color: "#6b7280", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.14em", lineHeight: 1.5, textTransform: "uppercase" }}>
+              <div className="font-montserrat" style={{ marginBottom: 24, color: "#c4c7cc", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.14em", lineHeight: 1.5, textTransform: "uppercase" }}>
                 {selectedLeader.role}
               </div>
               <div style={{ display: "grid", gap: 14 }}>
                 {selectedLeader.details.map((detail) => (
-                  <p key={detail} className="font-inter" style={{ margin: 0, color: "#4b5563", fontSize: "0.82rem", lineHeight: 1.75 }}>
+                  <p key={detail} className="font-inter" style={{ margin: 0, color: "#e1e3e6", fontSize: "0.82rem", lineHeight: 1.75 }}>
                     {detail}
                   </p>
                 ))}
