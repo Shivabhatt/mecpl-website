@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Award,
-  BookOpen,
   Building2,
   GraduationCap,
-  HardHat,
   HeartPulse,
   House,
   ShieldCheck,
@@ -20,17 +18,22 @@ type CarouselImage = {
 };
 
 const teamImages: CarouselImage[] = [
-  { src: "assets/people-safety/team-safety-induction.jpg", alt: "MECPL workforce gathered for a safety induction" },
-  { src: "assets/people-safety/team-recreation.jpg", alt: "MECPL team members taking part in recreational activities" },
-  { src: "assets/people-safety/team-education.jpg", alt: "Education support for MECPL workforce families" },
+  { src: "assets/people-safety/27_1790178654349.jpg", alt: "Children taking part in a supported classroom lesson" },
+  { src: "assets/people-safety/26_1790178654348.jpg", alt: "Children receiving education support at a MECPL labour camp" },
+  { src: "assets/people-safety/23_1790178654345.jpg", alt: "MECPL team members taking part in recreational activities" },
+  { src: "assets/people-safety/18_1790178654341.jpg", alt: "MECPL workforce gathered together on site" },
 ];
 
 const hseImages: CarouselImage[] = [
-  { src: "assets/people-safety/hse-health-checkups.jpg", alt: "Regular health check-up for an MECPL site worker" },
-  { src: "assets/people-safety/hse-safety-equipment.jpg", alt: "Personal protective equipment provided for site safety" },
-  { src: "assets/people-safety/hse-safety-induction.jpg", alt: "Safety induction for MECPL site workers" },
-  { src: "assets/people-safety/hse-labour-verification.jpg", alt: "Labour identity verification at an MECPL site" },
-  { src: "assets/people-safety/hse-accommodation.jpg", alt: "Safe accommodation provided for the MECPL workforce" },
+  { src: "assets/people-safety/20_1790178654343.jpg", alt: "MECPL workers completing site entry verification" },
+  { src: "assets/people-safety/19_1790178654342.jpg", alt: "MECPL workers attending a safety induction" },
+  { src: "assets/people-safety/17_1790178654339.jpg", alt: "Personal protective equipment prepared for a construction site" },
+  { src: "assets/people-safety/21_1790178654344.jpg", alt: "MECPL worker using fall-protection equipment" },
+  { src: "assets/people-safety/22_1790178654345.jpg", alt: "Medical professional checking a MECPL worker on site" },
+  { src: "assets/people-safety/24_1790178654346.jpg", alt: "Clean accommodation facilities for the MECPL workforce" },
+  { src: "assets/people-safety/25_1790178654347.jpg", alt: "MECPL workforce accommodation building" },
+  { src: "assets/people-safety/28_1790178654350.jpg", alt: "Medical care being provided to a MECPL worker" },
+  { src: "assets/people-safety/29_1790178654351.jpg", alt: "Doctors conducting a health check-up for a MECPL worker" },
 ];
 
 type SafetyStat = {
@@ -41,8 +44,13 @@ type SafetyStat = {
 
 const teamStats: SafetyStat[] = [
   { value: "8000+", label: "Skilled Workforce", Icon: Users },
-  { value: "1000+", label: "Experienced Professionals", Icon: HardHat },
-  { value: "Training & Development", label: "Continuous Learning", Icon: BookOpen },
+  { value: "1000+", label: "Experienced Professionals", Icon: Building2 },
+  {
+    value: "Health & Safety Priority",
+    label: "On Site Accommodation, Induction and Health Check-Ups",
+    Icon: HeartPulse,
+  },
+  { value: "Training & Development", label: "Continuous Learning", Icon: GraduationCap },
   { value: "Recognition", label: "Encouraged Growth", Icon: Award },
 ];
 
@@ -51,17 +59,15 @@ const hseStats: SafetyStat[] = [
   { value: "School Facility", label: "At Labour Camp", Icon: GraduationCap },
   { value: "Regular Health Check-Ups", label: "Medical Professional On Site", Icon: HeartPulse },
   { value: "Safety & Vertigo Tests", label: "Health Prioritized", Icon: Building2 },
-  { value: "Hygiene Accommodation", label: "Wellbeing Prioritized", Icon: House },
+  { value: "Hygiene Accommodation", label: "Health Prioritized", Icon: House },
 ];
 
 function ImageCarousel({
   images,
   assetBase,
-  reversed = false,
 }: {
   images: CarouselImage[];
   assetBase: string;
-  reversed?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -74,7 +80,7 @@ function ImageCarousel({
   }, [images.length]);
 
   return (
-    <div className={`ps-carousel ${reversed ? "ps-carousel-reversed" : ""}`}>
+    <div className="ps-carousel">
       {images.map((image, index) => (
         <img
           key={image.src}
@@ -101,9 +107,9 @@ function ImageCarousel({
   );
 }
 
-function StatsRow({ stats }: { stats: SafetyStat[] }) {
+function StatsRow({ stats, id }: { stats: SafetyStat[]; id?: string }) {
   return (
-    <div className="ps-stats">
+    <div id={id} className="ps-stats">
       {stats.map(({ value, label, Icon }) => (
         <div className="ps-stat" key={`${value}-${label}`}>
           <Icon className="ps-stat-icon" size={25} strokeWidth={1.6} aria-hidden="true" />
@@ -124,196 +130,309 @@ export default function PeopleSafetySection() {
         <article className="ps-panel ps-panel-team">
           <div className="ps-copy">
             <span className="ps-eyebrow">People &amp; Safety</span>
-            <h2 className="people-safety-heading">Our Team Is Our Substance</h2>
+            <h2 className="people-safety-heading">OUR TEAM IS OUR SUBSTANCE</h2>
             <p>
-              Our strength lies in the people who build, engineer and lead every project. From over
-              8,000 skilled workers on site to experienced engineers, project managers and leadership
-              teams, we invest in capability, safety, wellbeing and continuous development across the
-              organisation.
+              Our strength lies in the people who build, engineer and lead every project.
             </p>
-            <StatsRow stats={teamStats} />
-            <Link href="/careers">
+            <p>
+              From over 8,000 skilled workers on site to experienced engineers, project managers and
+              leadership teams, we invest in capability, safety, wellbeing and continuous development
+              across the organisation.
+            </p>
+            <Link href="/careers" className="ps-link">
               <span className="ps-button">
-                Meet Our Team <ArrowRight size={15} />
+                Join Our Team <ArrowRight size={15} />
               </span>
             </Link>
           </div>
           <ImageCarousel images={teamImages} assetBase={assetBase} />
+          <StatsRow stats={teamStats} />
         </article>
 
         <article className="ps-panel ps-panel-hse">
-          <ImageCarousel images={hseImages} assetBase={assetBase} reversed />
           <div className="ps-copy">
             <span className="ps-eyebrow">People &amp; Safety</span>
-            <h2 className="people-safety-heading">Building Safer Lives. Not Just Structures.</h2>
+            <h2 className="people-safety-heading">BUILDING SAFER LIVES. NOT JUST STRUCTURES.</h2>
             <p>
               We put health, safety and wellbeing at the heart of every site, from safety inductions,
               protective equipment and health checks to hygienic accommodation and food. Beyond the
-              workplace, we support education for workers&apos; children and responsible environmental
+              workplace, we support education for workers’ children and responsible environmental
               practices, helping build safer, healthier communities.
             </p>
-            <StatsRow stats={hseStats} />
-            <Link href="/about">
+            <Link href="/about" className="ps-link">
               <span className="ps-button">
                 Our Safety Practices <ArrowRight size={15} />
               </span>
             </Link>
           </div>
+          <ImageCarousel images={hseImages} assetBase={assetBase} />
+          <StatsRow id="people-safety-highlights" stats={hseStats} />
         </article>
       </div>
       <style>{`
         .ps-section {
+          position: relative;
+          isolation: isolate;
+          width: 100%;
           background: transparent;
-          padding: 64px 0;
+          padding: 0;
           overflow: hidden;
         }
         .ps-shell {
-          width: min(1320px, calc(100% - 48px));
+          width: 100%;
+          max-width: none;
           margin: 0 auto;
           display: grid;
           gap: 0;
           overflow: hidden;
-          background: #202326;
-          box-shadow: 0 22px 54px rgba(23, 27, 31, 0.2);
+          background: #ffffff;
         }
         .ps-panel {
+          position: relative;
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-          min-height: 430px;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr) auto;
+          min-height: clamp(520px, 54vw, 650px);
           overflow: hidden;
-          background: transparent;
+          background: #232529;
         }
         .ps-panel-team {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+          grid-template-rows: minmax(276px, auto) auto;
+          width: min(1200px, calc(100% - 160px));
+          min-height: 0;
+          margin-inline: auto;
+          padding: 74px 0 72px;
+          background: #ffffff;
         }
         .ps-panel-hse {
-          grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+          grid-template-rows: minmax(220px, auto) auto;
+          min-height: 300px;
+          background: #232529;
         }
         .ps-copy {
+          position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: clamp(32px, 4vw, 58px);
+          min-width: 0;
+          padding: clamp(34px, 4vw, 66px) clamp(28px, 5.2vw, 76px);
           background: #202326;
+        }
+        .ps-panel-team .ps-copy {
+          grid-column: 1;
+          grid-row: 1;
+          padding: 0;
+          background: #ffffff;
+        }
+        .ps-panel-hse .ps-copy {
+          grid-column: 1;
+          grid-row: 1;
+          padding: 32px clamp(48px, 8vw, 86px);
+          background: #232529;
         }
         .ps-eyebrow {
           display: block;
           width: fit-content;
-          margin-bottom: 16px;
-          padding-bottom: 9px;
+          margin-bottom: 19px;
+          padding-bottom: 7px;
           color: #ec3338;
-          border-bottom: 2px solid #ec3338;
           font-family: var(--font-montserrat);
-          font-size: 0.7rem;
+          font-size: 0.68rem;
           font-weight: 700;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
         }
         .ps-copy h2.people-safety-heading {
-          max-width: 610px;
-          margin: 0 0 15px;
+          max-width: 520px;
+          margin: 0 0 17px;
           color: #ffffff;
           font-family: var(--font-montserrat);
-          font-size: clamp(1.65rem, 2.3vw, 2.45rem);
-          font-weight: 400 !important;
-          line-height: 1.08;
-          letter-spacing: -0.035em;
+          font-size: clamp(1.85rem, 2.7vw, 3rem);
+          font-weight: 500 !important;
+          line-height: 1.04;
+          letter-spacing: -0.055em;
           text-transform: none;
         }
+        .ps-panel-team .ps-copy h2 {
+          max-width: 300px;
+          font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+          color: #232529;
+        }
         .ps-panel-hse .ps-copy h2 {
-          max-width: 560px;
+          max-width: 520px;
+          font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+          line-height: 1.2;
           color: #ffffff;
           text-transform: none;
         }
         .ps-copy p {
-          max-width: 630px;
-          margin: 0 0 22px;
+          max-width: 560px;
+          margin: 0 0 17px;
           color: rgba(255, 255, 255, 0.7);
           font-family: var(--font-montserrat);
-          font-size: 14px;
-          line-height: 1.65;
+          font-size: clamp(0.72rem, 0.85vw, 0.88rem);
+          line-height: 1.7;
+        }
+        .ps-panel-team .ps-copy p {
+          color: rgba(35, 37, 41, 0.67);
+        }
+        .ps-panel-hse .ps-copy p {
+          color: rgba(255, 255, 255, 0.7);
+        }
+        .ps-quote {
+          max-width: 520px;
+          margin: 3px 0 20px;
+          padding-left: 14px;
+          border-left: 2px solid #ec3338;
+          color: #232529;
+          font-family: var(--font-montserrat);
+          font-size: clamp(0.74rem, 0.84vw, 0.9rem);
+          font-style: italic;
+          font-weight: 600;
+          line-height: 1.5;
+        }
+        .ps-actions {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 9px;
+        }
+        .ps-link {
+          display: inline-flex;
+          width: fit-content;
+          color: inherit;
+          text-decoration: none;
         }
         .ps-button {
           display: inline-flex;
           align-items: center;
           justify-content: space-between;
-          gap: 28px;
+          gap: 14px;
           width: fit-content;
-          margin-bottom: 26px;
-          padding: 12px 16px;
+          padding: 11px 13px;
           background: #ec3338;
           color: #fff;
           font-family: var(--font-montserrat);
-          font-size: 10px;
+          font-size: 0.68rem;
           font-weight: 700;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.13em;
           text-transform: uppercase;
           cursor: pointer;
-          transition: background 180ms ease;
+          transition: background 180ms ease, color 180ms ease;
         }
         .ps-button:hover {
           background: #232529;
+          color: #ffffff;
+        }
+        .ps-button-secondary .ps-button {
+          border: 1px solid rgba(35, 37, 41, 0.22);
+          background: #ffffff;
+          color: #232529;
+        }
+        .ps-button-secondary .ps-button:hover {
+          border-color: #ec3338;
+          background: #ec3338;
+          color: #ffffff;
+        }
+        .ps-button:focus-visible,
+        .ps-carousel-dot:focus-visible {
+          outline: 2px solid #ec3338;
+          outline-offset: 4px;
         }
         .ps-stats {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-column: 1 / -1;
+          grid-row: 2;
           width: 100%;
-          margin-top: auto;
-          padding-top: 6px;
+          margin: 0;
+          padding: 18px clamp(20px, 4vw, 58px) 22px;
+          border-top: 1px solid rgba(35, 37, 41, 0.17);
+          background: #ffffff;
+        }
+        .ps-panel-team .ps-stats {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          padding-bottom: 78px;
         }
         .ps-panel-hse .ps-stats {
           grid-template-columns: repeat(5, minmax(0, 1fr));
-          margin: 4px 0 25px;
-        }
-        .ps-panel-hse .ps-stat {
-          border-left-color: rgba(255, 255, 255, 0.16);
-        }
-        .ps-stat strong {
-          color: #ffffff;
-        }
-        .ps-stat span {
-          color: rgba(255, 255, 255, 0.58);
-        }
-        .ps-panel-team .ps-stats {
-          margin: 4px 0 25px;
+          grid-column: 1 / -1;
+          grid-row: 2;
+          margin: 0;
+          padding-bottom: 22px;
         }
         .ps-stat {
           min-width: 0;
-          padding: 5px 13px;
+          align-self: start;
+          padding: 8px 12px 0;
           text-align: center;
-          border-left: 1px solid rgba(255, 255, 255, 0.16);
+          border-left: 1px solid rgba(35, 37, 41, 0.3);
         }
         .ps-stat:first-child {
           border-left: 0;
           padding-left: 0;
-        }
-        .ps-stat strong,
-        .ps-stat span {
-          display: block;
-          font-family: var(--font-montserrat);
         }
         .ps-stat-icon {
           display: block;
           margin: 0 auto 9px;
           color: #ec3338;
         }
+        .ps-panel-team .ps-stat-icon {
+          display: none;
+        }
+        .ps-stat strong,
+        .ps-stat span {
+          display: block;
+          font-family: var(--font-montserrat);
+        }
         .ps-stat strong {
-          min-height: 34px;
-          font-size: clamp(0.68rem, 0.85vw, 0.86rem);
-          font-weight: 700;
-          line-height: 1.22;
+          min-height: 0;
+          color: #c84b50;
+          font-size: clamp(1rem, 1.2vw, 1.25rem);
+          font-weight: 500;
+          line-height: 1.25;
         }
         .ps-stat span {
-          margin-top: 5px;
-          font-size: clamp(0.52rem, 0.62vw, 0.65rem);
+          margin-top: 6px;
+          color: rgba(35, 37, 41, 0.61);
+          font-size: clamp(0.52rem, 0.58vw, 0.65rem);
           font-weight: 500;
-          line-height: 1.35;
+          letter-spacing: 0.06em;
+          line-height: 1.4;
+          text-transform: uppercase;
+        }
+        .ps-panel-hse .ps-stat strong {
+          color: #383a3d;
+        }
+        .ps-panel-hse .ps-stat-icon {
+          width: 16px;
+          height: 16px;
+          margin-bottom: 5px;
         }
         .ps-carousel {
           position: relative;
-          min-height: 430px;
+          z-index: 1;
+          grid-column: 2;
+          grid-row: 1;
+          min-height: 0;
           overflow: hidden;
           background: #171a1d;
+        }
+        .ps-panel-team .ps-carousel,
+        .ps-panel-hse .ps-carousel {
+          grid-column: 2;
+          grid-row: 1;
+          min-height: 0;
+        }
+        .ps-panel-hse .ps-carousel::before {
+          content: "";
+          position: absolute;
+          z-index: 1;
+          inset: 0;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          pointer-events: none;
         }
         .ps-carousel-image {
           position: absolute;
@@ -322,90 +441,97 @@ export default function PeopleSafetySection() {
           height: 100%;
           object-fit: cover;
           opacity: 0;
-          transform: scale(1.025);
-          transition: opacity 700ms ease, transform 4.8s ease;
+          transition: opacity 700ms ease;
         }
         .ps-carousel-image.is-active {
           opacity: 1;
-          transform: scale(1);
         }
         .ps-carousel-dots {
           position: absolute;
           z-index: 2;
-          right: 24px;
-          bottom: 20px;
+          right: 14px;
+          bottom: 14px;
           display: flex;
-          gap: 8px;
-          padding: 8px 10px;
-          background: rgba(20, 22, 25, 0.42);
-          backdrop-filter: blur(5px);
+          gap: 6px;
+          padding: 6px 8px;
+          background: rgba(20, 22, 25, 0.5);
+          backdrop-filter: blur(6px);
         }
         .ps-carousel-dot {
-          width: 7px;
-          height: 7px;
+          width: 6px;
+          height: 6px;
           padding: 0;
           border: 1px solid rgba(255, 255, 255, 0.8);
           border-radius: 50%;
           background: transparent;
           cursor: pointer;
-          transition: width 180ms ease, background 180ms ease;
+          transition: width 180ms ease, background 180ms ease, border-color 180ms ease;
         }
         .ps-carousel-dot.is-active {
-          width: 22px;
+          width: 19px;
           border-radius: 10px;
           background: #ec3338;
           border-color: #ec3338;
         }
-        @media (max-width: 1100px) {
+        @media (max-width: 800px) {
           .ps-panel,
           .ps-panel-hse {
             grid-template-columns: 1fr;
-          }
-          .ps-panel-hse .ps-carousel {
-            order: 2;
-          }
-          .ps-panel-hse .ps-copy {
-            order: 1;
-          }
-          .ps-carousel {
+            grid-template-rows: auto auto auto;
             min-height: 0;
-            aspect-ratio: 16 / 9;
+          }
+          .ps-panel-team {
+            width: 100%;
+            padding: 0;
+          }
+          .ps-copy,
+          .ps-panel-team .ps-copy,
+          .ps-panel-hse .ps-copy {
+            grid-column: 1;
+            grid-row: 1;
+            padding: 32px 22px 28px;
+          }
+          .ps-panel-team .ps-carousel,
+          .ps-panel-hse .ps-carousel {
+            grid-column: 1;
+            grid-row: 2;
+            min-height: 0;
+            aspect-ratio: 16 / 10;
+          }
+          .ps-panel-team .ps-stats,
+          .ps-panel-hse .ps-stats {
+            grid-column: 1;
+            grid-row: 3;
+            padding: 12px 14px 18px;
           }
         }
         @media (max-width: 700px) {
-          .ps-section {
-            padding: 28px 0;
-          }
-          .ps-shell {
-            width: calc(100% - 24px);
-          }
-          .ps-copy {
-            padding: 32px 22px;
-          }
           .ps-copy h2.people-safety-heading {
-            font-size: 1.75rem;
+            max-width: 330px;
+            font-size: clamp(1.8rem, 8.5vw, 2.55rem);
           }
           .ps-copy p {
-            font-size: 13px;
-            line-height: 1.65;
+            max-width: 100%;
+            font-size: 0.82rem;
+            line-height: 1.7;
           }
-          .ps-stats,
+          .ps-quote {
+            font-size: 0.78rem;
+          }
+          .ps-panel-team .ps-stats,
           .ps-panel-hse .ps-stats {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px 0;
+            padding: 10px 14px 16px;
           }
-          .ps-stat:nth-child(odd) {
+          .ps-stat:nth-child(odd),
+          .ps-panel-hse .ps-stat:nth-child(odd) {
             border-left: 0;
           }
           .ps-stat:first-child {
-            padding-left: 13px;
-          }
-          .ps-carousel {
-            min-height: 0;
-            aspect-ratio: 16 / 9;
+            padding-left: 0;
           }
           .ps-carousel-dots {
-            right: 14px;
+            right: 12px;
             bottom: 12px;
           }
         }

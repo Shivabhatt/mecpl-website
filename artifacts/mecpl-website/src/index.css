@@ -197,11 +197,6 @@ html[data-theme="light"] {
   p, li, dt, dd, input, textarea, select, option {
     font-family: var(--app-font-body) !important;
   }
-  .home-page-typography .ps-section h3.people-safety-heading {
-    font-family: var(--font-montserrat) !important;
-    font-weight: 500 !important;
-    font-synthesis: none;
-  }
   .about-page .about-hero-title,
   .blog-page .blog-hero-title,
   .careers-page .careers-hero-title { font-weight: 600 !important; }
@@ -1219,11 +1214,6 @@ html[data-theme="light"] select {
   font-weight: 600 !important;
 }
 
-.site-typography .home-page-typography .ps-section h3.people-safety-heading {
-  font-weight: 500 !important;
-  font-synthesis: none;
-}
-
 .site-typography h3,
 .site-typography h4,
 .site-typography h5,
@@ -1518,8 +1508,7 @@ html[data-theme="light"] select {
   .home-page-typography #about .home-section-label,
   .home-page-typography .home-services-intro > .home-section-label,
   .home-page-typography #rising-projects .home-section-label,
-  .home-page-typography #testimonials .home-section-label,
-  .home-page-typography #people-safety .ps-eyebrow {
+  .home-page-typography #testimonials .home-section-label {
     font-size: var(--home-desktop-label-size) !important;
     line-height: 1.3 !important;
     letter-spacing: 0.16em !important;
@@ -1528,8 +1517,7 @@ html[data-theme="light"] select {
   .home-page-typography #about h2.about-heading-title,
   .home-page-typography .home-services-intro h2.home-services-title,
   .home-page-typography #rising-projects h2.hp-section-title,
-  .home-page-typography #testimonials h2.hp-section-title,
-  .home-page-typography #people-safety h2.people-safety-heading {
+  .home-page-typography #testimonials h2.hp-section-title {
     font-size: var(--home-desktop-section-size) !important;
     line-height: 1.2 !important;
   }
@@ -1586,7 +1574,6 @@ html[data-theme="light"] select {
   .home-page-typography .home-service-row p,
   .home-page-typography #rising-projects p.mx-auto,
   .home-page-typography #rising-projects article > p.max-w-sm,
-  .home-page-typography #people-safety .ps-copy p,
   .home-page-typography #testimonials p.mt-5.max-w-sm {
     font-size: var(--home-desktop-body-size) !important;
     line-height: 1.6 !important;
