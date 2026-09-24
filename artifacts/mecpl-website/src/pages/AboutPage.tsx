@@ -739,14 +739,14 @@ export default function AboutPage() {
                   style={{ background: "#ffffff", padding: "32px 24px", height: "100%", display: "flex", flexDirection: "column", border: "1px solid rgba(35,37,41,0.08)", textAlign: "center", alignItems: "center" }}
                   className="bg-[color:var(--color-border)]">
                   {award.img && (
-                    <div style={{ marginBottom: 18, height: 56, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <img src={award.img} alt={award.title} style={{ maxHeight: "100%", maxWidth: 140, objectFit: "contain" }} />
+                    <div className="recognition-mark-frame" style={{ marginBottom: 18 }}>
+                      <img src={award.img} alt={award.title} className="recognition-mark-image" />
                     </div>
                   )}
-                  <h2 className="abt-award-title font-montserrat" style={{ fontSize: "15px", fontWeight: 500, color: "#45484d", lineHeight: 1.4, margin: 0 }}>
+                  <h2 className="abt-award-title recognition-card-title font-montserrat" style={{ fontSize: "15px", fontWeight: 500, color: "#45484d", lineHeight: 1.4, margin: 0 }}>
                     {award.title}
                   </h2>
-                  <p className="font-montserrat text-[12px]" style={{ fontSize: "7px", fontWeight: 400, color: "#8a8d91", lineHeight: 1.45, margin: "4px 0 0" }}>
+                  <p className="recognition-card-detail font-montserrat" style={{ fontWeight: 400, color: "#8a8d91", lineHeight: 1.45, margin: "4px 0 0" }}>
                     {award.desc}
                   </p>
                 </div>

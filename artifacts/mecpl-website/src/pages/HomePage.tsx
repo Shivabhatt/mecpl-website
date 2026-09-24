@@ -580,20 +580,19 @@ export default function HomePage() {
                     index > 0 ? "border-l border-mecpl-dark/[0.08]" : ""
                   }`}
                 >
-                  <div className="flex h-[76px] w-full items-center justify-center">
+                  <div className="recognition-mark-frame">
                     <img
                       src={`${assetBase}${item.image}`}
                       alt={item.title}
-                      className="max-h-[72px] max-w-[130px] object-contain"
+                      className="recognition-mark-image"
                       loading="lazy"
                     />
                   </div>
-                  <h2 className="rec-card-title mt-2 max-w-[150px] font-montserrat font-medium text-[#74777b]">
+                  <h2 className="rec-card-title recognition-card-title mt-2 max-w-[180px] font-montserrat font-semibold text-[#30343a]">
                     {item.title}
                   </h2>
                   <p
-                    className="mt-1 max-w-[150px] font-montserrat font-normal tracking-[0.01em] text-[#74777b] text-[15px]"
-                    style={{ fontSize: "15px" }}
+                    className="recognition-card-detail mt-1 max-w-[180px] font-montserrat tracking-[0.01em] text-[#74777b]"
                   >
                     {item.detail}
                   </p>
@@ -682,23 +681,23 @@ export default function HomePage() {
                 index > 0 ? "border-l border-mecpl-dark/[0.08]" : ""
               }`}
             >
-              <div className="flex h-[48px] items-center justify-center">
+              <div className="recognition-mark-frame">
                 <img
                   src={`${assetBase}assets/recognition/iso-mark.png`}
                   alt=""
                   aria-hidden="true"
-                  className="h-[42px] w-[52px] object-contain md:h-[46px] md:w-[58px]"
+                  className="recognition-mark-image"
                   style={{ filter: `${item.markFilter} drop-shadow(0 2px 4px ${item.color}22)` }}
                   loading="lazy"
                 />
               </div>
               <h2
-                className="iso-card-title mt-2 font-montserrat font-semibold leading-tight"
+                className="iso-card-title recognition-card-title mt-2 font-montserrat font-semibold leading-tight"
                 style={{ color: item.color }}
               >
                 {item.standard}
               </h2>
-              <p className="mt-1 max-w-[170px] font-montserrat font-medium text-[#74777b] text-[12px]">
+              <p className="recognition-card-detail mt-1 max-w-[220px] font-montserrat text-[#74777b]">
                 {item.detail}
               </p>
             </div>
@@ -1032,7 +1031,7 @@ export default function HomePage() {
                      <div className="mt-auto">
                        <Link href="/projects" data-testid={`button-proj-${i}`}>
                          <span className="inline-flex items-center gap-4 text-white hover:text-mecpl-red transition-colors cursor-pointer group/btn">
-                           <span className="font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] uppercase">
+                           <span className="home-section-cta font-montserrat text-[9px] xl:text-[10px] font-semibold tracking-[0.2em] uppercase">
                              View Project
                            </span>
                            <div className="w-8 h-8 xl:w-10 xl:h-10 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:border-mecpl-red transition-colors">

@@ -193,25 +193,21 @@ export default function CompletedProjectsPage() {
               src: "/assets/awards/nsci-safety-award-2025.png",
               alt: "National Safety Council of India Green Triangle for Safety",
               label: "NSCI Safety Award 2025",
-              imageClass: "max-h-[58px] max-w-[200px] md:max-h-[64px] md:max-w-[220px]",
             },
             {
               src: "/assets/awards/bai-well-built-structure-award.png",
               alt: "Builders' Association of India",
               label: "BAI Well Built Structure Award",
-              imageClass: "max-h-[70px] max-w-[90px] md:max-h-[76px]",
             },
             {
               src: "/assets/awards/cidc-vishwakarma-award-2026.png",
               alt: "Construction Industry Development Council",
               label: "CIDC Vishwakarma Award 2026",
-              imageClass: "max-h-[70px] max-w-[90px] md:max-h-[76px]",
             },
             {
               src: "/assets/awards/british-safety-council-award-2026.jpeg",
               alt: "British Safety Council International Safety Awards 2026 Distinction",
               label: "International Safety Award 2026",
-              imageClass: "max-h-[70px] max-w-[160px] md:max-h-[76px] md:max-w-[180px]",
             },
           ].map((award, index) => (
             <div
@@ -222,15 +218,15 @@ export default function CompletedProjectsPage() {
                 index > 0 ? "md:border-l md:border-black/[0.08]" : "md:border-l-0"
               } md:border-b-0`}
             >
-              <div className="flex h-[78px] items-center justify-center">
+              <div className="recognition-mark-frame">
                 <img
                   src={award.src}
                   alt={award.alt}
-                  className={`h-auto w-auto object-contain ${award.imageClass}`}
+                  className="recognition-mark-image"
                   loading="lazy"
                 />
               </div>
-              <span className="mt-4 max-w-[190px] text-[9px] font-semibold leading-[1.45] tracking-[0.05em] text-[#73777d] md:text-[10px]">
+              <span className="recognition-card-title mt-3 max-w-[190px] font-montserrat font-semibold tracking-[0.05em] text-[#73777d]">
                 {award.label}
               </span>
             </div>
