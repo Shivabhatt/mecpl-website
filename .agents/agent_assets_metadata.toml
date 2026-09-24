@@ -1,0 +1,44 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "t_jXd9l6JDNGbhCYOiqCn"
+uri = "file://.local/previews/people-safety-page.png"
+type = "image"
+title = "People & Safety — desktop preview"
+description = "1440px-wide preview of the published Team-first layout, clean photos, Join Our Team CTA, and Safety panel."
+logical_id = "7d3e858c-ff2b-417a-a68f-05db6b36b48d"
+content_hash = "sha256:3f343080bcc02682147f2b64c2cbafd71612a13d385c2dd6d2555c1e7631dce5"
+size = 738734
+mtime_ms = 1790246639506
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/7d3e858c-ff2b-417a-a68f-05db6b36b48d/5802eedb-5925-42b0-b385-98fef616747e"
+storage_version_token = "1790247196701534"
+content_type = "image/png"
+
+[[outputs]]
+id = "7qICFeU_fbZSuu-m1MFyl"
+uri = "file://.local/previews/home-projects-section.png"
+type = "image"
+title = "Homepage Projects Section"
+description = "Desktop screenshot of the home page projects accordion with Trump Tower selected."
+logical_id = "6f8c8aa8-6dd7-4855-831d-01c8ce5e8ca4"
+content_hash = "sha256:1afff2479b7d5985902743b7f6340415af7e932669c35d2e5acf0b9d0e41a2e0"
+size = 821103
+mtime_ms = 1790251947084
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/6f8c8aa8-6dd7-4855-831d-01c8ce5e8ca4/e379be55-2fc1-4acd-95bb-d6f631bda9e6"
+storage_version_token = "1790251967985825"
+content_type = "image/png"
+
+[[outputs]]
+id = "iPBlmRQe00cmx2TnOrRz1"
+uri = "file://.local/previews/about-leaders-section.png"
+type = "image"
+title = "About Us Leadership Section"
+description = "Desktop screenshot of the leadership cards in the requested order: Jeevan, Manoj, then Jitin."
+logical_id = "594edd81-9301-48bf-a31b-2c12fb17d626"
+content_hash = "sha256:783dbcf04b848bcdf849431d4428dfd00a83c722bbe4a38e44907bb3df6d88ed"
+size = 695627
+mtime_ms = 1790251886779
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/594edd81-9301-48bf-a31b-2c12fb17d626/b6531cf1-df7f-4814-8f0b-c91db9cd7ff5"
+storage_version_token = "1790251969607278"
+content_type = "image/png"

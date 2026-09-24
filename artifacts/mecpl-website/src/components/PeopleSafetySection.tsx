@@ -114,7 +114,7 @@ function StatsRow({ stats, id }: { stats: SafetyStat[]; id?: string }) {
         <div className="ps-stat" key={`${value}-${label}`}>
           <Icon className="ps-stat-icon" size={25} strokeWidth={1.6} aria-hidden="true" />
           <strong>{value}</strong>
-          <span>{label}</span>
+          <span className="text-[10px]">{label}</span>
         </div>
       ))}
     </div>
@@ -131,10 +131,10 @@ export default function PeopleSafetySection() {
           <div className="ps-copy">
             <span className="ps-eyebrow">People &amp; Safety</span>
             <h2 className="people-safety-heading">OUR TEAM IS OUR SUBSTANCE</h2>
-            <p>
+            <p className="text-[16px]" style={{ fontSize: "16px" }}>
               Our strength lies in the people who build, engineer and lead every project.
             </p>
-            <p>
+            <p className="text-[16px]" style={{ fontSize: "16px" }}>
               From over 8,000 skilled workers on site to experienced engineers, project managers and
               leadership teams, we invest in capability, safety, wellbeing and continuous development
               across the organisation.
@@ -153,7 +153,7 @@ export default function PeopleSafetySection() {
           <div className="ps-copy">
             <span className="ps-eyebrow">People &amp; Safety</span>
             <h2 className="people-safety-heading">BUILDING SAFER LIVES. NOT JUST STRUCTURES.</h2>
-            <p>
+            <p style={{ fontSize: "16px" }}>
               We put health, safety and wellbeing at the heart of every site, from safety inductions,
               protective equipment and health checks to hygienic accommodation and food. Beyond the
               workplace, we support education for workers’ children and responsible environmental
@@ -197,12 +197,14 @@ export default function PeopleSafetySection() {
           background: #232529;
         }
         .ps-panel-team {
-          grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+          --ps-team-content-offset: calc(120px - max(80px, calc(50vw - 600px)));
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
           grid-template-rows: minmax(276px, auto) auto;
           width: min(1200px, calc(100% - 160px));
           min-height: 0;
           margin-inline: auto;
-          padding: 74px 0 72px;
+          padding: 14px 0 72px;
+          overflow: visible;
           background: #ffffff;
         }
         .ps-panel-hse {
@@ -223,13 +225,14 @@ export default function PeopleSafetySection() {
         .ps-panel-team .ps-copy {
           grid-column: 1;
           grid-row: 1;
+          margin-left: var(--ps-team-content-offset);
           padding: 0;
           background: #ffffff;
         }
         .ps-panel-hse .ps-copy {
           grid-column: 1;
           grid-row: 1;
-          padding: 32px clamp(48px, 8vw, 86px);
+          padding: 48px clamp(28px, 5vw, 60px) 48px 120px;
           background: #232529;
         }
         .ps-eyebrow {
@@ -239,7 +242,7 @@ export default function PeopleSafetySection() {
           padding-bottom: 7px;
           color: #ec3338;
           font-family: var(--font-montserrat);
-          font-size: 0.68rem;
+          font-size: 15px;
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -256,7 +259,7 @@ export default function PeopleSafetySection() {
           text-transform: none;
         }
         .ps-panel-team .ps-copy h2 {
-          max-width: 300px;
+          max-width: 440px;
           font-size: clamp(1.5rem, 2.4vw, 1.85rem);
           color: #232529;
         }
@@ -276,6 +279,7 @@ export default function PeopleSafetySection() {
           line-height: 1.7;
         }
         .ps-panel-team .ps-copy p {
+          max-width: 700px;
           color: rgba(35, 37, 41, 0.67);
         }
         .ps-panel-hse .ps-copy p {
@@ -354,7 +358,11 @@ export default function PeopleSafetySection() {
         }
         .ps-panel-team .ps-stats {
           grid-template-columns: repeat(5, minmax(0, 1fr));
-          padding-bottom: 78px;
+          width: calc(100% - var(--ps-team-content-offset));
+          margin-left: var(--ps-team-content-offset);
+          padding-left: 0;
+          padding-right: 0;
+          padding-bottom: 16px;
         }
         .ps-panel-hse .ps-stats {
           grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -402,6 +410,9 @@ export default function PeopleSafetySection() {
           letter-spacing: 0.06em;
           line-height: 1.4;
           text-transform: uppercase;
+        }
+        .ps-panel-hse .ps-stat:first-child span {
+          font-size: 10px;
         }
         .ps-panel-hse .ps-stat strong {
           color: #383a3d;
@@ -489,6 +500,7 @@ export default function PeopleSafetySection() {
           .ps-panel-hse .ps-copy {
             grid-column: 1;
             grid-row: 1;
+            margin-left: 0;
             padding: 32px 22px 28px;
           }
           .ps-panel-team .ps-carousel,
@@ -520,6 +532,8 @@ export default function PeopleSafetySection() {
           }
           .ps-panel-team .ps-stats,
           .ps-panel-hse .ps-stats {
+            width: 100%;
+            margin-left: 0;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             padding: 10px 14px 16px;
           }

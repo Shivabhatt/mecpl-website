@@ -152,9 +152,9 @@ export default function CompletedProjectsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
         <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
-          <span className="about-label-font font-montserrat font-medium" style={{
+          <span className="about-label-font font-montserrat font-medium text-[18px]" style={{
               fontFamily: "Montserrat",
-            fontSize: "0.62rem",
+            fontSize: "18px",
             fontWeight: 700,
             letterSpacing: "0.35em",
             color: "#ffffff",
@@ -165,8 +165,8 @@ export default function CompletedProjectsPage() {
             OUR PROJECTS
           </span>
           <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
-            <div className="hp-banner-line" style={{
-              fontSize: "clamp(1.6rem, 4vw, 3.2rem)",
+            <div className="hp-banner-line text-[35px]" style={{
+              fontSize: "clamp(18px, 3.5vw, 35px)",
               lineHeight: 1.15,
               color: "#ffffff",
               whiteSpace: "nowrap",
@@ -179,7 +179,6 @@ export default function CompletedProjectsPage() {
           </p>
         </div>
       </div>
-
       {/* Awards and industry recognition */}
       <section
         id="project-awards"
@@ -190,28 +189,32 @@ export default function CompletedProjectsPage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
           {[
             {
-              src: "/assets/awards/nsci-safety-award-2025.png",
-              alt: "National Safety Council of India Green Triangle for Safety",
-              label: "NSCI Safety Award 2025",
-            },
-            {
               src: "/assets/awards/bai-well-built-structure-award.png",
-              alt: "Builders' Association of India",
-              label: "BAI Well Built Structure Award",
+              alt: "Builders' Association of India Well Built Structure Award",
+              title: "Well Built Structure Awards for Quality",
+              count: "13 Projects Awarded",
             },
             {
               src: "/assets/awards/cidc-vishwakarma-award-2026.png",
-              alt: "Construction Industry Development Council",
-              label: "CIDC Vishwakarma Award 2026",
+              alt: "CIDC Vishwakarma Award emblem",
+              title: "CIDC Vishwakarma Awards",
+              count: "4 Projects Awarded",
             },
             {
-              src: "/assets/awards/british-safety-council-award-2026.jpeg",
-              alt: "British Safety Council International Safety Awards 2026 Distinction",
-              label: "International Safety Award 2026",
+              src: "/assets/awards/nsci-safety-award-2025.png",
+              alt: "National Safety Council of India safety award logo",
+              title: "NSCI Safety Awards",
+              count: "4 Projects Awarded",
+            },
+            {
+              src: "/assets/awards/pcerf-safety-award.png",
+              alt: "PCER safety award logo",
+              title: "PCER Safety Awards",
+              count: "11 Projects Awarded",
             },
           ].map((award, index) => (
             <div
-              key={award.label}
+              key={award.title}
               className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-6 text-center ${
                 index % 2 === 1 ? "border-l border-black/[0.08]" : ""
               } ${index < 2 ? "border-b border-black/[0.08]" : ""} ${
@@ -226,14 +229,18 @@ export default function CompletedProjectsPage() {
                   loading="lazy"
                 />
               </div>
-              <span className="recognition-card-title mt-3 max-w-[190px] font-montserrat font-semibold tracking-[0.05em] text-[#73777d]">
-                {award.label}
-              </span>
+              <div className="mt-3 max-w-[256px]">
+                <span className="block font-montserrat text-[12px] font-semibold leading-[1.3] tracking-[0.015em] text-[#73777d]">
+                  {award.title}
+                </span>
+                <span className="mt-1 block font-montserrat text-[11px] font-medium leading-[1.3] tracking-[0.04em] text-[#73777d]">
+                  {award.count}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </section>
-
       {/* Project metrics */}
       <section
         id="project-metrics"
@@ -268,13 +275,12 @@ export default function CompletedProjectsPage() {
           ))}
         </div>
       </section>
-
-       <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
-         <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
-           Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
-           Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
-         </p>
-       </section>
+      <section className="bg-white px-6 py-12 text-center md:py-16" data-testid="section-projects-intro">
+        <p data-scroll-reveal="text" className="mx-auto max-w-3xl font-montserrat text-sm leading-relaxed text-[#6b7280] md:text-base">
+          Our portfolio spans residential, commercial, industrial, and special-purpose developments across Pune.
+          Each project reflects our commitment to quality construction, thoughtful execution, and lasting value.
+        </p>
+      </section>
       <ArchitectureApproach />
       <ProjectExplorer />
       {/* Sticky project filters */}
@@ -297,7 +303,6 @@ export default function CompletedProjectsPage() {
           </div>
         </div>
       </div>
-
       {/* Projects Grid */}
       <section id="projects-grid" className="scroll-mt-16 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
         <div>

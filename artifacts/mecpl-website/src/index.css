@@ -1587,3 +1587,49 @@ html[data-theme="light"] select {
     line-height: 1.5 !important;
   }
 }
+
+/* Keep all homepage content and its shared navigation on Montserrat only. */
+.site-typography .home-page-typography,
+.site-typography .home-page-typography *,
+.site-typography .home-page-navbar,
+.site-typography .home-page-navbar *,
+.site-typography .site-footer,
+.site-typography .site-footer * {
+  font-family: var(--font-montserrat) !important;
+}
+
+.home-page-typography #rising-projects .rising-project-control:hover,
+.home-page-typography #rising-projects .rising-project-control:focus-visible {
+  background-color: #ec3338 !important;
+  border-color: #ec3338 !important;
+  color: #ffffff !important;
+}
+
+.home-page-typography #rising-projects .rising-project-control:hover svg,
+.home-page-typography #rising-projects .rising-project-control:focus-visible svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.home-page-typography #testimonials .testimonial-arrow-control:hover,
+.home-page-typography #testimonials .testimonial-arrow-control:focus-visible {
+  background-color: #ec3338 !important;
+  border-color: #ec3338 !important;
+  color: #ffffff !important;
+}
+
+.home-page-typography #testimonials .testimonial-arrow-control:hover svg,
+.home-page-typography #testimonials .testimonial-arrow-control:focus-visible svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.home-page-typography .home-service-row h3.home-service-title.home-service-title-residential {
+  font-size: 15px !important;
+}
+
+@media (max-width: 800px) {
+  .home-page-typography .hp-banner-line {
+    font-size: clamp(14px, 4vw, 22px) !important;
+  }
+}

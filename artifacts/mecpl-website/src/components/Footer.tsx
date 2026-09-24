@@ -5,7 +5,7 @@ export default function Footer() {
   const footerBorder = "rgba(255,255,255,0.28)";
 
   return (
-    <footer data-testid="footer" className="home-page-typography">
+    <footer data-testid="footer" className="site-footer">
       <div
         style={{
           background: "#CFE2E2", color: "#ffffff",

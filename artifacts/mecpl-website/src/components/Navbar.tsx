@@ -33,7 +33,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 bg-mecpl-dark shadow-[0_1px_0_rgba(255,255,255,0.08)] transition-transform duration-500 ${
         isAtTop || menuOpen ? "translate-y-0" : "-translate-y-full"
-      }`}
+      } ${location === "/" ? "home-page-navbar" : ""}`}
       data-testid="navbar"
       data-navbar-root="true"
     >
@@ -62,7 +62,7 @@ export default function Navbar() {
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <span
-                  className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal normal-case cursor-pointer transition-colors duration-300 group ${
+                  className={`navbar-nav-label font-montserrat relative inline-block px-4 py-2 text-sm font-medium tracking-normal uppercase cursor-pointer transition-colors duration-300 group ${
                     active ? "text-white" : "text-white/65 hover:text-white"
                   }`}
                 >
@@ -114,7 +114,7 @@ export default function Navbar() {
                 data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div
-                     className={`navbar-nav-label font-montserrat py-3 text-sm font-medium normal-case tracking-normal border-b border-mecpl-dark/[0.05] cursor-pointer transition-colors ${
+                     className={`navbar-nav-label font-montserrat py-3 text-sm font-medium uppercase tracking-normal border-b border-mecpl-dark/[0.05] cursor-pointer transition-colors ${
                     location === link.path ? "text-mecpl-red" : "text-mecpl-text hover:text-mecpl-red"
                   }`}
                 >

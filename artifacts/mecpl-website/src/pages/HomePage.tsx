@@ -38,7 +38,7 @@ const heroSlides = [
     subtitle: "ISO certified in Quality, Environment & Occupational Health & Safety | CRISIL BBB / Positive",
   },
   {
-    heading: ["PEOPLE BEHIND", "THE BUILDING"],
+    heading: ["PEOPLE BEHIND THE BUILDING"],
     subtitle: "A team of experts, backed by experienced professionals, bringing expertise and precision to every structure.",
   },
 ];
@@ -466,25 +466,25 @@ export default function HomePage() {
           position: "absolute", inset: 0, zIndex: 10,
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
-          <div style={{ textAlign: "center", maxWidth: "700px", padding: "0 40px" }}>
+          <div style={{ textAlign: "center", maxWidth: "700px", padding: "0 clamp(8px, 2.8vw, 40px)" }}>
             {/* Constant label */}
             <div
               style={{
-                fontSize: "18px",
+                fontSize: "clamp(11px, 2.75vw, 15px)",
                 fontWeight: 600, color: "rgba(255,255,255,0.92)",
-                letterSpacing: "0.18em", textTransform: "uppercase",
+                letterSpacing: "clamp(0.05em, 0.18vw, 0.18em)", textTransform: "uppercase",
+                whiteSpace: "nowrap",
                 marginBottom: "14px",
                 textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
               }}
-              className="text-[14px]">
+              className="text-[15px]">
               Millennium Engineers &amp; Contractors Pvt. Ltd.
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
             <h1 className="hp-banner-title page-title-font" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
-                <div key={i} className="hp-banner-line text-[51.2px]" style={{
-                  fontSize: videoIdx === 0 ? "51.2px" : "clamp(1.6rem, 4vw, 3.2rem)",
+                <div key={i} className="hp-banner-line text-[26px]" style={{
                   lineHeight: 1.15, color: "#ffffff",
                   whiteSpace: "nowrap",
                 }}>
@@ -712,10 +712,10 @@ export default function HomePage() {
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px 56px", paddingLeft: "45px" }}
       >
         <div className="max-w-none mx-auto">
-          <div className="grid items-start gap-16 lg:grid-cols-2 lg:items-stretch">
+          <div className="grid items-start gap-16 lg:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
 
             {/* Left: editorial */}
-            <div>
+            <div className="lg:pl-[120px]">
               <div className="about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
                 <span className="home-section-label font-montserrat text-[15px]" style={{
                   fontSize: "15px", fontWeight: 600,
@@ -764,7 +764,9 @@ export default function HomePage() {
                     <span style={{ color: "#949599", fontWeight: 500 }}> — </span>
                     <span style={{ color: "#EC3338", fontWeight: 600 }}>Founder &amp; Chairman</span>
                   </span>
-                  <span style={{ display: "block", marginTop: "4px", color: "#949599", fontSize: "10px", fontWeight: 500 }}>
+                  <span
+                    style={{ display: "block", marginTop: "4px", color: "#949599", fontSize: "14px", fontWeight: 500 }}
+                    className="text-[14px]">
                     Honoured with the prestigious{" "}
                     <span style={{ color: "#EC3338", fontWeight: 600 }}>Nirman Ratna Lifetime Achievement Award</span>{" "}
                     by the BAI and the{" "}
@@ -783,9 +785,9 @@ export default function HomePage() {
 
                 <Link href="/about" data-testid="button-about-more">
                   <span
-                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[12px]"
+                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[15px]"
                     style={{
-                      fontSize: "10px",
+                      fontSize: "15px",
                       letterSpacing: "0.2em", color: "#EC3338",
                       textTransform: "none", fontWeight: 600,
                     }}
@@ -846,8 +848,8 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="home-services-intro mx-auto flex w-full max-w-[820px] flex-col items-center justify-center text-center">
-            <span className="home-section-label font-montserrat text-[12px]" style={{
-              fontSize: "13px", fontWeight: 700,
+            <span className="home-section-label font-montserrat text-[15px]" style={{
+              fontSize: "15px", fontWeight: 700,
               letterSpacing: "0.28em", color: "#EC3338", textTransform: "uppercase",
               display: "block", marginBottom: "18px",
             }}>
@@ -887,10 +889,10 @@ export default function HomePage() {
                   <ServiceLineIcon type={svc.icon} className="h-9 w-9 sm:h-10 sm:w-10" />
                 </div>
                 <div className="mt-3 min-w-0">
-                  <h3 className="home-service-title font-montserrat text-[17px] font-semibold leading-[1.2] tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px]">
+                  <h3 className={`home-service-title font-montserrat font-semibold tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px] text-[15px] ${svc.icon === "residential" ? "home-service-title-residential" : ""}`}>
                     {svc.title}
                   </h3>
-                  <p className="mt-2 font-montserrat text-[11px] leading-[1.55] text-[#4f545b] sm:text-[11px]">
+                  <p className="mt-2 font-montserrat text-[#4f545b] sm:text-[11px] text-[14px]">
                     {svc.desc}
                   </p>
                 </div>
@@ -923,7 +925,7 @@ export default function HomePage() {
               <h2 className="font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
                 Landmark Works
               </h2>
-              <p className="font-inter text-[#949599] max-w-md mx-auto m-0 text-[18px] text-center">
+              <p className="font-montserrat text-[#949599] max-w-md mx-auto m-0 text-[18px] text-center">
                 A selection of the structures MECPL has delivered across Pune.
               </p>
             </div>
@@ -1015,7 +1017,7 @@ export default function HomePage() {
                         {proj.name}
                       </h2>
                       <p
-                        className="mt-3 flex items-center gap-3 font-inter text-base font-medium leading-relaxed text-white"
+                        className="mt-3 flex items-center gap-3 font-montserrat text-base font-medium leading-relaxed text-white"
                         style={{ textShadow: "0 2px 12px rgba(0,0,0,0.95)" }}
                       >
                         <span className="h-2 w-2 shrink-0 rounded-full bg-mecpl-red" aria-hidden="true" />
@@ -1057,7 +1059,7 @@ export default function HomePage() {
         id="rising-projects"
         data-testid="section-home-ongoing-projects"
         className="relative overflow-hidden bg-white"
-        style={{ background: "#ffffff", padding: "88px 0 104px" }}
+        style={{ background: "#ffffff", padding: "0 0 128px" }}
       >
         <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-[38%] opacity-[0.055]" aria-hidden="true">
           <svg viewBox="0 0 540 260" className="h-full w-full" fill="none" stroke="#232529">
@@ -1083,7 +1085,7 @@ export default function HomePage() {
 
           <div
             data-scroll-reveal="image"
-            className="grid items-center gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:gap-14"
+            className="relative grid items-center gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:gap-14"
             style={{ background: "#e4e4e6" }}
           >
             <div className="group relative aspect-video overflow-hidden rounded-[5px] bg-[#d8d7d3] shadow-[0_15px_45px_rgba(35,37,41,0.08)]">
@@ -1102,48 +1104,50 @@ export default function HomePage() {
               </video>
             </div>
 
-            <article className="relative">
-              <div className="-translate-y-2 mb-7 flex items-center justify-between">
-                <span className="font-montserrat text-[11px] font-semibold tracking-[0.16em] text-mecpl-red">
-                  {String(activeRisingProject + 1).padStart(2, "0")}
-                  <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
-                </span>
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    aria-label="Previous project"
-                    onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
-                     className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
-                  >
-                    <ChevronLeft size={17} />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="Next project"
-                    onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
-                     className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white text-mecpl-text shadow-[0_4px_15px_rgba(35,37,41,0.08)] transition-colors hover:bg-mecpl-red hover:text-white"
-                  >
-                    <ChevronRight size={17} />
-                  </button>
+            <div className="relative">
+              <article>
+                <div className="-translate-y-2 mb-7 flex items-center">
+                  <span className="font-montserrat text-[11px] font-semibold tracking-[0.16em] text-mecpl-red">
+                    {String(activeRisingProject + 1).padStart(2, "0")}
+                    <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
+                  </span>
                 </div>
-              </div>
-              <p className="mb-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
-                {risingProjectVideos[activeRisingProject].name}
-              </p>
-              <h2 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-[1.05] text-mecpl-text">
-                {risingProjectVideos[activeRisingProject].headline}
-              </h2>
-              <span className="mt-5 block h-0.5 w-10 bg-mecpl-red" />
-              <p className="mt-6 max-w-sm font-montserrat text-[12px] leading-6 text-[#696c71]">
-                {risingProjectVideos[activeRisingProject].description}
-              </p>
-              <Link
-                href="/projects"
-                className="mt-7 inline-flex items-center gap-4 border border-mecpl-red bg-mecpl-red px-5 py-3 font-montserrat font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark text-[12px]"
+                <p className="mb-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
+                  {risingProjectVideos[activeRisingProject].name}
+                </p>
+                <h2 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-[1.05] text-mecpl-text">
+                  {risingProjectVideos[activeRisingProject].headline}
+                </h2>
+                <span className="mt-5 block h-0.5 w-10 bg-mecpl-red" />
+                <p className="mt-6 max-w-sm font-montserrat text-[#696c71] text-[14px]">
+                  {risingProjectVideos[activeRisingProject].description}
+                </p>
+                <Link
+                  href="/projects"
+                  className="mt-7 inline-flex items-center gap-4 border border-mecpl-red bg-mecpl-red px-5 py-3 font-montserrat font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark text-[12px]"
+                >
+                  View Details <ArrowRight size={14} />
+                </Link>
+              </article>
+            </div>
+            <div className="-mt-10 flex justify-end lg:absolute lg:bottom-[8px] lg:right-[5px] lg:z-10 lg:mt-0">
+              <button
+                type="button"
+                aria-label="Previous project"
+                onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
+                className="rising-project-control flex h-[32px] w-[32px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
               >
-                View Details <ArrowRight size={14} />
-              </Link>
-            </article>
+                <ChevronLeft size={14} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next project"
+                onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
+                className="rising-project-control -ml-px flex h-[32px] w-[32px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
+              >
+                <ChevronRight size={14} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -1163,7 +1167,7 @@ export default function HomePage() {
             background: "#e4e4e6",
           }}
         >
-          <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10">
+          <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10 lg:pl-[80px]">
             <div>
               <span className="home-section-label block font-montserrat font-semibold tracking-[0.2em] text-mecpl-red text-[15px]">
                 CLIENT VOICES
@@ -1180,7 +1184,7 @@ export default function HomePage() {
           <div className="testi-card overflow-hidden border border-mecpl-dark/[0.08] bg-white">
             <div className="flex h-[400px] flex-col overflow-hidden bg-white px-7 py-9 sm:px-10 sm:py-11 md:px-14 md:py-12">
               <div className="flex items-start justify-between">
-                <span aria-hidden="true" className="font-serif text-[76px] font-semibold leading-[0.72] text-mecpl-red md:text-[92px]">
+                <span aria-hidden="true" className="font-montserrat text-[76px] font-semibold leading-[0.72] text-mecpl-red md:text-[92px]">
                   “
                 </span>
                 <span className="font-montserrat text-[9px] tracking-[0.22em] text-mecpl-steel">
@@ -1234,7 +1238,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setActiveTestimonial((current) => (current - 1 + testimonials.length) % testimonials.length)}
-                  className="flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
+                  className="testimonial-arrow-control flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft size={16} />
@@ -1242,7 +1246,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setActiveTestimonial((current) => (current + 1) % testimonials.length)}
-                  className="-ml-px flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
+                  className="testimonial-arrow-control -ml-px flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
                   aria-label="Next testimonial"
                 >
                   <ChevronRight size={16} />

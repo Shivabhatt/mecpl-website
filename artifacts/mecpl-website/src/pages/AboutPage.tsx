@@ -719,7 +719,53 @@ export default function AboutPage() {
       <PurposeSection />
       {/* ─── 04 — OUR JOURNEY ────────────────────────────────── */}
       <JourneyTimeline />
-      {/* ─── 05 — AWARDS & CERTIFICATIONS ────────────────────── */}
+      {/* ─── 05 — OUR FOUNDER ────────────────────────────────── */}
+      <section data-testid="section-about-founder" className="abt-founder-section" style={{ background: "#232529", color: "#ffffff", padding: "96px 56px", overflow: "hidden" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="abt-story-cols">
+          <RevealBlock delay={0}>
+            <div style={{ position: "relative", aspectRatio: "3/4" }}>
+              <img src={`${assetBase}assets/leaders/leader-01.jpg`} alt="M. B. Nambiar" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(20%) contrast(1.1)" }} />
+              <div style={{ position: "absolute", bottom: -20, right: -20, background: "#EC3338", padding: "32px", color: "#fff" }}>
+                <Quote size={32} />
+              </div>
+            </div>
+          </RevealBlock>
+          <RevealBlock delay={100}>
+            <div style={{ textAlign: "center" }}>
+              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+                OUR FOUNDER
+              </span>
+              <h2 className="font-montserrat" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: "0 0 32px", lineHeight: 1.1 }}>
+                A Vision That Built Generations.
+              </h2>
+              <div className="font-montserrat" style={{ fontSize: "1.2rem", fontWeight: 600, color: "#EC3338", marginBottom: 8 }}>
+                M. B. Nambiar
+              </div>
+              <div className="font-montserrat" style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>
+                Founder & Promoter
+              </div>
+              <p className="font-inter" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: 40 }}>
+                A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
+                <br /><br />
+                Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company's growth, reputation and enduring commitment to quality, safety and professional excellence.
+                <br /><br />
+                His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AESA Lifetime Achievement Award in 2022, presented by the Architects, Engineers and Surveyors Association (AESA), Pune.
+              </p>
+              <div style={{ borderTop: "2px solid #EC3338", paddingTop: 24, maxWidth: 420, margin: "0 auto" }}>
+                <p className="font-montserrat" style={{ fontSize: "1.1rem", fontWeight: 500, fontStyle: "italic", lineHeight: 1.6, color: "#ffffff", margin: 0 }}>
+                  "A legacy built on experience.<br/>A culture built to endure."
+                </p>
+                <span className="font-montserrat" style={{ display: "block", marginTop: 16, color: "rgba(255,255,255,0.55)", fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  M. B. Nambiar
+                </span>
+              </div>
+            </div>
+          </RevealBlock>
+        </div>
+      </section>
+      {/* ─── 06 — OUR LEADERSHIP ─────────────────────────────── */}
+      <LeadershipDoorSlider />
+      {/* ─── 07 — AWARDS & CERTIFICATIONS ────────────────────── */}
       <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#ffffff", padding: "96px 56px" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <RevealBlock>
@@ -756,48 +802,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      {/* ─── 06 — OUR FOUNDER ────────────────────────────────── */}
-      <section data-testid="section-about-founder" className="abt-founder-section" style={{ background: "#232529", color: "#ffffff", padding: "96px 56px", overflow: "hidden" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="abt-story-cols">
-          <RevealBlock delay={0}>
-            <div style={{ position: "relative", aspectRatio: "3/4" }}>
-              <img src={`${assetBase}assets/leaders/leader-01.jpg`} alt="M. B. Nambiar" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(20%) contrast(1.1)" }} />
-              <div style={{ position: "absolute", bottom: -20, right: -20, background: "#EC3338", padding: "32px", color: "#fff" }}>
-                <Quote size={32} />
-              </div>
-            </div>
-          </RevealBlock>
-          <RevealBlock delay={100}>
-            <div style={{ textAlign: "center" }}>
-              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
-                OUR FOUNDER
-              </span>
-              <h2 className="font-montserrat" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: "0 0 32px", lineHeight: 1.1 }}>
-                A Vision That Built Generations.
-              </h2>
-              <div className="font-montserrat" style={{ fontSize: "1.2rem", fontWeight: 600, color: "#EC3338", marginBottom: 8 }}>
-                M. B. Nambiar
-              </div>
-              <div className="font-montserrat" style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>
-                Founder & Promoter
-              </div>
-              <p className="font-inter" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: 40 }}>
-                A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group. Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company's growth, reputation and enduring commitment to quality, safety and professional excellence.
-              </p>
-              <div style={{ borderTop: "2px solid #EC3338", paddingTop: 24, maxWidth: 420, margin: "0 auto" }}>
-                <p className="font-montserrat" style={{ fontSize: "1.1rem", fontWeight: 500, fontStyle: "italic", lineHeight: 1.6, color: "#ffffff", margin: 0 }}>
-                  "A legacy built on experience.<br/>A culture built to endure."
-                </p>
-                <span className="font-montserrat" style={{ display: "block", marginTop: 16, color: "rgba(255,255,255,0.55)", fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
-                  M. B. Nambiar
-                </span>
-              </div>
-            </div>
-          </RevealBlock>
-        </div>
-      </section>
-      {/* ─── 07 — OUR LEADERSHIP ─────────────────────────────── */}
-      <LeadershipDoorSlider />
       {/* ─── 08 — TODAY, WE BUILD ACROSS ─────────────────────── */}
       <section data-testid="section-about-sectors" className="abt-sectors-section" style={{ background: "#ffffff", padding: "96px 56px" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
