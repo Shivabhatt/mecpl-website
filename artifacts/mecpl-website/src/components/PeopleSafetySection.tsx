@@ -58,7 +58,7 @@ const hseStats: SafetyStat[] = [
   { value: "100%", label: "PPE Compliance", Icon: ShieldCheck },
   { value: "School Facility", label: "At Labour Camp", Icon: GraduationCap },
   { value: "Regular Health Check-Ups", label: "Medical Professional On Site", Icon: HeartPulse },
-  { value: "Safety & Vertigo Tests", label: "Health Prioritized", Icon: Building2 },
+  { value: "Safety & Vertigo Tests", label: "Preparedness", Icon: Building2 },
   { value: "Hygiene Accommodation", label: "Health Prioritized", Icon: House },
 ];
 
