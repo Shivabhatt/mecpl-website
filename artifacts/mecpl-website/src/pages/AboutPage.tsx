@@ -1,15 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
+  ArrowLeft,
   ArrowRight,
-  Building,
-  Building2,
-  Construction,
-  DoorOpen,
-  Factory,
-  Landmark,
-  Pause,
-  Play,
   Quote,
   X,
 } from "lucide-react";
@@ -79,12 +72,12 @@ const values = [
 ];
 
 const sectors = [
-  { label: "RESIDENTIAL", Icon: Building2 },
-  { label: "COMMERCIAL", Icon: Building },
-  { label: "INSTITUTIONAL", Icon: Landmark },
-  { label: "INDUSTRIAL", Icon: Factory },
-  { label: "INFRASTRUCTURE", Icon: Construction },
-  { label: "INTERIORS", Icon: DoorOpen },
+  "RESIDENTIAL",
+  "COMMERCIAL",
+  "INSTITUTIONAL",
+  "INDUSTRIAL",
+  "INFRASTRUCTURE",
+  "INTERIORS",
 ];
 
 const awards = [
@@ -244,179 +237,133 @@ function PurposeSection() {
 function JourneyTimeline() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const scrollFrameRef = useRef<number | null>(null);
-  const programmaticScrollRef = useRef(false);
-  const programmaticScrollTimerRef = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  useEffect(() => {
-    const scroller = scrollRef.current;
-    const track = trackRef.current;
-    const slide = track?.children.item(activeIndex) as HTMLElement | null;
-    if (!scroller || !slide) return;
-
-    programmaticScrollRef.current = true;
-    if (programmaticScrollTimerRef.current !== null) {
-      window.clearTimeout(programmaticScrollTimerRef.current);
-    }
-    scroller.scrollTo({
-      left: slide.offsetLeft,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    });
-    programmaticScrollTimerRef.current = window.setTimeout(() => {
-      programmaticScrollRef.current = false;
-      programmaticScrollTimerRef.current = null;
-    }, 700);
-
-    return () => {
-      if (programmaticScrollTimerRef.current !== null) {
-        window.clearTimeout(programmaticScrollTimerRef.current);
-        programmaticScrollTimerRef.current = null;
-      }
-    };
-  }, [activeIndex]);
-
-  useEffect(() => {
-    if (!isPlaying) return;
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % journey.length);
-    }, 3500);
-    return () => window.clearInterval(timer);
-  }, [isPlaying]);
 
   useEffect(() => {
     const scroller = scrollRef.current;
     const track = trackRef.current;
     if (!scroller || !track) return;
+    let scrollFrame: number | null = null;
 
     const updateActiveSlide = () => {
-      if (programmaticScrollRef.current) return;
-      if (scrollFrameRef.current !== null) return;
-      scrollFrameRef.current = window.requestAnimationFrame(() => {
-        scrollFrameRef.current = null;
-        const target = scroller.scrollLeft + scroller.clientWidth * 0.35;
+      if (scrollFrame !== null) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = null;
+        const inset = Number.parseFloat(window.getComputedStyle(scroller).paddingLeft) || 0;
+        const target = scroller.getBoundingClientRect().left + scroller.clientLeft + inset;
         const slides = Array.from(track.children) as HTMLElement[];
         let closestIndex = 0;
         let closestDistance = Number.POSITIVE_INFINITY;
 
         slides.forEach((slide, index) => {
-          const distance = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - target);
+          const distance = Math.abs(slide.getBoundingClientRect().left - target);
           if (distance < closestDistance) {
             closestDistance = distance;
             closestIndex = index;
           }
         });
 
-        setActiveIndex((current) => current === closestIndex ? current : closestIndex);
+        setActiveIndex((current) => (current === closestIndex ? current : closestIndex));
       });
     };
 
     scroller.addEventListener("scroll", updateActiveSlide, { passive: true });
     return () => {
       scroller.removeEventListener("scroll", updateActiveSlide);
-      if (scrollFrameRef.current !== null) window.cancelAnimationFrame(scrollFrameRef.current);
+      if (scrollFrame !== null) window.cancelAnimationFrame(scrollFrame);
     };
   }, []);
 
+  const navigateTo = (index: number) => {
+    const scroller = scrollRef.current;
+    const track = trackRef.current;
+    const slide = track?.children.item(index) as HTMLElement | null;
+    if (!scroller || !slide) return;
+
+    const inset = Number.parseFloat(window.getComputedStyle(scroller).paddingLeft) || 0;
+    const left = scroller.scrollLeft
+      + slide.getBoundingClientRect().left
+      - scroller.getBoundingClientRect().left
+      - inset;
+    scroller.scrollTo({
+      left,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+    setActiveIndex(index);
+  };
+
   return (
-    <section id="our-journey" data-testid="section-about-journey" style={{ background: "#232529", color: "#ffffff", overflow: "hidden", position: "relative", scrollMarginTop: 80, paddingBottom: 108 }}>
-      <div style={{ padding: "80px 56px 40px", maxWidth: 1360, margin: "0 auto", textAlign: "center" }}>
-        <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+    <section
+      id="our-journey"
+      data-testid="section-about-journey"
+      className="abt-journey-section"
+      style={{ scrollMarginTop: 80 }}
+    >
+      <header className="abt-journey-header">
+        <span className="about-label-font font-montserrat abt-journey-eyebrow">
           OUR JOURNEY
         </span>
-        <h2 className="page-title-font font-montserrat text-[36px]" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: 0, lineHeight: 1.2 }}>
-          50+ Years.<br />One Continuing Journey.
+        <h2 className="page-title-font font-montserrat abt-journey-title">
+          50+ Years. <span>One Continuing Journey.</span>
         </h2>
-        <p className="font-inter" style={{ color: "rgba(255,255,255,0.62)", fontSize: "0.85rem", letterSpacing: "0.08em", margin: "18px 0 0", textTransform: "uppercase" }}>
+        <p className="font-inter abt-journey-subtitle">
           Milestones that build a stronger tomorrow
         </p>
-      </div>
+      </header>
       <div
         ref={scrollRef}
-        style={{ display: "flex", alignItems: "center", minHeight: "50vh", padding: "0 56px", overflowX: "auto", scrollSnapType: "x mandatory", overscrollBehaviorX: "contain" }}
         className="no-scrollbar abt-journey-scroll"
+        aria-label="Journey milestones"
       >
-        <div ref={trackRef} className="abt-journey-track" style={{ display: "flex", gap: 64, paddingRight: "50vw", paddingBottom: 80 }}>
-          {journey.map((item, i) => (
-            <div key={i} style={{ width: 340, flexShrink: 0, position: "relative", paddingTop: 32, scrollSnapAlign: "start" }}>
-              <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 2, background: "rgba(255,255,255,0.15)" }}>
-                <div style={{ position: "absolute", top: -5, left: 0, width: 12, height: 12, borderRadius: "50%", background: "#EC3338" }} />
+        <div ref={trackRef} className="abt-journey-track">
+          {journey.map((item, index) => (
+            <article
+              key={`${item.year}-${index}`}
+              className={`abt-journey-card${activeIndex === index ? " is-active" : ""}`}
+              aria-label={`${item.year}: ${item.title}`}
+            >
+              <div className="abt-journey-overline">
+                MILESTONE {String(index + 1).padStart(2, "0")}
               </div>
-              <div className="font-montserrat" style={{ fontSize: "2.5rem", fontWeight: 600, color: "#ffffff", lineHeight: 1, marginBottom: 16 }}>
+              <div className="abt-journey-year">
                 {item.year}
               </div>
-              <h2 className="font-montserrat" style={{ fontSize: "0.9rem", fontWeight: 600, color: "#EC3338", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 16px", lineHeight: 1.4 }}>
+              <h3 className="abt-journey-card-title">
                 {item.title}
-              </h2>
-              <p className="font-inter" style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, whiteSpace: "pre-wrap", margin: 0 }}>
+              </h3>
+              <p className="abt-journey-copy">
                 {item.text}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
-      <div
-        aria-label="Journey carousel controls"
-        style={{ position: "absolute", left: 0, right: 0, bottom: 28, display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "0 24px" }}
-      >
-        <div
-          style={{
-            minHeight: 58,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 13,
-            padding: "0 24px",
-            borderRadius: 999,
-            background: "rgba(255,255,255,0.06)",
-          }}
-        >
-          {journey.map((item, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <button
-                key={`${item.year}-${item.title}`}
-                type="button"
-                aria-label={`Show ${item.year}: ${item.title}`}
-                aria-current={isActive ? "true" : undefined}
-                onClick={() => setActiveIndex(index)}
-                style={{
-                  width: isActive ? 48 : 8,
-                  height: 8,
-                  padding: 0,
-                  border: 0,
-                  borderRadius: 999,
-                  background: isActive ? "#a9a9ad" : "#77777d",
-                  cursor: "pointer",
-                  transition: "width 220ms ease, background 220ms ease",
-                }}
-              />
-            );
-          })}
-        </div>
+      <nav className="abt-journey-controls" aria-label="Journey carousel controls">
         <button
           type="button"
-          aria-label={isPlaying ? "Pause journey carousel" : "Play journey carousel"}
-          aria-pressed={isPlaying}
-          onClick={() => setIsPlaying((playing) => !playing)}
-          style={{
-            width: 58,
-            height: 58,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: 0,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.06)",
-            color: "#ffffff",
-            cursor: "pointer",
-            flexShrink: 0,
-          }}
+          className="abt-journey-arrow"
+          aria-label="Previous milestone"
+          onClick={() => navigateTo(Math.max(0, activeIndex - 1))}
+          disabled={activeIndex === 0}
         >
-          {isPlaying ? <Pause size={21} strokeWidth={3} /> : <Play size={21} fill="currentColor" />}
+          <ArrowLeft size={19} strokeWidth={1.8} aria-hidden="true" />
         </button>
-      </div>
+        <p className="abt-journey-count" aria-live="polite">
+          <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+          <span className="abt-journey-count-divider"> / </span>
+          {String(journey.length).padStart(2, "0")}
+          <span className="abt-journey-count-year">{journey[activeIndex]?.year}</span>
+        </p>
+        <button
+          type="button"
+          className="abt-journey-arrow"
+          aria-label="Next milestone"
+          onClick={() => navigateTo(Math.min(journey.length - 1, activeIndex + 1))}
+          disabled={activeIndex === journey.length - 1}
+        >
+          <ArrowRight size={19} strokeWidth={1.8} aria-hidden="true" />
+        </button>
+      </nav>
     </section>
   );
 }
@@ -803,50 +750,38 @@ export default function AboutPage() {
         </div>
       </section>
       {/* ─── 08 — TODAY, WE BUILD ACROSS ─────────────────────── */}
-      <section data-testid="section-about-sectors" className="abt-sectors-section" style={{ background: "#ffffff", padding: "96px 56px" }}>
-        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
+      <section data-testid="section-about-sectors" className="abt-sectors-section">
+        <div className="abt-sectors-inner">
           <RevealBlock>
-            <div style={{ textAlign: "center", marginBottom: 64 }}>
-              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+            <header className="abt-sectors-header">
+              <span className="abt-sectors-eyebrow font-montserrat">
                 TODAY, WE BUILD ACROSS
               </span>
-              <h2 className="font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "#232529", letterSpacing: "-0.02em", margin: "0", lineHeight: 1.1 }}>
-                Diverse Spaces.<br/>A Stronger India.
+              <h2 className="abt-sectors-title font-montserrat">
+                Diverse Spaces. A Stronger India.
               </h2>
-            </div>
+            </header>
           </RevealBlock>
 
           <RevealBlock delay={100}>
-            <div className="abt-sectors-list" style={{ marginBottom: 80 }}>
-              {sectors.map(({ label, Icon }) => (
-                <div key={label} className="font-montserrat" style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 14,
-                  fontSize: "0.72rem",
-                  fontWeight: 600,
-                  color: "#EC3338",
-                  letterSpacing: "0.1em",
-                  textAlign: "center",
-                }}>
-                  <Icon size={30} strokeWidth={1.5} color="#949599" aria-hidden="true" />
-                  <span>{label}</span>
+            <div className="abt-sectors-list" aria-label="Sectors MECPL serves">
+              {sectors.map((label) => (
+                <div key={label} className="abt-sector-tab font-montserrat">
+                  {label}
                 </div>
               ))}
             </div>
           </RevealBlock>
 
           <RevealBlock delay={150}>
-            <div className="abt-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", borderTop: "1px solid rgba(0,0,0,0.08)", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
-              {stats.map((s, i) => (
-                <div key={s.label} className="abt-stat-item font-montserrat" style={{
-                  padding: "44px 32px",
-                  borderRight: i < stats.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
-                  textAlign: "center",
-                }}>
-                  <div style={{ fontWeight: 600, fontSize: "clamp(2.2rem, 3.5vw, 3rem)", color: "#232529", lineHeight: 1, marginBottom: 10 }}>{s.val}</div>
-                  <div style={{ fontSize: "0.7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "#949599" }}>{s.label}</div>
+            <div className="abt-stats-grid">
+              {stats.map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className={`abt-stat-item font-montserrat${index === 1 ? " is-featured" : ""}`}
+                >
+                  <div className="abt-stat-value">{stat.val}</div>
+                  <div className="abt-stat-label">{stat.label}</div>
                 </div>
               ))}
             </div>

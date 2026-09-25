@@ -77,7 +77,6 @@ const projects = [
   { name: "Panchshil Highrise Towers",   location: "Wagholi, Pune",       image: "assets/projects/HIGH-RISE-1-scaled.jpg" },
   { name: "Godrej Nurture",              location: "Mamurdi, Pune",      image: "assets/projects/Godrej-Forest-grove.jpg" },
   { name: "EON Phase II",                location: "Kharadi, Pune",      image: "assets/projects/Eonwest.jpg" },
-  { name: "Mahindra Electric Facility", location: "Chakan, Pune",        image: "assets/projects/PRAJ-INDUSTRIES.webp" },
   { name: "Kalpataru Jade Residences",   location: "Baner, Pune",         image: "assets/projects/KRC-scaled-e1700730314593.jpg" },
 ];
 
@@ -907,13 +906,7 @@ export default function HomePage() {
         data-testid="section-projects"
         className="bg-white py-24 lg:py-32 border-t border-mecpl-dark/10 relative overflow-hidden"
       >
-        {/* Engineering grid background */}
-        <div className="absolute inset-0 pointer-events-none opacity-20" style={{
-          backgroundImage: `linear-gradient(rgba(35, 37, 41, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(35, 37, 41, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '4rem 4rem'
-        }} />
-
-        <div className="max-w-none mx-auto px-5 lg:px-0 relative z-10">
+        <div className="max-w-none mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}
           <div className="flex flex-col items-center text-center gap-8 mb-12 lg:mb-16">
             <div className="w-full text-center" data-scroll-reveal="text">
@@ -932,14 +925,15 @@ export default function HomePage() {
 
           </div>
 
-          {/* The Expanding Matrix */}
-           <div className="relative w-full h-[700px] lg:h-[75vh] min-h-[600px] max-h-[850px] bg-mecpl-dark/10 p-[1px] flex flex-col lg:flex-row-reverse gap-[1px]">
-            {/* Corner crosshairs */}
-            <div className="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-mecpl-dark pointer-events-none z-10" />
-            <div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-mecpl-dark pointer-events-none z-10" />
-            <div className="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-mecpl-dark pointer-events-none z-10" />
-            <div className="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-mecpl-dark pointer-events-none z-10" />
-
+          {/* Expanding project gallery */}
+          <div className="relative">
+            <div className="pointer-events-none absolute -inset-[5px] z-20" aria-hidden="true">
+              <span className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[#232529]" />
+              <span className="absolute right-0 top-0 h-3 w-3 border-r border-t border-[#232529]" />
+              <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-[#232529]" />
+              <span className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#232529]" />
+            </div>
+            <div className="relative flex h-[600px] w-full flex-col gap-[6px] overflow-hidden rounded-[9px] bg-white p-[5px] shadow-[0_12px_36px_rgba(35,37,41,0.12)] sm:h-[640px] lg:h-[clamp(300px,35vw,460px)] lg:flex-row">
             {projects.map((proj, i) => {
               const isActive = activeProj === i;
               return (
@@ -950,95 +944,57 @@ export default function HomePage() {
                   data-testid={`button-proj-${i}`}
                   onMouseEnter={() => setActiveProj(i)}
                   onFocus={() => setActiveProj(i)}
-                  className={`group relative block overflow-hidden bg-white transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] motion-reduce:transition-none cursor-pointer ${
+                  className={`group relative block min-w-0 overflow-hidden rounded-[6px] bg-mecpl-dark transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] motion-reduce:transition-none focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mecpl-red ${
                     isActive
-                      ? 'flex-[1_1_100%] lg:flex-[1_1_60%]'
-                      : 'flex-[0_0_72px] lg:flex-[0_0_8%]'
+                      ? "flex-[1_1_100%] lg:flex-[1_1_55%]"
+                      : "flex-[0_0_56px] lg:flex-[0_0_9%]"
                   }`}
                 >
-                  {/* The Background Image */}
-                  <div className={`absolute inset-0 bg-mecpl-dark transition-opacity duration-700 motion-reduce:transition-none ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                  <div className="absolute inset-0 bg-mecpl-dark">
                     <img
                       src={`${assetBase}${proj.image}`}
-                      alt={proj.name}
+                      alt=""
                       loading={i === 0 ? "eager" : "lazy"}
                       decoding="async"
-                      className={`w-full h-full object-cover transition-all duration-1000 motion-reduce:transition-none ${isActive ? 'scale-100 opacity-90' : 'scale-110 opacity-0'}`}
+                      className={`h-full w-full object-cover transition-[transform,opacity] duration-700 motion-reduce:transition-none ${
+                        isActive ? "scale-100 opacity-100" : "scale-105 opacity-85"
+                      }`}
                       style={{
                         display: "block",
-                        position: "relative",
-                        zIndex: 1,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        opacity: isActive ? 0.9 : 0,
                       }}
                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10" />
                   </div>
 
-                  {/* Inactive State Content */}
-                  <div className={`absolute inset-0 flex flex-row lg:flex-col items-center justify-between lg:justify-start px-5 py-0 lg:py-10 lg:px-0 transition-opacity duration-300 motion-reduce:transition-none ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-300'}`}>
-
-                    {/* Mobile: Group Number and Name on left */}
-                    <div className="flex items-center gap-4 lg:hidden w-full overflow-hidden pr-4">
-                       <span className="font-montserrat text-[12px] font-semibold tracking-widest text-mecpl-text uppercase truncate transition-colors group-hover:text-mecpl-red">
-                        {proj.name}
-                      </span>
-                    </div>
-
-                    {/* Desktop: Vertical Name */}
-                    <div className="hidden lg:flex flex-1 items-center justify-center relative w-full">
-                      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-mecpl-steel/20 group-hover:bg-mecpl-red/30 transition-colors" />
-                      <span
-                        className="font-montserrat text-[14px] xl:text-[16px] font-semibold tracking-[0.15em] text-mecpl-text uppercase whitespace-nowrap group-hover:text-mecpl-red transition-colors z-10 bg-white py-6"
-                        style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-                      >
-                        {proj.name}
-                      </span>
-                    </div>
-
-                    <div className="lg:hidden text-mecpl-steel group-hover:text-mecpl-red transition-colors flex-shrink-0">
-                      <ArrowRight size={16} />
-                    </div>
-                  </div>
-
-                  {/* Active project details stay readable over every photo. */}
                   <div
-                    className={`absolute inset-x-0 bottom-0 z-10 p-4 lg:inset-x-auto lg:left-[14%] lg:right-0 lg:p-6 xl:p-8 transition-all duration-500 motion-reduce:transition-none ${
-                      isActive ? "translate-y-0 opacity-100 delay-150" : "translate-y-6 opacity-0 pointer-events-none"
-                    }`}
+                    className="absolute inset-x-0 bottom-0 z-10 px-3 pb-3 sm:px-4 sm:pb-4 lg:px-2 lg:pb-4"
                   >
-                    <div className="max-w-3xl">
-                      <h2
-                        className="font-montserrat text-3xl md:text-4xl font-semibold normal-case leading-[1.08] tracking-[-0.02em] text-white"
-                        style={{ textShadow: "0 2px 16px rgba(0,0,0,0.95), 0 4px 30px rgba(0,0,0,0.8)" }}
+                    <div className="min-w-0">
+                      <h3
+                        className={`font-montserrat font-semibold leading-[1.12] tracking-[-0.02em] text-white transition-[font-size] duration-500 ${
+                          isActive
+                            ? "text-xl sm:text-2xl lg:text-[clamp(20px,2.25vw,30px)]"
+                            : "text-[11px] sm:text-xs lg:text-[clamp(8px,0.62vw,9px)] text-balance"
+                        }`}
                       >
                         {proj.name}
-                      </h2>
+                      </h3>
                       <p
-                        className="mt-3 flex items-center gap-3 font-montserrat text-base font-medium leading-relaxed text-white"
-                        style={{ textShadow: "0 2px 12px rgba(0,0,0,0.95)" }}
+                        className={`mt-1 min-w-0 font-montserrat font-medium leading-[1.2] text-white/90 ${
+                          isActive
+                            ? "text-[11px] sm:text-xs lg:text-[13px]"
+                            : "text-[10px] sm:text-[11px] lg:text-[clamp(7px,0.68vw,10px)]"
+                        }`}
                       >
-                        <span className="h-2 w-2 shrink-0 rounded-full bg-mecpl-red" aria-hidden="true" />
                         {proj.location}
                       </p>
                     </div>
                   </div>
 
-                   {/* MECPL-red active/hover treatment */}
-                   <div
-                     className={`absolute inset-y-0 left-0 z-20 flex w-1.5 items-center justify-center transition-opacity duration-300 pointer-events-none lg:w-[12%] ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
-                     style={{ backgroundColor: "var(--mecpl-red)" }}
-                   >
-                     <span className="hidden font-montserrat text-[11px] font-semibold uppercase tracking-[0.18em] text-white lg:block" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
-                       {proj.name}
-                     </span>
-                    </div>
-                   <div className={`absolute inset-0 border-[1.5px] transition-colors pointer-events-none z-20 ${isActive ? "border-mecpl-red" : "border-transparent group-hover:border-mecpl-red"}`} />
-                  </Link>
+                </Link>
               )
             })}
+            </div>
           </div>
 
           {/* Mobile Button (Hidden on Desktop) */}

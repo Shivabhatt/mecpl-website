@@ -516,20 +516,7 @@ html[data-theme="light"] {
     transform: none !important;
   }
   .about-page .abt-journey-scroll {
-    display: block !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-    padding: 0 20px 64px !important;
-  }
-  .about-page .abt-journey-track {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 36px !important;
-    padding: 0 !important;
-    transform: none !important;
-  }
-  .about-page .abt-journey-track > div {
-    width: auto !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -1631,5 +1618,642 @@ html[data-theme="light"] select {
 @media (max-width: 800px) {
   .home-page-typography .hp-banner-line {
     font-size: clamp(14px, 4vw, 22px) !important;
+  }
+}
+
+.abt-journey-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: 64px;
+  background: #f8f7f4;
+  color: #232529;
+}
+
+.abt-journey-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-position: center 46%;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.abt-journey-header {
+  position: relative;
+  z-index: 1;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 78px 32px 10px;
+  text-align: center;
+}
+
+.abt-journey-eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  color: #ec3338;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.about-page .abt-journey-title {
+  margin: 0 !important;
+  color: #232529 !important;
+  font-size: clamp(2.15rem, 4.2vw, 3.35rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1.12 !important;
+  text-align: center;
+  text-transform: none !important;
+}
+
+.abt-journey-title span {
+  display: block;
+}
+
+.abt-journey-subtitle {
+  margin: 17px 0 0;
+  color: #737478;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.about-page .abt-journey-scroll {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 310px;
+  padding: 34px max(24px, calc((100vw - 1240px) / 2)) 34px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.abt-journey-track {
+  display: flex;
+  width: max-content;
+  gap: 36px;
+  padding-right: max(24px, calc((100vw - 1240px) / 2));
+}
+
+.abt-journey-card {
+  position: relative;
+  flex: 0 0 clamp(280px, 28vw, 360px);
+  padding-top: 29px;
+  scroll-snap-align: start;
+}
+
+.abt-journey-rail {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: calc(100% + 36px);
+  height: 1px;
+  background: rgba(35, 37, 41, 0.2);
+}
+
+.abt-journey-card:last-child .abt-journey-rail {
+  width: 100%;
+}
+
+.abt-journey-rail span {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #f8f7f4;
+  border-radius: 50%;
+  background: #8f9093;
+  box-shadow: 0 0 0 1px rgba(35, 37, 41, 0.16);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.abt-journey-card.is-active .abt-journey-rail span {
+  background: #ec3338;
+  box-shadow: 0 0 0 1px rgba(236, 51, 56, 0.32);
+}
+
+.abt-journey-year {
+  margin-bottom: 16px;
+  color: #34363a;
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  transition: color 180ms ease;
+}
+
+.abt-journey-card.is-active .abt-journey-year {
+  color: #ec3338;
+}
+
+.abt-journey-card-title {
+  margin: 0 0 13px;
+  color: #292b2f;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  line-height: 1.55;
+  text-transform: uppercase;
+}
+
+.abt-journey-copy {
+  max-width: 34ch;
+  margin: 0;
+  color: #66686c;
+  font-size: 0.83rem;
+  font-weight: 400;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.abt-journey-controls {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.abt-journey-arrow {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(35, 37, 41, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.56);
+  color: #232529;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.abt-journey-arrow:first-child {
+  justify-self: start;
+}
+
+.abt-journey-arrow:last-child {
+  justify-self: end;
+}
+
+.abt-journey-arrow:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.abt-journey-arrow:not(:disabled):hover,
+.abt-journey-arrow:not(:disabled):focus-visible {
+  border-color: #ec3338;
+  background: #ec3338;
+  color: #ffffff;
+}
+
+.abt-journey-arrow:focus-visible {
+  outline: 2px solid #ec3338;
+  outline-offset: 3px;
+}
+
+.abt-journey-count {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  color: #77797d;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+}
+
+.abt-journey-count > span:first-child {
+  color: #232529;
+  font-size: 0.82rem;
+}
+
+.abt-journey-count-divider {
+  color: #b0b1b3;
+}
+
+.abt-journey-count-year {
+  margin-left: 12px;
+  color: #ec3338;
+}
+
+@media (max-width: 700px) {
+  .abt-journey-section {
+    padding-bottom: 46px;
+  }
+
+  .abt-journey-header {
+    padding: 60px 22px 6px;
+  }
+
+  .abt-journey-eyebrow {
+    margin-bottom: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.23em;
+  }
+
+  .about-page .abt-journey-title {
+    font-size: clamp(1.9rem, 8vw, 2.5rem) !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .abt-journey-subtitle {
+    max-width: 28rem;
+    margin: 14px auto 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .about-page .abt-journey-scroll {
+    min-height: 285px;
+    padding: 29px 22px 30px;
+  }
+
+  .abt-journey-track {
+    gap: 24px;
+    padding-right: 22px;
+  }
+
+  .abt-journey-card {
+    flex-basis: min(78vw, 320px);
+  }
+
+  .abt-journey-year {
+    font-size: 2.7rem;
+  }
+
+  .abt-journey-controls {
+    padding: 0 22px;
+  }
+
+  .abt-journey-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .abt-journey-count-year {
+    margin-left: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .abt-journey-scroll {
+    scroll-behavior: auto !important;
+  }
+
+  .abt-journey-rail span,
+  .abt-journey-year,
+  .abt-journey-arrow {
+    transition: none !important;
+  }
+}
+
+/* The journey panels follow the site's clean charcoal-and-red feature strip. */
+.abt-journey-section {
+  padding-bottom: 60px;
+  background: #ffffff;
+}
+
+.abt-journey-backdrop {
+  display: none;
+}
+
+.abt-journey-header {
+  padding-top: 62px;
+  padding-bottom: 20px;
+}
+
+.abt-journey-eyebrow {
+  margin-bottom: 10px;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+
+.about-page .abt-journey-title {
+  font-size: clamp(1.9rem, 3.3vw, 2.8rem) !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.15 !important;
+}
+
+.abt-journey-title span {
+  display: inline;
+}
+
+.abt-journey-subtitle {
+  margin-top: 12px;
+  color: #55575b;
+  font-size: 0.67rem;
+  letter-spacing: 0.09em;
+}
+
+.about-page .abt-journey-scroll {
+  min-height: 0;
+  padding: 18px max(24px, calc((100vw - 1240px) / 2)) 24px;
+}
+
+.abt-journey-track {
+  gap: 0;
+  padding-right: max(24px, calc((100vw - 1240px) / 2));
+}
+
+.abt-journey-card {
+  display: flex;
+  min-height: 278px;
+  flex: 0 0 clamp(300px, calc((100vw - 200px) / 3), 420px);
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 34px 30px;
+  background: #232529;
+  color: #ffffff;
+  transition: background-color 200ms ease;
+}
+
+.abt-journey-card.is-active {
+  background: #ec3338;
+}
+
+.abt-journey-overline {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+}
+
+.abt-journey-year,
+.abt-journey-card.is-active .abt-journey-year {
+  margin-bottom: 14px;
+  color: #ffffff;
+  font-size: clamp(2.35rem, 3.5vw, 3rem);
+  letter-spacing: -0.035em;
+}
+
+.about-page .abt-journey-card-title {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.045em;
+  line-height: 1.5;
+}
+
+.abt-journey-copy {
+  max-width: 36ch;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.75rem;
+  line-height: 1.65;
+}
+
+.abt-journey-controls {
+  padding: 0 max(24px, calc((100vw - 1240px) / 2));
+}
+
+.abt-journey-arrow {
+  border-color: rgba(35, 37, 41, 0.2);
+  background: #f5f5f5;
+}
+
+.abt-journey-arrow:disabled {
+  opacity: 0.38;
+}
+
+@media (max-width: 700px) {
+  .abt-journey-section {
+    padding-bottom: 42px;
+  }
+
+  .abt-journey-header {
+    padding: 52px 20px 12px;
+  }
+
+  .about-page .abt-journey-title {
+    font-size: clamp(1.85rem, 7.7vw, 2.4rem) !important;
+  }
+
+  .abt-journey-subtitle {
+    max-width: 25rem;
+    font-size: 0.62rem;
+  }
+
+  .about-page .abt-journey-scroll {
+    min-height: 0;
+    padding: 16px 22px 20px;
+  }
+
+  .abt-journey-track {
+    padding-right: 22px;
+  }
+
+  .abt-journey-card {
+    min-height: 250px;
+    flex-basis: calc(100vw - 44px);
+    padding: 28px 26px 25px;
+  }
+
+  .abt-journey-year,
+  .abt-journey-card.is-active .abt-journey-year {
+    font-size: 2.55rem;
+  }
+
+  .abt-journey-controls {
+    padding: 0 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-journey-card {
+    transition: none;
+  }
+}
+
+/* About sectors: compact editorial header, segmented categories, bold stat panels. */
+.about-page .abt-sectors-section {
+  width: 100%;
+  padding: 0;
+  background: #ffffff;
+}
+
+.about-page .abt-sectors-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.about-page .abt-sectors-header {
+  margin: 0;
+  padding: 32px 20px 26px;
+  text-align: center;
+}
+
+.about-page .abt-sectors-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  color: #ec3338;
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.about-page .abt-sectors-title {
+  margin: 0;
+  color: #232529;
+  font-size: clamp(22px, 2.7vw, 31px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.about-page .abt-sectors-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  align-items: stretch;
+  margin: 0;
+  border-top: 1px solid #bfc0c2;
+  border-bottom: 1px solid #bfc0c2;
+}
+
+.about-page .abt-sector-tab {
+  display: flex;
+  min-width: 0;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  border-right: 1px solid #d7d8da;
+  color: #87898c;
+  background: #ffffff;
+  font-size: clamp(5px, 0.64vw, 7px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.about-page .abt-sector-tab:nth-child(even) {
+  background: #f2f2f3;
+}
+
+.about-page .abt-sector-tab:last-child {
+  border-right: 0;
+}
+
+.about-page .abt-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.about-page .abt-stats-grid .abt-stat-item {
+  display: flex;
+  min-width: 0;
+  min-height: 94px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 18px clamp(22px, 7vw, 72px);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  background: #232529;
+  text-align: left;
+}
+
+.about-page .abt-stats-grid .abt-stat-item.is-featured {
+  background: #ec3338;
+}
+
+.about-page .abt-stats-grid .abt-stat-item:last-child {
+  border-right: 0;
+}
+
+.about-page .abt-stat-value {
+  margin-bottom: 7px;
+  color: #ffffff;
+  font-size: clamp(22px, 3vw, 31px);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1;
+}
+
+.about-page .abt-stat-item:last-child .abt-stat-value {
+  font-size: clamp(15px, 2.5vw, 29px);
+  letter-spacing: 0.01em;
+}
+
+.about-page .abt-stat-label {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 5px;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .about-page .abt-sectors-header {
+    padding: 28px 14px 20px;
+  }
+
+  .about-page .abt-sectors-title {
+    font-size: clamp(16px, 4.4vw, 24px) !important;
+    line-height: 1.2;
+  }
+
+  .about-page .abt-sectors-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .about-page .abt-sector-tab {
+    min-height: 34px;
+    border-bottom: 1px solid #d7d8da;
+    font-size: 7px;
+  }
+
+  .about-page .abt-sector-tab:nth-child(3n) {
+    border-right: 0;
+  }
+
+  .about-page .abt-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .about-page .abt-stats-grid .abt-stat-item {
+    min-height: 86px;
+    padding: 14px clamp(11px, 4.5vw, 22px);
+  }
+
+  .about-page .abt-stat-value {
+    font-size: clamp(17px, 5.5vw, 25px);
+  }
+
+  .about-page .abt-stat-item:last-child .abt-stat-value {
+    font-size: clamp(8px, 2.6vw, 12px);
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .about-page .abt-stat-label {
+    font-size: 4.5px;
+    letter-spacing: 0.07em;
   }
 }
