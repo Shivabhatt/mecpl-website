@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --background: 210 20% 97%;
+  --foreground: 220 34% 13%;
+  --border: 220 13% 91%;
+  --card: 210 20% 97%;
+  --card-foreground: 220 34% 13%;
+  --popover: 210 20% 97%;
+  --popover-foreground: 220 34% 13%;
+  --primary: 358 83% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 20% 97%;
+  --secondary-foreground: 220 34% 13%;
+  --muted: 220 15% 32%;
+  --muted-foreground: 220 15% 32%;
+  --accent: 358 83% 56%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 220 13% 91%;
+  --ring: 358 83% 56%;
+  --app-font-body: var(--font-montserrat);
+  --app-font-display: var(--font-montserrat);
+  --app-font-sans: var(--font-montserrat);
+  --radius: 0.125rem;
+  --mecpl-dark: #232529;
+  --mecpl-card: #ffffff;
+  --mecpl-red: #EC3338;
+  --mecpl-steel: #949599;
+  --mecpl-text: #232529;
+  --mecpl-text-muted: #949599;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-inter: var(--font-montserrat);
+}
+
+html[data-theme="light"] {
+  --mecpl-dark: #232529;
+  --mecpl-card: #ffffff;
+  --mecpl-text: #232529;
+  --mecpl-text-muted: #949599;
+}

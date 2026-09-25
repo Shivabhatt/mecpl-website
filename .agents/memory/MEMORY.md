@@ -9,3 +9,4 @@
 - [GitHub Pages direct routes](github-pages-direct-routes.md) — public SPA routes need generated route app shells; 404.html alone preserves rendering but still returns HTTP 404.
 - [MECPL mobile asset verification](mecpl-mobile-asset-verification.md) — reproduce reports at 402×874 and inspect natural dimensions plus a rendered capture before changing working asset paths or layout.
 - [MECPL media optimization](mecpl-media-optimization.md) — keep public URLs stable while compressing project JPEGs, large PNGs, and muted background videos with posters.
+- [About section preview checks](mecpl-about-preview-checks.md) — SPA hash screenshots may remain at the About hero; use a component-level preview for direct section visual checks.

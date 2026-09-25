@@ -42,3 +42,577 @@ mtime_ms = 1790251886779
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/594edd81-9301-48bf-a31b-2c12fb17d626/b6531cf1-df7f-4814-8f0b-c91db9cd7ff5"
 storage_version_token = "1790251969607278"
 content_type = "image/png"
+
+[[outputs]]
+id = "DPVC6N8p77gUxYtttQifX"
+uri = "file://screenshots/home-projects-desktop.png"
+type = "image"
+title = "MECPL Home Projects — 5-card desktop"
+description = "Updated Home gallery with Mahindra Electric Facility hidden; the full Projects page listing remains unchanged."
+logical_id = "c9e79f43-cc45-49f6-b9be-ee800cb9e710"
+content_hash = "sha256:b7e9a719d297b8d2a88b9cb093c28879e034747d62425b96d5212fb3c11feea8"
+size = 840631
+mtime_ms = 1790327663012
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/c9e79f43-cc45-49f6-b9be-ee800cb9e710/44d5d349-6885-49b7-84dd-1afd38d07583"
+storage_version_token = "1790327680036627"
+content_type = "image/png"
+
+[[outputs]]
+id = "DjFhISyfRV-DfWm290xra"
+uri = "file://screenshots/home-page-desktop.jpg"
+type = "image"
+title = "MECPL Home page — desktop"
+description = "Current local Home page screenshot at 1280×900."
+logical_id = "0fd98c5a-7c3e-4b31-8cad-f3f96581f19c"
+content_hash = "sha256:938fff87921071627320ec5200814f566f37493e953b72cd83b9857f9316ade4"
+size = 80269
+mtime_ms = 1790328534468
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/0fd98c5a-7c3e-4b31-8cad-f3f96581f19c/86b2512f-ae10-42b8-9fb7-3a59b0d8484b"
+storage_version_token = "1790328556726437"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "PyKFLOFJZwAixyorT1i8Y"
+uri = "file://screenshots/about-us-desktop.jpg"
+type = "image"
+title = "MECPL About Us — desktop"
+description = "Current local About Us page screenshot at 1280×900."
+logical_id = "5fba3e44-1164-44c0-b032-0ea0ca89aa69"
+content_hash = "sha256:65fc4b0cfe43661ae61cec44545bc6e2208a18e9a72ec4717470764884be3f41"
+size = 86491
+mtime_ms = 1790328536832
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/5fba3e44-1164-44c0-b032-0ea0ca89aa69/77ee1d03-48ee-4b56-ba27-2f7878b227bb"
+storage_version_token = "1790328558100682"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "GrDCgC19NRAIKbP7QpbxO"
+uri = "file://screenshots/gh-pages-home/00-full-homepage.png"
+type = "image"
+title = "MECPL Home — full page"
+description = "Full-length capture of the live GitHub Pages homepage after the gh-pages update."
+logical_id = "3dbec216-faa5-45f9-950d-07bb831c4cbf"
+content_hash = "sha256:cf79e8691fec81bcfafb97e9e744a96a664d065281058b47826dfec477172336"
+size = 3550385
+mtime_ms = 1790329345724
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3dbec216-faa5-45f9-950d-07bb831c4cbf/c4b482b0-66c9-4e5d-ac4d-e15e2894332a"
+storage_version_token = "1790329399691503"
+content_type = "image/png"
+
+[[outputs]]
+id = "vGuBHdzD5pB-NvLEb_Btg"
+uri = "file://screenshots/gh-pages-home/01-hero.png"
+type = "image"
+title = "Home — Hero"
+description = "Live GitHub Pages homepage hero section."
+logical_id = "338f0272-8d4a-4abd-8466-76c5665341e1"
+content_hash = "sha256:6bb94c335ea5be5f8c37c9cc835724a5cbfd9f6f066fea605bdb2f3354a79fff"
+size = 1044853
+mtime_ms = 1790329346996
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/338f0272-8d4a-4abd-8466-76c5665341e1/67ee0e87-331b-4f8c-9042-5da7e6fde781"
+storage_version_token = "1790329401011851"
+content_type = "image/png"
+
+[[outputs]]
+id = "ziBNcDofTGH1h5ExcIvX4"
+uri = "file://screenshots/gh-pages-home/02-recognition.png"
+type = "image"
+title = "Home — Recognition"
+description = "Recognition and Small Giants section."
+logical_id = "0f46787f-ac8d-4de5-bdd4-0b266d3df972"
+content_hash = "sha256:3a4f7dddfc3d75a28f4704b790da9585b68b84742eabc8aa2bdd5be6c8ae44b6"
+size = 345709
+mtime_ms = 1790329348072
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/0f46787f-ac8d-4de5-bdd4-0b266d3df972/ae2e520b-ec99-4435-9e82-8529f758223d"
+storage_version_token = "1790329402307774"
+content_type = "image/png"
+
+[[outputs]]
+id = "mfIsHOafXWwte-hUdxIBo"
+uri = "file://screenshots/gh-pages-home/03-stats.png"
+type = "image"
+title = "Home — Stats"
+description = "Company statistics section."
+logical_id = "d22524aa-aa06-4ad9-937e-3c9a9c46f1c7"
+content_hash = "sha256:31145cb48cdd6501bb1018c9131d645ac3f6457c42be984c9bfbffc1a9307557"
+size = 395184
+mtime_ms = 1790329349112
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/d22524aa-aa06-4ad9-937e-3c9a9c46f1c7/d18cc338-500f-4507-a151-bd9d0d1915ee"
+storage_version_token = "1790329403670993"
+content_type = "image/png"
+
+[[outputs]]
+id = "QtZfeuD8Lr2e_vgvFslqc"
+uri = "file://screenshots/gh-pages-home/04-iso-certifications.png"
+type = "image"
+title = "Home — ISO certifications"
+description = "ISO certification badges section."
+logical_id = "4ec88411-911c-41a8-9c11-13b6d7fdfbcb"
+content_hash = "sha256:0403031481c4d907a4fd2a63e8b5059cf113888e5dbd8f90db6cf69975af04ad"
+size = 512985
+mtime_ms = 1790329350220
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/4ec88411-911c-41a8-9c11-13b6d7fdfbcb/5934004c-8021-4353-88cb-d43ab7b3711f"
+storage_version_token = "1790329405013637"
+content_type = "image/png"
+
+[[outputs]]
+id = "pxv5gEvkVh-3ppmz1ZC8K"
+uri = "file://screenshots/gh-pages-home/05-about.png"
+type = "image"
+title = "Home — About MECPL"
+description = "Company introduction section."
+logical_id = "d3b02394-c195-4ffd-b311-e66d7fc5d4c3"
+content_hash = "sha256:96e4fd31ffa452d63c031836b47e0309d4540b3b136cdc6aa4e7acc236c2ee12"
+size = 713486
+mtime_ms = 1790329351360
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/d3b02394-c195-4ffd-b311-e66d7fc5d4c3/44aa3f88-55a8-49da-be33-123a50037042"
+storage_version_token = "1790329406369613"
+content_type = "image/png"
+
+[[outputs]]
+id = "96J8O_jAAYEQcQRTf_CO0"
+uri = "file://screenshots/gh-pages-home/06-services.png"
+type = "image"
+title = "Home — Services"
+description = "Services section."
+logical_id = "7e13b4d7-55c9-4579-adf4-358ee6a0db8e"
+content_hash = "sha256:84fc90f3aabcde09efb3e8691b0d5d2644de32e9777727648223bd459eb36b1d"
+size = 773625
+mtime_ms = 1790329352564
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/7e13b4d7-55c9-4579-adf4-358ee6a0db8e/ebfeeb6b-8216-42e9-ab42-427f6f2ab6ac"
+storage_version_token = "1790329407661566"
+content_type = "image/png"
+
+[[outputs]]
+id = "-qIN952swsR3uNLXC9eC0"
+uri = "file://screenshots/gh-pages-home/07-featured-projects.png"
+type = "image"
+title = "Home — Featured projects"
+description = "Landmark Works featured projects section."
+logical_id = "bc755a90-89dc-4ad9-bfd9-fcc1bd002225"
+content_hash = "sha256:7f01418a67d8cc050c05bf4bb315dbbc7d882f91554132529e48ea884e354d04"
+size = 1079311
+mtime_ms = 1790329353740
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/bc755a90-89dc-4ad9-bfd9-fcc1bd002225/6f976b95-7b5e-44ed-9b6b-9d75d25fccbb"
+storage_version_token = "1790329408955590"
+content_type = "image/png"
+
+[[outputs]]
+id = "igwe8GZ-tmpcS26Sazt3F"
+uri = "file://screenshots/gh-pages-home/08-rising-projects.png"
+type = "image"
+title = "Home — Ongoing projects"
+description = "Rising As We Speak project section."
+logical_id = "f9c71039-7929-4256-859b-48346d57a6ed"
+content_hash = "sha256:3b69e5c34b970bf29c1c952891750ca96f87335af3113137c3aa606bb0112283"
+size = 917972
+mtime_ms = 1790329354900
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/f9c71039-7929-4256-859b-48346d57a6ed/e2fc3d89-3113-42b9-9956-9b2270a626ec"
+storage_version_token = "1790329410243079"
+content_type = "image/png"
+
+[[outputs]]
+id = "ebuhjQ5dCF-Il8u2NudsK"
+uri = "file://screenshots/gh-pages-home/09-people-safety.png"
+type = "image"
+title = "Home — People and safety"
+description = "People, safety, and team section."
+logical_id = "b5cc8586-eafa-453b-b9b5-72316916ed31"
+content_hash = "sha256:93c046cd4fe21951e6bda456898e23cdfbc2fd5dcbfd0af5d0a4d3221bdef39d"
+size = 575794
+mtime_ms = 1790329355964
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/b5cc8586-eafa-453b-b9b5-72316916ed31/c781d548-f632-4b50-8824-dad4e9bad82a"
+storage_version_token = "1790329411545500"
+content_type = "image/png"
+
+[[outputs]]
+id = "CEoQHwIO5gT1cQDG913os"
+uri = "file://screenshots/gh-pages-home/10-testimonials.png"
+type = "image"
+title = "Home — Testimonials"
+description = "Client testimonials section."
+logical_id = "74bf5d6d-e133-45f1-9932-f9c5cef6b7a0"
+content_hash = "sha256:1d5f5846bf7795b00107377a35a8bee7ba1f707aadc1f56ca83c2dc379ee76d8"
+size = 117567
+mtime_ms = 1790329356984
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/74bf5d6d-e133-45f1-9932-f9c5cef6b7a0/dd41a77a-8d0e-4789-851f-19fcbc782c6e"
+storage_version_token = "1790329412842042"
+content_type = "image/png"
+
+[[outputs]]
+id = "7blG8FIyWKEgEBsBWYPel"
+uri = "file://screenshots/gh-pages-home/11-clients.png"
+type = "image"
+title = "Home — Clients"
+description = "Trusted Partners client logo section."
+logical_id = "9eb34ebf-1db6-4d1b-b9d6-c811e6913687"
+content_hash = "sha256:b04607bd5fb246f1707980c639511c04798b5c149ed98ab1e6654d065e910b09"
+size = 163183
+mtime_ms = 1790329358004
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/9eb34ebf-1db6-4d1b-b9d6-c811e6913687/0a17581b-2611-4f67-a797-9206247ecd85"
+storage_version_token = "1790329414150641"
+content_type = "image/png"
+
+[[outputs]]
+id = "KwFXSJ869SlkIVujNb0YK"
+uri = "file://screenshots/gh-pages-home/12-footer.png"
+type = "image"
+title = "Home — Footer"
+description = "Live website footer."
+logical_id = "09cbaf10-d852-4ab3-acb1-a9d2ff5d06a8"
+content_hash = "sha256:be5f64b8e4444628d06d5ff41d0fd638f13f3f76ce42824798f191ce279150f9"
+size = 152020
+mtime_ms = 1790329359016
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/09cbaf10-d852-4ab3-acb1-a9d2ff5d06a8/243d978b-e6b2-4771-9bc8-83cd4ea045cb"
+storage_version_token = "1790329415458417"
+content_type = "image/png"
+
+[[outputs]]
+id = "VCBM4SpxAVQdrzprJYH6r"
+uri = "file://screenshots/live-sections/home/00-full-home.png"
+type = "image"
+title = "Home page — full page"
+description = "Full live home page, 1440px wide, 7,688px tall."
+logical_id = "f99c820a-cd39-49b3-a0f7-8a981ec60a8a"
+content_hash = "sha256:9d6ae46b84cfbb31052b3197baeaa144bcb3979108bc57b91b75da038334e35c"
+size = 3196887
+mtime_ms = 1790330895012
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/f99c820a-cd39-49b3-a0f7-8a981ec60a8a/01a6462f-4518-41dd-adb4-2b49162281a3"
+storage_version_token = "1790330935863645"
+content_type = "image/png"
+
+[[outputs]]
+id = "2V0EQsSTYmHMoaEwAT5S8"
+uri = "file://screenshots/live-sections/home/01-hero.png"
+type = "image"
+title = "Home — Hero"
+description = "Full Hero section, captured from the live site."
+logical_id = "ac112f59-20e1-4f68-9554-a6b9585e5fbc"
+content_hash = "sha256:900d2542ecf56c2b0556beeb2571a0cdb07abb930137852022e967d83f3d3f51"
+size = 97271
+mtime_ms = 1790330895256
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ac112f59-20e1-4f68-9554-a6b9585e5fbc/877ced79-02e6-4f06-aadf-8d3ad871be63"
+storage_version_token = "1790330937162056"
+content_type = "image/png"
+
+[[outputs]]
+id = "e_asnVessaYHUkSVxVeuD"
+uri = "file://screenshots/live-sections/home/02-recognition.png"
+type = "image"
+title = "Home — Recognition"
+description = "Full India’s Small Giants recognition section."
+logical_id = "e3de2ee7-879a-4e65-a82a-b8434d77ce62"
+content_hash = "sha256:69ccf054297be11d42dab59cf8012f5983789d0a2727071ce568d3a6f4b80f59"
+size = 52077
+mtime_ms = 1790330895392
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/e3de2ee7-879a-4e65-a82a-b8434d77ce62/377f736d-8902-4dbd-aa71-af41fd58532c"
+storage_version_token = "1790330938511221"
+content_type = "image/png"
+
+[[outputs]]
+id = "263cC1yEXO6VpUFZDD6Ox"
+uri = "file://screenshots/live-sections/home/03-stats.png"
+type = "image"
+title = "Home — Statistics"
+description = "Full statistics section."
+logical_id = "09d22b6f-9c08-4ed8-a480-1df18057c840"
+content_hash = "sha256:825e402c17add7875d715635cd2a940f27c9e16c5b6a4bc9e1cccbcf3ac48ca9"
+size = 14002
+mtime_ms = 1790330895508
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/09d22b6f-9c08-4ed8-a480-1df18057c840/a1650392-f6b6-406c-a917-9cfc85586747"
+storage_version_token = "1790330939854562"
+content_type = "image/png"
+
+[[outputs]]
+id = "5rAH1gQuveYLxM3UFL14H"
+uri = "file://screenshots/live-sections/home/04-iso-certifications.png"
+type = "image"
+title = "Home — ISO certifications"
+description = "Full ISO certifications section."
+logical_id = "a9e20f61-d2c4-442e-8bb6-0228842ef304"
+content_hash = "sha256:2892bd20566010cbd406e9d47fcdbec115229a114a6afcde17a52bb5835cf066"
+size = 57934
+mtime_ms = 1790330895628
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a9e20f61-d2c4-442e-8bb6-0228842ef304/b4c4316a-03e2-454a-9a38-7b2812a41eb8"
+storage_version_token = "1790330941152476"
+content_type = "image/png"
+
+[[outputs]]
+id = "sC2JIo0yu8-hLadFzh4Pb"
+uri = "file://screenshots/live-sections/home/05-about.png"
+type = "image"
+title = "Home — About MECPL"
+description = "Full company introduction section."
+logical_id = "e6b627e5-fbc3-4f06-b00e-9864f1605919"
+content_hash = "sha256:b3c8a26a5632fc95d99f72737035b35852a9dc8392f6d027df19ab343132197b"
+size = 336416
+mtime_ms = 1790330895840
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/e6b627e5-fbc3-4f06-b00e-9864f1605919/fad6b0be-defc-485d-a9e6-9aa94c74b65f"
+storage_version_token = "1790330942507295"
+content_type = "image/png"
+
+[[outputs]]
+id = "Ze5upIoERjSgRjGHfRjMf"
+uri = "file://screenshots/live-sections/home/06-services.png"
+type = "image"
+title = "Home — Services"
+description = "Full services section."
+logical_id = "6526a12a-379e-492c-b174-91470038e4f7"
+content_hash = "sha256:5f99e4a6f04059524fa57ac10949c8160a9b93131cbfe1e9437ef6ea22673ccd"
+size = 758443
+mtime_ms = 1790330896316
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/6526a12a-379e-492c-b174-91470038e4f7/a8d08ab0-e10f-49fa-8078-c32023723b49"
+storage_version_token = "1790330943871166"
+content_type = "image/png"
+
+[[outputs]]
+id = "vh4EzGG_gtuD_TO-kVtHD"
+uri = "file://screenshots/live-sections/home/07-featured-projects.png"
+type = "image"
+title = "Home — Featured projects"
+description = "Full Landmark Works section."
+logical_id = "ca97dc3c-4bba-4a3b-abcf-fdde18d39613"
+content_hash = "sha256:803fce2aec6c4b06ac9c161dbac94f5fdd506d84aaa522b9989204c17a4651fc"
+size = 968457
+mtime_ms = 1790330896580
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ca97dc3c-4bba-4a3b-abcf-fdde18d39613/082689ab-c900-49c9-aa2a-6974d53fd3a5"
+storage_version_token = "1790330945173547"
+content_type = "image/png"
+
+[[outputs]]
+id = "9CqcSMXEb3Pal4mbsTMEe"
+uri = "file://screenshots/live-sections/home/08-rising-projects.png"
+type = "image"
+title = "Home — Ongoing projects"
+description = "Full Rising As We Speak section."
+logical_id = "ea15d0ee-63e7-4e4b-8d2f-995c27ad9011"
+content_hash = "sha256:b9d3dfe401c57adb70bfca9d0d9bfbeea9bd7e3c1171671e8c6eb50f116d70b3"
+size = 495690
+mtime_ms = 1790330896844
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ea15d0ee-63e7-4e4b-8d2f-995c27ad9011/80838ee9-5988-4d30-8fad-515d1ce84e1c"
+storage_version_token = "1790330946465549"
+content_type = "image/png"
+
+[[outputs]]
+id = "q3AC0z2wnfVAykcMx6e5P"
+uri = "file://screenshots/live-sections/home/09-people-safety.png"
+type = "image"
+title = "Home — People & Safety"
+description = "Full People and Safety section."
+logical_id = "da0542c3-9a3d-4635-a036-ac00891a19a1"
+content_hash = "sha256:c659978a296cb3b729f1e46dbe4ce505f6099b34be434ba2d85965e1e05d1414"
+size = 881366
+mtime_ms = 1790330897076
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/da0542c3-9a3d-4635-a036-ac00891a19a1/d56ccd61-73fd-49be-9f76-2fbf53fb28ef"
+storage_version_token = "1790330947817413"
+content_type = "image/png"
+
+[[outputs]]
+id = "i_2cJuxm25OxKuOBlJx8c"
+uri = "file://screenshots/live-sections/home/10-testimonials.png"
+type = "image"
+title = "Home — Testimonials"
+description = "Full client testimonials section."
+logical_id = "c8dc793c-6ee8-4e77-8f54-f0b3b5234530"
+content_hash = "sha256:c38ee3eebe98d8d5f4f7998f37625bcb489f6ed4e8f96caaad996e5220ef510d"
+size = 48138
+mtime_ms = 1790330897200
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/c8dc793c-6ee8-4e77-8f54-f0b3b5234530/0cb92c43-dd17-486f-bdec-ca5d688ab397"
+storage_version_token = "1790330949095619"
+content_type = "image/png"
+
+[[outputs]]
+id = "cLP4TTKL7ydSsXD2Yx36k"
+uri = "file://screenshots/live-sections/home/11-clients.png"
+type = "image"
+title = "Home — Clients"
+description = "Full Trusted Partners section."
+logical_id = "a77b3814-4cd5-4787-81ed-c32f86feb4bb"
+content_hash = "sha256:ce3d71a856b52ab6776ca1ec00f091b0b3d01c1ceb81e942033168f172323a38"
+size = 145504
+mtime_ms = 1790330897348
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a77b3814-4cd5-4787-81ed-c32f86feb4bb/ac235835-7a19-4747-8f40-f60794b6b6b0"
+storage_version_token = "1790330950407947"
+content_type = "image/png"
+
+[[outputs]]
+id = "D9WY5iWPHhfayAfFuRPXC"
+uri = "file://screenshots/live-sections/home/12-footer.png"
+type = "image"
+title = "Home — Footer"
+description = "Live home page footer."
+logical_id = "ea47cbda-bd0d-44a6-bec5-3280b08ab8c6"
+content_hash = "sha256:2d8132f89387a1db7d1e217cad9e159966dda92e8b4b24d01b749c992af28564"
+size = 25519
+mtime_ms = 1790330897476
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ea47cbda-bd0d-44a6-bec5-3280b08ab8c6/9484e19a-7e26-4f25-9f42-e7715bfd4485"
+storage_version_token = "1790330951767906"
+content_type = "image/png"
+
+[[outputs]]
+id = "cPU8uQ7-qhT8S_lC78X5v"
+uri = "file://screenshots/live-sections/about/00-full-about.png"
+type = "image"
+title = "About Us — full page"
+description = "Full live About Us page, 1440px wide, 6,442px tall."
+logical_id = "9bb654aa-8991-4ade-9c74-3dcd127a0218"
+content_hash = "sha256:d65cff59c1255ad9eeb51b0f53d8e85dbaaa98df1e4670015015182611a41cc0"
+size = 2960311
+mtime_ms = 1790330901412
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/9bb654aa-8991-4ade-9c74-3dcd127a0218/d40404ca-7e97-43bc-80b8-ff5098c0c740"
+storage_version_token = "1790330953181216"
+content_type = "image/png"
+
+[[outputs]]
+id = "_-VkXyjcWwYEzDY6axpam"
+uri = "file://screenshots/live-sections/about/01-about-story.png"
+type = "image"
+title = "About Us — Story"
+description = "Full 50+ Years of Building What Lasts hero section."
+logical_id = "8fadf6c0-bcce-41a2-9260-425ac2ccf32a"
+content_hash = "sha256:eef2bb74a90df0e1b453d1ec3abdd3462a8a55b12afb5b5820659dc46d076cb5"
+size = 1124876
+mtime_ms = 1790330901884
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/8fadf6c0-bcce-41a2-9260-425ac2ccf32a/ec5d726f-7d16-4b12-a810-b2a5e80922ce"
+storage_version_token = "1790330954482128"
+content_type = "image/png"
+
+[[outputs]]
+id = "qnKRwlPjYtikJH2h-oE4Y"
+uri = "file://screenshots/live-sections/about/02-about-values.png"
+type = "image"
+title = "About Us — Values"
+description = "Full What We Build On section."
+logical_id = "1b5db816-c2f9-4d07-a1b3-00b7b4f2a721"
+content_hash = "sha256:c008e66e034e560de55fde36595b2c231b5cd880e72b916cddff25ba92268231"
+size = 36281
+mtime_ms = 1790330901964
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/1b5db816-c2f9-4d07-a1b3-00b7b4f2a721/d1ca0c9f-ebb0-43e1-b446-20d85708352f"
+storage_version_token = "1790330955794326"
+content_type = "image/png"
+
+[[outputs]]
+id = "5MxXpGE9HuMqHdjyivv56"
+uri = "file://screenshots/live-sections/about/03-about-purpose.png"
+type = "image"
+title = "About Us — Purpose"
+description = "Full Where We’re Going. How We Get There section."
+logical_id = "f85da040-443e-4e37-b0f6-7d43828edc1f"
+content_hash = "sha256:24df73a4576bbee582d58afa689efa6898cc289bc7b74b10bffa5083c8fcfc3c"
+size = 370535
+mtime_ms = 1790330902124
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/f85da040-443e-4e37-b0f6-7d43828edc1f/74255077-b007-4734-9d8c-e1302523b781"
+storage_version_token = "1790330957099385"
+content_type = "image/png"
+
+[[outputs]]
+id = "asPc_cYKh7OHklAtjHQnD"
+uri = "file://screenshots/live-sections/about/04-our-journey.png"
+type = "image"
+title = "About Us — Journey"
+description = "Full company history and journey timeline."
+logical_id = "015cacdc-803a-4a68-b7ff-a2b39b7dae0f"
+content_hash = "sha256:fff13edc364decf0697819cb6ac40dd37d8c6436b2307a9d6e241594fc6bd9d5"
+size = 68708
+mtime_ms = 1790330902220
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/015cacdc-803a-4a68-b7ff-a2b39b7dae0f/cfdaa361-e00f-4605-beb2-debefe3ec3e1"
+storage_version_token = "1790330958432676"
+content_type = "image/png"
+
+[[outputs]]
+id = "bUqSxbXSXST9ooViSOECq"
+uri = "file://screenshots/live-sections/about/05-about-founder.png"
+type = "image"
+title = "About Us — Founder"
+description = "Full founder story section."
+logical_id = "c4ada9d5-d3a0-4cae-a13d-b0cd87a02a5b"
+content_hash = "sha256:a64e5a4779e611ddb8254b6e30ae52a7f0153266932ca8c92479f93456f34c9a"
+size = 467410
+mtime_ms = 1790330902408
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/c4ada9d5-d3a0-4cae-a13d-b0cd87a02a5b/880958a9-1b89-48a2-9eb5-4a9c294cc3f3"
+storage_version_token = "1790330959752070"
+content_type = "image/png"
+
+[[outputs]]
+id = "ow3Ef0vYN2mH10GMlVfsa"
+uri = "file://screenshots/live-sections/about/06-abt3.png"
+type = "image"
+title = "About Us — Leadership"
+description = "Full leadership section."
+logical_id = "04980cce-bad1-4768-9ef1-b782246c9874"
+content_hash = "sha256:b6fcfcef3a6d6c4b6be76ca448f4a2bd67fab2b2c9137f65ab6da677f7507008"
+size = 658443
+mtime_ms = 1790330902672
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/04980cce-bad1-4768-9ef1-b782246c9874/6846fdd3-7ec1-4bdb-9350-38b0cbe1eb5f"
+storage_version_token = "1790330961047272"
+content_type = "image/png"
+
+[[outputs]]
+id = "3neFemVols3LvTfIa_zXe"
+uri = "file://screenshots/live-sections/about/07-certifications.png"
+type = "image"
+title = "About Us — Awards & certifications"
+description = "Full awards and certifications section."
+logical_id = "016e9a23-e6a3-482b-b31d-9788848cea08"
+content_hash = "sha256:45ff552d1b6bdcfa0bf7c9b5999350070239ae9e5743934fa2896eeaae42ce6f"
+size = 139412
+mtime_ms = 1790330902784
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/016e9a23-e6a3-482b-b31d-9788848cea08/dcb734c3-2886-401a-a6e3-b37327bd5547"
+storage_version_token = "1790330962344444"
+content_type = "image/png"
+
+[[outputs]]
+id = "kQiQE5rF-DjuTM_2esaMf"
+uri = "file://screenshots/live-sections/about/08-about-sectors.png"
+type = "image"
+title = "About Us — Sectors"
+description = "Full sectors section."
+logical_id = "8c5a01e4-3fc9-41ec-aa1a-ff203d5370a3"
+content_hash = "sha256:abe0e5059f0cd51906facbecf7d22cf6ccd3932b7ef5ebf2142c7efb99d60648"
+size = 23843
+mtime_ms = 1790330902876
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/8c5a01e4-3fc9-41ec-aa1a-ff203d5370a3/cc622a8c-07b3-414f-a7ea-c8017807ba0a"
+storage_version_token = "1790330963691637"
+content_type = "image/png"
+
+[[outputs]]
+id = "zEtrI-4t6oKZOg4wYvdle"
+uri = "file://screenshots/live-sections/about/09-about-continuation.png"
+type = "image"
+title = "About Us — Continuation"
+description = "Full closing continuation section."
+logical_id = "f3b60d81-e9f8-4cd3-a538-04d5f2d45b60"
+content_hash = "sha256:c67a1e1c787bed07ad0185555acaf0a168288c48ed983607ce4fe73136c15ab8"
+size = 35785
+mtime_ms = 1790330902964
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/f3b60d81-e9f8-4cd3-a538-04d5f2d45b60/69385f5a-e35a-459c-b85a-479bfcc5acf4"
+storage_version_token = "1790330964960164"
+content_type = "image/png"
+
+[[outputs]]
+id = "0CF-rYswP-6HG9UcrRaGu"
+uri = "file://screenshots/live-sections/about/10-footer.png"
+type = "image"
+title = "About Us — Footer"
+description = "Live About Us page footer."
+logical_id = "3b21207b-4fcc-4ad2-becf-2d5fa26b91f4"
+content_hash = "sha256:19c8987b21ce9761fe435ccf553b9717787480439a14d99e178269e05849d7bd"
+size = 25632
+mtime_ms = 1790330903060
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3b21207b-4fcc-4ad2-becf-2d5fa26b91f4/26ba4efd-5a81-4aa1-9c1f-6d880d38a290"
+storage_version_token = "1790330966323963"
+content_type = "image/png"
+
+[[outputs]]
+id = "rjlucGcLxQdzAMghd81KT"
+uri = "file://screenshots/live-sections/home/13-safety-preparedness-live.png"
+type = "image"
+title = "Live safety stats — Preparedness"
+description = "Verified on the live MECPL homepage after deployment; Preparedness appears beneath Safety & Vertigo Tests."
+logical_id = "3f5199f4-cff0-479b-8ce6-64b282f49835"
+content_hash = "sha256:77f7e079a4d111827f21d272958eeaf60215ac0a94c9da6fb4739bc372ee0e93"
+size = 20218
+mtime_ms = 1790334013590
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3f5199f4-cff0-479b-8ce6-64b282f49835/2a8bf9cf-9bbb-43c8-baf8-9fc2f819c698"
+storage_version_token = "1790334036099933"
+content_type = "image/png"

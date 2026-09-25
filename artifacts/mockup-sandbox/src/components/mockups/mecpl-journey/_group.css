@@ -1,0 +1,524 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --mecpl-red: #ec3338;
+  --mecpl-text: #232529;
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+.journey-preview,
+.journey-preview * {
+  box-sizing: border-box;
+}
+
+.journey-preview {
+  min-height: 100vh;
+  color: var(--mecpl-text);
+  font-family: var(--font-montserrat);
+}
+
+.abt-journey-section {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0 0 64px;
+  background: #f8f7f4;
+  color: #232529;
+}
+
+.abt-journey-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-position: center 46%;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.abt-journey-header {
+  position: relative;
+  z-index: 1;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 78px 32px 10px;
+  text-align: center;
+}
+
+.abt-journey-eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  color: #ec3338;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.journey-preview .abt-journey-title {
+  margin: 0;
+  color: #232529;
+  font-size: clamp(2.15rem, 4.2vw, 3.35rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  text-align: center;
+  text-transform: none;
+}
+
+.abt-journey-title span {
+  display: block;
+}
+
+.abt-journey-subtitle {
+  margin: 17px 0 0;
+  color: #737478;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.abt-journey-scroll {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 310px;
+  padding: 34px max(24px, calc((100vw - 1240px) / 2)) 34px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.abt-journey-track {
+  display: flex;
+  width: max-content;
+  gap: 36px;
+  padding-right: max(24px, calc((100vw - 1240px) / 2));
+}
+
+.abt-journey-card {
+  position: relative;
+  flex: 0 0 clamp(280px, 28vw, 360px);
+  padding-top: 29px;
+  scroll-snap-align: start;
+}
+
+.abt-journey-rail {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: calc(100% + 36px);
+  height: 1px;
+  background: rgba(35, 37, 41, 0.2);
+}
+
+.abt-journey-card:last-child .abt-journey-rail {
+  width: 100%;
+}
+
+.abt-journey-rail span {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #f8f7f4;
+  border-radius: 50%;
+  background: #8f9093;
+  box-shadow: 0 0 0 1px rgba(35, 37, 41, 0.16);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.abt-journey-card.is-active .abt-journey-rail span {
+  background: #ec3338;
+  box-shadow: 0 0 0 1px rgba(236, 51, 56, 0.32);
+}
+
+.abt-journey-year {
+  margin-bottom: 16px;
+  color: #34363a;
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  transition: color 180ms ease;
+}
+
+.abt-journey-card.is-active .abt-journey-year {
+  color: #ec3338;
+}
+
+.abt-journey-card-title {
+  margin: 0 0 13px;
+  color: #292b2f;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  line-height: 1.55;
+  text-transform: uppercase;
+}
+
+.abt-journey-copy {
+  max-width: 34ch;
+  margin: 0;
+  color: #66686c;
+  font-size: 0.83rem;
+  font-weight: 400;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.abt-journey-controls {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.abt-journey-arrow {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(35, 37, 41, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.56);
+  color: #232529;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.abt-journey-arrow:first-child {
+  justify-self: start;
+}
+
+.abt-journey-arrow:last-child {
+  justify-self: end;
+}
+
+.abt-journey-arrow:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.abt-journey-arrow:not(:disabled):hover,
+.abt-journey-arrow:not(:disabled):focus-visible {
+  border-color: #ec3338;
+  background: #ec3338;
+  color: #ffffff;
+}
+
+.abt-journey-arrow:focus-visible {
+  outline: 2px solid #ec3338;
+  outline-offset: 3px;
+}
+
+.abt-journey-count {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  color: #77797d;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+}
+
+.abt-journey-count > span:first-child {
+  color: #232529;
+  font-size: 0.82rem;
+}
+
+.abt-journey-count-divider {
+  color: #b0b1b3;
+}
+
+.abt-journey-count-year {
+  margin-left: 12px;
+  color: #ec3338;
+}
+
+@media (max-width: 700px) {
+  .abt-journey-section {
+    padding-bottom: 46px;
+  }
+
+  .abt-journey-header {
+    padding: 60px 22px 6px;
+  }
+
+  .abt-journey-eyebrow {
+    margin-bottom: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.23em;
+  }
+
+  .journey-preview .abt-journey-title {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+    letter-spacing: -0.04em;
+  }
+
+  .abt-journey-subtitle {
+    max-width: 28rem;
+    margin: 14px auto 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .abt-journey-scroll {
+    min-height: 285px;
+    padding: 29px 22px 30px;
+  }
+
+  .abt-journey-track {
+    gap: 24px;
+    padding-right: 22px;
+  }
+
+  .abt-journey-card {
+    flex-basis: min(78vw, 320px);
+  }
+
+  .abt-journey-year {
+    font-size: 2.7rem;
+  }
+
+  .abt-journey-controls {
+    padding: 0 22px;
+  }
+
+  .abt-journey-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .abt-journey-count-year {
+    margin-left: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-journey-scroll {
+    scroll-behavior: auto;
+  }
+
+  .abt-journey-rail span,
+  .abt-journey-year,
+  .abt-journey-arrow {
+    transition: none;
+  }
+}
+
+/* Reference-inspired timeline frame; kept separate from the Current baseline. */
+.abt-journey-section {
+  padding-bottom: 48px;
+  background: #ffffff;
+}
+
+.abt-journey-backdrop {
+  display: block;
+  background-position: center 58%;
+  background-repeat: no-repeat;
+}
+
+.abt-journey-header {
+  padding-top: 62px;
+  padding-bottom: 12px;
+}
+
+.abt-journey-eyebrow {
+  margin-bottom: 10px;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+
+.journey-preview .abt-journey-title {
+  font-size: clamp(1.9rem, 3.3vw, 2.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.abt-journey-title span {
+  display: inline;
+}
+
+.abt-journey-subtitle {
+  max-width: 48ch;
+  margin: 12px auto 0;
+  color: #55575b;
+  font-size: 0.67rem;
+  letter-spacing: 0.09em;
+  text-align: center;
+}
+
+.abt-journey-scroll {
+  min-height: 0;
+  padding: 24px max(24px, calc((100vw - 1240px) / 2)) 20px;
+}
+
+.abt-journey-track {
+  gap: 0;
+  padding-right: max(88px, calc((100vw - 1240px) / 2 + 64px));
+}
+
+.abt-journey-card {
+  min-height: 224px;
+  flex: 0 0 clamp(290px, calc((100vw - 200px) / 3), 390px);
+  padding: 28px 32px 18px 0;
+  background: transparent;
+  color: #232529;
+  scroll-snap-align: start;
+}
+
+.abt-journey-overline {
+  display: none;
+}
+
+.abt-journey-rail {
+  top: 0;
+  width: 100%;
+  background: rgba(35, 37, 41, 0.22);
+}
+
+.abt-journey-card:last-child .abt-journey-rail {
+  width: 100%;
+}
+
+.abt-journey-rail span {
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border: 0;
+  background: #ec3338;
+  box-shadow: 0 0 0 3px #ffffff;
+}
+
+.abt-journey-card.is-active {
+  background: transparent;
+}
+
+.abt-journey-year,
+.abt-journey-card.is-active .abt-journey-year {
+  margin-bottom: 12px;
+  color: #292b2f;
+  font-size: clamp(2.25rem, 3.2vw, 2.8rem);
+  letter-spacing: -0.055em;
+}
+
+.abt-journey-card-title {
+  margin: 0 0 9px;
+  color: #ec3338;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.abt-journey-copy {
+  max-width: 38ch;
+  color: #66686c;
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.abt-journey-stage {
+  position: relative;
+  z-index: 1;
+}
+
+.abt-journey-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  max-width: 1240px;
+  margin: 4px auto 0;
+  padding: 0 24px;
+}
+
+.abt-journey-arrow {
+  width: 42px;
+  height: 42px;
+  border-color: rgba(35, 37, 41, 0.22);
+  background: #f5f5f5;
+}
+
+.abt-journey-arrow:disabled {
+  opacity: 0.38;
+}
+
+.abt-journey-count {
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 700px) {
+  .abt-journey-section {
+    padding-bottom: 36px;
+  }
+
+  .abt-journey-header {
+    padding: 52px 20px 8px;
+  }
+
+  .journey-preview .abt-journey-title {
+    font-size: clamp(1.75rem, 7.3vw, 2.2rem);
+  }
+
+  .abt-journey-subtitle {
+    max-width: 25rem;
+    font-size: 0.62rem;
+  }
+
+  .abt-journey-scroll {
+    min-height: 0;
+    padding: 22px 22px 18px;
+  }
+
+  .abt-journey-track {
+    padding-right: 72px;
+  }
+
+  .abt-journey-card {
+    min-height: 236px;
+    flex-basis: min(84vw, 350px);
+    padding: 27px 24px 18px 0;
+  }
+
+  .abt-journey-year,
+  .abt-journey-card.is-active .abt-journey-year {
+    font-size: 2.35rem;
+  }
+
+  .abt-journey-controls {
+    gap: 10px;
+    margin-top: 2px;
+    padding: 0 22px;
+  }
+
+  .abt-journey-arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-journey-card {
+    scroll-behavior: auto;
+  }
+}

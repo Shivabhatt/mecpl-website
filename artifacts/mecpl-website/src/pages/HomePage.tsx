@@ -933,7 +933,7 @@ export default function HomePage() {
               <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-[#232529]" />
               <span className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-[#232529]" />
             </div>
-            <div className="relative flex h-[600px] w-full flex-col gap-[6px] overflow-hidden rounded-[9px] bg-white p-[5px] shadow-[0_12px_36px_rgba(35,37,41,0.12)] sm:h-[640px] lg:h-[clamp(300px,35vw,460px)] lg:flex-row">
+            <div className="relative flex h-[650px] w-full flex-col gap-[6px] overflow-hidden rounded-[9px] bg-white p-[5px] shadow-[0_12px_36px_rgba(35,37,41,0.12)] lg:flex-row">
             {projects.map((proj, i) => {
               const isActive = activeProj === i;
               return (
@@ -1091,7 +1091,7 @@ export default function HomePage() {
                 type="button"
                 aria-label="Previous project"
                 onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
-                className="rising-project-control flex h-[32px] w-[32px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
+                className="rising-project-control flex h-[36px] w-[36px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
               >
                 <ChevronLeft size={14} />
               </button>
@@ -1099,7 +1099,7 @@ export default function HomePage() {
                 type="button"
                 aria-label="Next project"
                 onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
-                className="rising-project-control -ml-px flex h-[32px] w-[32px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
+                className="rising-project-control -ml-px flex h-[36px] w-[36px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
               >
                 <ChevronRight size={14} />
               </button>

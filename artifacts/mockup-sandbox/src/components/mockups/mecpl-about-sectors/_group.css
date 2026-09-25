@@ -1,0 +1,287 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+.sectors-preview,
+.sectors-preview * {
+  box-sizing: border-box;
+}
+
+.sectors-preview {
+  min-height: 100vh;
+  width: 100%;
+  color: #232529;
+  background: #ffffff;
+  font-family: "Montserrat", sans-serif;
+}
+
+.sectors-preview .font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.sectors-preview .abt-sectors-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.sectors-current .abt-sectors-section {
+  padding: 96px 56px;
+  background: #ffffff;
+}
+
+.sectors-current .abt-sectors-header {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.sectors-current .abt-sectors-eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #ec3338;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.sectors-current .abt-sectors-title {
+  margin: 0;
+  color: #232529;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.sectors-current .abt-sector-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #ec3338;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.sectors-current .abt-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sectors-current .abt-stat-item {
+  padding: 44px 32px;
+  text-align: center;
+}
+
+.sectors-current .abt-stat-item:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sectors-current .abt-stat-value {
+  margin-bottom: 10px;
+  color: #232529;
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sectors-current .abt-stat-label {
+  color: #949599;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.sectors-reference .abt-sectors-section {
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+.sectors-reference .abt-sectors-header {
+  padding: 32px 20px 26px;
+  text-align: center;
+}
+
+.sectors-reference .abt-sectors-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  color: #ec3338;
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.sectors-reference .abt-sectors-title {
+  margin: 0;
+  color: #232529;
+  font-size: clamp(22px, 2.7vw, 31px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.sectors-reference .abt-sectors-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid #bfc0c2;
+  border-bottom: 1px solid #bfc0c2;
+}
+
+.sectors-reference .abt-sector-tab {
+  display: flex;
+  min-width: 0;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  border-right: 1px solid #d7d8da;
+  color: #87898c;
+  background: #ffffff;
+  font-size: clamp(5px, 0.64vw, 7px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.sectors-reference .abt-sector-tab:nth-child(even) {
+  background: #f2f2f3;
+}
+
+.sectors-reference .abt-sector-tab:last-child {
+  border-right: 0;
+}
+
+.sectors-reference .abt-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sectors-reference .abt-stat-item {
+  display: flex;
+  min-width: 0;
+  min-height: 94px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 18px clamp(22px, 7vw, 72px);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  background: #232529;
+}
+
+.sectors-reference .abt-stat-item.is-featured {
+  background: #ec3338;
+}
+
+.sectors-reference .abt-stat-item:last-child {
+  border-right: 0;
+}
+
+.sectors-reference .abt-stat-value {
+  margin-bottom: 7px;
+  color: #ffffff;
+  font-size: clamp(22px, 3vw, 31px);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1;
+}
+
+.sectors-reference .abt-stat-item:last-child .abt-stat-value {
+  font-size: clamp(15px, 2.5vw, 29px);
+  letter-spacing: 0.01em;
+}
+
+.sectors-reference .abt-stat-label {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 5px;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .sectors-current .abt-sectors-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 36px;
+  }
+
+  .sectors-current .abt-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sectors-current .abt-stat-item {
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .sectors-current .abt-sectors-section {
+    padding: 64px 20px;
+  }
+
+  .sectors-current .abt-sectors-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sectors-current .abt-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sectors-reference .abt-sectors-header {
+    padding: 28px 14px 20px;
+  }
+
+  .sectors-reference .abt-sectors-title {
+    font-size: clamp(16px, 4.4vw, 24px);
+    line-height: 1.2;
+  }
+
+  .sectors-reference .abt-sectors-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sectors-reference .abt-sector-tab {
+    min-height: 34px;
+    border-bottom: 1px solid #d7d8da;
+    font-size: 7px;
+  }
+
+  .sectors-reference .abt-sector-tab:nth-child(3n) {
+    border-right: 0;
+  }
+
+  .sectors-reference .abt-stat-item {
+    min-height: 86px;
+    padding: 14px clamp(11px, 4.5vw, 22px);
+  }
+
+  .sectors-reference .abt-stat-value {
+    font-size: clamp(17px, 5.5vw, 25px);
+  }
+
+  .sectors-reference .abt-stat-item:last-child .abt-stat-value {
+    font-size: clamp(8px, 2.6vw, 12px);
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .sectors-reference .abt-stat-label {
+    font-size: 4.5px;
+    letter-spacing: 0.07em;
+  }
+}

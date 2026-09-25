@@ -1,0 +1,225 @@
+.purpose-reference {
+  background: #fff;
+}
+
+.purpose-ref-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 42px 120px 56px;
+  background: #fff;
+}
+
+.purpose-ref-watermark {
+  position: absolute;
+  z-index: -1;
+  top: -76px;
+  right: 7%;
+  width: 186px;
+  height: 420px;
+  border: 22px solid rgba(35, 37, 41, 0.025);
+  border-radius: 100px;
+  pointer-events: none;
+}
+
+.purpose-ref-watermark::before,
+.purpose-ref-watermark::after {
+  position: absolute;
+  width: 142px;
+  height: 142px;
+  border: 18px solid rgba(35, 37, 41, 0.022);
+  border-radius: 50%;
+  content: "";
+}
+
+.purpose-ref-watermark::before {
+  top: -42px;
+  left: -46px;
+}
+
+.purpose-ref-watermark::after {
+  right: -38px;
+  bottom: -72px;
+  width: 104px;
+  height: 104px;
+}
+
+.purpose-ref-content {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.purpose-ref-header {
+  margin: 0 auto clamp(30px, 4.2vw, 48px);
+  text-align: center;
+}
+
+.purpose-ref-kicker {
+  display: block;
+  margin-bottom: 12px;
+  color: #ec3338;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+}
+
+.purpose-reference .purpose-ref-title {
+  margin: 0;
+  color: #232529;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  line-height: 0.98;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.purpose-reference .purpose-ref-title span {
+  display: block;
+}
+
+.purpose-reference .purpose-ref-title span + span {
+  color: #929499;
+}
+
+.purpose-ref-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.purpose-ref-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 220px;
+  overflow: hidden;
+  padding: 36px 28px;
+  border: 1px solid #ededed;
+  border-left: 5px solid #ec3338;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(35, 37, 41, 0.045);
+}
+
+.purpose-ref-card::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 92px;
+  height: 60px;
+  background:
+    linear-gradient(135deg, transparent 49.2%, rgba(236, 51, 56, 0.16) 49.7%, transparent 50.4%),
+    linear-gradient(45deg, transparent 49.2%, rgba(236, 51, 56, 0.12) 49.7%, transparent 50.4%);
+  content: "";
+  pointer-events: none;
+}
+
+.purpose-ref-copy {
+  min-width: 0;
+  width: 100%;
+}
+
+.purpose-ref-copy h3 {
+  margin: 0 0 10px;
+  color: #73767a;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.purpose-ref-copy p {
+  max-width: 62ch;
+  margin: 0;
+  color: #777a7f;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.purpose-ref-highlights {
+  display: block;
+  margin-top: 10px;
+  color: #9a9ca0;
+  font-size: 0.44rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+}
+
+.purpose-ref-card-dark {
+  border-color: #222328;
+  border-left-color: #ec3338;
+  background: #202126;
+  box-shadow: none;
+}
+
+.purpose-ref-card-dark .purpose-ref-copy h3 {
+  color: #d1d2d4;
+}
+
+.purpose-ref-card-dark .purpose-ref-copy p {
+  color: #b9bbc0;
+}
+
+.purpose-ref-card-dark .purpose-ref-highlights {
+  color: #87898e;
+}
+
+.purpose-ref-card-dark::after {
+  background:
+    linear-gradient(135deg, transparent 49.2%, rgba(255, 255, 255, 0.14) 49.7%, transparent 50.4%),
+    linear-gradient(45deg, transparent 49.2%, rgba(255, 255, 255, 0.1) 49.7%, transparent 50.4%);
+}
+
+@media (max-width: 900px) {
+  .purpose-ref-section {
+    min-height: auto;
+    padding: 56px 24px 64px;
+  }
+
+  .purpose-ref-cards {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .purpose-ref-card {
+    min-height: 190px;
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .purpose-ref-section {
+    padding: 48px 18px 54px;
+  }
+
+  .purpose-ref-header {
+    margin-bottom: 30px;
+  }
+
+  .purpose-reference .purpose-ref-title {
+    font-size: clamp(1.55rem, 6.8vw, 1.9rem);
+  }
+
+  .purpose-ref-card {
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .purpose-ref-copy h3 {
+    font-size: 0.6rem;
+  }
+
+  .purpose-ref-copy p {
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .purpose-ref-highlights {
+    font-size: 0.42rem;
+  }
+}

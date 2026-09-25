@@ -149,10 +149,12 @@ const purposeRows = [
   {
     label: "Our Vision",
     text: "To be the most preferred civil engineering contractor, delivering beyond expectations through safe, compliant and environmentally responsible execution.",
+    highlights: "SAFE · COMPLIANT · RESPONSIBLE",
   },
   {
     label: "Our Mission",
-    text: "To deliver quality construction, on time and with care — continuously improving our people, processes and technology while putting safety, health and the environment first.",
+    text: "To deliver quality construction, on time and with care — continually improving our people, processes and technology while putting safety, health and the environment first.",
+    highlights: "QUALITY · PEOPLE · PROCESS",
   },
 ];
 
@@ -161,71 +163,32 @@ function PurposeSection() {
     <section
       id="about-purpose"
       data-testid="section-about-purpose"
-      className="abt-purpose-section"
-      style={{ background: "transparent", color: "#232529", padding: "112px 56px" }}
+      className="abt-purpose-section purpose-reference purpose-ref-section"
+      style={{ scrollMarginTop: 80 }}
+      aria-labelledby="purpose-title"
     >
-      <div className="abt-purpose-grid border-t-[#e4e4e6] border-r-[#e4e4e6] border-b-[#e4e4e6] border-l-[#e4e4e6] bg-[color:var(--color-border)]" style={{
-        maxWidth: 1360,
-        margin: "0 auto",
-        padding: "64px",
-        background: "var(--color-border)",
-        position: "relative",
-        overflow: "hidden",
-        borderRadius: 32,
-        display: "grid",
-        gridTemplateColumns: "minmax(0, 0.95fr) minmax(0, 1.05fr)",
-        gap: "clamp(64px, 9vw, 144px)",
-        alignItems: "center",
-      }}>
-        <img
-          className="abt-purpose-image"
-          src={`${assetBase}assets/projects/43PD-1-scaled.jpg`}
-          alt=""
-          aria-hidden="true"
-        />
-
-        <div data-scroll-reveal="text" className="abt-purpose-heading">
-          <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", color: "#EC3338", display: "block", marginBottom: 18 }}>
-            OUR PURPOSE
-          </span>
-          <h2 className="font-montserrat text-[36px]" style={{
-            fontSize: "36px",
-            fontWeight: 600,
-            color: "#232529",
-            lineHeight: 1.08,
-            letterSpacing: "-0.035em",
-            margin: 0,
-          }}>
-            Where We're Going.<br />How We Get There.
+      <span className="purpose-ref-watermark" aria-hidden="true" />
+      <div className="purpose-ref-content">
+        <header className="purpose-ref-header">
+          <span className="purpose-ref-kicker">OUR PURPOSE</span>
+          <h2 className="purpose-ref-title" id="purpose-title">
+            <span>Where We&apos;re Going.</span>
+            <span>How We Get There.</span>
           </h2>
-        </div>
+        </header>
 
-        <div data-scroll-reveal="text" className="abt-purpose-copy bg-[color:var(--mecpl-card)]" style={{ background: "var(--mecpl-card)", borderTop: "1px solid rgba(17,24,39,0.14)" }}>
-          {purposeRows.map((row) => (
-            <div
+        <div className="purpose-ref-cards">
+          {purposeRows.map((row, index) => (
+            <article
+              className={`purpose-ref-card${index === 1 ? " purpose-ref-card-dark" : ""}`}
               key={row.label}
-              style={{ padding: "24px 0 26px", borderBottom: "1px solid rgba(17,24,39,0.14)" }}
             >
-              <h2 className="font-montserrat" style={{
-                color: "#232529",
-                fontSize: "0.68rem",
-                fontWeight: 600,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                margin: "0 0 12px",
-              }}>
-                {row.label}
-              </h2>
-              <p className="font-inter" style={{
-                color: "#949599",
-                fontSize: "clamp(0.88rem, 1.1vw, 1rem)",
-                lineHeight: 1.75,
-                margin: 0,
-                maxWidth: 620,
-              }}>
-                {row.text}
-              </p>
-            </div>
+              <div className="purpose-ref-copy">
+                <h3>{row.label}</h3>
+                <p>{row.text}</p>
+                <span className="purpose-ref-highlights">{row.highlights}</span>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -299,6 +262,13 @@ function JourneyTimeline() {
       className="abt-journey-section"
       style={{ scrollMarginTop: 80 }}
     >
+      <div
+        className="abt-journey-backdrop"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.89), rgba(255, 255, 255, 0.89)), url(${assetBase}assets/people-safety/23_1790178654345.jpg)`,
+        }}
+      />
       <header className="abt-journey-header">
         <span className="about-label-font font-montserrat abt-journey-eyebrow">
           OUR JOURNEY
@@ -310,60 +280,57 @@ function JourneyTimeline() {
           Milestones that build a stronger tomorrow
         </p>
       </header>
-      <div
-        ref={scrollRef}
-        className="no-scrollbar abt-journey-scroll"
-        aria-label="Journey milestones"
-      >
-        <div ref={trackRef} className="abt-journey-track">
-          {journey.map((item, index) => (
-            <article
-              key={`${item.year}-${index}`}
-              className={`abt-journey-card${activeIndex === index ? " is-active" : ""}`}
-              aria-label={`${item.year}: ${item.title}`}
-            >
-              <div className="abt-journey-overline">
-                MILESTONE {String(index + 1).padStart(2, "0")}
-              </div>
-              <div className="abt-journey-year">
-                {item.year}
-              </div>
-              <h3 className="abt-journey-card-title">
-                {item.title}
-              </h3>
-              <p className="abt-journey-copy">
-                {item.text}
-              </p>
-            </article>
-          ))}
+      <div className="abt-journey-stage">
+        <nav className="abt-journey-controls" aria-label="Journey carousel controls">
+          <button
+            type="button"
+            className="abt-journey-arrow"
+            aria-label="Previous milestone"
+            onClick={() => navigateTo(Math.max(0, activeIndex - 1))}
+            disabled={activeIndex === 0}
+          >
+            <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="abt-journey-arrow"
+            aria-label="Next milestone"
+            onClick={() => navigateTo(Math.min(journey.length - 1, activeIndex + 1))}
+            disabled={activeIndex === journey.length - 1}
+          >
+            <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
+          </button>
+        </nav>
+        <div
+          ref={scrollRef}
+          className="no-scrollbar abt-journey-scroll"
+          role="region"
+          aria-label="Journey milestones"
+        >
+          <div ref={trackRef} className="abt-journey-track">
+            {journey.map((item, index) => (
+              <article
+                key={`${item.year}-${index}`}
+                className={`abt-journey-card${activeIndex === index ? " is-active" : ""}`}
+                aria-label={`${item.year}: ${item.title}`}
+              >
+                <div className="abt-journey-rail" aria-hidden="true">
+                  <span />
+                </div>
+                <div className="abt-journey-year">
+                  {item.year}
+                </div>
+                <h3 className="abt-journey-card-title">
+                  {item.title}
+                </h3>
+                <p className="abt-journey-copy">
+                  {item.text}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
-      <nav className="abt-journey-controls" aria-label="Journey carousel controls">
-        <button
-          type="button"
-          className="abt-journey-arrow"
-          aria-label="Previous milestone"
-          onClick={() => navigateTo(Math.max(0, activeIndex - 1))}
-          disabled={activeIndex === 0}
-        >
-          <ArrowLeft size={19} strokeWidth={1.8} aria-hidden="true" />
-        </button>
-        <p className="abt-journey-count" aria-live="polite">
-          <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-          <span className="abt-journey-count-divider"> / </span>
-          {String(journey.length).padStart(2, "0")}
-          <span className="abt-journey-count-year">{journey[activeIndex]?.year}</span>
-        </p>
-        <button
-          type="button"
-          className="abt-journey-arrow"
-          aria-label="Next milestone"
-          onClick={() => navigateTo(Math.min(journey.length - 1, activeIndex + 1))}
-          disabled={activeIndex === journey.length - 1}
-        >
-          <ArrowRight size={19} strokeWidth={1.8} aria-hidden="true" />
-        </button>
-      </nav>
     </section>
   );
 }
@@ -396,13 +363,12 @@ function LeadershipDoorSlider() {
       style={{
         position: "relative",
         scrollMarginTop: 80,
-        padding: "96px 56px",
+        padding: "96px 120px",
         overflow: "hidden",
-        background: "#f4f5f6",
-        backgroundImage: "radial-gradient(circle at 12% 18%, rgba(236,51,56,0.06), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.72), rgba(244,245,246,0.96))",
+        background: "#ffffff",
       }}
     >
-      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, maxWidth: 1220, margin: "0 auto", display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: 72, alignItems: "center" }}>
+      <div className="abt-leadership-grid" style={{ position: "relative", zIndex: 1, width: "100%", margin: 0, display: "grid", gridTemplateColumns: "260px minmax(0, 1fr)", gap: 72, alignItems: "center" }}>
         <div data-scroll-reveal="text">
           <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 14 }}>
             OUR LEADERSHIP
@@ -421,57 +387,33 @@ function LeadershipDoorSlider() {
 
         <div className="abt-leadership-cards" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18 }}>
           {leaders.map((leader, i) => (
-            <div
+            <button
               key={leader.name}
+              type="button"
+              className="abt-leadership-card"
               data-scroll-reveal="image"
               data-scroll-reveal-delay={String(i * 90)}
-              style={{
-                position: "relative",
-                background: "#ffffff",
-                border: "1px solid rgba(17,24,39,0.08)",
-                borderRadius: 4,
-                overflow: "hidden",
-                boxShadow: "0 16px 36px rgba(17,24,39,0.08)",
-                display: "flex", flexDirection: "column",
-              }}
+              aria-label={`View profile of ${leader.name}`}
+              aria-haspopup="dialog"
+              onClick={() => setSelectedLeader(leader)}
             >
-              <div style={{ position: "relative", aspectRatio: "1.18", background: "#dfe2e5" }}>
+              <div className="abt-leadership-card-image">
                 <img src={leader.image} alt={leader.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
-                <button
-                  type="button"
-                  aria-label={`View profile of ${leader.name}`}
-                  onClick={() => setSelectedLeader(leader)}
-                  style={{
-                    position: "absolute",
-                    left: 16,
-                    bottom: -18,
-                    zIndex: 4,
-                    width: 38,
-                    height: 38,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    border: "3px solid #ffffff",
-                    borderRadius: "50%",
-                    background: "#EC3338",
-                    color: "#ffffff",
-                    cursor: "pointer",
-                    boxShadow: "0 4px 12px rgba(17,24,39,0.2)",
-                  }}
-                >
+                <span className="abt-leadership-image-shade" aria-hidden="true" />
+                <span className="abt-leadership-open-icon" aria-hidden="true">
                   <span aria-hidden="true" style={{ fontSize: 24, fontWeight: 300, lineHeight: 1, marginTop: -2 }}>+</span>
-                </button>
+                </span>
               </div>
 
-              <div style={{ padding: "30px 18px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.78rem", color: "#111827", textTransform: "none", letterSpacing: "0.01em", lineHeight: 1.3, marginBottom: 8 }}>
+              <div className="abt-leadership-card-copy">
+                <div className="abt-leadership-card-name font-montserrat">
                   {leader.name}
                 </div>
-                <div className="font-montserrat" style={{ fontWeight: 600, fontSize: "0.48rem", color: "#6b7280", letterSpacing: "0.14em", textTransform: "uppercase", lineHeight: 1.5 }}>
+                <div className="abt-leadership-card-role font-montserrat">
                   {leader.role}
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -627,38 +569,36 @@ export default function AboutPage() {
         </div>
       </section>
       {/* ─── 02 — OUR VALUES ─────────────────────────────────── */}
-      <section data-testid="section-about-values" className="abt-values-section bg-[transparent]" style={{ padding: "90px 56px" }}>
-        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <RevealBlock>
-            <div style={{ marginBottom: 64, textAlign: "center" }}>
-              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
-                OUR VALUES
-              </span>
-              <h2 className="font-montserrat font-medium" style={{ fontWeight: 600, fontSize: "36px", color: "#232529", letterSpacing: "-0.02em", margin: "0 0 16px", lineHeight: 1.1 }}>
-                What We Build On.
-              </h2>
-              <p className="font-inter" style={{ fontSize: "0.95rem", color: "#949599", maxWidth: 500, margin: "0 auto" }}>
-                Guiding every project. Shaping a stronger tomorrow.
-              </p>
+      <section data-testid="section-about-values" className="abt-values-section">
+        <div className="abt-values-band">
+          <div className="abt-values-content">
+            <RevealBlock className="abt-values-heading-wrap">
+              <div className="abt-values-heading">
+                <span className="abt-values-kicker font-montserrat">
+                  OUR VALUES
+                </span>
+                <h2 className="abt-values-title font-montserrat">
+                  What We Build On.
+                </h2>
+                <p className="abt-values-subtitle font-inter">
+                  Guiding every project. Shaping a stronger tomorrow.
+                </p>
+              </div>
+            </RevealBlock>
+            <div className="abt-values-grid" role="region" aria-label="Our values" tabIndex={0}>
+              {values.map((v, i) => (
+                <RevealBlock key={v.label} delay={i * 100} className="abt-value-item">
+                  <div className="abt-value-card">
+                    <div className="abt-value-label font-montserrat">
+                      {v.label}
+                    </div>
+                    <p className="abt-value-desc font-inter">
+                      {v.desc}
+                    </p>
+                  </div>
+                </RevealBlock>
+              ))}
             </div>
-          </RevealBlock>
-
-          <div className="abt-values-grid">
-            {values.map((v, i) => (
-              <RevealBlock key={i} delay={i * 100} className="abt-value-item">
-                <div className="abt-value-card">
-                  <div className="font-montserrat" style={{ fontSize: "0.55rem", fontWeight: 500, color: "#949599", letterSpacing: "0.08em", marginBottom: 40 }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="font-montserrat" style={{ fontSize: "1.25rem", fontWeight: 600, color: "#EC3338", marginBottom: 16, letterSpacing: "0.02em" }}>
-                    {v.label}
-                  </div>
-                  <p className="font-inter" style={{ fontSize: "0.85rem", color: "#949599", lineHeight: 1.7, margin: 0 }}>
-                    {v.desc}
-                  </p>
-                </div>
-              </RevealBlock>
-            ))}
           </div>
         </div>
       </section>
@@ -667,44 +607,54 @@ export default function AboutPage() {
       {/* ─── 04 — OUR JOURNEY ────────────────────────────────── */}
       <JourneyTimeline />
       {/* ─── 05 — OUR FOUNDER ────────────────────────────────── */}
-      <section data-testid="section-about-founder" className="abt-founder-section" style={{ background: "#232529", color: "#ffffff", padding: "96px 56px", overflow: "hidden" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="abt-story-cols">
+      <section data-testid="section-about-founder" className="abt-founder-section">
+        <div className="abt-founder-grid">
           <RevealBlock delay={0}>
-            <div style={{ position: "relative", aspectRatio: "3/4" }}>
-              <img src={`${assetBase}assets/leaders/leader-01.jpg`} alt="M. B. Nambiar" style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(20%) contrast(1.1)" }} />
-              <div style={{ position: "absolute", bottom: -20, right: -20, background: "#EC3338", padding: "32px", color: "#fff" }}>
-                <Quote size={32} />
+            <div className="abt-founder-photo">
+              <img
+                className="abt-founder-image"
+                src={`${assetBase}assets/leaders/leader-01.jpg`}
+                alt="M. B. Nambiar"
+              />
+              <div className="abt-founder-quote-badge" aria-hidden="true">
+                <Quote size={24} />
               </div>
             </div>
           </RevealBlock>
           <RevealBlock delay={100}>
-            <div style={{ textAlign: "center" }}>
-              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+            <div className="abt-founder-copy">
+              <span className="font-montserrat abt-founder-kicker">
                 OUR FOUNDER
               </span>
-              <h2 className="font-montserrat" style={{ fontWeight: 600, fontSize: "36px", letterSpacing: "-0.02em", margin: "0 0 32px", lineHeight: 1.1 }}>
+              <h2 className="font-montserrat abt-founder-title">
                 A Vision That Built Generations.
               </h2>
-              <div className="font-montserrat" style={{ fontSize: "1.2rem", fontWeight: 600, color: "#EC3338", marginBottom: 8 }}>
-                M. B. Nambiar
-              </div>
-              <div className="font-montserrat" style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>
-                Founder & Promoter
-              </div>
-              <p className="font-inter" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.8, marginBottom: 40 }}>
-                A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
-                <br /><br />
-                Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company's growth, reputation and enduring commitment to quality, safety and professional excellence.
-                <br /><br />
-                His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AESA Lifetime Achievement Award in 2022, presented by the Architects, Engineers and Surveyors Association (AESA), Pune.
-              </p>
-              <div style={{ borderTop: "2px solid #EC3338", paddingTop: 24, maxWidth: 420, margin: "0 auto" }}>
-                <p className="font-montserrat" style={{ fontSize: "1.1rem", fontWeight: 500, fontStyle: "italic", lineHeight: 1.6, color: "#ffffff", margin: 0 }}>
-                  "A legacy built on experience.<br/>A culture built to endure."
-                </p>
-                <span className="font-montserrat" style={{ display: "block", marginTop: 16, color: "rgba(255,255,255,0.55)", fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
+              <div className="abt-founder-identity">
+                <span className="font-montserrat abt-founder-name">
                   M. B. Nambiar
                 </span>
+                <span className="font-montserrat abt-founder-role">
+                  Founder & Promoter
+                </span>
+              </div>
+              <div className="font-inter abt-founder-bio">
+                <p>
+                  A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
+                </p>
+                <p>
+                  Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company&apos;s growth, reputation and enduring commitment to quality, safety and professional excellence.
+                </p>
+                <p>
+                  His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AES Lifetime Achievement Award in 2022, presented by the Architects, Engineers and Surveyors Association (AESA), Pune.
+                </p>
+              </div>
+              <div className="abt-founder-quote">
+                <div className="abt-founder-quote-copy">
+                  <p className="font-montserrat">
+                    A legacy built on experience. A culture built to endure.
+                  </p>
+                  <span className="font-montserrat">M. B. Nambiar</span>
+                </div>
               </div>
             </div>
           </RevealBlock>
@@ -775,10 +725,10 @@ export default function AboutPage() {
 
           <RevealBlock delay={150}>
             <div className="abt-stats-grid">
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className={`abt-stat-item font-montserrat${index === 1 ? " is-featured" : ""}`}
+                  className="abt-stat-item font-montserrat"
                 >
                   <div className="abt-stat-value">{stat.val}</div>
                   <div className="abt-stat-label">{stat.label}</div>
@@ -790,11 +740,22 @@ export default function AboutPage() {
       </section>
       {/* ─── 09 — THE JOURNEY CONTINUES (CTA) ────────────────── */}
       <section data-testid="section-about-continuation" className="abt-cta-section" style={{
-        background: "#EC3338",
+        background: "#232529",
         padding: "96px 40px 120px",
         position: "relative",
+        isolation: "isolate",
         overflow: "hidden",
       }}>
+         <div
+           aria-hidden="true"
+           style={{
+             position: "absolute",
+             inset: 0,
+              backgroundColor: "#232529",
+             zIndex: 0,
+             pointerEvents: "none",
+           }}
+         />
          <div data-scroll-reveal="text" style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <span className="font-montserrat text-[color:var(--mecpl-red)]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 24 }}>
             THE JOURNEY CONTINUES
@@ -807,13 +768,10 @@ export default function AboutPage() {
             lineHeight: 1.1,
             margin: "0 0 24px",
           }}>
-            Same Purpose.<br/>Greater Possibilities.
+            SAME PURPOSE.<br/>GREATER POSSIBILITIES.
           </h2>
-          <p className="font-inter" style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.9)", maxWidth: 600, margin: "0 auto 48px", lineHeight: 1.7 }}>
-            From the foundations we laid in 1975 to what we build next — the purpose remains the same: to build better, safer and stronger.
-          </p>
-          <p className="font-montserrat" style={{ color: "rgba(255,255,255,0.72)", fontSize: "0.62rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", margin: "-24px auto 40px" }}>
-            People · Places · Progress
+          <p className="font-inter" style={{ fontSize: "1.05rem", color: "#d1d3d5", maxWidth: 600, margin: "0 auto 48px", lineHeight: 1.7 }}>
+            From the foundations we laid in 1975 to what we build next, the purpose remains the same: to build better, safer and stronger.
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <Link href="/contact" data-testid="link-about-contact">
@@ -831,7 +789,7 @@ export default function AboutPage() {
             <Link href="/projects" data-testid="link-about-projects">
               <span className="font-montserrat" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                border: "1.5px solid rgba(255,255,255,0.85)", color: "#ffffff",
+                border: "1.5px solid #ffffff", color: "#ffffff",
                 padding: "15px 36px",
                 fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
                 cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
