@@ -293,7 +293,7 @@ export default function PeopleSafetySection() {
           color: #232529;
           font-family: var(--font-montserrat);
           font-size: clamp(0.74rem, 0.84vw, 0.9rem);
-          font-style: italic;
+          font-style: normal;
           font-weight: 600;
           line-height: 1.5;
         }

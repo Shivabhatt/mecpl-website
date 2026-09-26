@@ -10,7 +10,7 @@ import {
 const assetBase = import.meta.env.BASE_URL;
 
 const stats = [
-  { val: "50+", label: "YEARS OF LEGACY" },
+  { val: "45+", label: "YEARS OF LEGACY" },
   { val: "30+", label: "COMPLETED PROJECTS" },
   { val: "MAHARASHTRA", label: "REGIONAL PRESENCE" },
 ];
@@ -147,12 +147,11 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
 
 const purposeRows = [
   {
-    label: "Our Vision",
+    label: "OUR VISION",
     text: "To be the most preferred civil engineering contractor, delivering beyond expectations through safe, compliant and environmentally responsible execution.",
-    highlights: "SAFE · COMPLIANT · RESPONSIBLE",
   },
   {
-    label: "Our Mission",
+    label: "OUR MISSION",
     text: "To deliver quality construction, on time and with care — continually improving our people, processes and technology while putting safety, health and the environment first.",
     highlights: "QUALITY · PEOPLE · PROCESS",
   },
@@ -170,10 +169,9 @@ function PurposeSection() {
       <span className="purpose-ref-watermark" aria-hidden="true" />
       <div className="purpose-ref-content">
         <header className="purpose-ref-header">
-          <span className="purpose-ref-kicker">OUR PURPOSE</span>
+          <span className="purpose-ref-kicker about-label-font font-montserrat">OUR PURPOSE</span>
           <h2 className="purpose-ref-title" id="purpose-title">
-            <span>Where We&apos;re Going.</span>
-            <span>How We Get There.</span>
+            Where We&apos;re Going. How We Get There.
           </h2>
         </header>
 
@@ -185,8 +183,10 @@ function PurposeSection() {
             >
               <div className="purpose-ref-copy">
                 <h3>{row.label}</h3>
-                <p>{row.text}</p>
-                <span className="purpose-ref-highlights">{row.highlights}</span>
+                <p className="text-[16px]">{row.text}</p>
+                {row.highlights && (
+                  <span className="purpose-ref-highlights">{row.highlights}</span>
+                )}
               </div>
             </article>
           ))}
@@ -274,9 +274,9 @@ function JourneyTimeline() {
           OUR JOURNEY
         </span>
         <h2 className="page-title-font font-montserrat abt-journey-title">
-          50+ Years. <span>One Continuing Journey.</span>
+          45+ YEARS. ONE CONTINUING JOURNEY.
         </h2>
-        <p className="font-inter abt-journey-subtitle">
+        <p className="font-montserrat abt-journey-subtitle text-[16px]">
           Milestones that build a stronger tomorrow
         </p>
       </header>
@@ -323,7 +323,7 @@ function JourneyTimeline() {
                 <h3 className="abt-journey-card-title">
                   {item.title}
                 </h3>
-                <p className="abt-journey-copy">
+                <p className="abt-journey-copy text-[16px]">
                   {item.text}
                 </p>
               </article>
@@ -374,13 +374,10 @@ function LeadershipDoorSlider() {
             OUR LEADERSHIP
           </span>
           <h2 className="page-title-font font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
-            The People Building What's Next.
+            Built on Experience. Driven by the Future.
           </h2>
-          <p className="font-inter" style={{ fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
+          <p className="font-montserrat text-[16px]" style={{ fontSize: "0.8rem", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
             For over five decades, MECPL has been shaped by leaders who combine deep industry experience with a forward-looking approach to construction, people and business.
-          </p>
-          <p className="font-montserrat" style={{ fontSize: "0.62rem", color: "#949599", lineHeight: 1.9, letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 28px" }}>
-            Experience · Leadership · Continuity · A Stronger Tomorrow
           </p>
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
         </div>
@@ -409,7 +406,7 @@ function LeadershipDoorSlider() {
                 <div className="abt-leadership-card-name font-montserrat">
                   {leader.name}
                 </div>
-                <div className="abt-leadership-card-role font-montserrat">
+                <div className="abt-leadership-card-role font-montserrat text-[16px]">
                   {leader.role}
                 </div>
               </div>
@@ -417,7 +414,6 @@ function LeadershipDoorSlider() {
           ))}
         </div>
       </div>
-
       {selectedLeader && (
         <div
           role="presentation"
@@ -487,7 +483,7 @@ function LeadershipDoorSlider() {
               </div>
               <div style={{ display: "grid", gap: 14 }}>
                 {selectedLeader.details.map((detail) => (
-                  <p key={detail} className="font-inter" style={{ margin: 0, color: "#e1e3e6", fontSize: "0.82rem", lineHeight: 1.75 }}>
+                  <p key={detail} className="font-montserrat" style={{ margin: 0, color: "#e1e3e6", fontSize: "0.82rem", lineHeight: 1.75 }}>
                     {detail}
                   </p>
                 ))}
@@ -507,7 +503,7 @@ function LeadershipDoorSlider() {
 
 export default function AboutPage() {
   return (
-    <div data-animate-page className="about-page font-inter" style={{ background: "#ffffff", color: "#232529" }}>
+    <div data-animate-page className="about-page font-montserrat" style={{ background: "#ffffff", color: "#232529" }}>
       {/* ─── 01 — OUR STORY (Hero) ───────────────────────────── */}
       <section
         data-testid="section-about-story"
@@ -527,33 +523,33 @@ export default function AboutPage() {
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
           textAlign: "center",
         }}>
-          <span className="about-label-font font-montserrat" style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)", display: "block", marginBottom: 16 }}>
+          <span className="about-hero-label font-montserrat" style={{ fontSize: "clamp(11px, 2.75vw, 15px)", fontWeight: 600, letterSpacing: "clamp(0.05em, 0.18vw, 0.18em)", color: "rgba(255,255,255,0.7)", display: "block", marginBottom: 16, textTransform: "uppercase" }}>
             Our Story
           </span>
-          <h1 className="hp-banner-title page-title-font font-montserrat" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+          <h1 className="about-hero-title hp-banner-title page-title-font font-montserrat" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
             <div className="hp-banner-line" style={{
-              fontSize: "36px",
+              fontSize: "26px",
               fontWeight: 500,
               lineHeight: 1.15, color: "#ffffff",
             }}>
-              50+ YEARS OF<br/>BUILDING WHAT LASTS.
+              45+ YEARS OF<br/>BUILDING WHAT LASTS.
             </div>
           </h1>
-          <h2 className="font-montserrat" style={{
-            fontSize: "clamp(0.95rem, 1.5vw, 1.2rem)",
-            fontWeight: 500,
+          <h2 className="about-hero-tagline font-montserrat" style={{
+            fontSize: "16px",
+            fontWeight: 400,
             color: "rgba(255,255,255,0.9)",
-            letterSpacing: "-0.01em",
-            lineHeight: 1.4,
+            letterSpacing: "normal",
+            lineHeight: 1.7,
             margin: "0 0 12px",
           }}>
             People. Partnerships. Progress.
           </h2>
-          <p className="page-subtitle-font font-montserrat" style={{
-            fontSize: "12px",
-            fontWeight: 300,
+          <p className="about-hero-description page-subtitle-font font-montserrat text-[16px]" style={{
+            fontSize: "16px",
+            fontWeight: 400,
             color: "rgba(255,255,255,0.65)",
-            lineHeight: 1.7,
+            lineHeight: 1.6,
             margin: 0,
             maxWidth: 600,
             padding: "0 24px",
@@ -562,7 +558,7 @@ export default function AboutPage() {
           </p>
           <a
             href="#our-journey"
-            className="mt-7 inline-flex items-center gap-3 border border-mecpl-red bg-mecpl-red px-6 py-3 font-montserrat text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:border-white hover:bg-transparent"
+            className="mt-7 inline-flex items-center gap-3 border border-mecpl-red bg-mecpl-red px-6 py-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:border-white hover:bg-transparent"
           >
             Watch Our Story <ArrowRight size={14} aria-hidden="true" />
           </a>
@@ -580,7 +576,7 @@ export default function AboutPage() {
                 <h2 className="abt-values-title font-montserrat">
                   What We Build On.
                 </h2>
-                <p className="abt-values-subtitle font-inter">
+                <p className="abt-values-subtitle font-montserrat text-[16px]">
                   Guiding every project. Shaping a stronger tomorrow.
                 </p>
               </div>
@@ -592,7 +588,7 @@ export default function AboutPage() {
                     <div className="abt-value-label font-montserrat">
                       {v.label}
                     </div>
-                    <p className="abt-value-desc font-inter">
+                    <p className="abt-value-desc font-montserrat text-[16px]">
                       {v.desc}
                     </p>
                   </div>
@@ -637,7 +633,7 @@ export default function AboutPage() {
                   Founder & Promoter
                 </span>
               </div>
-              <div className="font-inter abt-founder-bio">
+              <div className="font-montserrat abt-founder-bio text-[16px]">
                 <p>
                   A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
                 </p>
@@ -663,11 +659,11 @@ export default function AboutPage() {
       {/* ─── 06 — OUR LEADERSHIP ─────────────────────────────── */}
       <LeadershipDoorSlider />
       {/* ─── 07 — AWARDS & CERTIFICATIONS ────────────────────── */}
-      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#ffffff", padding: "96px 56px" }}>
+      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#ffffff", padding: "24px 56px 96px" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <RevealBlock>
             <div style={{ marginBottom: 64, textAlign: "center" }}>
-              <span className="font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
+              <span className="about-label-font font-montserrat text-[15px]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 12 }}>
                 AWARDS & CERTIFICATIONS
               </span>
               <h2 className="font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "#232529", letterSpacing: "-0.02em", margin: "0 auto", lineHeight: 1.1, maxWidth: 600 }}>
@@ -704,7 +700,7 @@ export default function AboutPage() {
         <div className="abt-sectors-inner">
           <RevealBlock>
             <header className="abt-sectors-header">
-              <span className="abt-sectors-eyebrow font-montserrat">
+              <span className="abt-sectors-eyebrow about-label-font font-montserrat">
                 TODAY, WE BUILD ACROSS
               </span>
               <h2 className="abt-sectors-title font-montserrat">
@@ -741,7 +737,8 @@ export default function AboutPage() {
       {/* ─── 09 — THE JOURNEY CONTINUES (CTA) ────────────────── */}
       <section data-testid="section-about-continuation" className="abt-cta-section" style={{
         background: "#232529",
-        padding: "96px 40px 120px",
+        padding: "120px 40px 120px",
+        marginTop: "120px",
         position: "relative",
         isolation: "isolate",
         overflow: "hidden",
@@ -757,7 +754,7 @@ export default function AboutPage() {
            }}
          />
          <div data-scroll-reveal="text" style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <span className="font-montserrat text-[color:var(--mecpl-red)]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 24 }}>
+          <span className="about-label-font font-montserrat text-[color:var(--mecpl-red)]" style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "0.3em", color: "#EC3338", textTransform: "uppercase", display: "block", marginBottom: 24 }}>
             THE JOURNEY CONTINUES
           </span>
           <h2 className="font-montserrat" style={{
@@ -770,7 +767,7 @@ export default function AboutPage() {
           }}>
             SAME PURPOSE.<br/>GREATER POSSIBILITIES.
           </h2>
-          <p className="font-inter" style={{ fontSize: "1.05rem", color: "#d1d3d5", maxWidth: 600, margin: "0 auto 48px", lineHeight: 1.7 }}>
+          <p className="font-montserrat" style={{ fontSize: "1.05rem", color: "#d1d3d5", maxWidth: 600, margin: "0 auto 48px", lineHeight: 1.7 }}>
             From the foundations we laid in 1975 to what we build next, the purpose remains the same: to build better, safer and stronger.
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>

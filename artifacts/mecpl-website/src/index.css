@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -164,8 +163,9 @@
   --mecpl-text: #232529;
   --mecpl-text-muted: #949599;
 
-  --font-montserrat: 'Montserrat', sans-serif;
-  --font-inter: var(--font-montserrat);
+  --font-montserrat: 'Montserrat';
+  --default-font-family: 'Montserrat';
+  --default-mono-font-family: 'Montserrat';
 }
 
 html[data-theme="light"] {
@@ -303,16 +303,6 @@ html[data-theme="light"] {
 
 .home-page-typography .rec-card h2.rec-card-title {
   font-size: 9px !important;
-}
-
-.home-page-typography h2.iso-card-title {
-  font-size: 8px !important;
-}
-
-@media (min-width: 768px) {
-  .home-page-typography h2.iso-card-title {
-    font-size: 10px !important;
-  }
 }
 
 .font-montserrat {
@@ -745,7 +735,7 @@ html[data-theme="light"] select {
   [data-testid="section-stats"]       { padding: 40px 20px !important; }
   [data-testid="section-services"]    { padding: 56px 0 !important; }
   [data-testid="section-projects"]    { padding-top: 56px !important; }
-  [data-testid="section-testimonials"]{ padding: 56px 0 !important; }
+  [data-testid="section-testimonials"]{ padding: 56px 0 0 !important; }
 
   /* ── Services inner header ── */
   [data-testid="section-services"] .max-w-7xl { padding-left: 20px !important; padding-right: 20px !important; }
@@ -769,7 +759,7 @@ html[data-theme="light"] select {
   }
 
   /* ── Testimonials inner ── */
-  [data-testid="section-testimonials"] > div:first-child { padding: 0 20px !important; margin-bottom: 36px !important; }
+  [data-testid="section-testimonials"] > div:first-child { padding: 0 20px !important; margin-bottom: 0 !important; }
   [data-testid="section-testimonials"] > div:nth-child(2){ padding: 0 12px !important; margin-bottom: 36px !important; }
 
   /* ── Navbar — tighter on mobile ── */
@@ -1007,7 +997,7 @@ html[data-theme="light"] select {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 96px 40px 120px !important;
+  padding: 120px 40px 120px !important;
   background: #232529 !important;
 }
 
@@ -1033,14 +1023,14 @@ html[data-theme="light"] select {
 .purpose-reference {
   background: #fff;
   color: #232529;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat';
 }
 
 .purpose-ref-section {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 42px 120px 56px;
+  padding: 120px 120px 120px;
   background: #fff;
 }
 
@@ -1108,15 +1098,8 @@ html[data-theme="light"] select {
   letter-spacing: 0.015em;
   line-height: 0.98;
   text-align: center;
-  text-transform: uppercase;
-}
-
-.purpose-reference .purpose-ref-title span {
-  display: block;
-}
-
-.purpose-reference .purpose-ref-title span + span {
-  color: #929499;
+  text-transform: none;
+  white-space: nowrap;
 }
 
 .purpose-ref-cards {
@@ -1136,19 +1119,6 @@ html[data-theme="light"] select {
   border-left: 5px solid #ec3338;
   background: #fff;
   box-shadow: 0 8px 28px rgba(35, 37, 41, 0.045);
-}
-
-.purpose-ref-card::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 92px;
-  height: 60px;
-  background:
-    linear-gradient(135deg, transparent 49.2%, rgba(236, 51, 56, 0.16) 49.7%, transparent 50.4%),
-    linear-gradient(45deg, transparent 49.2%, rgba(236, 51, 56, 0.12) 49.7%, transparent 50.4%);
-  content: "";
-  pointer-events: none;
 }
 
 .purpose-ref-copy {
@@ -1204,16 +1174,10 @@ html[data-theme="light"] select {
   color: #87898e;
 }
 
-.purpose-ref-card-dark::after {
-  background:
-    linear-gradient(135deg, transparent 49.2%, rgba(255, 255, 255, 0.14) 49.7%, transparent 50.4%),
-    linear-gradient(45deg, transparent 49.2%, rgba(255, 255, 255, 0.1) 49.7%, transparent 50.4%);
-}
-
 @media (max-width: 900px) {
   .purpose-ref-section {
     min-height: auto;
-    padding: 56px 24px 64px;
+    padding: 120px 24px 120px;
   }
 
   .purpose-ref-content {
@@ -1231,9 +1195,20 @@ html[data-theme="light"] select {
   }
 }
 
+@media (max-width: 900px) {
+  .purpose-ref-section {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .purpose-reference .purpose-ref-title {
+    font-size: clamp(1rem, 4vw, 2rem);
+  }
+}
+
 @media (max-width: 560px) {
   .purpose-ref-section {
-    padding: 48px 18px 54px;
+    padding: 120px 18px 120px;
   }
 
   .purpose-ref-header {
@@ -1241,7 +1216,7 @@ html[data-theme="light"] select {
   }
 
   .purpose-reference .purpose-ref-title {
-    font-size: clamp(1.55rem, 6.8vw, 1.9rem);
+    font-size: clamp(0.875rem, 4.1vw, 1.5rem);
   }
 
   .purpose-ref-card {
@@ -1265,7 +1240,8 @@ html[data-theme="light"] select {
 
 .abt-founder-section {
   overflow: hidden;
-  padding: 96px 120px;
+  margin-top: 120px;
+  padding: 120px 120px 96px;
   background: #232529;
   color: #fff;
 }
@@ -1390,7 +1366,7 @@ html[data-theme="light"] select {
   margin: 0;
   color: #fff;
   font-size: 0.85rem;
-  font-style: italic;
+  font-style: normal;
   font-weight: 500;
   line-height: 1.55;
   text-align: left;
@@ -1686,6 +1662,7 @@ html[data-theme="light"] select {
   .abt-awards-item,
   .abt-awards-item:nth-child(6) { grid-column: auto !important; }
   .abt-leadership-section { padding: 72px 32px !important; }
+  .abt-awards-section { padding-top: 48px !important; }
   .abt-leadership-grid    { grid-template-columns: 1fr !important; gap: 48px !important; }
   .abt-leadership-cards   { grid-template-columns: 1fr 1fr !important; }
   .abt-leadership-modal-card { grid-template-columns: 0.8fr 1.2fr !important; }
@@ -1693,12 +1670,12 @@ html[data-theme="light"] select {
   .abt-stats-grid         { grid-template-columns: 1fr 1fr !important; }
   .abt-stats-grid > div   { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
   .abt-alt-text           { padding: 40px 48px !important; }
-  .abt-cta-section        { min-height: auto; padding: 40px 28px !important; }
+  .abt-cta-section        { min-height: auto; padding: 120px 28px 40px !important; }
 }
 
 @media (max-width: 900px) {
   .abt-founder-section {
-    padding: 72px 48px !important;
+    padding: 120px 48px 72px !important;
   }
 
   .abt-founder-grid {
@@ -1735,10 +1712,11 @@ html[data-theme="light"] select {
   .abt-story-cols         { grid-template-columns: 1fr !important; gap: 24px !important; }
   .abt-stats-grid         { grid-template-columns: 1fr 1fr !important; }
   .abt-alt-text           { padding: 32px 24px !important; }
-  .abt-cta-section        { min-height: auto; padding: 32px 20px !important; }
+  .abt-cta-section        { min-height: auto; padding: 120px 20px 32px !important; }
   .abt-awards-section,
   .abt-founder-section,
   .abt-sectors-section    { padding: 64px 20px !important; }
+  .abt-founder-section    { padding-top: 120px !important; }
   .abt-values-content     { width: 100%; max-width: none; min-height: 320px; margin: 0; gap: 20px; padding: 30px 0 24px; }
   .abt-values-heading     { padding: 0 20px; }
   .abt-values-grid        { display: flex; width: 100%; min-height: 120px; flex: 0 0 120px; overflow-x: auto; overflow-y: hidden; padding: 0 14px; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -1799,7 +1777,6 @@ html[data-theme="light"] select {
   font-weight: 500 !important;
 }
 
-.font-inter,
 .page-subtitle-font,
 .blog-article-copy,
 .blog-article-intro,
@@ -2039,11 +2016,6 @@ html[data-theme="light"] select {
   line-height: 1.35 !important;
 }
 
-.home-page-typography section[aria-label="ISO certifications"] h2.iso-card-title {
-  font-size: 14px !important;
-  line-height: 1.35 !important;
-}
-
 .home-page-typography #featured-projects .group h2 {
   font-size: clamp(1.875rem, 4vw, 3.5rem) !important;
   line-height: 1.08 !important;
@@ -2083,15 +2055,9 @@ html[data-theme="light"] select {
     line-height: 1.35 !important;
   }
 
-  .home-page-typography #recognition .rec-card p,
-  .home-page-typography section[aria-label="ISO certifications"] p {
+  .home-page-typography #recognition .rec-card p {
     font-size: var(--home-desktop-card-meta-size) !important;
     line-height: 1.4 !important;
-  }
-
-  .home-page-typography section[aria-label="ISO certifications"] h2.iso-card-title {
-    font-size: 15px !important;
-    line-height: 1.35 !important;
   }
 
   .home-page-typography #stats .home-stat-item > div:first-child > span {
@@ -2498,7 +2464,7 @@ html[data-theme="light"] select {
 
 /* The journey follows a centered editorial timeline with end-positioned controls. */
 .abt-journey-section {
-  padding-bottom: 44px;
+  padding-bottom: 0;
   background: #f5f5f2;
 }
 
@@ -2550,7 +2516,7 @@ html[data-theme="light"] select {
 
 .about-page .abt-journey-scroll {
   min-height: 0;
-  padding: 28px 0 18px;
+  padding: 28px 0 0;
 }
 
 .abt-journey-track {
@@ -2663,7 +2629,7 @@ html[data-theme="light"] select {
 
 @media (max-width: 700px) {
   .abt-journey-section {
-    padding-bottom: 30px;
+    padding-bottom: 0;
   }
 
   .abt-journey-header {
@@ -2686,7 +2652,7 @@ html[data-theme="light"] select {
 
   .about-page .abt-journey-scroll {
     min-height: 0;
-    padding: 38px 0 12px;
+    padding: 38px 0 0;
   }
 
   .abt-journey-track {
@@ -2735,9 +2701,21 @@ html[data-theme="light"] select {
 }
 
 .about-page .abt-sectors-inner {
+  position: relative;
   width: 100%;
   max-width: none;
   margin: 0 auto;
+}
+
+.about-page .abt-sectors-inner::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: #d9d9d6;
+  content: "";
+  pointer-events: none;
 }
 
 .about-page .abt-sectors-header {
@@ -2829,7 +2807,7 @@ html[data-theme="light"] select {
   max-width: 1200px;
   margin: 0 auto;
   border-top: 1px solid #d9d9d6;
-  border-bottom: 1px solid #d9d9d6;
+  border-bottom: 0;
 }
 
 .about-page .abt-stats-grid .abt-stat-item {
@@ -2948,5 +2926,249 @@ html[data-theme="light"] select {
   .about-page .abt-stat-label {
     max-width: none;
     text-align: left;
+  }
+}
+
+.home-page-typography #clients .clients-marquee {
+  overflow: hidden;
+}
+
+.home-page-typography #clients .client-logo-image {
+  filter: grayscale(1);
+  opacity: 0.64;
+  transition: filter 280ms ease, opacity 280ms ease;
+}
+
+.home-page-typography #clients .client-logo-cell:hover .client-logo-image,
+.home-page-typography #clients .client-logo-cell:active .client-logo-image {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page-typography #clients .clients-marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+
+  .home-page-typography #clients .clients-loop-group[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+html,
+body,
+* {
+  font-family: 'Montserrat' !important;
+  font-style: normal !important;
+}
+
+*::before,
+*::after {
+  font-family: 'Montserrat' !important;
+  font-style: normal !important;
+}
+
+@layer base {
+  .about-page .about-hero-title .hp-banner-line {
+    font-family: var(--font-montserrat) !important;
+    font-size: 26px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.15 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .about-hero-label {
+    font-family: var(--font-montserrat) !important;
+    font-size: clamp(11px, 2.75vw, 15px) !important;
+    font-weight: 600 !important;
+    letter-spacing: clamp(0.05em, 0.18vw, 0.18em) !important;
+    line-height: normal !important;
+    text-transform: uppercase !important;
+  }
+
+  .about-page h2:not(.about-hero-tagline):not(.abt-award-title) {
+    font-family: var(--font-montserrat) !important;
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;
+    text-transform: none !important;
+  }
+
+  .about-page h2.about-hero-tagline {
+    font-family: var(--font-montserrat) !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+    line-height: 1.7 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .about-label-font {
+    font-family: var(--font-montserrat) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    line-height: 1.3 !important;
+    text-transform: uppercase !important;
+  }
+
+  .about-page .abt-values-kicker {
+    font-family: var(--font-montserrat) !important;
+    font-size: 14px !important;
+  }
+
+  .about-page .purpose-ref-kicker {
+    font-family: var(--font-montserrat) !important;
+    font-size: 14px !important;
+  }
+
+  .about-page .abt-founder-kicker {
+    font-family: var(--font-montserrat) !important;
+    font-size: 14px !important;
+  }
+
+  .about-page .about-hero-description,
+  .about-page .abt-values-subtitle,
+  .about-page .abt-value-desc,
+  .about-page .abt-founder-bio,
+  .about-page .purpose-ref-copy p,
+  .about-page .abt-journey-copy,
+  .about-page .abt-leadership-section [data-scroll-reveal="text"] > p:first-of-type,
+  .about-page .abt-journey-subtitle,
+  .about-page .abt-cta-section p {
+    font-family: var(--font-montserrat) !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+    line-height: 1.6 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .purpose-ref-copy h3,
+  .about-page .abt-journey-card-title,
+  .about-page .abt-awards-grid h2.abt-award-title {
+    font-family: var(--font-montserrat) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: normal !important;
+    line-height: 1.35 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .purpose-ref-highlights {
+    font-family: var(--font-montserrat) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    line-height: 1.6 !important;
+    text-transform: uppercase !important;
+  }
+
+  .about-page .abt-journey-year,
+  .about-page .abt-stat-value,
+  .about-page .abt-stat-item:last-child .abt-stat-value {
+    font-family: var(--font-montserrat) !important;
+    font-size: clamp(34px, 3.2vw, 40px) !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.06em !important;
+    line-height: 1 !important;
+  }
+
+  .about-page .abt-awards-grid .recognition-card-detail {
+    font-family: var(--font-montserrat) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+    line-height: 1.45 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .abt-founder-quote-copy p {
+    font-family: var(--font-montserrat) !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    letter-spacing: normal !important;
+    line-height: 1.6 !important;
+    text-transform: none !important;
+  }
+
+  .about-page .abt-leadership-card-name {
+    font-family: var(--font-montserrat) !important;
+    font-size: clamp(15px, 1.3vw, 20px) !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-page .abt-leadership-card-role {
+    font-family: var(--font-montserrat) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.4 !important;
+  }
+
+  .about-page .abt-sector-tab {
+    font-family: var(--font-montserrat) !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.25 !important;
+  }
+
+  .about-page .abt-stat-label {
+    font-family: var(--font-montserrat) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.35 !important;
+  }
+
+  .about-page .abt-cta-section a > span {
+    font-family: var(--font-montserrat) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+  }
+
+  @media (min-width: 1024px) {
+    .about-page .about-label-font {
+      font-size: 14px !important;
+      letter-spacing: 0.16em !important;
+    }
+
+    .about-page .abt-awards-grid .recognition-card-detail {
+      font-size: 13px !important;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .about-page .about-hero-title .hp-banner-line {
+      font-size: clamp(14px, 4vw, 22px) !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-page .abt-leadership-section [data-scroll-reveal="text"] > p:first-of-type {
+      font-size: 16px !important;
+    }
+
+    .about-page .purpose-ref-copy p {
+      font-size: 16px !important;
+    }
+
+    .about-page .abt-awards-grid .recognition-card-detail,
+    .about-page .abt-stat-label {
+      font-size: 12px !important;
+    }
+
+    .about-page .abt-sector-tab {
+      font-size: 16px !important;
+    }
   }
 }

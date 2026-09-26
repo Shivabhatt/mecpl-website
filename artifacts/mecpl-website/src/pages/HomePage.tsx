@@ -57,12 +57,6 @@ const recognitionData = [
   { title: "CRISIL BBB / Positive", detail: "Financial Rating", image: "assets/recognition/crisil-rating.jpg" },
 ];
 
-const isoCertifications = [
-  { standard: "ISO 9001:2015", detail: "Quality Management System", color: "#168455", markFilter: "hue-rotate(285deg) saturate(0.85)" },
-  { standard: "ISO 14001:2015", detail: "Environmental Management System", color: "#175f9b", markFilter: "saturate(0.9)" },
-  { standard: "ISO 45001:2018", detail: "Occupational Health & Safety Management System", color: "#bf3036", markFilter: "hue-rotate(125deg) saturate(1.35)" },
-];
-
 const services = [
   { num: "01", title: "Residential Construction", desc: "High-rise, township and residential developments built for scale, safety and lasting performance.", icon: "residential" },
   { num: "02", title: "Institutional & Industrial Construction", desc: "From educational and institutional spaces to factories, R&D centres and process plants, we build high-performance structures engineered for demanding operations.", icon: "institutional-industrial" },
@@ -118,18 +112,23 @@ const testimonials = [
 ];
 
 const clients = [
-  { name: "Panchshil Group",      logo: "assets/clients/client-09-1.webp" },
-  { name: "Godrej Properties",    logo: "assets/clients/client-12-1.webp" },
-  { name: "K Raheja Corp",        logo: "assets/clients/client-17.webp"   },
-  { name: "Kalpataru",            logo: "assets/clients/client-14.webp"   },
-  { name: "Tata Consultancy",     logo: "assets/clients/client-06.webp"   },
-  { name: "Gera Developers",      logo: "assets/clients/client-05.webp"   },
-  { name: "Pride Builders",       logo: "assets/clients/client-15-1.webp" },
-  { name: "Syntel International", logo: "assets/clients/omniactive.webp"  },
-  { name: "Praj Industries",      logo: "assets/clients/client-13.webp"   },
-  { name: "Mahindra",             logo: "assets/clients/vtp-realty.webp"  },
-  { name: "Sahara India",         logo: "assets/clients/client-09-1.webp" },
-  { name: "Cadbury India",        logo: "assets/clients/client-12-1.webp" },
+  { name: "Panchshil",                         logo: "assets/clients/partner-logos/panchshil.webp" },
+  { name: "K Raheja Corp",                     logo: "assets/clients/partner-logos/k-raheja.webp" },
+  { name: "Godrej",                            logo: "assets/clients/partner-logos/godrej.webp" },
+  { name: "Tata Consultancy Services",          logo: "assets/clients/partner-logos/tcs.webp" },
+  { name: "Praj",                              logo: "assets/clients/partner-logos/praj.webp" },
+  { name: "Nandan",                            logo: "assets/clients/partner-logos/nandan.webp" },
+  { name: "Atos Syntel",                       logo: "assets/clients/partner-logos/atos-syntel.webp" },
+  { name: "Pride Purple",                      logo: "assets/clients/partner-logos/pride-purple.webp" },
+  { name: "Kalpataru",                         logo: "assets/clients/partner-logos/kalpataru.webp" },
+  { name: "Gera World",                        logo: "assets/clients/partner-logos/gera-world.webp" },
+  { name: "Pride",                             logo: "assets/clients/partner-logos/pride.webp" },
+  { name: "Bekaert",                           logo: "assets/clients/partner-logos/bekaert.webp" },
+  { name: "Mondelez International",             logo: "assets/clients/partner-logos/mondelez.webp" },
+  { name: "TCG International Biotech Park",     logo: "assets/clients/partner-logos/tcg-ibp.webp" },
+  { name: "UWC Mahindra",                      logo: "assets/clients/partner-logos/mahindra-uwc.webp" },
+  { name: "OmniActive",                        logo: "assets/clients/partner-logos/omniactive.webp" },
+  { name: "Bombay YMCA",                       logo: "assets/clients/partner-logos/bombay-ymca.webp" },
 ];
 
 /* ─── COMPONENT ──────────────────────────────────────────────────── */
@@ -388,9 +387,10 @@ export default function HomePage() {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const tween = gsap.to(track, {
-        x: () => -(track.scrollWidth / 2),
-        duration: 28, ease: "none", repeat: -1,
-        onRepeat: () => gsap.set(track, { x: 0 }),
+        xPercent: -50,
+        duration: 56,
+        ease: "none",
+        repeat: -1,
       });
       const pause = () => tween.pause();
       const play  = () => tween.play();
@@ -568,10 +568,10 @@ export default function HomePage() {
         </div>
       </section>
       {/* ══════════ 2. RECOGNITION ══════════ */}
-      <section id="recognition" ref={recognitionRef} className="bg-[#f7f6f3] px-5 py-7 md:px-10 md:py-8">
-        <div className="mx-auto max-w-7xl">
+      <section id="recognition" ref={recognitionRef} className="bg-[#f7f6f3] px-5 py-7 md:px-10 md:py-8 lg:px-[100px]">
+        <div className="mx-auto w-full">
           <div className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
-            <div className="grid min-w-[440px] grid-cols-4 md:min-w-0">
+            <div className="grid min-w-[560px] grid-cols-5 md:min-w-0">
               {recognitionData.map((item, index) => (
                 <div
                   key={item.title}
@@ -597,6 +597,32 @@ export default function HomePage() {
                   </p>
                 </div>
               ))}
+              <div
+                role="group"
+                aria-label="ISO certifications"
+                className="rec-card flex min-h-[142px] flex-col items-center justify-center border-l border-mecpl-dark/[0.08] px-2 py-3 text-center"
+              >
+                <div className="recognition-mark-frame">
+                  <img
+                    src={`${assetBase}assets/recognition/iso-mark.png`}
+                    alt="Blue ISO logo"
+                    className="recognition-mark-image"
+                    style={{
+                      filter: "drop-shadow(0 2px 5px rgba(23,95,155,0.16))",
+                    }}
+                    loading="lazy"
+                  />
+                </div>
+                <h2 className="rec-card-title recognition-card-title mt-2 max-w-[180px] font-montserrat font-semibold text-[#30343a]">
+                  ISO Certified
+                </h2>
+                <p className="recognition-card-detail mt-1 w-full max-w-[220px] font-montserrat tracking-[0.01em] text-[#74777b]">
+                  <span className="block xl:whitespace-nowrap">
+                    ISO 14001:2015, ISO 9001:2015,
+                  </span>
+                  <span className="block">ISO 45001: 2018</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -670,37 +696,69 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* ══════════ 2.75 ISO CERTIFICATIONS ══════════ */}
-      <section className="bg-[#f7f6f3] px-5 py-6 md:px-10 md:py-7" aria-label="ISO certifications">
-        <div className="mx-auto grid max-w-4xl grid-cols-3">
-          {isoCertifications.map((item, index) => (
-            <div
-              key={item.standard}
-              className={`flex min-h-[112px] flex-col items-center justify-center px-2 py-3 text-center md:px-6 ${
-                index > 0 ? "border-l border-mecpl-dark/[0.08]" : ""
-              }`}
-            >
-              <div className="recognition-mark-frame">
-                <img
-                  src={`${assetBase}assets/recognition/iso-mark.png`}
-                  alt=""
-                  aria-hidden="true"
-                  className="recognition-mark-image"
-                  style={{ filter: `${item.markFilter} drop-shadow(0 2px 4px ${item.color}22)` }}
-                  loading="lazy"
-                />
-              </div>
-              <h2
-                className="iso-card-title recognition-card-title mt-2 font-montserrat font-semibold leading-tight"
-                style={{ color: item.color }}
+      {/* ══════════ CLIENTS: partner logo marquee ══════════ */}
+      <section
+        id="clients"
+        ref={clientsRef}
+        data-testid="section-clients"
+        aria-label="Our clients"
+        style={{
+          background: "#ffffff",
+          borderTop: "1px solid rgba(35,37,41,0.08)",
+          padding: "clamp(52px, 6vw, 76px) 0",
+        }}
+      >
+        <div className="clients-marquee" role="region" aria-label="Client logos">
+          <div
+            className="clients-track"
+            style={{ display: "flex", alignItems: "center", width: "max-content" }}
+          >
+            {[0, 1].map((copyIndex) => (
+              <div
+                key={copyIndex}
+                className="clients-loop-group"
+                aria-hidden={copyIndex === 1 ? "true" : undefined}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "clamp(32px, 4vw, 72px)",
+                  paddingRight: "clamp(32px, 4vw, 72px)",
+                }}
               >
-                {item.standard}
-              </h2>
-              <p className="recognition-card-detail mt-1 max-w-[220px] font-montserrat text-[#74777b]">
-                {item.detail}
-              </p>
-            </div>
-          ))}
+                {clients.map((client, index) => (
+                  <div
+                    key={`${copyIndex}-${client.name}`}
+                    className="client-logo-cell"
+                    data-testid={copyIndex === 0 ? `card-client-${index}` : undefined}
+                    style={{
+                      width: "clamp(132px, 12vw, 180px)",
+                      height: "112px",
+                      flexShrink: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      src={`${assetBase}${client.logo}`}
+                      alt={copyIndex === 0 ? client.name : ""}
+                      className="client-logo-image"
+                      loading="lazy"
+                      decoding="async"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        height: "100%",
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        objectFit: client.name === "Praj" ? "cover" : "contain",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       {/* ══════════ 3. ABOUT — Storytelling ══════════ */}
@@ -918,7 +976,10 @@ export default function HomePage() {
               <h2 className="font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
                 Landmark Works
               </h2>
-              <p className="font-montserrat text-[#949599] max-w-md mx-auto m-0 text-[18px] text-center">
+              <p
+                className="font-montserrat text-[#949599] w-full max-w-none mx-auto m-0 text-center"
+                style={{ whiteSpace: "nowrap", fontSize: "clamp(0.625rem, 2.6vw, 16px)" }}
+              >
                 A selection of the structures MECPL has delivered across Pune.
               </p>
             </div>
@@ -1114,16 +1175,21 @@ export default function HomePage() {
         id="testimonials"
         ref={testimonialsRef}
         data-testid="section-testimonials"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(35,37,41,0.07)", padding: "96px 0" }}
+        style={{
+          background: "#232529",
+          borderTop: "1px solid rgba(35,37,41,0.07)",
+          padding: "96px 0 0",
+          marginTop: "120px",
+        }}
       >
         <div
           className="mx-auto grid gap-12 px-6 md:grid-cols-[0.72fr_1.6fr] md:gap-16 md:px-10"
           style={{
             width: "100%",
-            background: "#e4e4e6",
+            background: "#232529",
           }}
         >
-          <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10 lg:pl-[80px]">
+          <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10 lg:pl-[80px]" style={{ color: "#ffffff" }}>
             <div>
               <span className="home-section-label block font-montserrat font-semibold tracking-[0.2em] text-mecpl-red text-[15px]">
                 CLIENT VOICES
@@ -1131,7 +1197,7 @@ export default function HomePage() {
               <h2 className="hp-section-title mt-3 font-montserrat">
                 What Our<br className="hidden md:block" /> Clients Say
               </h2>
-              <p className="mt-5 max-w-sm font-montserrat text-[#73767c] text-[18px]">
+              <p className="mt-5 max-w-sm font-montserrat text-[#c2c5cb] text-[18px]">
                 Long-standing relationships are built on delivery, transparency and trust.
               </p>
             </div>
@@ -1209,87 +1275,6 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      {/* ══════════ 8. CLIENTS ══════════ */}
-      <section
-        id="clients"
-        ref={clientsRef}
-        data-testid="section-clients"
-        style={{
-          background: "#232529",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          padding: "96px 0 120px",
-        }}
-      >
-        {/* Heading */}
-        <div data-scroll-reveal="text" style={{ padding: "0 40px", marginBottom: "36px", textAlign: "center" }}>
-          <span className="home-section-label font-montserrat text-[15px] text-[color:var(--mecpl-red)]" style={{
-            fontSize: "15px", fontWeight: 600,
-              letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
-            display: "block", marginBottom: "10px",
-          }}>
-             OUR CLIENTS
-          </span>
-           <h2 className="hp-section-title font-montserrat" style={{
-             margin: 0,
-              color: "#ffffff",
-           }}>
-            Trusted Partners
-          </h2>
-          <p className="page-subtitle-font text-[18px]" style={{
-            maxWidth: "620px",
-            margin: "14px auto 0",
-              color: "rgba(255,255,255,0.5)",
-            fontSize: "13px",
-            lineHeight: 1.7,
-          }}>
-             Built on trusted relationships with the teams shaping India&apos;s future.
-          </p>
-        </div>
-
-        {/* Single GSAP ticker */}
-        <div style={{
-          overflow: "hidden",
-          margin: 0,
-          padding: "12px 0 0",
-          background: "#232529",
-        }}>
-          <div className="clients-track" style={{ display: "flex", alignItems: "center", gap: "18px", width: "max-content" }}>
-            {[...clients, ...clients].map((c, i) => (
-              <div
-                key={i}
-                data-testid={i < clients.length ? `card-client-${i}` : undefined}
-                style={{
-                   width: "clamp(210px, 21vw, 420px)",
-                   height: "clamp(180px, 15vw, 240px)",
-                   flexShrink: 0,
-                  background: "#ffffff",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                  borderRadius: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                   padding: "18px 24px",
-                }}
-              >
-                <img
-                  src={`${assetBase}${c.logo}`}
-                  alt={c.name}
-                  loading="eager"
-                  decoding="async"
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: "100%",
-                    maxHeight: "160px",
-                    objectFit: "contain",
-                  }}
-                />
-              </div>
-            ))}
           </div>
         </div>
       </section>
