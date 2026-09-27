@@ -174,7 +174,7 @@ export default function PeopleSafetySection() {
           position: relative;
           isolation: isolate;
           width: 100%;
-          background: transparent;
+          background: #ffffff;
           padding: 0;
           overflow: hidden;
         }

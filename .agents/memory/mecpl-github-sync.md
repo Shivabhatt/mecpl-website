@@ -24,3 +24,19 @@ In this workspace, `client.rest.actions.listWorkflowRuns()` returned 404 while `
 **Why:** The connection was authorized—the Git Data API succeeded and the proxy returned Actions data—so this 404 was not evidence that reauthorization was needed.
 
 **How to apply:** For GitHub Pages verification, query runs with `proxyFetch` and then confirm that `gh-pages` moved to a new ref.
+
+## Delta generation on a diverged branch
+
+When the local branch is both ahead of and behind `origin/main`, build the publication delta with `git diff origin/main HEAD` (two-dot), not `git diff origin/main...HEAD` (three-dot). The three-dot form starts at the merge base and can include many blobs already in remote `main`. Still require the created tree SHA to match local `HEAD^{tree}` before updating the ref.
+
+**Why:** A three-dot diff included many already-published files and caused unnecessary blob uploads; the direct base-to-HEAD delta was smaller and produced the same exact local tree.
+
+**How to apply:** Recheck the remote `main` SHA and tree, compare directly against that base, upload only missing blobs, then verify the resulting tree hash before committing.
+
+## Resumable CodeExecution batches
+
+For multi-batch GitHub uploads, define and invoke any helper containing a `"use impure"` function in the same CodeExecution block. A helper reused from a prior block may fail with `executeJs is not defined`; keep the resumable progress in the journal instead of relying on a persisted helper closure.
+
+**Why:** The durable runtime retained the helper name but not its impure dispatcher across blocks, while inline batch execution worked reliably.
+
+**How to apply:** Keep each upload batch self-contained and record every successful blob SHA in the journal so a later block can safely resume.

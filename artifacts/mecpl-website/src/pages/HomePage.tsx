@@ -568,7 +568,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* ══════════ 2. RECOGNITION ══════════ */}
-      <section id="recognition" ref={recognitionRef} className="bg-[#f7f6f3] px-5 py-7 md:px-10 md:py-8 lg:px-[100px]">
+      <section id="recognition" ref={recognitionRef} className="bg-white px-5 py-7 md:px-10 md:py-8 lg:px-[100px]">
         <div className="mx-auto w-full">
           <div className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
             <div className="grid min-w-[560px] grid-cols-5 md:min-w-0">
@@ -1078,13 +1078,6 @@ export default function HomePage() {
         className="relative overflow-hidden bg-white"
         style={{ background: "#ffffff", padding: "0 0 128px" }}
       >
-        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-[38%] opacity-[0.055]" aria-hidden="true">
-          <svg viewBox="0 0 540 260" className="h-full w-full" fill="none" stroke="#232529">
-            <path d="M14 260V160l76-50v150M90 260V78l98 60v122M188 260V118l80-44 72 57v129M340 260V95l84-59 102 72v152" />
-            <path d="M28 260v-86l47-30v116M110 260V116l56 34v110M210 260V139l54-31 52 40v112M365 260V112l57-40 79 56v132" />
-          </svg>
-        </div>
-
         <div
           className="relative w-full"
         >
