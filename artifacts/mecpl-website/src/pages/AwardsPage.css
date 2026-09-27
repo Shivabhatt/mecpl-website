@@ -295,7 +295,7 @@
   width: min(calc(100% - 112px), 1360px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, calc(20% - 16px)));
+  grid-template-columns: repeat(4, minmax(0, calc(20% - 8px)));
   justify-content: space-between;
   gap: 36px 0;
 }
