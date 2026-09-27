@@ -292,11 +292,11 @@
 }
 
 .mecpl-awards-grid {
-  width: min(100%, 1200px);
+  width: min(calc(100% - 112px), 1360px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 36px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 36px 20px;
 }
 
 .mecpl-award-card {
@@ -516,8 +516,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 900px) {
-  .mecpl-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px; }
+@media (max-width: 1024px) {
+  .mecpl-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px 20px; }
 }
 
 @media (max-width: 767px) {
