@@ -1,91 +1,210 @@
-import { Link } from "wouter";
-import SectionHeader from "@/components/SectionHeader";
-const assetBase = import.meta.env.BASE_URL;
+import { useEffect, useMemo, useState } from "react";
+import { ArrowUpRight, Award } from "lucide-react";
+import "./AwardsPage.css";
 
-const awards = [
-  { year: "2023", award: "BAI Well-Built Structure", subtitle: "Special Jury's Recommendation Award", org: "BAI", icon: `${assetBase}assets/awards/WhatsApp-Image-2023-12-27.jpg` },
-  { year: "2022", award: "PCERF Constro Silver Trophy", subtitle: "Eon West Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/EON-WEST.jpeg.jpg` },
-  { year: "2021", award: "PCERF Constro Gold Trophy", subtitle: "Godrej Nurture Project Phase", org: "PCERF", icon: `${assetBase}assets/awards/GODREJ-NURTURE.jpeg.jpg` },
-  { year: "2020", award: "MPL Tournament Runner-Up", subtitle: "Corporate Champions Honors", org: "MPL", icon: `${assetBase}assets/awards/mpl_2020_04.jpg` },
-  { year: "2019", award: "MPL Operations & RASS Champions", subtitle: "Champions League Trophy", org: "MPL", icon: `${assetBase}assets/awards/rss_2019_01-scaled.jpg` },
-  { year: "2018", award: "PCERF CONSTRO Industry Excellence", subtitle: "Gold Trophy Achievement", org: "PCERF", icon: `${assetBase}assets/awards/mpl_2018_01-scaled.jpg` },
-  { year: "2017", award: "India's Small Giants Elite Index", subtitle: "PCERF CONSTRO Safety Commendation", org: "PCERF", icon: `${assetBase}assets/awards/2017-02-large.webp` },
-  { year: "2016", award: "National SME Excellence Awards", subtitle: "Corporate Recognition Award", org: "National", icon: `${assetBase}assets/awards/2016-01-large.webp` },
-  { year: "2015", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2015-01-large.webp` },
-  { year: "2014", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2014-01-large.webp` },
-  { year: "2013", award: "ICI Best Structural Execution", subtitle: "Indian Concrete Institute Honor", org: "ICI", icon: `${assetBase}assets/awards/2013-01-large.webp` },
-  { year: "2012", award: "CONSTRO Safety Medal", subtitle: "Excellence in Construction Safety", org: "CONSTRO", icon: `${assetBase}assets/awards/2012-01-large.webp` },
-  { year: "2007", award: "BAI First Prize — Well-Built Structures", subtitle: "Syntel Campus Phase II", org: "BAI", icon: `${assetBase}assets/awards/2010-01-large.webp` },
-  { year: "2002", award: "CONSTRO Safety Medal", subtitle: "Early safety leadership recognition", org: "CONSTRO", icon: `${assetBase}assets/awards/2002-01-large.webp` },
+const assetBase = import.meta.env.BASE_URL;
+type AwardCategory = "National & State" | "Safety" | "Quality";
+type AwardEntry = {
+  id: string;
+  year: number;
+  category: AwardCategory;
+  title: string;
+  detail?: string;
+  issuer: string;
+  logo?: string;
+};
+
+const issuerLogos = {
+  british: `${assetBase}assets/awards/british-safety-council-award-2026.jpeg`,
+  cidc: `${assetBase}assets/awards/cidc-vishwakarma-award-2026.png`,
+  nsci: `${assetBase}assets/awards/nsci-safety-award-2025.png`,
+  bai: `${assetBase}assets/awards/bai-well-built-structure-award.png`,
+  pcerf: `${assetBase}assets/awards/pcerf-safety-award.png`,
+  sme: `${assetBase}assets/recognition/india-sme-100-awards.jpeg`,
+};
+
+const awards: AwardEntry[] = [
+  { id: "national-2026-international-safety", year: 2026, category: "National & State", title: "International Safety Award – Distinction", issuer: "British Safety Council", logo: issuerLogos.british },
+  { id: "national-2026-cidc-17", year: 2026, category: "National & State", title: "17th CIDC Vishwakarma Awards", issuer: "CIDC", logo: issuerLogos.cidc },
+  { id: "national-2025-nsci-yoo-villa", year: 2025, category: "National & State", title: "NSCI Safety Award – YOO Villa – Fourth Level Prashansa Patra", issuer: "NSCI", logo: issuerLogos.nsci },
+  { id: "national-2025-nsci-k57", year: 2025, category: "National & State", title: "NSCI Safety Award – K57 – Certificate of Merit", issuer: "NSCI", logo: issuerLogos.nsci },
+  { id: "national-2025-nsci-vantage", year: 2025, category: "National & State", title: "NSCI Safety Award – Vantage – Certificate of Merit", issuer: "NSCI", logo: issuerLogos.nsci },
+  { id: "national-2025-cidc-16", year: 2025, category: "National & State", title: "16th CIDC Vishwakarma Awards", issuer: "CIDC", logo: issuerLogos.cidc },
+  { id: "national-2024-cidc-15", year: 2024, category: "National & State", title: "15th CIDC Vishwakarma Awards", issuer: "CIDC", logo: issuerLogos.cidc },
+  { id: "national-2018-iconic-brand", year: 2018, category: "National & State", title: "Iconic Brand of the Year Award", issuer: "MSME" },
+  { id: "national-2017-sme-100", year: 2017, category: "National & State", title: "SME 100 Awards 2015–2016", issuer: "India SME Forum", logo: issuerLogos.sme },
+  { id: "safety-2025-pcerf-yoo-villa", year: 2025, category: "Safety", title: "PCERF 2025 – Silver Trophy for Safety", detail: "Yoo Villa, Pune", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2024-apex-raheja", year: 2024, category: "Safety", title: "9th Apex India Occupational Health & Safety Award", detail: "Raheja Baner B 94–97", issuer: "Apex India" },
+  { id: "safety-2024-pcerf-vantage", year: 2024, category: "Safety", title: "PCERF 2024 – Silver Trophy for Safety", detail: "Vantage Tower, Pune", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2023-pcerf-privet", year: 2023, category: "Safety", title: "PCERF 2023 – Silver Trophy for Safety", detail: "43 Privet Drive, Pune", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2022-pcerf-eon", year: 2022, category: "Safety", title: "PCERF 2022 – Silver Trophy for Safety", detail: "EON West, Wakad, Pune", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2021-pcerf-godrej-nurture", year: 2021, category: "Safety", title: "PCERF 2021 – Gold Trophy for Safety", detail: "Godrej Nurture, Mamurdi, Pune", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2020-pcerf-godrej-24", year: 2020, category: "Safety", title: "PCERF 2020 – Gold Trophy for Safety", detail: "Godrej-24, Hinjewadi", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2019-pcerf-godrej-24", year: 2019, category: "Safety", title: "PCERF 2019 – Silver Trophy for Safety", detail: "Godrej-24, Hinjewadi", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2018-nsci-krc", year: 2018, category: "Safety", title: "Certificate of Appreciation – NSCI Safety Awards", detail: "KRC IT Park, Kharadi", issuer: "NSCI", logo: issuerLogos.nsci },
+  { id: "safety-2018-pcerf-raheja", year: 2018, category: "Safety", title: "PCERF 2018 – Gold Trophy for Safety", detail: "K Raheja IT Campus, Kharadi", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2017-pcerf-multiple", year: 2017, category: "Safety", title: "PCERF 2017 – Gold Trophy for Safety", detail: "Highrise Tower / Panchshil Tower / Kalpataru Jade Residency / EON SEZ Phase 2", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2016-pcerf-kalpataru", year: 2016, category: "Safety", title: "PCERF 2016 – Gold Trophy for Safety", detail: "Kalpataru Residential Tower", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "safety-2014-pcerf-emrius", year: 2014, category: "Safety", title: "PCERF Constro 2014 – Gold Trophy for Safety", detail: "Emrius Residential Tower, Baner", issuer: "PCERF", logo: issuerLogos.pcerf },
+  { id: "quality-2025-bai-k57", year: 2025, category: "Quality", title: "BAI – Well Built Structure Award", detail: "KRC K57 Tower, Kharadi", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2024-bai-vantage", year: 2024, category: "Quality", title: "BAI – Well Built Structure Award", detail: "Vantage Tower, Kharadi", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2023-ici", year: 2023, category: "Quality", title: "Indian Concrete Institute – UltraTech Award", detail: "EON West Wakad – LP II — Jury Recommendation; 43 Privet Drive — Jury Appreciation", issuer: "Indian Concrete Institute" },
+  { id: "quality-2023-bai", year: 2023, category: "Quality", title: "BAI – Well Built Structure Award", detail: "EON West Wakad – LP II; 43 Privet Drive", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2022-bai-nurture", year: 2022, category: "Quality", title: "BAI – Well Built Structure Award", detail: "Godrej Nurture, Mamurdi", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2022-ici-gera", year: 2022, category: "Quality", title: "Indian Concrete Institute – UltraTech Award", detail: "KRC Gera, Commerzone, Kharadi", issuer: "Indian Concrete Institute" },
+  { id: "quality-2021-ici-connect", year: 2021, category: "Quality", title: "Indian Concrete Institute – UltraTech Award", detail: "The Connect, Bavdhan", issuer: "Indian Concrete Institute" },
+  { id: "quality-2021-bai-connect", year: 2021, category: "Quality", title: "BAI – Well Built Structure", detail: "The Connect, Bavdhan", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2020-aesa-reservoir", year: 2020, category: "Quality", title: "AESA Award 2020", detail: "Elevated Storage Reservoir for Panchshil", issuer: "AESA" },
+  { id: "quality-2019-ici-reservoir", year: 2019, category: "Quality", title: "Indian Concrete Institute – UltraTech Award", detail: "Elevated Storage Reservoir for Panchshil", issuer: "Indian Concrete Institute" },
+  { id: "quality-2018-bai-panchshil", year: 2018, category: "Quality", title: "BAI – Well Built Structure", detail: "Panchshil Highrise Tower, Wagholi", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2015-ici-trump", year: 2015, category: "Quality", title: "Indian Concrete Institute – Birla Super Award 2013–2014", detail: "Trump Tower, Kalyaninagar", issuer: "Indian Concrete Institute" },
+  { id: "quality-2013-ici-syntel", year: 2013, category: "Quality", title: "Indian Concrete Institute – Birla Super Award 2011–2012", detail: "SDB for Syntel International Pvt. Ltd.", issuer: "Indian Concrete Institute" },
+  { id: "quality-2011-bai-syntel", year: 2011, category: "Quality", title: "BAI – Well Built Structure – First Prize", detail: "Global Development Centre for Syntel International", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2009-bai-lavasa", year: 2009, category: "Quality", title: "BAI – Well Built Structure – First Prize", detail: "Lavasa Villa", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2008-bai-syntel", year: 2008, category: "Quality", title: "BAI – Well Built Structure – Jury's Recommendation Award", detail: "Global Development Centre for Syntel International", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2005-bai-xansa", year: 2005, category: "Quality", title: "BAI – Well Built Structure – First Prize", detail: "Office Block for Xansa (India) Ltd.", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2002-bai-temple-first", year: 2002, category: "Quality", title: "BAI – Well Built Structure – First Prize", detail: "Universal Temple of Ramakrishna, Pune", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
+  { id: "quality-2002-bai-temple-best", year: 2002, category: "Quality", title: "BAI – Birla Super Outstanding Structure – Best of the Best", detail: "Universal Temple of Ramakrishna, Pune", issuer: "Builders’ Association of India", logo: issuerLogos.bai },
 ];
 
-export default function AwardsPage() {
+const filters: Array<{ label: string; value: "All" | AwardCategory; testId: string }> = [
+  { label: "All", value: "All", testId: "filter-all" },
+  { label: "Safety", value: "Safety", testId: "filter-safety" },
+  { label: "Quality", value: "Quality", testId: "filter-quality" },
+  { label: "National & State", value: "National & State", testId: "filter-national-state" },
+];
+
+function AwardCard({ award }: { award: AwardEntry }) {
+  const titleParts = award.title.split(/((?:19|20)\d{2}(?:[–—-](?:19|20)?\d{2})?)/g);
+  const visibleTitleParts = titleParts.filter((part) => part !== String(award.year));
+
   return (
-    <div data-animate-page className="bg-white">
-      {/* Header */}
-      <div className="relative py-20 border-b border-mecpl-dark/[0.06] overflow-hidden">
-        <img src="/assets/projects/GODREJ-INFINITY.jpg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="Award-winning MECPL construction project" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70"></div>
-        <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="Recognition" title="Awards & Honors" subtitle="Over two decades of consecutive industry recognition for structural excellence, safety leadership, and construction quality." center />
-        </div>
+    <article className={`mecpl-award-card mecpl-award-${award.category.toLowerCase().replace(/[^a-z]+/g, "-")}`} data-testid={`award-card-${award.id}`}>
+      <header className="mecpl-award-meta">
+        <span className="mecpl-award-organization">{award.issuer}</span>
+        <span className="mecpl-award-year">{award.year}</span>
+      </header>
+      <span className="mecpl-award-logo">
+        {award.logo ? <img src={award.logo} alt={`${award.issuer} logo`} loading="lazy" /> : <span>{award.issuer}</span>}
+      </span>
+      <div className="mecpl-award-copy">
+        <h3>
+          {(visibleTitleParts.length ? visibleTitleParts : [award.title]).map((part, index) =>
+            /^(?:19|20)\d{2}(?:[–—-](?:19|20)?\d{2})?$/.test(part)
+              ? <span className="mecpl-award-year-inline" key={index}>{part}</span>
+              : part
+          )}
+        </h3>
+        {award.detail && <p className="mecpl-award-detail">{award.detail}</p>}
       </div>
+    </article>
+  );
+}
 
-      {/* Marquee */}
-      <div className="bg-mecpl-red py-3">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-white font-semibold text-sm uppercase tracking-widest">20+ Years of Consecutive Industry Awards — MECPL's Legacy of Excellence</p>
-        </div>
-      </div>
+export default function AwardsPage() {
+  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]["value"]>("All");
+  const filteredAwards = useMemo(
+    () => activeFilter === "All" ? awards : awards.filter((award) => award.category === activeFilter),
+    [activeFilter],
+  );
+  const countFor = (category: AwardCategory) => awards.filter((award) => award.category === category).length;
 
-      {/* Highlight cards */}
-      <section className="max-w-7xl mx-auto px-6 py-14" data-testid="section-awards-highlights">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
-          {awards.slice(0, 6).map((a, i) => (
-            <div key={i} className="bg-white border border-mecpl-dark/[0.07] rounded-sm p-5 text-center hover:border-mecpl-red/30 transition-all shadow-sm" data-testid={`card-award-highlight-${i}`}>
-              <div className="w-16 h-16 mx-auto mb-3 rounded-sm overflow-hidden border border-mecpl-dark/[0.1]">
-                <img src={a.icon} alt={a.award} className="w-full h-full object-cover" />
-              </div>
-              <div className="text-mecpl-red font-semibold text-xl">{a.year}</div>
-              <div className="text-mecpl-steel text-[9px] uppercase tracking-widest mt-1 font-semibold leading-snug">{a.award.split(" ").slice(0, 3).join(" ")}</div>
+  useEffect(() => {
+    const previousTitle = document.title;
+    const description = "Explore 41 MECPL awards and recognitions for construction safety, quality, and structural excellence from 2002 to 2026.";
+    const updates = [
+      ['meta[name="description"]', description],
+      ['meta[property="og:title"]', "Awards & Recognition | MECPL"],
+      ['meta[property="og:description"]', description],
+      ['meta[name="twitter:title"]', "Awards & Recognition | MECPL"],
+      ['meta[name="twitter:description"]', description],
+    ] as const;
+    const previous = updates.map(([selector, content]) => {
+      const tag = document.querySelector<HTMLMetaElement>(selector);
+      const oldContent = tag?.content;
+      if (tag) tag.content = content;
+      return [tag, oldContent] as const;
+    });
+    document.title = "Awards & Recognition | MECPL";
+    return () => {
+      document.title = previousTitle;
+      previous.forEach(([tag, content]) => {
+        if (tag && content !== undefined) tag.content = content;
+      });
+    };
+  }, []);
+
+  return (
+    <div className="mecpl-awards-page" style={{ background: "#25292b", color: "#f2efe8" }}>
+      <main className="mecpl-awards-main">
+        <section className="mecpl-awards-hero" aria-labelledby="mecpl-awards-title" style={{ backgroundImage: `url("${assetBase}assets/awards/awards-banner.jpg")` }}>
+          <div className="mecpl-awards-hero-shade" />
+          <div className="mecpl-awards-hero-content">
+            <h1 id="mecpl-awards-title">Recognition<br /><em>Earned on the Ground.</em></h1>
+            <p>Every distinction reflects the discipline, care and engineering rigour behind structures made to last.</p>
+          </div>
+        </section>
+
+        <section className="mecpl-awards-intro" aria-label="Awards archive summary">
+          <div className="mecpl-intro-copy">
+            <div className="mecpl-section-label">A measured record</div>
+            <h2>Recognition is a result. <span>Execution is the standard.</span></h2>
+            <p>From safe worksites to enduring structures, these honours recognise the teams and partnerships that have shaped MECPL’s work across Pune and Maharashtra.</p>
+          </div>
+          <div className="mecpl-awards-proof" role="group" aria-label="Recognition totals">
+            <div className="mecpl-proof-stat"><strong>{awards.length}<i aria-hidden="true">+</i></strong><span>Verified recognitions<br />since 2002</span></div>
+            <div className="mecpl-proof-stat"><strong>{countFor("Safety")}<i aria-hidden="true">+</i></strong><span>Safety</span></div>
+            <div className="mecpl-proof-stat"><strong>{countFor("Quality")}<i aria-hidden="true">+</i></strong><span>Quality</span></div>
+            <div className="mecpl-proof-stat"><strong>{String(countFor("National & State")).padStart(2, "0")}<i aria-hidden="true">+</i></strong><span>National &amp; State</span></div>
+          </div>
+        </section>
+
+        <section className="mecpl-archive" id="recognition-archive" aria-labelledby="mecpl-archive-title">
+          <div className="mecpl-archive-heading">
+            <div>
+              <div className="mecpl-section-label">The recognition archive</div>
+              <h2 id="mecpl-archive-title">{awards.length} milestones.<br /><span>One standard of work.</span></h2>
             </div>
-          ))}
-        </div>
-
-        {/* Timeline */}
-        <div>
-          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase block mb-8">Full Timeline</span>
-          <div className="relative">
-            <div className="absolute left-[4.5rem] top-0 bottom-0 w-px bg-mecpl-dark/[0.08]"></div>
-            <div className="space-y-5">
-              {awards.map((award, i) => (
-                <div key={i} className="flex gap-8 items-start" data-testid={`award-${award.year}-${i}`}>
-                  <div className="w-14 flex-shrink-0 text-right">
-                    <span className="text-mecpl-red font-semibold text-sm">{award.year}</span>
-                  </div>
-                  <div className="flex-shrink-0 mt-1.5 relative z-10">
-                    <div className="w-4 h-4 bg-mecpl-red rounded-sm border-4 border-white shadow"></div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="bg-white border border-mecpl-dark/[0.07] rounded-sm p-4 hover:border-mecpl-red/20 transition-colors group shadow-sm">
-                      <div className="flex items-start gap-3">
-                        <span className="w-12 h-12 rounded-sm overflow-hidden border border-mecpl-dark/[0.1] flex-shrink-0">
-                          <img src={award.icon} alt={award.award} className="w-full h-full object-cover" />
-                        </span>
-                        <div>
-                          <h3 className="text-mecpl-text font-semibold text-sm group-hover:text-mecpl-red transition-colors">{award.award}</h3>
-                          <p className="text-mecpl-steel text-xs mt-1">{award.subtitle}</p>
-                          <span className="inline-block mt-2 text-[9px] font-semibold uppercase tracking-widest text-mecpl-red bg-mecpl-red/10 px-2 py-0.5 rounded-sm">{award.org}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </div>
+          <div className="mecpl-archive-toolbar">
+            <div className="mecpl-filter-list" role="group" aria-label="Filter awards by category">
+              {filters.map(({ label, value, testId }) => (
+                <button key={value} type="button"
+                  className={`mecpl-filter-button${activeFilter === value ? " is-active" : ""}`}
+                  aria-pressed={activeFilter === value}
+                  onClick={() => setActiveFilter(value)}
+                  data-testid={testId}>
+                  {label}<span>{value === "All" ? awards.length : countFor(value)}</span>
+                </button>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+          {filteredAwards.length ? (
+            <div className="mecpl-awards-grid" data-testid="awards-grid">
+              {filteredAwards.map((award) => <AwardCard key={award.id} award={award} />)}
+            </div>
+          ) : (
+            <div className="mecpl-awards-empty">
+              <Award size={22} strokeWidth={1.5} />
+              <h3>No recognitions in this view</h3>
+              <button type="button" onClick={() => setActiveFilter("All")} data-testid="button-reset-filters">View all recognitions</button>
+            </div>
+          )}
+        </section>
+
+        <section className="mecpl-awards-closing">
+          <div className="mecpl-closing-copy">
+            <div className="mecpl-section-label">The journey continues</div>
+            <h2>Same purpose.<br />Greater possibilities.</h2>
+            <p>From the foundations laid in 1975 to what we build next, the purpose remains the same: to build better, safer and stronger.</p>
+            <div className="mecpl-closing-actions">
+              <a href="mailto:contact@mecpl.in" className="mecpl-closing-link is-primary">
+                Contact MECPL <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
