@@ -295,8 +295,9 @@
   width: min(calc(100% - 112px), 1360px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 36px 20px;
+  grid-template-columns: repeat(4, minmax(0, calc(20% - 16px)));
+  justify-content: space-between;
+  gap: 36px 0;
 }
 
 .mecpl-award-card {
