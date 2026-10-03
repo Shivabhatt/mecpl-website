@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { ModalProvider } from "@/context/ModalContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CertificationAwardsCTA from "@/components/CertificationAwardsCTA";
 import { useLocation } from "wouter";
 import EnquiryModal from "@/components/EnquiryModal";
 import HomePage from "@/pages/HomePage";
@@ -19,6 +20,7 @@ import OngoingProjectsPage from "@/pages/OngoingProjectsPage";
 import ClientsPage from "@/pages/ClientsPage";
 import EquipmentPage from "@/pages/EquipmentPage";
 import AwardsPage from "@/pages/AwardsPage";
+import CertificationsPage from "@/pages/CertificationsPage";
 import InvestorsPage from "@/pages/InvestorsPage";
 import CareersPage from "@/pages/CareersPage";
 import ContactPage from "@/pages/ContactPage";
@@ -39,7 +41,10 @@ function Router() {
   }, [location]);
 
   return (
-    <div ref={containerRef} className="site-typography flex min-h-screen flex-col">
+    <div
+      ref={containerRef}
+      className={`site-typography flex min-h-screen flex-col${location === "/" ? " home-route" : ""}`}
+    >
       <Navbar />
       <main className="flex-1">
         <Switch>
@@ -52,6 +57,7 @@ function Router() {
           <Route path="/clients" component={ClientsPage} />
           <Route path="/equipment" component={EquipmentPage} />
           <Route path="/awards" component={AwardsPage} />
+          <Route path="/certifications" component={CertificationsPage} />
           <Route path="/blog/:slug" component={BlogArticlePage} />
           <Route path="/blog" component={BlogPage} />
           <Route path="/investors" component={InvestorsPage} />
@@ -60,6 +66,7 @@ function Router() {
           <Route component={NotFound} />
         </Switch>
       </main>
+      {location === "/certifications" && <CertificationAwardsCTA />}
       {location !== "/" && <Footer />}
       <EnquiryModal />
     </div>

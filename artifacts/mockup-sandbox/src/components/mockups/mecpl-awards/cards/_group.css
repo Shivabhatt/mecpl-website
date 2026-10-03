@@ -1,0 +1,208 @@
+.mecpl-awards-page {
+  --awards-ink: #25292b;
+  --awards-red: #cf2e2e;
+  --awards-line: #484e50;
+  --awards-face: #fff;
+  color: #f2efe8;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.mecpl-awards-page *,
+.mecpl-awards-page *::before,
+.mecpl-awards-page *::after {
+  font-family: "Montserrat", sans-serif !important;
+  box-sizing: border-box;
+}
+
+.mecpl-award-current-preview {
+  min-height: 720px;
+  padding: 48px 0;
+  background: #fff;
+  color: var(--awards-ink);
+}
+
+.mecpl-award-current-preview .mecpl-awards-grid {
+  width: calc(100% - 240px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mecpl-award-current-preview .mecpl-award-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 210px;
+  padding: 22px 8px 34px;
+  display: flex;
+  flex-direction: column;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  background: transparent;
+  animation: mecpl-award-rise .4s both;
+  transition: transform .24s ease;
+  filter: drop-shadow(0 6px 4px rgba(37, 41, 43, .12));
+}
+
+.mecpl-award-current-preview .mecpl-award-card::before,
+.mecpl-award-current-preview .mecpl-award-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+
+.mecpl-award-current-preview .mecpl-award-card::before {
+  z-index: 0;
+  background: #e1e3e3;
+}
+
+.mecpl-award-current-preview .mecpl-award-card::after {
+  z-index: 1;
+  inset: 1px;
+  background: var(--awards-face);
+}
+
+.mecpl-award-current-preview .mecpl-award-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.mecpl-award-current-preview .mecpl-award-card > .mecpl-award-card-accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 3;
+  width: 28px;
+  height: 4px;
+  background: var(--awards-red);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.mecpl-award-current-preview .mecpl-award-card:nth-child(3n + 2) {
+  animation-delay: .045s;
+}
+
+.mecpl-award-current-preview .mecpl-award-card:nth-child(3n) {
+  animation-delay: .09s;
+}
+
+.mecpl-award-current-preview .mecpl-award-card:hover {
+  transform: translateY(-3px);
+}
+
+.mecpl-award-current-preview .mecpl-award-card-head {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mecpl-award-current-preview .mecpl-award-logo {
+  width: min(100%, 144px);
+  height: 68px;
+  margin-inline: auto;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border: 1px solid #e7e7e7;
+  background: #fff;
+  box-shadow: 0 2px 9px rgba(37, 41, 43, .12);
+}
+
+.mecpl-award-current-preview .mecpl-award-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: multiply;
+}
+
+.mecpl-award-current-preview .mecpl-award-logo > span {
+  color: #343738;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mecpl-award-current-preview .mecpl-award-copy {
+  flex: 1;
+  padding: 0 2px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.mecpl-award-current-preview .mecpl-award-copy::before {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 2px;
+  margin: 14px auto 8px;
+  content: "";
+  background: var(--awards-red);
+}
+
+.mecpl-award-current-preview .mecpl-award-card h3 {
+  max-width: 25ch;
+  margin: 6px auto 0;
+  color: #25292b;
+  font-size: 13px;
+  font-weight: 700 !important;
+  letter-spacing: -.025em;
+  line-height: 1.38;
+  text-align: center;
+}
+
+.mecpl-award-year-inline {
+  color: var(--awards-red);
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: normal;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.mecpl-award-current-preview .mecpl-award-detail {
+  max-width: 30ch;
+  margin: 7px auto 0;
+  color: #626866;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@keyframes mecpl-award-rise {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .mecpl-award-current-preview .mecpl-awards-grid {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 900px) {
+  .mecpl-award-current-preview .mecpl-awards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .mecpl-award-current-preview .mecpl-awards-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

@@ -616,3 +616,31 @@ mtime_ms = 1790334013590
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3f5199f4-cff0-479b-8ce6-64b282f49835/2a8bf9cf-9bbb-43c8-baf8-9fc2f819c698"
 storage_version_token = "1790334036099933"
 content_type = "image/png"
+
+[[outputs]]
+id = "-2zvh-m_h0ocizniq-TaX"
+uri = "file://screenshots/mecpl-awards-spotlight.jpg"
+type = "image"
+title = "MECPL Awards — Spotlight"
+description = "Desktop screenshot of the Spotlight awards-page direction."
+logical_id = "2cab4e64-a861-498c-bbe7-1b30783e0e66"
+content_hash = "sha256:9084212613423de0a53691f02c58ae8ce78fc6e94da3c9841cc8868d659ac5d8"
+size = 190569
+mtime_ms = 1790592246800
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/2cab4e64-a861-498c-bbe7-1b30783e0e66/8f5b616a-a9b3-48dd-bd19-d437057de48b"
+storage_version_token = "1790592261035863"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "I1GmzJm8e_bCujc6xPwlD"
+uri = "file://screenshots/mecpl-awards-emblem.jpg"
+type = "image"
+title = "MECPL Awards — Emblem"
+description = "Desktop screenshot of the Emblem awards-page direction."
+logical_id = "a541820c-cb95-485a-89f8-a5012349f47f"
+content_hash = "sha256:2547018ef8f0f33432d57ace8baf1bb93a449efca1fa63112104f98b4161a0c6"
+size = 185666
+mtime_ms = 1790592249232
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a541820c-cb95-485a-89f8-a5012349f47f/0a97344d-3576-427a-9a7c-89c6b0b7faf0"
+storage_version_token = "1790592262399942"
+content_type = "image/jpeg"

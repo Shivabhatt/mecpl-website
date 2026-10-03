@@ -1,0 +1,89 @@
+Yes. I checked the **MECPL Company Profile 2026** and extracted the award lists from the dedicated award sections. The profile has **41 listed award entries** across National & State, Safety, and Quality categories. 
+
+## 1. National & State Awards — 9
+
+| Year     | Award                                                        | Awarded / Instituted by |
+| -------- | ------------------------------------------------------------ | ----------------------- |
+| **2026** | International Safety Award – Distinction                     | British Safety Council  |
+| **2026** | 17th CIDC Vishwakarma Awards                                 | CIDC                    |
+| **2025** | NSCI Safety Award – YOO Villa – Fourth Level Prashansa Patra | NSCI                    |
+| **2025** | NSCI Safety Award – K57 – Certificate of Merit               | NSCI                    |
+| **2025** | NSCI Safety Award – Vantage – Certificate of Merit           | NSCI                    |
+| **2025** | 16th CIDC Vishwakarma Awards                                 | CIDC                    |
+| **2024** | 15th CIDC Vishwakarma Awards                                 | CIDC                    |
+| **2018** | Iconic Brand of the Year Award                               | MSME                    |
+| **2017** | SME 100 Awards 2015–2016                                     | India SME Forum         |
+
+
+
+---
+
+## 2. Safety Awards — 13
+
+| Year     | Award                                             | Project                                                                       |
+| -------- | ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **2025** | PCERF 2025 – Silver Trophy for Safety             | Yoo Villa, Pune                                                               |
+| **2024** | 9th Apex India Occupational Health & Safety Award | Raheja Baner B 94–97                                                          |
+| **2024** | PCERF 2024 – Silver Trophy for Safety             | Vantage Tower, Pune                                                           |
+| **2023** | PCERF 2023 – Silver Trophy for Safety             | 43 Privet Drive, Pune                                                         |
+| **2022** | PCERF 2022 – Silver Trophy for Safety             | EON West, Wakad, Pune                                                         |
+| **2021** | PCERF 2021 – Gold Trophy for Safety               | Godrej Nurture, Mamurdi, Pune                                                 |
+| **2020** | PCERF 2020 – Gold Trophy for Safety               | Godrej-24, Hinjewadi                                                          |
+| **2019** | PCERF 2019 – Silver Trophy for Safety             | Godrej-24, Hinjewadi                                                          |
+| **2018** | Certificate of Appreciation – NSCI Safety Awards  | KRC IT Park, Kharadi                                                          |
+| **2018** | PCERF 2018 – Gold Trophy for Safety               | K Raheja IT Campus, Kharadi                                                   |
+| **2017** | PCERF 2017 – Gold Trophy for Safety               | Highrise Tower / Panchshil Tower / Kalpataru Jade Residency / EON SEZ Phase 2 |
+| **2016** | PCERF 2016 – Gold Trophy for Safety               | Kalpataru Residential Tower                                                   |
+| **2014** | PCERF Constro 2014 – Gold Trophy for Safety       | Emrius Residential Tower, Baner                                               |
+
+
+
+---
+
+# 3. Quality Awards — 19
+
+### 2025–2020
+
+| Year     | Award                                       | Project / Category                           |
+| -------- | ------------------------------------------- | -------------------------------------------- |
+| **2025** | BAI – Well Built Structure Award            | KRC K57 Tower, Kharadi                       |
+| **2024** | BAI – Well Built Structure Award            | Vantage Tower, Kharadi                       |
+| **2023** | Indian Concrete Institute – UltraTech Award | EON West Wakad – LP II — Jury Recommendation |
+| **2023** | Indian Concrete Institute – UltraTech Award | 43 Privet Drive — Jury Appreciation          |
+| **2023** | BAI – Well Built Structure Award            | EON West Wakad – LP II                       |
+| **2023** | BAI – Well Built Structure Award            | 43 Privet Drive                              |
+| **2022** | BAI – Well Built Structure Award            | Godrej Nurture, Mamurdi                      |
+| **2022** | Indian Concrete Institute – UltraTech Award | KRC Gera, Commerzone, Kharadi                |
+| **2021** | Indian Concrete Institute – UltraTech Award | The Connect, Bavdhan                         |
+| **2021** | BAI – Well Built Structure                  | The Connect, Bavdhan                         |
+| **2020** | AESA Award 2020                             | Elevated Storage Reservoir for Panchshil     |
+| **2019** | Indian Concrete Institute – UltraTech Award | Elevated Storage Reservoir for Panchshil     |
+
+
+
+### 2018–2002
+
+| Year     | Award                                                      | Project / Category                                 |
+| -------- | ---------------------------------------------------------- | -------------------------------------------------- |
+| **2018** | BAI – Well Built Structure                                 | Panchshil Highrise Tower, Wagholi                  |
+| **2015** | Indian Concrete Institute – Birla Super Award 2013–2014    | Trump Tower, Kalyaninagar                          |
+| **2013** | Indian Concrete Institute – Birla Super Award 2011–2012    | SDB for Syntel International Pvt. Ltd.             |
+| **2011** | BAI – Well Built Structure – First Prize                   | Global Development Centre for Syntel International |
+| **2009** | BAI – Well Built Structure – First Prize                   | Lavasa Villa                                       |
+| **2008** | BAI – Well Built Structure – Jury's Recommendation Award   | Global Development Centre for Syntel International |
+| **2005** | BAI – Well Built Structure – First Prize                   | Office Block for Xansa (India) Ltd.                |
+| **2002** | BAI – Well Built Structure – First Prize                   | Universal Temple of Ramakrishna, Pune              |
+| **2002** | BAI – Birla Super Outstanding Structure – Best of the Best | Universal Temple of Ramakrishna, Pune              |
+
+
+
+### For your **MECPL Awards page filters**, I recommend using these 3 primary categories:
+
+**ALL**
+**SAFETY**
+**QUALITY**
+**NATIONAL & STATE**
+
+And **International** can be treated as a sub-category/filter under the National & State list because the profile itself places the International Safety Award within **“Awards Received at National & State Level.”** 
+
+This gives you the **complete award data from the profile**, rather than only the 5 recent awards currently displayed on the Hatchable page.

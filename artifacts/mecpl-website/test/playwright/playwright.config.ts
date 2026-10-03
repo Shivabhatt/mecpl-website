@@ -12,13 +12,13 @@ export default defineConfig({
   fullyParallel: false,
   reporter: "list",
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:4173",
     browserName: "chromium",
     viewport: { width: 402, height: 874 },
     reducedMotion: "reduce",
     launchOptions: executablePath ? { executablePath } : undefined,
   },
-  webServer: {
+  webServer: process.env.PLAYWRIGHT_BASE_URL ? undefined : {
     command: "pnpm run dev",
     url: "http://127.0.0.1:4173",
     timeout: 120_000,

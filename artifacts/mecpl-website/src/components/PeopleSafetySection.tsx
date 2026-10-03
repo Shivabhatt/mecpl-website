@@ -129,19 +129,19 @@ export default function PeopleSafetySection() {
       <div className="ps-shell">
         <article className="ps-panel ps-panel-team">
           <div className="ps-copy">
-            <span className="ps-eyebrow">People &amp; Safety</span>
-            <h2 className="people-safety-heading">OUR TEAM IS OUR SUBSTANCE</h2>
-            <p className="text-[16px]" style={{ fontSize: "16px" }}>
+            <span className="ps-eyebrow">People &amp; safety</span>
+            <h2 className="people-safety-heading home-heading-26">Our Team Is Our Substance</h2>
+            <p className="text-[14px]" style={{ fontSize: "14px" }}>
               Our strength lies in the people who build, engineer and lead every project.
             </p>
-            <p className="text-[16px]" style={{ fontSize: "16px" }}>
+            <p className="text-[14px]" style={{ fontSize: "14px" }}>
               From over 8,000 skilled workers on site to experienced engineers, project managers and
               leadership teams, we invest in capability, safety, wellbeing and continuous development
               across the organisation.
             </p>
             <Link href="/careers" className="ps-link">
               <span className="ps-button">
-                Join Our Team <ArrowRight size={15} />
+                Join our team <ArrowRight size={15} />
               </span>
             </Link>
           </div>
@@ -151,9 +151,9 @@ export default function PeopleSafetySection() {
 
         <article className="ps-panel ps-panel-hse">
           <div className="ps-copy">
-            <span className="ps-eyebrow">People &amp; Safety</span>
-            <h2 className="people-safety-heading">BUILDING SAFER LIVES. NOT JUST STRUCTURES.</h2>
-            <p style={{ fontSize: "16px" }}>
+            <span className="ps-eyebrow">People &amp; safety</span>
+            <h2 className="people-safety-heading home-heading-26">Building Safer Lives. Not Just Structures.</h2>
+            <p style={{ fontSize: "14px" }}>
               We put health, safety and wellbeing at the heart of every site, from safety inductions,
               protective equipment and health checks to hygienic accommodation and food. Beyond the
               workplace, we support education for workers’ children and responsible environmental
@@ -161,7 +161,7 @@ export default function PeopleSafetySection() {
             </p>
             <Link href="/about" className="ps-link">
               <span className="ps-button">
-                Our Safety Practices <ArrowRight size={15} />
+                Our safety practices <ArrowRight size={15} />
               </span>
             </Link>
           </div>
@@ -238,18 +238,18 @@ export default function PeopleSafetySection() {
         .ps-eyebrow {
           display: block;
           width: fit-content;
-          margin-bottom: 19px;
+          margin-bottom: 12px;
           padding-bottom: 7px;
           color: #ec3338;
-          font-family: var(--font-montserrat);
+          font-family: var(--font-montserrat) !important;
           font-size: 15px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
+          font-weight: 600 !important;
+          letter-spacing: 0.08em;
+          text-transform: none !important;
         }
         .ps-copy h2.people-safety-heading {
           max-width: 520px;
-          margin: 0 0 17px;
+          margin: 0 0 8px;
           color: #ffffff;
           font-family: var(--font-montserrat);
           font-size: clamp(1.85rem, 2.7vw, 3rem);
@@ -269,6 +269,11 @@ export default function PeopleSafetySection() {
           line-height: 1.2;
           color: #ffffff;
           text-transform: none;
+        }
+        .ps-panel-hse .ps-copy h2.people-safety-heading {
+          font-family: "Montserrat", sans-serif !important;
+          font-weight: 500 !important;
+          letter-spacing: -0.01em !important;
         }
         .ps-copy p {
           max-width: 560px;
@@ -319,10 +324,10 @@ export default function PeopleSafetySection() {
           background: #ec3338;
           color: #fff;
           font-family: var(--font-montserrat);
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.13em;
-          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: normal;
+          text-transform: none;
           cursor: pointer;
           transition: background 180ms ease, color 180ms ease;
         }
@@ -397,7 +402,7 @@ export default function PeopleSafetySection() {
         }
         .ps-stat strong {
           min-height: 0;
-          color: #c84b50;
+          color: var(--mecpl-red);
           font-size: clamp(1rem, 1.2vw, 1.25rem);
           font-weight: 500;
           line-height: 1.25;

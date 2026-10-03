@@ -244,11 +244,11 @@ export default function CompletedProjectsPage() {
       {/* Project metrics */}
       <section
         id="project-metrics"
-        className="bg-[#232529] px-6 py-11 font-montserrat md:py-14"
+        className="bg-[#232529] px-6 py-11 font-montserrat md:px-[120px] md:py-14"
         data-testid="section-project-metrics"
         aria-label="Project delivery metrics"
       >
-        <div className="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-3">
+        <div className="grid w-full grid-cols-1 sm:grid-cols-3">
           {[
             { value: "150", suffix: "+", label: "Projects Delivered" },
             { value: "50M", suffix: "+", label: "Sq. Ft. Delivered" },
@@ -286,18 +286,24 @@ export default function CompletedProjectsPage() {
       {/* Sticky project filters */}
       <div className="sticky top-0 z-40 border-b border-black/[0.12] bg-white py-3 shadow-[0_4px_14px_rgba(0,0,0,0.04)] md:py-4" data-testid="section-project-filters">
         <div className="mx-auto flex w-full max-w-7xl justify-start overflow-x-auto px-6 font-montserrat sm:justify-center">
-          <div className="grid w-full grid-cols-5 items-center gap-1 font-montserrat sm:min-w-[42rem] sm:gap-8">
+          <div className="flex w-max min-w-full items-center justify-between gap-6 font-montserrat sm:gap-8">
             {filters.map(f => (
               <button
                 key={f}
                 onClick={() => selectFilter(f)}
                 aria-pressed={active === f}
-                className={`cursor-pointer whitespace-normal px-1 py-2 text-center font-montserrat text-[8px] font-bold normal-case leading-tight tracking-[0.1em] transition-colors duration-300 sm:text-xs sm:tracking-[0.16em] lg:text-[14px] ${
+                className={`group relative inline-flex w-max shrink-0 cursor-pointer items-center justify-center whitespace-nowrap px-1 py-2 text-center font-montserrat text-sm font-medium uppercase leading-tight tracking-normal transition-colors duration-300 ${
                   active === f ? "text-[#C41E3A]" : "text-[#9ca3af] hover:text-[#C41E3A]"
                 }`}
                 data-testid={`button-filter-${f.toLowerCase()}`}
               >
                 {f}
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-0 bottom-0 h-[1.5px] origin-left bg-[#C41E3A] transition-transform duration-300 ${
+                    active === f ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </button>
             ))}
           </div>
@@ -375,7 +381,7 @@ function ArchitectureApproach() {
           </p>
           <a
             href="#project-explorer"
-            className="mt-8 inline-flex items-center gap-3 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-[#232529] transition-colors hover:text-[#EC3338]"
+            className="mt-8 inline-flex min-h-12 items-center justify-center gap-3 bg-[#EC3338] px-6 py-4 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#cf2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EC3338]"
           >
             Explore our projects <ArrowRight size={14} />
           </a>
@@ -446,7 +452,7 @@ function ProjectExplorer() {
             <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-[#CF2E2E]">
               Building with purpose.
             </h2>
-            <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-[#626667]">
+            <p className="mt-3 max-w-2xl text-[#626667] text-[14px]">
               From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,
               responsibility, and a long-term view of Pune.
             </p>
@@ -460,20 +466,21 @@ function ProjectExplorer() {
                 role="img"
                 aria-label="Pune project region with selectable MECPL locations"
               >
-                <g fill="none" stroke="#d8d8d4" strokeWidth="1" strokeDasharray="3 5">
+                <g fill="none" stroke="#e4e3df" strokeWidth="1" strokeDasharray="1.5 5">
                   <circle cx="184" cy="258" r="72" />
                   <circle cx="184" cy="258" r="112" />
                   <circle cx="184" cy="258" r="154" />
                 </g>
                 <path
-                  d="M153 24 188 43l31-3 22 31 37 11 16 42-25 34 17 35-31 24 11 37-29 23 6 44-28 28-16 61-28-45-19-35-34-23 8-39-35-30 21-36-13-40 33-28-5-43 31-18Z"
-                  fill="#ededeb"
-                  stroke="#9fa09d"
-                  strokeWidth="2"
+                  data-testid="project-map-silhouette"
+                  d="M159 44 185 56l23 5 18-1 18 20 35 15 20 18q-4 10-12 14l-26 12 3 16 23 22 28 27-25 19-11 26-13 3-23 36-16 37-16 33-25 66-16-29-6-21-13-16-5-22-16-17-19-4-12-21 9-12-23-6-14-18-2-13 13-17-17-6 12-19 6-14-7-13 9-12 20-6 11-13 13-13 7-17 19-9 4-14-16-15 4-17-9-12 7-10Z"
+                  fill="#e9e9e7"
+                  stroke="#adb0ae"
+                  strokeWidth="1.5"
                   strokeLinejoin="round"
                 />
-                <g fill="none" stroke="#d2d2cf" strokeWidth="1">
-                  <path d="m126 111 83 245M96 211l164 66M132 323l117-167M151 64l86 285" />
+                <g fill="none" stroke="#d4d5d2" strokeWidth="0.9">
+                  <path d="M155 134c25 10 58 15 98 12M140 191c36 8 88 13 143 4M82 253c47-4 111 9 187-8M119 317c34-4 73 2 120-22M173 374c13-11 27-22 42-31M142 112c20 52 30 103 38 148 8 48 21 89 37 125" />
                 </g>
               </svg>
 
@@ -496,7 +503,7 @@ function ProjectExplorer() {
                   >
                     <span
                       className={`block rounded-full border-2 border-white bg-[#CF2E2E] shadow-[0_2px_7px_rgba(80,0,0,0.24)] transition-all ${
-                        selected ? "h-4 w-4 ring-[7px] ring-[#CF2E2E]/20" : "h-3 w-3 group-hover:scale-125"
+                        selected ? "h-2.5 w-2.5 ring-4 ring-[#CF2E2E]/20" : "h-2.5 w-2.5 group-hover:scale-125"
                       }`}
                     />
                   </button>
@@ -540,7 +547,6 @@ function ProjectExplorer() {
 function ProjectCard({ project, index }: { project: (typeof allProjects)[number]; index: number }) {
   const { ref, inView } = useInView<HTMLDivElement>();
   const delay = (index % 3) * 90;
-  const projectNumber = String(index + 1).padStart(2, "0");
 
   return (
     <div
@@ -556,10 +562,8 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-10">
         <div className="flex min-h-[180px] flex-col justify-between font-montserrat lg:min-h-[220px]">
           <div>
-            <div className="mb-5 flex items-center gap-4 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
-              <span className="text-[#111111]">{projectNumber}</span>
-              <span className="h-px w-8 bg-[#c7c7c1]" />
-              <span>{project.type}</span>
+            <div data-testid={`category-project-${index}`} className="mb-5 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
+              {project.type}
             </div>
             <h2 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}

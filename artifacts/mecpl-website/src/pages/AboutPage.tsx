@@ -9,10 +9,10 @@ import {
 
 const assetBase = import.meta.env.BASE_URL;
 
-const stats = [
+const stats: { val: string; label: string; variant?: "claim" }[] = [
   { val: "45+", label: "YEARS OF LEGACY" },
   { val: "30+", label: "COMPLETED PROJECTS" },
-  { val: "MAHARASHTRA", label: "REGIONAL PRESENCE" },
+  { val: "NO. 1 TRUSTED CONTRACTOR IN PUNE", label: "REGIONAL PRESENCE", variant: "claim" },
 ];
 
 type LeadershipMember = {
@@ -724,9 +724,11 @@ export default function AboutPage() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="abt-stat-item font-montserrat"
+                  className={`abt-stat-item font-montserrat${stat.variant === "claim" ? " abt-stat-claim" : ""}`}
                 >
-                  <div className="abt-stat-value">{stat.val}</div>
+                  <div className={`abt-stat-value${stat.variant === "claim" ? " abt-stat-value-claim" : ""}`}>
+                    {stat.val}
+                  </div>
                   <div className="abt-stat-label">{stat.label}</div>
                 </div>
               ))}

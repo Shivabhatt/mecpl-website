@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "luc
 
 export default function Footer() {
   const footerMuted = "rgba(255,255,255,0.78)";
+  const footerContact = "rgba(255,255,255,0.94)";
   const footerBorder = "rgba(255,255,255,0.28)";
 
   return (
@@ -10,7 +11,6 @@ export default function Footer() {
         style={{
           background: "#CFE2E2", color: "#ffffff",
           borderRadius: "12px 12px 0 0",
-          borderTop: "1px solid rgba(255,255,255,0.42)",
           display: "flex", flexDirection: "column",
         }}
       >
@@ -27,23 +27,26 @@ export default function Footer() {
               <div className="space-y-2 text-xs">
                 <div className="flex items-start gap-2">
                   <MapPin size={12} className="flex-shrink-0 mt-0.5" style={{ color: "#ffffff" }} />
-                  <span style={{ color: footerMuted, lineHeight: 1.65 }}>
+                  <span
+                    className="font-montserrat text-[13px] font-medium"
+                    style={{ color: footerContact, lineHeight: 1.65 }}
+                  >
                     Office No. 501-504, 5th Floor, Elite Transbay, Balewadi, Pune - 411045
                   </span>
                 </div>
                 <a href="tel:02066865858"
-                  className="flex items-center gap-2 transition-colors"
-                   style={{ color: footerMuted }}
+                  className="flex items-center gap-2 font-montserrat text-[13px] font-medium transition-colors"
+                   style={{ color: footerContact }}
                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
-                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = footerMuted)}
+                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = footerContact)}
                   data-testid="link-footer-phone">
                     <Phone size={12} style={{ color: "#ffffff" }} /> 020 6686 5858
                 </a>
                 <a href="mailto:contact@mecpl.in"
-                  className="flex items-center gap-2 transition-colors"
-                   style={{ color: footerMuted }}
+                  className="flex items-center gap-2 font-montserrat text-[13px] font-medium transition-colors"
+                   style={{ color: footerContact }}
                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
-                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = footerMuted)}
+                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = footerContact)}
                   data-testid="link-footer-email">
                     <Mail size={12} style={{ color: "#ffffff" }} /> contact@mecpl.in
                 </a>

@@ -211,8 +211,8 @@ export default function CareersPage() {
               <p className="text-mecpl-text text-sm md:text-base leading-relaxed max-w-md">
                 We encourage our employees to achieve growth by creating opportunities to learn, lead, and contribute. Our teams work on landmark projects with disciplined standards and strong collaboration.
               </p>
-              <a href="#apply-form" className="inline-flex items-center gap-2 mt-8 text-mecpl-text text-[10px] font-semibold uppercase tracking-[0.2em] hover:text-mecpl-red transition-colors group">
-                Apply Now <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              <a href="#apply-form" data-testid="button-careers-workplace-apply" className="inline-flex min-h-12 items-center justify-center gap-3 mt-8 bg-[#EC3338] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#cf2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EC3338]">
+                Apply Now <ArrowRight size={14} aria-hidden="true" />
               </a>
             </div>
             <div className="relative">
@@ -247,7 +247,7 @@ export default function CareersPage() {
                  data-scroll-reveal="text"
                  data-scroll-reveal-delay={i * 90}
                >
-                <div className="text-mecpl-red opacity-20 text-6xl font-serif absolute top-6 right-6 leading-none">"</div>
+                <div className="text-mecpl-red opacity-20 text-6xl font-montserrat absolute top-6 right-6 leading-none">"</div>
                 <p className="text-lg font-medium text-mecpl-text mb-12 relative z-10 leading-snug flex-1">
                   "{story.quote}"
                 </p>
@@ -530,7 +530,7 @@ export default function CareersPage() {
             READY TO BUILD WHAT COMES NEXT?
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="#abt3" className="mecpl-button mecpl-button--light">
+            <a href="#abt3" className="mecpl-button mecpl-button--primary">
               View Current Opportunities <ArrowRight size={12} />
             </a>
             <a href="#apply-form" className="mecpl-button mecpl-button--outline-light">

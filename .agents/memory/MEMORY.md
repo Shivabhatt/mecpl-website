@@ -4,10 +4,14 @@
 - [MECPL testimonials AutoSplit](mecpl-testimonials-autosplit.md) — GggpRoB pattern: SplitText.create with mask:"lines" + autoSplit:true; wait document.fonts.ready; cancelled flag for async cleanup.
 - [MECPL GitHub sync fallback](mecpl-github-sync.md) — if HTTPS credentials fail, publish an exact verified tree through the authorized GitHub connector without forcing main.
 - [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
-- [MECPL typography source](mecpl-shared-typography.md) — Home’s role-based sizes and weights are the reference for matching About.
+- [MECPL typography source](mecpl-shared-typography.md) — use Montserrat sitewide; Home’s role-based sizes and weights guide corresponding About text.
 - [MECPL dependency install](mecpl-dependency-install.md) — frontend-only filtered pnpm installs avoid unrelated Orval firewall failures when the goal is a website preview.
 - [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — use the static editorial Pune silhouette with red project dots, not a Leaflet or MapLibre street map.
 - [GitHub Pages direct routes](github-pages-direct-routes.md) — public SPA routes need generated route app shells; 404.html alone preserves rendering but still returns HTTP 404.
 - [MECPL mobile asset verification](mecpl-mobile-asset-verification.md) — reproduce reports at 402×874 and inspect natural dimensions plus a rendered capture before changing working asset paths or layout.
 - [MECPL media optimization](mecpl-media-optimization.md) — keep public URLs stable while compressing project JPEGs, large PNGs, and muted background videos with posters.
 - [About section preview checks](mecpl-about-preview-checks.md) — SPA hash screenshots may remain at the About hero; use a component-level preview for direct section visual checks.
+- [Awards wall direction](mecpl-award-reference.md) — the Wall of Fame specification replaces the white/silver wreath grid; preserve the surrounding page and the complete record.
+- [Client logo presentation](mecpl-client-logo-presentation.md) — preserve intended transparency, show one TCS logo version, and make visible logo artwork clearly readable.
+- [Certifications direction](mecpl-certifications-direction.md) — certifications only, no awards; original scans in a light popup with previous/next controls; preserve the common footer.
+- [Statistics-strip spacing](mecpl-stats-strip-layout.md) — Certifications and Completed Projects metrics must span the available width with 120px desktop side padding.

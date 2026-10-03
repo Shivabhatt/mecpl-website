@@ -25,6 +25,14 @@ In this workspace, `client.rest.actions.listWorkflowRuns()` returned 404 while `
 
 **How to apply:** For GitHub Pages verification, query runs with `proxyFetch` and then confirm that `gh-pages` moved to a new ref.
 
+## Direct GitHub Pages branch publishing
+
+When the user explicitly requests a `gh-pages` deploy from a diverged source branch, publish the built static tree to the current `gh-pages` head instead of implicitly syncing the entire source history to `main`. Preserve `CNAME` and `.nojekyll`, use a compact Git Data delta, verify the resulting tree SHA, and update the ref with force disabled.
+
+**Why:** Updating `main` can publish unrelated source changes; moving the Pages ref also does not guarantee the CDN has refreshed yet.
+
+**How to apply:** Verify the Pages build succeeded and the public route serves the newly referenced hashed assets before reporting deployment complete.
+
 ## Delta generation on a diverged branch
 
 When the local branch is both ahead of and behind `origin/main`, build the publication delta with `git diff origin/main HEAD` (two-dot), not `git diff origin/main...HEAD` (three-dot). The three-dot form starts at the merge base and can include many blobs already in remote `main`. Still require the created tree SHA to match local `HEAD^{tree}` before updating the ref.
@@ -40,3 +48,11 @@ For multi-batch GitHub uploads, define and invoke any helper containing a `"use 
 **Why:** The durable runtime retained the helper name but not its impure dispatcher across blocks, while inline batch execution worked reliably.
 
 **How to apply:** Keep each upload batch self-contained and record every successful blob SHA in the journal so a later block can safely resume.
+
+## Preserve Git blob bytes across shell callbacks
+
+When uploading files through GitHub's Git Data API, read large files as bytes inside the same `use impure` block that calls `createBlob`, then send `bytes.toString("base64")` with `encoding: "base64"`. Avoid routing large base64 through `shellExec`; its callback can truncate a payload even when a larger output limit was requested. Text intermediates can also normalize line endings.
+
+**Why:** A 677KB bundle sent through shell-produced base64 became a 61KB remote blob, while direct filesystem reading in the integration call preserved all bytes. Earlier text transfers also changed blob hashes through newline normalization.
+
+**How to apply:** Hash each local byte buffer as a Git blob before upload, compare that SHA with `createBlob`'s response, upload sequentially, and verify the complete tree SHA before updating a ref.

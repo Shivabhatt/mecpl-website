@@ -439,7 +439,7 @@ export default function HomePage() {
         {/* Cinematic gradient overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "rgba(0,0,0,0.46)",
+          background: "rgba(0,0,0,0.5)",
         }} />
 
         {/* TOP RIGHT: video counter + progress */}
@@ -465,7 +465,12 @@ export default function HomePage() {
           position: "absolute", inset: 0, zIndex: 10,
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
-          <div style={{ textAlign: "center", maxWidth: "700px", padding: "0 clamp(8px, 2.8vw, 40px)" }}>
+          <div style={{
+            textAlign: "center",
+            maxWidth: "700px",
+            padding: "0 clamp(8px, 2.8vw, 40px)",
+            textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
+          }}>
             {/* Constant label */}
             <div
               style={{
@@ -476,12 +481,12 @@ export default function HomePage() {
                 marginBottom: "14px",
                 textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
               }}
-              className="text-[15px]">
+              className="home-intro-label text-[15px]">
               Millennium Engineers &amp; Contractors Pvt. Ltd.
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
-            <h1 className="hp-banner-title page-title-font" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+            <h1 className="hp-banner-title page-title-font home-intro-title home-intro-title-has-description" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
                 <div key={i} className="hp-banner-line text-[26px]" style={{
                   lineHeight: 1.15, color: "#ffffff",
@@ -493,11 +498,11 @@ export default function HomePage() {
             </h1>
 
             {/* Per-slide subtitle */}
-            <p className="page-subtitle-font text-[14px]" key={`sub-${videoIdx}`} style={{
+            <p className="page-subtitle-font home-intro-description text-[14px]" key={`sub-${videoIdx}`} style={{
               fontSize: "16px",
-              fontWeight: 400, color: "rgba(255,255,255,0.9)",
+              fontWeight: 400, color: "rgba(255,255,255,0.95)",
               lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
-              textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 2px rgba(0,0,0,0.6)",
+              textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
               animation: "heroSlideIn 0.7s ease forwards",
             }}>
               {(heroSlides[videoIdx] ?? heroSlides[0]).subtitle}
@@ -510,14 +515,15 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     background: "#EC3338", color: "#ffffff",
-                    fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600,
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "12px",
+                    letterSpacing: "normal", textTransform: "none", fontWeight: 500,
                     padding: "14px 32px", cursor: "pointer",
                   }}
                   onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
-                  className="text-[12px]">
-                  EXPLORE OUR WORK <ArrowRight size={11} />
+                  className="font-montserrat text-[12px]">
+                  Explore our work <ArrowRight size={11} />
                 </span>
               </Link>
               <Link href="/about">
@@ -525,12 +531,13 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     border: "1px solid rgba(255,255,255,0.55)", color: "#ffffff",
-                    fontSize: "10px",
-                    letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600,
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "12px",
+                    letterSpacing: "normal", textTransform: "none", fontWeight: 500,
                     padding: "13px 28px", cursor: "pointer",
                   }}
-                  className="text-[12px]">
-                  WATCH OUR STORY <ArrowRight size={11} />
+                  className="font-montserrat text-[12px]">
+                  Watch our story <ArrowRight size={11} />
                 </span>
               </Link>
             </div>
@@ -731,8 +738,8 @@ export default function HomePage() {
                     className="client-logo-cell"
                     data-testid={copyIndex === 0 ? `card-client-${index}` : undefined}
                     style={{
-                      width: "clamp(132px, 12vw, 180px)",
-                      height: "112px",
+                      width: "clamp(176px, 16vw, 240px)",
+                      height: "clamp(112px, 10vw, 140px)",
                       flexShrink: 0,
                       display: "flex",
                       alignItems: "center",
@@ -747,11 +754,11 @@ export default function HomePage() {
                       decoding="async"
                       style={{
                         display: "block",
-                        width: "100%",
-                        height: "100%",
+                        width: "80%",
+                        height: "80%",
                         maxWidth: "100%",
                         maxHeight: "100%",
-                        objectFit: client.name === "Praj" ? "cover" : "contain",
+                        objectFit: "contain",
                       }}
                     />
                   </div>
@@ -766,7 +773,7 @@ export default function HomePage() {
         id="about"
         ref={aboutRef}
         data-testid="section-about"
-        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px 56px", paddingLeft: "45px" }}
+        style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px 128px 45px" }}
       >
         <div className="max-w-none mx-auto">
           <div className="grid items-start gap-16 lg:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
@@ -774,14 +781,14 @@ export default function HomePage() {
             {/* Left: editorial */}
             <div className="lg:pl-[120px]">
               <div className="about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
-                <span className="home-section-label font-montserrat text-[15px]" style={{
+                <span className="home-section-label home-intro-label font-montserrat text-[15px]" style={{
                   fontSize: "15px", fontWeight: 600,
-                  letterSpacing: "0.2em", color: "#EC3338", textTransform: "none",
+                  letterSpacing: "0.08em", color: "#EC3338", textTransform: "none",
                   display: "block", marginBottom: "10px",
                 }}>
-                  WHO WE ARE
+                  Who we are
                 </span>
-                <h2 className="hp-section-title whitespace-normal font-montserrat lg:whitespace-nowrap" style={{
+                <h2 className="hp-section-title home-heading-26 home-intro-title whitespace-normal font-montserrat lg:whitespace-nowrap" style={{
                   margin: "0 0 20px",
                   fontSize: "clamp(1.5rem, 1.9vw, 1.75rem)",
                 }}>
@@ -799,10 +806,10 @@ export default function HomePage() {
                   willChange: "clip-path",
                 }}
               >
-                <p style={{
+                <p className="font-montserrat" style={{
                   fontSize: "clamp(1.05rem, 1.8vw, 1.35rem)",
-                  fontWeight: 300, color: "rgba(17,24,39,0.8)",
-                  lineHeight: 1.6, margin: "0 0 18px", letterSpacing: "-0.01em",
+                  fontWeight: 500, color: "#232529",
+                  lineHeight: 1.6, margin: "0 0 18px", letterSpacing: "normal",
                 }}>
                   “Bringing positive changes in the lives of the people around me is the biggest achievement I've had in my life.”
                 </p>
@@ -812,18 +819,18 @@ export default function HomePage() {
                     color: "#232529",
                     fontSize: "10px",
                     fontWeight: 600,
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.02em",
                     textAlign: "left",
                   }}
                 >
                   <span style={{ fontSize: "15px" }}>
-                    <span style={{ color: "#232529" }}>M. B Nambiar</span>
+                    <span style={{ color: "#232529", fontWeight: 600 }}>M. B Nambiar</span>
                     <span style={{ color: "#949599", fontWeight: 500 }}> — </span>
                     <span style={{ color: "#EC3338", fontWeight: 600 }}>Founder &amp; Chairman</span>
                   </span>
                   <span
                     style={{ display: "block", marginTop: "4px", color: "#949599", fontSize: "14px", fontWeight: 500 }}
-                    className="text-[14px]">
+                    className="font-montserrat text-[14px]">
                     Honoured with the prestigious{" "}
                     <span style={{ color: "#EC3338", fontWeight: 600 }}>Nirman Ratna Lifetime Achievement Award</span>{" "}
                     by the BAI and the{" "}
@@ -842,14 +849,14 @@ export default function HomePage() {
 
                 <Link href="/about" data-testid="button-about-more">
                   <span
-                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[15px]"
+                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[12px]"
                     style={{
-                      fontSize: "15px",
-                      letterSpacing: "0.2em", color: "#EC3338",
-                      textTransform: "none", fontWeight: 600,
+                      fontSize: "12px",
+                      letterSpacing: "normal", color: "#EC3338",
+                      textTransform: "none", fontWeight: 500,
                     }}
                   >
-                    Read Our Full Story <ArrowRight size={12} />
+                    Read our full story <ArrowRight size={12} />
                   </span>
                 </Link>
               </div>
@@ -905,14 +912,14 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="home-services-intro mx-auto flex w-full max-w-[820px] flex-col items-center justify-center text-center">
-            <span className="home-section-label font-montserrat text-[15px]" style={{
-              fontSize: "15px", fontWeight: 700,
-              letterSpacing: "0.28em", color: "#EC3338", textTransform: "uppercase",
+            <span className="home-section-label home-intro-label font-montserrat text-[15px]" style={{
+              fontSize: "15px", fontWeight: 600,
+              letterSpacing: "0.08em", color: "#EC3338", textTransform: "none",
               display: "block", marginBottom: "18px",
             }}>
-              WHAT WE DO
+              What we do
             </span>
-            <h2 className="home-services-title font-montserrat text-white" style={{
+            <h2 className="home-services-title home-heading-26 home-intro-title home-intro-title-has-description font-montserrat text-white" style={{
               margin: 0, fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 0.98,
               textShadow: "0 3px 18px rgba(0,0,0,0.65)",
             }}>
@@ -920,7 +927,7 @@ export default function HomePage() {
               <span style={{ color: "#ffffff" }}>Services</span>
             </h2>
             <p
-              className="page-subtitle-font mt-6 max-w-[700px] text-[18px]"
+              className="page-subtitle-font home-intro-description mt-6 max-w-[700px] text-[18px]"
               style={{
                 color: "rgba(255,255,255,0.78)",
                 fontSize: "15px",
@@ -946,10 +953,10 @@ export default function HomePage() {
                   <ServiceLineIcon type={svc.icon} className="h-9 w-9 sm:h-10 sm:w-10" />
                 </div>
                 <div className="mt-3 min-w-0">
-                  <h3 className={`home-service-title font-montserrat font-semibold tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px] text-[15px] ${svc.icon === "residential" ? "home-service-title-residential" : ""}`}>
+                  <h3 className="home-service-title font-montserrat font-semibold tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px] text-[15px]">
                     {svc.title}
                   </h3>
-                  <p className="mt-2 font-montserrat text-[#4f545b] sm:text-[11px] text-[14px]">
+                  <p className="mt-2 font-montserrat text-[#4f545b] text-[14px]">
                     {svc.desc}
                   </p>
                 </div>
@@ -968,17 +975,15 @@ export default function HomePage() {
           {/* Header */}
           <div className="flex flex-col items-center text-center gap-8 mb-12 lg:mb-16">
             <div className="w-full text-center" data-scroll-reveal="text">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="font-montserrat font-semibold tracking-[0.25em] text-mecpl-red uppercase text-[15px]">
-                  OUR PROJECTS
-                </span>
-              </div>
-              <h2 className="font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
+              <span className="home-section-label home-intro-label font-montserrat font-semibold tracking-[0.08em] text-mecpl-red text-[15px]">
+                Our projects
+              </span>
+              <h2 className="home-heading-26 home-intro-title home-intro-title-has-description font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
                 Landmark Works
               </h2>
               <p
-                className="font-montserrat text-[#949599] w-full max-w-none mx-auto m-0 text-center"
-                style={{ whiteSpace: "nowrap", fontSize: "clamp(0.625rem, 2.6vw, 16px)" }}
+                className="home-intro-description home-projects-description font-montserrat text-[#949599] w-full max-w-none mx-auto m-0 text-center"
+                style={{ fontSize: "14px" }}
               >
                 A selection of the structures MECPL has delivered across Pune.
               </p>
@@ -1082,13 +1087,13 @@ export default function HomePage() {
           className="relative w-full"
         >
           <div data-scroll-reveal="text" className="mb-10 px-6 text-center md:mb-12 md:px-10">
-            <span className="home-section-label block font-montserrat text-[15px] font-semibold uppercase tracking-[0.3em] text-mecpl-red">
-              RIGHT NOW
+            <span className="home-section-label home-intro-label block font-montserrat text-[15px] font-semibold tracking-[0.08em] text-mecpl-red">
+              Right now
             </span>
-            <h2 className="hp-section-title mt-3 font-montserrat text-mecpl-text font-medium">
+            <h2 className="hp-section-title home-heading-26 home-intro-title home-intro-title-has-description mt-3 font-montserrat text-mecpl-text font-medium">
               Rising As We Speak
             </h2>
-            <p className="mx-auto mt-2 max-w-xl font-montserrat text-[#73767c] text-[18px]">
+            <p className="home-intro-description home-rising-description mx-auto mt-2 max-w-xl font-montserrat text-[#73767c] text-[14px]">
               Four project milestones and active works currently taking shape across Pune.
             </p>
           </div>
@@ -1122,21 +1127,21 @@ export default function HomePage() {
                     <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
                   </span>
                 </div>
-                <p className="mb-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
+                <p className="home-rising-project-label mb-3 font-montserrat text-[14px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
                   {risingProjectVideos[activeRisingProject].name}
                 </p>
-                <h2 className="font-montserrat text-[clamp(2rem,3vw,2.7rem)] font-medium leading-[1.05] text-mecpl-text">
+                <h2 className="home-rising-headline font-montserrat text-[14px] font-medium leading-[1.05] text-mecpl-text">
                   {risingProjectVideos[activeRisingProject].headline}
                 </h2>
                 <span className="mt-5 block h-0.5 w-10 bg-mecpl-red" />
-                <p className="mt-6 max-w-sm font-montserrat text-[#696c71] text-[14px]">
+                <p className="home-rising-detail mt-6 max-w-sm font-montserrat text-[#696c71] text-[14px]">
                   {risingProjectVideos[activeRisingProject].description}
                 </p>
                 <Link
                   href="/projects"
-                  className="mt-7 inline-flex items-center gap-4 border border-mecpl-red bg-mecpl-red px-5 py-3 font-montserrat font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark text-[12px]"
+                  className="mt-7 inline-flex items-center gap-4 border border-mecpl-red bg-mecpl-red px-5 py-3 font-montserrat text-[12px] font-medium normal-case text-white transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark"
                 >
-                  View Details <ArrowRight size={14} />
+                  View details <ArrowRight size={14} />
                 </Link>
               </article>
             </div>
@@ -1184,13 +1189,13 @@ export default function HomePage() {
         >
           <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10 lg:pl-[80px]" style={{ color: "#ffffff" }}>
             <div>
-              <span className="home-section-label block font-montserrat font-semibold tracking-[0.2em] text-mecpl-red text-[15px]">
-                CLIENT VOICES
+              <span className="home-section-label home-intro-label block font-montserrat font-semibold tracking-[0.08em] text-mecpl-red text-[15px]">
+                Client voices
               </span>
-              <h2 className="hp-section-title mt-3 font-montserrat">
+              <h2 className="hp-section-title home-heading-26 home-intro-title home-intro-title-has-description mt-3 font-montserrat">
                 What Our<br className="hidden md:block" /> Clients Say
               </h2>
-              <p className="mt-5 max-w-sm font-montserrat text-[#c2c5cb] text-[18px]">
+              <p className="home-intro-description home-testimonials-description mt-5 max-w-sm font-montserrat text-[#c2c5cb] text-[14px]">
                 Long-standing relationships are built on delivery, transparency and trust.
               </p>
             </div>
