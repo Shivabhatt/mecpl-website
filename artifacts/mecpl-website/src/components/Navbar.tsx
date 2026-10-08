@@ -6,12 +6,12 @@ import { useModal } from "@/context/ModalContext";
 const logoAsset = "/assets/logo/mecpl-logo.webp";
 
 const navLinks = [
-  { label: "Home",     path: "/" },
-  { label: "About Us", path: "/about" },
-  { label: "Projects", path: "/projects" },
-  { label: "Certifications", path: "/certifications" },
-  { label: "Awards",   path: "/awards" },
-  { label: "Careers",  path: "/careers" },
+  { label: "HOME",           path: "/" },
+  { label: "ABOUT US",       path: "/about" },
+  { label: "PROJECTS",       path: "/projects" },
+  { label: "CERTIFICATIONS", path: "/certifications" },
+  { label: "AWARDS",         path: "/awards" },
+  { label: "CAREERS",        path: "/careers" },
 ];
 
 export default function Navbar() {
@@ -85,7 +85,7 @@ export default function Navbar() {
             className="mecpl-button mecpl-button--primary whitespace-nowrap px-5 py-3"
             data-testid="button-contact-nav"
           >
-            Enquire Now
+            ENQUIRE NOW
           </button>
         </div>
 
@@ -128,7 +128,7 @@ export default function Navbar() {
                   className="mecpl-button mecpl-button--primary w-full"
                 data-testid="button-mobile-enquire"
               >
-                Enquire Now
+                ENQUIRE NOW
               </button>
             </div>
           </div>

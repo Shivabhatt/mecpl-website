@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { sentenceCase } from "@/lib/typography";
 
 const equipment = [
   {
@@ -41,8 +42,8 @@ export default function EquipmentPage() {
         <img src="/assets/projects/PRAJ-INDUSTRIES.webp" className="absolute inset-0 w-full h-full object-cover opacity-[0.12]" alt="MECPL industrial project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
-          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase block mb-3">Infrastructure Assets</span>
-          <h3 className="text-3xl font-semibold tracking-tighter uppercase text-mecpl-text">Advanced Machinery Inventory</h3>
+          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase block mb-3">Infrastructure assets</span>
+          <h1 className="mecpl-type-page-title text-3xl font-semibold tracking-tighter uppercase text-mecpl-text">Advanced machinery inventory</h1>
           <div className="w-16 h-0.5 bg-mecpl-red mt-4"></div>
           <p className="text-mecpl-text text-base mt-4 max-w-xl leading-relaxed">Our execution velocity stems directly from total strategic ownership over heavy industrial machinery assets, eliminating supply dependency bottlenecks entirely.</p>
         </div>
@@ -55,8 +56,8 @@ export default function EquipmentPage() {
             <img src="/assets/projects/BEKAERT-INDUSTRIES-PVT.LTD_.webp" className="w-full h-full object-cover transition-all duration-500" alt="MECPL industrial construction project" />
           </div>
           <div className="space-y-6">
-            <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Self-Owned Fleet</span>
-            <h3 className="text-3xl font-semibold tracking-tight uppercase text-mecpl-text">Total Operational Independence</h3>
+            <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Self-owned fleet</span>
+            <h2 className="mecpl-type-section-title text-3xl font-semibold tracking-tight uppercase text-mecpl-text">Total operational independence</h2>
             <p className="text-mecpl-text text-sm leading-relaxed">MECPL's self-owned equipment fleet ensures operational independence, consistent quality, and cost efficiency on every project — a key competitive advantage in large-scale tender bidding.</p>
             <ul className="space-y-3">
               {["Automated High-Capacity Tower Cranes & Heavy Material Lifts", "Computerized Central Concrete Batching Plants", "Heavy Earth Excavation Machinery & Transit Mixer Fleets", "Certified Modular Formwork & Heavy Infrastructure Shuttering Systems"].map((item, i) => (
@@ -83,7 +84,7 @@ export default function EquipmentPage() {
                   <div className="space-y-4">
                     <div>
                       <span className="text-mecpl-red text-[9px] font-semibold uppercase tracking-widest">Equipment 0{i + 1}</span>
-                      <h3 className="text-mecpl-text font-semibold text-xl uppercase tracking-tight mt-1">{item.name}</h3>
+                      <h3 className="text-mecpl-text font-semibold text-xl uppercase tracking-tight mt-1">{sentenceCase(item.name)}</h3>
                       <div className="w-8 h-0.5 bg-mecpl-red mt-3"></div>
                     </div>
                     <p className="text-mecpl-text text-sm leading-relaxed">{item.desc}</p>

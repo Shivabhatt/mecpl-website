@@ -85,13 +85,13 @@
   max-width: 1000px;
   margin: 24px auto 20px;
   color: #fff;
-  font-size: 35px;
+  font-size: 26px;
   font-weight: 500 !important;
   letter-spacing: -.078em;
   line-height: .96;
 }
 
-.emblem-hero h1 em { color: #fff; font-style: normal; font-weight: 500 !important; }
+.emblem-hero h1 em { color: #fff; font-style: normal; font-weight: 500 !important; font-synthesis: none; }
 .emblem-hero-content > p { max-width: 475px; margin: 0; color: rgba(255,255,255,.8); font-size: 14px; line-height: 1.8; }
 
 .emblem-intro {
@@ -210,7 +210,7 @@
 
 .emblem-closing-copy { width: min(100%, 740px); text-align: center; }
 .emblem-closing-copy .emblem-section-label { justify-content: center; }
-.mecpl-awards-page .emblem-closing-copy h2 { margin: 15px 0 12px; color: #f3f1eb; font-size: clamp(31px, 4.3vw, 44px); font-weight: 600 !important; letter-spacing: -.04em; line-height: 1.12; text-transform: uppercase; }
+.mecpl-awards-page .emblem-closing-copy h2 { margin: 15px 0 12px; color: #f3f1eb; font-size: 26px; font-weight: 600 !important; letter-spacing: -.04em; line-height: 1.12; text-transform: uppercase; }
 .emblem-closing-copy > p { max-width: 590px; margin: 0 auto; color: #b9bcb8; font-size: 12px; line-height: 1.75; }
 .emblem-closing-actions { margin-top: 24px; display: flex; justify-content: center; }
 .emblem-closing-link { min-height: 39px; padding: 0 15px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--emblem-red); color: #fff; background: var(--emblem-red); font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: transform .2s ease; }

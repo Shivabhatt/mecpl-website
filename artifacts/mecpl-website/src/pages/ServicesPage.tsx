@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { sentenceCase } from "@/lib/typography";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceLineIcon, { type ServiceIconType } from "@/components/ServiceLineIcon";
@@ -73,7 +74,7 @@ export default function ServicesPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6" style={{ paddingTop: 25 }}>
-          <SectionHeader label="What We Do" title="Our Services" subtitle="End-to-end construction and execution across residential, commercial, institutional, industrial and infrastructure projects." center />
+          <SectionHeader label="What we do" title="Our services" subtitle="End-to-end construction and execution across residential, commercial, institutional, industrial and infrastructure projects." center />
           <div className="flex items-center gap-3 mt-4 text-mecpl-steel text-[10px] font-semibold tracking-widest uppercase">
             <Link href="/">
               <span className="hover:text-mecpl-red cursor-pointer transition-colors">Home</span>
@@ -94,8 +95,8 @@ export default function ServicesPage() {
             { val: "ISO", label: "9001 · 14001 · 45001" },
           ].map((s) => (
             <div key={s.label}>
-              <div className="text-white font-semibold text-2xl">{s.val}</div>
-              <div className="text-white/70 text-[9px] uppercase tracking-widest font-semibold">{s.label}</div>
+              <div className="mecpl-type-stat text-white font-semibold text-2xl">{s.val}</div>
+              <div className="text-white/70 text-[9px] uppercase tracking-widest font-semibold">{sentenceCase(s.label)}</div>
             </div>
           ))}
         </div>
@@ -103,7 +104,7 @@ export default function ServicesPage() {
 
       {/* Services grid */}
       <section className="max-w-7xl mx-auto px-6 py-20 space-y-8">
-        <SectionHeader label="Service Verticals" title="Built for India's Most Demanding Projects" center subtitle="Six specialized service pillars, each backed by 25+ years of execution experience and ISO-certified quality standards." />
+        <SectionHeader useH1={false} label="Service verticals" title="Built for India's most demanding projects" center subtitle="Six specialized service pillars, each backed by 25+ years of execution experience and ISO-certified quality standards." />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {services.map((svc, i) => (
             <div key={i} className="group bg-white border border-mecpl-dark/[0.07] rounded-sm overflow-hidden hover:border-mecpl-red/30 hover:shadow-lg transition-all duration-300 flex flex-col shadow-sm">
@@ -116,8 +117,8 @@ export default function ServicesPage() {
               </div>
               <div className="p-8 space-y-4 flex-1 flex flex-col">
                 <div>
-                  <span className="text-mecpl-red text-[9px] font-semibold tracking-widest uppercase">{svc.subtitle}</span>
-                  <h3 className="text-xl font-semibold uppercase tracking-tight text-mecpl-text mt-1">{svc.title}</h3>
+                  <span className="text-mecpl-red text-[9px] font-semibold tracking-widest uppercase">{sentenceCase(svc.subtitle)}</span>
+                  <h3 className="text-xl font-semibold uppercase tracking-tight text-mecpl-text mt-1">{sentenceCase(svc.title)}</h3>
                 </div>
                 <p className="text-mecpl-text text-sm leading-relaxed flex-1">{svc.desc}</p>
                 <ul className="space-y-1.5 pt-2 border-t border-mecpl-dark/[0.06]">
@@ -137,10 +138,10 @@ export default function ServicesPage() {
       {/* Why partner CTA */}
       <section className="bg-[#f9f9f9] border-y border-mecpl-dark/[0.06] py-20" data-animate-exclude="true">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Get Started</span>
-          <h3 className="text-4xl md:text-5xl font-semibold tracking-tighter uppercase text-mecpl-text">
-            Ready to Discuss Your Project?
-          </h3>
+          <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Get started</span>
+          <h2 className="mecpl-type-section-title text-4xl md:text-5xl font-semibold tracking-tighter uppercase text-mecpl-text">
+            Ready to discuss your project?
+          </h2>
           <p className="text-mecpl-text text-sm leading-relaxed max-w-xl mx-auto">
             Share your structural blueprints or project brief and our senior engineering team will respond within 24 hours with a tailored assessment.
           </p>

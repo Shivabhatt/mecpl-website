@@ -1,27 +1,18 @@
 ---
-name: MECPL Preloader Fix
-description: Two bugs in Preloader.tsx and how they were fixed
+name: MECPL preloader direction
+description: User-supplied Framer reference and the intended loading-screen treatment.
 ---
 
-## Bug 1: Preloader turns white in light mode
-`html[data-theme="light"] .bg-black { background-color: #ffffff !important; }` (index.css global rule) overrides the Preloader's `bg-black` class, making it appear white.
+Use the user's replacement image-expansion reference on a black screen, with the MECPL logo, divider, “Millennium,” a project image between “Millennium” and “Engineers & Contractors,” and “PVT. LTD.” on a second line. The user explicitly moved this design off the hero and onto the preloader. The project image is 60×60px on desktop and scales down at phone widths to keep the lockup on screen.
 
-**Fix:** Add `.preloader-force-text` class to the preloader wrapper (already present) and add a targeted CSS override after the global rule:
-```css
-html[data-theme="light"] .preloader-force-text { background-color: #000000 !important; color: #ffffff !important; }
-```
+Reference: https://fabulous-environment-467627.framer.app/
 
-**Why:** The preloader sits outside `.hp-root` so hp-root's dark overrides don't apply to it.
+**Why:** The user rejected the five-panel loader and supplied this replacement, then clarified that the full correct-spelling logo-and-name lockup belongs on the preloader, not the hero. They also asked for a prominent 60×60px project image, with smaller sizing at phone widths so the lockup fits, and required the website to start from its beginning after the loader.
 
-## Bug 2: GSAP "target [object NodeList] not found" warning
-The simplified Preloader has no `.preloader-line` elements, but still calls `gsap.from(lines, ...)` where `lines` is an empty NodeList. GSAP emits a warning when given an empty NodeList.
+**How to apply:** Preserve image cycling and full-screen expansion using MECPL's own images, keeping the logo, divider, and correctly spelled company name in one centered row. On startup, reset scroll to the top and delay the first hero video's playback and rotation until the reveal. Keep the hero's existing label and headline unchanged, preserve subsequent in-site navigation, and do not add the Framer runtime merely to render the loader.
 
-**Fix:** Guard the tween with `if (lines.length > 0)`:
-```tsx
-if (lines.length > 0) {
-  tl.from(lines, { yPercent: 100, opacity: 0, duration: 0.65, stagger: 0.08 });
-}
-tl.to(wrapperRef.current, { opacity: 0, ... });
-```
+Keep “PVT. LTD.” centered within the brand-copy area when adjusting its letter spacing; do not left-align it.
 
-**How to apply:** Any time a `.preloader-line` class is removed from the preloader JSX, this guard prevents the spurious GSAP warning.
+**Why:** The user clarified that the subtitle should remain centered.
+
+**How to apply:** Limit future subtitle styling changes to its typography unless the user asks to reposition it.

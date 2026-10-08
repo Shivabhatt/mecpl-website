@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import Footer from "../components/Footer";
 import PeopleSafetySection from "../components/PeopleSafetySection";
+import RisingProjectsSection from "../components/RisingProjectsSection";
+import RecognitionMarksSection from "../components/RecognitionMarksSection";
+import "../components/RisingProjectsSection.css";
 import ServiceLineIcon, { type ServiceIconType } from "../components/ServiceLineIcon";
 import {
   ArrowRight,
@@ -24,22 +26,34 @@ const heroVideos = [
   "assets/video/banner-people-behind-the-building.mp4",
 ];
 
-const heroSlides = [
+type HeroSlide = {
+  heading: string[];
+  subtitle: string;
+  subtitleSecondLine?: string;
+  keepHeadingLines?: boolean;
+};
+
+const heroSlides: HeroSlide[] = [
   {
     heading: ["GIANT BEHIND THE GIANTS"],
+    keepHeadingLines: true,
     subtitle: "We're Millennium Engineers & Contractors, a Pune-based civil, structural & interior contractor that turns ambitious ideas into buildings people trust. For 45 years, that's simply what we do.",
   },
   {
-    heading: ["TO BUILD IS A", "FORCE WITHIN US"],
+    heading: ["TO BUILD IS A FORCE", "WITHIN US"],
+    keepHeadingLines: true,
     subtitle: "An 8,000+ strong team that treats every industrial, commercial, residential or institutional site like it's their own.",
   },
   {
     heading: ["QUALITY YOU CAN SEE.", "SAFETY YOU CAN RELY ON."],
-    subtitle: "ISO certified in Quality, Environment & Occupational Health & Safety | CRISIL BBB / Positive",
+    keepHeadingLines: true,
+    subtitle: "ISO certified in quality, environment & occupational",
+    subtitleSecondLine: "health & safety | CRISIL BBB / Positive",
   },
   {
     heading: ["PEOPLE BEHIND THE BUILDING"],
-    subtitle: "A team of experts, backed by experienced professionals, bringing expertise and precision to every structure.",
+    subtitle: "A team of experts, backed by experienced professionals,",
+    subtitleSecondLine: "bringing expertise and precision to every structure.",
   },
 ];
 
@@ -48,13 +62,6 @@ const stats = [
   { target: 150, suffix: "+",   label: "Projects Delivered"           },
   { target: 900, suffix: "+Cr", label: "Revenue"          },
   { target: 30,  suffix: "+",   label: "Ongoing Projects" },
-];
-
-const recognitionData = [
-  { title: "India's Small Giants", detail: "Emerging Enterprises of India", image: "assets/recognition/indias-small-giants.png" },
-  { title: "India SME 100 Awards", detail: "Recognised SME Excellence", image: "assets/recognition/india-sme-100-awards.jpeg" },
-  { title: "Iconic Brand of the Year 2026", detail: "Brand Recognition", image: "assets/recognition/iconic-brand-2026.png" },
-  { title: "CRISIL BBB / Positive", detail: "Financial Rating", image: "assets/recognition/crisil-rating.jpg" },
 ];
 
 const services = [
@@ -105,6 +112,12 @@ const risingProjectVideos = [
   },
 ];
 
+const risingHighlightPosterNames: Record<string, string> = {
+  "rising-concrete-pouring": "rising-concrete-pouring-highlight",
+  "rising-vantage-tower-b": "rising-vantage-tower-b-highlight",
+  "rising-riverfront-infrastructure": "rising-riverfront-infrastructure-highlight",
+};
+
 const testimonials = [
   { quote: "MECPL is equipped with better infrastructure and well-qualified, experienced staff — capable of handling any type of project.", name: "Pride Properties", role: "Certificate of Testimony" },
   { quote: "We were particularly impressed by MECPL's professional expertise and interaction with our project managers — despite the site's unyielding terrain.", name: "Mahindra United World College", role: "Project Correspondence" },
@@ -112,66 +125,34 @@ const testimonials = [
 ];
 
 const clients = [
-  { name: "Panchshil",                         logo: "assets/clients/partner-logos/panchshil.webp" },
-  { name: "K Raheja Corp",                     logo: "assets/clients/partner-logos/k-raheja.webp" },
-  { name: "Godrej",                            logo: "assets/clients/partner-logos/godrej.webp" },
-  { name: "Tata Consultancy Services",          logo: "assets/clients/partner-logos/tcs.webp" },
-  { name: "Praj",                              logo: "assets/clients/partner-logos/praj.webp" },
-  { name: "Nandan",                            logo: "assets/clients/partner-logos/nandan.webp" },
-  { name: "Atos Syntel",                       logo: "assets/clients/partner-logos/atos-syntel.webp" },
-  { name: "Pride Purple",                      logo: "assets/clients/partner-logos/pride-purple.webp" },
-  { name: "Kalpataru",                         logo: "assets/clients/partner-logos/kalpataru.webp" },
-  { name: "Gera World",                        logo: "assets/clients/partner-logos/gera-world.webp" },
-  { name: "Pride",                             logo: "assets/clients/partner-logos/pride.webp" },
-  { name: "Bekaert",                           logo: "assets/clients/partner-logos/bekaert.webp" },
-  { name: "Mondelez International",             logo: "assets/clients/partner-logos/mondelez.webp" },
-  { name: "TCG International Biotech Park",     logo: "assets/clients/partner-logos/tcg-ibp.webp" },
-  { name: "UWC Mahindra",                      logo: "assets/clients/partner-logos/mahindra-uwc.webp" },
-  { name: "OmniActive",                        logo: "assets/clients/partner-logos/omniactive.webp" },
-  { name: "Bombay YMCA",                       logo: "assets/clients/partner-logos/bombay-ymca.webp" },
+  { name: "Tata Consultancy Services", logo: "assets/clients/partner-logos/tcs.webp" },
+  { name: "Praj", logo: "assets/clients/partner-logos/praj.webp" },
+  { name: "Nandan", logo: "assets/clients/partner-logos/nandan.webp" },
+  { name: "Atos Syntel", logo: "assets/clients/partner-logos/atos-syntel.webp" },
+  { name: "Pride Purple", logo: "assets/clients/partner-logos/pride-purple.webp" },
+  { name: "OmniActive", logo: "assets/clients/partner-logos/omniactive.webp" },
+  { name: "Bombay YMCA", logo: "assets/clients/partner-logos/bombay-ymca.webp" },
 ];
 
 /* ─── COMPONENT ──────────────────────────────────────────────────── */
-export default function HomePage() {
+export default function HomePage({ isReady = true }: { isReady?: boolean }) {
   const [videoIdx, setVideoIdx] = useState(0);
+  const activeHeroSlide = heroSlides[videoIdx] ?? heroSlides[0];
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeRisingProject, setActiveRisingProject] = useState(0);
   const [activeProj, setActiveProj] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const risingVideoRef = useRef<HTMLVideoElement | null>(null);
   const assetBase = import.meta.env.BASE_URL;
-  const posterFor = (src: string) =>
-    `${assetBase}assets/video/posters/${src.split("/").pop()?.replace(/\.mp4$/i, ".jpg") ?? ""}`;
+  const posterFor = (src: string) => {
+    const videoName = src.split("/").pop()?.replace(/\.mp4$/i, "") ?? "";
+    const posterName = risingHighlightPosterNames[videoName] ?? videoName;
+    return `${assetBase}assets/video/posters/${posterName}.jpg`;
+  };
 
   const heroSectionRef  = useRef<HTMLElement>(null);
   const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    const video = risingVideoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.currentTime = 0;
-          void video.play().catch(() => undefined);
-          return;
-        }
-
-        video.pause();
-        video.currentTime = 0;
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(video);
-    return () => {
-      observer.disconnect();
-      video.pause();
-      video.currentTime = 0;
-    };
-  }, [activeRisingProject]);
   const heroTagRef      = useRef<HTMLElement>(null);
   const heroSubRef      = useRef<HTMLDivElement>(null);
   const statsRef        = useRef<HTMLElement>(null);
@@ -181,6 +162,7 @@ export default function HomePage() {
   const recognitionRef  = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (!isReady) return;
     const targetId = window.location.hash.slice(1);
     if (!["recognition", "about", "services", "featured-projects", "rising-projects", "people-safety", "testimonials", "clients"].includes(targetId)) return;
     const scrollToTarget = () => {
@@ -194,7 +176,7 @@ export default function HomePage() {
       window.cancelAnimationFrame(frame);
       window.clearTimeout(settledLayoutTimer);
     };
-  }, []);
+  }, [isReady]);
 
   useEffect(() => {
     const testimonialTimer = window.setInterval(() => {
@@ -206,6 +188,7 @@ export default function HomePage() {
 
   /* ── HERO: entrance (SplitText chars + section slide-up) ── */
   useEffect(() => {
+    if (!isReady) return;
     const headline = heroHeadlineRef.current;
     const section  = heroSectionRef.current;
     if (!headline || !section) return;
@@ -255,26 +238,29 @@ export default function HomePage() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [isReady]);
 
   /* ── HERO: video cycling ── */
   useEffect(() => {
+    if (!isReady) return;
+    setVideoIdx(0);
     const id = setInterval(() => setVideoIdx(v => (v + 1) % heroVideos.length), 8000);
     return () => clearInterval(id);
-  }, []);
+  }, [isReady]);
 
   /* ── HERO: play/pause based on active index ── */
   useEffect(() => {
     videoRefs.current.forEach((vid, i) => {
       if (!vid) return;
-      if (i === videoIdx) {
+      if (isReady && i === videoIdx) {
         vid.currentTime = 0;
         vid.play().catch(() => {});
       } else {
         vid.pause();
+        vid.currentTime = 0;
       }
     });
-  }, [videoIdx]);
+  }, [videoIdx, isReady]);
 
   /* ── STATS: count-up ── */
   useEffect(() => {
@@ -378,28 +364,33 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── CLIENTS: GSAP infinite ticker ── */
+  /* ── CLIENTS: continuous ticker, retaining hover pause ── */
   useEffect(() => {
     const sec = clientsRef.current;
-    if (!sec) return;
-    const track = sec.querySelector<HTMLElement>(".clients-track");
-    if (!track) return;
+    const track = sec?.querySelector<HTMLElement>(".clients-track");
+    if (!sec || !track) return;
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const tween = gsap.to(track, {
-        xPercent: -50,
-        duration: 56,
+      const tween = gsap.fromTo(track, { x: 0 }, {
+        x: () => -(track.scrollWidth / 2),
+        duration: 28,
         ease: "none",
         repeat: -1,
       });
       const pause = () => tween.pause();
-      const play  = () => tween.play();
+      const play = () => tween.play();
       sec.addEventListener("mouseenter", pause);
       sec.addEventListener("mouseleave", play);
+      const observer = new ResizeObserver(() => {
+        const progress = tween.progress();
+        tween.invalidate().progress(progress);
+      });
+      observer.observe(sec);
       return () => {
+        observer.disconnect();
         sec.removeEventListener("mouseenter", pause);
         sec.removeEventListener("mouseleave", play);
-        tween.kill();
+        tween.revert();
       };
     });
     return () => mm.revert();
@@ -411,8 +402,9 @@ export default function HomePage() {
       {/* ══════════ 1. HERO — Cinematic centered ══════════ */}
       <section
         ref={heroSectionRef}
-        className="relative h-screen overflow-hidden"
+        className="home-hero-banner relative h-screen overflow-hidden"
         data-testid="section-hero"
+        style={{ visibility: isReady ? "visible" : "hidden" }}
       >
         {/* 3 cycling videos — only active one plays */}
         {heroVideos.map((src, i) => (
@@ -427,6 +419,7 @@ export default function HomePage() {
             style={{
               position: "absolute", inset: 0,
               width: "100%", height: "100%", objectFit: "cover",
+              filter: "brightness(1.12) contrast(1.03) saturate(1.08)",
               opacity: videoIdx === i ? 1 : 0,
               transition: "opacity 1.4s ease",
               zIndex: videoIdx === i ? 1 : 0,
@@ -439,7 +432,7 @@ export default function HomePage() {
         {/* Cinematic gradient overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "rgba(0,0,0,0.5)",
+          background: "rgba(0,0,0,0.42)",
         }} />
 
         {/* TOP RIGHT: video counter + progress */}
@@ -447,14 +440,15 @@ export default function HomePage() {
           position: "absolute", top: "100px", right: "40px", zIndex: 10,
           display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px",
         }}>
-          <div style={{
-            fontSize: "9px",
-            fontWeight: 300, color: "rgba(255,255,255,0.45)", letterSpacing: "0.24em",
+          <div className="home-slide-counter mecpl-role-swipe-hint" style={{
+            
+            color: "rgba(255,255,255,0.45)", 
           }}>
             {String(videoIdx + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
           </div>
           <div style={{ width: "60px", height: "1px", background: "rgba(255,255,255,0.15)", position: "relative", overflow: "hidden" }}>
-            <div key={videoIdx} className="hero-progress-bar" style={{
+            <div key={`${videoIdx}-${isReady}`} className="hero-progress-bar" style={{
+              animationPlayState: isReady ? "running" : "paused",
               position: "absolute", left: 0, top: 0, height: "100%", background: "#ffffff",
             }} />
           </div>
@@ -467,45 +461,45 @@ export default function HomePage() {
         }}>
           <div style={{
             textAlign: "center",
-            maxWidth: "700px",
+            width: "100%",
+            maxWidth: "1100px",
             padding: "0 clamp(8px, 2.8vw, 40px)",
-            textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
+            textShadow: "none",
+            backgroundImage: "radial-gradient(ellipse at center, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.14) 45%, transparent 75%)",
+            backgroundSize: "min(100%, 700px) 100%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}>
             {/* Constant label */}
             <div
               style={{
-                fontSize: "clamp(11px, 2.75vw, 15px)",
-                fontWeight: 600, color: "rgba(255,255,255,0.92)",
-                letterSpacing: "clamp(0.05em, 0.18vw, 0.18em)", textTransform: "uppercase",
-                whiteSpace: "nowrap",
+                
+                color: "rgba(255,255,255,0.92)",
+                
                 marginBottom: "14px",
-                textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
               }}
-              className="home-intro-label text-[15px]">
-              Millennium Engineers &amp; Contractors Pvt. Ltd.
+              className="mecpl-role-hero-company home-intro-label">
+              MILLENNIUM ENGINEERS &amp; CONTRACTORS PVT. LTD.
             </div>
 
             {/* Per-slide heading — re-mounts with key to trigger animation */}
-            <h1 className="hp-banner-title page-title-font home-intro-title home-intro-title-has-description" key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
-              {(heroSlides[videoIdx] ?? heroSlides[0]).heading.map((line, i) => (
-                <div key={i} className="hp-banner-line text-[26px]" style={{
-                  lineHeight: 1.15, color: "#ffffff",
-                  whiteSpace: "nowrap",
-                }}>
+            <h1 className={`mecpl-role-hero-title type-display hp-banner-title page-title-font home-intro-title home-intro-title-has-description${activeHeroSlide.keepHeadingLines ? " hp-banner-title-fit-lines" : ""}`} key={videoIdx} style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
+              {activeHeroSlide.heading.map((line, i) => (
+                <div key={i} className="hp-banner-line" style={{ color: "#ffffff" }}>
                   {line}
                 </div>
               ))}
             </h1>
 
             {/* Per-slide subtitle */}
-            <p className="page-subtitle-font home-intro-description text-[14px]" key={`sub-${videoIdx}`} style={{
-              fontSize: "16px",
-              fontWeight: 400, color: "rgba(255,255,255,0.95)",
-              lineHeight: 1.7, margin: "0 auto 28px", maxWidth: "460px",
-              textShadow: "0 2px 10px rgba(0,0,0,0.78), 0 0 3px rgba(0,0,0,0.62)",
+            <p className="mecpl-role-lead page-subtitle-font home-intro-description" key={`sub-${videoIdx}`} style={{
+              
+              color: "rgba(255,255,255,0.95)",
+              margin: "0 auto 20px", maxWidth: "460px",
               animation: "heroSlideIn 0.7s ease forwards",
             }}>
-              {(heroSlides[videoIdx] ?? heroSlides[0]).subtitle}
+              {activeHeroSlide.subtitle}
+              {activeHeroSlide.subtitleSecondLine && <><br />{activeHeroSlide.subtitleSecondLine}</>}
             </p>
 
             {/* Constant buttons */}
@@ -515,14 +509,14 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     background: "#EC3338", color: "#ffffff",
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "12px",
-                    letterSpacing: "normal", textTransform: "none", fontWeight: 500,
+                    
+                    
+                    
                     padding: "14px 32px", cursor: "pointer",
                   }}
                   onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
                   onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
-                  className="font-montserrat text-[12px]">
+                  className="mecpl-role-button">
                   Explore our work <ArrowRight size={11} />
                 </span>
               </Link>
@@ -531,28 +525,15 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     border: "1px solid rgba(255,255,255,0.55)", color: "#ffffff",
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "12px",
-                    letterSpacing: "normal", textTransform: "none", fontWeight: 500,
+                    
+                    
+                    
                     padding: "13px 28px", cursor: "pointer",
                   }}
-                  className="font-montserrat text-[12px]">
+                  className="mecpl-role-button">
                   Watch our story <ArrowRight size={11} />
                 </span>
               </Link>
-            </div>
-            <div
-              style={{
-                marginTop: "22px",
-                color: "rgba(255,255,255,0.88)",
-                fontSize: "10px",
-                letterSpacing: "0.16em",
-                lineHeight: 1.6,
-                textTransform: "uppercase",
-                textShadow: "0 2px 8px rgba(0,0,0,0.72), 0 0 2px rgba(0,0,0,0.55)",
-              }}
-              className="font-semibold text-[12px]">
-              Recognised as one of India&apos;s Small Giants · SME 100 · Iconic Brand of the Year
             </div>
           </div>
         </div>
@@ -564,9 +545,9 @@ export default function HomePage() {
           display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
         }}>
           <span style={{
-            fontSize: "7px",
-            letterSpacing: "0.34em", color: "rgba(255,255,255,0.32)", textTransform: "uppercase",
-          }}>
+            
+            color: "rgba(255,255,255,0.32)", 
+          }} className="home-scroll-hint mecpl-role-swipe-hint">
             SCROLL
           </span>
           <div className="scroll-bounce">
@@ -575,65 +556,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* ══════════ 2. RECOGNITION ══════════ */}
-      <section id="recognition" ref={recognitionRef} className="bg-white px-5 py-7 md:px-10 md:py-8 lg:px-[100px]">
-        <div className="mx-auto w-full">
-          <div className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
-            <div className="grid min-w-[560px] grid-cols-5 md:min-w-0">
-              {recognitionData.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`rec-card flex min-h-[142px] flex-col items-center justify-center px-2 py-3 text-center ${
-                    index > 0 ? "border-l border-mecpl-dark/[0.08]" : ""
-                  }`}
-                >
-                  <div className="recognition-mark-frame">
-                    <img
-                      src={`${assetBase}${item.image}`}
-                      alt={item.title}
-                      className="recognition-mark-image"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h2 className="rec-card-title recognition-card-title mt-2 max-w-[180px] font-montserrat font-semibold text-[#30343a]">
-                    {item.title}
-                  </h2>
-                  <p
-                    className="recognition-card-detail mt-1 max-w-[180px] font-montserrat tracking-[0.01em] text-[#74777b]"
-                  >
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-              <div
-                role="group"
-                aria-label="ISO certifications"
-                className="rec-card flex min-h-[142px] flex-col items-center justify-center border-l border-mecpl-dark/[0.08] px-2 py-3 text-center"
-              >
-                <div className="recognition-mark-frame">
-                  <img
-                    src={`${assetBase}assets/recognition/iso-mark.png`}
-                    alt="Blue ISO logo"
-                    className="recognition-mark-image"
-                    style={{
-                      filter: "drop-shadow(0 2px 5px rgba(23,95,155,0.16))",
-                    }}
-                    loading="lazy"
-                  />
-                </div>
-                <h2 className="rec-card-title recognition-card-title mt-2 max-w-[180px] font-montserrat font-semibold text-[#30343a]">
-                  ISO Certified
-                </h2>
-                <p className="recognition-card-detail mt-1 w-full max-w-[220px] font-montserrat tracking-[0.01em] text-[#74777b]">
-                  <span className="block xl:whitespace-nowrap">
-                    ISO 14001:2015, ISO 9001:2015,
-                  </span>
-                  <span className="block">ISO 45001: 2018</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RecognitionMarksSection sectionRef={recognitionRef} />
       {/* ══════════ 2.5 STATS STRIP ══════════ */}
       <section
         id="stats"
@@ -672,29 +595,26 @@ export default function HomePage() {
               >
                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "1px", marginBottom: 8 }}>
                   <span
-                    className="stat-num page-title-font"
+                    className="mecpl-role-stat-number stat-num"
                     data-target={s.target}
                     style={{
-                       fontSize: "clamp(2.1rem, 3.2vw, 3.1rem)",
-                      fontWeight: 300, color: "#ffffff", letterSpacing: "-0.055em", lineHeight: 0.9,
+                       
+                      color: "#ffffff", 
                     }}
                   >
                     0
                   </span>
-                  <span className="page-title-font" style={{
-                     fontSize: "clamp(2.1rem, 3.2vw, 3.1rem)",
-                    fontWeight: 300, color: "#EC3338", letterSpacing: "-0.055em", lineHeight: 0.9,
-                  }}>
+                  <span className="mecpl-role-stat-number home-stat-unit" style={{ color: "#EC3338" }}>
                     {s.suffix}
                   </span>
                 </div>
                 <div className="home-stat-label" style={{
                   maxWidth: 240,
                   margin: "0 auto",
-                   fontSize: "14px",
-                  fontWeight: 500, letterSpacing: "0.18em",
-                   lineHeight: 1.35,
-                  textTransform: "uppercase", color: "rgba(255,255,255,0.5)",
+                   
+                  
+                   
+                  color: "rgba(255,255,255,0.5)",
                 }}>
                   {s.label}
                 </div>
@@ -703,66 +623,45 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* ══════════ CLIENTS: partner logo marquee ══════════ */}
+      {/* ══════════ CLIENTS: partner logos ══════════ */}
       <section
         id="clients"
         ref={clientsRef}
+        className="clients-logo-section"
         data-testid="section-clients"
-        aria-label="Our clients"
-        style={{
-          background: "#ffffff",
-          borderTop: "1px solid rgba(35,37,41,0.08)",
-          padding: "clamp(52px, 6vw, 76px) 0",
-        }}
+        aria-labelledby="clients-title"
       >
-        <div className="clients-marquee" role="region" aria-label="Client logos">
-          <div
-            className="clients-track"
-            style={{ display: "flex", alignItems: "center", width: "max-content" }}
-          >
-            {[0, 1].map((copyIndex) => (
+        <div className="client-logos-heading-band">
+          <h2 id="clients-title" className="mecpl-role-h2-medium client-logos-title">
+            Built for Industry Leaders
+          </h2>
+        </div>
+        <div className="client-logos-viewport">
+          <div className="client-logos-grid clients-track">
+            {[false, true].map((duplicate) => (
               <div
-                key={copyIndex}
-                className="clients-loop-group"
-                aria-hidden={copyIndex === 1 ? "true" : undefined}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "clamp(32px, 4vw, 72px)",
-                  paddingRight: "clamp(32px, 4vw, 72px)",
-                }}
+                key={String(duplicate)}
+                className="client-logos-set"
+                role={duplicate ? undefined : "list"}
+                aria-label={duplicate ? undefined : "Client logos"}
+                aria-hidden={duplicate || undefined}
               >
-                {clients.map((client, index) => (
-                  <div
-                    key={`${copyIndex}-${client.name}`}
-                    className="client-logo-cell"
-                    data-testid={copyIndex === 0 ? `card-client-${index}` : undefined}
-                    style={{
-                      width: "clamp(176px, 16vw, 240px)",
-                      height: "clamp(112px, 10vw, 140px)",
-                      flexShrink: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <img
-                      src={`${assetBase}${client.logo}`}
-                      alt={copyIndex === 0 ? client.name : ""}
-                      className="client-logo-image"
-                      loading="lazy"
-                      decoding="async"
-                      style={{
-                        display: "block",
-                        width: "80%",
-                        height: "80%",
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                ))}
+            {clients.map((client, index) => (
+              <div
+                key={client.name}
+                className="client-logo-cell"
+                data-testid={duplicate ? undefined : `card-client-${index}`}
+                role={duplicate ? undefined : "listitem"}
+              >
+                <img
+                  src={`${assetBase}${client.logo}`}
+                  alt={duplicate ? "" : client.name}
+                  className="client-logo-image"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            ))}
               </div>
             ))}
           </div>
@@ -775,22 +674,23 @@ export default function HomePage() {
         data-testid="section-about"
         style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "100px 40px 128px 45px" }}
       >
-        <div className="max-w-none mx-auto">
-          <div className="grid items-start gap-16 lg:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
+        <div className="home-about-shell max-w-none mx-auto">
+          <div className="home-about-grid grid items-start gap-16 lg:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
 
             {/* Left: editorial */}
-            <div className="lg:pl-[120px]">
-              <div className="about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
-                <span className="home-section-label home-intro-label font-montserrat text-[15px]" style={{
-                  fontSize: "15px", fontWeight: 600,
-                  letterSpacing: "0.08em", color: "#EC3338", textTransform: "none",
+            <div className="home-about-copy lg:pl-[120px]">
+              <div className="home-about-heading about-fade" style={{ marginBottom: "36px", textAlign: "center" }}>
+                <span className="home-section-label home-intro-label" style={{
+                  
+                  color: "#EC3338", 
                   display: "block", marginBottom: "10px",
                 }}>
                   Who we are
                 </span>
-                <h2 className="hp-section-title home-heading-26 home-intro-title whitespace-normal font-montserrat lg:whitespace-nowrap" style={{
-                  margin: "0 0 20px",
-                  fontSize: "clamp(1.5rem, 1.9vw, 1.75rem)",
+                <h2 className="mecpl-role-h2-large hp-section-title home-heading-26 home-intro-title whitespace-normal" style={{
+                  maxWidth: "520px",
+                  margin: "0 auto 20px",
+                  
                 }}>
                   From a ₹2 Lakh Beginning to ₹900+ Cr
                 </h2>
@@ -806,54 +706,53 @@ export default function HomePage() {
                   willChange: "clip-path",
                 }}
               >
-                <p className="font-montserrat" style={{
-                  fontSize: "clamp(1.05rem, 1.8vw, 1.35rem)",
-                  fontWeight: 500, color: "#232529",
-                  lineHeight: 1.6, margin: "0 0 18px", letterSpacing: "normal",
+                <p className="mecpl-role-quote" style={{
+                  color: "#232529",
+                  margin: "0 0 18px", 
                 }}>
                   “Bringing positive changes in the lives of the people around me is the biggest achievement I've had in my life.”
                 </p>
                 <div
-                  className="font-montserrat text-[15px]"
+                  className="home-founder-attribution"
                   style={{
                     color: "#232529",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "0.02em",
+                    
+                    
+                    
                     textAlign: "left",
                   }}
                 >
-                  <span style={{ fontSize: "15px" }}>
-                    <span style={{ color: "#232529", fontWeight: 600 }}>M. B Nambiar</span>
-                    <span style={{ color: "#949599", fontWeight: 500 }}> — </span>
-                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Founder &amp; Chairman</span>
+                  <span className="home-founder-name-line">
+                    <span style={{ color: "#232529", }}>M. B Nambiar</span>
+                    <span style={{ color: "#949599", }}> — </span>
+                    <span style={{ color: "#EC3338", }}>Founder &amp; Chairman</span>
                   </span>
                   <span
-                    style={{ display: "block", marginTop: "4px", color: "#949599", fontSize: "14px", fontWeight: 500 }}
-                    className="font-montserrat text-[14px]">
+                    style={{ display: "block", marginTop: "4px", color: "#949599", }}
+                    className="home-founder-credit">
                     Honoured with the prestigious{" "}
-                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Nirman Ratna Lifetime Achievement Award</span>{" "}
+                    <span style={{ color: "#EC3338", }}>Nirman Ratna Lifetime Achievement Award</span>{" "}
                     by the BAI and the{" "}
-                    <span style={{ color: "#EC3338", fontWeight: 600 }}>Lifetime Achievement Award</span> by AESA
+                    <span style={{ color: "#EC3338", }}>Lifetime Achievement Award</span> by AESA
                   </span>
                 </div>
               </div>
 
               <div className="about-fade">
-                <p style={{
-                  fontSize: "13.5px",
-                  lineHeight: 1.85, color: "#949599", marginBottom: "28px",
+                <p className="home-intro-description home-about-description" style={{
+                  
+                  color: "#4f545b", marginBottom: "28px",
                 }}>
                   Millennium Engineers &amp; Contractors began in the 1980s as a small partnership, taken on by an engineer who wasn't content working for someone else. Four and a half decades on, that same commitment to quality and timely delivery has grown MECPL into one of Pune's most trusted structural engineering and construction names — ISO-certified, CRISIL-rated, and built on 8,000+ skilled hands.
                 </p>
 
                 <Link href="/about" data-testid="button-about-more">
                   <span
-                    className="font-montserrat inline-flex items-center gap-2 cursor-pointer text-[12px]"
+                    className="mecpl-role-button inline-flex items-center gap-2 cursor-pointer"
                     style={{
-                      fontSize: "12px",
-                      letterSpacing: "normal", color: "#EC3338",
-                      textTransform: "none", fontWeight: 500,
+                      
+                      color: "#EC3338",
+                      
                     }}
                   >
                     Read our full story <ArrowRight size={12} />
@@ -864,7 +763,7 @@ export default function HomePage() {
 
             {/* Right: founder portrait */}
             <div
-              className="about-img h-[420px] lg:h-auto lg:self-stretch"
+              className="home-about-portrait about-img h-[420px] lg:h-auto lg:self-stretch"
               style={{
                 width: "100%",
                 maxWidth: "440px",
@@ -912,26 +811,26 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <div className="home-services-intro mx-auto flex w-full max-w-[820px] flex-col items-center justify-center text-center">
-            <span className="home-section-label home-intro-label font-montserrat text-[15px]" style={{
-              fontSize: "15px", fontWeight: 600,
-              letterSpacing: "0.08em", color: "#EC3338", textTransform: "none",
+            <span className="home-section-label home-intro-label" style={{
+              
+              color: "#EC3338", 
               display: "block", marginBottom: "18px",
             }}>
               What we do
             </span>
-            <h2 className="home-services-title home-heading-26 home-intro-title home-intro-title-has-description font-montserrat text-white" style={{
-              margin: 0, fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 0.98,
+            <h2 className="mecpl-role-h2-large home-services-title home-heading-26 home-intro-title home-intro-title-has-description text-white" style={{
+              margin: 0, 
               textShadow: "0 3px 18px rgba(0,0,0,0.65)",
             }}>
               Our{" "}
               <span style={{ color: "#ffffff" }}>Services</span>
             </h2>
             <p
-              className="page-subtitle-font home-intro-description mt-6 max-w-[700px] text-[18px]"
+              className="page-subtitle-font home-intro-description mt-6 max-w-[700px] text-balance"
               style={{
                 color: "rgba(255,255,255,0.78)",
-                fontSize: "15px",
-                lineHeight: 1.7,
+                
+                
                 marginBottom: 0,
               }}
             >
@@ -953,10 +852,10 @@ export default function HomePage() {
                   <ServiceLineIcon type={svc.icon} className="h-9 w-9 sm:h-10 sm:w-10" />
                 </div>
                 <div className="mt-3 min-w-0">
-                  <h3 className="home-service-title font-montserrat font-semibold tracking-[-0.025em] text-[#232529] transition-colors duration-300 sm:text-[18px] text-[15px]">
+                  <h3 className="mecpl-role-service-title home-service-title text-[#232529] transition-colors duration-300">
                     {svc.title}
                   </h3>
-                  <p className="mt-2 font-montserrat text-[#4f545b] text-[14px]">
+                  <p className="mt-2 text-[#4f545b]">
                     {svc.desc}
                   </p>
                 </div>
@@ -975,15 +874,15 @@ export default function HomePage() {
           {/* Header */}
           <div className="flex flex-col items-center text-center gap-8 mb-12 lg:mb-16">
             <div className="w-full text-center" data-scroll-reveal="text">
-              <span className="home-section-label home-intro-label font-montserrat font-semibold tracking-[0.08em] text-mecpl-red text-[15px]">
+              <span className="home-section-label home-intro-label text-mecpl-red">
                 Our projects
               </span>
-              <h2 className="home-heading-26 home-intro-title home-intro-title-has-description font-montserrat text-4xl lg:text-5xl leading-none font-semibold text-mecpl-text uppercase tracking-tight m-0">
+              <h2 className="mecpl-role-h2-large home-heading-26 home-intro-title home-intro-title-has-description text-mecpl-text m-0">
                 Landmark Works
               </h2>
               <p
-                className="home-intro-description home-projects-description font-montserrat text-[#949599] w-full max-w-none mx-auto m-0 text-center"
-                style={{ fontSize: "14px" }}
+                className="home-intro-description home-projects-description text-[#4f545b] w-full max-w-none mx-auto m-0 text-center"
+                style={{ color: "#4f545b" }}
               >
                 A selection of the structures MECPL has delivered across Pune.
               </p>
@@ -1037,20 +936,12 @@ export default function HomePage() {
                   >
                     <div className="min-w-0">
                       <h3
-                        className={`font-montserrat font-semibold leading-[1.12] tracking-[-0.02em] text-white transition-[font-size] duration-500 ${
-                          isActive
-                            ? "text-xl sm:text-2xl lg:text-[clamp(20px,2.25vw,30px)]"
-                            : "text-[11px] sm:text-xs lg:text-[clamp(8px,0.62vw,9px)] text-balance"
-                        }`}
+                        className={`home-project-title text-white text-balance ${isActive ? "home-project-title--active" : ""}`}
                       >
                         {proj.name}
                       </h3>
                       <p
-                        className={`mt-1 min-w-0 font-montserrat font-medium leading-[1.2] text-white/90 ${
-                          isActive
-                            ? "text-[11px] sm:text-xs lg:text-[13px]"
-                            : "text-[10px] sm:text-[11px] lg:text-[clamp(7px,0.68vw,10px)]"
-                        }`}
+                        className="home-project-category mt-1 min-w-0 text-white/90"
                       >
                         {proj.location}
                       </p>
@@ -1067,7 +958,7 @@ export default function HomePage() {
           <div className="mt-10 md:hidden w-full">
               <Link href="/projects" data-testid="button-all-projects-mobile">
                 <span className="group flex items-center justify-center gap-4 border border-mecpl-dark bg-transparent text-mecpl-text px-6 py-4 cursor-pointer transition-colors hover:bg-mecpl-dark hover:text-white w-full">
-                  <span className="font-montserrat text-[10px] font-semibold tracking-[0.2em] uppercase">
+                  <span className="mecpl-role-button">
                     View All 150+ Projects
                   </span>
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -1077,95 +968,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* ══════════ 6. RISING AS WE SPEAK ══════════ */}
-      <section
-        id="rising-projects"
-        data-testid="section-home-ongoing-projects"
-        className="relative overflow-hidden bg-white"
-        style={{ background: "#ffffff", padding: "0 0 128px" }}
-      >
-        <div
-          className="relative w-full"
-        >
-          <div data-scroll-reveal="text" className="mb-10 px-6 text-center md:mb-12 md:px-10">
-            <span className="home-section-label home-intro-label block font-montserrat text-[15px] font-semibold tracking-[0.08em] text-mecpl-red">
-              Right now
-            </span>
-            <h2 className="hp-section-title home-heading-26 home-intro-title home-intro-title-has-description mt-3 font-montserrat text-mecpl-text font-medium">
-              Rising As We Speak
-            </h2>
-            <p className="home-intro-description home-rising-description mx-auto mt-2 max-w-xl font-montserrat text-[#73767c] text-[14px]">
-              Four project milestones and active works currently taking shape across Pune.
-            </p>
-          </div>
-
-          <div
-            data-scroll-reveal="image"
-            className="relative grid items-center gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:gap-14"
-            style={{ background: "#e4e4e6" }}
-          >
-            <div className="group relative aspect-video overflow-hidden rounded-[5px] bg-[#d8d7d3] shadow-[0_15px_45px_rgba(35,37,41,0.08)]">
-              <video
-                key={risingProjectVideos[activeRisingProject].video}
-                ref={risingVideoRef}
-                controls
-                muted
-                playsInline
-                preload="metadata"
-                poster={posterFor(risingProjectVideos[activeRisingProject].video)}
-                className="h-full w-full object-cover"
-                aria-label={`${risingProjectVideos[activeRisingProject].name} construction progress video`}
-              >
-                <source src={`${assetBase}${risingProjectVideos[activeRisingProject].video}`} type="video/mp4" />
-              </video>
-            </div>
-
-            <div className="relative">
-              <article>
-                <div className="-translate-y-2 mb-7 flex items-center">
-                  <span className="font-montserrat text-[11px] font-semibold tracking-[0.16em] text-mecpl-red">
-                    {String(activeRisingProject + 1).padStart(2, "0")}
-                    <span className="ml-1 text-[#a7a8ab]">/ {String(risingProjectVideos.length).padStart(2, "0")}</span>
-                  </span>
-                </div>
-                <p className="home-rising-project-label mb-3 font-montserrat text-[14px] font-semibold uppercase tracking-[0.18em] text-mecpl-red">
-                  {risingProjectVideos[activeRisingProject].name}
-                </p>
-                <h2 className="home-rising-headline font-montserrat text-[14px] font-medium leading-[1.05] text-mecpl-text">
-                  {risingProjectVideos[activeRisingProject].headline}
-                </h2>
-                <span className="mt-5 block h-0.5 w-10 bg-mecpl-red" />
-                <p className="home-rising-detail mt-6 max-w-sm font-montserrat text-[#696c71] text-[14px]">
-                  {risingProjectVideos[activeRisingProject].description}
-                </p>
-                <Link
-                  href="/projects"
-                  className="mt-7 inline-flex items-center gap-4 border border-mecpl-red bg-mecpl-red px-5 py-3 font-montserrat text-[12px] font-medium normal-case text-white transition-colors hover:border-mecpl-dark hover:bg-mecpl-dark"
-                >
-                  View details <ArrowRight size={14} />
-                </Link>
-              </article>
-            </div>
-            <div className="-mt-10 flex justify-end lg:absolute lg:bottom-[8px] lg:right-[5px] lg:z-10 lg:mt-0">
-              <button
-                type="button"
-                aria-label="Previous project"
-                onClick={() => setActiveRisingProject((current) => (current - 1 + risingProjectVideos.length) % risingProjectVideos.length)}
-                className="rising-project-control flex h-[36px] w-[36px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
-              >
-                <ChevronLeft size={14} />
-              </button>
-              <button
-                type="button"
-                aria-label="Next project"
-                onClick={() => setActiveRisingProject((current) => (current + 1) % risingProjectVideos.length)}
-                className="rising-project-control -ml-px flex h-[36px] w-[36px] cursor-pointer items-center justify-center border border-mecpl-dark/10 bg-white text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
-              >
-                <ChevronRight size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RisingProjectsSection projects={risingProjectVideos} activeIndex={activeRisingProject} onSelect={setActiveRisingProject} videoRef={risingVideoRef} assetBase={assetBase} posterFor={posterFor} />
       {/* ══════════ 6. PEOPLE & SAFETY ══════════ */}
       <PeopleSafetySection />
       {/* ══════════ 7. TESTIMONIALS ══════════ */}
@@ -1173,110 +976,52 @@ export default function HomePage() {
         id="testimonials"
         ref={testimonialsRef}
         data-testid="section-testimonials"
+        aria-labelledby="testimonials-title"
         style={{
-          background: "#232529",
-          borderTop: "1px solid rgba(35,37,41,0.07)",
-          padding: "96px 0 0",
-          marginTop: "120px",
+          background: "#ffffff",
+          borderTop: "1px solid #eceae7",
+          borderBottom: "1px solid rgba(236,51,56,0.45)",
+          padding: "44px 0 32px",
+          marginTop: "64px",
         }}
       >
-        <div
-          className="mx-auto grid gap-12 px-6 md:grid-cols-[0.72fr_1.6fr] md:gap-16 md:px-10"
-          style={{
-            width: "100%",
-            background: "#232529",
-          }}
-        >
-          <div data-scroll-reveal="text" className="flex flex-col pt-8 md:justify-between md:pt-10 lg:pl-[80px]" style={{ color: "#ffffff" }}>
-            <div>
-              <span className="home-section-label home-intro-label block font-montserrat font-semibold tracking-[0.08em] text-mecpl-red text-[15px]">
+        <div className="mx-auto w-full max-w-[960px] px-5 text-center">
+          <div className="testi-card">
+            <div data-scroll-reveal="text">
+              <span className="home-section-label home-intro-label block text-mecpl-red">
                 Client voices
               </span>
-              <h2 className="hp-section-title home-heading-26 home-intro-title home-intro-title-has-description mt-3 font-montserrat">
-                What Our<br className="hidden md:block" /> Clients Say
+              <h2
+                id="testimonials-title"
+                className="mecpl-role-h2-large hp-section-title home-heading-26 home-testimonials-title home-intro-title mt-2"
+              >
+                What Our Clients Say
               </h2>
-              <p className="home-intro-description home-testimonials-description mt-5 max-w-sm font-montserrat text-[#c2c5cb] text-[14px]">
-                Long-standing relationships are built on delivery, transparency and trust.
-              </p>
-            </div>
-          </div>
-
-          <div className="testi-card overflow-hidden border border-mecpl-dark/[0.08] bg-white">
-            <div className="flex h-[400px] flex-col overflow-hidden bg-white px-7 py-9 sm:px-10 sm:py-11 md:px-14 md:py-12">
-              <div className="flex items-start justify-between">
-                <span aria-hidden="true" className="font-montserrat text-[76px] font-semibold leading-[0.72] text-mecpl-red md:text-[92px]">
-                  “
-                </span>
-                <span className="font-montserrat text-[9px] tracking-[0.22em] text-mecpl-steel">
-                  {String(activeTestimonial + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
-                </span>
-              </div>
-
               <blockquote
                 key={activeTestimonial}
-                className="mt-5 max-w-3xl font-montserrat text-[clamp(1.1rem,2vw,1.65rem)] font-medium leading-[1.5] tracking-[-0.025em] text-mecpl-text md:mt-7 bg-[ffff]"
+                aria-live="polite"
+                aria-atomic="true"
+                className="mecpl-role-testimonial home-testimonial-quote mx-auto mt-5 grid min-h-[3em] w-full max-w-[820px] place-items-center text-balance text-center text-mecpl-text"
               >
-                {testimonials[activeTestimonial].quote}
+                <span>
+                  <span className="home-testimonial-quote-mark">“</span>
+                  {testimonials[activeTestimonial].quote}
+                  <span className="home-testimonial-quote-mark">”</span>
+                </span>
               </blockquote>
-
-              <div className="mt-auto flex items-start gap-4 border-t border-mecpl-dark/10 pt-6">
-                <span className="mt-2 h-0.5 w-8 shrink-0 bg-mecpl-red" />
-                <div>
-                  <div className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.08em] text-mecpl-text">
-                    {testimonials[activeTestimonial].name}
-                  </div>
-                  <div className="mt-1 font-montserrat text-[10px] text-mecpl-steel">
-                    {testimonials[activeTestimonial].role}
-                  </div>
+              <div className="mt-4">
+                <div className="home-testimonial-name text-mecpl-text">
+                  {testimonials[activeTestimonial].name}
+                </div>
+                <div className="home-testimonial-role mt-1 text-mecpl-steel">
+                  {testimonials[activeTestimonial].role}
                 </div>
               </div>
             </div>
 
-            <div className="grid border-t border-mecpl-dark/[0.08] md:grid-cols-[1fr_auto]">
-              <div className="grid grid-cols-1 sm:grid-cols-3">
-                {testimonials.map((testimonial, index) => (
-                  <button
-                    key={`${testimonial.name}-${index}`}
-                    type="button"
-                    onClick={() => setActiveTestimonial(index)}
-                    aria-pressed={activeTestimonial === index}
-                    className={`border-b border-mecpl-dark/[0.08] px-5 py-4 text-left font-montserrat transition-colors sm:border-b-0 sm:border-r ${
-                      activeTestimonial === index
-                        ? "bg-mecpl-dark text-white"
-                        : "bg-white text-[#73767c] hover:bg-[#f5f4f1] hover:text-mecpl-text"
-                    }`}
-                  >
-                    <span className="block text-[8px] tracking-[0.18em] opacity-50">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="mt-1.5 block truncate text-[9px] font-semibold uppercase tracking-[0.08em]">
-                      {testimonial.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-end bg-white px-4 py-3">
-                <button
-                  type="button"
-                  onClick={() => setActiveTestimonial((current) => (current - 1 + testimonials.length) % testimonials.length)}
-                  className="testimonial-arrow-control flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTestimonial((current) => (current + 1) % testimonials.length)}
-                  className="testimonial-arrow-control -ml-px flex h-10 w-10 items-center justify-center border border-mecpl-dark/10 text-mecpl-text transition-colors hover:border-mecpl-red hover:bg-mecpl-red hover:text-white"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -162,19 +162,18 @@ export default function CompletedProjectsPage() {
             display: "block",
             marginBottom: 20,
           }}>
-            OUR PROJECTS
+            Our projects
           </span>
           <h1 className="hp-banner-title page-title-font" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
-            <div className="hp-banner-line text-[35px]" style={{
-              fontSize: "clamp(18px, 3.5vw, 35px)",
+            <div className="hp-banner-line" style={{
               lineHeight: 1.15,
               color: "#ffffff",
               whiteSpace: "nowrap",
             }}>
-              BUILT FOR TOMORROW.
+              Built for tomorrow.
             </div>
           </h1>
-          <p className="mt-0 max-w-2xl font-montserrat font-medium text-sm leading-relaxed text-white/75 md:text-base">
+          <p className="completed-projects-hero-description mt-0 max-w-2xl font-montserrat font-medium leading-relaxed text-white/75">
             From visionary designs to enduring structures, explore 150+ successful projects across Pune.
           </p>
         </div>
@@ -229,7 +228,7 @@ export default function CompletedProjectsPage() {
                   loading="lazy"
                 />
               </div>
-              <div className="mt-3 max-w-[256px]">
+              <div className="mt-3 max-w-[256px] project-award-card-copy">
                 <span className="block font-montserrat text-[12px] font-semibold leading-[1.3] tracking-[0.015em] text-[#73777d]">
                   {award.title}
                 </span>
@@ -261,10 +260,10 @@ export default function CompletedProjectsPage() {
               }`}
             >
               <div className="flex items-baseline justify-center">
-                <span className="text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
+                <span className="mecpl-type-stat text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
                   {metric.value}
                 </span>
-                <span className="ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
+                <span className="mecpl-type-stat-unit ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
                   {metric.suffix}
                 </span>
               </div>
@@ -452,7 +451,7 @@ function ProjectExplorer() {
             <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-[#CF2E2E]">
               Building with purpose.
             </h2>
-            <p className="mt-3 max-w-2xl text-[#626667] text-[14px]">
+            <p className="mt-3 max-w-2xl text-[#626667] mecpl-type-supporting">
               From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,
               responsibility, and a long-term view of Pune.
             </p>
@@ -525,7 +524,7 @@ function ProjectExplorer() {
               />
             </div>
             <div className="mt-auto pt-7">
-              <h2 className="text-lg font-semibold leading-tight text-[#232529]">{selectedProject.name}</h2>
+              <h2 className="mecpl-type-card-title text-lg font-semibold leading-tight text-[#232529]">{selectedProject.name}</h2>
               <p className="mt-3 flex items-center gap-2 text-[10px] text-[#777a79]">
                 <MapPin size={12} className="shrink-0 text-[#CF2E2E]" />
                 {selectedProject.location}
@@ -565,7 +564,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             <div data-testid={`category-project-${index}`} className="mb-5 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
               {project.type}
             </div>
-            <h2 className="max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
+            <h2 className="mecpl-type-card-title max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}
             </h2>
             <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#949599]">

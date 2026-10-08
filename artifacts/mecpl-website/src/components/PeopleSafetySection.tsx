@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  Award,
-  Building2,
-  GraduationCap,
-  HeartPulse,
-  House,
-  ShieldCheck,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
+import { sentenceCase } from "@/lib/typography";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 type CarouselImage = {
@@ -18,15 +9,15 @@ type CarouselImage = {
 };
 
 const teamImages: CarouselImage[] = [
+  { src: "assets/people-safety/18_1790178654341.jpg", alt: "MECPL workforce gathered together on site" },
   { src: "assets/people-safety/27_1790178654349.jpg", alt: "Children taking part in a supported classroom lesson" },
   { src: "assets/people-safety/26_1790178654348.jpg", alt: "Children receiving education support at a MECPL labour camp" },
   { src: "assets/people-safety/23_1790178654345.jpg", alt: "MECPL team members taking part in recreational activities" },
-  { src: "assets/people-safety/18_1790178654341.jpg", alt: "MECPL workforce gathered together on site" },
 ];
 
 const hseImages: CarouselImage[] = [
-  { src: "assets/people-safety/20_1790178654343.jpg", alt: "MECPL workers completing site entry verification" },
   { src: "assets/people-safety/19_1790178654342.jpg", alt: "MECPL workers attending a safety induction" },
+  { src: "assets/people-safety/20_1790178654343.jpg", alt: "MECPL workers completing site entry verification" },
   { src: "assets/people-safety/17_1790178654339.jpg", alt: "Personal protective equipment prepared for a construction site" },
   { src: "assets/people-safety/21_1790178654344.jpg", alt: "MECPL worker using fall-protection equipment" },
   { src: "assets/people-safety/22_1790178654345.jpg", alt: "Medical professional checking a MECPL worker on site" },
@@ -39,27 +30,25 @@ const hseImages: CarouselImage[] = [
 type SafetyStat = {
   value: string;
   label: string;
-  Icon: LucideIcon;
 };
 
 const teamStats: SafetyStat[] = [
-  { value: "8000+", label: "Skilled Workforce", Icon: Users },
-  { value: "1000+", label: "Experienced Professionals", Icon: Building2 },
+  { value: "8000+", label: "Skilled Workforce" },
+  { value: "1000+", label: "Experienced Professionals" },
   {
     value: "Health & Safety Priority",
     label: "On Site Accommodation, Induction and Health Check-Ups",
-    Icon: HeartPulse,
   },
-  { value: "Training & Development", label: "Continuous Learning", Icon: GraduationCap },
-  { value: "Recognition", label: "Encouraged Growth", Icon: Award },
+  { value: "Training & Development", label: "Continuous Learning" },
+  { value: "Recognition", label: "Encouraged Growth" },
 ];
 
 const hseStats: SafetyStat[] = [
-  { value: "100%", label: "PPE Compliance", Icon: ShieldCheck },
-  { value: "School Facility", label: "At Labour Camp", Icon: GraduationCap },
-  { value: "Regular Health Check-Ups", label: "Medical Professional On Site", Icon: HeartPulse },
-  { value: "Safety & Vertigo Tests", label: "Preparedness", Icon: Building2 },
-  { value: "Hygiene Accommodation", label: "Health Prioritized", Icon: House },
+  { value: "100%", label: "PPE Compliance" },
+  { value: "School Facility", label: "At Labour Camp" },
+  { value: "Regular Health Check-Ups", label: "Medical Professional On Site" },
+  { value: "Safety & Vertigo Tests", label: "Preparedness" },
+  { value: "Hygiene Accommodation", label: "Health Prioritized" },
 ];
 
 function ImageCarousel({
@@ -110,11 +99,12 @@ function ImageCarousel({
 function StatsRow({ stats, id }: { stats: SafetyStat[]; id?: string }) {
   return (
     <div id={id} className="ps-stats">
-      {stats.map(({ value, label, Icon }) => (
+      {stats.map(({ value, label }) => (
         <div className="ps-stat" key={`${value}-${label}`}>
-          <Icon className="ps-stat-icon" size={25} strokeWidth={1.6} aria-hidden="true" />
-          <strong>{value}</strong>
-          <span className="text-[10px]">{label}</span>
+          <strong className={/^[\d,]+(?:\.\d+)?\s*[+%]?$/.test(value.trim()) ? "mecpl-role-stat-number" : "mecpl-role-stat-label"}>
+            {sentenceCase(value)}
+          </strong>
+          <span>{sentenceCase(label)}</span>
         </div>
       ))}
     </div>
@@ -125,48 +115,52 @@ export default function PeopleSafetySection() {
   const assetBase = import.meta.env.BASE_URL;
 
   return (
-    <section id="people-safety" data-testid="section-people-safety" className="ps-section">
+    <section id="people-safety" data-testid="section-people-safety" className="ps-section" aria-labelledby="people-safety-title">
       <div className="ps-shell">
-        <article className="ps-panel ps-panel-team">
-          <div className="ps-copy">
-            <span className="ps-eyebrow">People &amp; safety</span>
-            <h2 className="people-safety-heading home-heading-26">Our Team Is Our Substance</h2>
-            <p className="text-[14px]" style={{ fontSize: "14px" }}>
-              Our strength lies in the people who build, engineer and lead every project.
-            </p>
-            <p className="text-[14px]" style={{ fontSize: "14px" }}>
-              From over 8,000 skilled workers on site to experienced engineers, project managers and
-              leadership teams, we invest in capability, safety, wellbeing and continuous development
-              across the organisation.
-            </p>
-            <Link href="/careers" className="ps-link">
-              <span className="ps-button">
-                Join our team <ArrowRight size={15} />
-              </span>
-            </Link>
-          </div>
-          <ImageCarousel images={teamImages} assetBase={assetBase} />
-          <StatsRow stats={teamStats} />
-        </article>
-
+        <header className="ps-section-heading">
+          <span className="ps-section-kicker">People &amp; safety</span>
+          <h2 id="people-safety-title" className="mecpl-role-h2-large ps-common-heading">
+            Building a Culture of Care and Capability
+          </h2>
+        </header>
         <article className="ps-panel ps-panel-hse">
           <div className="ps-copy">
-            <span className="ps-eyebrow">People &amp; safety</span>
-            <h2 className="people-safety-heading home-heading-26">Building Safer Lives. Not Just Structures.</h2>
-            <p style={{ fontSize: "14px" }}>
+            <h3 className="people-safety-heading">Building safer lives. Not just structures.</h3>
+            <p>
               We put health, safety and wellbeing at the heart of every site, from safety inductions,
               protective equipment and health checks to hygienic accommodation and food. Beyond the
               workplace, we support education for workers’ children and responsible environmental
               practices, helping build safer, healthier communities.
             </p>
             <Link href="/about" className="ps-link">
-              <span className="ps-button">
+              <span className="ps-button mecpl-role-button">
                 Our safety practices <ArrowRight size={15} />
               </span>
             </Link>
           </div>
           <ImageCarousel images={hseImages} assetBase={assetBase} />
           <StatsRow id="people-safety-highlights" stats={hseStats} />
+        </article>
+
+        <article className="ps-panel ps-panel-team">
+          <div className="ps-copy">
+            <h3 className="people-safety-heading">Our team is our substance</h3>
+            <p>
+              Our strength lies in the people who build, engineer and lead every project.
+            </p>
+            <p>
+              From over 8,000 skilled workers on site to experienced engineers, project managers and
+              leadership teams, we invest in capability, safety, wellbeing and continuous development
+              across the organisation.
+            </p>
+            <Link href="/careers" className="ps-link">
+              <span className="ps-button mecpl-role-button">
+                Join our team <ArrowRight size={15} />
+              </span>
+            </Link>
+          </div>
+          <ImageCarousel images={teamImages} assetBase={assetBase} />
+          <StatsRow stats={teamStats} />
         </article>
       </div>
       <style>{`
@@ -187,29 +181,45 @@ export default function PeopleSafetySection() {
           overflow: hidden;
           background: #ffffff;
         }
+        .ps-section-heading {
+          grid-column: 1 / -1;
+          padding: 32px 20px 48px;
+          background: #ffffff;
+          text-align: center;
+        }
+        .ps-section-kicker {
+          display: block;
+          margin: 0 0 12px;
+          color: #cb777d;
+        }
+        #people-safety .ps-section-heading h2.ps-common-heading {
+          max-width: 900px;
+          margin: 0 auto;
+          color: #111111;
+          text-align: center;
+        }
         .ps-panel {
           position: relative;
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
           grid-template-rows: minmax(0, 1fr) auto;
-          min-height: clamp(520px, 54vw, 650px);
+          min-height: clamp(220px, 22vw, 320px);
           overflow: hidden;
           background: #232529;
         }
         .ps-panel-team {
-          --ps-team-content-offset: calc(120px - max(80px, calc(50vw - 600px)));
-          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-          grid-template-rows: minmax(276px, auto) auto;
-          width: min(1200px, calc(100% - 160px));
-          min-height: 0;
-          margin-inline: auto;
-          padding: 14px 0 72px;
-          overflow: visible;
-          background: #ffffff;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr) auto;
+          width: 100%;
+          min-height: clamp(220px, 22vw, 320px);
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background: #232529;
         }
         .ps-panel-hse {
-          grid-template-rows: minmax(220px, auto) auto;
-          min-height: 300px;
+          grid-template-rows: minmax(0, 1fr) auto;
+          min-height: clamp(220px, 22vw, 320px);
           background: #232529;
         }
         .ps-copy {
@@ -219,76 +229,35 @@ export default function PeopleSafetySection() {
           flex-direction: column;
           justify-content: center;
           min-width: 0;
-          padding: clamp(34px, 4vw, 66px) clamp(28px, 5.2vw, 76px);
-          background: #202326;
+          padding: clamp(26px, 4vw, 56px) clamp(24px, 4.4vw, 64px);
+          background: #232529;
         }
         .ps-panel-team .ps-copy {
-          grid-column: 1;
+          grid-column: 2;
           grid-row: 1;
-          margin-left: var(--ps-team-content-offset);
-          padding: 0;
-          background: #ffffff;
+          margin-left: 0;
+          padding: clamp(26px, 4vw, 56px) clamp(24px, 4.4vw, 64px);
+          background: #232529;
         }
         .ps-panel-hse .ps-copy {
           grid-column: 1;
           grid-row: 1;
-          padding: 48px clamp(28px, 5vw, 60px) 48px 120px;
+          padding: clamp(26px, 4vw, 56px) clamp(24px, 4.4vw, 64px);
           background: #232529;
         }
-        .ps-eyebrow {
-          display: block;
-          width: fit-content;
-          margin-bottom: 12px;
-          padding-bottom: 7px;
-          color: #ec3338;
-          font-family: var(--font-montserrat) !important;
-          font-size: 15px;
-          font-weight: 600 !important;
-          letter-spacing: 0.08em;
-          text-transform: none !important;
-        }
-        .ps-copy h2.people-safety-heading {
+        .ps-copy h3.people-safety-heading {
           max-width: 520px;
-          margin: 0 0 8px;
+          margin: 0 0 10px;
           color: #ffffff;
-          font-family: var(--font-montserrat);
-          font-size: clamp(1.85rem, 2.7vw, 3rem);
-          font-weight: 500 !important;
-          line-height: 1.04;
-          letter-spacing: -0.055em;
-          text-transform: none;
-        }
-        .ps-panel-team .ps-copy h2 {
-          max-width: 440px;
-          font-size: clamp(1.5rem, 2.4vw, 1.85rem);
-          color: #232529;
-        }
-        .ps-panel-hse .ps-copy h2 {
-          max-width: 520px;
-          font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-          line-height: 1.2;
-          color: #ffffff;
-          text-transform: none;
-        }
-        .ps-panel-hse .ps-copy h2.people-safety-heading {
-          font-family: "Montserrat", sans-serif !important;
-          font-weight: 500 !important;
-          letter-spacing: -0.01em !important;
         }
         .ps-copy p {
           max-width: 560px;
-          margin: 0 0 17px;
-          color: rgba(255, 255, 255, 0.7);
-          font-family: var(--font-montserrat);
-          font-size: clamp(0.72rem, 0.85vw, 0.88rem);
-          line-height: 1.7;
+          margin: 0 0 12px;
+          color: rgba(255, 255, 255, 0.76);
         }
         .ps-panel-team .ps-copy p {
           max-width: 700px;
-          color: rgba(35, 37, 41, 0.67);
-        }
-        .ps-panel-hse .ps-copy p {
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.76);
         }
         .ps-quote {
           max-width: 520px;
@@ -296,11 +265,6 @@ export default function PeopleSafetySection() {
           padding-left: 14px;
           border-left: 2px solid #ec3338;
           color: #232529;
-          font-family: var(--font-montserrat);
-          font-size: clamp(0.74rem, 0.84vw, 0.9rem);
-          font-style: normal;
-          font-weight: 600;
-          line-height: 1.5;
         }
         .ps-actions {
           display: flex;
@@ -323,11 +287,6 @@ export default function PeopleSafetySection() {
           padding: 11px 13px;
           background: #ec3338;
           color: #fff;
-          font-family: var(--font-montserrat);
-          font-size: 12px;
-          font-weight: 500;
-          letter-spacing: normal;
-          text-transform: none;
           cursor: pointer;
           transition: background 180ms ease, color 180ms ease;
         }
@@ -352,80 +311,58 @@ export default function PeopleSafetySection() {
         }
         .ps-stats {
           display: grid;
-          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-columns: repeat(5, minmax(0, 1fr));
           grid-column: 1 / -1;
           grid-row: 2;
           width: 100%;
           margin: 0;
-          padding: 18px clamp(20px, 4vw, 58px) 22px;
-          border-top: 1px solid rgba(35, 37, 41, 0.17);
+          padding: 10px clamp(18px, 4vw, 58px) 12px;
+          border-top: 1px solid rgba(35, 37, 41, 0.14);
           background: #ffffff;
         }
-        .ps-panel-team .ps-stats {
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          width: calc(100% - var(--ps-team-content-offset));
-          margin-left: var(--ps-team-content-offset);
-          padding-left: 0;
-          padding-right: 0;
-          padding-bottom: 16px;
-        }
+        .ps-panel-team .ps-stats,
         .ps-panel-hse .ps-stats {
           grid-template-columns: repeat(5, minmax(0, 1fr));
-          grid-column: 1 / -1;
-          grid-row: 2;
+          width: 100%;
           margin: 0;
-          padding-bottom: 22px;
+        }
+        @media (min-width: 1280px) {
+          .ps-panel-team .ps-stats {
+            grid-template-columns:
+              minmax(0, 1.1fr)
+              minmax(0, 1.35fr)
+              minmax(0, 2.75fr)
+              minmax(0, 1.5fr)
+              minmax(0, 1.15fr);
+          }
         }
         .ps-stat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
           min-width: 0;
-          align-self: start;
-          padding: 8px 12px 0;
+          align-self: stretch;
+          padding: 4px 10px 2px;
           text-align: center;
-          border-left: 1px solid rgba(35, 37, 41, 0.3);
+          border-left: 1px solid rgba(35, 37, 41, 0.15);
         }
         .ps-stat:first-child {
           border-left: 0;
           padding-left: 0;
         }
-        .ps-stat-icon {
-          display: block;
-          margin: 0 auto 9px;
-          color: #ec3338;
-        }
-        .ps-panel-team .ps-stat-icon {
-          display: none;
-        }
         .ps-stat strong,
         .ps-stat span {
           display: block;
-          font-family: var(--font-montserrat);
+          width: 100%;
         }
         .ps-stat strong {
           min-height: 0;
           color: var(--mecpl-red);
-          font-size: clamp(1rem, 1.2vw, 1.25rem);
-          font-weight: 500;
-          line-height: 1.25;
         }
         .ps-stat span {
-          margin-top: 6px;
+          margin-top: 4px;
           color: rgba(35, 37, 41, 0.61);
-          font-size: clamp(0.52rem, 0.58vw, 0.65rem);
-          font-weight: 500;
-          letter-spacing: 0.06em;
-          line-height: 1.4;
-          text-transform: uppercase;
-        }
-        .ps-panel-hse .ps-stat:first-child span {
-          font-size: 10px;
-        }
-        .ps-panel-hse .ps-stat strong {
-          color: #383a3d;
-        }
-        .ps-panel-hse .ps-stat-icon {
-          width: 16px;
-          height: 16px;
-          margin-bottom: 5px;
         }
         .ps-carousel {
           position: relative;
@@ -441,6 +378,9 @@ export default function PeopleSafetySection() {
           grid-column: 2;
           grid-row: 1;
           min-height: 0;
+        }
+        .ps-panel-team .ps-carousel {
+          grid-column: 1;
         }
         .ps-panel-hse .ps-carousel::before {
           content: "";
@@ -522,18 +462,15 @@ export default function PeopleSafetySection() {
             padding: 12px 14px 18px;
           }
         }
-        @media (max-width: 700px) {
-          .ps-copy h2.people-safety-heading {
-            max-width: 330px;
-            font-size: clamp(1.8rem, 8.5vw, 2.55rem);
+        @media (max-width: 800px) {
+          .ps-section-heading {
+            padding: 28px 18px 40px;
+          }
+          .ps-copy h3.people-safety-heading {
+            max-width: 100%;
           }
           .ps-copy p {
             max-width: 100%;
-            font-size: 0.82rem;
-            line-height: 1.7;
-          }
-          .ps-quote {
-            font-size: 0.78rem;
           }
           .ps-panel-team .ps-stats,
           .ps-panel-hse .ps-stats {

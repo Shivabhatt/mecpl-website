@@ -1,0 +1,36 @@
+TYPOGRAPHY SPEC — MECPL construction website (dark industrial, grand/editorial)
+
+FONTS
+- Display (headings, big numbers, stat values): "Barlow Condensed", weight 500 (medium), uppercase for hero/band text.
+- Body / UI / card titles: "Manrope", weights 400 (body), 600 (semibold), 700 (bold).
+
+HEADINGS
+- Hero H1 (homepage & page heroes): 60px mobile → 72px @sm → 96px @lg, uppercase, line-height 0.88–0.9, weight 500.
+- Section H2 (large, e.g. "Our Services", "Landmark Works"): 60px, weight 500, line-height 1.
+- Section H2 (medium, e.g. "Built for Industry Leaders"): 36px mobile → 48px @sm, weight 500.
+- Full-width photo-band statement ("Built to Stand for Generations"): display font, 48px mobile → 72px @sm, uppercase, line-height 1 (none).
+- Client testimonial quote: display font, 30px, line-height ~1.35.
+- Project card titles (overlaid on photos): 30px, weight 500.
+- Service card titles: 24px, weight 500.
+- Stat / metric numbers: display font, 36px, weight 500 (wall counter number 24px).
+- Award plaque year: display font, 20px mobile → 24px @lg.
+
+BODY TEXT
+- Lead / hero sub-paragraph: 14px, line-height 28px (leading-7).
+- Section descriptions / muted body: 14px, line-height 24–28px.
+- Blockquote (founder quote): 18px, line-height 32px.
+- Card body copy: 12px, line-height 24px.
+- Award plaque text: title 12px→14px @lg (line-height 20→24px), category & project 11px, line-height 16px.
+
+LABELS & MICRO TEXT
+- Eyebrow / kicker labels: 10px, bold, uppercase, letter-spacing 0.24em.
+- Micro eyebrow (hero company name line): 10px, semibold, uppercase, letter-spacing 0.25em.
+- Nav links: 12px.
+- Buttons: 10px, bold, uppercase, letter-spacing 0.17–0.18em.
+- Photo-band micro line (recognitions strip): 8px, uppercase, letter-spacing 0.2em.
+- "Swipe to turn" hint: 10px, uppercase, letter-spacing 0.24em.
+- Stats labels, card sublabels: 9–10px (sublabels 9px, often uppercase for stat labels).
+- Footer legal text: 12px, line-height 24px.
+
+SCALE SUMMARY (Tailwind reference)
+8px = text-[8px] · 9px = text-[9px] · 10px = text-[10px] · 11px = text-[11px] · 12px = text-xs · 14px = text-sm · 18px = text-lg · 20px = text-xl · 24px = text-2xl · 30px = text-3xl · 36px = text-4xl · 48px = text-5xl · 60px = text-6xl · 72px = text-7xl · 96px = text-8xl.

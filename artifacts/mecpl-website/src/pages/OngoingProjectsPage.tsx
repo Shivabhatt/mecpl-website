@@ -28,7 +28,7 @@ export default function OngoingProjectsPage() {
             <span className="w-2 h-2 bg-mecpl-red rounded-full animate-pulse"></span>
             <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Active Construction</span>
           </div>
-          <SectionHeader title="Ongoing Projects" subtitle="10 active engineering pipelines currently under construction across Pune's premier development zones." center />
+          <SectionHeader title="Ongoing projects" subtitle="10 active engineering pipelines currently under construction across Pune's premier development zones." center />
           <div className="flex items-center gap-2 mt-3 text-mecpl-steel text-[10px] md:text-xs tracking-widest uppercase font-semibold">
             <Link href="/"><span className="hover:text-mecpl-red cursor-pointer">Home</span></Link>
             <span>/</span>
@@ -90,7 +90,7 @@ export default function OngoingProjectsPage() {
       {/* CTA */}
       <section className="border-t border-mecpl-dark/[0.06] bg-[#f9f9f9] py-20" data-testid="section-ongoing-cta">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-          <h3 className="text-3xl font-semibold uppercase tracking-tighter text-mecpl-text">Partner on Your Next Project</h3>
+          <h2 className="mecpl-type-section-title text-3xl font-semibold uppercase tracking-tighter text-mecpl-text">Partner on your next project</h2>
           <p className="text-mecpl-text text-sm leading-relaxed max-w-md mx-auto">Looking for a trusted civil engineering partner? Connect with MECPL's project team.</p>
           <Link href="/contact" data-testid="button-ongoing-contact">
             <span className="inline-block bg-mecpl-red hover:bg-mecpl-dark text-white px-10 py-4 text-xs font-semibold tracking-widest uppercase rounded-sm transition-all shadow-lg cursor-pointer">

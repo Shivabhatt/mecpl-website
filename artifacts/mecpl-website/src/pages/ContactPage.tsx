@@ -22,7 +22,7 @@ export default function ContactPage() {
           <div className="mb-8">
             <img src="/assets/logo/mecpl-logo.webp" alt="MECPL logo" className="h-16 w-auto object-contain" />
           </div>
-          <SectionHeader label="Project Intake Channel" title={`Let's Build Something Extraordinary Together`} subtitle="Transmit your structural blueprints or enterprise construction specifications. Our central operations bureau will analyze your requirements immediately." />
+          <SectionHeader label="Project intake channel" title={`Let's build something extraordinary together`} subtitle="Transmit your structural blueprints or enterprise construction specifications. Our central operations bureau will analyze your requirements immediately." />
           <div className="flex items-center gap-2 mt-2 text-mecpl-steel text-xs tracking-widest uppercase font-semibold">
             <Link href="/"><span className="hover:text-mecpl-red cursor-pointer">Home</span></Link>
             <span>/</span>
@@ -37,7 +37,7 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="lg:col-span-2 space-y-5">
             <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Contact Details</span>
-            <h3 className="text-2xl font-semibold uppercase tracking-tight text-mecpl-text">Get in Touch</h3>
+            <h2 className="mecpl-type-section-title text-2xl font-semibold uppercase tracking-tight text-mecpl-text">Get in touch</h2>
 
             <div className="space-y-4">
               <div className="flex gap-4 p-5 bg-white border border-mecpl-dark/[0.07] rounded-sm hover:border-mecpl-red/20 transition-colors shadow-sm" data-testid="info-address">
@@ -98,7 +98,7 @@ export default function ContactPage() {
                 <div className="w-16 h-16 bg-mecpl-red/10 rounded-sm flex items-center justify-center mx-auto mb-5">
                   <span className="text-mecpl-red text-3xl">✓</span>
                 </div>
-                <h3 className="text-mecpl-text font-semibold text-2xl uppercase mb-3">Enquiry Logged</h3>
+                <h3 className="text-mecpl-text font-semibold text-2xl uppercase mb-3">Enquiry logged</h3>
                 <p className="text-mecpl-text text-sm max-w-sm mx-auto">Thank you for reaching out. Our team will respond to your project enquiry within 24 hours.</p>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); }}
@@ -112,7 +112,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-5" data-testid="form-contact">
                 <div className="space-y-1">
                   <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Project Enquiry</span>
-                  <h3 className="text-mecpl-text font-semibold text-xl uppercase">Transmit Operational Parameters</h3>
+                  <h3 className="text-mecpl-text font-semibold text-xl uppercase">Transmit operational parameters</h3>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4">

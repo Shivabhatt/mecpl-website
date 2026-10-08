@@ -49,7 +49,7 @@ export default function BlogPage() {
                   lineHeight: 1.15, color: "#ffffff",
                   whiteSpace: "nowrap",
                 }}>
-                  MECPL JOURNAL
+                  MECPL journal
                 </div>
               </h1>
               <p className="mt-0 max-w-2xl font-montserrat font-medium text-sm leading-relaxed text-white md:text-base">
@@ -151,7 +151,7 @@ export default function BlogPage() {
                 lineHeight: 1.1,
                 margin: "0 0 5px",
               }}>
-                Beyond the Journal
+                Beyond the journal
               </h2>
               <p className="font-montserrat font-medium text-white/80 text-xs leading-tight mb-2.5">
                 Discover the people and projects behind MECPL.

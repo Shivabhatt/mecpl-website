@@ -1,0 +1,1228 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@100..900&display=block");
+
+/*
+ * GRAND EDITORIAL TYPE SPEC (layer: mecpl-font-spec)
+ * ---------------------------------------------------------------------------
+ * Single source of truth for the attached typography spec. Declared before
+ * `mecpl-typography`, so its !important rules outrank the legacy important
+ * layer, inline styles and Tailwind utilities.
+ *
+ * Gate: every rule is scoped to `.mecpl-font-spec` (App adds it on Home and
+ * About). To roll out to another page, add that class to the route.
+ *
+ * Reusable role classes (use inside a .mecpl-font-spec root):
+ *   .mecpl-role-hero-title      Barlow 500 uppercase, 60/72/96, lh .9
+ *   .mecpl-role-hero-company    micro eyebrow 10/600 uppercase .25em
+ *   .mecpl-role-lead            14 / 28
+ *   .mecpl-role-body            14 / 24 muted body
+ *   .mecpl-role-card-body       12 / 24
+ *   .mecpl-role-quote           18 / 32 blockquote
+ *   .mecpl-role-h2-large        Barlow 500 60 / 1
+ *   .mecpl-role-h2-medium       Barlow 500 36 -> 48@sm
+ *   .mecpl-role-band-statement  Barlow 500 uppercase 48 -> 72@sm, lh 1
+ *   .mecpl-role-testimonial     Barlow 500 30 / 1.35
+ *   .mecpl-role-project-title   Manrope 500 30
+ *   .mecpl-role-service-title   Manrope 500 24
+ *   .mecpl-role-stat-number     Barlow 500 36 (.mecpl-role-stat-number--wall = 24)
+ *   .mecpl-role-kicker          10/700 uppercase .24em
+ *   .mecpl-role-button          10/700 uppercase .18em (text buttons only)
+ *   .mecpl-role-micro-band      8 uppercase .2em
+ *   .mecpl-role-swipe-hint      10 uppercase .24em
+ *   .mecpl-role-sublabel        9 (stat / card sublabels)
+ *   .mecpl-role-stat-label      10 uppercase
+ *   .mecpl-role-award-year      Barlow 500 20 -> 24@lg
+ *   .mecpl-role-award-title     12/20 -> 14/24@lg
+ *   .mecpl-role-award-meta      11 / 16
+ *   .mecpl-role-legal           12 / 24
+ *   .mecpl-role-nav             12 / 18 semibold
+ * Home-page elements are bound to these roles by their existing semantic
+ * classes in the "Home bindings" section below.
+ */
+@layer mecpl-font-spec {
+  :root {
+    --mecpl-font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --mecpl-font-ui: "Manrope", "Montserrat", sans-serif;
+    --mecpl-spec-weight-display: 500;
+    --mecpl-spec-weight-regular: 400;
+    --mecpl-spec-weight-medium: 500;
+    --mecpl-spec-weight-semibold: 600;
+    --mecpl-spec-weight-bold: 700;
+    --mecpl-spec-track-kicker: 0.24em;
+    --mecpl-spec-track-eyebrow: 0.25em;
+    --mecpl-spec-track-button: 0.18em;
+    --mecpl-spec-track-micro: 0.2em;
+  }
+
+  /* Base: Manrope everywhere in the gated root, zero specificity so roles win. */
+  .mecpl-font-spec,
+  :where(.mecpl-font-spec *),
+  :where(.mecpl-font-spec *)::before,
+  :where(.mecpl-font-spec *)::after {
+    font-family: var(--mecpl-font-ui) !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-transform: none !important;
+  }
+  .mecpl-font-spec {
+    font-size: 14px !important;
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+    line-height: 24px !important;
+  }
+
+  /* ---------- Display (Barlow Condensed 500) ---------- */
+  .mecpl-font-spec :is(
+    .mecpl-role-hero-title, .mecpl-role-h2-large, .mecpl-role-h2-medium,
+    .mecpl-role-band-statement, .mecpl-role-testimonial, .mecpl-role-stat-number,
+    .mecpl-role-award-year,
+    .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line,
+    .home-heading-26, .ps-common-heading, .client-logos-title,
+    .home-testimonial-quote, .home-stat-item .stat-num, .home-stat-item .home-stat-unit
+  ) {
+    font-family: var(--mecpl-font-display) !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    font-synthesis: none !important;
+  }
+  .mecpl-font-spec :is(
+    .mecpl-role-hero-title, .mecpl-role-h2-large, .mecpl-role-h2-medium,
+    .mecpl-role-band-statement, .mecpl-role-testimonial, .mecpl-role-stat-number,
+    .mecpl-role-award-year, .home-heading-26, .ps-common-heading,
+    .client-logos-title, .home-hero-banner h1.hp-banner-title
+  ) * {
+    font: inherit !important;
+    letter-spacing: inherit !important;
+    text-transform: inherit !important;
+  }
+
+  /* Hero H1 */
+  .mecpl-font-spec :is(.mecpl-role-hero-title, .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line) {
+    font-size: 60px !important;
+    line-height: 0.9 !important;
+    text-transform: uppercase !important;
+    white-space: normal !important;
+  }
+  @media (min-width: 640px) {
+    .mecpl-font-spec :is(.mecpl-role-hero-title, .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line) { font-size: 72px !important; }
+  }
+  @media (min-width: 1024px) {
+    .mecpl-font-spec :is(.mecpl-role-hero-title, .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line) { font-size: 96px !important; }
+  }
+
+  /* Section H2 large 60/1 */
+  .mecpl-font-spec :is(.mecpl-role-h2-large, .home-heading-26, .ps-common-heading) {
+    font-size: 60px !important;
+    line-height: 1 !important;
+  }
+  /* Section H2 medium 36 -> 48 */
+  .mecpl-font-spec :is(.mecpl-role-h2-medium, .client-logos-title) {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+  }
+  @media (min-width: 640px) {
+    .mecpl-font-spec :is(.mecpl-role-h2-medium, .client-logos-title) { font-size: 48px !important; }
+  }
+  /* Photo-band statement 48 -> 72 uppercase, no leading */
+  .mecpl-font-spec .mecpl-role-band-statement {
+    font-size: 48px !important; line-height: 1 !important; text-transform: uppercase !important;
+  }
+  @media (min-width: 640px) { .mecpl-font-spec .mecpl-role-band-statement { font-size: 72px !important; } }
+  /* Testimonial quote 30 / 1.35 */
+  .mecpl-font-spec :is(.mecpl-role-testimonial, .home-testimonial-quote) {
+    font-size: 30px !important; line-height: 1.35 !important;
+  }
+  /* Stat numbers 36 (wall counter 24) */
+  .mecpl-font-spec :is(.mecpl-role-stat-number, .home-stat-item .stat-num, .home-stat-item .home-stat-unit) {
+    font-size: 36px !important; line-height: 1.1 !important;
+  }
+  /* Keep People & Safety metric pairs visually consistent, outside display-role typography. */
+  .mecpl-font-spec #people-safety .ps-stat :is(strong, span) {
+    font-family: "Montserrat", sans-serif !important;
+    font-size: clamp(12px, 0.97222vw, 16px) !important;
+    line-height: 1.5 !important;
+    letter-spacing: normal !important;
+  }
+  .mecpl-font-spec #people-safety .ps-stat strong {
+    font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  @media (min-width: 1280px) {
+    .mecpl-font-spec #people-safety .ps-stat :is(strong, span) {
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 800px) {
+    .mecpl-font-spec #people-safety .ps-stat :is(strong, span) {
+      font-size: 12px !important;
+    }
+  }
+  .mecpl-font-spec .mecpl-role-stat-number--wall { font-size: 24px !important; }
+  /* Award plaque year 20 -> 24@lg */
+  .mecpl-font-spec .mecpl-role-award-year { font-size: 20px !important; line-height: 1.1 !important; }
+  @media (min-width: 1024px) { .mecpl-font-spec .mecpl-role-award-year { font-size: 24px !important; } }
+
+  /* ---------- Card titles (Manrope 500) ---------- */
+  .mecpl-font-spec :is(.mecpl-role-project-title, .mecpl-role-service-title, .home-service-title, .home-project-title, .people-safety-heading) {
+    font-weight: var(--mecpl-spec-weight-medium) !important;
+    line-height: 1.25 !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-service-title, .home-service-title, .people-safety-heading) { font-size: 24px !important; }
+  .mecpl-font-spec :is(.mecpl-role-project-title, .home-project-title--active) { font-size: 30px !important; }
+  /* Collapsed landmark slivers: not specified, kept compact so the accordion layout holds. */
+  .mecpl-font-spec .home-project-title:not(.home-project-title--active) { font-size: 12px !important; line-height: 1.2 !important; }
+
+  /* ---------- Body ---------- */
+  .mecpl-font-spec :is(.mecpl-role-lead, .mecpl-role-body, .mecpl-role-card-body, .mecpl-role-quote, .mecpl-role-legal,
+    .home-intro-description, .home-projects-description, .home-rising-description, .home-rising-detail,
+    .ps-copy p, .home-service-row p, .home-hero-banner p.home-intro-description) {
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-lead, .home-intro-description, .home-projects-description,
+    .home-rising-description, .home-rising-detail, .ps-copy p) {
+    font-size: 14px !important; line-height: 28px !important;
+  }
+  .mecpl-font-spec .mecpl-role-body { font-size: 14px !important; line-height: 24px !important; }
+  .mecpl-font-spec :is(.mecpl-role-card-body, .home-service-row p) { font-size: 12px !important; line-height: 24px !important; }
+  .mecpl-font-spec :is(.mecpl-role-quote, .about-quote p) {
+    font-size: 18px !important; line-height: 32px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec .home-founder-name-line,
+  .mecpl-font-spec .home-founder-name-line * {
+    font-size: 14px !important; line-height: 24px !important; font-weight: var(--mecpl-spec-weight-bold) !important;
+  }
+  .mecpl-font-spec .home-founder-name-line > span:nth-child(3) { font-weight: var(--mecpl-spec-weight-semibold) !important; }
+  .mecpl-font-spec .home-founder-credit,
+  .mecpl-font-spec .home-founder-credit * {
+    font-size: 12px !important; line-height: 24px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec .home-founder-credit span { font-weight: var(--mecpl-spec-weight-semibold) !important; }
+
+  /* ---------- Labels, buttons, micro ---------- */
+  .mecpl-font-spec :is(.mecpl-role-kicker, .home-section-label, .ps-section-kicker, .footer-section-label) {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.5 !important; letter-spacing: var(--mecpl-spec-track-kicker) !important; text-transform: uppercase !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-hero-company, .home-hero-banner .home-intro-label) {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-eyebrow) !important; text-transform: uppercase !important; white-space: normal !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-button, .mecpl-button, .ps-button) {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-bold) !important; line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-button) !important; text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .mecpl-button { letter-spacing: 0.17em !important; }
+  .mecpl-font-spec .mecpl-role-micro-band {
+    font-size: 8px !important; letter-spacing: var(--mecpl-spec-track-micro) !important; text-transform: uppercase !important; line-height: 1.5 !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-swipe-hint, .home-scroll-hint, .home-slide-counter) {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-regular) !important; line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-kicker) !important; text-transform: uppercase !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-sublabel, .footer-certificate-description, .home-testimonial-role) {
+    font-size: 9px !important; line-height: 16px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-stat-label, .home-stat-label) {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
+    letter-spacing: 0.17em !important; text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .ps-stat span {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-regular) !important; line-height: 1.5 !important;
+  }
+  .mecpl-font-spec .home-testimonial-name {
+    font-size: 10px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
+    letter-spacing: 0.17em !important; text-transform: uppercase !important;
+  }
+  .mecpl-font-spec :is(.mecpl-role-legal) { font-size: 12px !important; line-height: 24px !important; }
+
+  /* Award plaque (rollout config) */
+  .mecpl-font-spec .mecpl-role-award-title {
+    font-size: 12px !important; line-height: 20px !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  .mecpl-font-spec .mecpl-role-award-meta { font-size: 11px !important; line-height: 16px !important; }
+  @media (min-width: 1024px) {
+    .mecpl-font-spec .mecpl-role-award-title { font-size: 14px !important; line-height: 24px !important; }
+  }
+
+  /* ---------- Home bindings ---------- */
+  .mecpl-font-spec :is(.mecpl-role-nav, .navbar-nav-label) {
+    font-size: 12px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
+  }
+  .mecpl-font-spec .recognition-card-title {
+    font-size: 12px !important; line-height: 20px !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  .mecpl-font-spec .recognition-card-detail,
+  .mecpl-font-spec .recognition-card-detail * {
+    font-size: 11px !important; line-height: 16px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec .home-project-category {
+    font-size: 9px !important; line-height: 16px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec #rising-projects .rising-rail-name,
+  .mecpl-font-spec .home-rising-project-label {
+    font-size: 12px !important; line-height: 1.5 !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  .mecpl-font-spec #rising-projects .rising-rail-headline {
+    font-size: 12px !important; line-height: 24px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec .home-rising-headline {
+    font-size: 14px !important; line-height: 1.4 !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  .mecpl-font-spec .home-footer-full-company {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: clamp(12px, 1.04vw, 15px) !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .home-footer-wordmark {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 32px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .home-footer-tagline {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 11px !important;
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.19em !important;
+    text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .home-footer-heading {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+  }
+  .mecpl-font-spec .home-footer-contact-row,
+  .mecpl-font-spec .home-footer-link {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 12px !important;
+    font-weight: var(--mecpl-spec-weight-medium) !important;
+    line-height: 1.5 !important;
+  }
+  .mecpl-font-spec #testimonials .home-testimonial-quote-mark {
+    color: #ec3338 !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+  }
+  /* Footer (shared markup; legacy appearance elsewhere is untouched) */
+  .mecpl-font-spec footer :where(p, a, li, span, div) {
+    font-size: 12px !important; line-height: 24px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec footer .footer-certificate-name { font-size: 12px !important; line-height: 1.5 !important; font-weight: var(--mecpl-spec-weight-semibold) !important; }
+}
+
+/*
+ * Shared website typography. Sizes follow content roles, not individual pages.
+ * This layer preserves the existing typography on routes not using the new
+ * preset, while still outranking legacy unlayered important overrides.
+ * Layout, colors, weights, animation, and images remain page-owned.
+ * Author titles in sentence case; proper names and acronyms retain their spelling.
+ */
+@layer mecpl-font-spec {
+  /* About page bindings — same shared font roles, without layout or color changes. */
+  .mecpl-font-spec .about-page h1.about-hero-title,
+  .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
+    font-family: var(--mecpl-font-display) !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    font-size: 60px !important;
+    line-height: 0.9 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: uppercase !important;
+    font-synthesis: none !important;
+  }
+
+  @media (min-width: 640px) {
+    .mecpl-font-spec .about-page h1.about-hero-title,
+    .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
+      font-size: 72px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mecpl-font-spec .about-page h1.about-hero-title,
+    .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
+      font-size: 96px !important;
+    }
+  }
+
+  .mecpl-font-spec .about-page :is(
+    .purpose-ref-title,
+    .abt-values-title,
+    .abt-journey-title,
+    .abt-founder-title,
+    .abt-leadership-grid h2.page-title-font,
+    .abt-awards-section-title,
+    .abt-sectors-title,
+    .abt-cta-section h2
+  ) {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 36px !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    line-height: 1.1 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    font-synthesis: none !important;
+  }
+
+  .mecpl-font-spec .about-page :is(
+    .purpose-ref-title,
+    .abt-values-title,
+    .abt-journey-title,
+    .abt-founder-title,
+    .abt-leadership-grid h2.page-title-font,
+    .abt-awards-section-title,
+    .abt-sectors-title,
+    .abt-cta-section h2
+  ) * {
+    font: inherit !important;
+    letter-spacing: inherit !important;
+    text-transform: inherit !important;
+  }
+
+  @media (min-width: 640px) {
+    .mecpl-font-spec .about-page :is(
+      .purpose-ref-title,
+      .abt-values-title,
+      .abt-journey-title,
+      .abt-founder-title,
+      .abt-leadership-grid h2.page-title-font,
+      .abt-awards-section-title,
+      .abt-sectors-title,
+      .abt-cta-section h2
+    ) {
+      font-size: 48px !important;
+    }
+  }
+
+  .mecpl-font-spec .about-page p {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 14px !important;
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+    line-height: 24px !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  .mecpl-font-spec .about-page .about-hero-description {
+    line-height: 28px !important;
+  }
+
+  .mecpl-font-spec .about-page .about-hero-tagline {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 14px !important;
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+    line-height: 24px !important;
+  }
+
+  .mecpl-font-spec .about-page :is(
+    .purpose-ref-copy > p,
+    .abt-value-desc,
+    .abt-journey-copy
+  ) {
+    font-size: 12px !important;
+    line-height: 24px !important;
+  }
+
+  .mecpl-font-spec .about-page .abt-founder-quote-copy p {
+    font-size: 18px !important;
+    font-weight: var(--mecpl-spec-weight-regular) !important;
+    line-height: 32px !important;
+  }
+
+  .mecpl-font-spec .about-page :is(
+    .about-label-font,
+    .purpose-ref-kicker,
+    .abt-values-kicker,
+    .abt-founder-kicker,
+    .abt-journey-eyebrow,
+    .abt-sectors-eyebrow
+  ) {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-kicker) !important;
+    text-transform: none !important;
+  }
+
+  .mecpl-font-spec .about-page .about-hero-label {
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-kicker) !important;
+    text-transform: uppercase !important;
+  }
+
+  .mecpl-font-spec .about-page :is(
+    .purpose-ref-kicker,
+    .abt-values-kicker,
+    .abt-journey-eyebrow,
+    .abt-founder-kicker,
+    .abt-leadership-grid .about-label-font,
+    .abt-leadership-modal-card .about-label-font,
+    .abt-awards-section .about-label-font,
+    .abt-sectors-eyebrow,
+    .abt-cta-section .about-label-font
+  ) {
+    text-transform: uppercase !important;
+  }
+
+  .mecpl-font-spec .about-page .abt-stat-label {
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-semibold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.17em !important;
+    text-transform: uppercase !important;
+  }
+
+  .mecpl-font-spec .about-page :is(.abt-stat-value:not(.abt-stat-value-claim), .abt-stat-rank) {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 36px !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    line-height: 1.1 !important;
+    font-synthesis: none !important;
+  }
+
+  .mecpl-font-spec .about-page .abt-journey-year {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 20px !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    line-height: 1.1 !important;
+    font-synthesis: none !important;
+  }
+
+  @media (min-width: 1024px) {
+    .mecpl-font-spec .about-page .abt-journey-year {
+      font-size: 24px !important;
+    }
+  }
+
+  .mecpl-font-spec .about-page .abt-award-title {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 12px !important;
+    font-weight: var(--mecpl-spec-weight-semibold) !important;
+    line-height: 20px !important;
+  }
+
+  @media (min-width: 1024px) {
+    .mecpl-font-spec .about-page .abt-award-title {
+      font-size: 14px !important;
+      line-height: 24px !important;
+    }
+  }
+
+  .mecpl-font-spec .about-page .purpose-ref-copy h3 {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    line-height: 1.25 !important;
+  }
+
+  .mecpl-font-spec .about-page .abt-journey-card-title,
+  .mecpl-font-spec .about-page .abt-value-label {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+  }
+
+  .mecpl-font-spec .about-page :is(.about-cta-button-font, .mecpl-role-button) {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: var(--mecpl-spec-track-button) !important;
+    text-transform: uppercase !important;
+  }
+
+  .mecpl-font-spec .about-page a[href="#our-journey"] {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: var(--mecpl-spec-weight-bold) !important;
+    letter-spacing: var(--mecpl-spec-track-button) !important;
+    text-transform: uppercase !important;
+  }
+}
+@layer mecpl-typography {
+  :root {
+    --mecpl-type-page: 36px;
+    --mecpl-type-section: 28px;
+    --mecpl-type-compact-section: 26px;
+    --mecpl-type-home-section: 26px;
+    --mecpl-type-about-section: 26px;
+    --mecpl-type-card: 20px;
+    --mecpl-type-recognition-card: 16px;
+    --mecpl-type-home-service-title: 16px;
+    --mecpl-type-body: 16px;
+    --mecpl-type-supporting: 14px;
+    --mecpl-type-label: 12px;
+    --mecpl-type-stat: 40px;
+    --mecpl-type-stat-unit: 24px;
+    --mecpl-weight-page: 600;
+    --mecpl-weight-section: 500;
+    --mecpl-weight-card: 500;
+    --mecpl-weight-body: 400;
+    --mecpl-weight-label: 500;
+    --mecpl-weight-control: 500;
+  }
+
+  html {
+    font-size: 16px;
+  }
+
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    font-family: "Montserrat", sans-serif !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  @media (min-width: 1024px) {
+    .site-typography .home-page-typography .home-hero-banner .home-intro-label,
+    .site-typography .home-page-typography .home-hero-banner .hp-banner-line {
+      text-transform: uppercase !important;
+    }
+
+    .site-typography .home-page-typography :is(#about, #services, #featured-projects, #rising-projects, #testimonials) .home-section-label,
+    .site-typography .home-page-typography #people-safety .ps-section-kicker {
+      font-size: var(--mecpl-type-label) !important;
+      text-transform: uppercase !important;
+    }
+  }
+
+  body {
+    font-size: var(--mecpl-type-body);
+    line-height: 1.65;
+  }
+
+  /* Keep all copy on the site's homepage weight scale, then set roles below. */
+  .site-typography,
+  .site-typography * {
+    font-weight: var(--mecpl-weight-body) !important;
+  }
+
+  .site-typography .mecpl-loader-brand-copy,
+  .site-typography .mecpl-loader-brand-line,
+  .site-typography .mecpl-loader-brand-subline {
+    font-weight: 300 !important;
+  }
+
+  /* Legacy utility and inline sizes must not outrank semantic roles below. */
+  [class*="text-sm"],
+  [class*="text-base"],
+  [class*="text-[14px]"],
+  [class*="text-[15px]"],
+  [class*="text-[16px]"],
+  [style*="font-size: 15px"] {
+    font-size: var(--mecpl-type-body) !important;
+    line-height: 1.65 !important;
+  }
+
+  [class*="text-[13px]"] {
+    font-size: var(--mecpl-type-supporting) !important;
+    line-height: 1.5 !important;
+  }
+
+  h1,
+  .site-typography h1,
+  .hp-banner-line,
+  .mecpl-type-page-title {
+    font-weight: var(--mecpl-weight-page) !important;
+    font-size: var(--mecpl-type-page) !important;
+    line-height: 1.2 !important;
+  }
+
+  .site-typography .hp-banner-line {
+    font-weight: 300 !important;
+  }
+
+  .site-typography .home-page-typography h1.hp-banner-title,
+  .site-typography .home-page-typography h1.hp-banner-title .hp-banner-line,
+  .site-typography .about-page h1.about-hero-title,
+  .site-typography .about-page h1.about-hero-title .hp-banner-line,
+  .site-typography .completed-projects-page h1.hp-banner-title,
+  .site-typography .completed-projects-page h1.hp-banner-title .hp-banner-line,
+  .site-typography .careers-page h1.careers-hero-title {
+    font-size: var(--mecpl-type-compact-section) !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    font-synthesis: none !important;
+  }
+
+  .site-typography :is(h1, h2, h3, h4, h5, h6) * {
+    font-weight: inherit !important;
+  }
+
+  h2:not(.ps-common-heading),
+  .site-typography h2:not(.ps-common-heading),
+  .hp-section-title,
+  .home-accordion-title,
+  .mecpl-type-section-title {
+    font-weight: var(--mecpl-weight-section) !important;
+    font-size: var(--mecpl-type-section) !important;
+    line-height: 1.3 !important;
+  }
+
+  .home-page-typography #about h2.home-heading-26,
+  .home-page-typography #services h2.home-heading-26,
+  .home-page-typography #featured-projects h2.home-heading-26,
+  .home-page-typography #rising-projects h2.home-heading-26,
+  .home-page-typography #people-safety h2.home-heading-26,
+  .home-page-typography #testimonials h2.home-heading-26 {
+    font-size: var(--mecpl-type-home-section) !important;
+  }
+
+  .site-typography .purpose-reference h2.purpose-ref-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .completed-projects-page #architecture-approach h2 {
+    font-size: var(--mecpl-type-compact-section) !important;
+  }
+
+  .mecpl-awards-page .emblem-closing-copy h2 {
+    font-size: 26px !important;
+  }
+
+  .careers-page .careers-bottom-cta h2 {
+    font-size: 26px !important;
+  }
+
+  .site-typography .completed-projects-page .completed-projects-hero-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .cert-page .cert-hero-copy > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .emblem-hero .emblem-hero-content > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .cert-page #cert-title,
+  .site-typography .cert-page #cert-title em,
+  .site-typography .emblem-hero #emblem-title,
+  .site-typography .emblem-hero #emblem-title em {
+    font-size: var(--mecpl-type-compact-section) !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    font-synthesis: none !important;
+  }
+
+  .site-typography .careers-page .careers-hero-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .cert-awards-cta #cert-awards-cta-title {
+    font-size: var(--mecpl-type-compact-section) !important;
+    font-weight: 300 !important;
+    font-synthesis: none !important;
+  }
+
+  .site-typography .cert-awards-cta #cert-awards-cta-title * {
+    font-size: inherit !important;
+    font-weight: 300 !important;
+    font-synthesis: none !important;
+  }
+
+  .site-typography #project-contact h2.page-title-font {
+    font-size: var(--mecpl-type-compact-section) !important;
+  }
+
+  .site-typography #project-contact p.projects-contact-description {
+    font-size: var(--mecpl-type-supporting) !important;
+    line-height: 1.5 !important;
+  }
+
+  .site-typography .about-page .purpose-ref-card .purpose-ref-copy > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page h2.abt-journey-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page .abt-values-heading h2.abt-values-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page .abt-founder-copy h2.abt-founder-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page #abt3 .abt-leadership-grid h2.page-title-font {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page h2.abt-awards-section-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page h2.abt-sectors-title {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page .abt-leadership-grid > div[data-scroll-reveal="text"] > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-cta-section h2 {
+    font-size: var(--mecpl-type-about-section) !important;
+  }
+
+  .site-typography .about-page .abt-cta-section p.abt-cta-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  h3,
+  .site-typography h3,
+  .abt-value-label,
+  .abt-leadership-card-name,
+  .abt-founder-name,
+  .wof-list li .tt,
+  .mecpl-type-card-title {
+    font-weight: var(--mecpl-weight-card) !important;
+    font-size: var(--mecpl-type-card) !important;
+    line-height: 1.35 !important;
+  }
+
+  .about-page .abt-leadership-card-name {
+    font-size: 16px !important;
+  }
+
+  .site-typography .home-service-row h3.home-service-title {
+    font-size: var(--mecpl-type-home-service-title) !important;
+  }
+
+  h4,
+  h5,
+  h6,
+  .site-typography h4,
+  .site-typography h5,
+  .site-typography h6 {
+    font-weight: var(--mecpl-weight-card) !important;
+  }
+
+  .site-typography .mecpl-type-section-title {
+    font-size: var(--mecpl-type-section) !important;
+    line-height: 1.3 !important;
+  }
+
+  .site-typography .mecpl-type-card-title {
+    font-size: var(--mecpl-type-card) !important;
+    line-height: 1.35 !important;
+  }
+
+  .site-typography h2.home-rising-headline {
+    font-size: var(--mecpl-type-card) !important;
+    line-height: 1.35 !important;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 span,
+  h2 span,
+  h3 span,
+  h4 span,
+  h5 span,
+  h6 span {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+
+  p,
+  .page-subtitle-font,
+  .abt-founder-bio,
+  .abt-values-subtitle,
+  .abt-value-desc,
+  .abt-journey-subtitle,
+  .home-intro-description,
+  .blog-article-copy,
+  .mecpl-type-body {
+    font-weight: var(--mecpl-weight-body) !important;
+    font-size: var(--mecpl-type-body) !important;
+    line-height: 1.65 !important;
+  }
+
+  p,
+  li,
+  dt,
+  dd,
+  input,
+  textarea,
+  select,
+  option,
+  .page-subtitle-font,
+  .abt-founder-bio,
+  .abt-values-subtitle,
+  .abt-value-desc,
+  .abt-journey-subtitle,
+  .home-intro-description,
+  .blog-article-copy,
+  .site-typography .mecpl-type-supporting {
+    font-weight: var(--mecpl-weight-body) !important;
+  }
+
+  .site-typography .about-quote > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .home-service-row p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .home-services-intro > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography p.page-subtitle-font.home-intro-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .home-page-typography #featured-projects p.home-projects-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography #rising-projects p.home-rising-detail {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-fade > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-value-card > p.abt-value-desc {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page p.about-hero-description {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-founder-bio > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-founder-copy .abt-founder-bio {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-values-heading p.abt-values-subtitle {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-journey-card p.abt-journey-copy {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-page .abt-journey-header p.abt-journey-subtitle {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .completed-projects-page #architecture-approach div.text-sm {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .completed-projects-page #architecture-approach div.text-sm > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .completed-projects-page [data-testid="section-projects-intro"] > p[data-scroll-reveal="text"] {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .completed-projects-page #project-awards .project-award-card-copy > span {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .ps-panel-hse .ps-copy > p,
+  .site-typography .ps-panel-team .ps-copy > p {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  .site-typography .about-quote p,
+  .site-typography blockquote,
+  .site-typography q,
+  .site-typography strong,
+  .site-typography b {
+    font-weight: var(--mecpl-weight-card) !important;
+  }
+
+  .site-typography .home-section-label,
+  .site-typography .home-stat-label,
+  .site-typography .mecpl-section-label,
+  .site-typography .about-label-font,
+  .site-typography .careers-section-label,
+  .site-typography .purpose-ref-kicker,
+  .site-typography .purpose-ref-highlights,
+  .site-typography .abt-values-kicker,
+  .site-typography .abt-founder-kicker,
+  .site-typography .abt-journey-eyebrow,
+  .site-typography .abt-sectors-eyebrow,
+  .site-typography .abt-stat-label,
+  .site-typography .wof-eyebrow,
+  .site-typography .wof-d-eyebrow,
+  .site-typography .wof-d-issuer,
+  .site-typography .wof-year,
+  .site-typography .wof-seg,
+  .site-typography .wof-medal > span,
+  .site-typography .wof-list .y,
+  .site-typography .emblem-eyebrow,
+  .site-typography .emblem-section-label,
+  .site-typography .cert-eyebrow,
+  .site-typography .cert-label,
+  .site-typography .cert-stats span,
+  .site-typography .cert-doc-zoom,
+  .site-typography .cs-cta,
+  .site-typography .blog-article-rail-label,
+  .site-typography .blog-article-section-number,
+  .site-typography .abt-founder-quote-copy > span,
+  .site-typography .mecpl-type-label,
+  .site-typography small,
+  .site-typography label {
+    font-weight: var(--mecpl-weight-label) !important;
+  }
+
+  .site-typography .home-intro-label:not(.home-section-label) {
+    font-weight: 500 !important;
+  }
+
+  .site-typography .about-hero-label {
+    font-weight: 500 !important;
+  }
+
+  .site-typography button,
+  .site-typography .mecpl-button,
+  .site-typography .home-section-cta,
+  .site-typography .about-cta-button-font,
+  .site-typography .careers-hero-cta,
+  .site-typography .careers-cta-button,
+  .site-typography .navbar-nav-label,
+  .site-typography .emblem-closing-link,
+  .site-typography .blog-article-back {
+    font-weight: var(--mecpl-weight-control) !important;
+  }
+
+  .site-typography :is(button, .mecpl-button, .home-section-cta, .about-cta-button-font, .careers-hero-cta, .careers-cta-button, .emblem-closing-link, .blog-article-back) * {
+    font-weight: inherit !important;
+  }
+
+  .site-typography .stat-num,
+  .site-typography .home-stat-value,
+  .site-typography .abt-stat-value:not(.abt-stat-value-claim),
+  .site-typography .cert-stats strong,
+  .site-typography .mecpl-type-stat,
+  .site-typography .wof-ptitle,
+  .site-typography .wof-list li .tt,
+  .site-typography .abt-journey-year {
+    font-weight: var(--mecpl-weight-card) !important;
+  }
+
+  .site-typography .abt-journey-year {
+    font-size: 26px !important;
+  }
+
+  .site-typography .home-page-typography h1 .hp-banner-line {
+    font-weight: var(--mecpl-weight-section) !important;
+  }
+
+  .site-typography .wof-div-label {
+    font-weight: 300 !important;
+  }
+
+  .site-typography .wof-div-label b {
+    font-weight: var(--mecpl-weight-card) !important;
+  }
+
+  /* Card titles use the same role regardless of their legacy heading tag. */
+  .site-typography h2.rec-card-title,
+  .site-typography h2.abt-award-title,
+  .wof-ptitle {
+    font-size: var(--mecpl-type-card) !important;
+    line-height: 1.35 !important;
+  }
+
+  .site-typography h2.recognition-card-title {
+    font-size: var(--mecpl-type-recognition-card) !important;
+    line-height: 1.35 !important;
+  }
+
+  .site-typography h2.about-hero-tagline {
+    font-size: var(--mecpl-type-body) !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Normalize legacy tiny text utilities into a readable caption size. */
+  [class*="text-xs"],
+  [class*="text-[8px]"],
+  [class*="text-[9px]"],
+  [class*="text-[10px]"],
+  [class*="text-[11px]"],
+  [class*="text-[12px]"],
+  [style*="font-size: 7px"],
+  [style*="font-size: 8px"],
+  [style*="font-size: 9px"],
+  [style*="font-size: 10px"],
+  [style*="font-size: 11px"],
+  [style*="font-size: 0.55rem"],
+  small,
+  label,
+  .home-section-label,
+  .home-intro-label,
+  .home-stat-label,
+  .home-rising-project-label,
+  .home-project-category,
+  .ps-eyebrow,
+  .about-label-font,
+  .about-hero-label,
+  .careers-section-label,
+  .mecpl-section-label,
+  .purpose-ref-kicker,
+  .purpose-ref-highlights,
+  .abt-values-kicker,
+  .abt-founder-kicker,
+  .abt-journey-eyebrow,
+  .abt-sectors-eyebrow,
+  .abt-stat-label,
+  .wof-eyebrow,
+  .wof-d-eyebrow,
+  .wof-d-issuer,
+  .wof-year,
+  .wof-seg,
+  .wof-medal > span,
+  .wof-list .y,
+  .emblem-eyebrow,
+  .emblem-section-label,
+  .cert-eyebrow,
+  .cert-label,
+  .cert-stats span,
+  .cert-doc-zoom,
+  .cs-cta,
+  .blog-article-rail-label,
+  .blog-article-section-number,
+  .abt-founder-quote-copy > span,
+  .mecpl-type-label {
+    font-weight: var(--mecpl-weight-label) !important;
+    font-size: var(--mecpl-type-label) !important;
+    line-height: 1.5 !important;
+  }
+
+  .site-typography .home-stats-grid .home-stat-item .home-stat-label {
+    font-size: var(--mecpl-type-supporting) !important;
+  }
+
+  /* Controls and secondary information have the same size on every page. */
+  button[class],
+  input,
+  textarea,
+  select,
+  .mecpl-button,
+  .home-section-cta,
+  .about-cta-button-font,
+  .careers-hero-cta,
+  .careers-cta-button,
+  .navbar-nav-label,
+  .abt-leadership-card-role,
+  .abt-founder-role,
+  .recognition-card-detail,
+  .emblem-closing-link,
+  .blog-article-back,
+  .mecpl-type-supporting {
+    font-size: var(--mecpl-type-supporting) !important;
+    line-height: 1.5 !important;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: var(--mecpl-type-body) !important;
+  }
+
+  .site-typography footer :is(p, a, li) {
+    font-size: var(--mecpl-type-supporting) !important;
+    line-height: 1.65 !important;
+  }
+
+  .abt-stat-value:not(.abt-stat-value-claim),
+  .home-page-typography .stat-num,
+  .cert-stats strong,
+  .blog-page span[class*="text-4xl"],
+  .home-stat-value,
+  .mecpl-type-stat {
+    font-size: var(--mecpl-type-stat) !important;
+    line-height: 1.15 !important;
+  }
+
+  .abt-stat-value-claim {
+    font-size: var(--mecpl-type-body) !important;
+    line-height: 1.4 !important;
+  }
+
+  .mecpl-type-stat-unit {
+    font-size: var(--mecpl-type-stat-unit) !important;
+    line-height: 1.15 !important;
+  }
+
+  .ps-stat strong {
+    font-size: var(--mecpl-type-body) !important;
+    line-height: 1.4 !important;
+  }
+
+  .about-page a span.font-montserrat {
+    font-size: var(--mecpl-type-supporting) !important;
+    line-height: 1.5 !important;
+  }
+
+  .site-typography.home-route .home-page-typography #people-safety .ps-section-heading h2.ps-common-heading {
+    font-size: clamp(18px, 2vw, 25px) !important;
+    font-weight: 700 !important;
+  }
+
+  .site-typography.home-route .home-page-typography #clients h2.client-logos-title {
+    color: #232529 !important;
+    font-family: var(--font-montserrat) !important;
+    font-size: clamp(22px, 2.3vw, 28px) !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    text-transform: none !important;
+  }
+
+  @media (min-width: 1024px) {
+    .site-typography .home-page-typography #rising-projects h2.home-heading-26,
+    .site-typography .home-page-typography #rising-projects h2.home-heading-26 .rising-title-accent {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    .site-typography #rising-projects .rising-rail-name {
+      font-weight: 600 !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --mecpl-type-page: 28px;
+      --mecpl-type-section: 24px;
+      --mecpl-type-card: 18px;
+      --mecpl-type-stat: 32px;
+      --mecpl-type-stat-unit: 20px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .site-typography.home-route .home-page-typography #people-safety .ps-section-heading h2.ps-common-heading {
+      font-size: clamp(18px, 5vw, 21px) !important;
+    }
+  }
+}

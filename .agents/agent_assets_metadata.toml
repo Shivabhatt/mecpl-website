@@ -644,3 +644,367 @@ mtime_ms = 1790592249232
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a541820c-cb95-485a-89f8-a5012349f47f/0a97344d-3576-427a-9a7c-89c6b0b7faf0"
 storage_version_token = "1790592262399942"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "iXTf4cVYGMvI62zNdvwQV"
+uri = "file://artifacts/mecpl-website/screenshots/rising-as-we-speak-desktop.png"
+type = "image"
+title = "Rising as we speak — reference layout"
+description = "Desktop section with the main video on the left, four selectable thumbnails on the right, opposing overlay arrows, and unchanged project copy."
+logical_id = "ebdaa344-5a9e-455b-845c-48826234603a"
+content_hash = "sha256:b3f9f23b0de92820655ca65b4812cf50a80f200b582b01e8f7bbd3bf4b4b4bd9"
+size = 790774
+mtime_ms = 1791352615682
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ebdaa344-5a9e-455b-845c-48826234603a/b1270df7-882f-4e12-8e83-018a4e1bafcd"
+storage_version_token = "1791352718486262"
+content_type = "image/png"
+
+[[outputs]]
+id = "nAo2UWQ6XoYNaAqqovljd"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/01-home-banner.jpg"
+type = "image"
+title = "Home 1 — Banner"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "a4977a9d-34b9-46da-984f-2321c330e29b"
+content_hash = "sha256:96b81693cf12e100bfa633251e05dd0ec156f676fe82a9eda8e6d9fb7d850a58"
+size = 199344
+mtime_ms = 1791354830986
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a4977a9d-34b9-46da-984f-2321c330e29b/eab693e4-c3f0-4d75-8f4e-77f79f194409"
+storage_version_token = "1791354864610158"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "BCIgZ7uONkz01z-nho_4R"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/02-recognition.jpg"
+type = "image"
+title = "Home 2 — Recognition"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "68d67126-b0f1-4494-b2eb-3f1552b487e4"
+content_hash = "sha256:512256de51a3fcbcae2bca635978e97486a630e39f432bd962c3921b317d4c7c"
+size = 26863
+mtime_ms = 1791354832823
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/68d67126-b0f1-4494-b2eb-3f1552b487e4/e3b0c50a-d132-4cfc-a024-d41b3e912687"
+storage_version_token = "1791354865997611"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "p6slvXhuAQEoOZK53qPVp"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/03-statistics.jpg"
+type = "image"
+title = "Home 3 — Statistics"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "37347b2f-1226-4da9-a450-8fda0b2f395a"
+content_hash = "sha256:5f066b264266e905c4b8c5bb7cd8f40a849261c0a25c25101885c90c941a7344"
+size = 11468
+mtime_ms = 1791354834362
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/37347b2f-1226-4da9-a450-8fda0b2f395a/e01846d0-66fb-433b-a60c-c310e7247209"
+storage_version_token = "1791354867345047"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "bYH_SuALr4jbfor030Lan"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/04-industry-leaders-and-client-logos.jpg"
+type = "image"
+title = "Home 4 — Built for Industry Leaders and client logos"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "f88e9b3a-6e9a-436f-8d55-7c0012f49778"
+content_hash = "sha256:2a855183c9f3ddee3c79625d74a441ad7412671a07df945b007e311a0e93c945"
+size = 30303
+mtime_ms = 1791354835912
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/f88e9b3a-6e9a-436f-8d55-7c0012f49778/a500c6bf-f8f5-4c90-9808-c39001f71658"
+storage_version_token = "1791354868667786"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "blXHCjnqOVloxGAbijUsW"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/05-who-we-are.jpg"
+type = "image"
+title = "Home 5 — Who We Are"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "a3770f9f-93ac-490c-801f-ca15ffd551b5"
+content_hash = "sha256:a26119b970dfeaab12a08faa80edab828ef05c4c94d410a947779ea62e41b513"
+size = 160541
+mtime_ms = 1791354837690
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/a3770f9f-93ac-490c-801f-ca15ffd551b5/7bdd317d-0fd7-4d25-b509-27fd3a424eff"
+storage_version_token = "1791354869985062"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "kFs2zcDysRdzS2xTnloLr"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/06-what-we-do.jpg"
+type = "image"
+title = "Home 6 — What We Do"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "26bbba29-4657-466a-be1c-ed743be7b9f2"
+content_hash = "sha256:090b786abd0406d45aa8a5d278fb4150fd7861bca479f7a4d8a02563ee20641a"
+size = 146244
+mtime_ms = 1791354839245
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/26bbba29-4657-466a-be1c-ed743be7b9f2/d8357d2c-ff26-44d2-ac3b-c2c92b094e31"
+storage_version_token = "1791354871353853"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "BMvFFh0TaP1N8yIaijDp-"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/07-landmark-works.jpg"
+type = "image"
+title = "Home 7 — Landmark Works"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "6430ce53-8fd4-4f68-838d-0367c46828b0"
+content_hash = "sha256:4a46c8f97745e886a59fa34b44b0a83a34bfa06930c2278e4e13ae52a73aa309"
+size = 267478
+mtime_ms = 1791354841035
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/6430ce53-8fd4-4f68-838d-0367c46828b0/e35d3edd-e520-4ecd-a133-715d0d753260"
+storage_version_token = "1791354872694141"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "T1cKo93deN5BD_NSkNQeM"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/08-rising-as-we-speak.jpg"
+type = "image"
+title = "Home 8 — Rising as We Speak"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "57820083-cae7-4e0e-b91b-4e927dc5f13e"
+content_hash = "sha256:9b0adcb9743fc99e9e5e85c83e57fc51891ac775876e1275b9e3af5142e31b19"
+size = 196875
+mtime_ms = 1791354842640
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/57820083-cae7-4e0e-b91b-4e927dc5f13e/dbe3a916-daf3-48c7-ab64-cf687d0b8879"
+storage_version_token = "1791354874053974"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "T0VMxavL6iblXGo9zlYIi"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/09-people-and-safety.jpg"
+type = "image"
+title = "Home 9 — People & Safety"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "8cbca277-cb56-4dc4-a9d1-1077d21d7f9f"
+content_hash = "sha256:a4beca8f7695f0bafc00a4d94e68bcbb16d043979e29dc723995774a6fefaed6"
+size = 248478
+mtime_ms = 1791354844180
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/8cbca277-cb56-4dc4-a9d1-1077d21d7f9f/05239815-225f-488e-a2c3-77188bb2517a"
+storage_version_token = "1791354875422952"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "ViqLz1vAqMitXXc9b7jWQ"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/10-client-voices.jpg"
+type = "image"
+title = "Home 10 — Client Voices"
+description = "Full-resolution desktop screenshot (1440px wide) of the complete Home page section."
+logical_id = "83c89a6f-941f-4a93-bbac-a4af2737c048"
+content_hash = "sha256:9924d23933e127e711ebb39da08f9c3cc78f2593824b9a1d6a18d88dece61283"
+size = 39662
+mtime_ms = 1791354845696
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/83c89a6f-941f-4a93-bbac-a4af2737c048/2a5dc14b-c06d-4dc7-b1df-7b544e20782a"
+storage_version_token = "1791354876881783"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "c1Cy7v3keFlmt9Ik3DlaR"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/people-safety-metrics-28px.jpg"
+type = "image"
+title = "People & Safety — desktop screenshot"
+description = "Full section screenshot at 1440px wide, with the metric numbers reduced to 28px."
+logical_id = "2d8dcfe3-55db-412b-a14b-5b06f4aad289"
+content_hash = "sha256:aa38a60a7e305ceae06f9353a148d203acec59665008007b1c7ee6b06a85cc1b"
+size = 248202
+mtime_ms = 1791356436209
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/2d8dcfe3-55db-412b-a14b-5b06f4aad289/8d8a09a9-9709-4bfe-8e7e-2c7dc0ca8b8c"
+storage_version_token = "1791356455974438"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "vMmH1BDNVeaHBOzPyreIC"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/rising-as-we-speak-desktop-full-width.jpg"
+type = "image"
+title = "Rising as We Speak — Desktop Screenshot"
+description = "Full section at 1440px desktop width, showing the widened layout with the Who We Are section’s left and right margins."
+logical_id = "318a6553-d8e9-403e-a5e5-76f910bf5766"
+content_hash = "sha256:a92745e3062d67a44d34968f949d61edff86a9cd553623cef745c648dbe3cd31"
+size = 196790
+mtime_ms = 1791357146864
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/318a6553-d8e9-403e-a5e5-76f910bf5766/2e6f5b67-10bb-442d-b436-2f9c70521165"
+storage_version_token = "1791357166765028"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "l113Om15-jT22fbyAzf5l"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/people-safety-red-stats-desktop.jpg"
+type = "image"
+title = "People & Safety — Red Metric Row"
+description = "Current full-section desktop screenshot at 1440px wide, showing the upper metrics styled red to match the lower row."
+logical_id = "ada9f9fa-d662-4ff3-9d25-b03b4f526b45"
+content_hash = "sha256:110fe9f93247375e940c1e1922f3a851f73605f4d42277df878f7298b622c7fb"
+size = 246616
+mtime_ms = 1791357983041
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/ada9f9fa-d662-4ff3-9d25-b03b4f526b45/86404366-2daa-4af0-9da3-bc65ad2a4db2"
+storage_version_token = "1791358005047482"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "keVm8GFH_8IoB_ovG09_e"
+uri = "file://artifacts/mecpl-website/screenshots/home-desktop-sections/rising-highlight-posters-autoplay.jpg"
+type = "image"
+title = "Rising as We Speak — Video Highlights"
+description = "Desktop screenshot showing the concrete-pour video playing and the selected still covers for all four projects."
+logical_id = "3363608f-a621-4bcd-85ad-911f972736c9"
+content_hash = "sha256:72044479664515af16c0f39ce0c89feedaa0595ae9ca0f4511ccc87b36d20af9"
+size = 211178
+mtime_ms = 1791366921653
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3363608f-a621-4bcd-85ad-911f972736c9/42fa7541-43a8-40e3-ab9e-f08ac2b1cb09"
+storage_version_token = "1791367145059647"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "LKcs9VAydDxh7iO5hli7v"
+uri = "file://artifacts/mecpl-website/screenshots/rising-as-we-speak-current.jpg"
+type = "image"
+title = "Rising as We Speak — desktop screenshot"
+description = "Current desktop capture of the Rising as We Speak homepage section."
+logical_id = "44a549aa-f703-4f33-8c0f-28e5853216d2"
+content_hash = "sha256:fa8f5360739efe88e71aa22419f3a1befef5ce05519561abc93531b6ae7b72b6"
+size = 195963
+mtime_ms = 1791368949327
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/44a549aa-f703-4f33-8c0f-28e5853216d2/7ab543b6-06fd-48ea-bc0a-271ef2952d32"
+storage_version_token = "1791368974199535"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "KZnsc3MQMfvzs-swwzi57"
+uri = "file://artifacts/mecpl-website/screenshots/homepage-full-desktop.jpg"
+type = "image"
+title = "Updated full desktop homepage screenshot"
+description = "Full-page homepage capture with the Client Voices quotation marks in bold red."
+logical_id = "0bb045c4-e0c4-49b3-a976-6d965ac9668c"
+content_hash = "sha256:36046e73da1780d353c9bccdc2b1b7e457e5c9855d4f94282d0434abbfaf0c6a"
+size = 864293
+mtime_ms = 1791372321759
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/0bb045c4-e0c4-49b3-a976-6d965ac9668c/8942db5d-1d57-42fb-9c55-db600aa305ef"
+storage_version_token = "1791372343927360"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "PREk78qCRWDLxwqz4e4wM"
+uri = "file://artifacts/mecpl-website/screenshots/homepage-full-screen.jpg"
+type = "image"
+title = "MECPL homepage — full desktop screenshot"
+description = "Full-page desktop capture after the homepage finished loading."
+logical_id = "b96a043e-3bbd-4257-b9c1-6edb56948d9f"
+content_hash = "sha256:7f256ecd20756464f69c764ee94ea2c5681bd6da232d4d4502144a7ed8f2f047"
+size = 972958
+mtime_ms = 1791398778700
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/b96a043e-3bbd-4257-b9c1-6edb56948d9f/826a87bf-4e3f-4c45-86fd-955db78ff55d"
+storage_version_token = "1791398810302029"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "xBCIF98xlywGVbHG9X-W3"
+uri = "file://.local/deliverables/about-us-full-desktop.png"
+type = "image"
+title = "MECPL About Us — Full Desktop Screenshot"
+description = "Full-page desktop capture of the About Us page, from the hero through the footer."
+logical_id = "c14ac18b-4793-471c-926d-9ebd1907e3b3"
+content_hash = "sha256:ce4027e5d1d6d9fe5c44c5ded267f1fc5142300c1b072382d4704edf16d4114e"
+size = 2856355
+mtime_ms = 1791436039897
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/c14ac18b-4793-471c-926d-9ebd1907e3b3/c64824f5-06cb-499f-8083-dba2857812ef"
+storage_version_token = "1791436050222628"
+content_type = "image/png"
+
+[[outputs]]
+id = "-V_eDqoeG0qrSbOA4ZyLL"
+uri = "file://.local/deliverables/about-us-full-desktop-fonts.png"
+type = "image"
+title = "MECPL About Us — Full Desktop Screenshot"
+description = "Full-page desktop capture after applying the shared Barlow Condensed and Manrope typography system to both Home and About."
+logical_id = "d8d604b1-ec03-4544-a84e-2ee6619971ae"
+content_hash = "sha256:fba540d9881e4988302dbeb51a47ca90b46319eb410d36fa2704a69b21217740"
+size = 2832824
+mtime_ms = 1791451685467
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/d8d604b1-ec03-4544-a84e-2ee6619971ae/bff80ce8-63df-4f24-9853-c0b84a11ad8b"
+storage_version_token = "1791451727922918"
+content_type = "image/png"
+
+[[outputs]]
+id = "SXftVMAkyQbWMoulDZQUb"
+uri = "file://.local/deliverables/about-us-full-desktop-title-case.png"
+type = "image"
+title = "MECPL About Us — Full Desktop Screenshot"
+description = "Full-page desktop screenshot with the banner in uppercase, main headings in Title Case, and section labels in sentence case."
+logical_id = "3141fa89-3b38-45ef-b064-a1c648a99457"
+content_hash = "sha256:bb844a579afd80c1b6bddd75c426c48a6e659ee5ffb82cd6cae587ac35878ad9"
+size = 2827864
+mtime_ms = 1791455329215
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/3141fa89-3b38-45ef-b064-a1c648a99457/d9add7e4-1481-499e-a74c-6a957231dbe4"
+storage_version_token = "1791455354713188"
+content_type = "image/png"
+
+[[outputs]]
+id = "2vENRtk3g7nj54HOQSPn2"
+uri = "file://.local/deliverables/about-recognition-row.png"
+type = "image"
+title = "MECPL About — Recognition Logo Row"
+description = "Close-up of the recognition badges added below the About page banner, matching Home's white-circle logo treatment."
+logical_id = "136a34b4-df05-4906-883f-72eaa85461c8"
+content_hash = "sha256:09da477f5ed572d6a81780100e4d9fcc1f2be0d08ae9b9c08902d9db74606182"
+size = 42017
+mtime_ms = 1791456082283
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/136a34b4-df05-4906-883f-72eaa85461c8/875a9f60-621e-497c-902e-83d7d408776a"
+storage_version_token = "1791456111364171"
+content_type = "image/png"
+
+[[outputs]]
+id = "ay0XAdLCCzl6dlYOLKlfN"
+uri = "file://.local/deliverables/about-with-home-recognition-strip.png"
+type = "image"
+title = "MECPL About — Full Desktop Screenshot"
+description = "Full-page About desktop view with the Home-style recognition logo row directly beneath the banner."
+logical_id = "db9b6e05-d067-4345-ae98-d407b4e7d9ef"
+content_hash = "sha256:e6a976c171c9b904eab5c33db0d11fd187d1d60c2201ce1916e02953ae8b183e"
+size = 2871316
+mtime_ms = 1791455947314
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/db9b6e05-d067-4345-ae98-d407b4e7d9ef/2ac85788-6fcd-4013-a79b-ce53309a0ab4"
+storage_version_token = "1791456112919998"
+content_type = "image/png"
+
+[[outputs]]
+id = "9hZVrE1P4x85M8DBcfjI0"
+uri = "file://.local/deliverables/about-awards-circles.png"
+type = "image"
+title = "About Us — Awards & Certifications logos"
+description = "Desktop close-up of the existing awards and certifications section. The extra row below the About banner has been removed; the existing logos now use white circles."
+logical_id = "d0a70b0e-f1ea-47f1-9d28-a4a7870d43c7"
+content_hash = "sha256:e4dafe01362f2824979874f692cf5a26e64afcda0a09637be1ef5e85fb3a5ca2"
+size = 83320
+mtime_ms = 1791456848386
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/d0a70b0e-f1ea-47f1-9d28-a4a7870d43c7/742ef9cf-5666-4203-90ed-91b0cea88c7a"
+storage_version_token = "1791456940062726"
+content_type = "image/png"
+
+[[outputs]]
+id = "RiQ-7glUnMmAxghcG0LQa"
+uri = "file://.local/deliverables/about-us-full-screen.png"
+type = "image"
+title = "MECPL About Us — Full Desktop Screenshot"
+description = "Full-page desktop capture of the About Us page, including the updated Awards & Certifications logo circles and no extra logo strip beneath the banner."
+logical_id = "fd11ccd4-3342-499c-b771-72988b30baee"
+content_hash = "sha256:1c379192a82ec08228425f8645ac5bc9c23905153bbb36deca2b1ca60c07375a"
+size = 2789979
+mtime_ms = 1791457635078
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/fd11ccd4-3342-499c-b771-72988b30baee/c4b0caf7-5ab1-4403-b033-de347fc7998a"
+storage_version_token = "1791457657049607"
+content_type = "image/png"
+
+[[outputs]]
+id = "4Lax_oJFJCvOWUL8eXCe6"
+uri = "file://screenshots/people-safety-metrics-desktop.png"
+type = "image"
+title = "People & Safety — single-line desktop metrics"
+description = "Both statistics rows with matching value/caption sizes and single-line desktop alignment."
+logical_id = "aa281ffb-c7b3-4455-aabc-db53e0452c4b"
+content_hash = "sha256:8e9e9e1c279779178c08f47846924cb61adda7085235615b2ece80c39f25d741"
+size = 1176348
+mtime_ms = 1791480249140
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/aa281ffb-c7b3-4455-aabc-db53e0452c4b/57ee0e95-2d94-4687-9730-58e63ec9f0a2"
+storage_version_token = "1791480289067392"
+content_type = "image/png"

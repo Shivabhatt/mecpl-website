@@ -34,7 +34,9 @@ export default function CertificationsPage() {
         <div className="cert-hero-inner">
           <div className="cert-hero-copy">
             <div className="cert-eyebrow">Certified systems</div>
-            <h1 id="cert-title" className="cert-title">Built to a standard.<br /><em>Certified to three.</em></h1>
+            <h1 id="cert-title" className="cert-title" style={{ fontSize: 26, fontWeight: 500, fontSynthesis: "none" }}>
+              Built to a standard.<br /><em>Certified to three.</em>
+            </h1>
             <p>One integrated Bureau Veritas certificate attests to MECPL's quality, environmental and safety management.</p>
           </div>
         </div>

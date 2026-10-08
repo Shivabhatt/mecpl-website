@@ -1,3 +1,5 @@
+import { sentenceCase } from "@/lib/typography";
+
 interface SectionHeaderProps {
   label?: string;
   title: string;
@@ -13,17 +15,17 @@ export default function SectionHeader({ label, title, subtitle, center = true, l
     <div className={`space-y-3 ${center ? "text-center max-w-3xl mx-auto px-6 pt-6 pb-0" : ""}`}>
       {label && (
         <span className="mecpl-section-label">
-          {label}
+          {sentenceCase(label)}
         </span>
       )}
       {useH1 ? (
         <h1 className="page-title-font text-5xl leading-tight text-mecpl-text">
-          {title}
+          {sentenceCase(title)}
         </h1>
       ) : (
-        <h3 className="page-title-font text-3xl leading-tight text-mecpl-text">
-          {title}
-        </h3>
+        <h2 className="mecpl-type-section-title page-title-font text-3xl leading-tight text-mecpl-text">
+          {sentenceCase(title)}
+        </h2>
       )}
       {subtitle && (
         <p className="page-subtitle-font text-mecpl-text text-sm leading-relaxed">

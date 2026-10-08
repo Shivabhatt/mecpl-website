@@ -46,7 +46,7 @@ export default function ClientsPage() {
         <img src="/assets/projects/Solitaire-Business-Hub-II.jpeg" className="absolute inset-0 w-full h-full object-cover opacity-[0.1]" alt="MECPL commercial project" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/40"></div>
         <div className="relative max-w-7xl mx-auto px-6">
-          <SectionHeader label="Our Network" title="Clients & Partners" subtitle="India's most respected real estate developers, industrialists, and corporates trust MECPL for their landmark projects." />
+          <SectionHeader label="Our network" title="Clients & partners" subtitle="India's most respected real estate developers, industrialists, and corporates trust MECPL for their landmark projects." />
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export default function ClientsPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
           {[{ val: "50+", label: "Enterprise Clients" }, { val: "150+", label: "Projects Delivered" }, { val: "25+", label: "Years of Trust" }, { val: "100%", label: "Quality Record" }].map(s => (
             <div key={s.label} className="p-6 border-l-2 border-mecpl-red bg-[#f9f9f9] text-center rounded-sm">
-              <div className="text-4xl font-semibold text-mecpl-red">{s.val}</div>
+              <div className="mecpl-type-stat text-4xl font-semibold text-mecpl-red">{s.val}</div>
               <div className="text-[10px] text-mecpl-text font-semibold uppercase tracking-wider mt-2">{s.label}</div>
             </div>
           ))}
@@ -64,7 +64,7 @@ export default function ClientsPage() {
         {/* Marquee client logos */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <span className="text-mecpl-red text-[10px] font-semibold tracking-widest uppercase">Ecosystem</span>
-          <h3 className="text-3xl font-semibold tracking-tight uppercase text-mecpl-text">Clients & Premium Architects</h3>
+          <h2 className="mecpl-type-section-title text-3xl font-semibold tracking-tight uppercase text-mecpl-text">Clients & premium architects</h2>
           <p className="text-mecpl-text text-sm">We orchestrate high-tier development work hand-in-hand with India's marquee real estate enterprises and global master planners.</p>
         </div>
 

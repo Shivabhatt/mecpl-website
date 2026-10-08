@@ -7,7 +7,12 @@ export default function CertificationAwardsCTA() {
     <section className="cert-awards-cta" aria-labelledby="cert-awards-cta-title" data-testid="cert-awards-cta">
       <div className="cert-awards-cta-inner">
         <p className="cert-awards-cta-eyebrow">The journey continues</p>
-        <h2 id="cert-awards-cta-title">Same purpose.<br />Greater possibilities.</h2>
+        <h2
+          id="cert-awards-cta-title"
+          style={{ fontSize: 26, fontWeight: 300, fontSynthesis: "none" }}
+        >
+          Same purpose.<br />Greater possibilities.
+        </h2>
         <p className="cert-awards-cta-copy">
           From the standards we uphold to the recognition we earn, our purpose remains the same:
           to build better, safer and stronger.

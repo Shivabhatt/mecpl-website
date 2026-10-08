@@ -24,12 +24,20 @@ export default function useLenis() {
     });
 
     lenis.scrollTo(0, { immediate: true });
+    if (document.querySelector(".mecpl-preloader")) lenis.stop();
 
     const handleScrollTop = () => {
-      lenis.scrollTo(0, { immediate: true });
+      lenis.scrollTo(0, { immediate: true, force: true });
+    };
+    const handlePreloaderStart = () => lenis.stop();
+    const handlePreloaderExit = () => {
+      lenis.start();
+      handleScrollTop();
     };
 
     window.addEventListener("mecpl:scroll-top", handleScrollTop);
+    window.addEventListener("mecpl:preloader-start", handlePreloaderStart);
+    window.addEventListener("preloader-exit", handlePreloaderExit);
 
     const handleLenisScroll = () => ScrollTrigger.update();
     lenis.on("scroll", handleLenisScroll);
@@ -44,6 +52,8 @@ export default function useLenis() {
 
     return () => {
       window.removeEventListener("mecpl:scroll-top", handleScrollTop);
+      window.removeEventListener("mecpl:preloader-start", handlePreloaderStart);
+      window.removeEventListener("preloader-exit", handlePreloaderExit);
       lenis.off("scroll", handleLenisScroll);
       cancelAnimationFrame(rafId);
       lenis.destroy();

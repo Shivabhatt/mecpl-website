@@ -45,7 +45,7 @@ export default function AwardsPage() {
             <div className="emblem-hero-shade" />
             <div className="emblem-hero-content">
               <div className="emblem-eyebrow">A record built on site</div>
-              <h1 id="emblem-title" style={{ fontSize: 35, fontWeight: 500 }}>Recognition<br /><em>Earned on the Ground.</em></h1>
+              <h1 id="emblem-title" style={{ fontSize: 26, fontWeight: 500, fontSynthesis: "none" }}>Recognition<br /><em>earned on the ground.</em></h1>
               <p>Every distinction reflects the discipline, care and engineering rigour behind structures made to last.</p>
             </div>
           </section>

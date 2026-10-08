@@ -2,7 +2,7 @@
 .cert-awards-cta-inner{max-width:720px;margin:0 auto}
 .cert-awards-cta-eyebrow{color:#ec3338;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
 @layer base {
-  .cert-awards-cta h2{font-family:'Montserrat',sans-serif!important;color:#fff!important;font-size:35px!important;font-weight:500!important;line-height:1.18;text-transform:uppercase!important;letter-spacing:-.02em!important}
+  .cert-awards-cta h2{font-family:'Montserrat',sans-serif!important;color:#fff!important;font-size:26px!important;font-weight:300!important;font-synthesis:none;line-height:1.18;text-transform:uppercase!important;letter-spacing:-.02em!important}
 }
 .cert-awards-cta-copy{max-width:580px;margin:20px auto 0;color:#c5c7ca;font-size:14px;line-height:1.8}
 .cert-awards-cta-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;padding:15px 24px;min-height:48px;background:#cf2e2e;color:#fff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:background .2s}
@@ -10,6 +10,6 @@
 .cert-awards-cta-button:focus-visible{outline:2px solid #fff;outline-offset:5px}
 @media(max-width:600px){
   .cert-awards-cta{padding:64px 24px}
-  @layer base {.cert-awards-cta h2{font-size:28px!important}}
+  @layer base {.cert-awards-cta h2{font-size:26px!important}}
 }
 @media(prefers-reduced-motion:reduce){.cert-awards-cta-button{transition:none}}

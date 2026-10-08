@@ -1,0 +1,48 @@
+/* Preserve the existing grid and dividers; suppress only the red hover line. */
+.about-page .abt-sectors-section .abt-sector-tab::after {
+  display: none;
+  content: none;
+}
+
+.about-page .abt-sectors-section .abt-sector-tab {
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 3px;
+}
+
+.about-page .abt-sectors-section .abt-sector-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: #ec3338;
+}
+
+/* Reuse the normal statistic/label classes rather than an independent scale. */
+.about-page .abt-sectors-section .abt-stat-rank,
+.about-page .abt-sectors-section .abt-stat-description {
+  display: block;
+}
+
+.about-page .abt-sectors-section .abt-stat-rank {
+  margin-bottom: 10px;
+}
+
+.about-page .abt-sectors-section .abt-stat-claim .abt-stat-label {
+  max-width: none;
+  text-align: left;
+}
+
+@media (min-width: 769px) {
+  .about-page .abt-sectors-section .abt-stats-grid .abt-stat-item {
+    justify-content: flex-start;
+  }
+}
+
+@layer mecpl-typography {
+  @media (max-width: 480px) {
+    .site-typography .about-page .abt-sectors-section .abt-sector-tab {
+      font-size: clamp(10px, 2.8vw, 12px) !important;
+      white-space: nowrap;
+    }
+  }
+}

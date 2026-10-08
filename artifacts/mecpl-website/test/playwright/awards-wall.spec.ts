@@ -37,7 +37,7 @@ test("all awards, responsive geometry, categories, keyboard, dialogs and view sw
   page.on("pageerror", (e) => errors.push(e.message));
   await page.setViewportSize({ width: 1440, height: 1080 });
   await visit(page);
-  await expect(page.locator(".wof-plaque")).toHaveCount(41);
+  await expect(page.locator(".wof-plaque")).toHaveCount(40);
   await expect(page.locator(".wof-plaque .wof-issuer")).toHaveCount(0);
   await expect(page.locator(".wof-dot")).toHaveCount(8);
   await expect(page.locator(".wof-col")).toHaveCount(18);
@@ -175,7 +175,7 @@ test("no-JS archive remains readable", async ({ browser, baseURL }) => {
   const page = await context.newPage();
   await page.goto(`${baseURL}/awards`);
   await expect(page.locator(".awards-nojs")).toBeVisible();
-  await expect(page.locator(".awards-nojs li")).toHaveCount(41);
+  await expect(page.locator(".awards-nojs li")).toHaveCount(40);
   await expect(page.locator(".awards-nojs h2")).toHaveCount(3);
   await context.close();
 });
@@ -186,8 +186,8 @@ test("reference-style awards list keeps logos and years in the same row", async 
   await page.getByTestId("button-view-list").click();
   await page.getByTestId("list-filter-all").click();
   const list = page.getByTestId("awards-list");
-  await expect(list.locator("li")).toHaveCount(41);
-  await expect(list.locator(".wof-medal")).toHaveCount(41);
+  await expect(list.locator("li")).toHaveCount(40);
+  await expect(list.locator(".wof-medal")).toHaveCount(40);
   await expect(page.getByRole("heading", { name: "Awards and recognition" })).toBeVisible();
   await expect(stage(page)).toHaveCount(0);
   await expect(list).toHaveCSS("padding-left", "120px");
@@ -259,7 +259,7 @@ test("list filters omit counts, filter real awards, and show hover feedback", as
   const list = page.getByTestId("awards-list");
   const filters = page.getByRole("navigation", { name: "Filter awards" });
   await expect(filters.getByRole("button")).toHaveText(["Featured", "Safety", "Quality", "National & State", "All"]);
-  for (const [key, count] of [["featured", 8], ["safety", 13], ["quality", 19], ["national-state", 9], ["all", 41]] as const) {
+  for (const [key, count] of [["featured", 8], ["safety", 13], ["quality", 19], ["national-state", 8], ["all", 40]] as const) {
     await page.getByTestId(`list-filter-${key}`).click();
     await expect(page.getByTestId(`list-filter-${key}`)).toHaveAttribute("aria-pressed", "true");
     await expect(list.locator("li")).toHaveCount(count);

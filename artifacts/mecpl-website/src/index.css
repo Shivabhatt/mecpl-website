@@ -1,3 +1,6 @@
+/* Shared typography layer precedes legacy important page rules. */
+@layer mecpl-font-spec, mecpl-typography;
+@import "./typography.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -218,9 +221,9 @@ html[data-theme="light"] {
     touch-action: pan-y;
   }
   h1, h2, h3, h4, h5, h6 { font-family: var(--app-font-display) !important; }
-  h1, h2 { font-weight: 600 !important; }
+  h1, h2:not(.ps-common-heading) { font-weight: 600 !important; }
   h3, h4, h5, h6 { font-weight: 500 !important; }
-  .home-page-typography h2 { font-weight: 500 !important; }
+  .home-page-typography h2:not(.ps-common-heading) { font-weight: 500 !important; }
   .home-page-typography h1.hp-banner-title .hp-banner-line {
     font-weight: 300 !important;
   }
@@ -311,8 +314,8 @@ html[data-theme="light"] {
 
 .home-page-typography {
   font-family: var(--app-font-body) !important;
-  --home-intro-label-title-gap: 12px;
-  --home-intro-title-description-gap: 8px;
+  --home-intro-label-title-gap: 24px;
+  --home-intro-title-description-gap: 12px;
 }
 
 .home-page-typography .home-intro-label {
@@ -331,6 +334,26 @@ html[data-theme="light"] {
   margin-top: var(--home-intro-title-description-gap) !important;
 }
 
+.home-page-typography .home-hero-banner .home-intro-description {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-page-typography .home-hero-banner .home-intro-description::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -14px -38px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(24, 17, 12, 0.38) 0%,
+    rgba(24, 17, 12, 0.22) 60%,
+    transparent 100%
+  );
+  filter: blur(9px);
+}
+
 .site-typography,
 .site-typography *,
 .site-typography *::before,
@@ -343,8 +366,7 @@ html[data-theme="light"] {
   font-family: var(--font-montserrat) !important;
 }
 
-.home-page-typography .home-section-label,
-.home-page-typography .ps-eyebrow {
+.home-page-typography .home-section-label {
   font-family: var(--font-montserrat) !important;
   font-size: 10px !important;
   font-weight: 700 !important;
@@ -414,14 +436,14 @@ html[data-theme="light"] {
 }
 
 [data-animate-page] h1,
-[data-animate-page] h2 {
+[data-animate-page] h2:not(.ps-common-heading) {
   font-family: var(--font-montserrat) !important;
   font-weight: 600 !important;
   letter-spacing: -0.025em !important;
   text-transform: none !important;
 }
 
-.home-page-typography h2,
+.home-page-typography h2:not(.ps-common-heading),
 .about-page h2,
 .completed-projects-page h2 {
   font-family: var(--font-montserrat) !important;
@@ -429,6 +451,12 @@ html[data-theme="light"] {
   font-weight: 600 !important;
   line-height: 1.2;
   text-transform: capitalize !important;
+}
+
+.home-route .home-page-typography h2:not(.ps-common-heading),
+.home-route .home-page-typography h2.ps-common-heading,
+.home-route .home-page-typography h3 {
+  text-transform: none !important;
 }
 
 .site-typography .about-page .abt-awards-grid h2.abt-award-title {
@@ -741,13 +769,11 @@ html[data-theme="light"] select {
 /* ── Section colour-transition gradients ── */
 /* Dark sections (after white): white-to-transparent at top */
 [data-testid="section-about"],
-[data-testid="section-projects"],
-[data-testid="section-testimonials"] {
+[data-testid="section-projects"] {
   position: relative;
 }
 [data-testid="section-about"]::before,
-[data-testid="section-projects"]::before,
-[data-testid="section-testimonials"]::before {
+[data-testid="section-projects"]::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -793,7 +819,7 @@ html[data-theme="light"] select {
   [data-testid="section-stats"]       { padding: 40px 20px !important; }
   [data-testid="section-services"]    { padding: 56px 0 !important; }
   [data-testid="section-projects"]    { padding-top: 56px !important; }
-  [data-testid="section-testimonials"]{ padding: 56px 0 0 !important; }
+  [data-testid="section-testimonials"]{ padding: 40px 0 28px !important; }
 
   /* ── Services inner header ── */
   [data-testid="section-services"] .max-w-7xl { padding-left: 20px !important; padding-right: 20px !important; }
@@ -817,8 +843,7 @@ html[data-theme="light"] select {
   }
 
   /* ── Testimonials inner ── */
-  [data-testid="section-testimonials"] > div:first-child { padding: 0 20px !important; margin-bottom: 0 !important; }
-  [data-testid="section-testimonials"] > div:nth-child(2){ padding: 0 12px !important; margin-bottom: 36px !important; }
+  [data-testid="section-testimonials"] > div:first-child { padding: 0 20px !important; }
 
   /* ── Navbar — tighter on mobile ── */
   nav { padding-left: 16px !important; padding-right: 16px !important; }
@@ -1596,8 +1621,48 @@ html[data-theme="light"] select {
   grid-column: span 2;
 }
 
+.abt-awards-logo-grid .abt-awards-item {
+  min-width: 0;
+}
+
+.abt-awards-logo-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 12px 22px;
+  text-align: center;
+}
+
+.abt-award-logo-frame {
+  display: flex;
+  width: 96px;
+  height: 96px;
+  flex: 0 0 96px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.abt-award-logo-image {
+  display: block;
+  width: 62%;
+  height: 62%;
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  object-position: center;
+}
+
 .abt-awards-item:nth-child(6) {
   grid-column: 2 / span 2;
+}
+
+.abt-awards-item:nth-child(6):nth-last-child(3) {
+  grid-column: 3 / span 2;
 }
 
 /* Leadership profile cards open as a whole and reveal the red hover treatment. */
@@ -1824,7 +1889,7 @@ html[data-theme="light"] select {
 }
 
 .site-typography h1,
-.site-typography h2 {
+.site-typography h2:not(.ps-common-heading) {
   font-weight: 600 !important;
 }
 
@@ -2052,11 +2117,105 @@ html[data-theme="light"] select {
   flex: none;
 }
 
+.home-page-typography #recognition {
+  background-color: #f5f2f4;
+}
+
+.home-page-typography #recognition .recognition-mark-frame {
+  width: 96px;
+  height: 96px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.home-page-typography #recognition .recognition-mark-image {
+  width: var(--recognition-mark-size, 62%) !important;
+  height: var(--recognition-mark-size, 62%) !important;
+  max-width: var(--recognition-mark-size, 62%) !important;
+  max-height: var(--recognition-mark-size, 62%) !important;
+  object-fit: contain !important;
+  object-position: center;
+}
+
+.home-page-typography #recognition .rec-card:first-child {
+  --recognition-mark-size: 59%;
+}
+
+.home-page-typography #recognition .rec-card:nth-child(3) {
+  --recognition-mark-size: 55%;
+}
+
+.home-page-typography #recognition .rec-card:last-child {
+  --recognition-mark-size: 63%;
+}
+
+@media (min-width: 1024px) {
+  .home-page-typography #recognition .rec-card {
+    min-width: 0;
+    justify-content: flex-start;
+  }
+
+  .home-page-typography #recognition .recognition-mark-frame {
+    width: 76px;
+    height: 76px;
+  }
+
+  .abt-awards-logo-grid .abt-award-logo-frame {
+    width: 76px;
+    height: 76px;
+    flex-basis: 76px;
+  }
+
+  .home-page-typography #stats {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .home-page-typography #stats .home-stats-grid {
+    max-width: none !important;
+  }
+}
+
 .recognition-mark-image {
   display: block;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* Home founder section: broad, near-equal columns at the reference proportions. */
+@media (min-width: 1024px) {
+  .home-page-typography #about {
+    padding: 120px 3vw 128px 4vw !important;
+  }
+
+  .home-page-typography #about .home-about-grid {
+    grid-template-columns: 1fr 1.07fr;
+    align-items: center;
+    gap: 2.5vw;
+  }
+
+  .home-page-typography #about .home-about-copy {
+    padding-left: 0;
+  }
+
+  .home-page-typography #about .home-about-heading h2 {
+    max-width: none !important;
+  }
+
+  .home-page-typography #about .home-about-portrait {
+    max-width: none !important;
+    height: auto;
+    align-self: start;
+  }
+
+  .home-page-typography #about .home-about-portrait img {
+    height: auto !important;
+    object-fit: contain !important;
+  }
 }
 
 .recognition-card-title {
@@ -2106,6 +2265,11 @@ html[data-theme="light"] select {
     --home-desktop-subheading-size: 20px;
     --home-desktop-body-size: 16px;
     --home-desktop-card-meta-size: 13px;
+  }
+
+  .site-typography.home-route .home-page-typography #about h2.home-heading-26 {
+    font-size: 36px !important;
+    line-height: 1 !important;
   }
 
   .home-page-typography #recognition .rec-card h2.rec-card-title {
@@ -2190,7 +2354,7 @@ html[data-theme="light"] select {
   .home-page-typography .home-service-row p,
   .home-page-typography #rising-projects p.mx-auto,
   .home-page-typography #rising-projects article > p.max-w-sm,
-  .home-page-typography #testimonials p.mt-5.max-w-sm {
+  .home-page-typography #testimonials p.home-testimonials-intro {
     font-size: var(--home-desktop-body-size) !important;
     line-height: 1.6 !important;
   }
@@ -2201,7 +2365,7 @@ html[data-theme="light"] select {
   }
 }
 
-/* Keep all homepage content and its shared navigation on Montserrat only. */
+/* Keep Montserrat as the homepage base; scoped font-family exceptions are defined per role. */
 .site-typography .home-page-typography,
 .site-typography .home-page-typography *,
 .site-typography .home-page-navbar,
@@ -2224,19 +2388,6 @@ html[data-theme="light"] select {
   stroke: #ffffff !important;
 }
 
-.home-page-typography #testimonials .testimonial-arrow-control:hover,
-.home-page-typography #testimonials .testimonial-arrow-control:focus-visible {
-  background-color: #ec3338 !important;
-  border-color: #ec3338 !important;
-  color: #ffffff !important;
-}
-
-.home-page-typography #testimonials .testimonial-arrow-control:hover svg,
-.home-page-typography #testimonials .testimonial-arrow-control:focus-visible svg {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
-}
-
 @media (max-width: 800px) {
   .home-page-typography .hp-banner-line {
     font-size: clamp(16px, 4.5vw, 24px) !important;
@@ -2244,7 +2395,7 @@ html[data-theme="light"] select {
 }
 
 /* Home-only editorial type treatment: lighter headlines, less compressed tracking. */
-.home-page-typography h2 {
+.home-page-typography h2:not(.ps-common-heading) {
   font-size: 28px !important;
   letter-spacing: -0.01em !important;
 }
@@ -2379,7 +2530,7 @@ html[data-theme="light"] select {
 .abt-journey-year {
   margin-bottom: 16px;
   color: #34363a;
-  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-size: 26px;
   font-weight: 600;
   letter-spacing: -0.07em;
   line-height: 1;
@@ -3002,11 +3153,64 @@ html[data-theme="light"] select {
   }
 }
 
-.home-page-typography #clients .clients-marquee {
-  overflow: hidden;
+.home-page-typography #clients.clients-logo-section {
+  padding: 8px 0 42px;
+  border-top: 1px solid rgba(35,37,41,0.08);
+  background: #f8f7f4;
+}
+
+.home-page-typography #clients .client-logos-heading-band {
+  display: flex;
+  min-height: 55px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px 13px;
+  text-align: center;
+}
+
+.home-page-typography #clients .client-logos-viewport {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border-top: 1px solid #e8e7e4;
+  border-bottom: 1px solid #e8e7e4;
+  background: #ffffff;
+  scrollbar-width: none;
+}
+
+.home-page-typography #clients .client-logos-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.home-page-typography #clients .client-logos-grid {
+  display: flex;
+  width: max-content;
+  padding: 0;
+}
+
+.home-page-typography #clients .client-logos-set {
+  display: grid;
+  width: 100vw;
+  max-width: none;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: center;
+  margin: 0 auto;
+  padding: 8px 0;
+}
+
+.home-page-typography #clients .client-logo-cell {
+  display: flex;
+  height: 38px;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
 }
 
 .home-page-typography #clients .client-logo-image {
+  display: block;
+  width: min(100%, 120px);
+  height: 26px;
+  object-fit: contain;
   filter: grayscale(1);
   opacity: 1;
   transition: filter 280ms ease, opacity 280ms ease;
@@ -3018,14 +3222,53 @@ html[data-theme="light"] select {
   opacity: 1;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .home-page-typography #clients .clients-marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: thin;
+@media (min-width: 1024px) {
+  /* Match the live Lovable reference's desktop bands, including their borders. */
+  .home-page-typography #clients.clients-logo-section {
+    padding: 0 0 48px;
+    border-top: 0;
+    border-bottom: 1px solid #e8e7e4;
   }
 
-  .home-page-typography #clients .clients-loop-group[aria-hidden="true"] {
+  .home-page-typography #clients .client-logos-heading-band {
+    height: 155px;
+    min-height: 0;
+    padding: 0 20px;
+  }
+
+  .home-page-typography #clients .client-logos-set {
+    height: 120px;
+    padding: 0;
+  }
+
+  .home-page-typography #clients .client-logo-cell {
+    height: 100%;
+  }
+
+  .home-page-typography #clients .client-logo-image {
+    height: 4vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-page-typography #clients .client-logos-set {
+    min-width: 620px;
+    max-width: none;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page-typography #clients .client-logos-viewport {
+    overflow-x: auto;
+  }
+
+  .home-page-typography #clients .clients-track {
+    transform: none !important;
+  }
+
+  .home-page-typography #clients .client-logos-set[aria-hidden="true"] {
     display: none;
   }
 }
@@ -3056,7 +3299,7 @@ body,
   .about-page .about-hero-label {
     font-family: var(--font-montserrat) !important;
     font-size: clamp(11px, 2.75vw, 15px) !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     letter-spacing: clamp(0.05em, 0.18vw, 0.18em) !important;
     line-height: normal !important;
     text-transform: uppercase !important;
@@ -3172,7 +3415,7 @@ body,
 
   .about-page .abt-leadership-card-name {
     font-family: var(--font-montserrat) !important;
-    font-size: clamp(15px, 1.3vw, 20px) !important;
+    font-size: 16px !important;
     font-weight: 600 !important;
     line-height: 1.3 !important;
   }
@@ -3246,7 +3489,6 @@ body,
   }
 }
 
-.home-page-typography #about h2.home-heading-26,
 .home-page-typography #services h2.home-heading-26,
 .home-page-typography #featured-projects h2.home-heading-26,
 .home-page-typography #rising-projects h2.home-heading-26,
@@ -3255,8 +3497,287 @@ body,
   font-size: 26px !important;
 }
 
+.home-page-typography #testimonials h2.home-testimonials-title {
+  font-size: clamp(28px, 2.5vw, 36px) !important;
+}
+
 .home-page-typography .home-service-row p {
   font-size: 14px !important;
+}
+
+.home-site-footer {
+  width: 100%;
+  color: #ffffff;
+  background: #CF2E2E;
+}
+
+.home-footer-main {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 50px clamp(28px, 6vw, 88px) 44px;
+}
+
+.home-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr) minmax(190px, 0.8fr);
+  align-items: stretch;
+}
+
+.home-footer-column {
+  min-width: 0;
+}
+
+.home-footer-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 42px 0 0;
+}
+
+.home-footer-full-company {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  max-width: 100%;
+  color: #ffffff;
+}
+
+.home-footer-wordmark {
+  display: none;
+  color: #ffffff;
+}
+
+.home-footer-lockup {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: 64px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
+}
+
+.home-footer-logo-badge {
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.home-footer-logo-mark {
+  width: 52px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.home-footer-brand-rule {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 1px;
+  margin: 14px 0 12px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.home-footer-tagline {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  color: rgba(255, 255, 255, 0.96);
+  white-space: nowrap;
+}
+
+@media (min-width: 761px) {
+  .home-footer-brand {
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .home-footer-lockup {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .home-footer-wordmark {
+    display: block;
+  }
+
+  .home-footer-logo-badge,
+  .home-footer-full-company,
+  .home-footer-brand-rule {
+    display: none;
+  }
+}
+
+.home-footer-contact {
+  padding: 0 clamp(28px, 4vw, 56px);
+  border-right: 1px solid rgba(255, 255, 255, 0.34);
+  border-left: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.home-footer-heading {
+  margin: 0 0 18px;
+  color: #ffffff;
+}
+
+.home-footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.home-footer-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.home-footer-contact-row svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #ffffff;
+}
+
+.home-footer-contact-mark {
+  width: 19px;
+  height: 19px;
+}
+
+.home-footer-contact-row:hover,
+.home-footer-link:hover {
+  color: #ffffff;
+}
+
+.home-footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.home-footer-social-link {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  color: #ffffff;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.home-footer-social-mark {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.home-footer-social-link:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: transparent;
+  transform: translateY(-2px);
+}
+
+.home-footer-social-link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.home-footer-links {
+  padding-left: clamp(28px, 4vw, 56px);
+}
+
+.home-footer-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-footer-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.home-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+.home-footer-bottom-inner {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 14px clamp(28px, 6vw, 88px);
+}
+
+.home-footer-bottom-inner p,
+.home-footer-policies {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-montserrat);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.home-footer-policies {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 20px;
+}
+
+@media (max-width: 760px) {
+  .home-footer-main {
+    padding: 36px 24px;
+  }
+
+  .home-footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .home-footer-brand {
+    padding: 0;
+  }
+
+  .home-footer-contact {
+    padding: 0;
+    border: 0;
+  }
+
+  .home-footer-links {
+    padding: 0;
+  }
+
+  .home-footer-bottom-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px 24px;
+  }
+
+  .home-footer-bottom-inner p {
+    max-width: 100%;
+  }
 }
 
 .home-page-typography #featured-projects [data-scroll-reveal="text"] p.home-projects-description {
@@ -3279,10 +3800,6 @@ body,
   font-size: 14px !important;
 }
 
-.home-page-typography #testimonials p.home-testimonials-description.mt-5.max-w-sm {
-  font-size: 14px !important;
-}
-
 /* Keep regular page copy aligned with the 14px description roles on Home.
    Preserve intentionally small metadata and oversized quote/tagline copy. */
 .site-typography > main > :not(.home-page-typography) p:not(.text-xs):not(.text-lg):not(.text-xl):not(.text-2xl):not(.text-3xl):not(.text-4xl):not([class*="text-[9px]"]):not([class*="text-[10px]"]):not([class*="text-[11px]"]):not([class*="text-[12px]"]):not([class*="text-[13px]"]):not([class*="text-[1.35rem]"]) {
@@ -3299,8 +3816,7 @@ body,
     word-spacing: normal !important;
   }
 
-  .home-route .home-page-typography .home-section-label,
-  .home-route .home-page-typography .ps-eyebrow {
+  .home-route .home-page-typography .home-section-label {
     font-family: var(--font-montserrat) !important;
     font-size: 12px !important;
     font-weight: 500 !important;
@@ -3308,4 +3824,5 @@ body,
     letter-spacing: normal !important;
     word-spacing: normal !important;
   }
+
 }

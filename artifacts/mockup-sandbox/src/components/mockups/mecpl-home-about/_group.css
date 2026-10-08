@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&family=Manrope:wght@400;500;600;700&display=swap");
+
+.home-about-preview,
+.home-about-preview * {
+  box-sizing: border-box;
+}
+
+.home-about-preview {
+  min-height: 100vh;
+  background: #fff;
+  color: #232529;
+  font-family: "Manrope", sans-serif;
+  font-synthesis: none;
+}
+
+.home-about-preview #about {
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 100px 40px 128px 45px;
+}
+
+.home-about-preview #about .about-copy {
+  max-width: 598px;
+  padding-left: 38px;
+}
+
+.home-about-preview #about .home-section-label {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.2em !important;
+}
+
+.home-about-preview #about h2 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 36px !important;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.home-about-preview #about p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.home-about-preview #about .about-quote > p {
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.home-about-preview #about .about-fade > p {
+  max-width: 540px;
+}
+
+.home-about-preview #about .about-img {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f5f4f1;
+}
+
+.home-about-preview #about .about-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+@media (max-width: 1023px) {
+  .home-about-preview #about {
+    padding: 72px 28px 80px;
+  }
+
+  .home-about-preview #about .about-copy {
+    max-width: none;
+    padding-left: 0;
+  }
+
+  .home-about-preview #about .about-img {
+    height: 420px;
+  }
+}
+
+@media (min-width: 640px) {
+  .home-about-preview #about h2 {
+    font-size: 48px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-about-preview #about h2 {
+    font-size: 36px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-about-preview #about {
+    padding: 56px 22px 64px;
+  }
+
+  .home-about-preview #about h2 {
+    font-size: 36px !important;
+  }
+
+  .home-about-preview #about .about-img {
+    height: 360px;
+  }
+}

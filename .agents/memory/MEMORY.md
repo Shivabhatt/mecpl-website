@@ -1,10 +1,10 @@
 - [MECPL ThemeProvider override](mecpl-theme-override.md) — ThemeProvider always forces data-theme="light"; use hp-root inline styles + html[data-theme="light"] .hp-root rules (specificity 31) for dark homepage.
-- [MECPL Preloader fix](mecpl-preloader-fix.md) — global `html[data-theme="light"] .bg-black` turns preloader white; fix with `.preloader-force-text` CSS override + guard empty NodeList in Preloader GSAP.
+- [MECPL preloader lockup](mecpl-preloader-fix.md) — black loader uses MECPL logo, divider, “Millennium [image] Engineers & Contractors,” and correctly spelled “PVT. LTD.”; hero remains unchanged.
 - [MECPL GSAP ScrollTrigger patterns](mecpl-gsap-scrolltrigger.md) — containerAnimation must be the gsap tween, NOT ScrollTrigger.getById(); correct ctx+mm nesting for React Strict Mode.
-- [MECPL testimonials AutoSplit](mecpl-testimonials-autosplit.md) — GggpRoB pattern: SplitText.create with mask:"lines" + autoSplit:true; wait document.fonts.ready; cancelled flag for async cleanup.
+- [MECPL testimonial presentation](mecpl-testimonials-design.md) — keep Home testimonials centered on white with restrained red accents and preserve the full carousel.
 - [MECPL GitHub sync fallback](mecpl-github-sync.md) — if HTTPS credentials fail, publish an exact verified tree through the authorized GitHub connector without forcing main.
 - [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
-- [MECPL typography source](mecpl-shared-typography.md) — use Montserrat sitewide; Home’s role-based sizes and weights guide corresponding About text.
+- [MECPL typography source](mecpl-shared-typography.md) — central Barlow/Manrope roles and the Home/About casing rules are shared; leave other routes untouched until asked.
 - [MECPL dependency install](mecpl-dependency-install.md) — frontend-only filtered pnpm installs avoid unrelated Orval firewall failures when the goal is a website preview.
 - [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — use the static editorial Pune silhouette with red project dots, not a Leaflet or MapLibre street map.
 - [GitHub Pages direct routes](github-pages-direct-routes.md) — public SPA routes need generated route app shells; 404.html alone preserves rendering but still returns HTTP 404.
@@ -14,4 +14,13 @@
 - [Awards wall direction](mecpl-award-reference.md) — the Wall of Fame specification replaces the white/silver wreath grid; preserve the surrounding page and the complete record.
 - [Client logo presentation](mecpl-client-logo-presentation.md) — preserve intended transparency, show one TCS logo version, and make visible logo artwork clearly readable.
 - [Certifications direction](mecpl-certifications-direction.md) — certifications only, no awards; original scans in a light popup with previous/next controls; preserve the common footer.
-- [Statistics-strip spacing](mecpl-stats-strip-layout.md) — Certifications and Completed Projects metrics must span the available width with 120px desktop side padding.
+- [Statistics-strip spacing](mecpl-stats-strip-layout.md) — Home follows recognition gutters; Certifications and Completed Projects use 120px desktop side padding.
+- [Browser verification](browser-verification.md) — use system Chromium for Playwright and wait for the startup overlay to finish before visual captures.
+- [Home About layout](mecpl-home-about-layout.md) — desktop reference uses a wide text column and top-aligned natural portrait; preserve the medium font scale and mobile layout.
+- [Home font-trial retirement](mecpl-home-font-preview.md) — the font tester and trial styles were intentionally removed; restore only if the user asks.
+- [About sector summary](mecpl-about-sector-direction.md) — preserve dividers; remove only the red hover line; Services-style icons and matching numbers/labels, with 150+ completed projects.
+- [People & Safety reference](mecpl-people-safety-direction.md) — one shared heading, real photographs, and equal-size Montserrat metric pairs.
+- [Home recognition marks](mecpl-home-recognition-marks.md) — clear issuer logos in matching white circles; preserve text and wait for all entrance animations before judging visibility.
+- [Rising showcase direction](mecpl-rising-showcase-direction.md) — match the supplied white left-video/right-thumbnail reference; retain all four videos and full copy, without project numbering.
+- [MECPL official logo colors](mecpl-official-logo-colors.md) — keep original logo colors; adjust surroundings or remove an illegible placement rather than recoloring it.
+- [Common website footer](mecpl-common-footer.md) — use the Home footer design consistently on every page, with one footer per page.

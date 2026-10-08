@@ -1,5 +1,6 @@
 export type ServiceIconType =
   | "residential"
+  | "institutional"
   | "institutional-industrial"
   | "commercial"
   | "infrastructure"
@@ -30,6 +31,15 @@ export default function ServiceLineIcon({ type, className = "" }: ServiceLineIco
         <path d="M11.5 21v18h25V21" />
         <path d="M19 39V27h10v12" />
         <path d="M15.5 25.5h4M28.5 25.5h4" />
+      </svg>
+    );
+  }
+
+  if (type === "institutional") {
+    return (
+      <svg {...sharedProps}>
+        <path d="M6 18 24 7l18 11H6ZM9 40h30M6 44h36" />
+        <path d="M11 22v14M20 22v14M28 22v14M37 22v14" />
       </svg>
     );
   }

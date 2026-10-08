@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import { sentenceCase } from "@/lib/typography";
 import { Link, useRoute } from "wouter";
 import { blogPostMap } from "./blogData";
 
@@ -48,7 +49,7 @@ export default function BlogArticlePage() {
             <section id={`article-section-${index}`} key={section.heading} className="blog-article-section">
               <div className="blog-article-section-number">{String(index + 1).padStart(2, "0")}</div>
               <div>
-                <h2 className="page-title-font">{section.heading}</h2>
+                <h2 className="page-title-font">{sentenceCase(section.heading)}</h2>
                 <div className="blog-article-copy">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>

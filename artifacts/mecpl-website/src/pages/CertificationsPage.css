@@ -6,13 +6,13 @@
 .cert-hero-inner{position:relative;max-width:1180px;margin:0 auto;width:100%;text-align:center}
 .cert-hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-shadow:0 2px 12px #0007}
 @layer base {
-  .cert-page .cert-title,
+  .cert-page .cert-title {font-weight:500!important;font-synthesis:none}
   .cert-page h2,
   .cert-viewer .cert-viewer-title {font-weight:500!important;font-synthesis:none}
 }
 .cert-eyebrow,.cert-label{color:#ec3338;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
 .cert-label--light{color:#ff8a8d}
-.cert-page .cert-title{font-size:35px!important;font-weight:500!important;line-height:1.15;color:#fff!important;text-transform:none!important;letter-spacing:-.02em!important}
+.cert-page .cert-title{font-size:26px!important;font-weight:500!important;font-synthesis:none;line-height:1.15;color:#fff!important;text-transform:none!important;letter-spacing:-.02em!important}
 .cert-title em{font-style:normal;color:#fff}
 .cert-hero .cert-eyebrow{color:#fff;letter-spacing:normal}
 .cert-hero p{max-width:500px;margin-top:20px;color:rgba(255,255,255,.9);font-size:15px;line-height:1.7}

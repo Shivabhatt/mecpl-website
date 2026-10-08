@@ -19,19 +19,25 @@ In this workspace, `listConnections("github")` returns a raw connection ID witho
 
 ## GitHub Actions status polling
 
-In this workspace, `client.rest.actions.listWorkflowRuns()` returned 404 while `conn.proxyFetch("/repos/{owner}/{repo}/actions/runs?per_page=10")` returned the workflow run. Git Data methods on the same client worked.
+In this workspace, `client.rest.actions.listWorkflowRuns()` returned 404, while `client.rest.actions.listWorkflowRunsForRepo()` and `conn.proxyFetch("/repos/{owner}/{repo}/actions/runs?per_page=10")` both returned workflow runs. Git Data methods on the same client worked.
 
 **Why:** The connection was authorized—the Git Data API succeeded and the proxy returned Actions data—so this 404 was not evidence that reauthorization was needed.
 
-**How to apply:** For GitHub Pages verification, query runs with `proxyFetch` and then confirm that `gh-pages` moved to a new ref.
+**How to apply:** For GitHub Pages verification, query runs with `listWorkflowRunsForRepo` or `proxyFetch`. For branch-backed Pages, `GET /repos/{owner}/{repo}/pages/builds/latest` reports the deployed commit and `built` status; also verify public routes load the new hashed assets.
 
 ## Direct GitHub Pages branch publishing
 
 When the user explicitly requests a `gh-pages` deploy from a diverged source branch, publish the built static tree to the current `gh-pages` head instead of implicitly syncing the entire source history to `main`. Preserve `CNAME` and `.nojekyll`, use a compact Git Data delta, verify the resulting tree SHA, and update the ref with force disabled.
 
-**Why:** Updating `main` can publish unrelated source changes; moving the Pages ref also does not guarantee the CDN has refreshed yet.
+**Why:** Updating `main` can publish unrelated source changes or revert newer live releases that are absent from `main`; moving the Pages ref also does not guarantee the CDN has refreshed yet.
 
-**How to apply:** Verify the Pages build succeeded and the public route serves the newly referenced hashed assets before reporting deployment complete.
+**How to apply:** For a selective release, first reproduce the live build byte-for-byte from its source baseline, then apply only the requested source changes in an isolated working copy. Do not assume `main` matches the live site. Verify the Pages build succeeded and the public route serves the newly referenced hashed assets before reporting deployment complete.
+
+For Git Data deltas, use `git diff --no-abbrev --raw -z` and read uploaded bytes with `git cat-file blob <full-sha>` inside the same impure call as `createBlob`. Avoid hashing an unfiltered working-tree file as a substitute. This Nix environment also lacks `rsync`; use Node filesystem operations for an exact temporary tree copy.
+
+**Why:** Raw diff output abbreviated object IDs by default, causing a false blob hash mismatch; reading canonical Git objects avoids working-tree filter differences too.
+
+**How to apply:** Keep full blob IDs in the delta manifest, hash the canonical bytes, compare them with the expected SHA, then upload. Do not assume `rsync` is installed.
 
 ## Delta generation on a diverged branch
 

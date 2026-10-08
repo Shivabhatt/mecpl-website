@@ -16,10 +16,10 @@ export default function ProjectsPage() {
         <div
           className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center text-center"
         >
-          <h2 className="page-title-font max-w-3xl text-2xl font-medium uppercase leading-[1.1] tracking-[-0.02em] text-white sm:text-3xl md:text-4xl">
+          <h2 className="page-title-font max-w-3xl font-medium uppercase leading-[1.1] tracking-[-0.02em] text-white">
             Ready to shape what&apos;s next?
           </h2>
-          <p className="mt-2 max-w-xl text-[11px] leading-relaxed text-white/80 sm:text-xs">
+          <p className="projects-contact-description mt-2 max-w-xl leading-relaxed text-white/80">
             Connect with the MECPL team to discuss your next construction project or explore opportunities to grow with us.
           </p>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">

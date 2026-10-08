@@ -21,7 +21,7 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     slug: "construction-industry-trends",
-    title: "Construction Industry Trends to Watch Out For",
+    title: "Construction industry trends to watch out for",
     publishedDate: "April 13, 2018",
     category: "Industry Trends",
     heroImage: "/assets/projects/HIGH-RISE-1-scaled.jpg",
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "construction-site-material-storage",
-    title: "How to Store Building Materials Wisely On-Site",
+    title: "How to store building materials wisely on-site",
     publishedDate: "April 6, 2018",
     category: "Site Practice",
     heroImage: "/assets/projects/43PD-1-scaled.jpg",
@@ -109,7 +109,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "cement-setting-time",
-    title: "8 Factors Affecting Setting & Hardening of Cement",
+    title: "8 factors affecting setting & hardening of cement",
     publishedDate: "March 29, 2018",
     category: "Engineering Basics",
     heroImage: "/assets/projects/GODREJ-INFINITY.jpg",

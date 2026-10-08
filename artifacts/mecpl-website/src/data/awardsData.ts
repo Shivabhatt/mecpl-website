@@ -55,7 +55,6 @@ const raw: Award[] = [
   { id: "national-2025-nsci-vantage", category: "national-state", title: "NSCI Safety Award – Vantage – Certificate of Merit", year: 2025, issuer: "NSCI", logo: logos.nsci },
   { id: "national-2025-cidc-16", category: "national-state", title: "16th CIDC Vishwakarma Awards", year: 2025, issuer: "CIDC", logo: logos.cidc },
   { id: "national-2024-cidc-15", category: "national-state", title: "15th CIDC Vishwakarma Awards", year: 2024, issuer: "CIDC", logo: logos.cidc },
-  { id: "national-2018-iconic-brand", category: "national-state", title: "Iconic Brand of the Year Award", year: 2018, issuer: "MSME" },
   { id: "national-2017-sme-100", category: "national-state", title: "SME 100 Awards 2015–2016", year: 2017, issuer: "India SME Forum", logo: logos.sme },
   { id: "safety-2025-pcerf-yoo-villa", category: "safety", title: "PCERF 2025 – Silver Trophy for Safety", year: 2025, issuer: "PCERF", project: "Yoo Villa, Pune", logo: logos.pcerf, featured: true },
   { id: "safety-2024-apex-raheja", category: "safety", title: "9th Apex India Occupational Health & Safety Award", year: 2024, issuer: "Apex India", project: "Raheja Baner B 94–97", logo: logos.apex, featured: true },

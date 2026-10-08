@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import CertificationAwardsCTA from "@/components/CertificationAwardsCTA";
 import { useLocation } from "wouter";
 import EnquiryModal from "@/components/EnquiryModal";
+import Preloader from "@/components/Preloader";
 import HomePage from "@/pages/HomePage";
 import useGsapPageAnimations from "./hooks/useGsapPageAnimations";
 import useLenis from "./hooks/useLenis";
@@ -27,12 +28,12 @@ import ContactPage from "@/pages/ContactPage";
 import BlogPage from "@/pages/BlogPage";
 import BlogArticlePage from "@/pages/BlogArticlePage";
 import NotFound from "@/pages/not-found";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
 
-function Router() {
+function Router({ pageReady }: { pageReady: boolean }) {
   const containerRef = useGsapPageAnimations();
   const [location] = useLocation();
 
@@ -43,12 +44,13 @@ function Router() {
   return (
     <div
       ref={containerRef}
-      className={`site-typography flex min-h-screen flex-col${location === "/" ? " home-route" : ""}`}
+      className={`site-typography flex min-h-screen flex-col${location === "/" ? " home-route" : ""}${location === "/" || location === "/about" ? " mecpl-font-spec" : ""}`}
+      inert={!pageReady}
     >
       <Navbar />
       <main className="flex-1">
         <Switch>
-          <Route path="/" component={HomePage} />
+          <Route path="/"><HomePage isReady={pageReady} /></Route>
           <Route path="/about" component={AboutPage} />
           <Route path="/projects" component={ProjectsPage} />
           <Route path="/services" component={ServicesPage} />
@@ -67,7 +69,9 @@ function Router() {
         </Switch>
       </main>
       {location === "/certifications" && <CertificationAwardsCTA />}
-      {location !== "/" && <Footer />}
+      <div className="mecpl-font-spec">
+        <Footer variant="home" />
+      </div>
       <EnquiryModal />
     </div>
   );
@@ -75,6 +79,8 @@ function Router() {
 
 function App() {
   useLenis();
+  const [pageReady, setPageReady] = useState(false);
+  const revealWebsite = useCallback(() => setPageReady(true), []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -82,7 +88,8 @@ function App() {
         <ThemeProvider>
           <ModalProvider>
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-              <Router />
+              <Preloader onReveal={revealWebsite} />
+              <Router pageReady={pageReady} />
             </WouterRouter>
             <Toaster />
           </ModalProvider>
