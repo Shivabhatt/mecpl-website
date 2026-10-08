@@ -106,6 +106,10 @@
   @media (min-width: 1024px) {
     .mecpl-font-spec :is(.mecpl-role-hero-title, .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line) { font-size: 96px !important; }
   }
+  .mecpl-font-spec .home-page-typography h1.hp-banner-title.mecpl-role-hero-title,
+  .mecpl-font-spec .home-page-typography h1.hp-banner-title .hp-banner-line {
+    font-size: 60px !important;
+  }
 
   /* Section H2 large 60/1 */
   .mecpl-font-spec :is(.mecpl-role-h2-large, .home-heading-26, .ps-common-heading) {
@@ -332,20 +336,6 @@
     letter-spacing: 0.01em !important;
     text-transform: uppercase !important;
     font-synthesis: none !important;
-  }
-
-  @media (min-width: 640px) {
-    .mecpl-font-spec .about-page h1.about-hero-title,
-    .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
-      font-size: 72px !important;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .mecpl-font-spec .about-page h1.about-hero-title,
-    .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
-      font-size: 96px !important;
-    }
   }
 
   .mecpl-font-spec .about-page :is(

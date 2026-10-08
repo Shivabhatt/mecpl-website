@@ -19,7 +19,7 @@ Activate the new specification on Home and About only until the user requests ro
 
 **Why:** The user first limited rollout to Home, then specifically requested Home and About.
 
-**How to apply:** Keep other routes unchanged; shared navigation/footer only receive the preset when rendered on Home or About. Use the supplied responsive values.
+**How to apply:** Keep other routes' page content unchanged; shared navigation only receives the preset on Home or About. The common footer uses the Home preset site-wide as separately requested.
 
 Verify every visible text role, not just font-family declarations: headings, body, labels, statistics, nested spans, founder credits, cards, testimonials, navigation and footer.
 
