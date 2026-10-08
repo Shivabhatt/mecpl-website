@@ -657,7 +657,7 @@ export default function AboutPage() {
       {/* ─── 06 — OUR LEADERSHIP ─────────────────────────────── */}
       <LeadershipDoorSlider />
       {/* ─── 07 — AWARDS & CERTIFICATIONS ────────────────────── */}
-      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#f5f2f4", padding: "24px 56px 96px" }}>
+      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#f5f2f4", padding: "48px 56px 96px" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <RevealBlock>
             <div style={{ marginBottom: 64, textAlign: "center" }}>

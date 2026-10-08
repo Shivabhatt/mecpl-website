@@ -116,6 +116,14 @@
     font-size: 60px !important;
     line-height: 1 !important;
   }
+  .mecpl-font-spec .home-about-heading h2.mecpl-role-h2-large,
+  .mecpl-font-spec .home-page-typography h2.home-services-title,
+  .mecpl-font-spec #featured-projects h2.mecpl-role-h2-large,
+  .mecpl-font-spec #rising-projects h2.mecpl-role-h2-large,
+  .mecpl-font-spec #people-safety-title,
+  .mecpl-font-spec .home-page-typography #testimonials-title {
+    font-size: 48px !important;
+  }
   /* Section H2 medium 36 -> 48 */
   .mecpl-font-spec :is(.mecpl-role-h2-medium, .client-logos-title) {
     font-size: 36px !important;

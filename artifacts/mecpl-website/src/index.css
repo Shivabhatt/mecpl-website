@@ -2942,6 +2942,16 @@ html[data-theme="light"] select {
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .about-page .abt-sectors-section {
+    padding-top: 128px;
+  }
+
+  .about-page .abt-sectors-header {
+    padding-top: 0;
+  }
+}
+
 .about-page .abt-sectors-eyebrow {
   display: block;
   margin-bottom: 4px;
