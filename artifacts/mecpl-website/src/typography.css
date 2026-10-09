@@ -106,8 +106,8 @@
   @media (min-width: 1024px) {
     .mecpl-font-spec :is(.mecpl-role-hero-title, .home-hero-banner h1.hp-banner-title, .home-hero-banner h1.hp-banner-title .hp-banner-line) { font-size: 96px !important; }
   }
-  .mecpl-font-spec .home-page-typography h1.hp-banner-title.mecpl-role-hero-title,
-  .mecpl-font-spec .home-page-typography h1.hp-banner-title .hp-banner-line {
+  .site-typography .home-page-typography h1.hp-banner-title.mecpl-role-hero-title,
+  .site-typography .home-page-typography h1.hp-banner-title .hp-banner-line {
     font-size: 80px !important;
   }
 
@@ -335,8 +335,8 @@
  */
 @layer mecpl-font-spec {
   /* About page bindings — same shared font roles, without layout or color changes. */
-  .mecpl-font-spec .about-page h1.about-hero-title,
-  .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
+  .site-typography .about-page h1.about-hero-title,
+  .site-typography .about-page h1.about-hero-title .hp-banner-line {
     font-family: var(--mecpl-font-display) !important;
     font-weight: var(--mecpl-spec-weight-display) !important;
     font-size: 80px !important;
