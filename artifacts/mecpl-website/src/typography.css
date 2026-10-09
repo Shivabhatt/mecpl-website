@@ -108,7 +108,7 @@
   }
   .mecpl-font-spec .home-page-typography h1.hp-banner-title.mecpl-role-hero-title,
   .mecpl-font-spec .home-page-typography h1.hp-banner-title .hp-banner-line {
-    font-size: 60px !important;
+    font-size: 80px !important;
   }
 
   /* Section H2 large 60/1 */
@@ -339,7 +339,7 @@
   .mecpl-font-spec .about-page h1.about-hero-title .hp-banner-line {
     font-family: var(--mecpl-font-display) !important;
     font-weight: var(--mecpl-spec-weight-display) !important;
-    font-size: 60px !important;
+    font-size: 80px !important;
     line-height: 0.9 !important;
     letter-spacing: 0.01em !important;
     text-transform: uppercase !important;

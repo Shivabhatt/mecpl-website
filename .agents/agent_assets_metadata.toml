@@ -1008,3 +1008,31 @@ mtime_ms = 1791480249140
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/aa281ffb-c7b3-4455-aabc-db53e0452c4b/57ee0e95-2d94-4687-9730-58e63ec9f0a2"
 storage_version_token = "1791480289067392"
 content_type = "image/png"
+
+[[outputs]]
+id = "ch8_pD4XR3xbxct-XVU1a"
+uri = "file://screenshots/home-banner-80px-desktop.jpg"
+type = "image"
+title = "Home Page Banner — 80px"
+description = "Desktop screenshot at 1440 × 1000 showing the Home page banner heading at 80px."
+logical_id = "40f7c114-fe19-42be-b61b-a64af592914a"
+content_hash = "sha256:e8d42c3466db548d08907506cc7848995f0bddf1592f601ec252ff70c5f71818"
+size = 120893
+mtime_ms = 1791527470033
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/40f7c114-fe19-42be-b61b-a64af592914a/4c3eb098-bdc3-4a11-867f-1c5f69a71b6f"
+storage_version_token = "1791527498816377"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "QLlg8ijqmtkHT9_uixWcb"
+uri = "file://screenshots/about-banner-80px-desktop.jpg"
+type = "image"
+title = "About Us Banner — 80px"
+description = "Desktop screenshot at 1440 × 1000 showing the About Us page banner heading at 80px."
+logical_id = "bddb3249-43b1-4428-9e2f-a55de4b1cfad"
+content_hash = "sha256:1a6a66280b40a04384bc1d59bd83a4cdfb416ac3e42e98a7a0de3694d94e6784"
+size = 121141
+mtime_ms = 1791527472889
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/bddb3249-43b1-4428-9e2f-a55de4b1cfad/a021178a-5ef6-47cc-b36f-d46d9658fc89"
+storage_version_token = "1791527500190960"
+content_type = "image/jpeg"
