@@ -7,9 +7,11 @@ interface SectionHeaderProps {
   center?: boolean;
   light?: boolean;
   useH1?: boolean;
+  preserveTitleCase?: boolean;
 }
 
-export default function SectionHeader({ label, title, subtitle, center = true, light = false, useH1 = true }: SectionHeaderProps) {
+export default function SectionHeader({ label, title, subtitle, center = true, light = false, useH1 = true, preserveTitleCase = false }: SectionHeaderProps) {
+  const renderedTitle = preserveTitleCase ? title : sentenceCase(title);
 
   return (
     <div className={`space-y-3 ${center ? "text-center max-w-3xl mx-auto px-6 pt-6 pb-0" : ""}`}>
@@ -20,11 +22,11 @@ export default function SectionHeader({ label, title, subtitle, center = true, l
       )}
       {useH1 ? (
         <h1 className="page-title-font text-5xl leading-tight text-mecpl-text">
-          {sentenceCase(title)}
+          {renderedTitle}
         </h1>
       ) : (
         <h2 className="mecpl-type-section-title page-title-font text-3xl leading-tight text-mecpl-text">
-          {sentenceCase(title)}
+          {renderedTitle}
         </h2>
       )}
       {subtitle && (

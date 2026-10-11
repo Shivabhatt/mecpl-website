@@ -36,6 +36,14 @@ const queryClient = new QueryClient();
 function Router({ pageReady }: { pageReady: boolean }) {
   const containerRef = useGsapPageAnimations();
   const [location] = useLocation();
+  const usesSharedMecplFonts = [
+    "/projects",
+    "/completed-projects",
+    "/ongoing-projects",
+    "/certifications",
+    "/awards",
+    "/careers",
+  ].includes(location);
 
   useEffect(() => {
     window.dispatchEvent(new Event("mecpl:scroll-top"));
@@ -44,7 +52,7 @@ function Router({ pageReady }: { pageReady: boolean }) {
   return (
     <div
       ref={containerRef}
-      className={`site-typography flex min-h-screen flex-col${location === "/" ? " home-route" : ""}${location === "/" || location === "/about" ? " mecpl-font-spec" : ""}`}
+      className={`site-typography flex min-h-screen flex-col${location === "/" ? " home-route" : ""}${location === "/" || location === "/about" ? " mecpl-font-spec" : ""}${usesSharedMecplFonts ? " mecpl-shared-fonts" : ""}`}
       inert={!pageReady}
     >
       <Navbar />

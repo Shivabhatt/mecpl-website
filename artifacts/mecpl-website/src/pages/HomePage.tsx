@@ -599,12 +599,12 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
                     data-target={s.target}
                     style={{
                        
-                      color: "#ffffff", 
+                      color: "#EC3338", 
                     }}
                   >
                     0
                   </span>
-                  <span className="mecpl-role-stat-number home-stat-unit" style={{ color: "#EC3338" }}>
+                  <span className="mecpl-role-stat-number home-stat-unit" style={{ color: "#ffffff" }}>
                     {s.suffix}
                   </span>
                 </div>
@@ -614,7 +614,7 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
                    
                   
                    
-                  color: "rgba(255,255,255,0.5)",
+                  color: "#ffffff",
                 }}>
                   {s.label}
                 </div>

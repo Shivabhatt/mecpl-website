@@ -1,26 +1,64 @@
 ---
-name: MECPL awards wall direction
-description: Wall-first Awards navigation, flat gallery interaction, and the alternate reference-style list.
+name: MECPL Awards reference
+description: The supplied awards-gallery and circular-issuer design, preserving the existing banner and genuine recognition records.
 ---
 
-Open Awards in wall view on every navigation or reload; a previous list-view choice must not override this. The alternate list should retain the user's clean row-list reference: “Awards and recognition” heading on the left, award details on the right, thin dividers, year aligned right, and the issuer logo in the same row.
+The user's latest Awards reference replaces the earlier wall/list design. Keep the existing banner unchanged; below it use the awards photo gallery, compact charcoal statistics strip, centered National & State / Safety / Quality issuer groups in that order with logos in white circles, and a charcoal commitment section. Preserve the common footer and complete recognition record.
 
-List filters should include Featured, Safety, Quality, National & State, and All without counts, with a visible hover effect, as requested by the user.
+**Why:** The user explicitly asked to redesign everything below the banner to match their supplied image, with the same circular logo treatment used on Home.
 
-Choosing “View as list” from the wall should open Featured awards first and bring that filter into view. This shortcut does not override wall-first navigation.
+**How to apply:** Do not restore the old flat wall or rotating cylinder unless asked. Use genuine award photographs and original-color issuer marks, not generic certificates or invented trophies. Keep every recognition accessible through issuer details.
 
-**Why:** The user requested that clicking “View as list” redirect to Featured awards first.
+Awards headings should match Home's centralized heading typography, at 48px on desktop.
 
-Featured recognitions are marks within their real categories, not a separate collection. Preserve the surrounding hero, totals and closing CTA.
+**Why:** The user explicitly requested matching Home's font style through the existing centralized font configuration.
 
-For the wall, the user specified a white section background, light-grey cards, slightly thicker charcoal rings around round logos, red card hover backgrounds matching leadership, and no short issuer footer labels. Present it as a straight, flat, front-facing wall rather than a rotating cylinder. Preserve dragging, mobile swiping, looping, categories, keyboard navigation, list switching, and award popups.
+**How to apply:** Reuse the central font roles and adjust only Awards, not Home or About.
 
-**Why:** The user asked to show the awards straight rather than rotating, with all other functionality remaining as it is.
+Logo popups should use a broad, rounded light panel: consistent award/project/year records on the left and original company-profile certificate scans on the right.
 
-The awards position/category track should extend edge to edge across the viewport, unlike the statistics strips with 120px desktop side padding.
+**Why:** The user supplied this popup reference and requested one consistent record format with scrolling award imagery.
 
-**Why:** The user specifically asked for this track to use the full space from left to right, end to end.
+**How to apply:** Keep all issuer records available. Leave the image pane clear at the top; show its certificate name and image-position count between left/right arrows at the bottom. Clearly show when an issuer has no supplied scan; do not substitute its logo, a ceremony photo, or an unrelated certificate.
 
-**Why:** The user supplied a row-list reference, then requested a flat wall with existing interactions preserved, and finally specified that navigating to Awards should open wall view.
+Certificate-image counts are not award-table counts, and the profile contains some earlier certificates not included in its current recognition tables.
 
-**How to apply:** Use the flat wall by default and keep the reference-style list available through its switch. Preserve the surrounding hero, totals, closing CTA and complete real award record. Use genuine issuer marks and only real per-award photos; do not restore earlier wreath grids or the rotating cylinder without a new request.
+**Why:** Treating document pages as award records would change verified totals or falsely assign an older certificate to a newer recognition.
+
+**How to apply:** Keep record totals based on the tables and viewer counters based on supplied scans. Label older documents explicitly and verify the issuing body visually; text extraction misses these embedded scans.
+
+Verify popup scrolling with a real mouse wheel as well as navigation buttons.
+
+**Why:** The site's global smooth scrolling can consume native overflow-wheel events even while programmatic image navigation works.
+
+**How to apply:** Keep native dialog scrolling independent of background-page smoothing and test both interaction paths.
+
+Count individual award entries from the company profile, not its printed serial numbers. Its Quality table restarts numbering on the second page, and separate awards for different projects in the same year must not be merged.
+
+**Why:** The 2026 profile's printed numbering and the supplied mockup totals do not match its actual table entries.
+
+**How to apply:** Verify each issuer/year/project record against the tables when changing totals. Label record counts as awards received rather than unique projects awarded. Never use a year-stamped 2026 Iconic Brand logo to represent the profile's 2018 recognition.
+
+Use the Iconic Brand mark from the company's actual 2018 certificate, not the generic black-and-gold circular Iconic Awards emblem.
+
+**Why:** The user flagged the circular mark as incorrect; the supplied certificate shows a gold hexagonal badge with red lettering and the year 2018.
+
+**How to apply:** Preserve the verified badge's original colors and lettering rather than recreating it or substituting a similarly named award logo.
+
+Use the profile's table categories even when an award's name says “Safety.” Its National & State table includes British Safety Council and NSCI recognitions.
+
+**Why:** Issuer-wide totals overlap category boundaries and make the grouped counts disagree with the category totals.
+
+**How to apply:** Count within the category before grouping by issuer. Do not infer category solely from an issuer or award title; keep each individual recognition in one category.
+
+Legacy ceremony-photo filenames are not evidence of an award's year or project.
+
+**Why:** Some older BAI photographs contain dates that differ from their filename, so filename-based record assignments can misrepresent the evidence.
+
+**How to apply:** Use issuer-wide ceremony captions unless the image content and profile verify the specific record. Do not describe a ceremony photograph as an original certificate scan.
+
+Use the NSCI artwork visibly shown in the Awards page's circle as the reference for About Us.
+
+**Why:** The user repeated this instruction after a different NSCI image version was substituted and still looked incorrect.
+
+**How to apply:** Compare the actual rendered reference badge, including any issuer-specific image override, rather than assuming the default award-record image is the displayed logo. Preserve original logo colors.

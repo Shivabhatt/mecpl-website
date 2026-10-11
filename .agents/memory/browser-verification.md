@@ -14,3 +14,9 @@ Wait for the site's startup overlay to finish before capturing rendered sections
 **Why:** Repeated short captures showed the black MECPL intro instead of the requested section even though the page DOM was already present.
 
 **How to apply:** In browser checks, wait for the intro overlay to disappear before scrolling to and capturing the target section. Do not change or bypass the shipped preloader to obtain screenshots.
+
+When a fresh render disagrees with a successful edit result, recheck the current source before assuming a cache or hot-reload problem.
+
+**Why:** The current source has differed from an earlier acknowledged patch during live editing; changing CSS alone cannot correct markup that is no longer present.
+
+**How to apply:** Treat the latest file contents and fresh browser output as authoritative. Reconcile them before trying additional overrides, and preserve unrelated intervening edits.

@@ -34,7 +34,7 @@
  *   .mecpl-role-award-title     12/20 -> 14/24@lg
  *   .mecpl-role-award-meta      11 / 16
  *   .mecpl-role-legal           12 / 24
- *   .mecpl-role-nav             12 / 18 semibold
+ *   .mecpl-role-nav             14 / 21 semibold
  * Home-page elements are bound to these roles by their existing semantic
  * classes in the "Home bindings" section below.
  */
@@ -67,6 +67,39 @@
     font-size: 14px !important;
     font-weight: var(--mecpl-spec-weight-regular) !important;
     line-height: 24px !important;
+  }
+
+  /* Font-family-only rollout for additional routes; preserve their own sizing and casing. */
+  .mecpl-shared-fonts,
+  :where(.mecpl-shared-fonts *),
+  :where(.mecpl-shared-fonts *)::before,
+  :where(.mecpl-shared-fonts *)::after {
+    font-family: var(--mecpl-font-ui) !important;
+  }
+  .mecpl-shared-fonts :is(h1, h2),
+  .site-typography .mecpl-awards-page .aw-strip strong {
+    font-family: var(--mecpl-font-display) !important;
+  }
+  .site-typography .completed-projects-page #project-metrics :is(.mecpl-type-stat, .mecpl-type-stat-unit) {
+    font-family: var(--mecpl-font-display) !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+  }
+  .site-typography .completed-projects-page #project-metrics .project-metric-label {
+    font-family: var(--mecpl-font-ui) !important;
+    font-weight: var(--mecpl-spec-weight-semibold) !important;
+  }
+  .mecpl-shared-fonts main h1 {
+    font-size: 80px !important;
+    text-transform: uppercase !important;
+  }
+  .mecpl-shared-fonts main h1 * {
+    font-size: inherit !important;
+    text-transform: uppercase !important;
+  }
+  @media (max-width: 1023px) {
+    .mecpl-shared-fonts main h1 {
+      font-size: clamp(36px, 7vw, 64px) !important;
+    }
   }
 
   /* ---------- Display (Barlow Condensed 500) ---------- */
@@ -234,6 +267,10 @@
     font-size: 10px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
     letter-spacing: 0.17em !important; text-transform: uppercase !important;
   }
+  .mecpl-font-spec #stats .home-stat-label {
+    font-size: 14px !important;
+    text-transform: none !important;
+  }
   .mecpl-font-spec .ps-stat span {
     font-size: 10px !important; font-weight: var(--mecpl-spec-weight-regular) !important; line-height: 1.5 !important;
   }
@@ -254,7 +291,7 @@
 
   /* ---------- Home bindings ---------- */
   .mecpl-font-spec :is(.mecpl-role-nav, .navbar-nav-label) {
-    font-size: 12px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
+    font-size: 14px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
   }
   .mecpl-font-spec .recognition-card-title {
     font-size: 12px !important; line-height: 20px !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
@@ -262,6 +299,12 @@
   .mecpl-font-spec .recognition-card-detail,
   .mecpl-font-spec .recognition-card-detail * {
     font-size: 11px !important; line-height: 16px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
+  }
+  .mecpl-font-spec #recognition .recognition-card-detail {
+    font-size: 14px !important;
+  }
+  .mecpl-font-spec #recognition .recognition-card-title {
+    font-size: 14px !important;
   }
   .mecpl-font-spec .home-project-category {
     font-size: 9px !important; line-height: 16px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
@@ -324,6 +367,50 @@
     font-size: 12px !important; line-height: 24px !important; font-weight: var(--mecpl-spec-weight-regular) !important;
   }
   .mecpl-font-spec footer .footer-certificate-name { font-size: 12px !important; line-height: 1.5 !important; font-weight: var(--mecpl-spec-weight-semibold) !important; }
+}
+
+@layer mecpl-font-spec {
+  .mecpl-allcaps-10 :is(
+    .about-hero-label,
+    .abt-values-kicker,
+    .purpose-ref-kicker,
+    .abt-journey-eyebrow,
+    .abt-founder-kicker,
+    .about-label-font,
+    .abt-sectors-eyebrow,
+    .mecpl-allcaps-10-label,
+    .cert-eyebrow,
+    .cert-label,
+    .cert-awards-cta-eyebrow,
+    .emblem-eyebrow,
+    .emblem-section-label,
+    .wof-eyebrow,
+    .careers-section-label
+  ) {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+  }
+
+  .site-typography .mecpl-allcaps-10.mecpl-allcaps-10.mecpl-allcaps-10 :is(h1, h2, h3, h4, h5, h6, [role="heading"]) {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+  }
+
+  .site-typography .mecpl-allcaps-10.mecpl-allcaps-10.mecpl-allcaps-10 :is(h1, h2, h3, h4, h5, h6, [role="heading"]) * {
+    font-size: inherit !important;
+    text-transform: uppercase !important;
+  }
+
+  .site-typography .about-page.mecpl-allcaps-10 h1.about-hero-title .hp-banner-line {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+  }
+
+  .site-typography .cert-page.mecpl-allcaps-10.mecpl-allcaps-10 #cert-title,
+  .site-typography .mecpl-awards-page.mecpl-allcaps-10.mecpl-allcaps-10 #emblem-title {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+  }
 }
 
 /*
@@ -417,11 +504,16 @@
 
   .mecpl-font-spec .about-page :is(
     .purpose-ref-copy > p,
-    .abt-value-desc,
-    .abt-journey-copy
+    .abt-value-desc
   ) {
     font-size: 12px !important;
     line-height: 24px !important;
+  }
+  .mecpl-font-spec .about-page .purpose-ref-card:first-child .purpose-ref-copy > p {
+    font-size: 14px !important;
+  }
+  .mecpl-font-spec .about-page .abt-journey-copy {
+    font-size: 14px !important;
   }
 
   .mecpl-font-spec .about-page .abt-founder-quote-copy p {
@@ -1222,5 +1314,142 @@
     .site-typography.home-route .home-page-typography #people-safety .ps-section-heading h2.ps-common-heading {
       font-size: clamp(18px, 5vw, 21px) !important;
     }
+  }
+
+}
+
+@layer mecpl-typography {
+  .site-typography {
+    --mecpl-type-shared-banner: 80px;
+    --mecpl-type-shared-section: 48px;
+    --mecpl-type-shared-label: 10px;
+  }
+
+  .site-typography .cert-page,
+  .site-typography .cert-page *,
+  .site-typography .mecpl-awards-page.emblem-root,
+  .site-typography .mecpl-awards-page.emblem-root * {
+    font-family: var(--mecpl-font-ui) !important;
+  }
+
+  .site-typography .cert-page :is(h1, h2),
+  .site-typography .mecpl-awards-page.emblem-root :is(h1, h2) {
+    font-family: var(--mecpl-font-display) !important;
+  }
+
+  .site-typography .completed-projects-page h1.hp-banner-title,
+  .site-typography .completed-projects-page h1.hp-banner-title .hp-banner-line,
+  .site-typography .cert-page #cert-title,
+  .site-typography .mecpl-awards-page #emblem-title,
+  .site-typography .careers-page h1.careers-hero-title {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: var(--mecpl-type-shared-banner) !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .site-typography .completed-projects-page h2:not(.mecpl-type-card-title),
+  .site-typography .completed-projects-page #architecture-approach h2,
+  .site-typography .projects-page #project-contact h2,
+  .site-typography .ongoing-projects-page [data-testid="section-ongoing-cta"] h2,
+  .site-typography .ongoing-projects-page .space-y-3 > h1,
+  .site-typography .cert-page .cert-standards h2,
+  .site-typography .mecpl-awards-page .emblem-intro-copy h2,
+  .site-typography .mecpl-awards-page .emblem-featured-heading h2,
+  .site-typography .mecpl-awards-page .aw-gal h2,
+  .site-typography .mecpl-awards-page .aw-gallery-intro h2,
+  .site-typography .mecpl-awards-page .aw-group h2,
+  .site-typography .mecpl-awards-page .aw-cta h2,
+  .site-typography .mecpl-awards-page .aw-issuer-copy h2,
+  .site-typography .mecpl-awards-page .wof-header .wof-title,
+  .site-typography .mecpl-awards-page .emblem-closing-copy h2,
+  .site-typography .cert-awards-cta #cert-awards-cta-title {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: clamp(28px, 4vw, var(--mecpl-type-shared-section)) !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
+  }
+
+  .site-typography .mecpl-awards-page .aw-gallery-intro h2 {
+    font-size: 48px !important;
+  }
+  .site-typography .mecpl-awards-page .aw-gallery-intro p {
+    font-size: 14px !important;
+  }
+  .site-typography .mecpl-awards-page .aw-strip strong {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 36px !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    line-height: 1.1 !important;
+    letter-spacing: normal !important;
+  }
+  .site-typography .mecpl-awards-page .aw-strip span {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.17em !important;
+    text-transform: none !important;
+  }
+
+  .site-typography .completed-projects-page .project-metric-label {
+    font-size: 14px !important;
+  }
+
+  .site-typography .completed-projects-page h2.mecpl-type-card-title {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: var(--mecpl-type-card) !important;
+    text-transform: none !important;
+  }
+
+  .site-typography .ongoing-projects-page h3 {
+    font-family: var(--mecpl-font-ui) !important;
+    text-transform: none !important;
+  }
+
+  .site-typography .completed-projects-page .about-label-font,
+  .site-typography .completed-projects-page .mecpl-allcaps-10-label,
+  .site-typography .ongoing-projects-page .mecpl-section-label,
+  .site-typography .cert-page .cert-eyebrow,
+  .site-typography .cert-page .cert-label,
+  .site-typography .mecpl-awards-page .emblem-eyebrow,
+  .site-typography .mecpl-awards-page .emblem-section-label,
+  .site-typography .cert-awards-cta .cert-awards-cta-eyebrow {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: var(--mecpl-type-shared-label) !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+  }
+
+  @media (max-width: 1023px) {
+    .site-typography {
+      --mecpl-type-shared-banner: clamp(36px, 7vw, 64px);
+    }
+
+    .site-typography .completed-projects-page h1.hp-banner-title,
+    .site-typography .completed-projects-page h1.hp-banner-title .hp-banner-line,
+    .site-typography .cert-page #cert-title,
+    .site-typography .mecpl-awards-page #emblem-title,
+    .site-typography .careers-page h1.careers-hero-title {
+      font-size: var(--mecpl-type-shared-banner) !important;
+    }
+  }
+}
+
+@layer mecpl-font-spec {
+  .site-typography .completed-projects-page h1.hp-banner-title .hp-banner-line {
+    font-family: var(--mecpl-font-display) !important;
+    font-weight: var(--mecpl-weight-section) !important;
+    font-synthesis: none !important;
+  }
+
+  .site-typography .completed-projects-page h2.mecpl-type-card-title {
+    font-family: var(--mecpl-font-ui) !important;
   }
 }

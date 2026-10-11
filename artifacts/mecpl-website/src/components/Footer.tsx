@@ -8,6 +8,10 @@ type FooterProps = {
 type HomeFooterSocialName = "LinkedIn" | "Instagram" | "YouTube";
 
 function HomeFooterSocialIcon({ name }: { name: HomeFooterSocialName }) {
+  if (name === "LinkedIn") {
+    return <Linkedin className="home-footer-social-mark" aria-hidden="true" strokeWidth={2.5} />;
+  }
+
   return (
     <svg
       className="home-footer-social-mark"
@@ -15,23 +19,6 @@ function HomeFooterSocialIcon({ name }: { name: HomeFooterSocialName }) {
       aria-hidden="true"
       focusable="false"
     >
-      {name === "LinkedIn" && (
-        <>
-          <circle cx="12" cy="12" r="9.5" fill="currentColor" />
-          <text
-            x="12"
-            y="12.5"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontFamily="Arial, sans-serif"
-            fontSize="11"
-            fontWeight="700"
-            fill="#CF2E2E"
-          >
-            in
-          </text>
-        </>
-      )}
       {name === "Instagram" && (
         <>
           <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" strokeWidth="2.4" />
@@ -53,34 +40,11 @@ type HomeFooterContactIconName = "location" | "phone" | "email";
 
 function HomeFooterContactIcon({ name }: { name: HomeFooterContactIconName }) {
   return (
-    <svg
-      className="home-footer-contact-mark"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {name === "location" && (
-        <>
-          <path
-            fill="currentColor"
-            d="M12 22s8-6.5 8-14a8 8 0 1 0-16 0c0 7.5 8 14 8 14Z"
-          />
-          <circle cx="12" cy="8.5" r="2.4" fill="#CF2E2E" />
-        </>
-      )}
-      {name === "phone" && (
-        <path
-          fill="currentColor"
-          d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17.99 17.99 0 0 1 3 5a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1 11.3 11.3 0 0 0 .57 3.56 1 1 0 0 1-.25 1.01l-2.19 2.22Z"
-        />
-      )}
-      {name === "email" && (
-        <>
-          <rect x="2.5" y="4.5" width="19" height="15" rx="1.8" fill="currentColor" />
-          <path d="m4.5 6.8 7.5 5.8 7.5-5.8" fill="none" stroke="#CF2E2E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </>
-      )}
-    </svg>
+    <span className="home-footer-contact-icon" aria-hidden="true">
+      {name === "location" && <MapPin className="home-footer-contact-mark" strokeWidth={2.8} />}
+      {name === "phone" && <Phone className="home-footer-contact-mark" strokeWidth={2.8} />}
+      {name === "email" && <Mail className="home-footer-contact-mark" strokeWidth={2.8} />}
+    </span>
   );
 }
 
@@ -109,7 +73,6 @@ export default function Footer({ variant = "default" }: FooterProps) {
           <div className="home-footer-grid">
             <section className="home-footer-column home-footer-brand" aria-label="Millennium Engineers & Contractors Pvt. Ltd., Building a stronger tomorrow">
               <div className="home-footer-lockup">
-                  <div className="home-footer-wordmark">MECPL</div>
                 <div className="home-footer-logo-badge">
                   <img
                     className="home-footer-logo-mark"
@@ -119,12 +82,13 @@ export default function Footer({ variant = "default" }: FooterProps) {
                     height="46"
                   />
                 </div>
-                <div className="home-footer-full-company">
-                  <span>MILLENNIUM ENGINEERS &amp; CONTRACTORS</span>
-                  <span>PVT. LTD.</span>
+                <div className="home-footer-copy">
+                  <div className="home-footer-full-company">
+                    <span>MILLENNIUM ENGINEERS &amp;</span>
+                    <span>CONTRACTORS PVT. LTD.</span>
+                  </div>
+                  <div className="home-footer-tagline">BUILDING A STRONGER TOMORROW</div>
                 </div>
-                <div className="home-footer-brand-rule" aria-hidden="true" />
-                <div className="home-footer-tagline">BUILDING A STRONGER TOMORROW</div>
               </div>
               <div className="home-footer-social">
                 {socialLinks.map(({ href, label }) => (

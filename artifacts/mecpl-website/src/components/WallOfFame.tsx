@@ -474,7 +474,7 @@ export default function WallOfFame({ initialCategory = "national-state" }: { ini
       {showWall && (
         <header className="wof-header">
           <span className="wof-eyebrow">The record</span>
-          <h2 className="wof-title" id="wof-title">A wall of the work.</h2>
+          <h2 className="wof-title" id="wof-title">A Wall Of The Work.</h2>
           <p className="wof-sub">{touch ? "Swipe to explore, or choose a category." : "Drag to explore, or choose a category."}</p>
         </header>
       )}

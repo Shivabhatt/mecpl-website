@@ -14,3 +14,9 @@ Home statistics should instead span the screen with the same small side margins 
 **Why:** The user explicitly said too much space remained on the left and right and requested matching the recognition row's margins.
 
 **How to apply:** Keep the Home metrics evenly distributed without a narrow centered maximum width. Do not extend the other pages' 120px spacing rule to Home.
+
+The Awards statistics strip should match the Home statistics strip's desktop height.
+
+**Why:** The user requested consistent bar heights between Awards and the selected Home statistics section.
+
+**How to apply:** Compare their rendered heights at the same desktop widths when adjusting either strip. Preserve the Awards figures, typography, colors, and existing mobile layout when changing only its height.

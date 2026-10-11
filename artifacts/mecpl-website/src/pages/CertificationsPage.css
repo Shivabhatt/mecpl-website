@@ -21,8 +21,8 @@
 .cert-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;margin:0}
 .cert-stats>div{padding:20px 24px;border-right:1px solid #ffffff12}
 .cert-stats>div:last-child{border:0}
-.cert-stats strong{display:block;font-size:48px;font-weight:500;color:#fff;line-height:1;letter-spacing:-.04em}
-.cert-stats span{display:block;margin:16px auto 0;font-size:10px;font-weight:500;line-height:1.6;letter-spacing:.16em;text-transform:uppercase;color:#b2b4b8;max-width:240px}
+.cert-stats strong{display:block;font-size:48px;font-weight:500;color:#EC3338;line-height:1;letter-spacing:-.04em}
+.cert-stats span{display:block;margin:16px auto 0;font-size:10px;font-weight:500;line-height:1.6;letter-spacing:.16em;text-transform:uppercase;color:#fff;max-width:240px}
 .cert-standards{padding:104px 0;background:#fff}
 .cert-standards .cert-wrap>.cert-label,
 .cert-standards .cert-wrap>h2,

@@ -152,9 +152,7 @@ export default function CompletedProjectsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,16,0.88)_0%,rgba(6,10,16,0.68)_48%,rgba(6,10,16,0.38)_100%)]" />
         <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center font-montserrat font-medium">
-          <span className="about-label-font font-montserrat font-medium text-[18px]" style={{
-              fontFamily: "Montserrat",
-            fontSize: "18px",
+          <span className="about-label-font mecpl-type-label font-medium" style={{
             fontWeight: 700,
             letterSpacing: "0.35em",
             color: "#ffffff",
@@ -170,7 +168,7 @@ export default function CompletedProjectsPage() {
               color: "#ffffff",
               whiteSpace: "nowrap",
             }}>
-              Built for tomorrow.
+              Built For Tomorrow.
             </div>
           </h1>
           <p className="completed-projects-hero-description mt-0 max-w-2xl font-montserrat font-medium leading-relaxed text-white/75">
@@ -200,7 +198,7 @@ export default function CompletedProjectsPage() {
               count: "4 Projects Awarded",
             },
             {
-              src: "/assets/awards/nsci-safety-award-2025.png",
+              src: "/assets/awards/nsci-symbol.png",
               alt: "National Safety Council of India safety award logo",
               title: "NSCI Safety Awards",
               count: "4 Projects Awarded",
@@ -250,7 +248,7 @@ export default function CompletedProjectsPage() {
         <div className="grid w-full grid-cols-1 sm:grid-cols-3">
           {[
             { value: "150", suffix: "+", label: "Projects Delivered" },
-            { value: "50M", suffix: "+", label: "Sq. Ft. Delivered" },
+            { value: "50", unit: "M", suffix: "+", label: "Sq. Ft. Delivered" },
             { value: "25", suffix: "+", label: "Locations in Pune" },
           ].map((metric, index) => (
             <div
@@ -260,14 +258,15 @@ export default function CompletedProjectsPage() {
               }`}
             >
               <div className="flex items-baseline justify-center">
-                <span className="mecpl-type-stat text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-white md:text-[2.75rem]">
+                <span className="mecpl-type-stat text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-[#EC3338] md:text-[2.75rem]">
                   {metric.value}
+                  {metric.unit && <span className="mecpl-type-stat text-white">{metric.unit}</span>}
                 </span>
-                <span className="mecpl-type-stat-unit ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
+                <span className="mecpl-type-stat-unit ml-1 text-[1.8rem] font-medium leading-none text-white md:text-[2.15rem]">
                   {metric.suffix}
                 </span>
               </div>
-              <span className="mt-3 text-[8px] font-semibold uppercase leading-tight tracking-[0.2em] text-white/45 md:text-[9px]">
+              <span className="project-metric-label mt-3 text-sm font-semibold uppercase leading-tight tracking-[0.2em] text-white">
                 {metric.label}
               </span>
             </div>
@@ -360,11 +359,11 @@ function ArchitectureApproach() {
     <section id="architecture-approach" className="scroll-mt-20 overflow-visible bg-white px-6 py-20 md:px-10 md:py-28" data-testid="section-architecture-approach">
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-0">
         <div className="relative z-10 max-w-xl lg:py-10 lg:pr-16" data-scroll-reveal="text">
-          <span className="mb-5 block font-montserrat text-[10px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
+          <span className="mecpl-allcaps-10-label mb-5 block font-montserrat text-[10px] font-bold uppercase tracking-[0.22em] text-[#EC3338]">
             Architectural Approach
           </span>
           <h2 className="max-w-md font-montserrat text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.045em] text-[#232529]">
-            Architecture that feels considered.
+            Architecture That Feels Considered.
           </h2>
           <div className="mt-7 max-w-md space-y-4 text-sm leading-[1.85] text-[#232529]">
             <p>
@@ -401,9 +400,9 @@ function ArchitectureApproach() {
               Our Design Principle
             </span>
             <p className="mt-3 font-montserrat text-[1.35rem] font-medium leading-[1.12] tracking-[-0.035em] text-[#232529]">
-              Build with purpose.
+              Build With Purpose.
               <br />
-              <strong className="font-bold">Last with meaning.</strong>
+              <strong className="font-bold">Last With Meaning.</strong>
             </p>
           </div>
         </div>
@@ -448,8 +447,8 @@ function ProjectExplorer() {
 
         <div className="grid bg-white xl:grid-cols-[0.92fr_1.08fr] xl:grid-rows-[auto_minmax(0,1fr)]">
           <header className="border-b border-black/[0.08] px-6 py-8 xl:col-span-2 xl:px-10">
-            <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-[#CF2E2E]">
-              Building with purpose.
+            <h2 className="text-[clamp(1.25rem,2vw,1.8rem)] font-semibold leading-tight tracking-[-0.025em] text-black">
+              Building With Purpose.
             </h2>
             <p className="mt-3 max-w-2xl text-[#626667] mecpl-type-supporting">
               From residential communities to commercial landmarks, MECPL delivers spaces shaped by precision,

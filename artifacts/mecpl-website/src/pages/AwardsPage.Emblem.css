@@ -11,14 +11,14 @@
   overflow: clip;
   color: var(--emblem-ink);
   background: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--mecpl-font-ui, "Manrope", sans-serif);
 }
 
 .mecpl-awards-page.emblem-root *,
 .mecpl-awards-page.emblem-root *::before,
 .mecpl-awards-page.emblem-root *::after {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: var(--mecpl-font-ui, "Manrope", sans-serif);
 }
 
 .emblem-main { padding-top: 0; }
@@ -188,7 +188,7 @@
 .mecpl-awards-page.emblem-root .emblem-feature h3 { max-width: 24ch; margin: 10px auto 0; color: #454f59; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; }
 @layer base {
   .mecpl-awards-page.emblem-root .emblem-feature h3 {
-    font-family: "Montserrat", sans-serif !important;
+    font-family: var(--mecpl-font-ui, "Manrope", sans-serif);
     font-weight: 600 !important;
   }
 }

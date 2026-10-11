@@ -11,7 +11,7 @@
 - [MECPL mobile asset verification](mecpl-mobile-asset-verification.md) — reproduce reports at 402×874 and inspect natural dimensions plus a rendered capture before changing working asset paths or layout.
 - [MECPL media optimization](mecpl-media-optimization.md) — keep public URLs stable while compressing project JPEGs, large PNGs, and muted background videos with posters.
 - [About section preview checks](mecpl-about-preview-checks.md) — SPA hash screenshots may remain at the About hero; use a component-level preview for direct section visual checks.
-- [Awards wall direction](mecpl-award-reference.md) — the Wall of Fame specification replaces the white/silver wreath grid; preserve the surrounding page and the complete record.
+- [Awards reference direction](mecpl-award-reference.md) — gallery and circular issuer groups replace the wall; preserve the banner and genuine records; profile numbering needs care.
 - [Client logo presentation](mecpl-client-logo-presentation.md) — preserve intended transparency, show one TCS logo version, and make visible logo artwork clearly readable.
 - [Certifications direction](mecpl-certifications-direction.md) — certifications only, no awards; original scans in a light popup with previous/next controls; preserve the common footer.
 - [Statistics-strip spacing](mecpl-stats-strip-layout.md) — Home follows recognition gutters; Certifications and Completed Projects use 120px desktop side padding.

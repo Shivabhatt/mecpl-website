@@ -89,7 +89,7 @@ const awards = [
   { title: "British Safety Council", desc: "International Safety Award – Distinction 2026", img: `${assetBase}assets/awards/british-safety-council-award-2026-mark.webp` },
   { title: "ISO Certified Company", desc: "Quality, Environmental & Safety", img: `${assetBase}assets/recognition/iso-mark.png` },
   { title: "CRISIL BBB / Positive", desc: "Financial Rating", img: `${assetBase}assets/recognition/crisil-rating.jpg` },
-  { title: "NSCI Safety Awards", desc: "7 Award-Winning Projects", img: `${assetBase}assets/awards/nsci-safety-award-2025.png` },
+  { title: "NSCI Safety Awards", desc: "7 Award-Winning Projects", img: `${assetBase}assets/awards/nsci-symbol.png` },
   { title: "CIDC Vishwakarma Awards", desc: "Construction Health, Safety & Environment", img: `${assetBase}assets/awards/cidc-vishwakarma-award-2026.png` },
   { title: "BAI Well Built Structure Awards", desc: "13 Award-Winning Projects", img: `${assetBase}assets/awards/bai-well-built-structure-award.png` },
 ];
@@ -657,7 +657,7 @@ export default function AboutPage() {
       {/* ─── 06 — OUR LEADERSHIP ─────────────────────────────── */}
       <LeadershipDoorSlider />
       {/* ─── 07 — AWARDS & CERTIFICATIONS ────────────────────── */}
-      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#f5f2f4", padding: "48px 56px 96px" }}>
+      <section id="certifications" data-testid="section-about-awards" className="abt-awards-section scroll-mt-20" style={{ background: "#ffffff", padding: "48px 56px 96px" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <RevealBlock>
             <div style={{ marginBottom: 64, textAlign: "center" }}>

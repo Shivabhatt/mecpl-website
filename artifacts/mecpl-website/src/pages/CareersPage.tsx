@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { sentenceCase } from "@/lib/typography";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./CareersPage.css";
 import {
   MapPin,
   Clock,
@@ -26,27 +25,32 @@ const values = [
   {
     title: "People First",
     desc: "We prioritise our people in everything we do: employees, customers, and all stakeholders.",
-    image: "/images/careers.jpg",
+    image: "/images/careers-values/people-first.jpg",
+    alt: "Construction crew working together on site, illustrating People First.",
   },
   {
     title: "Quality",
     desc: "Every process is benchmarked against disciplined execution, safety and premium outcomes.",
-    image: "/assets/projects/HIGH-RISE-1-scaled.jpg",
+    image: "/images/careers-values/quality.jpg",
+    alt: "Site engineers inspecting structural work, illustrating construction quality checks.",
   },
   {
     title: "Integrity",
     desc: "Transparent decisions and ethical project governance are part of MECPL's operating DNA.",
-    image: "/assets/projects/GODREJ-INFINITY.jpg",
+    image: "/images/careers-values/integrity.jpg",
+    alt: "Engineers reviewing site plans together, illustrating integrity in project decisions.",
   },
   {
     title: "Innovation",
     desc: "We improve through modern systems, practical problem solving, and technical curiosity.",
-    image: "/assets/projects/TechPark.jpg",
+    image: "/images/careers-values/innovation.jpg",
+    alt: "Engineer using a tablet for digital planning inside a modern industrial facility.",
   },
   {
     title: "Teamwork",
     desc: "Cross-functional teams collaborate closely so execution is consistent from office to site.",
-    image: "/assets/projects/43PD-1-scaled.jpg",
+    image: "/images/careers-values/teamwork.jpg",
+    alt: "Engineers collaborating around a tablet in an industrial workplace.",
   },
 ];
 
@@ -108,62 +112,13 @@ export default function CareersPage() {
   const [form, setForm] = useState({ name: "", email: "", exp: "0 - 2 Years Baseline", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  const pageRef = useRef<HTMLDivElement>(null);
-  const progressLineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const mm = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Values scroll-linked active state
-        const panels = gsap.utils.toArray<HTMLElement>('.value-panel');
-        const navItems = gsap.utils.toArray<HTMLElement>('.value-nav-item');
-
-        if (panels.length > 0 && navItems.length > 0) {
-          panels.forEach((panel, i) => {
-            ScrollTrigger.create({
-              trigger: panel,
-              start: "top 60%",
-              end: "bottom 60%",
-              onToggle: (self) => {
-                if (self.isActive) {
-                  gsap.to(navItems, { opacity: 0.3, color: "white", duration: 0.3 });
-                  gsap.to(navItems[i], { opacity: 1, color: "#EC3338", duration: 0.3 });
-                }
-              }
-            });
-          });
-
-          ScrollTrigger.create({
-            trigger: ".values-scroll-container",
-            start: "top 60%",
-            end: "bottom 60%",
-            scrub: true,
-            onUpdate: (self) => {
-              if (progressLineRef.current) {
-                gsap.set(progressLineRef.current, { scaleY: self.progress });
-              }
-            }
-          });
-        }
-      });
-    }, pageRef);
-
-    return () => {
-      mm.revert();
-      ctx.revert();
-    };
-  }, []);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
 
   return (
-    <div data-animate-page className="careers-page bg-white font-montserrat" ref={pageRef}>
+    <div data-animate-page className="careers-page bg-white">
       {/* HERO SECTION */}
       <section className="relative min-h-screen overflow-hidden bg-mecpl-dark flex items-center">
         <img
@@ -176,12 +131,12 @@ export default function CareersPage() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center">
           <span className="mb-5 block text-[10px] font-semibold uppercase tracking-[0.35em] text-white">
-            Join team MECPL
+            JOIN TEAM MECPL
           </span>
-          <h1 className="careers-hero-title page-title-font max-w-4xl tracking-tight text-white">
+          <h1 className="careers-hero-title careers-display-heading max-w-4xl tracking-tight text-white">
             Build your engineering career
           </h1>
-          <p className="careers-hero-description mt-6 max-w-2xl leading-relaxed text-white/75">
+          <p className="careers-hero-description mt-6 max-w-2xl text-balance leading-relaxed text-white/75">
             Work with a team that values safety, quality, and professional growth. Build your skills and your impact inside high-performance projects.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -192,7 +147,7 @@ export default function CareersPage() {
               Explore open roles <ArrowRight size={14} />
             </a>
             <a
-              href="#abt1"
+               href="#careers-life"
               className="careers-hero-cta inline-flex items-center justify-center gap-3 border border-white/30 px-6 py-4 text-white transition-colors hover:border-white/70 hover:bg-white/10"
             >
               Life at MECPL
@@ -204,10 +159,10 @@ export default function CareersPage() {
       <section id="abt1" className="py-24 md:py-32 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div>
+            <div className="careers-culture-copy">
               <span className="careers-section-label" style={careerSectionLabelStyle}>Our workplace</span>
-              <h2 className="uppercase tracking-tighter text-mecpl-text mb-6 text-[30px] font-medium">
-                A culture that <br /><span className="font-medium">enables growth</span>
+              <h2 className="careers-section-title careers-sentence-case mb-6">
+                A Culture That Enables Growth.
               </h2>
               <p className="text-mecpl-text text-sm md:text-base leading-relaxed max-w-md">
                 We encourage our employees to achieve growth by creating opportunities to learn, lead, and contribute. Our teams work on landmark projects with disciplined standards and strong collaboration.
@@ -233,12 +188,47 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+      {/* LIFE AT MECPL */}
+      <section id="careers-life" className="careers-life-section bg-[#f7f6f4] py-24 md:py-32 scroll-mt-20" aria-labelledby="careers-life-title">
+        <div className="mx-auto max-w-7xl px-6">
+          <header className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+            <span className="careers-section-label" style={careerSectionLabelStyle}>Life at MECPL</span>
+            <h2 id="careers-life-title" className="careers-section-title careers-sentence-case">
+              Good Work Is Built <span>Together.</span>
+            </h2>
+            <p className="careers-life-intro mx-auto mt-5 max-w-2xl">
+              From learning on site to recognising milestones, the best work happens when people can grow, contribute, and feel part of the team.
+            </p>
+          </header>
+          <div className="careers-life-grid">
+            <figure className="careers-life-card careers-life-card--training">
+              <img src="/images/careers-demo/training.jpg" alt="Illustrative photo of Indian construction professionals learning together during a site training session" loading="lazy" />
+              <figcaption><span>01 / Learn together</span><strong>Knowledge, shared on site</strong></figcaption>
+            </figure>
+            <figure className="careers-life-card careers-life-card--milestone">
+              <img src="/images/careers-demo/team-milestone.jpg" alt="Illustrative photo of Indian colleagues celebrating a project milestone" loading="lazy" />
+              <figcaption><span>02 / Mark the moment</span><strong>Progress worth celebrating</strong></figcaption>
+            </figure>
+            <figure className="careers-life-card careers-life-card--wellbeing">
+              <img src="/images/careers-demo/wellbeing.jpg" alt="Illustrative photo of Indian coworkers taking part in a morning wellbeing activity" loading="lazy" />
+              <figcaption><span>03 / Make room to reset</span><strong>Wellbeing, as a team</strong></figcaption>
+            </figure>
+            <figure className="careers-life-card careers-life-card--teamwork">
+              <img src="/images/careers-demo/teamwork.jpg" alt="Illustrative photo of Indian project colleagues walking through a finished building and talking" loading="lazy" />
+              <figcaption><span>04 / Build with purpose</span><strong>Shared effort. Lasting impact.</strong></figcaption>
+            </figure>
+          </div>
+          <p className="careers-demo-note">
+            Illustrative placeholder photos only—not MECPL employees or events. These will be replaced with MECPL’s own employee-event photos.
+          </p>
+        </div>
+      </section>
       {/* EMPLOYEE STORIES */}
       <section className="py-24 bg-[#f8fafc] border-y border-mecpl-dark/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="careers-section-label" style={careerSectionLabelStyle}>Voices of MECPL</span>
-            <h2 className="text-[30px] font-light uppercase tracking-tighter text-mecpl-text">Hear from the <span className="font-medium">people who build it.</span></h2>
+            <h2 className="careers-section-title careers-sentence-case">Hear From the People Who Built It.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {employeeStories.map((story, i) => (
@@ -249,7 +239,7 @@ export default function CareersPage() {
                  data-scroll-reveal-delay={i * 90}
                >
                 <div className="text-mecpl-red opacity-20 text-6xl font-montserrat absolute top-6 right-6 leading-none">"</div>
-                <p className="text-lg font-medium text-mecpl-text mb-12 relative z-10 leading-snug flex-1">
+                 <p className="careers-story-quote mb-12 relative z-10 flex-1">
                   "{story.quote}"
                 </p>
                 <div className="flex items-center gap-4 mt-auto">
@@ -267,46 +257,24 @@ export default function CareersPage() {
       {/* CORE VALUES */}
       <section id="abt2" className="relative bg-mecpl-dark text-white py-24 md:py-32 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="md:grid md:grid-cols-12 gap-12 lg:gap-20">
-            {/* Sticky Sidebar */}
-            <div className="md:col-span-5 relative mb-16 md:mb-0">
-              <div className="md:sticky md:top-40 space-y-6">
-                <span className="careers-section-label" style={careerSectionLabelStyle}>What drives MECPL</span>
-                <h2 className="text-[30px] font-light uppercase tracking-tighter leading-[1.05]">
-                  Core <span className="font-medium">values</span>
-                </h2>
-
-                {/* Desktop Nav Indicators */}
-                <div className="hidden md:flex flex-col gap-6 mt-12 relative border-l border-white/10 pl-6 py-2">
-                  <div
-                    ref={progressLineRef}
-                    className="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-mecpl-red origin-top scale-y-0"
-                  />
-                  {values.map((v, i) => (
-                    <div key={i} className={`value-nav-item transition-colors duration-300 ${i === 0 ? 'opacity-100 text-mecpl-red' : 'opacity-30 text-white'}`}>
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.2em]">{sentenceCase(v.title)}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Scrolling Content */}
-            <div className="md:col-span-7 space-y-24 values-scroll-container">
-              {values.map((v, i) => (
-                <div key={i} className="value-panel group">
-                  <div className="aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-sm mb-8">
+          <header className="text-center mb-12 md:mb-16">
+            <span className="careers-section-label" style={careerSectionLabelStyle}>What drives MECPL</span>
+            <h2 className="careers-section-title careers-sentence-case">Core Values.</h2>
+          </header>
+          <div className="careers-values-grid">
+              {values.map((v) => (
+                <article key={v.title} className="careers-value-card group">
+                  <div className="aspect-[16/10] overflow-hidden mb-6">
                     <img
                       src={v.image}
-                      alt={v.title}
+                      alt={v.alt}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="text-2xl font-semibold uppercase tracking-tight mb-4">{sentenceCase(v.title)}</h3>
+                  <h3 className="text-xl font-semibold uppercase tracking-tight mb-3">{sentenceCase(v.title)}</h3>
                   <p className="text-white/70 text-sm md:text-base max-w-lg leading-relaxed">{v.desc}</p>
-                </div>
+                </article>
               ))}
-            </div>
           </div>
         </div>
       </section>
@@ -314,10 +282,10 @@ export default function CareersPage() {
       <section className="border-b border-mecpl-dark/10 bg-white py-20 md:py-28 text-mecpl-text">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div className="text-left lg:justify-self-start" data-scroll-reveal="text">
+            <div className="careers-growth-copy" data-scroll-reveal="text">
               <span className="careers-section-label" style={careerSectionLabelStyle}>Build Your Career With Us</span>
-              <h2 className="text-[30px] font-light uppercase tracking-tighter leading-[0.98]">
-                Start with purpose.<br /><span className="font-medium">Grow with responsibility.</span>
+              <h2 className="careers-section-title careers-sentence-case leading-[0.98]">
+                Start With Purpose.<br /><span className="font-medium">Grow With Responsibilities.</span>
               </h2>
               <div className="mt-12 flex max-w-md flex-col items-start gap-5 border-t border-mecpl-dark/10 pt-7">
                 <p className="max-w-md text-sm leading-relaxed text-mecpl-text">
@@ -344,7 +312,7 @@ export default function CareersPage() {
                   data-scroll-reveal-delay={index * 90}
                 >
                   <div className="text-[10px] font-semibold tracking-[0.2em] text-white/55">{number}</div>
-                  <h3 className="mt-8 text-lg font-semibold uppercase tracking-tight">{title}</h3>
+                 <h3 className="careers-step-title mt-8">{title}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-white/75">{description}</p>
                 </article>
               ))}
@@ -355,10 +323,10 @@ export default function CareersPage() {
       {/* BENEFITS */}
       <section id="abt4" className="py-24 md:py-32 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div className="flex flex-col items-center text-center gap-5 mb-16">
             <div>
               <span className="careers-section-label" style={careerSectionLabelStyle}>Benefits</span>
-              <h2 className="text-[30px] font-light uppercase tracking-tighter text-mecpl-text">Live your <span className="font-medium">best life</span></h2>
+              <h2 className="careers-section-title careers-sentence-case">Live Your Best Life.</h2>
             </div>
             <p className="text-mecpl-text text-sm max-w-sm">Learn about the benefits of working with MECPL and how we prioritise our employees at every step.</p>
           </div>
@@ -386,7 +354,7 @@ export default function CareersPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 flex flex-col items-center text-center">
             <span className="careers-section-label" style={careerSectionLabelStyle}>Current Opportunities</span>
-            <h2 className="text-[30px] font-light uppercase tracking-tighter text-mecpl-text">Open <span className="font-medium">roles</span></h2>
+            <h2 className="careers-section-title careers-sentence-case">Open Roles.</h2>
           </div>
 
           <div className="flex flex-col border-t border-mecpl-dark/10">
@@ -423,7 +391,7 @@ export default function CareersPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="careers-section-label" style={careerSectionLabelStyle}>Application</span>
-            <h2 className="text-[30px] font-light uppercase tracking-tighter text-mecpl-text">Submit <span className="font-medium">general application</span></h2>
+            <h2 className="careers-section-title careers-sentence-case">Submit General Application.</h2>
             <p className="mt-6 text-mecpl-text text-sm max-w-xl mx-auto">
               Share your background, the role you're interested in, and any portfolio or CV details. We review applications on a rolling basis.
             </p>
@@ -527,8 +495,8 @@ export default function CareersPage() {
       </section>
       <section className="careers-bottom-cta mecpl-cta-banner px-10 py-[72px]">
         <div className="mx-auto max-w-[900px] text-center">
-          <h2 className="mb-9 text-[26px] font-medium uppercase tracking-tight text-white">
-            Ready to build what comes next?
+          <h2 className="careers-sentence-case mb-9 text-[26px] font-medium tracking-tight text-white">
+            Ready to Build What Comes Next.
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a href="#abt3" className="mecpl-button mecpl-button--primary">
