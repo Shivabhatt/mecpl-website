@@ -198,7 +198,7 @@ export default function CompletedProjectsPage() {
               count: "4 Projects Awarded",
             },
             {
-              src: "/assets/awards/nsci-safety-award-2025.png",
+              src: "/assets/awards/nsci-symbol.png",
               alt: "National Safety Council of India safety award logo",
               title: "NSCI Safety Awards",
               count: "4 Projects Awarded",
