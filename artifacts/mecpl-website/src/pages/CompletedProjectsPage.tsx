@@ -198,7 +198,7 @@ export default function CompletedProjectsPage() {
               count: "4 Projects Awarded",
             },
             {
-              src: "/assets/awards/nsci-symbol.png",
+              src: "/assets/awards/nsci-safety-award-2025.png",
               alt: "National Safety Council of India safety award logo",
               title: "NSCI Safety Awards",
               count: "4 Projects Awarded",
@@ -248,7 +248,7 @@ export default function CompletedProjectsPage() {
         <div className="grid w-full grid-cols-1 sm:grid-cols-3">
           {[
             { value: "150", suffix: "+", label: "Projects Delivered" },
-            { value: "50", unit: "M", suffix: "+", label: "Sq. Ft. Delivered" },
+            { value: "50M", suffix: "+", label: "Sq. Ft. Delivered" },
             { value: "25", suffix: "+", label: "Locations in Pune" },
           ].map((metric, index) => (
             <div
@@ -260,13 +260,12 @@ export default function CompletedProjectsPage() {
               <div className="flex items-baseline justify-center">
                 <span className="mecpl-type-stat text-[2.25rem] font-medium leading-none tracking-[-0.045em] text-[#EC3338] md:text-[2.75rem]">
                   {metric.value}
-                  {metric.unit && <span className="mecpl-type-stat text-white">{metric.unit}</span>}
                 </span>
-                <span className="mecpl-type-stat-unit ml-1 text-[1.8rem] font-medium leading-none text-white md:text-[2.15rem]">
+                <span className="mecpl-type-stat-unit ml-1 text-[1.8rem] font-medium leading-none text-[#EC3338] md:text-[2.15rem]">
                   {metric.suffix}
                 </span>
               </div>
-              <span className="project-metric-label mt-3 text-sm font-semibold uppercase leading-tight tracking-[0.2em] text-white">
+              <span className="mt-3 text-[8px] font-semibold uppercase leading-tight tracking-[0.2em] text-white md:text-[9px]">
                 {metric.label}
               </span>
             </div>

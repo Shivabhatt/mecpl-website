@@ -14,6 +14,8 @@ const gallery = [
   { img: "2012-01-large.webp", t: "MECPL Team", s: "Award ceremony" },
   { img: "2013-01-large.webp", t: "MECPL Team", s: "Award ceremony" },
   { img: "WhatsApp-Image-2023-12-27.jpg", t: "MECPL Team", s: "Award ceremony" },
+  { img: "2014-01-large.webp", t: "MECPL Team", s: "Award ceremony" },
+  { img: "2016-01-large.webp", t: "India SME 100", s: "SME Awards" },
 ];
 
 const defs: { group: string; category: Award["category"]; items: { key: string; label: string; re: RegExp; logo?: string }[] }[] = [
@@ -49,14 +51,6 @@ export default function AwardsGroups() {
 
   return (
     <>
-      <section className="aw-gallery-intro" aria-labelledby="aw-gallery-title">
-        <span className="aw-gallery-kicker">AWARDS GALLERY</span>
-        <h2 id="aw-gallery-title" className="mecpl-role-h2-medium aw-gallery-title">
-          Moments That Inspire Us.
-        </h2>
-        <p>A glimpse of our prestigious awards and certificates over the years.</p>
-      </section>
-
       <section className="aw-gal" aria-label="Award photos">
         <div className="aw-rail">
           <div className="aw-track" role="group" aria-label="Award photos">

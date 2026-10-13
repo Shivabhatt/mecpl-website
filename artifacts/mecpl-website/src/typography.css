@@ -240,9 +240,13 @@
   .mecpl-font-spec .home-founder-credit span { font-weight: var(--mecpl-spec-weight-semibold) !important; }
 
   /* ---------- Labels, buttons, micro ---------- */
-  .mecpl-font-spec :is(.mecpl-role-kicker, .home-section-label, .ps-section-kicker, .footer-section-label) {
+  .mecpl-font-spec :is(.mecpl-role-kicker, .home-section-label, .ps-section-kicker, .footer-section-label),
+  .site-typography .mecpl-awards-page :is(.aw-gallery-kicker, .aw-cta .aw-label) {
     font-size: 10px !important; font-weight: var(--mecpl-spec-weight-bold) !important;
     line-height: 1.5 !important; letter-spacing: var(--mecpl-spec-track-kicker) !important; text-transform: uppercase !important;
+  }
+  .site-typography .mecpl-awards-page :is(.aw-gallery-kicker, .aw-cta .aw-label) {
+    color: #EC3338 !important;
   }
   .mecpl-font-spec :is(.mecpl-role-hero-company, .home-hero-banner .home-intro-label) {
     font-size: 10px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
