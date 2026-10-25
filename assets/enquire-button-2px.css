@@ -17,3 +17,78 @@
 .site-typography .navbar-enquire-button:active .mecpl-arrow-fill-button__circle {
   border-radius: 2px;
 }
+
+.home-route .home-page-typography .mecpl-arrow-fill-link,
+.home-route .home-page-typography .mecpl-arrow-fill-button,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-link,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button {
+  border-radius: 2px;
+}
+
+.home-route .home-page-typography .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button__circle {
+  transition:
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inset var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    border-radius var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.home-route .home-page-typography .mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle {
+  border-radius: 2px;
+}
