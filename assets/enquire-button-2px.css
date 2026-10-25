@@ -1,0 +1,19 @@
+.site-typography .navbar-enquire-button {
+  border-radius: 2px;
+}
+
+.site-typography .navbar-enquire-button .mecpl-arrow-fill-button__circle {
+  transition:
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inset var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    border-radius var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.site-typography .navbar-enquire-button:hover .mecpl-arrow-fill-button__circle,
+.site-typography .navbar-enquire-button:focus-visible .mecpl-arrow-fill-button__circle,
+.site-typography .navbar-enquire-button:active .mecpl-arrow-fill-button__circle {
+  border-radius: 2px;
+}
