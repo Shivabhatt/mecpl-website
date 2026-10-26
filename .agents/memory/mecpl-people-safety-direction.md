@@ -32,3 +32,21 @@ On desktop, each metric value and caption should occupy one line, with consisten
 **Why:** The user repeated the reference showing clean single-line metric pairs after the equal-size treatment still wrapped longer text.
 
 **How to apply:** Keep all copy intact and equal paired font sizes. Allow enough space for the longest caption in the desktop bar; do not clip text or impose desktop no-wrap on narrow-screen layouts.
+
+Keep the People & Safety layout full-width, without outer gutters or inter-panel gaps, with square edges.
+
+**Why:** The user asked that this section match production after a local redesign diverged from its full-bleed layout.
+
+**How to apply:** Do not introduce compact rounded cards or side gutters. Preserve the full-bleed panel composition when adjusting photo presentation.
+
+Use taller image panels and preserve the important subjects in the original photographs, including the portrait award trophy. Small crops of unimportant bottom margins are acceptable; black letterboxing is not.
+
+**Why:** The user repeatedly found people and safety equipment cut off, then supplied uncropped originals and asked for taller panels. They subsequently allowed a slight bottom crop and AI editing to remove black gaps without changing panel size.
+
+**How to apply:** Keep the taller frames and full-width composition. Use a soft same-photo background fill for mismatched aspect ratios, or extend only the background. Keep separate award-presentation slides rather than merging them into a collage.
+
+For AI-assisted award-photo extensions, preserve the actual trophy, inscription and logos from the original photograph rather than trusting an AI redraw.
+
+**Why:** Image editing can change lettering and composition even when instructed not to. Authentic award content must not be changed for visual fitting.
+
+**How to apply:** Generate background-only material and composite the untouched original subject region over it. Keep original uploads available and verify the preserved region before exporting the web image.

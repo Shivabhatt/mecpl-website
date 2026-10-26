@@ -6,7 +6,7 @@
 - [Typography weight exceptions](typography-weight-exceptions.md) — load requested weights and ensure intentional exceptions outrank shared `!important` title rules.
 - [MECPL typography source](mecpl-shared-typography.md) — central Barlow/Manrope roles and the Home/About casing rules are shared; leave other routes untouched until asked.
 - [MECPL dependency install](mecpl-dependency-install.md) — frontend-only filtered pnpm installs avoid unrelated Orval firewall failures when the goal is a website preview.
-- [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — use the static editorial Pune silhouette with red project dots, not a Leaflet or MapLibre street map.
+- [MECPL Projects map direction](mecpl-mobile-map-compatibility.md) — static editorial silhouette; map projects follow the user's workbook, independently of the gallery.
 - [GitHub Pages direct routes](github-pages-direct-routes.md) — public SPA routes need generated route app shells; 404.html alone preserves rendering but still returns HTTP 404.
 - [MECPL mobile asset verification](mecpl-mobile-asset-verification.md) — reproduce reports at 402×874 and inspect natural dimensions plus a rendered capture before changing working asset paths or layout.
 - [MECPL media optimization](mecpl-media-optimization.md) — keep public URLs stable while compressing project JPEGs, large PNGs, and muted background videos with posters.
@@ -19,8 +19,10 @@
 - [Home About layout](mecpl-home-about-layout.md) — desktop reference uses a wide text column and top-aligned natural portrait; preserve the medium font scale and mobile layout.
 - [Home font-trial retirement](mecpl-home-font-preview.md) — the font tester and trial styles were intentionally removed; restore only if the user asks.
 - [About sector summary](mecpl-about-sector-direction.md) — preserve dividers; remove only the red hover line; Services-style icons and matching numbers/labels, with 150+ completed projects.
-- [People & Safety reference](mecpl-people-safety-direction.md) — one shared heading, real photographs, and equal-size Montserrat metric pairs.
+- [People & Safety reference](mecpl-people-safety-direction.md) — shared heading, real photos, equal-size metrics, and the live full-bleed production layout.
 - [Home recognition marks](mecpl-home-recognition-marks.md) — clear issuer logos in matching white circles; preserve text and wait for all entrance animations before judging visibility.
 - [Rising showcase direction](mecpl-rising-showcase-direction.md) — match the supplied white left-video/right-thumbnail reference; retain all four videos and full copy, without project numbering.
 - [MECPL official logo colors](mecpl-official-logo-colors.md) — keep original logo colors; adjust surroundings or remove an illegible placement rather than recoloring it.
+- [MECPL award logo consistency](mecpl-award-logo-consistency.md) — reuse the Awards-page NSCI logo asset in the About and Completed Projects award marks.
 - [Common website footer](mecpl-common-footer.md) — use the Home footer design consistently on every page, with one footer per page.
+- [Documentary photo retouching](documentary-photo-retouching.md) — edit square detail crops and blend only the affected area; full-frame AI edits can reframe genuine photographs.

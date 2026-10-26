@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import MecplArrowButtonContent from "./MecplArrowButtonContent";
 import { Link } from "wouter";
 import "./CertificationAwardsCTA.css";
 
@@ -14,8 +14,8 @@ export default function CertificationAwardsCTA() {
           From the standards we uphold to the recognition we earn, our purpose remains the same:
           to build better, safer and stronger.
         </p>
-        <Link href="/awards" className="cert-awards-cta-button" data-testid="link-cert-awards">
-          View Awards <ArrowRight size={16} aria-hidden="true" />
+        <Link href="/awards" className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary cert-awards-cta-action" data-testid="link-cert-awards">
+          <MecplArrowButtonContent>View Awards</MecplArrowButtonContent>
         </Link>
       </div>
     </section>

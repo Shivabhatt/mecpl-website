@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import MecplArrowButtonContent from "@/components/MecplArrowButtonContent";
 import CompletedProjectsPage from "@/pages/CompletedProjectsPage";
 
 export default function ProjectsPage() {
@@ -25,17 +25,15 @@ export default function ProjectsPage() {
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 border-[1.5px] border-mecpl-red bg-mecpl-red px-5 py-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:border-mecpl-dark hover:bg-mecpl-dark hover:text-white"
+              className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary"
             >
-              <span>Contact Us</span>
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+              <MecplArrowButtonContent>Contact Us</MecplArrowButtonContent>
             </Link>
             <Link
               href="/careers"
-              className="group inline-flex items-center gap-2.5 border-[1.5px] border-white/75 bg-transparent px-5 py-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-mecpl-red"
+              className="mecpl-arrow-fill-button mecpl-arrow-fill-button--outline-light"
             >
-              <span>View Careers</span>
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+              <MecplArrowButtonContent>View Careers</MecplArrowButtonContent>
             </Link>
           </div>
         </div>

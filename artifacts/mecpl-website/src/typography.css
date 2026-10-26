@@ -297,6 +297,12 @@
   .mecpl-font-spec :is(.mecpl-role-nav, .navbar-nav-label) {
     font-size: 14px !important; font-weight: var(--mecpl-spec-weight-semibold) !important; line-height: 1.5 !important;
   }
+  .mecpl-font-spec .navbar-enquire-button {
+    font-size: 14px !important;
+    font-weight: var(--mecpl-spec-weight-semibold) !important;
+    line-height: 1.5 !important;
+    letter-spacing: normal !important;
+  }
   .mecpl-font-spec .recognition-card-title {
     font-size: 12px !important; line-height: 20px !important; font-weight: var(--mecpl-spec-weight-semibold) !important;
   }
@@ -1040,6 +1046,12 @@
     font-size: var(--mecpl-type-supporting) !important;
   }
 
+  .site-typography .completed-projects-page #project-awards .project-award-card-copy > span:first-child {
+    font-weight: 600 !important;
+    color: #30343a !important;
+    text-wrap: balance;
+  }
+
   .site-typography .ps-panel-hse .ps-copy > p,
   .site-typography .ps-panel-team .ps-copy > p {
     font-size: var(--mecpl-type-supporting) !important;
@@ -1246,6 +1258,12 @@
   .site-typography footer :is(p, a, li) {
     font-size: var(--mecpl-type-supporting) !important;
     line-height: 1.65 !important;
+  }
+
+  .site-typography .navbar-enquire-button {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: normal !important;
   }
 
   .abt-stat-value:not(.abt-stat-value-claim),
@@ -1455,5 +1473,15 @@
 
   .site-typography .completed-projects-page h2.mecpl-type-card-title {
     font-family: var(--mecpl-font-ui) !important;
+  }
+
+  .site-typography :is(.about-page, .projects-page, .completed-projects-page, .cert-awards-cta, .mecpl-awards-page, .careers-page) .mecpl-arrow-fill-button,
+  .site-typography :is(.about-page, .projects-page, .completed-projects-page, .cert-awards-cta, .mecpl-awards-page, .careers-page) .mecpl-arrow-fill-button * {
+    font-family: var(--mecpl-font-ui) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import MecplArrowButtonContent from "@/components/MecplArrowButtonContent";
 import AwardsGroups from "./AwardsGroups";
 import { awards } from "@/data/awardsData";
 import "./AwardsPage.Emblem.css";
@@ -56,7 +56,9 @@ export default function AwardsPage() {
             <h2 className="mecpl-role-h2-medium">Standards Today,<br />A Stronger Tomorrow.</h2>
             <p>These recognitions motivate us to keep raising the bar in quality, safety and engineering excellence.</p>
             <div className="emblem-closing-actions">
-              <a href="mailto:contact@mecpl.in" className="emblem-closing-link">Contact MECPL <ArrowRight size={15} aria-hidden="true" /></a>
+              <a href="mailto:contact@mecpl.in" className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary">
+                <MecplArrowButtonContent>Contact MECPL</MecplArrowButtonContent>
+              </a>
             </div>
           </section>
         </main>

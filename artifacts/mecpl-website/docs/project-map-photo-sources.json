@@ -1,0 +1,114 @@
+{
+  "source": "attached_assets/COMPANY_PROFILE_2026_(1)_1791708267344.pdf",
+  "pageNumbering": "One-based PDF pages; imageIndex is zero-based get_images(full=True) order.",
+  "extraction": "Render the exact image rectangle, not the raw embedded bitmap, to honor PDF orientation and aspect transforms. Exclude captions and borders; limit the longest edge to 1280px.",
+  "policy": "Use only photographs of the named project from the user-supplied company profile. Do not infer a building, location or phase from a shared client. Preserve workbook metadata and the separate gallery. Remaining unmapped entries still need approved project-specific photographs.",
+  "photos": [
+    {
+      "id": "completed-7",
+      "filename": "kumar-motors-pirangut.jpg",
+      "page": 46,
+      "imageIndex": 2,
+      "caption": "KUMAR MOTORS PVT. LTD. PIRANGUT"
+    },
+    {
+      "id": "completed-12",
+      "filename": "eon-phase-ii-kharadi.jpg",
+      "page": 73,
+      "imageIndex": 0,
+      "caption": "EON PHASE- II AT KHARADI, PUNE - PANCHSHIL GROUP"
+    },
+    {
+      "id": "completed-19",
+      "filename": "indira-engineering-parandwadi.jpg",
+      "page": 56,
+      "imageIndex": 1,
+      "note": "The embedded bitmap is stretched by the PDF. Render its image rectangle to retain the source's displayed building proportions, excluding captions.",
+      "caption": "INDIRA COLLEGE OF ENGINEERING & MANAGEMENT PARANTWADI"
+    },
+    {
+      "id": "completed-22",
+      "filename": "triose-food-plaza-lonavala.jpg",
+      "page": 54,
+      "imageIndex": 0,
+      "caption": "SREE VINAYAKA HOSPITALITY, LONAVLA ( TRIOSE )"
+    },
+    {
+      "id": "completed-23",
+      "filename": "syntel-global-development-talawade.jpg",
+      "page": 51,
+      "imageIndex": 0,
+      "caption": "GLOBAL DEVELOPMENT CENTER FOR SYNTEL INTERNATIONAL PHASE I, TALAWADE"
+    },
+    {
+      "id": "completed-26",
+      "filename": "tata-research-centre-hadapsar.jpg",
+      "page": 55,
+      "imageIndex": 0,
+      "caption": "TATA RESEARCH CENTRE AT HADAPSAR"
+    },
+    {
+      "id": "completed-27",
+      "filename": "international-biotech-park-hinjewadi.jpg",
+      "page": 61,
+      "imageIndex": 0,
+      "caption": "INTERNATIONAL BIO-TECH PARK, HINJEWADI"
+    },
+    {
+      "id": "completed-29",
+      "filename": "xansa-india-talawade.jpg",
+      "page": 59,
+      "imageIndex": 1,
+      "caption": "XANSA INDIA LTD, TALAWADE"
+    },
+    {
+      "id": "completed-33",
+      "filename": "mahindra-united-world-college.jpg",
+      "page": 57,
+      "imageIndex": 0,
+      "caption": "MAHINDRA UNITED WORLD COLLEGE OF INDIA ADMINISTRATIVE BUILDING - FOYER"
+    },
+    {
+      "id": "completed-44",
+      "filename": "godrej-24-hinjewadi.jpg",
+      "page": 66,
+      "imageIndex": 0,
+      "caption": "GODREJ24, PUNE - PEARLITE REAL PROPERTIES"
+    },
+    {
+      "id": "completed-50",
+      "filename": "pride-world-city-charoli.jpg",
+      "page": 67,
+      "imageIndex": 0,
+      "caption": "PRIDE WORLD CITY AT CHAROLI, PUNE - PRIDE BUILDERS LLP."
+    },
+    {
+      "id": "completed-51",
+      "filename": "gera-green-trinity-kharadi.jpg",
+      "page": 72,
+      "imageIndex": 0,
+      "caption": "GREEN VILLA TRINITY TOWERS AT KHARADI, PUNE - GERA DEVELOPERS"
+    },
+    {
+      "id": "completed-57",
+      "filename": "nandan-edura-erandwane.jpg",
+      "page": 75,
+      "imageIndex": 0,
+      "caption": "NANDAN EDURAA AT ERANDWANE, PUNE - NANDAN BUILDCON"
+    },
+    {
+      "id": "completed-61",
+      "filename": "lavasa-villas.jpg",
+      "page": 53,
+      "imageIndex": 0,
+      "caption": "Villas at LAVASA",
+      "note": "Generic Villas entry only; the source does not identify NP3 villas."
+    }
+  ],
+  "notMapped": [
+    "Amtek page 45 groups Ranjangaon and Sanaswadi without identifying which photograph belongs to which site.",
+    "Indira page 60 gives only the education society name; do not assign to a particular school or campus.",
+    "Nandan Festiva/Aspira page 75 is an architectural rendering, not a project photograph.",
+    "Syntel Global Development Center photography is not assigned to the separate Commercial Bldg entry."
+  ]
+}

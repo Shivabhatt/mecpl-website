@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
+import MecplArrowButtonContent from "../components/MecplArrowButtonContent";
 import PeopleSafetySection from "../components/PeopleSafetySection";
 import RisingProjectsSection from "../components/RisingProjectsSection";
 import RecognitionMarksSection from "../components/RecognitionMarksSection";
@@ -19,12 +20,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ─── TYPES ──────────────────────────────────────────────────────── */
 /* ─── DATA ───────────────────────────────────────────────────────── */
-const heroVideos = [
-  "assets/video/banner-giant-behind-the-giants.mp4",
-  "assets/video/banner-force-within-us.mp4",
-  "assets/video/banner-quality-and-safety.mp4",
-  "assets/video/banner-people-behind-the-building.mp4",
-];
+const heroMedia = [
+  { type: "image", src: "assets/video/posters/banner-giant-behind-the-giants.jpg" },
+  { type: "video", src: "assets/video/banner-force-within-us.mp4" },
+  { type: "video", src: "assets/video/banner-quality-and-safety.mp4" },
+  { type: "video", src: "assets/video/banner-people-behind-the-building.mp4" },
+] as const;
 
 type HeroSlide = {
   heading: string[];
@@ -45,15 +46,15 @@ const heroSlides: HeroSlide[] = [
     subtitle: "An 8,000+ strong team that treats every industrial, commercial, residential or institutional site like it's their own.",
   },
   {
-    heading: ["QUALITY YOU CAN SEE.", "SAFETY YOU CAN RELY ON."],
+    heading: ["QUALITY IN EVERY DETAIL", "SAFETY IN EVERY STEP"],
     keepHeadingLines: true,
-    subtitle: "ISO certified in quality, environment & occupational",
-    subtitleSecondLine: "health & safety | CRISIL BBB / Positive",
+    subtitle: "Through rigorous quality control, proactive construction safety practices and disciplined site management, we uphold high standards across every stage of project execution.",
   },
   {
-    heading: ["PEOPLE BEHIND THE BUILDING"],
-    subtitle: "A team of experts, backed by experienced professionals,",
-    subtitleSecondLine: "bringing expertise and precision to every structure.",
+    heading: ["THE PEOPLE BEHIND", "THE LANDMARKS"],
+    keepHeadingLines: true,
+    subtitle: "Our engineers, project teams and skilled workforce bring the expertise,",
+    subtitleSecondLine: "teamwork and dedication that turn ambitious visions into landmarks built to last.",
   },
 ];
 
@@ -122,6 +123,8 @@ const testimonials = [
   { quote: "MECPL is equipped with better infrastructure and well-qualified, experienced staff — capable of handling any type of project.", name: "Pride Properties", role: "Certificate of Testimony" },
   { quote: "We were particularly impressed by MECPL's professional expertise and interaction with our project managers — despite the site's unyielding terrain.", name: "Mahindra United World College", role: "Project Correspondence" },
   { quote: "Millennium Engineers & Contractors completed our Universal Temple project on time, with real professionalism and skilled staff.", name: "Mahindra United World College", role: "President, Ramakrishna Math" },
+  { quote: "We have been working with Millennium for over 10 years, and it has been a very positive association. We are happy working with their team and feel confident and comfortable entrusting our projects to them. The trust we have built over the years makes our association truly valuable.", name: "Arvind Jain", role: "Managing Director, Pride Group" },
+  { quote: "Our business association with Millennium began over 12 years ago. Since then, they have successfully completed several of our residential and commercial projects, including Trump Towers and World Trade Centre, along with numerous turnkey projects for SRA. It has been a longstanding association across a diverse range of projects.", name: "Abhay Chordia", role: "Joint Managing Director, Panchshil Group" },
 ];
 
 const clients = [
@@ -244,7 +247,7 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
   useEffect(() => {
     if (!isReady) return;
     setVideoIdx(0);
-    const id = setInterval(() => setVideoIdx(v => (v + 1) % heroVideos.length), 8000);
+    const id = setInterval(() => setVideoIdx(v => (v + 1) % heroMedia.length), 8000);
     return () => clearInterval(id);
   }, [isReady]);
 
@@ -406,28 +409,49 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
         data-testid="section-hero"
         style={{ visibility: isReady ? "visible" : "hidden" }}
       >
-        {/* 3 cycling videos — only active one plays */}
-        {heroVideos.map((src, i) => (
-          <video
-            key={i}
-            ref={el => { videoRefs.current[i] = el; }}
-            muted
-            loop
-            playsInline
-            preload={i === 0 ? "auto" : "none"}
-            poster={posterFor(src)}
-            style={{
-              position: "absolute", inset: 0,
-              width: "100%", height: "100%", objectFit: "cover",
-              filter: "brightness(1.12) contrast(1.03) saturate(1.08)",
-              opacity: videoIdx === i ? 1 : 0,
-              transition: "opacity 1.4s ease",
-              zIndex: videoIdx === i ? 1 : 0,
-            }}
-          >
-            <source src={`${assetBase}${src}`} type="video/mp4" />
-          </video>
-        ))}
+        {/* Start with the supplied still image, then continue through the video slides. */}
+        {heroMedia.map((media, i) => {
+          const mediaStyle = {
+            position: "absolute" as const,
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover" as const,
+            filter: "brightness(1.12) contrast(1.03) saturate(1.08)",
+            opacity: videoIdx === i ? 1 : 0,
+            transition: "opacity 1.4s ease",
+            zIndex: videoIdx === i ? 1 : 0,
+          };
+
+          if (media.type === "image") {
+            return (
+              <img
+                key={media.src}
+                src={`${assetBase}${media.src}`}
+                alt=""
+                aria-hidden="true"
+                loading="eager"
+                decoding="async"
+                style={mediaStyle}
+              />
+            );
+          }
+
+          return (
+            <video
+              key={media.src}
+              ref={el => { videoRefs.current[i] = el; }}
+              muted
+              loop
+              playsInline
+              preload={i === 1 ? "auto" : "none"}
+              poster={posterFor(media.src)}
+              style={mediaStyle}
+            >
+              <source src={`${assetBase}${media.src}`} type="video/mp4" />
+            </video>
+          );
+        })}
 
         {/* Cinematic gradient overlay */}
         <div style={{
@@ -444,7 +468,7 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
             
             color: "rgba(255,255,255,0.45)", 
           }}>
-            {String(videoIdx + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
+            {String(videoIdx + 1).padStart(2, "0")} / {String(heroMedia.length).padStart(2, "0")}
           </div>
           <div style={{ width: "60px", height: "1px", background: "rgba(255,255,255,0.15)", position: "relative", overflow: "hidden" }}>
             <div key={`${videoIdx}-${isReady}`} className="hero-progress-bar" style={{
@@ -492,10 +516,10 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
             </h1>
 
             {/* Per-slide subtitle */}
-            <p className="mecpl-role-lead page-subtitle-font home-intro-description" key={`sub-${videoIdx}`} style={{
+            <p className="mecpl-role-lead page-subtitle-font home-intro-description text-[#ffffffff]" key={`sub-${videoIdx}`} style={{
               
               color: "rgba(255,255,255,0.95)",
-              margin: "0 auto 20px", maxWidth: "460px",
+              margin: "0 auto 20px", maxWidth: videoIdx === 3 ? "min(760px, 90vw)" : "460px",
               animation: "heroSlideIn 0.7s ease forwards",
             }}>
               {activeHeroSlide.subtitle}
@@ -504,34 +528,18 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
 
             {/* Constant buttons */}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-              <Link href="/projects" data-testid="button-hero-projects">
-                <span
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "8px",
-                    background: "#EC3338", color: "#ffffff",
-                    
-                    
-                    
-                    padding: "14px 32px", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#232529")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#EC3338")}
-                  className="mecpl-role-button">
-                  Explore our work <ArrowRight size={11} />
+              <Link
+                href="/projects"
+                data-testid="button-hero-projects"
+                className="mecpl-arrow-fill-link"
+              >
+                <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mecpl-role-button">
+                  <MecplArrowButtonContent>Explore our work</MecplArrowButtonContent>
                 </span>
               </Link>
-              <Link href="/about">
-                <span
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "8px",
-                    border: "1px solid rgba(255,255,255,0.55)", color: "#ffffff",
-                    
-                    
-                    
-                    padding: "13px 28px", cursor: "pointer",
-                  }}
-                  className="mecpl-role-button">
-                  Watch our story <ArrowRight size={11} />
+              <Link href="/about" className="mecpl-arrow-fill-link">
+                <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--outline-light mecpl-role-button">
+                  <MecplArrowButtonContent>Watch our story</MecplArrowButtonContent>
                 </span>
               </Link>
             </div>
@@ -685,7 +693,7 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
                   color: "#EC3338", 
                   display: "block", marginBottom: "10px",
                 }}>
-                  Who we are
+                  How It All Started
                 </span>
                 <h2 className="mecpl-role-h2-large hp-section-title home-heading-26 home-intro-title whitespace-normal" style={{
                   maxWidth: "520px",
@@ -816,7 +824,7 @@ export default function HomePage({ isReady = true }: { isReady?: boolean }) {
               color: "#EC3338", 
               display: "block", marginBottom: "18px",
             }}>
-              What we do
+              Expertise in Action
             </span>
             <h2 className="mecpl-role-h2-large home-services-title home-heading-26 home-intro-title home-intro-title-has-description text-white" style={{
               margin: 0, 

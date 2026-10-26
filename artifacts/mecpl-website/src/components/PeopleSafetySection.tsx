@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { sentenceCase } from "@/lib/typography";
-import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import MecplArrowButtonContent from "./MecplArrowButtonContent";
 
 type CarouselImage = {
   src: string;
@@ -9,6 +9,12 @@ type CarouselImage = {
 };
 
 const teamImages: CarouselImage[] = [
+  {
+    src: "assets/people-safety/credai-pride-best-facility-award-2025-team-full-no-watermark.jpg",
+    alt: "MECPL team receiving the 2025 CREDAI Pune Pride Best Facility Gold Award",
+  },
+  { src: "assets/people-safety/credai-pride-best-facility-award-2025-team-presentation-no-watermark.jpg", alt: "MECPL team presenting the 2025 CREDAI Pune Pride Best Facility Gold Award and certificate" },
+  { src: "assets/people-safety/credai-pride-best-facility-award-2025-gold-trophy-landscape.jpg", alt: "Original CREDAI Pune Pride Best Facility Gold Award trophy and plaque, 2025, with an extended background" },
   { src: "assets/people-safety/18_1790178654341.jpg", alt: "MECPL workforce gathered together on site" },
   { src: "assets/people-safety/27_1790178654349.jpg", alt: "Children taking part in a supported classroom lesson" },
   { src: "assets/people-safety/26_1790178654348.jpg", alt: "Children receiving education support at a MECPL labour camp" },
@@ -19,12 +25,13 @@ const hseImages: CarouselImage[] = [
   { src: "assets/people-safety/19_1790178654342.jpg", alt: "MECPL workers attending a safety induction" },
   { src: "assets/people-safety/20_1790178654343.jpg", alt: "MECPL workers completing site entry verification" },
   { src: "assets/people-safety/17_1790178654339.jpg", alt: "Personal protective equipment prepared for a construction site" },
+  { src: "assets/people-safety/hse-electrical-room-fire-station.jpg", alt: "Fire extinguishers and a fire bucket beside the MECPL site electrical room" },
+  { src: "assets/people-safety/hse-fire-hose-reel-full-no-watermark.jpg", alt: "Fire hose reel installed at a MECPL site" },
   { src: "assets/people-safety/21_1790178654344.jpg", alt: "MECPL worker using fall-protection equipment" },
   { src: "assets/people-safety/22_1790178654345.jpg", alt: "Medical professional checking a MECPL worker on site" },
-  { src: "assets/people-safety/24_1790178654346.jpg", alt: "Clean accommodation facilities for the MECPL workforce" },
-  { src: "assets/people-safety/25_1790178654347.jpg", alt: "MECPL workforce accommodation building" },
+  { src: "assets/people-safety/hse-fire-hydrant-line-full-no-watermark.jpg", alt: "Fire hydrant line installed along the MECPL site building" },
   { src: "assets/people-safety/28_1790178654350.jpg", alt: "Medical care being provided to a MECPL worker" },
-  { src: "assets/people-safety/29_1790178654351.jpg", alt: "Doctors conducting a health check-up for a MECPL worker" },
+  { src: "assets/people-safety/hse-accommodation-room.jpg", alt: "MECPL worker accommodation room with a bed and wall fan" },
 ];
 
 type SafetyStat = {
@@ -54,44 +61,90 @@ const hseStats: SafetyStat[] = [
 function ImageCarousel({
   images,
   assetBase,
+  label,
 }: {
   images: CarouselImage[];
   assetBase: string;
+  label: string;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  // Also restart the viewing interval when the current dot is selected again.
+  const [selection, setSelection] = useState(0);
+  const stopped = prefersReducedMotion || hovered || focused;
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setPrefersReducedMotion(preference.matches);
+    preference.addEventListener("change", onChange);
+    return () => preference.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (stopped || images.length < 2) return;
+
+    const timer = window.setTimeout(() => {
       setActiveIndex((index) => (index + 1) % images.length);
     }, 4000);
 
-    return () => window.clearInterval(timer);
-  }, [images.length]);
+    return () => window.clearTimeout(timer);
+  }, [images.length, activeIndex, selection, stopped]);
 
   return (
-    <div className="ps-carousel">
+    <div
+      className="ps-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={label}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse" || event.pointerType === "pen") setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+      }}
+    >
       {images.map((image, index) => (
-        <img
-          key={image.src}
-          src={`${assetBase}${image.src}`}
-          alt={image.alt}
-          className={`ps-carousel-image ${index === activeIndex ? "is-active" : ""}`}
-          loading={index === 0 ? "eager" : "lazy"}
-          aria-hidden={index !== activeIndex}
-        />
-      ))}
-      <div className="ps-carousel-dots" aria-label="Carousel navigation">
-        {images.map((image, index) => (
-          <button
-            key={image.src}
-            type="button"
-            className={`ps-carousel-dot ${index === activeIndex ? "is-active" : ""}`}
-            onClick={() => setActiveIndex(index)}
-            aria-label={`Show image ${index + 1} of ${images.length}`}
-            aria-current={index === activeIndex ? "true" : undefined}
+        <Fragment key={image.src}>
+          <div
+            aria-hidden="true"
+            className={`ps-carousel-backdrop ${index === activeIndex ? "is-active" : ""}`}
+            style={{ backgroundImage: `url("${assetBase}${image.src}")` }}
           />
-        ))}
+          <img
+            src={`${assetBase}${image.src}`}
+            alt={image.alt}
+            className={`ps-carousel-image ${index === activeIndex ? "is-active" : ""}`}
+            loading={index === 0 ? "eager" : "lazy"}
+            aria-hidden={index !== activeIndex}
+          />
+        </Fragment>
+      ))}
+      <div className="ps-carousel-controls">
+        <div className="ps-carousel-dots" role="group" aria-label={`${label} navigation`}>
+          {images.map((image, index) => (
+            <button
+              key={image.src}
+              type="button"
+              className={`ps-carousel-dot ${index === activeIndex ? "is-active" : ""}`}
+              onClick={() => {
+                setActiveIndex(index);
+                setSelection((value) => value + 1);
+              }}
+              aria-label={`Show image ${index + 1} of ${images.length}`}
+              aria-current={index === activeIndex ? "true" : undefined}
+            />
+          ))}
+        </div>
       </div>
+      <span className="sr-only" aria-live={stopped ? "polite" : "off"} aria-atomic="true">
+        Photo {activeIndex + 1} of {images.length}: {images[activeIndex].alt}
+      </span>
     </div>
   );
 }
@@ -118,7 +171,7 @@ export default function PeopleSafetySection() {
     <section id="people-safety" data-testid="section-people-safety" className="ps-section" aria-labelledby="people-safety-title">
       <div className="ps-shell">
         <header className="ps-section-heading">
-          <span className="ps-section-kicker">People &amp; safety</span>
+          <span className="ps-section-kicker text-[#ec3338]">PEOPLE &amp; SAFETY</span>
           <h2 id="people-safety-title" className="mecpl-role-h2-large ps-common-heading">
             Building a Culture of Care and Capability
           </h2>
@@ -132,13 +185,13 @@ export default function PeopleSafetySection() {
               workplace, we support education for workers’ children and responsible environmental
               practices, helping build safer, healthier communities.
             </p>
-            <Link href="/about" className="ps-link">
-              <span className="ps-button mecpl-role-button">
-                Our safety practices <ArrowRight size={15} />
+            <Link href="/about" className="ps-link mecpl-arrow-fill-link">
+              <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mecpl-role-button">
+                <MecplArrowButtonContent>Our safety practices</MecplArrowButtonContent>
               </span>
             </Link>
           </div>
-          <ImageCarousel images={hseImages} assetBase={assetBase} />
+          <ImageCarousel images={hseImages} assetBase={assetBase} label="Safety photos" />
           <StatsRow id="people-safety-highlights" stats={hseStats} />
         </article>
 
@@ -153,13 +206,13 @@ export default function PeopleSafetySection() {
               leadership teams, we invest in capability, safety, wellbeing and continuous development
               across the organisation.
             </p>
-            <Link href="/careers" className="ps-link">
-              <span className="ps-button mecpl-role-button">
-                Join our team <ArrowRight size={15} />
+            <Link href="/careers" className="ps-link mecpl-arrow-fill-link">
+              <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mecpl-role-button">
+                <MecplArrowButtonContent>Join our team</MecplArrowButtonContent>
               </span>
             </Link>
           </div>
-          <ImageCarousel images={teamImages} assetBase={assetBase} />
+          <ImageCarousel images={teamImages} assetBase={assetBase} label="Team photos" />
           <StatsRow stats={teamStats} />
         </article>
       </div>
@@ -190,7 +243,7 @@ export default function PeopleSafetySection() {
         .ps-section-kicker {
           display: block;
           margin: 0 0 12px;
-          color: #cb777d;
+          color: #ec3338;
         }
         #people-safety .ps-section-heading h2.ps-common-heading {
           max-width: 900px;
@@ -278,33 +331,6 @@ export default function PeopleSafetySection() {
           color: inherit;
           text-decoration: none;
         }
-        .ps-button {
-          display: inline-flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 14px;
-          width: fit-content;
-          padding: 11px 13px;
-          background: #ec3338;
-          color: #fff;
-          cursor: pointer;
-          transition: background 180ms ease, color 180ms ease;
-        }
-        .ps-button:hover {
-          background: #232529;
-          color: #ffffff;
-        }
-        .ps-button-secondary .ps-button {
-          border: 1px solid rgba(35, 37, 41, 0.22);
-          background: #ffffff;
-          color: #232529;
-        }
-        .ps-button-secondary .ps-button:hover {
-          border-color: #ec3338;
-          background: #ec3338;
-          color: #ffffff;
-        }
-        .ps-button:focus-visible,
         .ps-carousel-dot:focus-visible {
           outline: 2px solid #ec3338;
           outline-offset: 4px;
@@ -371,13 +397,13 @@ export default function PeopleSafetySection() {
           grid-row: 1;
           min-height: 0;
           overflow: hidden;
-          background: #171a1d;
+          background: #232529;
         }
         .ps-panel-team .ps-carousel,
         .ps-panel-hse .ps-carousel {
           grid-column: 2;
           grid-row: 1;
-          min-height: 0;
+          min-height: clamp(360px, 37.5vw, 720px);
         }
         .ps-panel-team .ps-carousel {
           grid-column: 1;
@@ -390,40 +416,71 @@ export default function PeopleSafetySection() {
           border: 1px solid rgba(255, 255, 255, 0.22);
           pointer-events: none;
         }
+        .ps-carousel-backdrop {
+          position: absolute;
+          inset: -18px;
+          background-size: cover;
+          background-position: center;
+          filter: blur(16px);
+          opacity: 0;
+          transition: opacity 700ms ease;
+          pointer-events: none;
+        }
+        .ps-carousel-backdrop.is-active {
+          opacity: 1;
+        }
         .ps-carousel-image {
           position: absolute;
+          z-index: 1;
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
+          object-position: center center;
           opacity: 0;
           transition: opacity 700ms ease;
         }
         .ps-carousel-image.is-active {
           opacity: 1;
         }
-        .ps-carousel-dots {
+        .ps-carousel-controls {
           position: absolute;
           z-index: 2;
           right: 14px;
           bottom: 14px;
           display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          max-width: calc(100% - 28px);
           gap: 6px;
           padding: 6px 8px;
-          background: rgba(20, 22, 25, 0.5);
-          backdrop-filter: blur(6px);
+          background: transparent;
+        }
+        .ps-carousel-dots {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2px;
         }
         .ps-carousel-dot {
+          display: grid;
+          place-items: center;
+          width: 24px;
+          height: 28px;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+        }
+        .ps-carousel-dot::after {
+          content: "";
           width: 6px;
           height: 6px;
-          padding: 0;
           border: 1px solid rgba(255, 255, 255, 0.8);
           border-radius: 50%;
           background: transparent;
-          cursor: pointer;
           transition: width 180ms ease, background 180ms ease, border-color 180ms ease;
         }
-        .ps-carousel-dot.is-active {
+        .ps-carousel-dot.is-active::after {
           width: 19px;
           border-radius: 10px;
           background: #ec3338;
@@ -453,7 +510,7 @@ export default function PeopleSafetySection() {
             grid-column: 1;
             grid-row: 2;
             min-height: 0;
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 4 / 3;
           }
           .ps-panel-team .ps-stats,
           .ps-panel-hse .ps-stats {
@@ -486,14 +543,16 @@ export default function PeopleSafetySection() {
           .ps-stat:first-child {
             padding-left: 0;
           }
-          .ps-carousel-dots {
+          .ps-carousel-controls {
             right: 12px;
             bottom: 12px;
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .ps-carousel-image {
-            transition: opacity 150ms linear;
+          .ps-carousel-image,
+          .ps-carousel-backdrop,
+          .ps-carousel-dot::after {
+            transition: none;
           }
         }
       `}</style>

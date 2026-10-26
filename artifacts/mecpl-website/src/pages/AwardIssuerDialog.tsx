@@ -86,7 +86,14 @@ export default function AwardIssuerDialog({
             }}>
             {images.length ? images.map((image) => (
               <figure key={image.src}>
-                <img src={base + image.src} alt={image.caption} loading="lazy" />
+              <img
+                src={base + image.src}
+                alt={image.caption}
+                loading="lazy"
+                style={image.rotation || image.flipX ? {
+                  transform: `${image.rotation ? `rotate(${image.rotation}deg)` : ""}${image.flipX ? " scaleX(-1)" : ""}`.trim(),
+                } : undefined}
+              />
               </figure>
             )) : <div className="aw-issuer-empty">
               <strong>Original award images are not yet available.</strong>

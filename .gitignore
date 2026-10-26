@@ -49,3 +49,5 @@ Thumbs.db
 .cache/
 .local/
 .agents/outputs/
+/attached_assets/generated_images/
+/generated-artifacts/

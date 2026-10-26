@@ -31,7 +31,7 @@ const defs: { group: string; category: Award["category"]; items: { key: string; 
     { key: "apex", label: "Apex India Safety Awards", re: /apex/i, logo: "apex-symbol.png" } ] },
   { group: "Quality Awards", category: "quality", items: [
     { key: "bai", label: "Well Built Structure Awards for Quality", re: /builders|bai/i },
-    { key: "ici", label: "Indian Concrete Institute Awards", re: /concrete|\bici\b/i, logo: "ici-mark.png" },
+    { key: "ici", label: "Indian Concrete Institute Awards", re: /concrete|\bici\b/i, logo: "ici-mark.jpg" },
     { key: "aesa", label: "AESA Awards", re: /aesa/i, logo: "aesa-mark.png" } ] },
 ];
 const match = (x: Award, re: RegExp) => re.test(x.issuer) || re.test(x.title);

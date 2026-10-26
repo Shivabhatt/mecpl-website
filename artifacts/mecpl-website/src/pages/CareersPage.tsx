@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { sentenceCase } from "@/lib/typography";
+import MecplArrowButtonContent from "@/components/MecplArrowButtonContent";
 import "./CareersPage.css";
 import {
   MapPin,
   Clock,
-  ArrowRight,
   Send,
   ShieldCheck,
   Briefcase,
@@ -142,15 +142,15 @@ export default function CareersPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#abt3"
-              className="careers-hero-cta inline-flex items-center justify-center gap-3 bg-mecpl-red px-6 py-4 text-white transition-colors hover:bg-[#ab1831]"
+              className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary"
             >
-              Explore open roles <ArrowRight size={14} />
+              <MecplArrowButtonContent>Explore Open Roles</MecplArrowButtonContent>
             </a>
             <a
                href="#careers-life"
-              className="careers-hero-cta inline-flex items-center justify-center gap-3 border border-white/30 px-6 py-4 text-white transition-colors hover:border-white/70 hover:bg-white/10"
+              className="mecpl-arrow-fill-button mecpl-arrow-fill-button--outline-light"
             >
-              Life at MECPL
+              <MecplArrowButtonContent>Life at MECPL</MecplArrowButtonContent>
             </a>
           </div>
         </div>
@@ -167,8 +167,8 @@ export default function CareersPage() {
               <p className="text-mecpl-text text-sm md:text-base leading-relaxed max-w-md">
                 We encourage our employees to achieve growth by creating opportunities to learn, lead, and contribute. Our teams work on landmark projects with disciplined standards and strong collaboration.
               </p>
-              <a href="#apply-form" data-testid="button-careers-workplace-apply" className="inline-flex min-h-12 items-center justify-center gap-3 mt-8 bg-[#EC3338] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#cf2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EC3338]">
-                Apply Now <ArrowRight size={14} aria-hidden="true" />
+              <a href="#apply-form" data-testid="button-careers-workplace-apply" className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mt-8">
+                <MecplArrowButtonContent>Apply Now</MecplArrowButtonContent>
               </a>
             </div>
             <div className="relative">
@@ -293,9 +293,9 @@ export default function CareersPage() {
                 </p>
                 <a
                   href="#abt3"
-                  className="inline-flex items-center gap-3 self-start bg-mecpl-red px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#ab1831]"
+                  className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary self-start"
                 >
-                  Explore Open Roles <ArrowRight size={14} />
+                  <MecplArrowButtonContent>Explore Open Roles</MecplArrowButtonContent>
                 </a>
               </div>
             </div>
@@ -375,10 +375,10 @@ export default function CareersPage() {
                 <div>
                   <a
                     href={`mailto:contact@mecpl.in?subject=Application for ${job.title}`}
-                    className="inline-flex items-center gap-2 px-6 py-4 bg-mecpl-dark text-white text-[10px] font-semibold uppercase tracking-[0.2em] hover:bg-mecpl-red transition-colors rounded-sm w-full md:w-auto justify-center"
+                    className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary"
                     data-testid={`button-apply-${i}`}
                   >
-                    Apply Now <ArrowRight size={14} />
+                    <MecplArrowButtonContent>Apply Now</MecplArrowButtonContent>
                   </a>
                 </div>
               </div>
@@ -483,10 +483,10 @@ export default function CareersPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-mecpl-red hover:bg-mecpl-dark text-white font-semibold text-[10px] tracking-[0.2em] uppercase p-5 rounded-sm transition-colors flex items-center justify-center gap-2 mt-4"
+                  className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary careers-submit-button mt-4"
                   data-testid="button-submit-application"
                 >
-                  Submit Application <ArrowRight size={14} />
+                  <MecplArrowButtonContent>Submit Application</MecplArrowButtonContent>
                 </button>
               </form>
             )}
@@ -499,11 +499,11 @@ export default function CareersPage() {
             Ready to Build What Comes Next.
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="#abt3" className="mecpl-button mecpl-button--primary">
-              View Current Opportunities <ArrowRight size={12} />
+            <a href="#abt3" className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary">
+              <MecplArrowButtonContent>View Current Opportunities</MecplArrowButtonContent>
             </a>
-            <a href="#apply-form" className="mecpl-button mecpl-button--outline-light">
-              Submit Application <ArrowRight size={12} />
+            <a href="#apply-form" className="mecpl-arrow-fill-button mecpl-arrow-fill-button--outline-light">
+              <MecplArrowButtonContent>Submit Application</MecplArrowButtonContent>
             </a>
           </div>
         </div>

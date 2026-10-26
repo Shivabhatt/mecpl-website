@@ -69,7 +69,7 @@
     text-transform: uppercase !important;
   }
 
-  .site-typography .careers-page :is(.careers-hero-cta, a.mecpl-button, button[type="submit"]) {
+  .site-typography .careers-page :is(.careers-hero-cta, a.mecpl-button, button[type="submit"]:not(.mecpl-arrow-fill-button)) {
     font-family: var(--mecpl-font-ui) !important;
     font-size: 10px !important;
     font-weight: var(--mecpl-spec-weight-bold) !important;
@@ -104,6 +104,15 @@
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.careers-page .mecpl-arrow-fill-button,
+.careers-page .mecpl-arrow-fill-button__mask {
+  padding-inline: 10px;
+}
+
+.careers-page .mecpl-arrow-fill-button.careers-submit-button {
+  width: 100%;
 }
 
 .careers-page .careers-growth-copy a {

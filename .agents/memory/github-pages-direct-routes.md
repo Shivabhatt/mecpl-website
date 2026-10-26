@@ -5,6 +5,6 @@ description: How to preserve HTTP 200 responses for direct links to MECPL client
 
 Generate a copy of the built app shell for every public client-side route in both clean-URL and trailing-slash forms. Keep `404.html` only as a fallback for unknown paths.
 
-**Why:** GitHub Pages does not provide arbitrary SPA rewrites. Serving the app from `404.html` can render the correct client route, but the HTTP status remains 404 and fails direct-link requirements.
+**Why:** GitHub Pages does not provide arbitrary SPA rewrites. Serving the app from `404.html` can render the correct client route, but the HTTP status remains 404 and fails direct-link requirements. GitHub Pages can also serve a previously cached CSS response for up to 10 minutes after the same asset URL is updated.
 
-**How to apply:** Whenever a public route or static blog slug is added or removed, update the production route-shell list in the same change and verify the generated files match the root app shell.
+**How to apply:** Whenever a public route or static blog slug is added or removed, update the production route-shell list in the same change and verify the generated files match the root app shell. After a CSS-only publish, verify the live asset body and `Last-Modified`; if the old body is still cached, wait for expiry or publish under a new filename when immediate cache-busting matters.

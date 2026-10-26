@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { titleCase } from "@/lib/typography";
 import { Link } from "wouter";
+import MecplArrowButtonContent from "@/components/MecplArrowButtonContent";
 import "./AboutSectors.css";
 import ServiceLineIcon, { type ServiceIconType } from "@/components/ServiceLineIcon";
 import {
@@ -89,9 +90,11 @@ const awards = [
   { title: "British Safety Council", desc: "International Safety Award – Distinction 2026", img: `${assetBase}assets/awards/british-safety-council-award-2026-mark.webp` },
   { title: "ISO Certified Company", desc: "Quality, Environmental & Safety", img: `${assetBase}assets/recognition/iso-mark.png` },
   { title: "CRISIL BBB / Positive", desc: "Financial Rating", img: `${assetBase}assets/recognition/crisil-rating.jpg` },
-  { title: "NSCI Safety Awards", desc: "7 Award-Winning Projects", img: `${assetBase}assets/awards/nsci-symbol.png` },
+  { title: "NSCI Safety Awards", desc: "7 Projects Awarded", img: `${assetBase}assets/awards/nsci-symbol.png` },
+  { title: "PCERF Safety Awards", desc: "11 Projects Awarded", img: `${assetBase}assets/awards/pcerf-safety-award-mark.webp` },
   { title: "CIDC Vishwakarma Awards", desc: "Construction Health, Safety & Environment", img: `${assetBase}assets/awards/cidc-vishwakarma-award-2026.png` },
-  { title: "BAI Well Built Structure Awards", desc: "13 Award-Winning Projects", img: `${assetBase}assets/awards/bai-well-built-structure-award.png` },
+  { title: "BAI Well Built Structure Awards", desc: "13 Projects Awarded", img: `${assetBase}assets/awards/bai-well-built-structure-award.png` },
+  { title: "Indian Concrete Institute Awards", desc: "8 Projects Awarded", img: `${assetBase}assets/awards/ici-mark.jpg` },
 ];
 
 const journey = [
@@ -144,6 +147,31 @@ function RevealBlock({ children, delay = 0, className = "" }: { children: React.
     >
       {children}
     </div>
+  );
+}
+
+function RevealParagraph({ children, delay = 0, className = "", style }: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  useScrollReveal(ref);
+
+  return (
+    <p
+      ref={ref}
+      className={`reveal-block ${className}`.trim()}
+      style={{
+        ...style,
+        opacity: 0,
+        transform: "translateY(16px)",
+        transition: `opacity 700ms ease-out ${delay}ms, transform 700ms cubic-bezier(.16,1,.3,1) ${delay}ms`,
+      }}
+    >
+      {children}
+    </p>
   );
 }
 
@@ -374,9 +402,9 @@ function LeadershipDoorSlider() {
           <h2 className="page-title-font font-montserrat" style={{ fontWeight: 600, fontSize: "36px", color: "rgb(17,24,39)", letterSpacing: "-0.01em", lineHeight: 1.15, margin: "0 0 20px" }}>
             Built on Experience. Driven by the Future.
           </h2>
-          <p className="font-montserrat" style={{ fontSize: "14px", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
+          <RevealParagraph delay={180} className="font-montserrat abt-leadership-intro" style={{ fontSize: "14px", color: "#949599", lineHeight: 1.85, margin: "0 0 28px" }}>
             For over five decades, MECPL has been shaped by leaders who combine deep industry experience with a forward-looking approach to construction, people and business.
-          </p>
+          </RevealParagraph>
           <div style={{ width: 36, height: 2, background: "rgba(0,0,0,0.15)" }} />
         </div>
 
@@ -480,16 +508,16 @@ function LeadershipDoorSlider() {
                 {selectedLeader.role}
               </div>
               <div style={{ display: "grid", gap: 14 }}>
-                {selectedLeader.details.map((detail) => (
-                  <p key={detail} className="font-montserrat" style={{ margin: 0, color: "#e1e3e6", fontSize: "0.82rem", lineHeight: 1.75 }}>
+                {selectedLeader.details.map((detail, index) => (
+                  <RevealParagraph key={detail} delay={100 + index * 140} className="font-montserrat abt-leadership-profile-paragraph" style={{ margin: 0, color: "#e1e3e6", fontSize: "0.82rem", lineHeight: 1.75 }}>
                     {detail}
-                  </p>
+                  </RevealParagraph>
                 ))}
               </div>
               <div style={{ marginTop: 24, paddingLeft: 16, borderLeft: "3px solid #EC3338" }}>
-                <p className="font-montserrat" style={{ margin: 0, color: "#EC3338", fontSize: "0.78rem", fontWeight: 600, lineHeight: 1.6 }}>
+                <RevealParagraph delay={100 + selectedLeader.details.length * 140} className="font-montserrat abt-leadership-profile-paragraph" style={{ margin: 0, color: "#EC3338", fontSize: "0.78rem", fontWeight: 600, lineHeight: 1.6 }}>
                   {selectedLeader.quote}
-                </p>
+                </RevealParagraph>
               </div>
             </div>
           </div>
@@ -500,6 +528,47 @@ function LeadershipDoorSlider() {
 }
 
 export default function AboutPage() {
+  const storyVideoDialogRef = useRef<HTMLDialogElement>(null);
+  const storyVideoRef = useRef<HTMLVideoElement>(null);
+  const storyCloseTimerRef = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (storyCloseTimerRef.current !== null) {
+      window.clearTimeout(storyCloseTimerRef.current);
+    }
+  }, []);
+
+  const openStoryVideo = () => {
+    const dialog = storyVideoDialogRef.current;
+    if (!dialog || dialog.open) return;
+    if (storyCloseTimerRef.current !== null) {
+      window.clearTimeout(storyCloseTimerRef.current);
+      storyCloseTimerRef.current = null;
+    }
+    dialog.classList.remove("is-closing");
+    const video = storyVideoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    dialog.showModal();
+    void video?.play().catch(() => {});
+  };
+
+  const closeStoryVideo = () => {
+    const dialog = storyVideoDialogRef.current;
+    if (!dialog?.open || dialog.classList.contains("is-closing")) return;
+    dialog.classList.add("is-closing");
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : 520;
+    storyCloseTimerRef.current = window.setTimeout(() => {
+      if (dialog.open) dialog.close();
+      dialog.classList.remove("is-closing");
+      storyCloseTimerRef.current = null;
+    }, duration);
+  };
+
   return (
     <div data-animate-page className="about-page font-montserrat" style={{ background: "#ffffff", color: "#232529" }}>
       {/* ─── 01 — OUR STORY (Hero) ───────────────────────────── */}
@@ -510,7 +579,7 @@ export default function AboutPage() {
           height: "100vh",
           overflow: "hidden",
           backgroundColor: "#232529",
-          backgroundImage: `url(${assetBase}assets/services-crane-background.jpg)`,
+          backgroundImage: `url(${assetBase}assets/about-story-people-site.jpg)`,
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -521,7 +590,7 @@ export default function AboutPage() {
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
           textAlign: "center",
         }}>
-          <span className="about-hero-label font-montserrat font-medium" style={{ fontSize: "clamp(11px, 2.75vw, 15px)", fontWeight: 500, letterSpacing: "clamp(0.05em, 0.18vw, 0.18em)", color: "rgba(255,255,255,0.7)", display: "block", marginBottom: 16, textTransform: "uppercase" }}>
+          <span className="about-hero-label font-montserrat font-medium" style={{ fontSize: "clamp(11px, 2.75vw, 15px)", fontWeight: 500, letterSpacing: "clamp(0.05em, 0.18vw, 0.18em)", color: "#ffffff", display: "block", marginBottom: 16, textTransform: "uppercase" }}>
             Our story
           </span>
           <h1 className="about-hero-title hp-banner-title page-title-font font-montserrat" style={{ margin: "0 0 16px", animation: "heroSlideIn 0.7s ease forwards" }}>
@@ -530,23 +599,23 @@ export default function AboutPage() {
               fontWeight: 500,
               lineHeight: 1.15, color: "#ffffff",
             }}>
-              45+ years of<br/>building what lasts.
+              45+ years of<br/>building what lasts
             </div>
           </h1>
           <h2 className="about-hero-tagline font-montserrat" style={{
             fontSize: "14px",
             fontWeight: 400,
-            color: "rgba(255,255,255,0.9)",
+            color: "#ffffff",
             letterSpacing: "normal",
             lineHeight: 1.7,
             margin: "0 0 12px",
           }}>
             People. Partnerships. Progress.
           </h2>
-          <p className="about-hero-description page-subtitle-font font-montserrat" style={{
+          <p className="about-hero-description page-subtitle-font font-montserrat text-[#ffffff]" style={{
             fontSize: "14px",
             fontWeight: 400,
-            color: "rgba(255,255,255,0.65)",
+            color: "#ffffff",
             lineHeight: 1.6,
             margin: 0,
             maxWidth: 600,
@@ -554,14 +623,70 @@ export default function AboutPage() {
           }}>
             From industrial foundations in Pune to landmark developments across Maharashtra, MECPL has grown through capability, technology and an unwavering commitment to quality.
           </p>
-          <a
-            href="#our-journey"
-            className="about-cta-button-font mt-7 inline-flex items-center gap-3 border border-mecpl-red bg-mecpl-red px-6 py-3 font-montserrat text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition-colors hover:border-white hover:bg-transparent"
+          <button
+            type="button"
+            onClick={openStoryVideo}
+            aria-haspopup="dialog"
+            aria-controls="about-story-video-dialog"
+            className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mt-7"
           >
-            Watch Our Story <ArrowRight size={14} aria-hidden="true" />
-          </a>
+            <MecplArrowButtonContent>Watch Our Story</MecplArrowButtonContent>
+          </button>
         </div>
       </section>
+      <dialog
+        id="about-story-video-dialog"
+        ref={storyVideoDialogRef}
+        className="about-story-dialog"
+        aria-labelledby="about-story-video-title"
+        onClick={(event) => {
+          if (event.target === event.currentTarget) closeStoryVideo();
+        }}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeStoryVideo();
+        }}
+        onClose={() => {
+          if (storyCloseTimerRef.current !== null) {
+            window.clearTimeout(storyCloseTimerRef.current);
+            storyCloseTimerRef.current = null;
+          }
+          storyVideoDialogRef.current?.classList.remove("is-closing");
+          const video = storyVideoRef.current;
+          if (video) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        }}
+      >
+        <div className="about-story-dialog-frame">
+          <h2 id="about-story-video-title" className="sr-only">
+            MECPL — Our Story
+          </h2>
+          <button
+            type="button"
+            className="about-story-dialog-close"
+            onClick={closeStoryVideo}
+            aria-label="Close story video"
+          >
+            <X size={20} aria-hidden="true" />
+          </button>
+          <video
+            ref={storyVideoRef}
+            className="about-story-video"
+            controls
+            playsInline
+            preload="none"
+            poster={`${assetBase}assets/video/about-company-story-poster.jpg`}
+          >
+            <source
+              src={`${assetBase}assets/video/about-company-story.mp4`}
+              type="video/mp4"
+            />
+            Your browser does not support HTML video.
+          </video>
+        </div>
+      </dialog>
       {/* ─── 02 — OUR VALUES ─────────────────────────────────── */}
       <section data-testid="section-about-values" className="abt-values-section">
         <div className="abt-values-band">
@@ -632,15 +757,15 @@ export default function AboutPage() {
                 </span>
               </div>
               <div className="font-montserrat abt-founder-bio">
-                <p>
+                <RevealParagraph delay={180} className="abt-founder-paragraph">
                   A civil engineer with over six decades of experience, M. B. Nambiar began his professional journey in 1964 and went on to establish Shreyas Constructions, laying the foundation for what would become the Millennium Engineers group.
-                </p>
-                <p>
+                </RevealParagraph>
+                <RevealParagraph delay={320} className="abt-founder-paragraph">
                   Since the establishment of MECPL in 1999, his vision and entrepreneurial leadership have shaped the company&apos;s growth, reputation and enduring commitment to quality, safety and professional excellence.
-                </p>
-                <p>
+                </RevealParagraph>
+                <RevealParagraph delay={460} className="abt-founder-paragraph">
                   His contribution to the construction industry has been recognised with the Nirman Ratna Lifetime Achievement Award by the Builders Association of India and the AES Lifetime Achievement Award in 2022, presented by the Architects, Engineers and Surveyors Association (AESA), Pune.
-                </p>
+                </RevealParagraph>
               </div>
               <div className="abt-founder-quote">
                 <div className="abt-founder-quote-copy">
@@ -775,28 +900,14 @@ export default function AboutPage() {
             From the foundations we laid in 1975 to what we build next, the purpose remains the same: to build better, safer and stronger.
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-            <Link href="/contact" data-testid="link-about-contact">
-              <span className="font-montserrat" style={{
-                display: "inline-flex", alignItems: "center", gap: 10,
-                border: "1.5px solid #EC3338", color: "#ffffff",
-                padding: "15px 36px",
-                fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
-                cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
-                background: "#EC3338",
-              }}>
-                Contact MECPL <ArrowRight size={12} />
+            <Link href="/contact" data-testid="link-about-contact" className="mecpl-arrow-fill-link">
+              <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary">
+                <MecplArrowButtonContent>Contact MECPL</MecplArrowButtonContent>
               </span>
             </Link>
-            <Link href="/projects" data-testid="link-about-projects">
-              <span className="font-montserrat" style={{
-                display: "inline-flex", alignItems: "center", gap: 10,
-                border: "1.5px solid #ffffff", color: "#ffffff",
-                padding: "15px 36px",
-                fontWeight: 600, fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
-                cursor: "pointer", transition: "background 0.2s, border-color 0.2s",
-                background: "transparent",
-              }}>
-                View Projects <ArrowRight size={12} />
+            <Link href="/projects" data-testid="link-about-projects" className="mecpl-arrow-fill-link">
+              <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--outline-light">
+                <MecplArrowButtonContent>View Projects</MecplArrowButtonContent>
               </span>
             </Link>
           </div>

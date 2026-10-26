@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --mecpl-red: #ec3338;
+  --app-font-body: "Manrope", sans-serif;
+  --app-font-display: "Barlow Condensed", sans-serif;
+  --mecpl-font-ui: "Manrope", sans-serif;
+  --mecpl-font-display: "Barlow Condensed", sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background: #fff;
+}
+
+.mecpl-font-spec {
+  font-family: var(--mecpl-font-ui);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.mecpl-role-h2-large.ps-common-heading {
+  font-family: var(--mecpl-font-display);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.people-safety-heading {
+  font-family: var(--mecpl-font-ui);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.ps-section-kicker {
+  font-family: var(--mecpl-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+  text-transform: uppercase;
+}
+
+.ps-copy p {
+  font-family: var(--mecpl-font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.ps-stat strong,
+.ps-stat span {
+  font-family: var(--mecpl-font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ps-stat strong {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ps-stat span {
+  font-weight: 400;
+}
+
+.ps-button {
+  font-family: var(--mecpl-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}

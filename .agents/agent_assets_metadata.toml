@@ -1064,3 +1064,10 @@ mtime_ms = 1791530165849
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:9fae4a98-1866-4326-95a5-50cc0f249a63/46476e19-68ba-43f1-af86-8e02b65ce537/7893c9af-c507-4059-839d-cd3b490c3e0e"
 storage_version_token = "1791530270576302"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "fHQuemadaJjmEah3zl-yp"
+uri = "file://.agents/outputs/project-profile/photos-still-needed.csv"
+type = "table"
+title = "46 project photos still needed"
+description = "Checklist of the remaining map projects, with project names, clients, locations and a column for approved photo filenames or URLs."

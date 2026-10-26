@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, MapPin } from "lucide-react";
+import { Building2, MapPin } from "lucide-react";
+import MecplArrowButtonContent from "@/components/MecplArrowButtonContent";
 import { ongoingProjects } from "@/pages/OngoingProjectsPage";
+import { workbookProjects } from "@/data/projectMapData";
 const assetBase = import.meta.env.BASE_URL;
 
 function useInView<T extends HTMLElement>() {
@@ -24,7 +26,7 @@ function useInView<T extends HTMLElement>() {
   return { ref, inView };
 }
 
-const completedProjects = [
+const mapCompletedProjects = [
   // Residential
   { name: "Kingsbury Pride Purple Group", type: "Residential", location: "Charoli, Pune", image: `${assetBase}assets/projects/Kingsbury.jpg` },
   { name: "Gera Song of Joy", type: "Residential", location: "Kharadi, Pune", image: `${assetBase}assets/projects/gera-songs-of-joy-01-large.webp` },
@@ -56,8 +58,8 @@ const completedProjects = [
   { name: "Universal Temple Ramakrishna Math", type: "Special", location: "Pune City Hub", image: `${assetBase}assets/projects/Ramkrishna-Math.jpg` },
 ];
 
-const allProjects = [
-  ...completedProjects,
+const mapProjects = [
+  ...mapCompletedProjects,
   ...ongoingProjects.map((project) => ({
     name: project.name,
     type: "Ongoing Projects",
@@ -99,7 +101,7 @@ const areaCoordinates: Record<string, { mapX: number; mapY: number }> = {
   "Pune City Hub": { mapX: 59, mapY: 60 },
 };
 
-const explorerProjects = allProjects.map((project, index) => {
+const explorerProjects = mapProjects.map((project, index) => {
   const markerPosition = areaCoordinates[project.location] ?? { mapX: 52, mapY: 58 };
   const duplicateOffset = (index % 3) - 1;
 
@@ -114,7 +116,11 @@ export default function CompletedProjectsPage() {
   const [active, setActive] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 4;
-  const filtered = active === "All" ? allProjects : allProjects.filter(p => p.type === active);
+  const filtered = active === "All"
+    ? workbookProjects
+    : workbookProjects.filter(project => active === "Ongoing Projects"
+      ? project.status === "Ongoing"
+      : project.status === "Completed" && project.type === active);
   const totalPages = Math.ceil(filtered.length / projectsPerPage);
   const visibleProjects = filtered.slice(
     (currentPage - 1) * projectsPerPage,
@@ -168,7 +174,7 @@ export default function CompletedProjectsPage() {
               color: "#ffffff",
               whiteSpace: "nowrap",
             }}>
-              Built For Tomorrow.
+              Built For Tomorrow
             </div>
           </h1>
           <p className="completed-projects-hero-description mt-0 max-w-2xl font-montserrat font-medium leading-relaxed text-white/75">
@@ -310,7 +316,7 @@ export default function CompletedProjectsPage() {
       <section id="projects-grid" className="scroll-mt-16 mx-auto max-w-7xl bg-white px-6 py-14" data-testid="section-projects-grid">
         <div>
           {visibleProjects.map((project, i) => (
-            <ProjectCard key={project.name} project={project} index={(currentPage - 1) * projectsPerPage + i} />
+            <ProjectCard key={project.id} project={project} index={(currentPage - 1) * projectsPerPage + i} />
           ))}
         </div>
         {totalPages > 1 && (
@@ -378,9 +384,11 @@ function ArchitectureApproach() {
           </p>
           <a
             href="#project-explorer"
-            className="mt-8 inline-flex min-h-12 items-center justify-center gap-3 bg-[#EC3338] px-6 py-4 font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#cf2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EC3338]"
+            className="mecpl-arrow-fill-link mt-8"
           >
-            Explore our projects <ArrowRight size={14} />
+            <span className="mecpl-arrow-fill-button mecpl-arrow-fill-button--primary mecpl-role-button">
+              <MecplArrowButtonContent>Explore our projects</MecplArrowButtonContent>
+            </span>
           </a>
         </div>
 
@@ -495,7 +503,7 @@ function ProjectExplorer() {
                     aria-label={`Show ${project.name} in ${project.location}`}
                     aria-pressed={selected}
                     data-testid={`button-project-map-${index}`}
-                    className="group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CF2E2E] focus-visible:ring-offset-2"
+                    className="group absolute z-10 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CF2E2E] focus-visible:ring-offset-2"
                     style={{ left: `${left}%`, top: `${top}%` }}
                   >
                     <span
@@ -541,7 +549,7 @@ function ProjectExplorer() {
   );
 }
 
-function ProjectCard({ project, index }: { project: (typeof allProjects)[number]; index: number }) {
+function ProjectCard({ project, index }: { project: (typeof workbookProjects)[number]; index: number }) {
   const { ref, inView } = useInView<HTMLDivElement>();
   const delay = (index % 3) * 90;
 
@@ -555,16 +563,21 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
         transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms, background-color 0.4s ease`,
       }}
       data-testid={`card-project-${index}`}
+      data-project-id={project.id}
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-10">
         <div className="flex min-h-[180px] flex-col justify-between font-montserrat lg:min-h-[220px]">
           <div>
             <div data-testid={`category-project-${index}`} className="mb-5 text-[9px] font-bold normal-case tracking-[0.2em] text-[#949599]">
-              {project.type}
+              {project.type}{project.status === "Ongoing" ? " · Ongoing" : ""}
             </div>
             <h2 className="mecpl-type-card-title max-w-sm text-2xl font-medium leading-[0.98] tracking-[-0.045em] text-[#111111] md:text-3xl">
               {project.name}
             </h2>
+            <p data-testid={`client-project-${index}`} className="mt-3 text-sm font-normal leading-relaxed text-[#545960]">
+              <span className="font-semibold text-[#30343a]">Client: </span>
+              {project.client}
+            </p>
             <div className="mt-5 flex items-center gap-2 text-[10px] normal-case tracking-[0.16em] text-[#949599]">
               <MapPin size={12} className="text-[#C41E3A]" />
               <span>{project.location}</span>
@@ -573,6 +586,7 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
 
         </div>
 
+        {project.image ? (
         <div className="grid h-52 grid-cols-[minmax(0,1.55fr)_minmax(110px,0.85fr)] gap-2 overflow-hidden sm:h-60 md:h-64">
           <div className="relative overflow-hidden border-b-2 border-[#949599] bg-white">
             <img
@@ -598,6 +612,12 @@ function ProjectCard({ project, index }: { project: (typeof allProjects)[number]
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           </div>
         </div>
+        ) : (
+          <div className="flex h-52 flex-col items-center justify-center gap-3 border border-black/[0.08] bg-[#f5f5f4] px-6 text-center sm:h-60 md:h-64">
+            <Building2 size={32} strokeWidth={1.25} className="text-[#949599]" aria-hidden="true" />
+            <p className="text-sm font-normal text-[#73777d]">Project photograph not available</p>
+          </div>
+        )}
       </div>
     </div>
   );

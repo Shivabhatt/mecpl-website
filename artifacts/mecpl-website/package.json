@@ -8,6 +8,7 @@
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "test:milestones": "playwright test --config test/playwright/playwright.config.ts test/playwright/milestone-carousel.spec.ts",
+    "test:people-safety": "playwright test --config test/playwright/playwright.config.ts test/playwright/people-safety-carousel.spec.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {

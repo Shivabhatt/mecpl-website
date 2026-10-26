@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { useModal } from "@/context/ModalContext";
+import MecplArrowButtonContent from "./MecplArrowButtonContent";
 
 const logoAsset = "/assets/logo/mecpl-logo.webp";
 
@@ -82,10 +83,10 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4 flex-shrink-0">
           <button
             onClick={openModal}
-            className="mecpl-button mecpl-button--primary whitespace-nowrap px-5 py-3"
+            className="mecpl-button mecpl-button--primary mecpl-arrow-fill-button mecpl-arrow-fill-button--primary navbar-enquire-button whitespace-nowrap font-semibold text-[14px]"
             data-testid="button-contact-nav"
           >
-            ENQUIRE NOW
+            <MecplArrowButtonContent>ENQUIRE NOW</MecplArrowButtonContent>
           </button>
         </div>
 
@@ -98,7 +99,6 @@ export default function Navbar() {
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
-
       {/* ── Mobile panel ── */}
       {menuOpen && (
         <>
@@ -125,10 +125,10 @@ export default function Navbar() {
             <div className="pt-4">
               <button
                 onClick={() => { setMenuOpen(false); openModal(); }}
-                  className="mecpl-button mecpl-button--primary w-full"
+                className="mecpl-button mecpl-button--primary mecpl-arrow-fill-button mecpl-arrow-fill-button--primary w-full"
                 data-testid="button-mobile-enquire"
               >
-                ENQUIRE NOW
+                <MecplArrowButtonContent>ENQUIRE NOW</MecplArrowButtonContent>
               </button>
             </div>
           </div>

@@ -1610,7 +1610,7 @@ html[data-theme="light"] select {
   outline-offset: -3px;
 }
 
-/* About awards: five cards in the first row, four centered below. */
+/* About awards: five cards per full row; center a partially filled final row. */
 .abt-awards-grid {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -1658,7 +1658,23 @@ html[data-theme="light"] select {
   object-position: center;
 }
 
-.abt-awards-item:nth-child(6) {
+@media (hover: hover) and (pointer: fine) {
+  .abt-awards-logo-card .abt-award-logo-image {
+    transition: transform 220ms ease;
+  }
+
+  .abt-awards-logo-card:hover .abt-award-logo-image {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abt-awards-logo-card .abt-award-logo-image {
+    transition: none;
+  }
+}
+
+.abt-awards-item:nth-child(6):nth-last-child(4) {
   grid-column: 2 / span 2;
 }
 
@@ -1966,6 +1982,260 @@ html[data-theme="light"] select {
 .mecpl-button--outline-light:hover {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
+}
+
+.mecpl-arrow-fill-link {
+  display: inline-flex;
+  border-radius: 9999px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.mecpl-arrow-fill-button {
+  --mecpl-arrow-fill-duration: 450ms;
+  --mecpl-arrow-fill-circle-size: 34px;
+  --mecpl-arrow-fill-icon-right: 6px;
+  --mecpl-arrow-fill-circle-inset-y: calc(
+    (100% - var(--mecpl-arrow-fill-circle-size)) / 2
+  );
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  width: 184px;
+  max-width: 100%;
+  height: 36px;
+  min-height: 36px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--mecpl-arrow-fill-border);
+  border-radius: 9999px;
+  padding: 0 18px;
+  background-color: var(--mecpl-arrow-fill-bg);
+  color: var(--mecpl-arrow-fill-text);
+  cursor: pointer;
+  line-height: inherit;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.mecpl-arrow-fill-button--primary {
+  --mecpl-arrow-fill-bg: #ec3338;
+  --mecpl-arrow-fill-text: #ffffff;
+  --mecpl-arrow-fill-border: #ec3338;
+  --mecpl-arrow-fill-circle-bg: transparent;
+  --mecpl-arrow-fill-arrow: #ec3338;
+  --mecpl-arrow-fill-hover-bg: #ffffff;
+  --mecpl-arrow-fill-hover-text: #ec3338;
+  --mecpl-arrow-fill-hover-border: #ec3338;
+  --mecpl-arrow-fill-hover-arrow: #ec3338;
+}
+
+.mecpl-arrow-fill-button--outline-light {
+  --mecpl-arrow-fill-bg: rgba(255, 255, 255, 0.12);
+  --mecpl-arrow-fill-text: #ffffff;
+  --mecpl-arrow-fill-border: rgba(255, 255, 255, 0.72);
+  --mecpl-arrow-fill-circle-bg: transparent;
+  --mecpl-arrow-fill-arrow: #232529;
+  --mecpl-arrow-fill-hover-bg: #ffffff;
+  --mecpl-arrow-fill-hover-text: #232529;
+  --mecpl-arrow-fill-hover-border: #232529;
+  --mecpl-arrow-fill-hover-arrow: #232529;
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  backdrop-filter: blur(12px) saturate(130%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mecpl-arrow-fill-button__label {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 1px;
+}
+
+.mecpl-arrow-fill-button__circle {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  inset-block: var(--mecpl-arrow-fill-circle-inset-y);
+  inset-inline-start: calc(
+    100% - var(--mecpl-arrow-fill-icon-right) -
+      var(--mecpl-arrow-fill-circle-size)
+  );
+  inset-inline-end: var(--mecpl-arrow-fill-icon-right);
+  border-radius: 9999px;
+  background-color: var(--mecpl-arrow-fill-circle-bg);
+  transition:
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inset var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.mecpl-arrow-fill-button__mask {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  color: var(--mecpl-arrow-fill-arrow);
+  clip-path: inset(0 0 0 100%);
+  transition:
+    color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    clip-path var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.mecpl-arrow-fill-button__mask-label {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle {
+  inset: 0;
+  background-color: var(--mecpl-arrow-fill-hover-bg);
+}
+
+.mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__mask,
+.mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__mask,
+.mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__mask {
+  color: var(--mecpl-arrow-fill-hover-text);
+  clip-path: inset(0);
+}
+
+.mecpl-arrow-fill-button--primary:hover,
+.mecpl-arrow-fill-button--primary:focus-visible,
+.mecpl-arrow-fill-button--primary:active {
+  border-color: var(--mecpl-arrow-fill-hover-border);
+  background-color: var(--mecpl-arrow-fill-hover-bg);
+  color: var(--mecpl-arrow-fill-hover-text);
+}
+
+.mecpl-arrow-fill-button--outline-light:hover,
+.mecpl-arrow-fill-button--outline-light:focus-visible,
+.mecpl-arrow-fill-button--outline-light:active {
+  border-color: var(--mecpl-arrow-fill-hover-border);
+  background-color: var(--mecpl-arrow-fill-hover-bg);
+  color: var(--mecpl-arrow-fill-hover-text);
+}
+
+.mecpl-arrow-fill-button:focus-visible,
+.mecpl-arrow-fill-link:focus-visible .mecpl-arrow-fill-button {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.site-typography .navbar-enquire-button,
+.home-route .home-page-navbar .mecpl-arrow-fill-button,
+.home-route .home-page-typography .mecpl-arrow-fill-link,
+.home-route .home-page-typography .mecpl-arrow-fill-button {
+  border-radius: 2px;
+}
+
+.site-typography .navbar-enquire-button .mecpl-arrow-fill-button__circle,
+.home-route .home-page-navbar .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button__circle {
+  transition:
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inset var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    border-radius var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.site-typography .navbar-enquire-button:hover .mecpl-arrow-fill-button__circle,
+.site-typography .navbar-enquire-button:focus-visible .mecpl-arrow-fill-button__circle,
+.site-typography .navbar-enquire-button:active .mecpl-arrow-fill-button__circle,
+.home-route .home-page-navbar .mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.home-route .home-page-navbar .mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.home-route .home-page-navbar .mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.home-route .home-page-typography .mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle {
+  border-radius: 2px;
+}
+
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button {
+  border-radius: 2px;
+}
+
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button__circle {
+  transition:
+    background-color var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inset var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    border-radius var(--mecpl-arrow-fill-duration)
+      cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:hover .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:focus-visible .mecpl-arrow-fill-button__circle,
+.site-typography :is(
+  .about-page,
+  .projects-page,
+  .completed-projects-page,
+  .cert-page,
+  .cert-awards-cta,
+  .mecpl-awards-page,
+  .careers-page
+) .mecpl-arrow-fill-button:active .mecpl-arrow-fill-button__circle {
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mecpl-arrow-fill-button,
+  .mecpl-arrow-fill-button__circle,
+  .mecpl-arrow-fill-button__mask {
+    transition: none !important;
+  }
 }
 
 .mecpl-cta-banner {
