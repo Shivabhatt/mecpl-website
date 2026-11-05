@@ -1,0 +1,41 @@
+/* About page founder section: portrait-led layout and clear left-aligned biography. */
+.about-page .abt-founder-grid {
+  max-width: 1280px;
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 5vw, 72px);
+}
+
+.about-page .abt-founder-photo {
+  width: min(100%, 360px);
+  aspect-ratio: 2 / 3;
+  margin-inline: auto;
+}
+
+.about-page .abt-founder-image {
+  filter: none;
+  object-fit: cover;
+}
+
+.about-page .abt-founder-copy {
+  text-align: left;
+}
+
+.about-page .abt-founder-title {
+  margin: 0 0 20px;
+}
+
+.about-page .abt-founder-identity {
+  justify-content: flex-start;
+  white-space: normal;
+}
+
+@media (max-width: 900px) {
+  .about-page .abt-founder-photo {
+    width: min(100%, 360px);
+  }
+
+  .about-page .abt-founder-quote-copy p {
+    white-space: normal;
+  }
+}
