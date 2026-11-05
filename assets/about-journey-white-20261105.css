@@ -1,0 +1,7 @@
+.about-page #our-journey.abt-journey-section {
+  background: #ffffff !important;
+}
+
+.about-page #our-journey.abt-journey-section > .abt-journey-backdrop {
+  display: none !important;
+}
