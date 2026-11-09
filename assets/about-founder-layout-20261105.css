@@ -39,3 +39,26 @@
     white-space: normal;
   }
 }
+
+/* Leadership uses the same centered content edges as Founder. */
+.about-page #abt3.abt-leadership-section {
+  padding-inline: 120px !important;
+}
+
+.about-page #abt3 .abt-leadership-grid {
+  width: 100%;
+  max-width: 1280px !important;
+  margin-inline: auto !important;
+}
+
+@media (max-width: 900px) {
+  .about-page #abt3.abt-leadership-section {
+    padding-inline: 48px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page #abt3.abt-leadership-section {
+    padding-inline: 20px !important;
+  }
+}
