@@ -31,9 +31,9 @@
   margin: 0;
   color: #ffffff;
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
-  font-size: clamp(24px, 2.2vw, 32px) !important;
-  font-weight: 600 !important;
-  line-height: 1.15 !important;
+  font-size: 30px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
   text-align: right;
 }
 
@@ -349,10 +349,10 @@
   }
 
   .mecpl-font-spec footer .home-footer-cta-text strong {
-    font-family: var(--mecpl-font-display), sans-serif !important;
-    font-size: clamp(24px, 2.2vw, 32px) !important;
-    font-weight: 600 !important;
-    line-height: 1.15 !important;
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 30px !important;
+    font-weight: var(--mecpl-spec-weight-display) !important;
+    line-height: 1 !important;
   }
 
   .mecpl-font-spec footer .home-footer-cta-text span {
