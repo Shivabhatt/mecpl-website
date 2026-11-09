@@ -1,3 +1,7 @@
+.about-page .abt-sectors-section {
+  padding-top: 48px !important;
+}
+
 .about-page .abt-sectors-section .abt-stats-grid {
   display: none !important;
 }
