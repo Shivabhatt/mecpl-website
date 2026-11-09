@@ -376,6 +376,12 @@
     letter-spacing: normal !important;
     text-transform: none !important;
   }
+
+  .site-typography.home-route .home-page-typography #stats h2.gh-home-stats-trust-heading > span {
+    font: inherit !important;
+    letter-spacing: inherit !important;
+    text-transform: inherit !important;
+  }
 }
 
 @media (min-width: 1024px) {
