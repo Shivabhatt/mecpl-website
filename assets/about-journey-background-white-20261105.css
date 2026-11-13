@@ -32,3 +32,7 @@
     text-wrap: balance;
   }
 }
+
+
+/* Remove the decorative purpose watermark from the About page. */
+.purpose-ref-section .purpose-ref-watermark { display: none !important; }
