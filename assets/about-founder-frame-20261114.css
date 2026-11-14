@@ -1,0 +1,9 @@
+.about-page .abt-founder-photo {
+  aspect-ratio: 1034 / 1536 !important;
+}
+
+.about-page .abt-founder-image {
+  border: 0 !important;
+  outline: 2px solid #fff !important;
+  outline-offset: 0 !important;
+}
