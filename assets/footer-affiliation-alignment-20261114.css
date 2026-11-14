@@ -1,0 +1,10 @@
+/* Align the footer label with the first centered BAI logo. */
+.home-site-footer .home-footer-affiliations-heading {
+  padding-left: max(0px, calc(10.416667% - 34px));
+}
+
+@media (max-width: 760px) {
+  .home-site-footer .home-footer-affiliations-heading {
+    padding-left: max(0px, calc(25% - 27px));
+  }
+}
