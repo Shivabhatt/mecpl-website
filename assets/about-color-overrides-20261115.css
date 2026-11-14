@@ -1,0 +1,9 @@
+/* Scoped About-page color updates only. */
+.about-page .abt-values-subtitle,
+.about-page .abt-value-desc,
+.about-page .abt-founder-bio .abt-founder-paragraph,
+.about-page .purpose-ref-card-dark .purpose-ref-copy h3,
+.about-page .purpose-ref-card-dark .purpose-ref-copy p,
+.about-page .abt-cta-section .abt-cta-description {
+  color: #fff !important;
+}
