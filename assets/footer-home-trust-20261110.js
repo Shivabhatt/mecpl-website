@@ -145,20 +145,6 @@ const enhanceHome = () => {
     hero.append(button);
   }
 
-  const stats = document.querySelector("#stats");
-  const grid = stats?.querySelector(".home-stats-grid");
-  if (stats && grid && !stats.querySelector(".gh-home-stats-trust-heading")) {
-    const layout = grid.parentElement;
-    if (layout) {
-      layout.classList.add("gh-home-stats-layout");
-      const heading = createElement("h2", "gh-home-stats-trust-heading");
-      heading.append(
-        createElement("span", "home-stats-trust-rank", "No. 1"),
-        createElement("span", "home-stats-trust-copy", "Trusted Contractor in Pune"),
-      );
-      layout.insertBefore(heading, grid);
-    }
-  }
 };
 
 installStyles();
