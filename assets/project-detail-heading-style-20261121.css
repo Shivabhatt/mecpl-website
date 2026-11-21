@@ -1,0 +1,10 @@
+@layer mecpl-font-spec {
+  .site-typography .completed-projects-page #project-explorer [data-testid="project-map-detail-card"] h2.mecpl-type-card-title {
+    font-family: var(--mecpl-font-display) !important;
+    font-size: 48px !important;
+    font-weight: 500 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
+  }
+}
