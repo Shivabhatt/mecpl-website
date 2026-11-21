@@ -1,0 +1,37 @@
+/* Set only the section headings selected for the site-wide 48px scale. */
+@layer mecpl-font-spec {
+  .site-typography .home-page-typography #clients-title,
+  .site-typography.home-route .home-page-typography #about h2.home-heading-26,
+  .site-typography .home-page-typography #services h2.home-services-title,
+  .site-typography .home-page-typography #featured-projects h2.home-heading-26,
+  .site-typography .home-page-typography #rising-projects h2.home-heading-26,
+  .site-typography .home-page-typography #people-safety #people-safety-title,
+  .site-typography .home-page-typography #testimonials #testimonials-title,
+  .site-typography .about-page .abt-values-section h2.abt-values-title,
+  .site-typography .about-page #purpose-title,
+  .site-typography .about-page #journey-heading,
+  .site-typography .about-page .abt-founder-section h2.abt-founder-title,
+  .site-typography .about-page #abt3 h2.page-title-font,
+  .site-typography .about-page #certifications h2.abt-awards-section-title,
+  .site-typography .about-page .abt-sectors-section h2.abt-sectors-title,
+  .site-typography .about-page .abt-cta-section h2,
+  .site-typography :is(.projects-page, .completed-projects-page) #architecture-approach h2,
+  .site-typography :is(.projects-page, .completed-projects-page) #project-explorer h2,
+  .site-typography .projects-page #project-contact h2,
+  .site-typography .ongoing-projects-page h2.mecpl-type-section-title,
+  .site-typography .mecpl-awards-page .aw-groups h2.mecpl-role-h2-medium,
+  .site-typography .mecpl-awards-page .aw-cta h2.mecpl-role-h2-medium,
+  .site-typography .cert-page .cert-standards h2,
+  .site-typography .cert-awards-cta #cert-awards-cta-title,
+  .site-typography .careers-page #career-principles h2#career-principles-title,
+  .site-typography .careers-page #abt4 .cb-header h2#cb-process-title,
+  .site-typography .careers-page #employee-stories h2#careers-stories-title.careers-section-title,
+  .site-typography .careers-page #career-paths h2#career-paths-title.careers-section-title,
+  .site-typography .careers-page #careers-life h2#careers-life-title,
+  .site-typography .careers-page #careers-hiring-title,
+  .site-typography .careers-page #open-positions h2#open-positions-title,
+  .site-typography .careers-page #apply-form .ap-intro h2.careers-section-title.careers-sentence-case,
+  .site-typography .careers-page .careers-bottom-cta h2 {
+    font-size: 48px !important;
+  }
+}
