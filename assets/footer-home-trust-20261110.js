@@ -98,59 +98,9 @@ const enhanceFooter = () => {
   footer.dataset.footerRedesign = "true";
 };
 
-const enhanceHome = () => {
-  const hero = document.querySelector(".home-hero-banner");
-  if (hero && !hero.querySelector(".home-hero-trust-badge")) {
-    const button = createElement("button", "home-hero-trust-badge");
-    button.type = "button";
-    button.setAttribute("data-testid", "home-trust-banner");
-    button.setAttribute("aria-label", "No. 1 Trusted Contractor in Pune");
-    button.setAttribute("aria-expanded", "false");
-    button.setAttribute("aria-controls", "gh-home-hero-trust-copy");
-    const copy = createElement("span", "home-hero-trust-copy");
-    copy.id = "gh-home-hero-trust-copy";
-    copy.setAttribute("aria-hidden", "true");
-    copy.append(
-      createElement("span", "", "Trusted Contractor"),
-      createElement("span", "", "in Pune"),
-    );
-    button.append(copy, createElement("span", "home-hero-trust-rank", "No. 1"));
-    const expand = () => {
-      button.classList.add("is-expanded");
-      button.setAttribute("aria-expanded", "true");
-      copy.setAttribute("aria-hidden", "false");
-    };
-    const collapse = () => {
-      button.classList.remove("is-expanded");
-      button.setAttribute("aria-expanded", "false");
-      copy.setAttribute("aria-hidden", "true");
-    };
-    button.addEventListener("mouseenter", expand);
-    button.addEventListener("mouseleave", collapse);
-    button.addEventListener("focus", () => {
-      if (button.matches(":focus-visible")) expand();
-    });
-    button.addEventListener("blur", collapse);
-    button.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        collapse();
-        button.blur();
-      }
-    });
-    button.addEventListener("click", () => {
-      if (matchMedia("(hover: none)").matches) {
-        button.classList.contains("is-expanded") ? collapse() : expand();
-      }
-    });
-    hero.append(button);
-  }
-
-};
-
 installStyles();
 const applyUpdates = () => {
   enhanceFooter();
-  enhanceHome();
 };
 applyUpdates();
 const observer = new MutationObserver(applyUpdates);
